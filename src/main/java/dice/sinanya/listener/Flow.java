@@ -21,6 +21,8 @@ class Flow {
             roll.r();
         } else if (messages.matches("^.ra[0-9 ]*")) {
             rollAndCheck.ra();
+        } else if (messages.matches("^.rc[0-9 ]*")) {
+            rollAndCheck.rc();
         }
     }
 
@@ -36,7 +38,10 @@ class Flow {
             roll.rh();
         } else if (messages.matches("^.ra[0-9 ]*")) {
             rollAndCheck.ra();
+        } else if (messages.matches("^.rc[0-9 ]*")) {
+            rollAndCheck.rc();
         }
+
     }
 
     void toDisGroup() {
@@ -51,6 +56,8 @@ class Flow {
             roll.rh();
         } else if (messages.matches("^.ra[0-9 ]*")) {
             rollAndCheck.ra();
+        } else if (messages.matches("^.rc[0-9 ]*")) {
+            rollAndCheck.rc();
         }
     }
 }

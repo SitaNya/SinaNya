@@ -30,4 +30,17 @@ public class RollAndCheck {
         }
     }
 
+    public void rc() {
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".rc");
+
+        int random = random(1, 100);
+        if (isNumeric(msg)) {
+            int skill = Integer.parseInt(msg);
+            String stringBuilder = getNickName(entityTypeMessages) +
+                    "进行鉴定: D100=" + random + "/" + skill +
+                    new CheckResultLevel(random, skill, true).getResultLevel();
+            sender(entityTypeMessages, stringBuilder);
+        }
+    }
+
 }
