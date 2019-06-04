@@ -12,7 +12,7 @@ public class GetNickName {
             case privateMsg:
                 return entityTypeMessages.getMsgPrivate().getNick();
             case groupMsg:
-                return entityTypeMessages.getMsgGroup().getNick();
+                return entityTypeMessages.getMsgGroup().getUsername();
             case discussMsg:
                 return entityTypeMessages.getMsgDisGroup().getNick();
             default:

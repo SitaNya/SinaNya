@@ -18,6 +18,7 @@ public class RunApplication implements LemocApp {
     public void before(LinkConfiguration configuration) {
         configuration.setScannerPackage("dice.sinanya.listener");
         configuration.setLinkIp("123.207.150.160");
+        configuration.setPort(25304);
     }
 
     @Override

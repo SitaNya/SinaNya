@@ -15,6 +15,7 @@ public class EntityTypeMessages {
     private MsgDisGroup msgDisGroup;
     private MsgPrivate msgPrivate;
 
+
     public EntityTypeMessages(MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGet msgGet, MsgPrivate msgPrivate) {
         this.msgGetTypes = msgGetTypes;
         this.msgSender = msgSender;
@@ -34,6 +35,41 @@ public class EntityTypeMessages {
         this.msgSender = msgSender;
         this.msgGet = msgGet;
         this.msgDisGroup = msgDisGroup;
+    }
+
+    public String getFromQQ() {
+        switch (msgGetTypes) {
+            case groupMsg:
+                return msgGroup.getFromQQ();
+            case discussMsg:
+                return msgDisGroup.getFromQQ();
+            case privateMsg:
+                return msgPrivate.getFromQQ();
+            default:
+                return "450609203";
+        }
+    }
+
+    public String getFromGroup() {
+        switch (msgGetTypes) {
+            case groupMsg:
+                return msgGroup.getFromGroup();
+            case discussMsg:
+                return msgDisGroup.getFromDiscuss();
+            default:
+                return "0";
+        }
+    }
+
+    public String getFromGroupName() {
+        switch (msgGetTypes) {
+            case groupMsg:
+                return msgGroup.getFromGroupName();
+            case discussMsg:
+                return msgDisGroup.getFromDiscuss();
+            default:
+                return "无";
+        }
     }
 
     public MsgGetTypes getMsgGetTypes() {

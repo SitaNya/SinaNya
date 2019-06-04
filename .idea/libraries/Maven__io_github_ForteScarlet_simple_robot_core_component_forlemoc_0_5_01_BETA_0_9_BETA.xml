@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: io.github.ForteScarlet.simple-robot-core:component-forlemoc:0.5.01-BETA-0.9-BETA">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/io/github/ForteScarlet/simple-robot-core/component-forlemoc/0.5.01-BETA-0.9-BETA/component-forlemoc-0.5.01-BETA-0.9-BETA.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/io/github/ForteScarlet/simple-robot-core/component-forlemoc/0.5.01-BETA-0.9-BETA/component-forlemoc-0.5.01-BETA-0.9-BETA-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/io/github/ForteScarlet/simple-robot-core/component-forlemoc/0.5.01-BETA-0.9-BETA/component-forlemoc-0.5.01-BETA-0.9-BETA-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
