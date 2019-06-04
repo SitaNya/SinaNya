@@ -31,6 +31,17 @@
             <artifactId>component-forlemoc</artifactId>
             <version>0.5.01-BETA-0.9-BETA</version>
         </dependency>
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <classifier>jdk15</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.11.2</version>
+        </dependency>
 
     </dependencies>
 </project>
