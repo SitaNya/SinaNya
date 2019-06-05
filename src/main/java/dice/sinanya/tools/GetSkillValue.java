@@ -12,7 +12,7 @@ public class GetSkillValue {
     public static int getSkillValue(long idQq, EntityTypeMessages entityTypeMessages, String tmpSkillName) {
         String skillName = makeSkillName(tmpSkillName);
         if (searchRole(ROLE_CHOOISE.get(idQq), entityTypeMessages)) {
-            return ROLE_INFO_CACHE.get(new EntityRoleTag(idQq, ROLE_CHOOISE.get(idQq))).get(skillName);
+            return ROLE_INFO_CACHE.get(new EntityRoleTag(entityTypeMessages)).get(skillName);
         } else {
             return 0;
         }

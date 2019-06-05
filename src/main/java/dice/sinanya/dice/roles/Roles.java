@@ -107,7 +107,7 @@ public class Roles {
             stringBuilder.append("的属性为:\n");
             int rowNum = 0;
 
-            for (Map.Entry<String, Integer> mapEntry : ROLE_INFO_CACHE.get(new EntityRoleTag(qqId, ROLE_CHOOISE.get(qqId))).entrySet()) {
+            for (Map.Entry<String, Integer> mapEntry : ROLE_INFO_CACHE.get(new EntityRoleTag(entityTypeMessages)).entrySet()) {
                 stringBuilder.append(getSkillName(mapEntry.getKey()));
                 stringBuilder.append(":");
                 stringBuilder.append(mapEntry.getValue());

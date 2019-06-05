@@ -1,5 +1,7 @@
 package dice.sinanya.entity;
 
+import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOISE;
+
 public class EntityRoleTag {
     long qq;
     String role;
@@ -7,6 +9,15 @@ public class EntityRoleTag {
     public EntityRoleTag(long qq, String role) {
         this.qq = qq;
         this.role = role;
+    }
+
+    public EntityRoleTag(EntityTypeMessages entityTypeMessages) {
+        this.qq = Long.parseLong(entityTypeMessages.getFromQQ());
+        if (dice.sinanya.system.GetRole.getRole(qq, entityTypeMessages)) {
+            this.role = ROLE_CHOOISE.get(qq);
+        } else {
+            this.role = "未找到";
+        }
     }
 
     public long getQq() {
@@ -37,6 +48,6 @@ public class EntityRoleTag {
 
     @Override
     public int hashCode() {
-        return String.valueOf(qq).hashCode()+role.hashCode();
+        return String.valueOf(qq).hashCode() + role.hashCode();
     }
 }
