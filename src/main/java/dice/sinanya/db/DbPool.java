@@ -16,8 +16,6 @@ class DbPool {
     private static final Logger Log = LogManager.getLogger(DbPool.class.getName());
     private static DbPool instance;
 
-    private ComboPooledDataSource dataSource;
-
     /**
      * 根据本地db.properties文件中的内容创建连接池
      */
@@ -25,6 +23,8 @@ class DbPool {
     static {
         instance = new DbPool();
     }
+
+    private ComboPooledDataSource dataSource;
 
     private DbPool() {
         Log.info("Begin create DbPool");

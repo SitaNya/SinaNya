@@ -10,7 +10,7 @@ public class SearchRole {
     public static boolean searchRole(String role, EntityTypeMessages entityTypeMessages) {
         if (ROLE_INFO_CACHE.containsKey(new EntityRoleTag(entityTypeMessages))) {
             return true;
-        } else{
+        } else {
             new Roles(entityTypeMessages).get();
             return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(entityTypeMessages));
         }

@@ -28,21 +28,21 @@ public class Listener {
     }
 
     @Listen(MsgGetTypes.privateMsg)
-    @Filter(value="^\\.[a-z].*",keywordMatchType = KeywordMatchType.TRIM_REGEX)
+    @Filter(value = "^\\.[a-z].*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgPrivate msgPrivate) {
         new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgPrivate)).toPrivate();
         return true;
     }
 
     @Listen(MsgGetTypes.groupMsg)
-    @Filter(value="^\\.[a-z].*",keywordMatchType = KeywordMatchType.TRIM_REGEX)
+    @Filter(value = "^\\.[a-z].*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGroup msgGroup) {
         new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup)).toGroup();
         return true;
     }
 
     @Listen(MsgGetTypes.discussMsg)
-    @Filter(value="^\\.[a-z].*",keywordMatchType = KeywordMatchType.TRIM_REGEX)
+    @Filter(value = "^\\.[a-z].*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgDisGroup msgDisGroup) {
         new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup)).toDisGroup();
         return true;
