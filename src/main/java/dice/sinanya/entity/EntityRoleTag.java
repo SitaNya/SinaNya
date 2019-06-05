@@ -8,7 +8,11 @@ public class EntityRoleTag {
 
     public EntityRoleTag(long qq, String role) {
         this.qq = qq;
-        this.role = role;
+        if (role == null) {
+            this.role = "未找到";
+        } else {
+            this.role = role;
+        }
     }
 
     public EntityRoleTag(EntityTypeMessages entityTypeMessages) {

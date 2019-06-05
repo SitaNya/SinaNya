@@ -87,7 +87,7 @@ public class Roles {
     }
 
     public void move() {
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".move");
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".st move");
         long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
         if (searchRole(msg, entityTypeMessages)) {
             if (ROLE_CHOOISE.get(qqId).equals(msg)) {

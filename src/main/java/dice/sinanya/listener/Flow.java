@@ -18,11 +18,19 @@ class Flow {
     private boolean isRH = false;
     private boolean isRA = false;
     private boolean isRC = false;
-    private boolean isST = false;
-    private boolean isSHOW = false;
-    private boolean isLIST = false;
-    private boolean isMOVE = false;
-    private boolean isTEAM = false;
+
+    private boolean isStSet = false;
+    private boolean isStShow = false;
+    private boolean isStList = false;
+    private boolean isStMove = false;
+
+    private boolean isTeamShow = false;
+    private boolean isTeamSet = false;
+    private boolean isTeamClr = false;
+    private boolean isTeamMove = false;
+    private boolean isTeamCall = false;
+    private boolean isTeamHp = false;
+    private boolean isTeamSan = false;
 
     Flow(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
@@ -31,31 +39,43 @@ class Flow {
     }
 
     private void checkMessages(String messages) {
-        String tagR = ".r";
+        String tagR = "^.r.*";
 
-        String tagRH = ".rh";
-        String tagRA = ".ra";
-        String tagRC = ".rc";
-        String tagST = ".st";
+        String tagRH = "^.rh.*";
+        String tagRA = "^.ra.*";
+        String tagRC = "^.rc.*";
 
-        String tagSHOW = ".show";
-        String tagLIST = ".list";
-        String tagMOVE = ".move";
-        String tagTEAM = ".team";
+        String tagStSet = "^.st.*";
+        String tagStShow = "^.st[ ]*show.*";
+        String tagStList = "^.st[ ]*list.*";
+        String tagStMove = "^.st[ ]*move.*";
 
-        if (messages.length() >= tagSHOW.length()) {
-            isSHOW = messages.substring(0, tagSHOW.length()).endsWith(tagSHOW);
-            isLIST = messages.substring(0, tagLIST.length()).endsWith(tagLIST);
-            isMOVE = messages.substring(0, tagMOVE.length()).endsWith(tagMOVE);
-            isTEAM = messages.substring(0, tagTEAM.length()).endsWith(tagTEAM);
-        }
-        if (messages.length() >= tagRA.length()) {
-            isRH = messages.substring(0, tagRH.length()).equals(tagRH);
-            isRA = messages.substring(0, tagRA.length()).equals(tagRA);
-            isRC = messages.substring(0, tagRC.length()).equals(tagRC);
-            isST = messages.substring(0, tagST.length()).equals(tagST);
-        }
-        isR = messages.substring(0, tagR.length()).equals(tagR) && !isRH && !isRA && !isRC;
+        String tagTeamSet = "^.team[ ]*set.*";
+        String tagTeamShow = "^.team.*";
+        String tagTeamClr = "^.team[ ]*clr.*";
+        String tagTeamMove = "^.team[ ]*move.*";
+        String tagTeamCall = "^.team[ ]*call.*";
+        String tagTeamHp = "^.team[ ]*hp.*";
+        String tagTeamSan = "^.team[ ]*san.*";
+
+        isTeamSet = messages.matches(tagTeamSet);
+        isTeamClr = messages.matches(tagTeamClr);
+        isTeamMove = messages.matches(tagTeamMove);
+        isTeamCall = messages.matches(tagTeamCall);
+        isTeamHp = messages.matches(tagTeamHp);
+        isTeamSan = messages.matches(tagTeamSan);
+        isTeamShow = messages.matches(tagTeamShow) && !isTeamSet && !isTeamClr && !isTeamMove && !isTeamCall && !isTeamHp && !isTeamSan;
+
+        isStShow = messages.matches(tagStShow);
+        isStList = messages.matches(tagStList);
+        isStMove = messages.matches(tagStMove);
+        isStSet = messages.matches(tagStSet) && !isStShow && !isStList && !isStMove;
+
+
+        isRH = messages.matches(tagRH);
+        isRA = messages.matches(tagRA);
+        isRC = messages.matches(tagRC);
+        isR = messages.matches(tagR) && !isRH && !isRA && !isRC;
     }
 
     void toPrivate() {
@@ -69,7 +89,9 @@ class Flow {
             rollAndCheck.ra();
         } else if (isRC) {
             rollAndCheck.rc();
-        } else if (isST) {
+        }
+
+        if (isStSet) {
             try {
                 if (roles.set()) {
                     sender(entityTypeMessages, strSetPropSuccess);
@@ -79,11 +101,11 @@ class Flow {
             } catch (PlayerSetException e) {
                 System.out.println(e.getMessage());
             }
-        } else if (isSHOW) {
+        } else if (isStShow) {
             roles.show();
-        } else if (isLIST) {
+        } else if (isStList) {
             roles.list();
-        } else if (isMOVE) {
+        } else if (isStMove) {
             roles.move();
         }
     }
@@ -94,8 +116,10 @@ class Flow {
 
         if (isRH) {
             roll.rh();
-        } else if (isTEAM) {
+        } else if (isTeamSet) {
             team.set();
+        } else if (isTeamShow) {
+            team.show();
         }
         toPrivate();
     }

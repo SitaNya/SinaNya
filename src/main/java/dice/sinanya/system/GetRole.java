@@ -33,4 +33,12 @@ public class GetRole {
             return "未找到角色";
         }
     }
+
+    public static String getRoleInfo(EntityTypeMessages entityTypeMessages,long qqId) {
+        if (getRole(entityTypeMessages)) {
+            return ROLE_CHOOISE.get(qqId);
+        }else {
+            return "未找到角色";
+        }
+    }
 }
