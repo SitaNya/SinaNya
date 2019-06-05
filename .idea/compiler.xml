@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="java" />
+        <module name="MyDIceJava" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="MyDIceJava" target="6" />
+    </bytecodeTargetLevel>
   </component>
 </project>
