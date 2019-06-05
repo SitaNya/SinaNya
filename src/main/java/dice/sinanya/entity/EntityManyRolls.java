@@ -2,9 +2,7 @@ package dice.sinanya.entity;
 
 import dice.sinanya.exceptions.PlayerSetException;
 
-import static dice.sinanya.system.MessagesError.strValueErr;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.Sender.sender;
 
 /**
  * @author zhangxiaozhou
@@ -64,8 +62,7 @@ public class EntityManyRolls {
             if (entityManyRolls.checkInputError()) {
                 resultMessages += strTimesAndRoles + "=";
             } else {
-                sender(entityTypeMessages, strValueErr);
-                throw new PlayerSetException();
+                throw new PlayerSetException(entityTypeMessages);
             }
         } else {
             resultMessages += "D100=";

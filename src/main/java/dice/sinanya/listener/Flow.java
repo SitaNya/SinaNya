@@ -1,8 +1,14 @@
 package dice.sinanya.listener;
 
+import dice.sinanya.dice.roles.Roles;
 import dice.sinanya.dice.roll.Roll;
 import dice.sinanya.dice.roll.RollAndCheck;
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.exceptions.PlayerSetException;
+
+import static dice.sinanya.system.MessagesError.strPropErr;
+import static dice.sinanya.system.MessagesError.strSetPropSuccess;
+import static dice.sinanya.tools.Sender.sender;
 
 class Flow {
     private EntityTypeMessages entityTypeMessages;
@@ -11,6 +17,10 @@ class Flow {
     private boolean isRH = false;
     private boolean isRA = false;
     private boolean isRC = false;
+    private boolean isST = false;
+    private boolean isSHOW = false;
+    private boolean isLIST = false;
+    private boolean isMOVE = false;
 
     Flow(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
@@ -20,18 +30,33 @@ class Flow {
 
     private void checkMessages(String messages) {
         String tagR = ".r";
+
         String tagRH = ".rh";
         String tagRA = ".ra";
         String tagRC = ".rc";
+        String tagST = ".st";
 
-        isRH = messages.substring(0, tagRH.length()).equals(tagRH);
-        isRA = messages.substring(0, tagRA.length()).equals(tagRA);
-        isRC = messages.substring(0, tagRC.length()).equals(tagRC);
+        String tagSHOW = ".show";
+        String tagLIST = ".list";
+        String tagMOVE = ".move";
+
+        if (messages.length() >= 5) {
+            isSHOW = messages.substring(0, tagSHOW.length()).endsWith(tagSHOW);
+            isLIST = messages.substring(0, tagLIST.length()).endsWith(tagLIST);
+            isMOVE = messages.substring(0, tagMOVE.length()).endsWith(tagMOVE);
+        }
+        if (messages.length() >= 3) {
+            isRH = messages.substring(0, tagRH.length()).equals(tagRH);
+            isRA = messages.substring(0, tagRA.length()).equals(tagRA);
+            isRC = messages.substring(0, tagRC.length()).equals(tagRC);
+            isST = messages.substring(0, tagST.length()).equals(tagST);
+        }
         isR = messages.substring(0, tagR.length()).equals(tagR) && !isRH && !isRA && !isR;
     }
 
     void toPrivate() {
         Roll roll = new Roll(entityTypeMessages);
+        Roles roles = new Roles(entityTypeMessages);
         RollAndCheck rollAndCheck = new RollAndCheck(entityTypeMessages);
 
         if (isR) {
@@ -40,11 +65,28 @@ class Flow {
             rollAndCheck.ra();
         } else if (isRC) {
             rollAndCheck.rc();
+        } else if (isST) {
+            try {
+                if (roles.set()) {
+                    sender(entityTypeMessages, strSetPropSuccess);
+                } else {
+                    sender(entityTypeMessages, strPropErr);
+                }
+            } catch (PlayerSetException e) {
+                System.out.println(e.getMessage());
+            }
+        } else if (isSHOW) {
+            roles.show();
+        } else if (isLIST) {
+            roles.list();
+        } else if (isMOVE) {
+            roles.move();
         }
     }
 
     private void groupFunction() {
         Roll roll = new Roll(entityTypeMessages);
+        Roles roles = new Roles(entityTypeMessages);
         RollAndCheck rollAndCheck = new RollAndCheck(entityTypeMessages);
 
         if (isR) {
@@ -55,6 +97,22 @@ class Flow {
             rollAndCheck.ra();
         } else if (isRC) {
             rollAndCheck.rc();
+        } else if (isST) {
+            try {
+                if (roles.set()) {
+                    sender(entityTypeMessages, strSetPropSuccess);
+                } else {
+                    sender(entityTypeMessages, strPropErr);
+                }
+            } catch (PlayerSetException e) {
+                System.out.println(e.getMessage());
+            }
+        } else if (isSHOW) {
+            roles.show();
+        } else if (isLIST) {
+            roles.list();
+        } else if (isMOVE) {
+            roles.move();
         }
     }
 

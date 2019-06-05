@@ -9,6 +9,8 @@ public interface MessagesError {
     String strValueErr = "那个……您输入的值似乎有问题哦？奈梅斯很难办的QwQ";
     String strDiceTimesTooBig = "太……太多了！我有些忙不过来，可以少一些吗……";
     String strHiddenDice = "kp在暗骰~请kp大大好心一些！（鞠躬））";
+    String strSetPropSuccess = "奈梅斯好好地记住您了！也请您好好表现哦！";
+    String strPropErr = "这个属性是不是输入的有点问题？奈梅斯看不懂来着";
     String strNameNumCannotBeZero = "生成数量不能为零!请输入1-10之间的数字!";
     String strSetInvalid = "无效的默认骰!请输入1-99999之间的数字!";
     String strSetTooBig = "默认骰过大!请输入1-99999之间的数字!";
@@ -41,8 +43,8 @@ public interface MessagesError {
     String strNameTooLongErr = "错误:名称过长(最多为50英文字符)";
     String strUnknownPropErr = "哎？这是什么属性……是……是我忘了吗？对不起！QAQ";
     String strEmptyWWDiceErr = "格式错误:正确格式为.w(w)XaY!其中X≥1, 5≤Y≤10";
-    String strPropErr = "这个属性是不是输入的有点问题？奈梅斯看不懂来着";
-    String strSetPropSuccess = "奈梅斯好好地记住您了！也请您好好表现哦！";
+
+
     String strPropCleared = "已清除所有属性";
     String strRuleErr = "规则数据获取失败,具体信息:\n";
     String strRulesFailedErr = "请求失败,无法连接数据库";
