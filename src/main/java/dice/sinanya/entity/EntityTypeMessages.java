@@ -7,6 +7,11 @@ import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgGroup;
 import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgPrivate;
 import com.forte.qqrobot.sender.MsgSender;
 
+import static dice.sinanya.tools.CheckValue.checkValue;
+
+/**
+ * @author zhangxiaozhou
+ */
 public class EntityTypeMessages {
     private MsgGetTypes msgGetTypes;
     private MsgSender msgSender;
@@ -61,74 +66,39 @@ public class EntityTypeMessages {
         }
     }
 
-    public String getFromGroupName() {
-        switch (msgGetTypes) {
-            case groupMsg:
-                return msgGroup.getFromGroupName();
-            case discussMsg:
-                return msgDisGroup.getFromDiscuss();
-            default:
-                return "无";
-        }
-    }
-
     public MsgGetTypes getMsgGetTypes() {
         return msgGetTypes;
-    }
-
-    public void setMsgGetTypes(MsgGetTypes msgGetTypes) {
-        this.msgGetTypes = msgGetTypes;
     }
 
     public MsgSender getMsgSender() {
         return msgSender;
     }
 
-    public void setMsgSender(MsgSender msgSender) {
-        this.msgSender = msgSender;
-    }
-
     public MsgGet getMsgGet() {
         return msgGet;
-    }
-
-    public void setMsgGet(MsgGet msgGet) {
-        this.msgGet = msgGet;
     }
 
     public MsgGroup getMsgGroup() {
         return msgGroup;
     }
 
-    public void setMsgGroup(MsgGroup msgGroup) {
-        this.msgGroup = msgGroup;
-    }
-
     public MsgDisGroup getMsgDisGroup() {
         return msgDisGroup;
-    }
-
-    public void setMsgDisGroup(MsgDisGroup msgDisGroup) {
-        this.msgDisGroup = msgDisGroup;
     }
 
     public MsgPrivate getMsgPrivate() {
         return msgPrivate;
     }
 
-    public void setMsgPrivate(MsgPrivate msgPrivate) {
-        this.msgPrivate = msgPrivate;
-    }
-
     @Override
     public String toString() {
         String result = "";
-        result += "msgGetTypes: " + msgGetTypes.toString() + "\n";
-        result += "msgSender: " + msgSender.toString() + "\n";
-        result += "msgGet: " + msgGet.toString() + "\n";
-        result += "msgGroup: " + msgGroup.toString() + "\n";
-        result += "msgDisGroup: " + msgDisGroup.toString() + "\n";
-        result += "msgPrivate: " + msgPrivate.toString() + "\n";
+        result += "msgGetTypes: " + checkValue(msgGetTypes) + "\n";
+        result += "msgSender: " + checkValue(msgSender) + "\n";
+        result += "msgGet: " + checkValue(msgGet) + "\n";
+        result += "msgGroup: " + checkValue(msgGroup) + "\n";
+        result += "msgDisGroup: " + checkValue(msgDisGroup) + "\n";
+        result += "msgPrivate: " + checkValue(msgPrivate) + "\n";
         return result;
     }
 }

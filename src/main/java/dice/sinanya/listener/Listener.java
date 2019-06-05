@@ -16,6 +16,15 @@ import dice.sinanya.entity.EntityTypeMessages;
 public class Listener {
 
 
+    private Listener() {
+
+    }
+
+    @Constr
+    public static Listener getInstance() {
+        return new Listener();
+    }
+
     @Listen(MsgGetTypes.privateMsg)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgPrivate msgPrivate) {
         new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgPrivate)).toPrivate();
@@ -32,14 +41,5 @@ public class Listener {
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgDisGroup msgDisGroup) {
         new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup)).toDisGroup();
         return true;
-    }
-
-    private Listener() {
-
-    }
-
-    @Constr
-    public static Listener getInstance() {
-        return new Listener();
     }
 }

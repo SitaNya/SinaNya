@@ -1,4 +1,4 @@
-package dice.sinanya.Dice.Roll;
+package dice.sinanya.dice.roll;
 
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.tools.CheckResultLevel;
@@ -9,6 +9,9 @@ import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.Sender.sender;
 
+/**
+ * @author zhangxiaozhou
+ */
 public class RollAndCheck {
 
     private EntityTypeMessages entityTypeMessages;

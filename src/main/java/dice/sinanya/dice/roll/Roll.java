@@ -1,9 +1,11 @@
-package dice.sinanya.Dice.Roll;
+package dice.sinanya.dice.roll;
 
+import dice.sinanya.entity.EntityManyRolls;
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.exceptions.PlayerSetException;
 
-import static dice.sinanya.system.MessagesError.*;
-import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
+import static dice.sinanya.system.MessagesError.strDiceTimesTooBig;
+import static dice.sinanya.system.MessagesError.strHiddenDice;
 import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.RandomInt.random;
@@ -23,83 +25,45 @@ public class Roll {
     public void r() {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".r");
 
-        String tagTimes = "d";
-        int times = 1;
-        int rolls = 100;
-
         String strTimesAndRoles = msg.split(" +")[0];
 
         String resultMessage = getNickName(entityTypeMessages) + "掷出了: ";
 
-        if (strTimesAndRoles.contains(tagTimes) && strTimesAndRoles.split(tagTimes).length == 2) {
-            String strTimes = strTimesAndRoles.split(tagTimes)[0];
-            String strRolls = strTimesAndRoles.split(tagTimes)[1];
-
-            if (isNumeric(strTimes) && !strTimes.equals("")) {
-                times = Integer.parseInt(strTimes);
-            } else if (!strTimes.equals("")) {
-                sender(entityTypeMessages, strValueErr);
-                return;
-            }
-            if (isNumeric(strRolls) && !strRolls.equals("")) {
-                rolls = Integer.parseInt(strRolls);
-            } else if (!strRolls.equals("")) {
-                sender(entityTypeMessages, strValueErr);
-                return;
-            }
-            resultMessage += strTimesAndRoles + "=";
-            sender(entityTypeMessages, resultMessage + makeRoll(times, rolls));
-        } else {
-            resultMessage += "D100=";
-            sender(entityTypeMessages, resultMessage + makeRoll(1, 100));
+        EntityManyRolls entityManyRolls;
+        try {
+            entityManyRolls = new EntityManyRolls(strTimesAndRoles).check(resultMessage, entityTypeMessages);
+        } catch (PlayerSetException e) {
+            return;
         }
+        sender(entityTypeMessages, entityManyRolls.getResultMessages() + makeRoll(entityManyRolls.getTimes(), entityManyRolls.getRolls()));
     }
 
     public void rh() {
-        sender(entityTypeMessages, strHiddenDice);
-
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".rh");
-        String tagTimes = "d";
-        int times = 1;
-        int rolls = 100;
 
         String strTimesAndRoles = msg.split(" +")[0];
 
         String resultMessage = "您在群" + entityTypeMessages.getFromGroup() + "中掷出了: ";
 
-        if (strTimesAndRoles.contains(tagTimes) && strTimesAndRoles.split(tagTimes).length == 2) {
-            String strTimes = strTimesAndRoles.split(tagTimes)[0];
-            String strRolls = strTimesAndRoles.split(tagTimes)[1];
-
-            if (isNumeric(strTimes) && !strTimes.equals("")) {
-                times = Integer.parseInt(strTimes);
-            } else if (!strTimes.equals("")) {
-                sender(entityTypeMessages, strValueErr);
-                return;
-            }
-            if (isNumeric(strRolls) && !strRolls.equals("")) {
-                rolls = Integer.parseInt(strRolls);
-            } else if (!strRolls.equals("")) {
-                sender(entityTypeMessages, strValueErr);
-                return;
-            }
-            resultMessage += strTimesAndRoles + "=";
-
-            entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), resultMessage + makeHiddenRoll(times, rolls));
-        } else {
-            resultMessage += "D100=";
-            entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), resultMessage + makeHiddenRoll(1, 100));
+        EntityManyRolls entityManyRolls;
+        try {
+            entityManyRolls = new EntityManyRolls(strTimesAndRoles).check(resultMessage, entityTypeMessages);
+        } catch (PlayerSetException e) {
+            return;
         }
+        sender(entityTypeMessages, strHiddenDice);
+        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), entityManyRolls.getResultMessages() + makeHiddenRoll(entityManyRolls.getTimes(), entityManyRolls.getRolls()));
     }
 
 
     private String makeRoll(int times, int rolls) {
+        int maxTimesRolls = 10;
         StringBuilder stringBuilder = new StringBuilder(200);
         int intResult = 0;
         if (times == 1) {
             int tmpResult = random(1, rolls);
             return String.valueOf(tmpResult);
-        } else if (times > 10) {
+        } else if (times > maxTimesRolls) {
             for (int i = 0; i < times; i++) {
                 intResult += random(1, rolls);
             }
@@ -119,11 +83,12 @@ public class Roll {
     }
 
     private String makeHiddenRoll(int times, int rolls) {
+        int maxTimesHidden = 20;
         StringBuilder stringBuilder = new StringBuilder(200);
         if (times == 1) {
             int tmpResult = random(1, rolls);
             return String.valueOf(tmpResult);
-        } else if (times > 20) {
+        } else if (times > maxTimesHidden) {
             return strDiceTimesTooBig;
         } else if (times > 1) {
             stringBuilder.append("[");
