@@ -39,24 +39,24 @@ class Flow {
     }
 
     private void checkMessages(String messages) {
-        String tagR = "^.r.*";
+        String tagR = "^\\.[ ]*r.*";
 
-        String tagRH = "^.rh.*";
-        String tagRA = "^.ra.*";
-        String tagRC = "^.rc.*";
+        String tagRH = "^\\.[ ]*rh.*";
+        String tagRA = "^\\.[ ]*ra.*";
+        String tagRC = "^\\.[ ]*rc.*";
 
-        String tagStSet = "^.st.*";
-        String tagStShow = "^.st[ ]*show.*";
-        String tagStList = "^.st[ ]*list.*";
-        String tagStMove = "^.st[ ]*move.*";
+        String tagStSet = "^\\.[ ]*st.*";
+        String tagStShow = "^\\.[ ]*st[ ]*show.*";
+        String tagStList = "^\\.[ ]*st[ ]*list.*";
+        String tagStMove = "^\\.[ ]*st[ ]*move.*";
 
-        String tagTeamSet = "^.team[ ]*set.*";
-        String tagTeamShow = "^.team.*";
-        String tagTeamClr = "^.team[ ]*clr.*";
-        String tagTeamMove = "^.team[ ]*move.*";
-        String tagTeamCall = "^.team[ ]*call.*";
-        String tagTeamHp = "^.team[ ]*hp.*";
-        String tagTeamSan = "^.team[ ]*san.*";
+        String tagTeamSet = "^\\.[ ]*team[ ]*set.*";
+        String tagTeamShow = "^\\.[ ]*team.*";
+        String tagTeamClr = "^\\.[ ]*team[ ]*clr.*";
+        String tagTeamMove = "^\\.[ ]*team[ ]*move.*";
+        String tagTeamCall = "^\\.[ ]*team[ ]*call.*";
+        String tagTeamHp = "^\\.[ ]*team[ ]*hp.*";
+        String tagTeamSan = "^\\.[ ]*team[ ]*san.*";
 
         isTeamSet = messages.matches(tagTeamSet);
         isTeamClr = messages.matches(tagTeamClr);

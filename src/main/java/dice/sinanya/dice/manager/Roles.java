@@ -280,7 +280,7 @@ public class Roles {
     }
 
     @SuppressWarnings("AlibabaMethodTooLong")
-    private void insertRoleInfo(HashMap<String, Integer> propertiesDefault, String properties) {
+    public void insertRoleInfo(HashMap<String, Integer> propertiesDefault, String properties) {
         HashMap<String, Integer> propertiesForRole;
         if (propertiesDefault == null) {
             propertiesForRole = new RolesInfo(properties).getPropertiesForRole();

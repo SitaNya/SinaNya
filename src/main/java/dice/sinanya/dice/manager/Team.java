@@ -16,9 +16,11 @@ import java.util.regex.Pattern;
 
 import static dice.sinanya.system.GetRole.getRoleInfo;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
+import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.Sender.sender;
 import static java.lang.Math.ceil;
+import static java.lang.Math.floor;
 
 public class Team {
 
@@ -64,15 +66,93 @@ public class Team {
 
     public void clr() {
         deleteGroup(entityTypeMessages.getFromGroup());
-        sender(entityTypeMessages,"已清空本群小队");
+        sender(entityTypeMessages, "已清空本群小队");
     }
 
     public void hp() {
-       //TODO
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".team hp");
+        String regex = "\\[CQ:at,qq=([0-9]+)]";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(msg);
+
+        String qq = "0";
+        while (matcher.find()) {
+            qq = matcher.group(1);
+        }
+        if (isNumeric(msg)) {
+            new Roles(entityTypeMessages).searchRoleChoose(Long.parseLong(qq));
+            HashMap<String, Integer> prop = ROLE_INFO_CACHE.get(new EntityRoleTag(Long.parseLong(qq), getRoleInfo(entityTypeMessages, Long.parseLong(qq))));
+            if (prop != null) {
+                String role = getRoleInfo(entityTypeMessages, Long.parseLong(qq));
+                int hp = prop.get("hp");
+                hp = hp - Integer.parseInt(msg);
+                String newHp = "hp" + hp;
+                new Roles(entityTypeMessages).insertRoleInfo(ROLE_INFO_CACHE.get(new EntityRoleTag(entityTypeMessages)), newHp);
+                if (Integer.parseInt(msg) > floor(hp / 2)) {
+                    sender(entityTypeMessages, "已为" + role + "降低" + hp + "点血量，剩余" + newHp + "点,已进入重伤状态");
+                } else {
+                    sender(entityTypeMessages, "已为" + role + "降低" + hp + "点血量，剩余" + newHp + "点");
+                }
+            } else {
+                sender(entityTypeMessages, "[CQ:at,qq=" + qq + "] 未选择人物卡");
+            }
+        } else if (msg.contains("+") && isNumeric(msg.replace("+", "").trim())) {
+            new Roles(entityTypeMessages).searchRoleChoose(Long.parseLong(qq));
+            HashMap<String, Integer> prop = ROLE_INFO_CACHE.get(new EntityRoleTag(Long.parseLong(qq), getRoleInfo(entityTypeMessages, Long.parseLong(qq))));
+            if (prop != null) {
+                String role = getRoleInfo(entityTypeMessages, Long.parseLong(qq));
+                int hp = prop.get("hp");
+                hp = hp + Integer.parseInt(msg);
+                String newHp = "hp" + hp;
+                new Roles(entityTypeMessages).insertRoleInfo(ROLE_INFO_CACHE.get(new EntityRoleTag(entityTypeMessages)), newHp);
+                sender(entityTypeMessages, "已为" + role + "恢复" + hp + "点血量，剩余" + newHp + "点");
+            } else {
+                sender(entityTypeMessages, "[CQ:at,qq=" + qq + "] 未选择人物卡");
+            }
+        } else {
+            sender(entityTypeMessages, "输入错误，接受一个数字参数用于降低血量如.team hp @xxx 10，也可.team hp @xxx +10恢复血量");
+        }
     }
 
     public void san() {
-        //TODO
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".team hp");
+        String regex = "\\[CQ:at,qq=([0-9]+)]";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(msg);
+
+        String qq = "0";
+        while (matcher.find()) {
+            qq = matcher.group(1);
+        }
+        if (isNumeric(msg)) {
+            new Roles(entityTypeMessages).searchRoleChoose(Long.parseLong(qq));
+            HashMap<String, Integer> prop = ROLE_INFO_CACHE.get(new EntityRoleTag(Long.parseLong(qq), getRoleInfo(entityTypeMessages, Long.parseLong(qq))));
+            if (prop != null) {
+                String role = getRoleInfo(entityTypeMessages, Long.parseLong(qq));
+                int san = prop.get("san");
+                san = san - Integer.parseInt(msg);
+                String newSan = "san" + san;
+                new Roles(entityTypeMessages).insertRoleInfo(ROLE_INFO_CACHE.get(new EntityRoleTag(entityTypeMessages)), newSan);
+                sender(entityTypeMessages, "已为" + role + "降低" + san + "点san值，剩余" + newSan + "点");
+            } else {
+                sender(entityTypeMessages, "[CQ:at,qq=" + qq + "] 未选择人物卡");
+            }
+        } else if (msg.contains("+") && isNumeric(msg.replace("+", "").trim())) {
+            new Roles(entityTypeMessages).searchRoleChoose(Long.parseLong(qq));
+            HashMap<String, Integer> prop = ROLE_INFO_CACHE.get(new EntityRoleTag(Long.parseLong(qq), getRoleInfo(entityTypeMessages, Long.parseLong(qq))));
+            if (prop != null) {
+                String role = getRoleInfo(entityTypeMessages, Long.parseLong(qq));
+                int san = prop.get("san");
+                san = san + Integer.parseInt(msg);
+                String newSan = "san" + san;
+                new Roles(entityTypeMessages).insertRoleInfo(ROLE_INFO_CACHE.get(new EntityRoleTag(entityTypeMessages)), newSan);
+                sender(entityTypeMessages, "已为" + role + "恢复" + san + "点san值，剩余" + newSan + "点");
+            } else {
+                sender(entityTypeMessages, "[CQ:at,qq=" + qq + "] 未选择人物卡");
+            }
+        } else {
+            sender(entityTypeMessages, "输入错误，接受一个数字参数用于降低san值如.team san @xxx 10，也可.team san @xxx +10恢复san");
+        }
     }
 
     private ArrayList<String> get() {

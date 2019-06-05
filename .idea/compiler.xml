@@ -12,7 +12,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="java" target="7" />
-      <module name="MyDIceJava" target="6" />
+      <module name="MyDIceJava" target="7" />
     </bytecodeTargetLevel>
   </component>
 </project>
