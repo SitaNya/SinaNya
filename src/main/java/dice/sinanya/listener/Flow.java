@@ -40,12 +40,12 @@ class Flow {
         String tagLIST = ".list";
         String tagMOVE = ".move";
 
-        if (messages.length() >= 5) {
+        if (messages.length() >= tagSHOW.length()) {
             isSHOW = messages.substring(0, tagSHOW.length()).endsWith(tagSHOW);
             isLIST = messages.substring(0, tagLIST.length()).endsWith(tagLIST);
             isMOVE = messages.substring(0, tagMOVE.length()).endsWith(tagMOVE);
         }
-        if (messages.length() >= 3) {
+        if (messages.length() >= tagRA.length()) {
             isRH = messages.substring(0, tagRH.length()).equals(tagRH);
             isRA = messages.substring(0, tagRA.length()).equals(tagRA);
             isRC = messages.substring(0, tagRC.length()).equals(tagRC);
@@ -86,34 +86,11 @@ class Flow {
 
     private void groupFunction() {
         Roll roll = new Roll(entityTypeMessages);
-        Roles roles = new Roles(entityTypeMessages);
-        RollAndCheck rollAndCheck = new RollAndCheck(entityTypeMessages);
 
-        if (isR) {
-            roll.r();
-        } else if (isRH) {
+        if (isRH) {
             roll.rh();
-        } else if (isRA) {
-            rollAndCheck.ra();
-        } else if (isRC) {
-            rollAndCheck.rc();
-        } else if (isST) {
-            try {
-                if (roles.set()) {
-                    sender(entityTypeMessages, strSetPropSuccess);
-                } else {
-                    sender(entityTypeMessages, strPropErr);
-                }
-            } catch (PlayerSetException e) {
-                System.out.println(e.getMessage());
-            }
-        } else if (isSHOW) {
-            roles.show();
-        } else if (isLIST) {
-            roles.list();
-        } else if (isMOVE) {
-            roles.move();
         }
+        toPrivate();
     }
 
     void toGroup() {

@@ -26,7 +26,6 @@ import static dice.sinanya.tools.Sender.sender;
 public class Roles {
     private String role;
     private long qqId;
-    private long groupId;
     private EntityTypeMessages entityTypeMessages;
 
     public Roles(EntityTypeMessages entityTypeMessages) {
@@ -44,7 +43,7 @@ public class Roles {
             role = msg.split(sepRoleAndPro)[0];
             properties = msg.split(sepRoleAndPro)[1];
             qqId = Long.parseLong(entityTypeMessages.getFromQQ());
-            groupId = Long.parseLong(entityTypeMessages.getFromGroup());
+            long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
             insertRoleInfo(properties);
         } else if (!msg.equals(tagRoleNameNone)) {
             if (searchRole(msg, entityTypeMessages)) {
@@ -60,9 +59,10 @@ public class Roles {
     public void list() {
         long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
         StringBuilder stringBuilder = new StringBuilder();
+        String strRoleNone = "";
         if (getRole(qqId, entityTypeMessages) && searchRole(ROLE_CHOOISE.get(qqId), entityTypeMessages)) {
             stringBuilder.append("您当前使用角色: \n");
-            if (ROLE_CHOOISE.get(qqId) != null && !ROLE_CHOOISE.get(qqId).equals("")) {
+            if (ROLE_CHOOISE.get(qqId) != null && !ROLE_CHOOISE.get(qqId).equals(strRoleNone)) {
                 stringBuilder.append(ROLE_CHOOISE.get(qqId)).append("\n");
             } else {
                 stringBuilder.append("无").append("\n");
@@ -101,6 +101,7 @@ public class Roles {
     public void show() {
         long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
         StringBuilder stringBuilder = new StringBuilder();
+        int propertiesWeight = 13;
         if (getRole(qqId, entityTypeMessages) && searchRole(ROLE_CHOOISE.get(qqId), entityTypeMessages)) {
             stringBuilder.append("您的角色: ");
             stringBuilder.append(ROLE_CHOOISE.get(qqId));
@@ -113,7 +114,7 @@ public class Roles {
                 stringBuilder.append(mapEntry.getValue());
                 if (rowNum < 3) {
                     int textLen = (getSkillName(mapEntry.getKey()) + mapEntry.getValue()).length();
-                    for (int i = 0; i < 13 - textLen; i++) {
+                    for (int i = 0; i < propertiesWeight - textLen; i++) {
                         stringBuilder.append(" ");
                     }
                     rowNum++;
@@ -233,7 +234,7 @@ public class Roles {
 
         if (num == 0) {
             try (Connection conn = DbUtil.getConnection()) {
-                String sql = "INSERT INTO CHOOISE_ROLE(" +
+                String sql = "INSERT INTO CHOOSE_ROLE(" +
                         "qq," +
                         "role" +
                         ") VALUES(?,?)";
@@ -249,7 +250,7 @@ public class Roles {
             }
         } else {
             try (Connection conn = DbUtil.getConnection()) {
-                String sql = "update CHOOISE_ROLE set " +
+                String sql = "update CHOOSE_ROLE set " +
                         "role=? where qq=?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     ps.setString(1, role);
@@ -264,7 +265,7 @@ public class Roles {
 
     public void searchRoleChoose(long qqId) {
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from CHOOISE_ROLE where qq=?";
+            String sql = "select * from CHOOSE_ROLE where qq=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setLong(1, qqId);
                 try (ResultSet set = ps.executeQuery()) {
@@ -278,6 +279,7 @@ public class Roles {
         }
     }
 
+    @SuppressWarnings("AlibabaMethodTooLong")
     private void insertRoleInfo(String properties) {
         HashMap<String, Integer> propertiesForRole = new RolesInfo(properties).getPropertiesForRole();
         Timestamp timestamp = getTime(getNowString());

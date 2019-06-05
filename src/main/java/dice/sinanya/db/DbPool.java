@@ -16,7 +16,7 @@ class DbPool {
     private static final Logger Log = LogManager.getLogger(DbPool.class.getName());
     private static DbPool instance;
 
-    /**
+    /*
      * 根据本地db.properties文件中的内容创建连接池
      */
 
