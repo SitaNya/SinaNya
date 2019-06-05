@@ -22,6 +22,7 @@ public class EntityManyRolls {
         String strInputValueNone = "";
         String tagTimes = "d";
         String strTimes;
+        this.resultMessages = "";
         this.strTimesAndRoles = strTimesAndRoles;
         if (strTimesAndRoles.contains(tagTimes)) {
             switch (strTimesAndRoles.split(tagTimes).length) {
@@ -57,24 +58,28 @@ public class EntityManyRolls {
         }
     }
 
-    public EntityManyRolls check(String resultMessage, EntityTypeMessages entityTypeMessages) throws PlayerSetException {
+    public EntityManyRolls check(String resultMessages, EntityTypeMessages entityTypeMessages) throws PlayerSetException {
         EntityManyRolls entityManyRolls = new EntityManyRolls(strTimesAndRoles);
         if (entityManyRolls.checkContainD()) {
             if (entityManyRolls.checkInputError()) {
-                resultMessage += strTimesAndRoles + "=";
+                resultMessages += strTimesAndRoles + "=";
             } else {
                 sender(entityTypeMessages, strValueErr);
                 throw new PlayerSetException();
             }
         } else {
-            resultMessage += "D100=";
+            resultMessages += "D100=";
         }
-        this.resultMessages = resultMessage;
+        entityManyRolls.setResultMessages(resultMessages);
         return entityManyRolls;
     }
 
     public String getResultMessages() {
-        return resultMessages;
+        return this.resultMessages;
+    }
+
+    private void setResultMessages(String resultMessages) {
+        this.resultMessages = resultMessages;
     }
 
     private boolean checkContainD() {
