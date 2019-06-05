@@ -84,7 +84,7 @@ class Flow {
         }
     }
 
-    private void groupFunction() {
+    private void toPrivateAndGroup() {
         Roll roll = new Roll(entityTypeMessages);
 
         if (isRH) {
@@ -94,11 +94,11 @@ class Flow {
     }
 
     void toGroup() {
-        groupFunction();
+        toPrivateAndGroup();
     }
 
     void toDisGroup() {
-        groupFunction();
+        toPrivateAndGroup();
     }
 
 }
