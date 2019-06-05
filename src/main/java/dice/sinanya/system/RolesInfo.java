@@ -2,7 +2,7 @@ package dice.sinanya.system;
 
 import java.util.HashMap;
 
-import static dice.sinanya.tools.MakeSkillName.makeSkillName;
+import static dice.sinanya.tools.GetMessaggeToValue.getMessaggeToValue;
 
 /**
  * @author zhangxiaozhou
@@ -14,6 +14,11 @@ public class RolesInfo {
     public RolesInfo(String properties) {
         this.properties = properties;
         propertiesForRole = makeProperties();
+    }
+
+    public RolesInfo(String properties, HashMap<String, Integer> propertiesDefault) {
+        this.properties = properties;
+        propertiesForRole = makeProperties(propertiesDefault);
     }
 
     public RolesInfo() {
@@ -33,33 +38,16 @@ public class RolesInfo {
 
         String strInputNone = "";
         if (properties != null && !properties.equals(strInputNone)) {
-            StringBuilder strSkillValue = new StringBuilder();
-            StringBuilder strSkillName = new StringBuilder();
-            for (int i = 0; i < properties.length(); ) {
-                while (i < properties.length() && !Character.isSpaceChar(properties.charAt(i)) &&
-                        !Character.isDigit(properties.charAt(i)) &&
-                        properties.charAt(i) != ':' &&
-                        properties.charAt(i) != '=') {
-                    strSkillName.append(properties.charAt(i));
-                    i++;
-                }
+            return getMessaggeToValue(propertiesDefault, properties);
+        }
+        return propertiesDefault;
+    }
 
-                while (i < properties.length() && Character.isDigit(properties.charAt(i))) {
-                    strSkillValue.append(properties.charAt(i));
-                    i++;
-                }
+    private HashMap<String, Integer> makeProperties(HashMap<String, Integer> propertiesDefault) {
 
-                if (i < properties.length()) {
-                    try {
-                        propertiesDefault.put(makeSkillName(strSkillName.toString()), Integer.parseInt(strSkillValue.toString()));
-                        strSkillName = new StringBuilder();
-                        strSkillValue = new StringBuilder();
-                    } catch (NumberFormatException e) {
-                        System.out.println(e.getMessage());
-                        System.out.println(strSkillName.toString());
-                    }
-                }
-            }
+        String strInputNone = "";
+        if (properties != null && !properties.equals(strInputNone)) {
+            return getMessaggeToValue(propertiesDefault, properties);
         }
         return propertiesDefault;
     }

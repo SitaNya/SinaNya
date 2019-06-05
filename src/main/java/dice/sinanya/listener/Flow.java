@@ -1,6 +1,7 @@
 package dice.sinanya.listener;
 
-import dice.sinanya.dice.roles.Roles;
+import dice.sinanya.dice.manager.Roles;
+import dice.sinanya.dice.manager.Team;
 import dice.sinanya.dice.roll.Roll;
 import dice.sinanya.dice.roll.RollAndCheck;
 import dice.sinanya.entity.EntityTypeMessages;
@@ -21,6 +22,7 @@ class Flow {
     private boolean isSHOW = false;
     private boolean isLIST = false;
     private boolean isMOVE = false;
+    private boolean isTEAM = false;
 
     Flow(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
@@ -39,11 +41,13 @@ class Flow {
         String tagSHOW = ".show";
         String tagLIST = ".list";
         String tagMOVE = ".move";
+        String tagTEAM = ".team";
 
         if (messages.length() >= tagSHOW.length()) {
             isSHOW = messages.substring(0, tagSHOW.length()).endsWith(tagSHOW);
             isLIST = messages.substring(0, tagLIST.length()).endsWith(tagLIST);
             isMOVE = messages.substring(0, tagMOVE.length()).endsWith(tagMOVE);
+            isTEAM = messages.substring(0, tagTEAM.length()).endsWith(tagTEAM);
         }
         if (messages.length() >= tagRA.length()) {
             isRH = messages.substring(0, tagRH.length()).equals(tagRH);
@@ -51,7 +55,7 @@ class Flow {
             isRC = messages.substring(0, tagRC.length()).equals(tagRC);
             isST = messages.substring(0, tagST.length()).equals(tagST);
         }
-        isR = messages.substring(0, tagR.length()).equals(tagR) && !isRH && !isRA && !isR;
+        isR = messages.substring(0, tagR.length()).equals(tagR) && !isRH && !isRA && !isRC;
     }
 
     void toPrivate() {
@@ -86,9 +90,12 @@ class Flow {
 
     private void toPrivateAndGroup() {
         Roll roll = new Roll(entityTypeMessages);
+        Team team = new Team(entityTypeMessages);
 
         if (isRH) {
             roll.rh();
+        } else if (isTEAM) {
+            team.set();
         }
         toPrivate();
     }

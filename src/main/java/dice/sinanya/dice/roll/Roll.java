@@ -4,8 +4,11 @@ import dice.sinanya.entity.EntityManyRolls;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.PlayerSetException;
 
+import static dice.sinanya.system.GetRole.getRole;
+import static dice.sinanya.system.GetRole.getRoleInfo;
 import static dice.sinanya.system.MessagesError.strDiceTimesTooBig;
 import static dice.sinanya.system.MessagesError.strHiddenDice;
+import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOISE;
 import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.RandomInt.random;
@@ -26,8 +29,15 @@ public class Roll {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".r");
 
         String strTimesAndRoles = msg.split(" +")[0];
+        String nick = "";
 
-        String resultMessage = getNickName(entityTypeMessages) + "掷出了: ";
+        if (getRole(entityTypeMessages)) {
+            nick = getRoleInfo(entityTypeMessages);
+        } else {
+            nick = getNickName(entityTypeMessages);
+        }
+
+        String resultMessage = nick + "掷出了: ";
 
         EntityManyRolls entityManyRolls;
         try {

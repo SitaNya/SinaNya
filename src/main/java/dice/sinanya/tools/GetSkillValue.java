@@ -17,4 +17,15 @@ public class GetSkillValue {
             return 0;
         }
     }
+
+    public static int getSkillValue(EntityTypeMessages entityTypeMessages, String tmpSkillName) {
+        long idQq = Long.parseLong(entityTypeMessages.getFromQQ());
+        String skillName = makeSkillName(tmpSkillName);
+        if (searchRole(ROLE_CHOOISE.get(idQq), entityTypeMessages)) {
+            EntityRoleTag entityRoleTag=new EntityRoleTag(entityTypeMessages);
+            return ROLE_INFO_CACHE.get(entityRoleTag).get(skillName);
+        } else {
+            return 0;
+        }
+    }
 }
