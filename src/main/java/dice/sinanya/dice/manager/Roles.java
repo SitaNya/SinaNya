@@ -105,20 +105,75 @@ public class Roles {
             add("luck");
             add("mp");
         }};
+
+        ArrayList<String> propInvestigationOfCrimes = new ArrayList<String>() {{
+            add("libraryUse");
+            add("investigationOfCrimes");
+            add("listen");
+            add("unlock");
+            add("aWonderfulHand");
+        }};
+
+        ArrayList<String> propTalk = new ArrayList<String>() {{
+            add("persuade");
+            add("intimidate");
+            add("enchantment");
+            add("talkingSkill");
+            add("psychology");
+        }};
+
+        ArrayList<String> propFight = new ArrayList<String>() {{
+            add("aFistFight");
+            add("dodge");
+            add("pistol");
+            add("firstAid");
+            add("medicalScience");
+        }};
+
+        ArrayList<String> allSelect = new ArrayList<String>();
+
+        allSelect.addAll(propMain);
+        allSelect.addAll(propInvestigationOfCrimes);
+        allSelect.addAll(propTalk);
+        allSelect.addAll(propFight);
+
         StringBuilder stringBuilder = new StringBuilder();
 
 
         if (checkRoleInfoFromChooseExistByFromQQ(entityTypeMessages)) {
             stringBuilder.append("您的角色: ");
-            stringBuilder.append(getRoleChooseByFromQQ(entityTypeMessages));
-            stringBuilder.append("的主属性为:\n");
-            ArrayList<String> propMainResult = showMainProp(propMain, true);
+            stringBuilder.append(getRoleChooseByFromQQ(entityTypeMessages))
+                    .append("包含有以下数据\n");
+
+            stringBuilder.append("主属性为:\n");
+            ArrayList<String> propMainResult = showProp(propMain);
             Collections.sort(propMainResult);
             stringBuilder = formatResult(stringBuilder, propMainResult);
-            stringBuilder.append("\n\n技能列表为:\n");
-            ArrayList<String> propSkillResult = showMainProp(propMain, false);
-            Collections.sort(propSkillResult);
-            stringBuilder = formatResult(stringBuilder, propSkillResult);
+
+            stringBuilder.append("\n常规侦查技能:\n");
+            ArrayList<String> propInvestigationOfCrimesResult = showProp(propInvestigationOfCrimes);
+            Collections.sort(propInvestigationOfCrimesResult);
+            stringBuilder = formatResult(stringBuilder, propInvestigationOfCrimesResult);
+
+            stringBuilder.append("\n常规社交技能:\n");
+            ArrayList<String> propTalkResult = showProp(propTalk);
+            Collections.sort(propTalkResult);
+            stringBuilder = formatResult(stringBuilder, propTalkResult);
+
+            stringBuilder.append("\n常规战斗技能:\n");
+            ArrayList<String> propFightResult = showProp(propFight);
+            Collections.sort(propFightResult);
+            stringBuilder = formatResult(stringBuilder, propFightResult);
+
+            stringBuilder.append("\n剩余技能值在50以上的技能:\n");
+            ArrayList<String> propUpResult = showProp(allSelect, true);
+            Collections.sort(propUpResult);
+            stringBuilder = formatResult(stringBuilder, propUpResult);
+
+            stringBuilder.append("\n剩余输入了技能值但不足50的技能:\n");
+            ArrayList<String> propDownResult = showProp(allSelect, false);
+            Collections.sort(propDownResult);
+            stringBuilder = formatResult(stringBuilder, propDownResult);
         } else {
             stringBuilder.append("您似乎未设定角色");
         }
@@ -126,18 +181,28 @@ public class Roles {
         sender(entityTypeMessages, stringBuilder.toString());
     }
 
-    private ArrayList<String> showMainProp(ArrayList<String> propMain, boolean main) {
+    private ArrayList<String> showProp(ArrayList<String> propMain) {
 
         ArrayList<String> result = new ArrayList<>();
         for (Map.Entry<String, Integer> mapEntry : Objects.requireNonNull(getRoleInfoFromChooseByFromQQ(entityTypeMessages)).entrySet()) {
-            if (main) {
-                if (propMain.contains(mapEntry.getKey())) {
+            if (propMain.contains(mapEntry.getKey()) && mapEntry.getValue() != 0) {
+                result.add(getSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
+            }
+
+        }
+        return result;
+    }
+
+    private ArrayList<String> showProp(ArrayList<String> propMain, boolean up) {
+        ArrayList<String> result = new ArrayList<>();
+        for (Map.Entry<String, Integer> mapEntry : Objects.requireNonNull(getRoleInfoFromChooseByFromQQ(entityTypeMessages)).entrySet()) {
+            if (!propMain.contains(mapEntry.getKey()) && mapEntry.getValue() != 0) {
+                if (up && mapEntry.getValue() >= 50) {
+                    result.add(getSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
+                } else if (!up && mapEntry.getValue() < 50) {
                     result.add(getSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
                 }
-            } else {
-                if (!propMain.contains(mapEntry.getKey())) {
-                    result.add(getSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
-                }
+
             }
 
         }

@@ -1,5 +1,6 @@
 package dice.sinanya.listener;
 
+import dice.sinanya.dice.get.MakeCocCard;
 import dice.sinanya.dice.manager.Roles;
 import dice.sinanya.dice.manager.Team;
 import dice.sinanya.dice.roll.*;
@@ -44,6 +45,14 @@ class Flow {
     private boolean isBotOff = false;
     private boolean isBotExit = false;
 
+    private boolean isCoc7 = false;
+    private boolean isCoc6 = false;
+    private boolean isCoc7d = false;
+    private boolean isCoc6d = false;
+
+    private boolean isTi = false;
+    private boolean isLi = false;
+
     Flow(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
         String messages = entityTypeMessages.getMsgGet().getMsg().trim();
@@ -86,6 +95,15 @@ class Flow {
         String tagBotOff = headerBot + "off.*";
         String tagBotExit = headerBot + "exit.*";
 
+        String headerCoc = header + "coc[ ]*";
+        String tagCoc7 = headerCoc + "[7]{0,1}[ ]*(10|[1-9])*";
+        String tagCoc7d = headerCoc + "[7]{0,1}d[ ]*(10|[1-9])*";
+        String tagCoc6 = headerCoc + "6[ ]*(10|[1-9])*";
+        String tagCoc6d = headerCoc + "6d[ ]*(10|[1-9])*";
+
+        String tagTi = header + "ti[ ]*";
+        String tagLi = header + "li[ ]*";
+
         isTeamSet = messages.matches(tagTeamSet);
         isTeamClr = messages.matches(tagTeamClr);
         isTeamMove = messages.matches(tagTeamMove);
@@ -103,6 +121,14 @@ class Flow {
         isBotOff = messages.matches(tagBotOff);
         isBotExit = messages.matches(tagBotExit);
         isBotInfo = messages.matches(tagBotShow) && !isBotOn && !isBotOff && !isBotExit;
+
+        isCoc7d = messages.matches(tagCoc7d);
+        isCoc6d = messages.matches(tagCoc6d);
+        isCoc6 = messages.matches(tagCoc6);
+        isCoc7 = messages.matches(tagCoc7) && !isCoc7d && !isCoc6d && !isCoc6;
+
+        isTi = messages.matches(tagTi);
+        isLi = messages.matches(tagLi);
 
         isRB = messages.matches(tagRB);
         isRP = messages.matches(tagRP);
@@ -123,7 +149,9 @@ class Flow {
         SanCheck sanCheck = new SanCheck(entityTypeMessages);
         RollAndCheck rollAndCheck = new RollAndCheck(entityTypeMessages);
         RewardAndPunishment rewardAndPunishment = new RewardAndPunishment(entityTypeMessages);
+        MakeCocCard makeCocCard = new MakeCocCard(entityTypeMessages);
         Bot bot = new Bot(entityTypeMessages);
+        TiAndLi tiAndLi = new TiAndLi(entityTypeMessages);
 
         if (isR) {
             roll.r();
@@ -163,6 +191,22 @@ class Flow {
 
         if (isBotInfo) {
             bot.info();
+        }
+
+        if (isCoc7d) {
+            makeCocCard.coc7d();
+        } else if (isCoc7) {
+            makeCocCard.coc7();
+        } else if (isCoc6d) {
+            makeCocCard.coc6d();
+        } else if (isCoc6) {
+            makeCocCard.coc6();
+        }
+
+        if (isTi) {
+            tiAndLi.ti();
+        } else if (isLi) {
+            tiAndLi.li();
         }
     }
 

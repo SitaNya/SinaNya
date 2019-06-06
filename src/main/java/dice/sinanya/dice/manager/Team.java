@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
+import static dice.sinanya.tools.DBAndSize.dbGetter;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.ManyRolls.manyRollsForInt;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
@@ -242,17 +243,4 @@ public class Team {
     }
 
 
-    private String dbGetter(int a) {
-        if (a <= 64) {
-            return "-2";
-        } else if (a <= 84) {
-            return "-1";
-        } else if (a <= 124) {
-            return "0";
-        } else if (a <= 164) {
-            return "1d4";
-        } else {
-            return (a - 164) / 80 + "d6";
-        }
-    }
 }
