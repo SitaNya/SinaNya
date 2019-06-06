@@ -71,10 +71,7 @@ public interface MessagesError {
     String strInitListClearedNotice = "成功清除先攻记录!";
     String strInitListIsEmptyErr = "错误: 先攻列表为空!";
     String strCommandNotAvailableErr = "错误: 此命令仅可在群/讨论组中使用";
-    String strSuccessfullyEnabledNotice = "啊~您需要奈梅斯了吗？我一定会好好努力的";
-    String strAlreadyEnabledErr = "嗯！我在的呢，您尽管吩咐吧";
-    String strSuccessfullyDisabledNotice = "这样啊……你找到更好的骰子了对吗？奈梅斯明白的，会好好安静下来的……";
-    String strAlreadyDisabledErr = "奈梅斯还不够安静吗？您……您需要我离开吗？";
+
     String strDiceInsertValTooBig = "哎？这个……太大了！";
     String strMsgToLong = "那个……只需要录入有改动的数据就可以哦？这样长的话奈梅斯处理起来会很费劲的";
     String strObCommandSuccessfullyEnabledNotice = "成功在本群/讨论组中启用旁观模式!";

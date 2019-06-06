@@ -12,6 +12,9 @@ import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgPrivate;
 import com.forte.qqrobot.sender.MsgSender;
 import dice.sinanya.entity.EntityTypeMessages;
 
+import static dice.sinanya.system.MessagesSystem.strAlreadyDisabledErr;
+import static dice.sinanya.tools.SwitchBot.getBot;
+
 /**
  * @author zhangxiaozhou
  */
@@ -37,14 +40,32 @@ public class Listener {
     @Listen(MsgGetTypes.groupMsg)
     @Filter(value = "^\\.[a-z].*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGroup msgGroup) {
-        new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup)).toGroup();
-        return true;
+        String tagBotOn = ".bot on";
+        String tagBotOff = ".bot off";
+        if (getBot(Long.parseLong(msgGroup.getFromGroup())) || msgGroup.getMsg().trim().equals(tagBotOn)) {
+            new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup)).toGroup();
+            return true;
+        } else if (msgGroup.getMsg().trim().equals(tagBotOff)) {
+            msgSender.SENDER.sendGroupMsg(msgGroup.getFromGroup(), strAlreadyDisabledErr);
+            return true;
+        } else {
+            return true;
+        }
     }
 
     @Listen(MsgGetTypes.discussMsg)
     @Filter(value = "^\\.[a-z].*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgDisGroup msgDisGroup) {
-        new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup)).toDisGroup();
-        return true;
+        String tagBotOn = ".bot on";
+        String tagBotOff = ".bot off";
+        if (getBot(Long.parseLong(msgDisGroup.getFromDiscuss())) || msgDisGroup.getMsg().trim().equals(tagBotOn)) {
+            new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup)).toDisGroup();
+            return true;
+        } else if (msgDisGroup.getMsg().trim().equals(tagBotOff)) {
+            msgSender.SENDER.sendDiscussMsg(msgDisGroup.getFromDiscuss(), strAlreadyDisabledErr);
+            return true;
+        } else {
+            return true;
+        }
     }
 }

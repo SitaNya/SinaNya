@@ -2,10 +2,8 @@ package dice.sinanya.listener;
 
 import dice.sinanya.dice.manager.Roles;
 import dice.sinanya.dice.manager.Team;
-import dice.sinanya.dice.roll.RewardAndPunishment;
-import dice.sinanya.dice.roll.Roll;
-import dice.sinanya.dice.roll.RollAndCheck;
-import dice.sinanya.dice.roll.SanCheck;
+import dice.sinanya.dice.roll.*;
+import dice.sinanya.dice.system.Bot;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.PlayerSetException;
 
@@ -26,6 +24,8 @@ class Flow {
 
     private boolean isSC = false;
 
+    private boolean isEN = false;
+
     private boolean isStSet = false;
     private boolean isStShow = false;
     private boolean isStList = false;
@@ -39,6 +39,11 @@ class Flow {
     private boolean isTeamHp = false;
     private boolean isTeamSan = false;
 
+    private boolean isBotInfo = false;
+    private boolean isBotOn = false;
+    private boolean isBotOff = false;
+    private boolean isBotExit = false;
+
     Flow(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
         String messages = entityTypeMessages.getMsgGet().getMsg().trim();
@@ -46,29 +51,40 @@ class Flow {
     }
 
     private void checkMessages(String messages) {
+        String header = "^*[.。][ ]*";
         String tagR = "^\\.[ ]*r.*";
 
-        String tagRH = "^\\.[ ]*rh.*";
-        String tagRA = "^\\.[ ]*ra.*";
-        String tagRC = "^\\.[ ]*rc.*";
+        String tagRH = header + "rh.*";
+        String tagRA = header + "ra.*";
+        String tagRC = header + "rc.*";
 
-        String tagRB = "^\\.[ ]*rb.*";
-        String tagRP = "^\\.[ ]*rp.*";
+        String tagRB = header + "rb.*";
+        String tagRP = header + "rp.*";
 
-        String tagSC = "^\\.[ ]*sc.*";
+        String tagSC = header + "sc.*";
 
-        String tagStSet = "^\\.[ ]*st.*";
-        String tagStShow = "^\\.[ ]*st[ ]*show.*";
-        String tagStList = "^\\.[ ]*st[ ]*list.*";
-        String tagStMove = "^\\.[ ]*st[ ]*move.*";
+        String tagEN = header + "en.*";
 
-        String tagTeamSet = "^\\.[ ]*team[ ]*set.*";
-        String tagTeamShow = "^\\.[ ]*team.*";
-        String tagTeamClr = "^\\.[ ]*team[ ]*clr.*";
-        String tagTeamMove = "^\\.[ ]*team[ ]*move.*";
-        String tagTeamCall = "^\\.[ ]*team[ ]*call.*";
-        String tagTeamHp = "^\\.[ ]*team[ ]*hp.*";
-        String tagTeamSan = "^\\.[ ]*team[ ]*san.*";
+        String headerSt = header + "st[ ]*";
+        String tagStSet = headerSt + ".*";
+        String tagStShow = headerSt + "show.*";
+        String tagStList = headerSt + "list.*";
+        String tagStMove = headerSt + "move.*";
+
+        String headerTeam = header + "team[ ]*";
+        String tagTeamShow = headerTeam + ".*";
+        String tagTeamSet = headerTeam + "set.*";
+        String tagTeamClr = headerTeam + "clr.*";
+        String tagTeamMove = headerTeam + "move.*";
+        String tagTeamCall = headerTeam + "call.*";
+        String tagTeamHp = headerTeam + "hp.*";
+        String tagTeamSan = headerTeam + "san.*";
+
+        String headerBot = header + "bot[ ]*";
+        String tagBotShow = headerBot + ".*";
+        String tagBotOn = headerBot + "on.*";
+        String tagBotOff = headerBot + "off.*";
+        String tagBotExit = headerBot + "exit.*";
 
         isTeamSet = messages.matches(tagTeamSet);
         isTeamClr = messages.matches(tagTeamClr);
@@ -83,10 +99,17 @@ class Flow {
         isStMove = messages.matches(tagStMove);
         isStSet = messages.matches(tagStSet) && !isStShow && !isStList && !isStMove;
 
+        isBotOn = messages.matches(tagBotOn);
+        isBotOff = messages.matches(tagBotOff);
+        isBotExit = messages.matches(tagBotExit);
+        isBotInfo = messages.matches(tagBotShow) && !isBotOn && !isBotOff && !isBotExit;
+
         isRB = messages.matches(tagRB);
         isRP = messages.matches(tagRP);
 
         isSC = messages.matches(tagSC);
+
+        isEN = messages.matches(tagEN);
 
         isRH = messages.matches(tagRH);
         isRA = messages.matches(tagRA);
@@ -100,6 +123,7 @@ class Flow {
         SanCheck sanCheck = new SanCheck(entityTypeMessages);
         RollAndCheck rollAndCheck = new RollAndCheck(entityTypeMessages);
         RewardAndPunishment rewardAndPunishment = new RewardAndPunishment(entityTypeMessages);
+        Bot bot = new Bot(entityTypeMessages);
 
         if (isR) {
             roll.r();
@@ -136,11 +160,18 @@ class Flow {
         } else if (isRP) {
             rewardAndPunishment.rp();
         }
+
+        if (isBotInfo) {
+            bot.info();
+        }
     }
 
     private void toPrivateAndGroup() {
         Roll roll = new Roll(entityTypeMessages);
         Team team = new Team(entityTypeMessages);
+        SkillUp skillUp = new SkillUp(entityTypeMessages);
+        Bot bot = new Bot(entityTypeMessages);
+
 
         if (isRH) {
             roll.rh();
@@ -161,6 +192,19 @@ class Flow {
         } else if (isTeamSan) {
             team.san();
         }
+
+        if (isEN) {
+            skillUp.en();
+        }
+
+        if (isBotOn) {
+            bot.on();
+        } else if (isBotOff) {
+            bot.off();
+        } else if (isBotExit) {
+            bot.exit();
+        }
+
         toPrivate();
     }
 

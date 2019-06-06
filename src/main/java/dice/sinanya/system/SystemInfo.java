@@ -1,5 +1,7 @@
 package dice.sinanya.system;
 
+import java.util.HashMap;
+
 public interface SystemInfo {
 
     /**
@@ -10,4 +12,6 @@ public interface SystemInfo {
      * 编译时的BOOT-INF环境路径
      */
     String BUILD_CLASS_BOOT_INF_DIR = "!/BOOT-INF/classes!";
+
+    HashMap<Long,Boolean> SWITCH_BOT =new HashMap<>();
 }
