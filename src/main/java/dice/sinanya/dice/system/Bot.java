@@ -22,10 +22,10 @@ public class Bot {
             return;
         }
         if (getBot(groupId)) {
-            sender(entityTypeMessages, strAlreadyEnabledErr);
+            sender(entityTypeMessages, STR_ALREADY_ENABLED_ERR);
         } else {
             botOn(groupId);
-            sender(entityTypeMessages, strSuccessfullyEnabledNotice);
+            sender(entityTypeMessages, STR_SUCCESSFULLY_ENABLED_NOTICE);
         }
     }
 
@@ -36,10 +36,10 @@ public class Bot {
             return;
         }
         if (!getBot(groupId)) {
-            sender(entityTypeMessages, strAlreadyDisabledErr);
+            sender(entityTypeMessages, STR_ALREADY_DISABLED_ERR);
         } else {
             botOff(groupId);
-            sender(entityTypeMessages, strSuccessfullyDisabledNotice);
+            sender(entityTypeMessages, STR_SUCCESSFULLY_DISABLED_NOTICE);
         }
     }
 
@@ -47,12 +47,12 @@ public class Bot {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".bot");
         String tagExit = "exit";
         if (msg.equals(tagExit)) {
-            sender(entityTypeMessages, strExitInfo);
+            sender(entityTypeMessages, STR_EXIT_INFO);
             entityTypeMessages.getMsgSender().SETTER.setGroupLeave(entityTypeMessages.getFromGroup());
         }
     }
 
     public void info() {
-        sender(entityTypeMessages, strBotInfo.toString());
+        sender(entityTypeMessages, STR_BOT_INFO.toString());
     }
 }

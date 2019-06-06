@@ -12,7 +12,7 @@ import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgPrivate;
 import com.forte.qqrobot.sender.MsgSender;
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.system.MessagesSystem.strAlreadyDisabledErr;
+import static dice.sinanya.system.MessagesSystem.STR_ALREADY_DISABLED_ERR;
 import static dice.sinanya.tools.SwitchBot.getBot;
 
 /**
@@ -46,7 +46,7 @@ public class Listener {
             new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup)).toGroup();
             return true;
         } else if (msgGroup.getMsg().trim().equals(tagBotOff)) {
-            msgSender.SENDER.sendGroupMsg(msgGroup.getFromGroup(), strAlreadyDisabledErr);
+            msgSender.SENDER.sendGroupMsg(msgGroup.getFromGroup(), STR_ALREADY_DISABLED_ERR);
             return true;
         } else {
             return true;
@@ -62,7 +62,7 @@ public class Listener {
             new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup)).toDisGroup();
             return true;
         } else if (msgDisGroup.getMsg().trim().equals(tagBotOff)) {
-            msgSender.SENDER.sendDiscussMsg(msgDisGroup.getFromDiscuss(), strAlreadyDisabledErr);
+            msgSender.SENDER.sendDiscussMsg(msgDisGroup.getFromDiscuss(), STR_ALREADY_DISABLED_ERR);
             return true;
         } else {
             return true;
