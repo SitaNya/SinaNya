@@ -66,8 +66,6 @@ public class Roles {
         for (Map.Entry<EntityRoleTag, HashMap<String, Integer>> mapEntry : ROLE_INFO_CACHE.entrySet()) {
             if (checkRoleChooseExistByQQ(qqId) && !getRoleChooseByQQ(qqId).equals(mapEntry.getKey().getRole())) {
                 standbyRole.append(mapEntry.getKey().getRole()).append("\n");
-            } else if (checkRoleChooseExistByQQ(qqId)) {
-                standbyRole.append(mapEntry.getKey().getRole()).append("\n");
             }
         }
         if (standbyRole.length() == 0) {

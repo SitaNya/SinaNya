@@ -1,10 +1,14 @@
 package dice.sinanya.listener;
 
+import dice.sinanya.dice.get.BG;
 import dice.sinanya.dice.get.MakeCocCard;
+import dice.sinanya.dice.get.NPC;
+import dice.sinanya.dice.getbook.Book;
 import dice.sinanya.dice.manager.Roles;
 import dice.sinanya.dice.manager.Team;
 import dice.sinanya.dice.roll.*;
 import dice.sinanya.dice.system.Bot;
+import dice.sinanya.dice.system.Help;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.PlayerSetException;
 
@@ -44,6 +48,19 @@ class Flow {
     private boolean isBotOn = false;
     private boolean isBotOff = false;
     private boolean isBotExit = false;
+
+    private boolean isHelpNormal = false;
+    private boolean isHelpMake = false;
+    private boolean isHelpGroup = false;
+
+    private boolean isBookCard = false;
+    private boolean isBookRP = false;
+    private boolean isBookKP = false;
+    private boolean isBookMAKE = false;
+
+    private boolean isNPC = false;
+
+    private boolean isBG = false;
 
     private boolean isCoc7 = false;
     private boolean isCoc6 = false;
@@ -95,6 +112,21 @@ class Flow {
         String tagBotOff = headerBot + "off.*";
         String tagBotExit = headerBot + "exit.*";
 
+        String headerHelp = header + "help[ ]*";
+        String tagHelpNormal = headerHelp + "normal.*";
+        String tagHelpMake = headerHelp + "make.*";
+        String tagHelpGroup = headerHelp + "group.*";
+
+        String headerBook = header + "getbook[ ]*";
+        String tagBookCard = headerBook + "card.*";
+        String tagBookRP = headerBook + "rp.*";
+        String tagBookKP = headerBook + "kp.*";
+        String tagBookMake = headerBook + "make.*";
+
+        String tagNPC = header + "npc.*";
+
+        String tagBG = header + "bg.*";
+
         String headerCoc = header + "coc[ ]*";
         String tagCoc7 = headerCoc + "[7]{0,1}[ ]*(10|[1-9])*";
         String tagCoc7d = headerCoc + "[7]{0,1}d[ ]*(10|[1-9])*";
@@ -122,10 +154,23 @@ class Flow {
         isBotExit = messages.matches(tagBotExit);
         isBotInfo = messages.matches(tagBotShow) && !isBotOn && !isBotOff && !isBotExit;
 
+        isHelpNormal = messages.matches(tagHelpNormal);
+        isHelpMake = messages.matches(tagHelpMake);
+        isHelpGroup = messages.matches(tagHelpGroup);
+
         isCoc7d = messages.matches(tagCoc7d);
         isCoc6d = messages.matches(tagCoc6d);
         isCoc6 = messages.matches(tagCoc6);
         isCoc7 = messages.matches(tagCoc7) && !isCoc7d && !isCoc6d && !isCoc6;
+
+        isBookCard = messages.matches(tagBookCard);
+        isBookMAKE = messages.matches(tagBookMake);
+        isBookRP = messages.matches(tagBookRP);
+        isBookKP = messages.matches(tagBookKP);
+
+        isNPC = messages.matches(tagNPC);
+
+        isBG = messages.matches(tagBG);
 
         isTi = messages.matches(tagTi);
         isLi = messages.matches(tagLi);
@@ -152,6 +197,10 @@ class Flow {
         MakeCocCard makeCocCard = new MakeCocCard(entityTypeMessages);
         Bot bot = new Bot(entityTypeMessages);
         TiAndLi tiAndLi = new TiAndLi(entityTypeMessages);
+        Help help = new Help(entityTypeMessages);
+        Book book = new Book(entityTypeMessages);
+        BG bg = new BG(entityTypeMessages);
+        NPC npc = new NPC(entityTypeMessages);
 
         if (isR) {
             roll.r();
@@ -207,6 +256,32 @@ class Flow {
             tiAndLi.ti();
         } else if (isLi) {
             tiAndLi.li();
+        }
+
+        if (isHelpNormal) {
+            help.normal();
+        } else if (isHelpMake) {
+            help.make();
+        } else if (isHelpGroup) {
+            help.group();
+        }
+
+        if (isBookKP) {
+            book.kp();
+        } else if (isBookCard) {
+            book.card();
+        } else if (isBookRP) {
+            book.rp();
+        } else if (isBookMAKE) {
+            book.make();
+        }
+
+        if (isNPC) {
+            npc.npc();
+        }
+
+        if (isBG) {
+            bg.bg();
         }
     }
 

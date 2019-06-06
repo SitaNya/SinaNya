@@ -1,5 +1,6 @@
 package dice.sinanya.dice.manager;
 
+import dice.sinanya.dice.roll.SanCheck;
 import dice.sinanya.entity.EntityManyRolls;
 import dice.sinanya.entity.EntityTeamInfo;
 import dice.sinanya.entity.EntityTypeMessages;
@@ -152,6 +153,10 @@ public class Team {
         }
 
         msg = msg.replaceAll(regex, "").trim();
+        String strSanCheckFunction = "";
+        if ((msg.contains("d") || msg.contains("D")) || msg.contains("/")) {
+            strSanCheckFunction = msg;
+        }
         for (String qq : qqList) {
             int changeValue = 0;
             boolean add = false;
@@ -161,7 +166,7 @@ public class Team {
             }
             if (isNumeric(msg)) {
                 changeValue = Integer.parseInt(msg);
-            } else if (msg.contains("D") || msg.contains("d")) {
+            } else if ((msg.contains("D") || msg.contains("d")) && !msg.contains("/")) {
                 EntityManyRolls entityManyRolls;
                 try {
                     entityManyRolls = new EntityManyRolls(msg).check(entityTypeMessages);
@@ -186,7 +191,11 @@ public class Team {
                     int newSan = max(0, san - changeValue);
                     prop.put("san", newSan);
                     setRoleInfoFromChooseByQQ(qq, prop);
-                    sender(entityTypeMessages, "已为" + role + "降低" + changeValue + "点理智值，剩余" + newSan + "点");
+                    if (changeValue == 0) {
+                        new SanCheck(entityTypeMessages).sc(Long.parseLong(qq), strSanCheckFunction);
+                    } else {
+                        sender(entityTypeMessages, "已为" + role + "降低" + changeValue + "点理智值，剩余" + newSan + "点");
+                    }
                     if (newSan == 0) {
                         sender(entityTypeMessages, role + "已永久疯狂");
                     } else if (changeValue >= 5) {

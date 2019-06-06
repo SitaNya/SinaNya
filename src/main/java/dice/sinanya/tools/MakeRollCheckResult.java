@@ -55,6 +55,7 @@ public class MakeRollCheckResult {
 
         Matcher m = p.matcher(msg);
         if (m.find()) {
+            msg = msg.replaceAll(skillName.toString(), String.valueOf(skill));
             skill = (int) ceil(Calculator.conversion(msg));
         }
 

@@ -13,5 +13,5 @@ public interface SystemInfo {
      */
     String BUILD_CLASS_BOOT_INF_DIR = "!/BOOT-INF/classes!";
 
-    HashMap<Long,Boolean> SWITCH_BOT =new HashMap<>();
+    HashMap<Long, Boolean> SWITCH_BOT = new HashMap<>();
 }

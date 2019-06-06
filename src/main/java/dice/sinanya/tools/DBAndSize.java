@@ -2,7 +2,7 @@ package dice.sinanya.tools;
 
 public class DBAndSize {
 
-    public static String dbGetter(int a) {
+    public static String dbGetter6(int a) {
         if (a >= 2 && a <= 12) {
             return "-1D6";
         } else if (a <= 16) {
@@ -18,7 +18,7 @@ public class DBAndSize {
         }
     }
 
-    public static String dbGetter6(int a) {
+    public static String dbGetter(int a) {
         if (a >= 2 && a <= 64) {
             return "-2";
         } else if (a <= 84) {

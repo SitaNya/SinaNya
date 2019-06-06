@@ -2,7 +2,7 @@ package dice.sinanya.tools;
 
 import java.util.concurrent.Callable;
 
-import static dice.sinanya.tools.DBAndSize.dbGetter;
+import static dice.sinanya.tools.DBAndSize.dbGetter6;
 import static dice.sinanya.tools.ManyRolls.manyRollsProcess;
 import static java.lang.Math.ceil;
 
@@ -80,7 +80,7 @@ public class MakeCoc6Card implements Callable<String> {
                 .append(" ")
 
                 .append("DB:")
-                .append(dbGetter(siz + str))
+                .append(dbGetter6(siz + str))
 
                 .append("\n总值:")
                 .append(notLuck)
