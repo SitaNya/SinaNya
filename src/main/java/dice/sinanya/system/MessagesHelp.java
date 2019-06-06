@@ -55,6 +55,14 @@ public interface MessagesHelp {
             .append("生成6版详细人物卡")
             .append("\n\n")
 
+            .append(".getbook card\n")
+            .append("获取最新版人物卡，非常好用！")
+            .append("\n\n")
+
+            .append(".getbook make\n")
+            .append("获取车卡指南，新手花点时间准能看懂，能帮kp省很多事")
+            .append("\n\n")
+
             .append(".st\r")
             .append(".st缇娜-力量30|.st安娜-智力80\n")
             .append("录入多人物卡档位，本骰子不支持普通人物卡录入，请务必录入多人物卡，注意是减号分割。此功能与本骰子多项其余功能联动，忘记录入的话可能会影响其它功能的效果。")
@@ -105,5 +113,24 @@ public interface MessagesHelp {
             .append("\n\n")
 
             .append(".team clr\n")
-            .append("清空队伍");
+            .append("清空队伍")
+
+            .append(".npc\n")
+            .append("生成一个NPC，部分发送到群里给PC，部分私聊KP，注意这可不是车卡用的！");
+
+    StringBuilder bookHelp = new StringBuilder()
+            .append(".getbook card\n")
+            .append("获取最新版人物卡，非常好用！")
+            .append("\n\n")
+
+            .append(".getbook make\n")
+            .append("获取车卡指南，新手花点时间准能看懂，能帮kp省很多事")
+            .append("\n\n")
+
+            .append(".getbook kp\n")
+            .append("读规则书是好文明！")
+            .append("\n\n")
+
+            .append(".getbook rp\n")
+            .append("角色扮演365问，不过只有问没有答，估计还是要读的人自己思考吧");
 }
