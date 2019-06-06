@@ -23,4 +23,8 @@ public class Help {
     public void group() {
         sender(entityTypeMessages, groupHelp.toString());
     }
+
+    public void book() {
+        sender(entityTypeMessages, bookHelp.toString());
+    }
 }

@@ -114,6 +114,7 @@ public interface MessagesHelp {
 
             .append(".team clr\n")
             .append("清空队伍")
+            .append("\n\n")
 
             .append(".npc\n")
             .append("生成一个NPC，部分发送到群里给PC，部分私聊KP，注意这可不是车卡用的！");

@@ -52,6 +52,8 @@ class Flow {
     private boolean isHelpNormal = false;
     private boolean isHelpMake = false;
     private boolean isHelpGroup = false;
+    private boolean isHelpBook = false;
+
 
     private boolean isBookCard = false;
     private boolean isBookRP = false;
@@ -116,6 +118,7 @@ class Flow {
         String tagHelpNormal = headerHelp + "normal.*";
         String tagHelpMake = headerHelp + "make.*";
         String tagHelpGroup = headerHelp + "group.*";
+        String tagHelpBook = headerHelp + "book.*";
 
         String headerBook = header + "getbook[ ]*";
         String tagBookCard = headerBook + "card.*";
@@ -157,6 +160,7 @@ class Flow {
         isHelpNormal = messages.matches(tagHelpNormal);
         isHelpMake = messages.matches(tagHelpMake);
         isHelpGroup = messages.matches(tagHelpGroup);
+        isHelpBook = messages.matches(tagHelpBook);
 
         isCoc7d = messages.matches(tagCoc7d);
         isCoc6d = messages.matches(tagCoc6d);
@@ -264,6 +268,8 @@ class Flow {
             help.make();
         } else if (isHelpGroup) {
             help.group();
+        }else if(isHelpBook){
+            help.book();
         }
 
         if (isBookKP) {
