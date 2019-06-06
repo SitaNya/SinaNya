@@ -49,3 +49,5 @@
 /.idea
 /target
 /out
+.idea
+*.idea
