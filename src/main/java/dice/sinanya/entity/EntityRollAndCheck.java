@@ -4,11 +4,20 @@ public class EntityRollAndCheck {
     String nick;
     int random;
     int skill;
+    String process;
 
     public EntityRollAndCheck(String nick, int random, int skill) {
         this.nick = nick;
         this.random = random;
         this.skill = skill;
+    }
+
+    public String getProcess() {
+        return process;
+    }
+
+    public void setProcess(String process) {
+        this.process = process;
     }
 
     public String getNick() {

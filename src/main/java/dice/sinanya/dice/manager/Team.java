@@ -1,26 +1,24 @@
 package dice.sinanya.dice.manager;
 
-import dice.sinanya.db.DbUtil;
-import dice.sinanya.entity.EntityRoleTag;
+import dice.sinanya.entity.EntityManyRolls;
 import dice.sinanya.entity.EntityTeamInfo;
 import dice.sinanya.entity.EntityTypeMessages;
-import org.apache.commons.lang.StringUtils;
+import dice.sinanya.exceptions.PlayerSetException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static dice.sinanya.system.GetRole.getRoleInfo;
-import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
+import static dice.sinanya.tools.ManyRolls.manyRollsForInt;
+import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
+import static dice.sinanya.tools.RoleInfo.getRoleInfoFromChooseByQQ;
+import static dice.sinanya.tools.RoleInfo.setRoleInfoFromChooseByQQ;
 import static dice.sinanya.tools.Sender.sender;
-import static java.lang.Math.ceil;
-import static java.lang.Math.floor;
+import static dice.sinanya.tools.Team.*;
+import static java.lang.Math.*;
 
 public class Team {
 
@@ -41,7 +39,7 @@ public class Team {
             qqList.add(matcher.group(1));
         }
         EntityTeamInfo entityTeamInfo = new EntityTeamInfo(entityTypeMessages.getFromGroup(), qqList);
-        insertTeamInfo(entityTeamInfo, true);
+        addIntoTeam(entityTeamInfo);
         for (String qq : qqList) {
             sender(entityTypeMessages, "已将玩家: [CQ:at,qq=" + qq + "]加入小队。可以使用.team查看队伍信息,.team hp/san对成员状态进行强制调整\n其余使用方式请查看.help命令");
         }
@@ -58,117 +56,158 @@ public class Team {
             qqList.add(matcher.group(1));
         }
         EntityTeamInfo entityTeamInfo = new EntityTeamInfo(entityTypeMessages.getFromGroup(), qqList);
-        insertTeamInfo(entityTeamInfo, false);
+        removeFromTeam(entityTeamInfo);
         for (String qq : qqList) {
             sender(entityTypeMessages, "已将玩家: [CQ:at,qq=" + qq + "]移出小队,其在这期间损失的血量和san值不会还原。");
         }
     }
 
     public void clr() {
-        deleteGroup(entityTypeMessages.getFromGroup());
+        clearTeam(entityTypeMessages.getFromGroup());
         sender(entityTypeMessages, "已清空本群小队");
+    }
+
+    public void call() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("kp正在呼叫以下成员:");
+        for (String qq : queryTeam(entityTypeMessages.getFromGroup())
+        ) {
+            stringBuilder.append("\n[CQ:at,qq=")
+                    .append(qq)
+                    .append("]");
+        }
+        sender(entityTypeMessages, stringBuilder.toString());
     }
 
     public void hp() {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".team hp");
         String regex = "\\[CQ:at,qq=([0-9]+)]";
-        Pattern pattern = Pattern.compile(regex);
+        final Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(msg);
 
-        String qq = "0";
+        ArrayList<String> qqList = new ArrayList<>();
         while (matcher.find()) {
-            qq = matcher.group(1);
+            qqList.add(matcher.group(1));
         }
-        if (isNumeric(msg)) {
-            new Roles(entityTypeMessages).searchRoleChoose(Long.parseLong(qq));
-            HashMap<String, Integer> prop = ROLE_INFO_CACHE.get(new EntityRoleTag(Long.parseLong(qq), getRoleInfo(entityTypeMessages, Long.parseLong(qq))));
+
+        msg = msg.replaceAll(regex, "").trim();
+        for (String qq : qqList) {
+            int changeValue = 0;
+            boolean add = false;
+            if (msg.contains("+")) {
+                msg = msg.replaceAll("\\+", "");
+                add = true;
+            }
+            if (isNumeric(msg)) {
+                changeValue = Integer.parseInt(msg);
+            } else if (msg.contains("D") || msg.contains("d")) {
+                EntityManyRolls entityManyRolls;
+                try {
+                    entityManyRolls = new EntityManyRolls(msg).check(entityTypeMessages);
+                    changeValue = manyRollsForInt(entityManyRolls.getTimes(), entityManyRolls.getRolls());
+                } catch (PlayerSetException e) {
+                    return;
+                }
+            }
+
+            String role;
+            int hp;
+            HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);
             if (prop != null) {
-                String role = getRoleInfo(entityTypeMessages, Long.parseLong(qq));
-                int hp = prop.get("hp");
-                hp = hp - Integer.parseInt(msg);
-                String newHp = "hp" + hp;
-                new Roles(entityTypeMessages).insertRoleInfo(ROLE_INFO_CACHE.get(new EntityRoleTag(entityTypeMessages)), newHp);
-                if (Integer.parseInt(msg) > floor(hp / 2)) {
-                    sender(entityTypeMessages, "已为" + role + "降低" + hp + "点血量，剩余" + newHp + "点,已进入重伤状态");
+                role = getRoleChooseByQQ(qq);
+                hp = prop.get("hp");
+                if (add) {
+                    int newHp = hp + changeValue;
+                    prop.put("hp", newHp);
+                    setRoleInfoFromChooseByQQ(qq, prop);
+                    sender(entityTypeMessages, "已为" + role + "恢复" + changeValue + "点血量，剩余" + newHp + "点");
                 } else {
-                    sender(entityTypeMessages, "已为" + role + "降低" + hp + "点血量，剩余" + newHp + "点");
+                    int newHp = max(0, hp - changeValue);
+                    prop.put("hp", newHp);
+                    setRoleInfoFromChooseByQQ(qq, prop);
+                    if (newHp == 0) {
+                        sender(entityTypeMessages, role + "损失" + changeValue + "点血量，已死亡");
+                    } else if (changeValue >= floor(hp / 2)) {
+                        sender(entityTypeMessages, "已为" + role + "降低" + changeValue + "点血量，剩余" + newHp + "点,已进入重伤状态");
+                    } else {
+                        sender(entityTypeMessages, "已为" + role + "降低" + changeValue + "点血量，剩余" + newHp + "点");
+                    }
                 }
             } else {
                 sender(entityTypeMessages, "[CQ:at,qq=" + qq + "] 未选择人物卡");
             }
-        } else if (msg.contains("+") && isNumeric(msg.replace("+", "").trim())) {
-            new Roles(entityTypeMessages).searchRoleChoose(Long.parseLong(qq));
-            HashMap<String, Integer> prop = ROLE_INFO_CACHE.get(new EntityRoleTag(Long.parseLong(qq), getRoleInfo(entityTypeMessages, Long.parseLong(qq))));
-            if (prop != null) {
-                String role = getRoleInfo(entityTypeMessages, Long.parseLong(qq));
-                int hp = prop.get("hp");
-                hp = hp + Integer.parseInt(msg);
-                String newHp = "hp" + hp;
-                new Roles(entityTypeMessages).insertRoleInfo(ROLE_INFO_CACHE.get(new EntityRoleTag(entityTypeMessages)), newHp);
-                sender(entityTypeMessages, "已为" + role + "恢复" + hp + "点血量，剩余" + newHp + "点");
-            } else {
-                sender(entityTypeMessages, "[CQ:at,qq=" + qq + "] 未选择人物卡");
-            }
-        } else {
-            sender(entityTypeMessages, "输入错误，接受一个数字参数用于降低血量如.team hp @xxx 10，也可.team hp @xxx +10恢复血量");
         }
     }
 
     public void san() {
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".team hp");
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".team san");
         String regex = "\\[CQ:at,qq=([0-9]+)]";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(msg);
 
-        String qq = "0";
+        ArrayList<String> qqList = new ArrayList<>();
         while (matcher.find()) {
-            qq = matcher.group(1);
+            qqList.add(matcher.group(1));
         }
-        if (isNumeric(msg)) {
-            new Roles(entityTypeMessages).searchRoleChoose(Long.parseLong(qq));
-            HashMap<String, Integer> prop = ROLE_INFO_CACHE.get(new EntityRoleTag(Long.parseLong(qq), getRoleInfo(entityTypeMessages, Long.parseLong(qq))));
-            if (prop != null) {
-                String role = getRoleInfo(entityTypeMessages, Long.parseLong(qq));
-                int san = prop.get("san");
-                san = san - Integer.parseInt(msg);
-                String newSan = "san" + san;
-                new Roles(entityTypeMessages).insertRoleInfo(ROLE_INFO_CACHE.get(new EntityRoleTag(entityTypeMessages)), newSan);
-                sender(entityTypeMessages, "已为" + role + "降低" + san + "点san值，剩余" + newSan + "点");
-            } else {
-                sender(entityTypeMessages, "[CQ:at,qq=" + qq + "] 未选择人物卡");
-            }
-        } else if (msg.contains("+") && isNumeric(msg.replace("+", "").trim())) {
-            new Roles(entityTypeMessages).searchRoleChoose(Long.parseLong(qq));
-            HashMap<String, Integer> prop = ROLE_INFO_CACHE.get(new EntityRoleTag(Long.parseLong(qq), getRoleInfo(entityTypeMessages, Long.parseLong(qq))));
-            if (prop != null) {
-                String role = getRoleInfo(entityTypeMessages, Long.parseLong(qq));
-                int san = prop.get("san");
-                san = san + Integer.parseInt(msg);
-                String newSan = "san" + san;
-                new Roles(entityTypeMessages).insertRoleInfo(ROLE_INFO_CACHE.get(new EntityRoleTag(entityTypeMessages)), newSan);
-                sender(entityTypeMessages, "已为" + role + "恢复" + san + "点san值，剩余" + newSan + "点");
-            } else {
-                sender(entityTypeMessages, "[CQ:at,qq=" + qq + "] 未选择人物卡");
-            }
-        } else {
-            sender(entityTypeMessages, "输入错误，接受一个数字参数用于降低san值如.team san @xxx 10，也可.team san @xxx +10恢复san");
-        }
-    }
 
-    private ArrayList<String> get() {
-        return selectTeamInfo(entityTypeMessages.getFromGroup());
+        msg = msg.replaceAll(regex, "").trim();
+        for (String qq : qqList) {
+            int changeValue = 0;
+            boolean add = false;
+            if (msg.contains("+")) {
+                msg = msg.replaceAll("\\+", "");
+                add = true;
+            }
+            if (isNumeric(msg)) {
+                changeValue = Integer.parseInt(msg);
+            } else if (msg.contains("D") || msg.contains("d")) {
+                EntityManyRolls entityManyRolls;
+                try {
+                    entityManyRolls = new EntityManyRolls(msg).check(entityTypeMessages);
+                    changeValue = manyRollsForInt(entityManyRolls.getTimes(), entityManyRolls.getRolls());
+                } catch (PlayerSetException e) {
+                    return;
+                }
+            }
+
+            String role;
+            int san;
+            HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);
+            if (prop != null) {
+                role = getRoleChooseByQQ(qq);
+                san = prop.get("san");
+                if (add) {
+                    int newSan = san + changeValue;
+                    prop.put("san", newSan);
+                    setRoleInfoFromChooseByQQ(qq, prop);
+                    sender(entityTypeMessages, "已为" + role + "恢复" + changeValue + "点理智值，剩余" + newSan + "点");
+                } else {
+                    int newSan = max(0, san - changeValue);
+                    prop.put("san", newSan);
+                    setRoleInfoFromChooseByQQ(qq, prop);
+                    sender(entityTypeMessages, "已为" + role + "降低" + changeValue + "点理智值，剩余" + newSan + "点");
+                    if (newSan == 0) {
+                        sender(entityTypeMessages, role + "已永久疯狂");
+                    } else if (changeValue >= 5) {
+                        sender(entityTypeMessages, role + "已进入临时性疯狂");
+                    } else if (changeValue >= floor(san / 5)) {
+                        sender(entityTypeMessages, role + "已进入不定性疯狂");
+                    }
+                }
+            } else {
+                sender(entityTypeMessages, "[CQ:at,qq=" + qq + "] 未选择人物卡");
+            }
+        }
     }
 
     public void show() {
-        new Roles(entityTypeMessages).get();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("您的小队情况目前为: ");
-        for (String qq : get()
+        for (String qq : queryTeam(entityTypeMessages.getFromGroup())
         ) {
-            new Roles(entityTypeMessages).searchRoleChoose(Long.parseLong(qq));
-            HashMap<String, Integer> prop = ROLE_INFO_CACHE.get(new EntityRoleTag(Long.parseLong(qq), getRoleInfo(entityTypeMessages, Long.parseLong(qq))));
+            HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);
             if (prop != null) {
-                String role = getRoleInfo(entityTypeMessages, Long.parseLong(qq));
+                String role = getRoleChooseByQQ(qq);
                 int str = prop.get("str");
                 int pow = prop.get("pow");
                 int con = prop.get("con");
@@ -180,6 +219,7 @@ public class Team {
                 stringBuilder
                         .append("\n")
                         .append(role)
+                        .append("\t")
                         .append("血量=")
                         .append(hp)
                         .append("/")
@@ -199,96 +239,6 @@ public class Team {
             }
         }
         sender(entityTypeMessages, stringBuilder.toString());
-    }
-
-    private ArrayList<String> selectTeamInfo(String groupId) {
-        String strQqList = "";
-        try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from team where groupId=?";
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, groupId);
-                try (ResultSet set = ps.executeQuery()) {
-                    while (set.next()) {
-                        strQqList = set.getString("qqList");
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return new ArrayList<String>(Arrays.asList(strQqList.split(",")));
-    }
-
-    private void insertTeamInfo(EntityTeamInfo entityTeamInfo, boolean add) {
-        int num = 0;
-        ArrayList<String> qqList = entityTeamInfo.getQqList();
-        try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from team where groupId=?";
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, entityTeamInfo.getGroup());
-                try (ResultSet set = ps.executeQuery()) {
-                    while (set.next()) {
-                        num++;
-                        if (add) {
-                            qqList.addAll(Arrays.asList(set.getString("qqList").split(",")));
-                        } else {
-                            for (String tmp : entityTeamInfo.getQqList()) {
-                                qqList.remove(tmp);
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        if (num == 0) {
-            try (Connection conn = DbUtil.getConnection()) {
-                String sql = "INSERT INTO team(" +
-                        "groupId," +
-                        "qqList" +
-                        ") VALUES(?,?)";
-                try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    ps.setString(1, entityTeamInfo.getGroup());
-                    ps.setString(2, StringUtils.join(entityTeamInfo.getQqList(), ","));
-                    ps.executeUpdate();
-                }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        } else {
-            try (Connection conn = DbUtil.getConnection()) {
-                String sql = "update team set " +
-                        "qqList=? where groupId=?";
-                try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    Set<String> middleHashSet = new HashSet<String>(qqList);
-                    ArrayList<String> afterHashSetList = new ArrayList<String>(middleHashSet);
-                    StringBuilder stringBuilder = new StringBuilder();
-                    for (String tmp : afterHashSetList) {
-                        stringBuilder.append(tmp);
-                        stringBuilder.append(",");
-                    }
-                    ps.setString(1, stringBuilder.toString().substring(0, stringBuilder.length() - 1));
-                    ps.setString(2, entityTeamInfo.getGroup());
-                    ps.executeUpdate();
-                }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    private void deleteGroup(String group) {
-        try (Connection conn = DbUtil.getConnection()) {
-            String sql = "delete from team where groupId=?";
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, group);
-                ps.executeUpdate();
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
     }
 
 

@@ -71,6 +71,15 @@ public class EntityManyRolls {
         return entityManyRolls;
     }
 
+    public EntityManyRolls check(EntityTypeMessages entityTypeMessages) throws PlayerSetException {
+        EntityManyRolls entityManyRolls = new EntityManyRolls(strTimesAndRoles);
+        if (entityManyRolls.checkInputError()) {
+            return entityManyRolls;
+        } else {
+            throw new PlayerSetException(entityTypeMessages);
+        }
+    }
+
     public String getResultMessages() {
         return this.resultMessages;
     }

@@ -2,8 +2,10 @@ package dice.sinanya.listener;
 
 import dice.sinanya.dice.manager.Roles;
 import dice.sinanya.dice.manager.Team;
+import dice.sinanya.dice.roll.RewardAndPunishment;
 import dice.sinanya.dice.roll.Roll;
 import dice.sinanya.dice.roll.RollAndCheck;
+import dice.sinanya.dice.roll.SanCheck;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.PlayerSetException;
 
@@ -18,6 +20,11 @@ class Flow {
     private boolean isRH = false;
     private boolean isRA = false;
     private boolean isRC = false;
+
+    private boolean isRB = false;
+    private boolean isRP = false;
+
+    private boolean isSC = false;
 
     private boolean isStSet = false;
     private boolean isStShow = false;
@@ -45,6 +52,11 @@ class Flow {
         String tagRA = "^\\.[ ]*ra.*";
         String tagRC = "^\\.[ ]*rc.*";
 
+        String tagRB = "^\\.[ ]*rb.*";
+        String tagRP = "^\\.[ ]*rp.*";
+
+        String tagSC = "^\\.[ ]*sc.*";
+
         String tagStSet = "^\\.[ ]*st.*";
         String tagStShow = "^\\.[ ]*st[ ]*show.*";
         String tagStList = "^\\.[ ]*st[ ]*list.*";
@@ -71,17 +83,23 @@ class Flow {
         isStMove = messages.matches(tagStMove);
         isStSet = messages.matches(tagStSet) && !isStShow && !isStList && !isStMove;
 
+        isRB = messages.matches(tagRB);
+        isRP = messages.matches(tagRP);
+
+        isSC = messages.matches(tagSC);
 
         isRH = messages.matches(tagRH);
         isRA = messages.matches(tagRA);
         isRC = messages.matches(tagRC);
-        isR = messages.matches(tagR) && !isRH && !isRA && !isRC;
+        isR = messages.matches(tagR) && !isRH && !isRA && !isRC && !isRB && !isRP;
     }
 
     void toPrivate() {
         Roll roll = new Roll(entityTypeMessages);
         Roles roles = new Roles(entityTypeMessages);
+        SanCheck sanCheck = new SanCheck(entityTypeMessages);
         RollAndCheck rollAndCheck = new RollAndCheck(entityTypeMessages);
+        RewardAndPunishment rewardAndPunishment = new RewardAndPunishment(entityTypeMessages);
 
         if (isR) {
             roll.r();
@@ -108,6 +126,16 @@ class Flow {
         } else if (isStMove) {
             roles.move();
         }
+
+        if (isSC) {
+            sanCheck.sc();
+        }
+
+        if (isRB) {
+            rewardAndPunishment.rb();
+        } else if (isRP) {
+            rewardAndPunishment.rp();
+        }
     }
 
     private void toPrivateAndGroup() {
@@ -116,10 +144,22 @@ class Flow {
 
         if (isRH) {
             roll.rh();
-        } else if (isTeamSet) {
+        }
+
+        if (isTeamSet) {
             team.set();
         } else if (isTeamShow) {
             team.show();
+        } else if (isTeamMove) {
+            team.remove();
+        } else if (isTeamClr) {
+            team.clr();
+        } else if (isTeamCall) {
+            team.call();
+        } else if (isTeamHp) {
+            team.hp();
+        } else if (isTeamSan) {
+            team.san();
         }
         toPrivate();
     }

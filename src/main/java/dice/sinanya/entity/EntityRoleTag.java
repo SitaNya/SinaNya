@@ -1,6 +1,7 @@
 package dice.sinanya.entity;
 
-import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOISE;
+import static dice.sinanya.tools.RoleChoose.checkRoleChooseExistByQQ;
+import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
 
 public class EntityRoleTag {
     long qq;
@@ -17,8 +18,8 @@ public class EntityRoleTag {
 
     public EntityRoleTag(EntityTypeMessages entityTypeMessages) {
         this.qq = Long.parseLong(entityTypeMessages.getFromQQ());
-        if (dice.sinanya.system.GetRole.getRole(qq, entityTypeMessages)) {
-            this.role = ROLE_CHOOISE.get(qq);
+        if (checkRoleChooseExistByQQ(qq)) {
+            this.role = getRoleChooseByQQ(qq);
         } else {
             this.role = "未找到";
         }

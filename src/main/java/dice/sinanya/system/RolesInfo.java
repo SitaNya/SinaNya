@@ -1,15 +1,25 @@
 package dice.sinanya.system;
 
+import dice.sinanya.entity.EntityTypeMessages;
+
 import java.util.HashMap;
 
 import static dice.sinanya.tools.GetMessaggeToValue.getMessaggeToValue;
+import static dice.sinanya.tools.RoleInfo.getRoleInfoFromChooseByFromQQ;
 
 /**
  * @author zhangxiaozhou
  */
 public class RolesInfo {
+    EntityTypeMessages entityTypeMessages;
     private String properties;
     private HashMap<String, Integer> propertiesForRole;
+
+    public RolesInfo(EntityTypeMessages entityTypeMessages, String properties) {
+        this.properties = properties;
+        propertiesForRole = makeProperties();
+        this.entityTypeMessages = entityTypeMessages;
+    }
 
     public RolesInfo(String properties) {
         this.properties = properties;
@@ -34,7 +44,7 @@ public class RolesInfo {
     }
 
     private HashMap<String, Integer> makeProperties() {
-        HashMap<String, Integer> propertiesDefault = init();
+        HashMap<String, Integer> propertiesDefault = getRoleInfoFromChooseByFromQQ(entityTypeMessages);
 
         String strInputNone = "";
         if (properties != null && !properties.equals(strInputNone)) {

@@ -22,15 +22,13 @@ public class GetMessaggeToValue {
                 i++;
             }
 
-            if (i < msg.length()) {
-                try {
-                    propertiesDefault.put(makeSkillName(strSkillName.toString()), Integer.parseInt(strSkillValue.toString()));
-                    strSkillName = new StringBuilder();
-                    strSkillValue = new StringBuilder();
-                } catch (NumberFormatException e) {
-                    System.out.println(e.getMessage());
-                    System.out.println(strSkillName.toString());
-                }
+            try {
+                propertiesDefault.put(makeSkillName(strSkillName.toString()), Integer.parseInt(strSkillValue.toString()));
+                strSkillName = new StringBuilder();
+                strSkillValue = new StringBuilder();
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+                System.out.println(strSkillName.toString());
             }
         }
         return propertiesDefault;

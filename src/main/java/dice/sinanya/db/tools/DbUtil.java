@@ -1,4 +1,4 @@
-package dice.sinanya.db;
+package dice.sinanya.db.tools;
 
 import java.sql.Connection;
 

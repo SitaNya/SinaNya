@@ -3,22 +3,33 @@ package dice.sinanya.dice.roll;
 import dice.sinanya.entity.EntityManyRolls;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.PlayerSetException;
+import dice.sinanya.tools.Calculator;
+import dice.sinanya.tools.CheckResultLevel;
 
-import static dice.sinanya.system.GetRole.getRole;
-import static dice.sinanya.system.GetRole.getRoleInfo;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static dice.sinanya.system.MessagesError.strDiceTimesTooBig;
 import static dice.sinanya.system.MessagesError.strHiddenDice;
-import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOISE;
+import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
+import static dice.sinanya.tools.ManyRolls.manyRollsProcess;
 import static dice.sinanya.tools.RandomInt.random;
+import static dice.sinanya.tools.RoleChoose.checkRoleChooseExistByFromQQ;
+import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.Sender.sender;
+import static java.lang.Math.ceil;
 
 /**
  * @author zhangxiaozhou
  */
 public class Roll {
 
+    private static Pattern p1 = Pattern.compile("(\\d+d\\d+).*[+*-/]");
+    private static Pattern p2 = Pattern.compile("(\\d+d\\d+)");
+    private static Pattern p3 = Pattern.compile("[+*-/]");
     private EntityTypeMessages entityTypeMessages;
 
     public Roll(EntityTypeMessages entityTypeMessages) {
@@ -28,30 +39,60 @@ public class Roll {
     public void r() {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".r");
 
-        String strTimesAndRoles = msg.split(" +")[0];
         String nick = "";
 
-        if (getRole(entityTypeMessages)) {
-            nick = getRoleInfo(entityTypeMessages);
+        if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
+            nick = getRoleChooseByFromQQ(entityTypeMessages);
         } else {
             nick = getNickName(entityTypeMessages);
         }
 
         String resultMessage = nick + "掷出了: ";
 
-        EntityManyRolls entityManyRolls;
-        try {
-            entityManyRolls = new EntityManyRolls(strTimesAndRoles).check(resultMessage, entityTypeMessages);
-        } catch (PlayerSetException e) {
-            return;
+        ArrayList<String> strTimesAndRolesList = new ArrayList<>();
+        Matcher matcher = p2.matcher(msg);
+        while (matcher.find()) {
+            strTimesAndRolesList.add(matcher.group(1));
         }
-        sender(entityTypeMessages, entityManyRolls.getResultMessages() + makeRoll(entityManyRolls.getTimes(), entityManyRolls.getRolls()));
+        ArrayList<String> resultRoll = new ArrayList<>();
+        for (String strTimesAndRoles : strTimesAndRolesList) {
+            EntityManyRolls entityManyRolls;
+            try {
+                entityManyRolls = new EntityManyRolls(strTimesAndRoles).check(entityTypeMessages);
+            } catch (PlayerSetException e) {
+                return;
+            }
+            resultRoll.add(manyRollsProcess(entityManyRolls.getTimes(), entityManyRolls.getRolls()));
+        }
+        int i = 0;
+        Matcher findFunc = p3.matcher(msg);
+        if (!findFunc.find()) {
+            resultMessage += "D" + msg + "=";
+        }
+
+        Matcher findTimesAndRoles = p2.matcher(msg);
+        while (findTimesAndRoles.find()) {
+            msg = msg.replaceFirst(findTimesAndRoles.group(1), resultRoll.get(i));
+            i++;
+        }
+
+        Matcher findFuncAgain = p3.matcher(msg);
+        if (findFuncAgain.find()) {
+            resultMessage += msg + "=" + (int) ceil(Calculator.conversion(msg));
+        } else {
+            resultMessage += random(1, Integer.parseInt(msg.replaceAll("d", "")));
+        }
+        sender(entityTypeMessages, resultMessage);
     }
 
     public void rh() {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".rh");
 
         String strTimesAndRoles = msg.split(" +")[0];
+        int skill = 0;
+        if (msg.split(" +").length >= 2 && isNumeric(msg.split(" +")[1])) {
+            skill = Integer.parseInt(msg.split(" +")[1]);
+        }
 
         String resultMessage = "您在群" + entityTypeMessages.getFromGroup() + "中掷出了: ";
 
@@ -62,34 +103,14 @@ public class Roll {
             return;
         }
         sender(entityTypeMessages, strHiddenDice);
-        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), entityManyRolls.getResultMessages() + makeHiddenRoll(entityManyRolls.getTimes(), entityManyRolls.getRolls()));
-    }
-
-
-    private String makeRoll(int times, int rolls) {
-        int maxTimesRolls = 10;
-        StringBuilder stringBuilder = new StringBuilder(200);
-        int intResult = 0;
-        if (times == 1) {
-            int tmpResult = random(1, rolls);
-            return String.valueOf(tmpResult);
-        } else if (times > maxTimesRolls) {
-            for (int i = 0; i < times; i++) {
-                intResult += random(1, rolls);
-            }
-            stringBuilder.append(intResult);
-        } else if (times > 1) {
-            for (int i = 0; i < times; i++) {
-                int tmpRandom = random(1, rolls);
-                stringBuilder.append(tmpRandom);
-                if (i != (times - 1)) {
-                    stringBuilder.append("+");
-                }
-                intResult += tmpRandom;
-            }
-            stringBuilder.append("=").append(intResult);
+        String resHidden = makeHiddenRoll(entityManyRolls.getTimes(), entityManyRolls.getRolls());
+        int intHidden = (int) ceil(Calculator.conversion(resHidden));
+        if (skill != 0) {
+            String resLevel = new CheckResultLevel(intHidden, skill, true).getResultLevel();
+            entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), entityManyRolls.getResultMessages() + resHidden + "=" + intHidden + "/" + skill + "\n" + resLevel);
+        } else {
+            entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), entityManyRolls.getResultMessages() + resHidden);
         }
-        return stringBuilder.toString();
     }
 
     private String makeHiddenRoll(int times, int rolls) {
@@ -101,15 +122,15 @@ public class Roll {
         } else if (times > maxTimesHidden) {
             return strDiceTimesTooBig;
         } else if (times > 1) {
-            stringBuilder.append("[");
+            stringBuilder.append("(");
             for (int i = 0; i < times; i++) {
                 int tmpRandom = random(1, rolls);
                 stringBuilder.append(tmpRandom);
                 if (i != (times - 1)) {
-                    stringBuilder.append(",");
+                    stringBuilder.append("+");
                 }
             }
-            stringBuilder.append("]");
+            stringBuilder.append(")");
         }
         return stringBuilder.toString();
     }

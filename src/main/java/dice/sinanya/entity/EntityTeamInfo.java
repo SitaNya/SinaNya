@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class EntityTeamInfo {
     private String group;
-    private ArrayList<String> qqList=new ArrayList<>();
+    private ArrayList<String> qqList = new ArrayList<>();
 
     public EntityTeamInfo(String group, ArrayList<String> qqList) {
         this.group = group;

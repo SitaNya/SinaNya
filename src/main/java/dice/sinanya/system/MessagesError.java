@@ -6,7 +6,7 @@ package dice.sinanya.system;
 public interface MessagesError {
 
 
-    String strValueErr = "那个……您输入的值似乎有问题哦？奈梅斯很难办的QwQ";
+    String strValueErr = "那个……您输入的值似乎有问题哦？奈梅斯很难办的QwQ\n应该类似.st角色名-力量50体质60";
     String strDiceTimesTooBig = "太……太多了！我有些忙不过来，可以少一些吗……";
     String strHiddenDice = "kp在暗骰~请kp大大好心一些！（鞠躬））";
     String strSetPropSuccess = "奈梅斯好好地记住您了！也请您好好表现哦！";

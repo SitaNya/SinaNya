@@ -6,5 +6,5 @@ import java.util.HashMap;
 
 public interface RoleInfoCache {
     HashMap<EntityRoleTag, HashMap<String, Integer>> ROLE_INFO_CACHE = new HashMap<>();
-    HashMap<Long, String> ROLE_CHOOISE = new HashMap<>();
+    HashMap<Long, String> ROLE_CHOOSE = new HashMap<>();
 }

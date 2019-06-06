@@ -1,4 +1,4 @@
-package dice.sinanya.db;
+package dice.sinanya.db.tools;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.log4j.LogManager;
