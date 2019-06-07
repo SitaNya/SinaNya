@@ -107,13 +107,33 @@ public interface MessagesHelp {
                     "“所有人，san check”这种话已经过时了kp们，现在一条命令就让他们知道什么叫身不由己！")
             .append("\n\n")
 
-            .append(".team move\r")
-            .append(".team move @缇娜\n")
+            .append(".team rm\r")
+            .append(".team rm @缇娜\n")
             .append("将某人移出队伍，在队伍期间改变的人物卡属性不会还原")
             .append("\n\n")
 
             .append(".team clr\n")
             .append("清空队伍")
+            .append("\n\n")
+
+            .append(".log on\n")
+            .append(".log on test|.log on 卡森德拉\n")
+            .append("开始日志记录")
+            .append("\n\n")
+
+            .append(".log off\n")
+            .append(".log off test|.log off 卡森德拉\n")
+            .append("终止日志记录，日志名必须和开始时一致，但开始和关闭不需要是同一个人")
+            .append("\n\n")
+
+            .append(".log list\n")
+            .append(".log list\n")
+            .append("查看当前群组的日志列表")
+            .append("\n\n")
+
+            .append(".log del\n")
+            .append(".log del test|.log del 卡森德拉\n")
+            .append("删除某个日志，基本很少会用到，删除后就再也找不回来了")
             .append("\n\n")
 
             .append(".npc\n")
@@ -134,4 +154,22 @@ public interface MessagesHelp {
 
             .append(".getbook rp\n")
             .append("角色扮演365问，不过只有问没有答，估计还是要读的人自己思考吧");
+
+    StringBuffer dndHelp = new StringBuffer()
+            .append(".dnd\n")
+            .append(".dnd|.dnd 10\n")
+            .append("生成dnd英雄人物卡")
+            .append("\n\n")
+
+            .append(".ri\n")
+            .append(".ri|.ri 5|.ri+5|.ri-5\n")
+            .append("先攻骰掷，目前只支持加减，有其它需要再联系我")
+            .append("\n\n")
+
+            .append(".init\n")
+            .append("先攻骰掷列表")
+            .append("\n\n")
+
+            .append(".init clr\n")
+            .append("清空先攻骰掷列表");
 }

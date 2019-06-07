@@ -2,6 +2,7 @@ package dice.sinanya.db.team;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityTeamInfo;
+import dice.sinanya.entity.EntityTypeMessages;
 import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
@@ -27,9 +28,31 @@ public class InsertTeam {
         }
     }
 
+    public void deleteGroup(String group, ArrayList<String> qqList) {
+        try (Connection conn = DbUtil.getConnection()) {
+            if (qqList == null) {
+                String sql = "delete from team where groupId=?";
+                try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                    ps.setString(1, group);
+                    ps.executeUpdate();
+                }
+            } else {
+                String sql = "update team set qqList=? where groupId=?";
+                try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                    ps.setString(1, StringUtils.join(qqList, ","));
+                    ps.setString(2, group);
+                    ps.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void insertTeamInfo(EntityTeamInfo entityTeamInfo, boolean add) {
         int num = 0;
-        ArrayList<String> qqList = entityTeamInfo.getQqList();
+        ArrayList<String> qqChangeList = entityTeamInfo.getQqList();
+        ArrayList<String> qqList = new ArrayList<>();
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from team where groupId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -37,12 +60,12 @@ public class InsertTeam {
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         num++;
+                        qqList = new ArrayList<String>(Arrays.asList(set.getString("qqList").split(",")));
                         if (add) {
-                            qqList.addAll(Arrays.asList(set.getString("qqList").split(",")));
+                            qqList.addAll(qqChangeList);
                         } else {
-                            for (String tmp : entityTeamInfo.getQqList()) {
-                                qqList.remove(tmp);
-                            }
+                            qqList.removeAll(qqChangeList);
+                            deleteGroup(entityTeamInfo.getGroup(), qqList);
                         }
                     }
                 }
@@ -70,14 +93,11 @@ public class InsertTeam {
                 String sql = "update team set " +
                         "qqList=? where groupId=?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                    StringBuilder stringBuilder = new StringBuilder();
                     Set<String> middleHashSet = new HashSet<String>(qqList);
                     ArrayList<String> afterHashSetList = new ArrayList<String>(middleHashSet);
-                    StringBuilder stringBuilder = new StringBuilder();
-                    for (String tmp : afterHashSetList) {
-                        stringBuilder.append(tmp);
-                        stringBuilder.append(",");
-                    }
-                    ps.setString(1, stringBuilder.toString().substring(0, stringBuilder.length() - 1));
+
+                    ps.setString(1, StringUtils.join(afterHashSetList, ","));
                     ps.setString(2, entityTeamInfo.getGroup());
                     ps.executeUpdate();
                 }

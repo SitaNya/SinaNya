@@ -38,11 +38,11 @@ public class Roll {
     }
 
     public void r() {
-        String tag=tagR;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0,tag.length()-2));
+        String tag = tagR;
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
 
-        if (msg.equals("")){
-            msg="100";
+        if (msg.equals("")) {
+            msg = "100";
         }
 
         String nick = "";
@@ -92,8 +92,8 @@ public class Roll {
     }
 
     public void rh() {
-        String tag=tagRH;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0,tag.length()-2));
+        String tag = tagRH;
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
 
         String strTimesAndRoles = msg.split(" +")[0];
         int skill = 0;
@@ -114,9 +114,9 @@ public class Roll {
         int intHidden = (int) ceil(Calculator.conversion(resHidden));
         if (skill != 0) {
             String resLevel = new CheckResultLevel(intHidden, skill, true).getResultLevel();
-            entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), entityManyRolls.getResultMessages() + resHidden + "=" + intHidden + "/" + skill + "\n" + resLevel);
+            entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), "您在群" + entityTypeMessages.getFromGroup() + "的暗骰结果为:\n" + entityManyRolls.getResultMessages() + resHidden + "=" + intHidden + "/" + skill + "\n" + resLevel);
         } else {
-            entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), entityManyRolls.getResultMessages() + resHidden);
+            entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), "您在群" + entityTypeMessages.getFromGroup() + "的暗骰结果为:\n" + entityManyRolls.getResultMessages() + resHidden);
         }
     }
 

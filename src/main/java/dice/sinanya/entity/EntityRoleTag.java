@@ -1,5 +1,7 @@
 package dice.sinanya.entity;
 
+import java.util.Objects;
+
 import static dice.sinanya.tools.RoleChoose.checkRoleChooseExistByQQ;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
 
@@ -43,16 +45,15 @@ public class EntityRoleTag {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof EntityRoleTag) {
-            EntityRoleTag entityRoleTag = (EntityRoleTag) o;
-            return entityRoleTag.qq == qq && entityRoleTag.role.equals(role);
-        } else {
-            return false;
-        }
+        if (this == o) return true;
+        if (!(o instanceof EntityRoleTag)) return false;
+        EntityRoleTag that = (EntityRoleTag) o;
+        return getQq() == that.getQq() &&
+                getRole().equals(that.getRole());
     }
 
     @Override
     public int hashCode() {
-        return String.valueOf(qq).hashCode() + role.hashCode();
+        return Objects.hash(getQq(), getRole());
     }
 }

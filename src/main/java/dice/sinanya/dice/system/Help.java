@@ -27,4 +27,8 @@ public class Help {
     public void book() {
         sender(entityTypeMessages, bookHelp.toString());
     }
+
+    public void dnd() {
+        sender(entityTypeMessages, dndHelp.toString());
+    }
 }

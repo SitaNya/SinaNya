@@ -10,9 +10,16 @@ import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgDisGroup;
 import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgGroup;
 import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgPrivate;
 import com.forte.qqrobot.sender.MsgSender;
+import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 
+import static dice.sinanya.system.MessagesLog.logNameForGroup;
+import static dice.sinanya.system.MessagesLog.logSwitchForGroup;
 import static dice.sinanya.system.MessagesSystem.STR_ALREADY_DISABLED_ERR;
+import static dice.sinanya.tools.LogTag.*;
+import static dice.sinanya.tools.LogTag.getOthorLogTrue;
+import static dice.sinanya.tools.LogText.setLogText;
+import static dice.sinanya.tools.Sender.sender;
 import static dice.sinanya.tools.SwitchBot.getBot;
 
 /**
@@ -63,6 +70,42 @@ public class Listener {
             return true;
         } else if (msgDisGroup.getMsg().trim().equals(tagBotOff)) {
             msgSender.SENDER.sendDiscussMsg(msgDisGroup.getFromDiscuss(), STR_ALREADY_DISABLED_ERR);
+            return true;
+        } else {
+            return true;
+        }
+    }
+
+    @Listen(MsgGetTypes.groupMsg)
+    public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGroup msgGroup) {
+        String tagBotOn = ".bot on";
+        String tagBotOff = ".bot off";
+        if (getBot(Long.parseLong(msgGroup.getFromGroup())) || msgGroup.getMsg().trim().equals(tagBotOn)) {
+            EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
+            if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
+                setLogText(entityTypeMessages,new EntityLogTag(entityTypeMessages.getFromGroup(), getOthorLogTrue(entityTypeMessages.getFromGroup())), msgGet.getMsg());
+            }
+            return true;
+        } else if (msgGroup.getMsg().trim().equals(tagBotOff)) {
+            msgSender.SENDER.sendGroupMsg(msgGroup.getFromGroup(), STR_ALREADY_DISABLED_ERR);
+            return true;
+        } else {
+            return true;
+        }
+    }
+
+    @Listen(MsgGetTypes.discussMsg)
+    public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgDisGroup msgDisGroup) {
+        String tagBotOn = ".bot on";
+        String tagBotOff = ".bot off";
+        if (getBot(Long.parseLong(msgDisGroup.getFromDiscuss())) || msgDisGroup.getMsg().trim().equals(tagBotOn)) {
+            EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
+            if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
+                setLogText(entityTypeMessages,new EntityLogTag(entityTypeMessages.getFromGroup(), getOthorLogTrue(entityTypeMessages.getFromGroup())), msgGet.getMsg());
+            }
+            return true;
+        } else if (msgDisGroup.getMsg().trim().equals(tagBotOff)) {
+            msgSender.SENDER.sendGroupMsg(msgDisGroup.getFromDiscuss(), STR_ALREADY_DISABLED_ERR);
             return true;
         } else {
             return true;

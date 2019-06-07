@@ -2,6 +2,7 @@ package dice.sinanya.listener;
 
 import dice.sinanya.dice.get.BG;
 import dice.sinanya.dice.get.MakeCocCard;
+import dice.sinanya.dice.get.MakeDndCard;
 import dice.sinanya.dice.get.NPC;
 import dice.sinanya.dice.getbook.Book;
 import dice.sinanya.dice.manager.Roles;
@@ -9,6 +10,8 @@ import dice.sinanya.dice.manager.Team;
 import dice.sinanya.dice.roll.*;
 import dice.sinanya.dice.system.Bot;
 import dice.sinanya.dice.system.Help;
+import dice.sinanya.dice.system.Log;
+import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
@@ -16,6 +19,9 @@ import dice.sinanya.exceptions.SanCheckSetException;
 import static dice.sinanya.system.MessagesError.strPropErr;
 import static dice.sinanya.system.MessagesError.strSetPropSuccess;
 import static dice.sinanya.system.MessagesTag.*;
+import static dice.sinanya.tools.LogTag.checkOthorLogTrue;
+import static dice.sinanya.tools.LogTag.getOthorLogTrue;
+import static dice.sinanya.tools.LogText.setLogText;
 import static dice.sinanya.tools.Sender.sender;
 
 class Flow {
@@ -55,6 +61,7 @@ class Flow {
     private boolean isHelpMake = false;
     private boolean isHelpGroup = false;
     private boolean isHelpBook = false;
+    private boolean isHelpDnd = false;
 
 
     private boolean isBookCard = false;
@@ -71,8 +78,19 @@ class Flow {
     private boolean isCoc7d = false;
     private boolean isCoc6d = false;
 
+    private boolean isLogOn = false;
+    private boolean isLogOff = false;
+    private boolean isLogGet = false;
+    private boolean isLogList = false;
+    private boolean isLogDel = false;
+
     private boolean isTi = false;
     private boolean isLi = false;
+
+    private boolean isDnd = false;
+    private boolean isRi = false;
+    private boolean isInit = false;
+    private boolean isInitClr = false;
 
     Flow(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
@@ -104,16 +122,28 @@ class Flow {
         isHelpMake = messages.matches(tagHelpMake);
         isHelpGroup = messages.matches(tagHelpGroup);
         isHelpBook = messages.matches(tagHelpBook);
+        isHelpDnd = messages.matches(tagHelpDnd);
 
         isCoc7d = messages.matches(tagCoc7d);
         isCoc6d = messages.matches(tagCoc6d);
         isCoc6 = messages.matches(tagCoc6);
         isCoc7 = messages.matches(tagCoc7) && !isCoc7d && !isCoc6d && !isCoc6;
 
+        isDnd = messages.matches(tagDnd);
+        isRi = messages.matches(tagR);
+        isInitClr = messages.matches(tagInitClr);
+        isInit = messages.matches(tagInit) && !isInitClr;
+
         isBookCard = messages.matches(tagBookCard);
         isBookMAKE = messages.matches(tagBookMake);
         isBookRP = messages.matches(tagBookRP);
         isBookKP = messages.matches(tagBookKP);
+
+        isLogOn = messages.matches(tagLogOn);
+        isLogOff = messages.matches(tagLogOff);
+        isLogGet = messages.matches(tagLogGet);
+        isLogList = messages.matches(tagLogList);
+        isLogDel = messages.matches(tagLogDel);
 
         isNPC = messages.matches(tagNPC);
 
@@ -132,7 +162,7 @@ class Flow {
         isRH = messages.matches(tagRH);
         isRA = messages.matches(tagRA);
         isRC = messages.matches(tagRC);
-        isR = messages.matches(tagR) && !isRH && !isRA && !isRC && !isRB && !isRP;
+        isR = messages.matches(tagR) && !isRH && !isRA && !isRC && !isRB && !isRP && !isRi;
     }
 
     void toPrivate() {
@@ -142,6 +172,7 @@ class Flow {
         RollAndCheck rollAndCheck = new RollAndCheck(entityTypeMessages);
         RewardAndPunishment rewardAndPunishment = new RewardAndPunishment(entityTypeMessages);
         MakeCocCard makeCocCard = new MakeCocCard(entityTypeMessages);
+        MakeDndCard makeDndCard = new MakeDndCard(entityTypeMessages);
         Bot bot = new Bot(entityTypeMessages);
         TiAndLi tiAndLi = new TiAndLi(entityTypeMessages);
         Help help = new Help(entityTypeMessages);
@@ -217,6 +248,8 @@ class Flow {
             help.group();
         } else if (isHelpBook) {
             help.book();
+        } else if (isHelpDnd) {
+            help.dnd();
         }
 
         if (isBookKP) {
@@ -236,6 +269,12 @@ class Flow {
         if (isBG) {
             bg.bg();
         }
+
+        if (isDnd) {
+            makeDndCard.dnd();
+        }
+
+
     }
 
     private void toPrivateAndGroup() {
@@ -243,6 +282,8 @@ class Flow {
         Team team = new Team(entityTypeMessages);
         SkillUp skillUp = new SkillUp(entityTypeMessages);
         Bot bot = new Bot(entityTypeMessages);
+        Log log = new Log(entityTypeMessages);
+        RiAndInit riAndInit = new RiAndInit(entityTypeMessages);
 
 
         if (isRH) {
@@ -275,6 +316,26 @@ class Flow {
             bot.off();
         } else if (isBotExit) {
             bot.exit();
+        }
+
+        if (isLogOn) {
+            log.logOn();
+        } else if (isLogOff) {
+            log.logOff();
+        } else if (isLogGet) {
+            log.get();
+        } else if (isLogList) {
+            log.list();
+        } else if (isLogDel) {
+            log.del();
+        }
+
+        if (isRi) {
+            riAndInit.ri();
+        } else if (isInit) {
+            riAndInit.init();
+        } else if (isInitClr) {
+            riAndInit.clr();
         }
 
         toPrivate();

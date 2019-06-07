@@ -27,7 +27,7 @@ public interface MessagesTag {
     String tagTeamShow = headerTeam + ".*";
     String tagTeamSet = headerTeam + "set.*";
     String tagTeamClr = headerTeam + "clr.*";
-    String tagTeamMove = headerTeam + "move.*";
+    String tagTeamMove = headerTeam + "rm.*";
     String tagTeamCall = headerTeam + "call.*";
     String tagTeamHp = headerTeam + "hp.*";
     String tagTeamSan = headerTeam + "san.*";
@@ -43,6 +43,7 @@ public interface MessagesTag {
     String tagHelpMake = headerHelp + "make.*";
     String tagHelpGroup = headerHelp + "group.*";
     String tagHelpBook = headerHelp + "book.*";
+    String tagHelpDnd = headerHelp + "dnd.*";
 
     String headerBook = header + "getbook[ ]*";
     String tagBookCard = headerBook + "card.*";
@@ -60,7 +61,21 @@ public interface MessagesTag {
     String tagCoc6 = headerCoc + "6[ ]*(10|[1-9])*";
     String tagCoc6d = headerCoc + "6d[ ]*(10|[1-9])*";
 
+    String headerLog = header + "log[ ]*";
+    String tagLogOn = headerLog + "on.*";
+    String tagLogOff = headerLog + "off.*";
+    String tagLogGet = headerLog + "get.*";
+    String tagLogList = headerLog + "list.*";
+    String tagLogDel = headerLog + "del.*";
+
     String tagTi = header + "ti[ ]*.*";
     String tagLi = header + "li[ ]*.*";
+
+    String headerDnd = header + "dnd[ ]*";
+    String tagDnd = headerDnd + "(10|[1-9])*";
+    String tagRi=header+"ri.*";
+    String tagInit=header+"init.*";
+    String tagInitClr=header+"init clr.*";
+
 
 }

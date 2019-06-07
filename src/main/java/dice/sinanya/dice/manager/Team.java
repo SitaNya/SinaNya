@@ -42,15 +42,16 @@ public class Team {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(msg);
 
-        ArrayList<String> qqList = new ArrayList<>();
+        ArrayList<String> qqList=new ArrayList<>();
+        int i=0;
         while (matcher.find()) {
             qqList.add(matcher.group(1));
         }
-        EntityTeamInfo entityTeamInfo = new EntityTeamInfo(entityTypeMessages.getFromGroup(), qqList);
-        addIntoTeam(entityTeamInfo);
         for (String qq : qqList) {
             sender(entityTypeMessages, "已将玩家: [CQ:at,qq=" + qq + "]加入小队。可以使用.team查看队伍信息,.team hp/san对成员状态进行强制调整\n其余使用方式请查看.help命令");
         }
+        EntityTeamInfo entityTeamInfo = new EntityTeamInfo(entityTypeMessages.getFromGroup(), qqList);
+        addIntoTeam(entityTeamInfo);
     }
 
     public void remove() {
@@ -64,9 +65,10 @@ public class Team {
         while (matcher.find()) {
             qqList.add(matcher.group(1));
         }
+        ArrayList<String> tmpQQList=qqList;
         EntityTeamInfo entityTeamInfo = new EntityTeamInfo(entityTypeMessages.getFromGroup(), qqList);
         removeFromTeam(entityTeamInfo);
-        for (String qq : qqList) {
+        for (String qq : tmpQQList) {
             sender(entityTypeMessages, "已将玩家: [CQ:at,qq=" + qq + "]移出小队,其在这期间损失的血量和san值不会还原。");
         }
     }
