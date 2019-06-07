@@ -70,6 +70,7 @@ public class CheckResultLevel {
     }
 
     public EntityLevelResult getLevelResult() {
+        checkResultLevel();
         return new EntityLevelResult(level, random);
     }
 }

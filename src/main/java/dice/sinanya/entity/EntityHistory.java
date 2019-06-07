@@ -128,4 +128,29 @@ public class EntityHistory {
         times++;
         setMean(value);
     }
+
+    public void update(int level) {
+        switch (level) {
+            case 0:
+                Fumble++;
+                break;
+            case 5:
+                CriticalSuccess++;
+                break;
+            case 4:
+                ExtremeSuccess++;
+                break;
+            case 3:
+                HardSuccess++;
+                break;
+            case 2:
+                Success++;
+                break;
+            case 1:
+                Failure++;
+                break;
+            default:
+                break;
+        }
+    }
 }

@@ -10,6 +10,9 @@ public interface MessagesTag {
     String tagRA = header + "ra.*";
     String tagRC = header + "rc.*";
 
+    String tagRAL = header + "ral.*";
+    String tagRCL = header + "rcl.*";
+
     String tagRB = header + "rb.*";
     String tagRP = header + "rp.*";
 

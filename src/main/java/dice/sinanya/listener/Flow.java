@@ -30,6 +30,8 @@ class Flow {
     private boolean isRH = false;
     private boolean isRA = false;
     private boolean isRC = false;
+    private boolean isRAL = false;
+    private boolean isRCL = false;
 
     private boolean isRB = false;
     private boolean isRP = false;
@@ -176,10 +178,12 @@ class Flow {
 
         isEN = messages.matches(tagEN);
 
+        isRAL = messages.matches(tagRAL);
+        isRCL = messages.matches(tagRCL);
         isRH = messages.matches(tagRH);
-        isRA = messages.matches(tagRA);
-        isRC = messages.matches(tagRC);
-        isR = messages.matches(tagR) && !isRH && !isRA && !isRC && !isRB && !isRP && !isRi;
+        isRA = messages.matches(tagRA) && !isRAL;
+        isRC = messages.matches(tagRC) && !isRCL;
+        isR = messages.matches(tagR) && !isRH && !isRA && !isRC && !isRB && !isRP && !isRi && !isRAL && !isRCL;
     }
 
     void toPrivate() {
@@ -204,6 +208,10 @@ class Flow {
             rollAndCheck.ra();
         } else if (isRC) {
             rollAndCheck.rc();
+        } else if (isRAL) {
+            rollAndCheck.ral();
+        } else if (isRCL) {
+            rollAndCheck.rcl();
         }
 
         if (isStSet) {

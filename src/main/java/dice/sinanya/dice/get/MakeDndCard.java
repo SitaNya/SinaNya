@@ -59,7 +59,7 @@ public class MakeDndCard {
                 e.printStackTrace();
             }
         }
-
+        exec.shutdown();
         sender(entityTypeMessages, stringBuilder.toString().substring(0, stringBuilder.length() - 1));
 
 

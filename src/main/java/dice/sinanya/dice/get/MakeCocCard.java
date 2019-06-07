@@ -257,7 +257,7 @@ public class MakeCocCard {
                 e.printStackTrace();
             }
         }
-
+        exec.shutdown();
         sender(entityTypeMessages, stringBuilder.toString().substring(0, stringBuilder.length() - 1));
     }
 
@@ -298,7 +298,7 @@ public class MakeCocCard {
                 e.printStackTrace();
             }
         }
-
+        exec.shutdown();
         sender(entityTypeMessages, stringBuilder.toString().substring(0, stringBuilder.length() - 1));
     }
 
