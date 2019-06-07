@@ -11,6 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.DBAndSize.*;
 import static dice.sinanya.tools.GetNickName.getNickName;
@@ -216,7 +217,8 @@ public class MakeCocCard {
     }
 
     public void coc7() {
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".coc7");
+        String tag=tagCoc7;
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0,tag.length()-11));
         msg = deleteTag(msg, ".coc");
 
         int times = 1;
@@ -259,7 +261,8 @@ public class MakeCocCard {
     }
 
     public void coc6() {
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".coc6");
+        String tag=tagCoc6;
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0,tag.length()-11));
 
         int times = 1;
 

@@ -7,6 +7,7 @@ import dice.sinanya.exceptions.PlayerSetException;
 
 import java.util.*;
 
+import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.GetSkillName.getSkillName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
@@ -28,7 +29,8 @@ public class Roles {
 
     @SuppressWarnings("AlibabaMethodTooLong")
     public boolean set() throws PlayerSetException {
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".st");
+        String tag=tagStSet;
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0,tag.length()-2));
         String sepRoleAndPro = "-";
         String tagRoleNameNone = "";
         int lenRoleAndPro = 2;
@@ -77,7 +79,8 @@ public class Roles {
     }
 
     public void move() {
-        String role = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".st move");
+        String tag=tagTeamMove;
+        String role = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0,tag.length()-2));
         long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
         if (checkRoleInfoExistByFromQQ(entityTypeMessages, role)) {
             if (getRoleChooseByQQ(qqId).equals(role)) {

@@ -76,6 +76,37 @@ public class RoleInfo {
         }
     }
 
+    public static boolean checkRoleInfoFromChooseExistByQQ(String qq) {
+        long qqId = Long.parseLong(qq);
+        String role;
+        if (checkRoleChooseExistByQQ(qqId)) {
+            role = ROLE_CHOOSE.get(qqId);
+        } else {
+            return false;
+        }
+        if (ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role))) {
+            return true;
+        } else {
+            selectRoles.flushRoleInfoCacheByQQ(qqId);
+            return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
+        }
+    }
+
+    public static boolean checkRoleInfoFromChooseExistByQQ(long qqId) {
+        String role;
+        if (checkRoleChooseExistByQQ(qqId)) {
+            role = ROLE_CHOOSE.get(qqId);
+        } else {
+            return false;
+        }
+        if (ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role))) {
+            return true;
+        } else {
+            selectRoles.flushRoleInfoCacheByQQ(qqId);
+            return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
+        }
+    }
+
     public static HashMap<String, Integer> getRoleInfoByQQ(long qqId, String role) {
         if (checkRoleInfoExistByQQ(qqId, role)) {
             return ROLE_INFO_CACHE.get(new EntityRoleTag(qqId, role));

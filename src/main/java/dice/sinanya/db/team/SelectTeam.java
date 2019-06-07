@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 public class SelectTeam {
     public ArrayList<String> selectTeamInfo(String groupId) {
-        String strQqList = "";
+        String strQqList = null;
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from team where groupId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -25,6 +25,11 @@ public class SelectTeam {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return new ArrayList<String>(Arrays.asList(strQqList.split(",")));
+        if (strQqList != null) {
+            return new ArrayList<String>(Arrays.asList(strQqList.split(",")));
+        } else {
+            return null;
+        }
+
     }
 }

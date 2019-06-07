@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 import static dice.sinanya.system.MessagesError.strDiceTimesTooBig;
 import static dice.sinanya.system.MessagesError.strHiddenDice;
+import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
@@ -28,8 +29,8 @@ import static java.lang.Math.ceil;
 public class Roll {
 
     private static Pattern p1 = Pattern.compile("(\\d+d\\d+).*[+*-/]");
-    private static Pattern p2 = Pattern.compile("(\\d+d\\d+)");
-    private static Pattern p3 = Pattern.compile("[+*-/]");
+    private static Pattern p2 = Pattern.compile("(\\d+[dD]\\d+)");
+    private static Pattern p3 = Pattern.compile("[+*/-]");
     private EntityTypeMessages entityTypeMessages;
 
     public Roll(EntityTypeMessages entityTypeMessages) {
@@ -37,7 +38,12 @@ public class Roll {
     }
 
     public void r() {
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".r");
+        String tag=tagR;
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0,tag.length()-2));
+
+        if (msg.equals("")){
+            msg="100";
+        }
 
         String nick = "";
 
@@ -86,7 +92,8 @@ public class Roll {
     }
 
     public void rh() {
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), ".rh");
+        String tag=tagRH;
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0,tag.length()-2));
 
         String strTimesAndRoles = msg.split(" +")[0];
         int skill = 0;

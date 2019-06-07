@@ -5,6 +5,6 @@ package dice.sinanya.tools;
  */
 public class MakeMessages {
     public static String deleteTag(String message, String tag) {
-        return message.trim().replace(tag, "").trim();
+        return message.trim().replaceFirst(tag, "").trim();
     }
 }

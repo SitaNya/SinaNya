@@ -31,14 +31,14 @@ public class Listener {
     }
 
     @Listen(MsgGetTypes.privateMsg)
-    @Filter(value = "^\\.[a-z].*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
+    @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgPrivate msgPrivate) {
         new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgPrivate)).toPrivate();
         return true;
     }
 
     @Listen(MsgGetTypes.groupMsg)
-    @Filter(value = "^\\.[a-z].*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
+    @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGroup msgGroup) {
         String tagBotOn = ".bot on";
         String tagBotOff = ".bot off";
@@ -54,7 +54,7 @@ public class Listener {
     }
 
     @Listen(MsgGetTypes.discussMsg)
-    @Filter(value = "^\\.[a-z].*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
+    @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgDisGroup msgDisGroup) {
         String tagBotOn = ".bot on";
         String tagBotOff = ".bot off";
