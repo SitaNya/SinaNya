@@ -3,9 +3,7 @@ package dice.sinanya.tools;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static dice.sinanya.tools.ManyRolls.manyRollsProcess;
 import static dice.sinanya.tools.RandomInt.random;
-import static java.lang.Math.ceil;
 
 public class MakeDndCardInfo {
 

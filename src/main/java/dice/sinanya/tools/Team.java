@@ -3,7 +3,6 @@ package dice.sinanya.tools;
 import dice.sinanya.db.team.InsertTeam;
 import dice.sinanya.db.team.SelectTeam;
 import dice.sinanya.entity.EntityTeamInfo;
-import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.ArrayList;
 

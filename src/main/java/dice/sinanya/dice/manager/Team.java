@@ -42,8 +42,8 @@ public class Team {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(msg);
 
-        ArrayList<String> qqList=new ArrayList<>();
-        int i=0;
+        ArrayList<String> qqList = new ArrayList<>();
+        int i = 0;
         while (matcher.find()) {
             qqList.add(matcher.group(1));
         }
@@ -65,7 +65,7 @@ public class Team {
         while (matcher.find()) {
             qqList.add(matcher.group(1));
         }
-        ArrayList<String> tmpQQList=qqList;
+        ArrayList<String> tmpQQList = qqList;
         EntityTeamInfo entityTeamInfo = new EntityTeamInfo(entityTypeMessages.getFromGroup(), qqList);
         removeFromTeam(entityTeamInfo);
         for (String qq : tmpQQList) {
@@ -179,8 +179,8 @@ public class Team {
                         int changeValue = 0;
                         if (isNumeric(msg)) {
                             changeValue = Integer.parseInt(msg);
-                        }else {
-                            changeValue= new MakeManyRollsStr(msg).getRes();
+                        } else {
+                            changeValue = new MakeManyRollsStr(msg).getRes();
                         }
 
                         HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);

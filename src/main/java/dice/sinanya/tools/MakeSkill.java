@@ -45,14 +45,14 @@ public class MakeSkill {
 
     /**
      * @param skill 2d6+6、力量+20
-     * @param qq 技能发起者
-     * @return  (4+5)+6,15\50+20,70
+     * @param qq    技能发起者
+     * @return (4 + 5)+6,15\50+20,70
      */
     public static EntityStrManyRolls makeSkill(String skill, long qq) {
         skill = skill.trim();
         int i = 0;
         StringBuilder strSkillName = new StringBuilder();
-        while (i<skill.length()&&!Character.isDigit(skill.charAt(i))
+        while (i < skill.length() && !Character.isDigit(skill.charAt(i))
                 && !Character.isSpaceChar(skill.charAt(i))
                 && skill.charAt(i) != '+'
                 && skill.charAt(i) != '-'
@@ -80,7 +80,7 @@ public class MakeSkill {
 
     /**
      * @param skill 2d6+6
-     * @return  (4+5)+6,15\50+20,70
+     * @return (4 + 5)+6,15\50+20,70
      */
     public static EntityStrManyRolls makeSkill(String skill) {
         skill = skill.trim();

@@ -10,7 +10,7 @@ public class MakeLogInfo {
         info = info.trim();
         StringBuffer result = new StringBuffer();
 
-        if (info.contains("log")){
+        if (info.contains("log")) {
             return "";
         }
 

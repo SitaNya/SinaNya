@@ -22,8 +22,8 @@ public class MakeManyRollsStr {
         if (input.contains("d") || input.contains("D")) {
             strFirst = input.split("[dD]")[0];
             strSecond = input.split("[dD]")[1];
-        }else if (isNumeric(input)){
-            strSecond=input;
+        } else if (isNumeric(input)) {
+            strSecond = input;
         }
 
         if (isNumeric(strFirst) && !strFirst.equals(tagNone)) {
@@ -32,18 +32,18 @@ public class MakeManyRollsStr {
 
         if (isNumeric(strSecond) && !strSecond.equals(tagNone)) {
             strRolls = Integer.parseInt(strSecond);
-        }else{
-            strRolls=strTimes;
+        } else {
+            strRolls = strTimes;
         }
-        resInt=manyRollsForInt(strTimes,strRolls);
-        resStr=manyRollsProcess(strTimes,strRolls);
+        resInt = manyRollsForInt(strTimes, strRolls);
+        resStr = manyRollsProcess(strTimes, strRolls);
     }
 
-    public String getStr(){
+    public String getStr() {
         return resStr;
     }
 
-    public int getRes(){
+    public int getRes() {
         return resInt;
     }
 

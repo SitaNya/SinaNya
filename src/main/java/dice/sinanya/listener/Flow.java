@@ -5,13 +5,15 @@ import dice.sinanya.dice.get.MakeCocCard;
 import dice.sinanya.dice.get.MakeDndCard;
 import dice.sinanya.dice.get.NPC;
 import dice.sinanya.dice.getbook.Book;
+import dice.sinanya.dice.manager.Clue;
+import dice.sinanya.dice.manager.Kp;
 import dice.sinanya.dice.manager.Roles;
 import dice.sinanya.dice.manager.Team;
 import dice.sinanya.dice.roll.*;
 import dice.sinanya.dice.system.Bot;
 import dice.sinanya.dice.system.Help;
+import dice.sinanya.dice.system.History;
 import dice.sinanya.dice.system.Log;
-import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
@@ -19,9 +21,6 @@ import dice.sinanya.exceptions.SanCheckSetException;
 import static dice.sinanya.system.MessagesError.strPropErr;
 import static dice.sinanya.system.MessagesError.strSetPropSuccess;
 import static dice.sinanya.system.MessagesTag.*;
-import static dice.sinanya.tools.LogTag.checkOthorLogTrue;
-import static dice.sinanya.tools.LogTag.getOthorLogTrue;
-import static dice.sinanya.tools.LogText.setLogText;
 import static dice.sinanya.tools.Sender.sender;
 
 class Flow {
@@ -92,6 +91,15 @@ class Flow {
     private boolean isInit = false;
     private boolean isInitClr = false;
 
+    private boolean isClueSet = false;
+    private boolean isClueShow = false;
+    private boolean isClueRm = false;
+    private boolean isClueClr = false;
+
+    private boolean isKp = false;
+
+    private boolean isHiy = false;
+
     Flow(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
         String messages = entityTypeMessages.getMsgGet().getMsg().trim();
@@ -145,6 +153,15 @@ class Flow {
         isLogList = messages.matches(tagLogList);
         isLogDel = messages.matches(tagLogDel);
 
+
+        isClueClr = messages.matches(tagClueClr);
+        isClueShow = messages.matches(tagClueShow);
+        isClueRm = messages.matches(tagClueRm);
+        isClueSet = messages.matches(tagClueSet) && !isClueClr && !isClueShow && !isClueRm;
+
+        isKp = messages.matches(tagKp);
+        isHiy = messages.matches(tagHiy);
+
         isNPC = messages.matches(tagNPC);
 
         isBG = messages.matches(tagBG);
@@ -179,6 +196,7 @@ class Flow {
         Book book = new Book(entityTypeMessages);
         BG bg = new BG(entityTypeMessages);
         NPC npc = new NPC(entityTypeMessages);
+        History history = new History(entityTypeMessages);
 
         if (isR) {
             roll.r();
@@ -274,6 +292,9 @@ class Flow {
             makeDndCard.dnd();
         }
 
+        if (isHiy) {
+            history.hiy();
+        }
 
     }
 
@@ -284,6 +305,9 @@ class Flow {
         Bot bot = new Bot(entityTypeMessages);
         Log log = new Log(entityTypeMessages);
         RiAndInit riAndInit = new RiAndInit(entityTypeMessages);
+
+        Clue clue = new Clue(entityTypeMessages);
+        Kp kp = new Kp(entityTypeMessages);
 
 
         if (isRH) {
@@ -336,6 +360,20 @@ class Flow {
             riAndInit.init();
         } else if (isInitClr) {
             riAndInit.clr();
+        }
+
+        if (isClueRm) {
+            clue.rm();
+        } else if (isClueSet) {
+            clue.set();
+        } else if (isClueClr) {
+            clue.clr();
+        } else if (isClueShow) {
+            clue.show();
+        }
+
+        if (isKp) {
+            kp.set();
         }
 
         toPrivate();

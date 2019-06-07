@@ -3,10 +3,8 @@ package dice.sinanya.dice.system;
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 
-import java.util.HashMap;
-import java.util.regex.Pattern;
-
-import static dice.sinanya.system.MessagesLog.*;
+import static dice.sinanya.system.MessagesLog.logNameForGroup;
+import static dice.sinanya.system.MessagesLog.logSwitchForGroup;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.LogSave.logSave;
 import static dice.sinanya.tools.LogTag.*;
@@ -87,7 +85,7 @@ public class Log {
                 delLog(new EntityLogTag(entityTypeMessages.getFromGroup(), msg));
                 sender(entityTypeMessages, "已删除日志: " + msg);
             }
-        }else{
+        } else {
             sender(entityTypeMessages, "不存在日志: " + msg);
         }
     }

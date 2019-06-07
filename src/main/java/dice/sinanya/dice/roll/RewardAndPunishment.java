@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static dice.sinanya.system.MessagesTag.*;
+import static dice.sinanya.system.MessagesTag.tagRB;
+import static dice.sinanya.system.MessagesTag.tagRP;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.GetSkillValue.getSkillValue;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
@@ -34,8 +35,8 @@ public class RewardAndPunishment {
     }
 
     public void rb() {
-        String tag=tagRB;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0,tag.length()-2));
+        String tag = tagRB;
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, msg);
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -73,8 +74,8 @@ public class RewardAndPunishment {
     }
 
     public void rp() {
-        String tag=tagRP;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0,tag.length()-2));
+        String tag = tagRP;
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, msg);
 
         StringBuilder stringBuilder = new StringBuilder();

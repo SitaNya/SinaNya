@@ -6,7 +6,6 @@ import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static dice.sinanya.system.MessagesLog.*;
 
@@ -74,7 +73,7 @@ public class LogTag {
         return stringBuffer.substring(0, stringBuffer.length() - 1);
     }
 
-    public static void delLog(EntityLogTag entityLogTag){
+    public static void delLog(EntityLogTag entityLogTag) {
         insertLogTag.deleteLog(entityLogTag);
     }
 }

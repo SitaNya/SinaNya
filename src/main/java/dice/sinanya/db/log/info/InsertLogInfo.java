@@ -2,18 +2,13 @@ package dice.sinanya.db.log.info;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityLogTag;
-import dice.sinanya.entity.EntityRoleTag;
-import dice.sinanya.system.RolesInfo;
 
-import java.sql.*;
-import java.util.HashMap;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Map;
 
 import static dice.sinanya.system.MessagesLog.logNameSwitch;
-import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
-import static dice.sinanya.tools.GetTime.getNowString;
-import static dice.sinanya.tools.GetTime.getTime;
-import static dice.sinanya.tools.RoleInfo.getRoleInfoByQQ;
 
 public class InsertLogInfo {
 

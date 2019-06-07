@@ -2,7 +2,6 @@ package dice.sinanya.db.team;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityTeamInfo;
-import dice.sinanya.entity.EntityTypeMessages;
 import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;

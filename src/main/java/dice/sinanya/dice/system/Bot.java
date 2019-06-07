@@ -22,8 +22,8 @@ public class Bot {
     }
 
     public void on() {
-        String tag=tagBotOn;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0,tag.length()-2));
+        String tag = tagBotOn;
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         Matcher matcher = pattern.matcher(msg);
 
         ArrayList<String> qqList = new ArrayList<>();
@@ -49,8 +49,8 @@ public class Bot {
     }
 
     public void off() {
-        String tag=tagBotOff;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0,tag.length()-2));
+        String tag = tagBotOff;
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         Matcher matcher = pattern.matcher(msg);
 
         ArrayList<String> qqList = new ArrayList<>();
@@ -76,8 +76,8 @@ public class Bot {
     }
 
     public void exit() {
-        String tag=tagBotExit;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0,tag.length()-2));
+        String tag = tagBotExit;
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         Matcher matcher = pattern.matcher(msg);
 
         ArrayList<String> qqList = new ArrayList<>();

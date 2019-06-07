@@ -2,20 +2,14 @@ package dice.sinanya.db.log.tag;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityLogTag;
-import dice.sinanya.entity.EntityRoleTag;
-import dice.sinanya.entity.EntityTypeMessages;
-import dice.sinanya.system.RolesInfo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static dice.sinanya.system.MessagesLog.logNameSwitch;
-import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOSE;
-import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 
 public class SelectLogTag {
 

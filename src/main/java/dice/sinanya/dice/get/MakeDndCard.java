@@ -1,24 +1,18 @@
 package dice.sinanya.dice.get;
 
 import dice.sinanya.entity.EntityTypeMessages;
-import dice.sinanya.tools.Calculator;
-import dice.sinanya.tools.MakeCoc6Card;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import static dice.sinanya.system.MessagesTag.tagCoc6;
 import static dice.sinanya.system.MessagesTag.tagDnd;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
-import static dice.sinanya.tools.ManyRolls.manyRollsProcess;
 import static dice.sinanya.tools.Sender.sender;
-import static java.lang.Math.ceil;
 
 public class MakeDndCard {
 

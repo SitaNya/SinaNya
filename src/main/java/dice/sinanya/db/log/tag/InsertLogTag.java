@@ -2,14 +2,11 @@ package dice.sinanya.db.log.tag;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityLogTag;
-import dice.sinanya.system.RolesInfo;
 
-import java.sql.*;
-import java.util.HashMap;
-
-import static dice.sinanya.tools.GetTime.getNowString;
-import static dice.sinanya.tools.GetTime.getTime;
-import static dice.sinanya.tools.RoleInfo.getRoleInfoByQQ;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class InsertLogTag {
     public InsertLogTag() {
@@ -61,7 +58,7 @@ public class InsertLogTag {
 
     }
 
-    public void deleteLog(EntityLogTag entityLogTag){
+    public void deleteLog(EntityLogTag entityLogTag) {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "delete from tagLog where groupId=? and logName=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {

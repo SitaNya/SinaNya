@@ -73,9 +73,19 @@ public interface MessagesTag {
 
     String headerDnd = header + "dnd[ ]*";
     String tagDnd = headerDnd + "(10|[1-9])*";
-    String tagRi=header+"ri.*";
-    String tagInit=header+"init.*";
-    String tagInitClr=header+"init clr.*";
+    String tagRi = header + "ri.*";
+    String tagInit = header + "init.*";
+    String tagInitClr = header + "init clr.*";
+
+    String headerClue = header + "clue[ ]*";
+    String tagClueSet = headerClue + ".*";
+    String tagClueShow = headerClue + "show.*";
+    String tagClueRm = headerClue + "rm.*";
+    String tagClueClr = headerClue + "clr.*";
+
+    String tagHiy = header + "hiy[ ]*.*";
+
+    String tagKp = header + "kp[ ]*.*";
 
 
 }

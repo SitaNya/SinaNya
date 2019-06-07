@@ -12,7 +12,8 @@ import java.util.regex.Pattern;
 
 import static dice.sinanya.system.MessagesError.strDiceTimesTooBig;
 import static dice.sinanya.system.MessagesError.strHiddenDice;
-import static dice.sinanya.system.MessagesTag.*;
+import static dice.sinanya.system.MessagesTag.tagR;
+import static dice.sinanya.system.MessagesTag.tagRH;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;

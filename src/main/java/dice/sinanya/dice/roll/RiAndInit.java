@@ -1,24 +1,19 @@
 package dice.sinanya.dice.roll;
 
 import dice.sinanya.entity.EntityTypeMessages;
-import dice.sinanya.tools.Calculator;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import static dice.sinanya.system.MessagesInit.initList;
-import static dice.sinanya.system.MessagesTag.tagR;
 import static dice.sinanya.system.MessagesTag.tagRi;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
-import static dice.sinanya.tools.ManyRolls.manyRollsProcess;
 import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.RoleChoose.checkRoleChooseExistByFromQQ;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.Sender.sender;
-import static java.lang.Math.ceil;
 
 public class RiAndInit {
 

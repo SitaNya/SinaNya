@@ -3,7 +3,6 @@ package dice.sinanya.dice.roll;
 import dice.sinanya.db.roles.InsertRoles;
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.system.MessagesTag.tagCoc6;
 import static dice.sinanya.system.MessagesTag.tagEN;
 import static dice.sinanya.tools.GetSkillValue.getSkillValue;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
@@ -19,8 +18,8 @@ public class SkillUp {
     }
 
     public void en() {
-        String tag=tagEN;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0,tag.length()-2));
+        String tag = tagEN;
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         int skill = getSkillValue(entityTypeMessages, msg);
         if (skill == 0) {
             sender(entityTypeMessages, "没有找到您的技能哦");
