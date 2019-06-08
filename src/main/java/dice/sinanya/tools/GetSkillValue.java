@@ -11,7 +11,11 @@ public class GetSkillValue {
     public static int getSkillValue(EntityTypeMessages entityTypeMessages, String tmpSkillName) {
         String skillName = makeSkillName(tmpSkillName);
         if (checkRoleInfoFromChooseExistByFromQQ(entityTypeMessages)) {
-            return Objects.requireNonNull(getRoleInfoFromChooseByFromQQ(entityTypeMessages)).get(skillName);
+            if (Objects.requireNonNull(getRoleInfoFromChooseByFromQQ(entityTypeMessages)).containsKey(skillName)) {
+                return Objects.requireNonNull(getRoleInfoFromChooseByFromQQ(entityTypeMessages)).get(skillName);
+            }else {
+                return 0;
+            }
         } else {
             return 0;
         }

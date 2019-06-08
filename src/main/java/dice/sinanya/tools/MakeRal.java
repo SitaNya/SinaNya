@@ -21,7 +21,7 @@ public class MakeRal implements Callable<Integer> {
     public Integer call() {
         EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, rolls);
         CheckResultLevel checkResultLevel = new CheckResultLevel(entityRollAndCheck.getRandom(), entityRollAndCheck.getSkill(), false);
-        return checkResultLevel.getLevelResult().getLevel();
+        return checkResultLevel.getLevelAndRandom().getLevel();
     }
 
 

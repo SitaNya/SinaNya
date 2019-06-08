@@ -1,8 +1,8 @@
 package dice.sinanya.db.tools;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.beans.PropertyVetoException;
 import java.sql.Connection;

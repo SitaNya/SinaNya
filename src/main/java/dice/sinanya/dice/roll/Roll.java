@@ -114,7 +114,7 @@ public class Roll {
         String resHidden = makeHiddenRoll(entityManyRolls.getTimes(), entityManyRolls.getRolls());
         int intHidden = (int) ceil(Calculator.conversion(resHidden));
         if (skill != 0) {
-            String resLevel = new CheckResultLevel(intHidden, skill, true).getResultLevel();
+            String resLevel = new CheckResultLevel(intHidden, skill, true).getLevelResultStr();
             entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), "您在群" + entityTypeMessages.getFromGroup() + "的暗骰结果为:\n" + entityManyRolls.getResultMessages() + resHidden + "=" + intHidden + "/" + skill + "\n" + resLevel);
         } else {
             entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), "您在群" + entityTypeMessages.getFromGroup() + "的暗骰结果为:\n" + entityManyRolls.getResultMessages() + resHidden);

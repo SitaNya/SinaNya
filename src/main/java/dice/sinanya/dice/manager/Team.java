@@ -9,20 +9,19 @@ import dice.sinanya.exceptions.SanCheckSetException;
 import dice.sinanya.tools.CheckSanCheck;
 import dice.sinanya.tools.MakeManyRollsStr;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.DBAndSize.dbGetter;
+import static dice.sinanya.tools.GetSkillName.getSkillName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.MakeSkill.makeSkill;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
-import static dice.sinanya.tools.RoleInfo.getRoleInfoFromChooseByQQ;
-import static dice.sinanya.tools.RoleInfo.setRoleInfoFromChooseByQQ;
+import static dice.sinanya.tools.RoleInfo.*;
 import static dice.sinanya.tools.Sender.sender;
 import static dice.sinanya.tools.Team.*;
 import static java.lang.Math.*;
@@ -258,5 +257,160 @@ public class Team {
         sender(entityTypeMessages, stringBuilder.toString());
     }
 
+    public void desc() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("您小队内成员的属性值为:\n");
 
+        ArrayList<String> qqList = queryTeam(entityTypeMessages.getFromGroup());
+        if (qqList == null) {
+            sender(entityTypeMessages, "小队成员为空");
+            return;
+        }
+        for (String qq : qqList) {
+            ArrayList<String> propMain = new ArrayList<String>() {{
+                add("hp");
+                add("san");
+                add("str");
+                add("pow");
+                add("con");
+                add("app");
+                add("edu");
+                add("siz");
+                add("intValue");
+                add("luck");
+                add("mp");
+            }};
+
+            ArrayList<String> propInvestigationOfCrimes = new ArrayList<String>() {{
+                add("libraryUse");
+                add("investigationOfCrimes");
+                add("listen");
+                add("unlock");
+                add("aWonderfulHand");
+            }};
+
+            ArrayList<String> propTalk = new ArrayList<String>() {{
+                add("persuade");
+                add("intimidate");
+                add("enchantment");
+                add("talkingSkill");
+                add("psychology");
+            }};
+
+            ArrayList<String> propFight = new ArrayList<String>() {{
+                add("aFistFight");
+                add("dodge");
+                add("pistol");
+                add("firstAid");
+                add("medicalScience");
+            }};
+
+            ArrayList<String> allSelect = new ArrayList<String>();
+
+            allSelect.addAll(propMain);
+            allSelect.addAll(propInvestigationOfCrimes);
+            allSelect.addAll(propTalk);
+            allSelect.addAll(propFight);
+
+
+            if (checkRoleInfoFromChooseExistByQQ(qq)) {
+                stringBuilder.append(getRoleChooseByQQ(qq))
+                        .append("的角色: ")
+                        .append("包含有以下数据\n");
+
+                stringBuilder.append("主属性为:\n");
+                ArrayList<String> propMainResult = showProp(propMain);
+                Collections.sort(propMainResult);
+                stringBuilder = formatResult(stringBuilder, propMainResult);
+
+                stringBuilder.append("\n常规侦查技能:\n");
+                ArrayList<String> propInvestigationOfCrimesResult = showProp(propInvestigationOfCrimes);
+                Collections.sort(propInvestigationOfCrimesResult);
+                stringBuilder = formatResult(stringBuilder, propInvestigationOfCrimesResult);
+
+                stringBuilder.append("\n常规社交技能:\n");
+                ArrayList<String> propTalkResult = showProp(propTalk);
+                Collections.sort(propTalkResult);
+                stringBuilder = formatResult(stringBuilder, propTalkResult);
+
+                stringBuilder.append("\n常规战斗技能:\n");
+                ArrayList<String> propFightResult = showProp(propFight);
+                Collections.sort(propFightResult);
+                stringBuilder = formatResult(stringBuilder, propFightResult);
+
+                stringBuilder.append("\n剩余技能值在50以上的技能:\n");
+                ArrayList<String> propUpResult = showProp(allSelect, true);
+                Collections.sort(propUpResult);
+                stringBuilder = formatResult(stringBuilder, propUpResult);
+
+                stringBuilder.append("\n剩余输入了技能值但不足50的技能:\n");
+                ArrayList<String> propDownResult = showProp(allSelect, false);
+                Collections.sort(propDownResult);
+                stringBuilder = formatResult(stringBuilder, propDownResult);
+            } else {
+                stringBuilder.append(getRoleChooseByQQ(qq) + "似乎未设定角色");
+            }
+        }
+        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), stringBuilder.toString());
+    }
+
+    private StringBuilder formatResult(StringBuilder stringBuilder, ArrayList<String> propList) {
+        int rowNum = 0;
+        int propertiesWeight = 13;
+        for (String prop : propList) {
+            if (propList.indexOf(prop) == 0) {
+                stringBuilder.append(prop);
+                int textLen = (prop).length();
+                for (int i = 0; i < propertiesWeight - textLen; i++) {
+                    stringBuilder.append(" ");
+                }
+                continue;
+            }
+            if (rowNum < 3) {
+                stringBuilder.append(prop);
+                int textLen = (prop).length();
+                for (int i = 0; i < propertiesWeight - textLen; i++) {
+                    stringBuilder.append(" ");
+                }
+                rowNum++;
+            } else {
+                stringBuilder.append("\n");
+                stringBuilder.append(prop);
+                int textLen = (prop).length();
+                for (int i = 0; i < propertiesWeight - textLen; i++) {
+                    stringBuilder.append(" ");
+                }
+                rowNum = 0;
+            }
+        }
+        return stringBuilder;
+    }
+
+    private ArrayList<String> showProp(ArrayList<String> propMain) {
+
+        ArrayList<String> result = new ArrayList<>();
+        for (Map.Entry<String, Integer> mapEntry : Objects.requireNonNull(getRoleInfoFromChooseByFromQQ(entityTypeMessages)).entrySet()) {
+            if (propMain.contains(mapEntry.getKey()) && mapEntry.getValue() != 0) {
+                result.add(getSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
+            }
+
+        }
+        return result;
+    }
+
+    private ArrayList<String> showProp(ArrayList<String> propMain, boolean up) {
+        ArrayList<String> result = new ArrayList<>();
+        for (Map.Entry<String, Integer> mapEntry : Objects.requireNonNull(getRoleInfoFromChooseByFromQQ(entityTypeMessages)).entrySet()) {
+            if (!propMain.contains(mapEntry.getKey()) && mapEntry.getValue() != 0) {
+                if (up && mapEntry.getValue() >= 50) {
+                    result.add(getSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
+                } else if (!up && mapEntry.getValue() < 50) {
+                    result.add(getSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
+                }
+
+            }
+
+        }
+        return result;
+    }
 }

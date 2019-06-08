@@ -13,6 +13,9 @@ public interface MessagesTag {
     String tagRAL = header + "ral.*";
     String tagRCL = header + "rcl.*";
 
+    String tagRAV = header + "rav.*";
+    String tagRCV = header + "rcv.*";
+
     String tagRB = header + "rb.*";
     String tagRP = header + "rp.*";
 
@@ -34,6 +37,7 @@ public interface MessagesTag {
     String tagTeamCall = headerTeam + "call.*";
     String tagTeamHp = headerTeam + "hp.*";
     String tagTeamSan = headerTeam + "san.*";
+    String tagTeamDesc = headerTeam + "desc.*";
 
     String headerBot = header + "bot[ ]*";
     String tagBotShow = headerBot + ".*";
@@ -57,6 +61,10 @@ public interface MessagesTag {
     String tagNPC = header + "npc.*";
 
     String tagBG = header + "bg.*";
+
+    String tagTZ = header + "tz.*";
+
+    String tagGas = header + "gas.*";
 
     String headerCoc = header + "coc[ ]*";
     String tagCoc7 = headerCoc + "[7]{0,1}[ ]*(10|[1-9])*";
@@ -89,6 +97,4 @@ public interface MessagesTag {
     String tagHiy = header + "hiy[ ]*.*";
 
     String tagKp = header + "kp[ ]*.*";
-
-
 }

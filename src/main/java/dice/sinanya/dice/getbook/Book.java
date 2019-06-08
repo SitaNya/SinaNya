@@ -2,7 +2,7 @@ package dice.sinanya.dice.getbook;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.system.MessagesGetInfo.*;
+import static dice.sinanya.system.MessagesBook.*;
 import static dice.sinanya.tools.Sender.sender;
 
 public class Book {

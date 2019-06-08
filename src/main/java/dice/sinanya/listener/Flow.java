@@ -1,9 +1,6 @@
 package dice.sinanya.listener;
 
-import dice.sinanya.dice.get.BG;
-import dice.sinanya.dice.get.MakeCocCard;
-import dice.sinanya.dice.get.MakeDndCard;
-import dice.sinanya.dice.get.NPC;
+import dice.sinanya.dice.get.*;
 import dice.sinanya.dice.getbook.Book;
 import dice.sinanya.dice.manager.Clue;
 import dice.sinanya.dice.manager.Kp;
@@ -32,6 +29,8 @@ class Flow {
     private boolean isRC = false;
     private boolean isRAL = false;
     private boolean isRCL = false;
+    private boolean isRAV = false;
+    private boolean isRCV = false;
 
     private boolean isRB = false;
     private boolean isRP = false;
@@ -52,6 +51,7 @@ class Flow {
     private boolean isTeamCall = false;
     private boolean isTeamHp = false;
     private boolean isTeamSan = false;
+    private boolean isTeamDesc = false;
 
     private boolean isBotInfo = false;
     private boolean isBotOn = false;
@@ -73,6 +73,10 @@ class Flow {
     private boolean isNPC = false;
 
     private boolean isBG = false;
+
+    private boolean isTZ = false;
+
+    private boolean isGas = false;
 
     private boolean isCoc7 = false;
     private boolean isCoc6 = false;
@@ -116,7 +120,8 @@ class Flow {
         isTeamCall = messages.matches(tagTeamCall);
         isTeamHp = messages.matches(tagTeamHp);
         isTeamSan = messages.matches(tagTeamSan);
-        isTeamShow = messages.matches(tagTeamShow) && !isTeamSet && !isTeamClr && !isTeamMove && !isTeamCall && !isTeamHp && !isTeamSan;
+        isTeamDesc = messages.matches(tagTeamDesc);
+        isTeamShow = messages.matches(tagTeamShow) && !isTeamSet && !isTeamClr && !isTeamMove && !isTeamCall && !isTeamHp && !isTeamSan && !isTeamDesc;
 
         isStShow = messages.matches(tagStShow);
         isStList = messages.matches(tagStList);
@@ -140,7 +145,7 @@ class Flow {
         isCoc7 = messages.matches(tagCoc7) && !isCoc7d && !isCoc6d && !isCoc6;
 
         isDnd = messages.matches(tagDnd);
-        isRi = messages.matches(tagR);
+        isRi = messages.matches(tagRi);
         isInitClr = messages.matches(tagInitClr);
         isInit = messages.matches(tagInit) && !isInitClr;
 
@@ -168,6 +173,10 @@ class Flow {
 
         isBG = messages.matches(tagBG);
 
+        isTZ = messages.matches(tagTZ);
+
+        isGas = messages.matches(tagGas);
+
         isTi = messages.matches(tagTi);
         isLi = messages.matches(tagLi);
 
@@ -180,10 +189,12 @@ class Flow {
 
         isRAL = messages.matches(tagRAL);
         isRCL = messages.matches(tagRCL);
+        isRAV = messages.matches(tagRAV);
+        isRCV = messages.matches(tagRCV);
         isRH = messages.matches(tagRH);
-        isRA = messages.matches(tagRA) && !isRAL;
-        isRC = messages.matches(tagRC) && !isRCL;
-        isR = messages.matches(tagR) && !isRH && !isRA && !isRC && !isRB && !isRP && !isRi && !isRAL && !isRCL;
+        isRA = messages.matches(tagRA) && !isRAL && !isRAV;
+        isRC = messages.matches(tagRC) && !isRCL && !isRCV;
+        isR = messages.matches(tagR) && !isRH && !isRA && !isRC && !isRB && !isRP && !isRi && !isRAL && !isRCL && !isRAV && !isRCV;
     }
 
     void toPrivate() {
@@ -200,6 +211,8 @@ class Flow {
         Book book = new Book(entityTypeMessages);
         BG bg = new BG(entityTypeMessages);
         NPC npc = new NPC(entityTypeMessages);
+        TZ tz = new TZ(entityTypeMessages);
+        Gas gas = new Gas(entityTypeMessages);
         History history = new History(entityTypeMessages);
 
         if (isR) {
@@ -212,6 +225,10 @@ class Flow {
             rollAndCheck.ral();
         } else if (isRCL) {
             rollAndCheck.rcl();
+        } else if (isRAV) {
+            rollAndCheck.rav();
+        } else if (isRCV) {
+            rollAndCheck.rcv();
         }
 
         if (isStSet) {
@@ -296,6 +313,14 @@ class Flow {
             bg.bg();
         }
 
+        if (isTZ) {
+            tz.get();
+        }
+
+        if (isGas) {
+            gas.get();
+        }
+
         if (isDnd) {
             makeDndCard.dnd();
         }
@@ -303,6 +328,7 @@ class Flow {
         if (isHiy) {
             history.hiy();
         }
+
 
     }
 
@@ -336,6 +362,8 @@ class Flow {
             team.hp();
         } else if (isTeamSan) {
             team.san();
+        } else if (isTeamDesc) {
+            team.desc();
         }
 
         if (isEN) {

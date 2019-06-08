@@ -20,7 +20,7 @@ public class MakeRcl implements Callable<Integer> {
     public Integer call() {
         EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, rolls);
         CheckResultLevel checkResultLevel = new CheckResultLevel(entityRollAndCheck.getRandom(), entityRollAndCheck.getSkill(), true);
-        return checkResultLevel.getLevelResult().getLevel();
+        return checkResultLevel.getLevelAndRandom().getLevel();
     }
 
 }

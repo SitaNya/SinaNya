@@ -65,7 +65,7 @@ public class RewardAndPunishment {
         if (skill != 0) {
             strRes = entityRollAndCheck.getNick() +
                     "进行奖励骰鉴定: D100=" + random + "[奖励骰:" + stringBuilder.toString().substring(0, stringBuilder.toString().length() - 1) + "] = " + resultRandom + "/" + skill +
-                    new CheckResultLevel(resultRandom, entityRollAndCheck.getSkill(), false).getResultLevel();
+                    new CheckResultLevel(resultRandom, entityRollAndCheck.getSkill(), false).getLevelResultStr();
         } else {
             strRes = entityRollAndCheck.getNick() +
                     "进行奖励骰鉴定: D100=" + random + "[奖励骰:" + stringBuilder.toString().substring(0, stringBuilder.toString().length() - 1) + "] = " + resultRandom;
@@ -104,7 +104,7 @@ public class RewardAndPunishment {
         if (skill != 0) {
             strRes = entityRollAndCheck.getNick() +
                     "进行惩罚骰鉴定: D100=" + random + "[惩罚骰:" + stringBuilder.toString().substring(0, stringBuilder.toString().length() - 1) + "] = " + resultRandom + "/" + skill +
-                    new CheckResultLevel(resultRandom, entityRollAndCheck.getSkill(), false).getResultLevel();
+                    new CheckResultLevel(resultRandom, entityRollAndCheck.getSkill(), false).getLevelResultStr();
         } else {
             strRes = entityRollAndCheck.getNick() +
                     "进行惩罚骰鉴定: D100=" + random + "[惩罚骰:" + stringBuilder.toString().substring(0, stringBuilder.toString().length() - 1) + "] = " + resultRandom;

@@ -1,5 +1,6 @@
 package dice.sinanya.tools;
 
+import dice.sinanya.entity.EntityAntagonize;
 import dice.sinanya.entity.EntityLevelResult;
 
 import java.util.ArrayList;
@@ -63,14 +64,19 @@ public class CheckResultLevel {
         }
     }
 
-    public String getResultLevel() {
+    public String getLevelResultStr() {
         String strlevel = checkResultLevel();
         ArrayList<String> resultInfo = LEVEL_MAP.get(strlevel);
         return resultInfo.get(random(0, resultInfo.size() - 1));
     }
 
-    public EntityLevelResult getLevelResult() {
+    public EntityLevelResult getLevelAndRandom() {
         checkResultLevel();
         return new EntityLevelResult(level, random);
+    }
+
+    public EntityAntagonize getAntagonize() {
+        checkResultLevel();
+        return new EntityAntagonize(random, level, skill);
     }
 }
