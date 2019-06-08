@@ -130,21 +130,23 @@ public class Team {
 
                 role = getRoleChooseByQQ(qq);
                 hp = prop.get("hp");
+                int con=prop.get("con");
+                int siz=prop.get("siz");
                 if (add) {
                     int newHp = hp + entityStrManyRolls.getResult();
                     prop.put("hp", newHp);
                     setRoleInfoFromChooseByQQ(qq, prop);
-                    sender(entityTypeMessages, "已为" + role + "恢复" + entityStrManyRolls.getStrManyRolls() + entityStrManyRolls.getResult() + "点血量，剩余" + newHp + "点");
+                    sender(entityTypeMessages, "已为" + role + "恢复" + entityStrManyRolls.getStrManyRolls() +"="+ entityStrManyRolls.getResult() + "点血量，剩余" + min(newHp,(int) ceil((con + siz) / 10)) + "点");
                 } else {
                     int newHp = max(0, hp - entityStrManyRolls.getResult());
                     prop.put("hp", newHp);
                     setRoleInfoFromChooseByQQ(qq, prop);
                     if (newHp == 0) {
-                        sender(entityTypeMessages, role + "损失" + entityStrManyRolls.getStrManyRolls() + entityStrManyRolls.getResult() + "点血量，已死亡");
+                        sender(entityTypeMessages, role + "损失" + entityStrManyRolls.getStrManyRolls() +"="+ entityStrManyRolls.getResult() + "点血量，已死亡");
                     } else if (entityStrManyRolls.getResult() >= floor(hp / 2)) {
-                        sender(entityTypeMessages, "已为" + role + "降低" + entityStrManyRolls.getStrManyRolls() + entityStrManyRolls.getResult() + "点血量，剩余" + newHp + "点,已进入重伤状态");
+                        sender(entityTypeMessages, "已为" + role + "降低" + entityStrManyRolls.getStrManyRolls() +"="+ entityStrManyRolls.getResult() + "点血量，剩余" + newHp + "点,已进入重伤状态");
                     } else {
-                        sender(entityTypeMessages, "已为" + role + "降低" + entityStrManyRolls.getStrManyRolls() + entityStrManyRolls.getResult() + "点血量，剩余" + newHp + "点");
+                        sender(entityTypeMessages, "已为" + role + "降低" + entityStrManyRolls.getStrManyRolls() +"="+entityStrManyRolls.getResult() + "点血量，剩余" + newHp + "点");
                     }
                 }
             } else {
@@ -196,7 +198,6 @@ public class Team {
                         } else {
                             changeValue = new MakeManyRollsStr(msg).getRes();
                         }
-
                         HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);
                         if (prop != null) {
                             StringBuilder strResult = new StringBuilder();
@@ -253,19 +254,20 @@ public class Team {
                 stringBuilder
                         .append("\n")
                         .append(role)
-                        .append("\t")
+                        .append("  ")
                         .append("血量=")
                         .append(hp)
                         .append("/")
                         .append((int) ceil((con + siz) / 10))
-                        .append("\t")
+                        .append("  ")
                         .append("san值=")
                         .append(san)
                         .append("/")
                         .append(99 - cthulhuMythos)
+                        .append("  ")
                         .append("(初始值:")
                         .append(pow)
-                        .append(")\t")
+                        .append(")  ")
                         .append("DB:")
                         .append(dbGetter(siz + str));
             } else {

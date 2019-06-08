@@ -17,8 +17,7 @@ import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
 import static dice.sinanya.tools.RoleInfo.*;
 import static dice.sinanya.tools.Sender.sender;
-import static java.lang.Math.floor;
-import static java.lang.Math.max;
+import static java.lang.Math.*;
 
 public class CheckSanCheck {
     EntityTypeMessages entityTypeMessages;
@@ -51,6 +50,7 @@ public class CheckSanCheck {
 
         String role = "";
         int san;
+        int cthulhuMythos = 0;
 
         int changeValue = 0;
         String changeFuncion = "";
@@ -73,6 +73,7 @@ public class CheckSanCheck {
                 san = entityStrManyRolls.getResult();
             } else {
                 san = prop.get("san");
+                cthulhuMythos = prop.get("cthulhuMythos");
             }
             prop.put("san", san + changeValue);
         } else {
@@ -83,7 +84,7 @@ public class CheckSanCheck {
             }
         }
         setRoleInfoFromChooseByQQ(qq, prop);
-        sender(entityTypeMessages, "已为" + role + "恢复" + changeFuncion + "=" + changeValue + "点理智值，剩余" + (san + changeValue) + "点");
+        sender(entityTypeMessages, "已为" + role + "恢复" + changeFuncion + "=" + changeValue + "点理智值，剩余" + min((san + changeValue), 99 - cthulhuMythos) + "点");
     }
 
     public EntitySanCheck checkSanCheck(String skill, String strCheckValue) throws SanCheckSetException, PlayerSetException {

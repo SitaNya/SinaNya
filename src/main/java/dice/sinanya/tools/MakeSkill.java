@@ -5,6 +5,7 @@ import dice.sinanya.entity.EntityStrManyRolls;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.GetSkillValue.getSkillValue;
 import static java.lang.Math.ceil;
 
@@ -91,6 +92,10 @@ public class MakeSkill {
             skill = skill.replaceFirst("(\\d+[dD]\\d+)", makeManyRollsStr.getStr());
         }
 
-        return new EntityStrManyRolls(skill, (int) ceil(Calculator.conversion(skill)));
+        if (isNumeric(skill)) {
+            return new EntityStrManyRolls(skill, Integer.parseInt(skill));
+        } else {
+            return new EntityStrManyRolls(skill, (int) ceil(Calculator.conversion(skill)));
+        }
     }
 }
