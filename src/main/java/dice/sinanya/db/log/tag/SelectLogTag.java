@@ -72,6 +72,7 @@ public class SelectLogTag {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select logSwitch,logName from tagLog where groupId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1,groupId);
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         if (set.getBoolean("logSwitch")) {

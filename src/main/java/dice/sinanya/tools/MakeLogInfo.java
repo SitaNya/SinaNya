@@ -21,14 +21,13 @@ public class MakeLogInfo {
                     .append("发起骰掷");
             return result.toString();
         } else {
-            result.append(getNickName(entityTypeMessages));
             info = info.replaceAll("([\"“”])", "\"");
             if (info.contains("\"")) {
                 result.append(info);
             } else {
-                result.append("\"")
-                        .append(getNickName(entityTypeMessages))
+                result.append(getNickName(entityTypeMessages))
                         .append(":\t")
+                        .append("\"")
                         .append(info)
                         .append("\"");
             }
@@ -53,7 +52,7 @@ public class MakeLogInfo {
     public static String makeLogInfo(String info) {
         info = info.trim();
         StringBuilder result = new StringBuilder();
-        if (info.contains("暗骰结果")) {
+        if (info.contains("暗骰结果") || info.contains("日志")) {
             return "";
         }
 

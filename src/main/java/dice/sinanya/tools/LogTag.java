@@ -34,7 +34,7 @@ public class LogTag {
     }
 
     public static String getOthorLogTrue(String groupId) {
-        if (checkOthorLogTrue(groupId)) {
+        if (checkOthorLogTrue(groupId)&& logNameForGroup.get(groupId)!=null) {
             return logNameForGroup.get(groupId);
         } else {
             String name = selectLogTag.getOthorLogTrue(groupId);
