@@ -11,6 +11,8 @@ import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
 
+import static dice.sinanya.system.MessagesSystem.*;
+
 public class SendMail {
 
     public String toChinese(String text) {
@@ -90,7 +92,13 @@ public class SendMail {
         mb.setSubject(logName); // 设置邮件的主题
         mb.setContent("日志邮件测试"); // 设置邮件的正文
 
-        mb.attachFile("/Users/zhangxiaozhou/Desktop/" + groupId + "/" + logName);
+        if (OSX_MODEL) {
+            mb.attachFile("/Users/zhangxiaozhou/Desktop/" + groupId + "/" + logName);
+        } else if (WIN_MODEL) {
+            mb.attachFile("C:/Files/" + groupId + "/" + logName);
+        } else if (LINUX_MODEL) {
+            mb.attachFile("/tmp/" + groupId + "/" + logName);
+        }
 
         SendMail sm = new SendMail();
         System.out.println("正在发送邮件...");

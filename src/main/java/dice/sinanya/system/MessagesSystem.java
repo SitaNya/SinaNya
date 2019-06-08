@@ -1,6 +1,13 @@
 package dice.sinanya.system;
 
+import java.util.Locale;
+import java.util.Objects;
+
 public interface MessagesSystem {
+    Boolean OSX_MODEL = Objects.equals(System.getProperty("os.name").toLowerCase(Locale.US), "mac os x");
+    Boolean WIN_MODEL = Objects.equals(System.getProperty("os.name").toLowerCase(Locale.US), "Windows 10");
+    Boolean LINUX_MODEL = !OSX_MODEL && !WIN_MODEL;
+
     String VERSIONS = "0.1.0.0 beta";
     String STR_SUCCESSFULLY_ENABLED_NOTICE = "啊~您需要奈梅斯了吗？我一定会好好努力的";
     String STR_ALREADY_ENABLED_ERR = "嗯！我在的呢，您尽管吩咐吧";
@@ -15,7 +22,7 @@ public interface MessagesSystem {
             .append("Versions is:\t")
             .append(VERSIONS);
 
-    StringBuilder STR_BOT_HELP=new StringBuilder()
+    StringBuilder STR_BOT_HELP = new StringBuilder()
             .append("命令索引:\n")
             .append(".bot\t\t")
             .append("查看骰子版本信息\n")
