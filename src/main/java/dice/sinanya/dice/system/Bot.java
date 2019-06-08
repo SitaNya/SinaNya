@@ -94,6 +94,6 @@ public class Bot {
     }
 
     public void info() {
-        sender(entityTypeMessages, STR_BOT_INFO.toString());
+        sender(entityTypeMessages, STR_BOT_VERSIONS.toString());
     }
 }

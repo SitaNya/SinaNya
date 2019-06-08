@@ -9,6 +9,7 @@ public interface MessagesTag {
     String tagRH = header + "rh.*";
     String tagRA = header + "ra.*";
     String tagRC = header + "rc.*";
+    String tagRE = header + "re.*";
 
     String tagRAL = header + "ral.*";
     String tagRCL = header + "rcl.*";
@@ -46,6 +47,7 @@ public interface MessagesTag {
     String tagBotExit = headerBot + "exit.*";
 
     String headerHelp = header + "help[ ]*";
+    String tagHelpInfo = headerHelp + ".*";
     String tagHelpNormal = headerHelp + "normal.*";
     String tagHelpMake = headerHelp + "make.*";
     String tagHelpGroup = headerHelp + "group.*";

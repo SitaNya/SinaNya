@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+
+    <Properties>
+        <Property name="pattern_layout">%d %-5p (%F:%L) - %m%n</Property>
+        <Property name="LOG_HOME">.</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="%highlight{[ %p ] [%-d{yyyy-MM-dd HH:mm:ss}] [ LOGID:%X{logid} ] [%l] %m%n}"/>
+        </Console>
+
+        <RollingRandomAccessFile name="file"
+                                 fileName="${LOG_HOME}/root.log"
+                                 filePattern="${LOG_HOME}/root.log.%d{yyyy-MM-dd}">
+            <PatternLayout pattern="%highlight{[ %p ] [%-d{yyyy-MM-dd HH:mm:ss}] [ LOGID:%X{logid} ] [%l] %m%n}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="sinanya"
+                                 fileName="${LOG_HOME}/sitonya.log"
+                                 filePattern="${LOG_HOME}/sitonya.log.%d{yyyy-MM-dd}">
+            <PatternLayout pattern="%highlight{[ %p ] [%-d{yyyy-MM-dd HH:mm:ss}] [ LOGID:%X{logid} ] [%l] %m%n}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <Loggers>
+
+        <Logger name="dice.sinanya" level="INFO">
+            <AppenderRef ref="sinanya"/>
+        </Logger>
+
+        <!-- Root Logger -->
+        <Root level="INFO" includeLocation="true">
+            <AppenderRef ref="file"/>
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="errorLog"/>
+        </Root>
+    </Loggers>
+</Configuration>

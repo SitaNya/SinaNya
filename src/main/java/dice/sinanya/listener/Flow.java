@@ -27,6 +27,7 @@ class Flow {
     private boolean isRH = false;
     private boolean isRA = false;
     private boolean isRC = false;
+    private boolean isRE = false;
     private boolean isRAL = false;
     private boolean isRCL = false;
     private boolean isRAV = false;
@@ -63,6 +64,7 @@ class Flow {
     private boolean isHelpGroup = false;
     private boolean isHelpBook = false;
     private boolean isHelpDnd = false;
+    private boolean isHelpInfo = false;
 
 
     private boolean isBookCard = false;
@@ -138,6 +140,7 @@ class Flow {
         isHelpGroup = messages.matches(tagHelpGroup);
         isHelpBook = messages.matches(tagHelpBook);
         isHelpDnd = messages.matches(tagHelpDnd);
+        isHelpInfo = messages.matches(tagHelpInfo) && !isHelpNormal && !isHelpMake && !isHelpGroup && !isHelpBook && !isHelpDnd;
 
         isCoc7d = messages.matches(tagCoc7d);
         isCoc6d = messages.matches(tagCoc6d);
@@ -194,7 +197,8 @@ class Flow {
         isRH = messages.matches(tagRH);
         isRA = messages.matches(tagRA) && !isRAL && !isRAV;
         isRC = messages.matches(tagRC) && !isRCL && !isRCV;
-        isR = messages.matches(tagR) && !isRH && !isRA && !isRC && !isRB && !isRP && !isRi && !isRAL && !isRCL && !isRAV && !isRCV;
+        isRE = messages.matches(tagRE);
+        isR = messages.matches(tagR) && !isRH && !isRA && !isRC && !isRB && !isRP && !isRi && !isRE && !isRAL && !isRCL && !isRAV && !isRCV;
     }
 
     void toPrivate() {
@@ -214,6 +218,7 @@ class Flow {
         TZ tz = new TZ(entityTypeMessages);
         Gas gas = new Gas(entityTypeMessages);
         History history = new History(entityTypeMessages);
+        RollForDnd rollForDnd = new RollForDnd(entityTypeMessages);
 
         if (isR) {
             roll.r();
@@ -221,6 +226,8 @@ class Flow {
             rollAndCheck.ra();
         } else if (isRC) {
             rollAndCheck.rc();
+        } else if (isRE) {
+            rollForDnd.re();
         } else if (isRAL) {
             rollAndCheck.ral();
         } else if (isRCL) {
@@ -293,6 +300,8 @@ class Flow {
             help.book();
         } else if (isHelpDnd) {
             help.dnd();
+        }else if (isHelpInfo){
+            help.info();
         }
 
         if (isBookKP) {

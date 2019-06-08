@@ -3,6 +3,8 @@ package dice.sinanya.dice.system;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.system.MessagesHelp.*;
+import static dice.sinanya.system.MessagesSystem.STR_BOT_HELP;
+import static dice.sinanya.system.MessagesSystem.STR_BOT_INFO;
 import static dice.sinanya.tools.Sender.sender;
 
 public class Help {
@@ -30,5 +32,9 @@ public class Help {
 
     public void dnd() {
         sender(entityTypeMessages, dndHelp.toString());
+    }
+
+    public void info() {
+        sender(entityTypeMessages, STR_BOT_INFO.toString());
     }
 }
