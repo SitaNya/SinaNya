@@ -1,11 +1,14 @@
 package dice.sinanya.db.roles;
 
 import dice.sinanya.db.tools.DbUtil;
+import dice.sinanya.entity.EntityRoleTag;
 import dice.sinanya.system.RolesInfo;
 
 import java.sql.*;
 import java.util.HashMap;
 
+import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOSE;
+import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.GetTime.getNowString;
 import static dice.sinanya.tools.GetTime.getTime;
 import static dice.sinanya.tools.RoleInfo.getRoleInfoByQQ;
@@ -14,7 +17,7 @@ public class InsertRoles {
     public void insertRoleChoose(long qqId, String role) {
         int num = 0;
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from CHOOISE_ROLE where qq=?";
+            String sql = "select * from CHOOSE_ROLE where qq=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setLong(1, qqId);
                 try (ResultSet set = ps.executeQuery()) {
@@ -61,7 +64,11 @@ public class InsertRoles {
     @SuppressWarnings("AlibabaMethodTooLong")
     public void insertRoleInfo(String properties, String role, long qqId) {
         HashMap<String, Integer> propertiesForRole = getRoleInfoByQQ(qqId, role);
-        propertiesForRole = new RolesInfo(properties, propertiesForRole).getPropertiesForRole();
+        if (propertiesForRole == null) {
+            propertiesForRole = new RolesInfo().init();
+        } else {
+            propertiesForRole = new RolesInfo(properties, propertiesForRole).getPropertiesForRole();
+        }
         int num = 0;
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from role where userName=? and qqId=?";
@@ -78,12 +85,14 @@ public class InsertRoles {
             System.out.println(e.getMessage());
         }
 
+        ROLE_CHOOSE.put(qqId, role);
+        insertRoleChoose(qqId, role);
+        ROLE_INFO_CACHE.put(new EntityRoleTag(qqId, role), propertiesForRole);
         if (num == 0) {
             insertInfo(propertiesForRole, qqId, role);
         } else {
             updateInfo(propertiesForRole, qqId, role);
         }
-
     }
 
     @SuppressWarnings("AlibabaMethodTooLong")
@@ -142,7 +151,7 @@ public class InsertRoles {
     }
 
 
-    private void insertInfo(HashMap<String, Integer> propertiesForRole, long qqId, String role) {
+    private void updateInfo(HashMap<String, Integer> propertiesForRole, long qqId, String role) {
         Timestamp timestamp = getTime(getNowString());
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "update role set createTime=?,  str=?, dex=?, pow=?, con=?, app=?, edu=?, siz=?, intValue=?, san=?, luck=?, mp=?, hp=?, accounting=?, anthropology=?, evaluation=?, archaeology=?, enchantment=?, toClimb=?, computerUsage=?, creditRating=?, cthulhuMythos=?, disguise=?, dodge=?, drive=?, electricalMaintenance=?, electronics=?, talkingSkill=?, aFistFight=?, wrangle=?, pistol=?, firstAid=?, history=?, intimidate=?, jump=?, motherTongue=?, law=?, libraryUse=?, listen=?, `unlock`=?, mechanicalMaintenance=?, medicalScience=?, naturalHistory=?, naturalScience=?, pilotage=?, occultScience=?, operatingHeavyMachinery=?, persuade=?, psychoanalysis=?, psychology=?, horsemanship=?, aWonderfulHand=?, investigationOfCrimes=?, stealth=?, existence=?, swimming=?, throwValue=?, trackValue=?, domesticatedAnimal=?, diving=?, blast=?, lipReading=?, hypnosis=?, artillery=? where userName=? and qqId=? ";
@@ -211,8 +220,8 @@ public class InsertRoles {
                 ps.setInt(62, propertiesForRole.get("lipReading"));
                 ps.setInt(63, propertiesForRole.get("hypnosis"));
                 ps.setInt(64, propertiesForRole.get("artillery"));
-                ps.setLong(65, qqId);
-                ps.setString(66, role);
+                ps.setString(65, role);
+                ps.setLong(66, qqId);
                 System.out.println(ps.toString());
                 ps.executeUpdate();
             }
@@ -221,7 +230,7 @@ public class InsertRoles {
         }
     }
 
-    private void updateInfo(HashMap<String, Integer> propertiesForRole, long qqId, String role) {
+    private void insertInfo(HashMap<String, Integer> propertiesForRole, long qqId, String role) {
         Timestamp timestamp = getTime(getNowString());
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "INSERT INTO role(" +
@@ -370,7 +379,7 @@ public class InsertRoles {
     public void deleteInfo(long qqId, String role) {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "delete from role where " +
-                    "qqId=?" +
+                    "qqId=? and " +
                     "userName=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setLong(1, qqId);

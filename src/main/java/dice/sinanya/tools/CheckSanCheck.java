@@ -14,6 +14,7 @@ import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.MakeSkill.makeSkill;
 import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
+import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
 import static dice.sinanya.tools.RoleInfo.*;
 import static dice.sinanya.tools.Sender.sender;
 import static java.lang.Math.floor;
@@ -113,7 +114,7 @@ public class CheckSanCheck {
         boolean useCard = false;
         HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);
         if (prop != null) {
-            role = getRoleChooseByFromQQ(entityTypeMessages);
+            role = getRoleChooseByQQ(qq);
             if (!skill.equals("理智")) {
                 san = entityStrManyRolls.getResult();
             } else {

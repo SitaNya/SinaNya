@@ -62,7 +62,7 @@ public class RolesInfo {
         return propertiesDefault;
     }
 
-    private HashMap<String, Integer> init() {
+    public HashMap<String, Integer> init() {
         return new HashMap<String, Integer>(500) {{
             put("str", 0);
             put("dex", 0);

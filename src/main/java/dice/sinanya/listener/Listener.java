@@ -44,8 +44,8 @@ public class Listener {
     @Listen(MsgGetTypes.groupMsg)
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGroup msgGroup) {
-        String tagBotOn = ".bot on";
-        String tagBotOff = ".bot off";
+        String tagBotOn = ".bot on [CQ:at,qq=1984749515]";
+        String tagBotOff = ".bot off [CQ:at,qq=1984749515]";
         if (getBot(Long.parseLong(msgGroup.getFromGroup())) || msgGroup.getMsg().trim().equals(tagBotOn)) {
             new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup)).toGroup();
             return true;

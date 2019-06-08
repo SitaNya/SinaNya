@@ -58,8 +58,10 @@ public class Roll {
 
         ArrayList<String> strTimesAndRolesList = new ArrayList<>();
         Matcher matcher = p2.matcher(msg);
+        boolean setMaxValue = true;
         while (matcher.find()) {
             strTimesAndRolesList.add(matcher.group(1));
+            setMaxValue = false;
         }
         ArrayList<String> resultRoll = new ArrayList<>();
         for (String strTimesAndRoles : strTimesAndRolesList) {
@@ -74,7 +76,11 @@ public class Roll {
         int i = 0;
         Matcher findFunc = p3.matcher(msg);
         if (!findFunc.find()) {
-            resultMessage += "D" + msg + "=";
+            if (setMaxValue) {
+                resultMessage += msg + "=";
+            } else {
+                resultMessage += "D" + msg + "=";
+            }
         }
 
         Matcher findTimesAndRoles = p2.matcher(msg);

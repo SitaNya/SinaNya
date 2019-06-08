@@ -41,6 +41,12 @@ public class SelectRoles {
     }
 
     @SuppressWarnings("AlibabaMethodTooLong")
+    public void flushRoleChooseByFromQQ(EntityTypeMessages entityTypeMessages) {
+        long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
+        selectRoleInfoCache(qqId);
+    }
+
+    @SuppressWarnings("AlibabaMethodTooLong")
     public void flushRoleInfoCacheByQQ(long qqId) {
         selectRoleInfoCache(qqId);
     }
@@ -48,7 +54,7 @@ public class SelectRoles {
     @SuppressWarnings("AlibabaMethodTooLong")
     public void flushRoleInfoCacheByQQ(String qqId) {
         long qq = Long.parseLong(qqId);
-        selectRoleInfoCache(qq);
+        flushRoleChooseByQQ(qq);
     }
 
     private void selectRoleInfoCache(long qqId) {

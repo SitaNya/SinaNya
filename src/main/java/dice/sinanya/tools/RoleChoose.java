@@ -2,7 +2,11 @@ package dice.sinanya.tools;
 
 import dice.sinanya.db.roles.InsertRoles;
 import dice.sinanya.db.roles.SelectRoles;
+import dice.sinanya.entity.EntityRoleTag;
 import dice.sinanya.entity.EntityTypeMessages;
+
+import javax.swing.text.html.parser.Entity;
+import java.util.HashMap;
 
 import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOSE;
 

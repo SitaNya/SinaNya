@@ -1,14 +1,14 @@
 package dice.sinanya.dice.manager;
 
 import dice.sinanya.db.roles.InsertRoles;
+import dice.sinanya.db.roles.SelectRoles;
 import dice.sinanya.entity.EntityRoleTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.PlayerSetException;
 
 import java.util.*;
 
-import static dice.sinanya.system.MessagesTag.tagStSet;
-import static dice.sinanya.system.MessagesTag.tagTeamMove;
+import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.GetSkillName.getSkillName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
@@ -66,8 +66,10 @@ public class Roles {
         stringBuilder.append("当前备选角色:\n");
         StringBuilder standbyRole = new StringBuilder();
 
+        new SelectRoles().flushRoleChooseByFromQQ(entityTypeMessages);
+        new SelectRoles().flushRoleInfoCacheByFromQQ(entityTypeMessages);
         for (Map.Entry<EntityRoleTag, HashMap<String, Integer>> mapEntry : ROLE_INFO_CACHE.entrySet()) {
-            if (checkRoleChooseExistByQQ(qqId) && !getRoleChooseByQQ(qqId).equals(mapEntry.getKey().getRole())) {
+            if (checkRoleChooseExistByQQ(qqId) && !getRoleChooseByQQ(qqId).equals(mapEntry.getKey().getRole()) && mapEntry.getKey().getQq()==qqId) {
                 standbyRole.append(mapEntry.getKey().getRole()).append("\n");
             }
         }
@@ -80,7 +82,7 @@ public class Roles {
     }
 
     public void move() {
-        String tag = tagTeamMove;
+        String tag = tagStMove;
         String role = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
         if (checkRoleInfoExistByFromQQ(entityTypeMessages, role)) {
@@ -94,6 +96,9 @@ public class Roles {
     }
 
     public void show() {
+        new SelectRoles().flushRoleChooseByFromQQ(entityTypeMessages);
+        new SelectRoles().flushRoleInfoCacheByFromQQ(entityTypeMessages);
+
         ArrayList<String> propMain = new ArrayList<String>() {{
             add("hp");
             add("san");

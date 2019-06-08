@@ -1,5 +1,6 @@
 package dice.sinanya.dice.manager;
 
+import dice.sinanya.db.roles.SelectRoles;
 import dice.sinanya.entity.EntitySanCheck;
 import dice.sinanya.entity.EntityStrManyRolls;
 import dice.sinanya.entity.EntityTeamInfo;
@@ -19,7 +20,6 @@ import static dice.sinanya.tools.DBAndSize.dbGetter;
 import static dice.sinanya.tools.GetSkillName.getSkillName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.MakeSkill.makeSkill;
-import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
 import static dice.sinanya.tools.RoleInfo.*;
 import static dice.sinanya.tools.Sender.sender;
@@ -35,6 +35,9 @@ public class Team {
     }
 
     public void set() {
+        new SelectRoles().flushRoleChooseByFromQQ(entityTypeMessages);
+        new SelectRoles().flushRoleInfoCacheByFromQQ(entityTypeMessages);
+
         String tag = tagTeamSet;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         String regex = "\\[CQ:at,qq=([0-9]+)]";
@@ -54,6 +57,9 @@ public class Team {
     }
 
     public void remove() {
+        new SelectRoles().flushRoleChooseByFromQQ(entityTypeMessages);
+        new SelectRoles().flushRoleInfoCacheByFromQQ(entityTypeMessages);
+
         String tag = tagTeamMove;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         String regex = "\\[CQ:at,qq=([0-9]+)]";
@@ -78,6 +84,9 @@ public class Team {
     }
 
     public void call() {
+        new SelectRoles().flushRoleChooseByFromQQ(entityTypeMessages);
+        new SelectRoles().flushRoleInfoCacheByFromQQ(entityTypeMessages);
+
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("kp正在呼叫以下成员:");
         for (String qq : queryTeam(entityTypeMessages.getFromGroup())
@@ -90,6 +99,9 @@ public class Team {
     }
 
     public void hp() {
+        new SelectRoles().flushRoleChooseByFromQQ(entityTypeMessages);
+        new SelectRoles().flushRoleInfoCacheByFromQQ(entityTypeMessages);
+
         String tag = tagTeamHp;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         String regex = "\\[CQ:at,qq=([0-9]+)]";
@@ -142,6 +154,9 @@ public class Team {
     }
 
     public void san() {
+        new SelectRoles().flushRoleChooseByFromQQ(entityTypeMessages);
+        new SelectRoles().flushRoleInfoCacheByFromQQ(entityTypeMessages);
+
         String tag = tagTeamSan;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         String regex = "\\[CQ:at,qq=([0-9]+)]";
@@ -186,7 +201,7 @@ public class Team {
                         if (prop != null) {
                             StringBuilder strResult = new StringBuilder();
                             int newSan = max(0, prop.get("san") - changeValue);
-                            String role = getRoleChooseByFromQQ(entityTypeMessages);
+                            String role = getRoleChooseByQQ(qq);
                             strResult.append("已为").append(role).append("减少").append(changeValue).append("点理智值，剩余").append(newSan).append("点");
                             if (newSan == 0) {
                                 strResult.append("\n已永久疯狂");
@@ -213,6 +228,9 @@ public class Team {
     }
 
     public void show() {
+        new SelectRoles().flushRoleChooseByFromQQ(entityTypeMessages);
+        new SelectRoles().flushRoleInfoCacheByFromQQ(entityTypeMessages);
+
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("您的小队情况目前为: ");
         ArrayList<String> qqList = queryTeam(entityTypeMessages.getFromGroup());
@@ -314,7 +332,11 @@ public class Team {
 
 
             if (checkRoleInfoFromChooseExistByQQ(qq)) {
-                stringBuilder.append(getRoleChooseByQQ(qq))
+                stringBuilder
+                        .append("\n")
+                        .append("======================================================")
+                        .append("\n")
+                        .append(getRoleChooseByQQ(qq))
                         .append("的角色: ")
                         .append("包含有以下数据\n");
 
