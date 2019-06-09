@@ -2,10 +2,7 @@ package dice.sinanya.listener;
 
 import dice.sinanya.dice.get.*;
 import dice.sinanya.dice.getbook.Book;
-import dice.sinanya.dice.manager.Clue;
-import dice.sinanya.dice.manager.Kp;
-import dice.sinanya.dice.manager.Roles;
-import dice.sinanya.dice.manager.Team;
+import dice.sinanya.dice.manager.*;
 import dice.sinanya.dice.roll.*;
 import dice.sinanya.dice.system.Bot;
 import dice.sinanya.dice.system.Help;
@@ -39,6 +36,8 @@ class Flow {
     private boolean isSC = false;
 
     private boolean isEN = false;
+
+    private boolean isSetRollMaxValue = false;
 
     private boolean isStSet = false;
     private boolean isStShow = false;
@@ -190,6 +189,8 @@ class Flow {
 
         isEN = messages.matches(tagEN);
 
+        isSetRollMaxValue = messages.matches(tagSetRollMaxValue);
+
         isRAL = messages.matches(tagRAL);
         isRCL = messages.matches(tagRCL);
         isRAV = messages.matches(tagRAV);
@@ -300,7 +301,7 @@ class Flow {
             help.book();
         } else if (isHelpDnd) {
             help.dnd();
-        }else if (isHelpInfo){
+        } else if (isHelpInfo) {
             help.info();
         }
 
@@ -348,6 +349,7 @@ class Flow {
         Bot bot = new Bot(entityTypeMessages);
         Log log = new Log(entityTypeMessages);
         RiAndInit riAndInit = new RiAndInit(entityTypeMessages);
+        SetRollMaxValue setRollMaxValue = new SetRollMaxValue(entityTypeMessages);
 
         Clue clue = new Clue(entityTypeMessages);
         Kp kp = new Kp(entityTypeMessages);
@@ -419,6 +421,10 @@ class Flow {
 
         if (isKp) {
             kp.set();
+        }
+
+        if (isSetRollMaxValue) {
+            setRollMaxValue.set();
         }
 
         toPrivate();

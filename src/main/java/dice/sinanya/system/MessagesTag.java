@@ -24,6 +24,8 @@ public interface MessagesTag {
 
     String tagEN = header + "en.*";
 
+    String tagSetRollMaxValue = header + "set.*";
+
     String headerSt = header + "st[ ]*";
     String tagStSet = headerSt + ".*";
     String tagStShow = headerSt + "show.*";

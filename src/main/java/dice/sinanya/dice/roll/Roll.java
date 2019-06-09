@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 import static dice.sinanya.system.MessagesError.strDiceTimesTooBig;
 import static dice.sinanya.system.MessagesError.strHiddenDice;
+import static dice.sinanya.system.MessagesSystem.ROLL_MAX_VALUE;
 import static dice.sinanya.system.MessagesTag.tagR;
 import static dice.sinanya.system.MessagesTag.tagRH;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
@@ -29,9 +30,11 @@ import static java.lang.Math.ceil;
  */
 public class Roll {
 
+    private static Pattern plus = Pattern.compile("[+*/-]");
+    private static Pattern times = Pattern.compile("(\\d+#)");
     private static Pattern p1 = Pattern.compile("(\\d+[dD][^\\d+\\-*/]*)");
     private static Pattern p2 = Pattern.compile("(\\d+[dD]\\d+)");
-    private static Pattern p3 = Pattern.compile("[+*/-]");
+
     private EntityTypeMessages entityTypeMessages;
 
     public Roll(EntityTypeMessages entityTypeMessages) {
@@ -42,8 +45,49 @@ public class Roll {
         String tag = tagR;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
 
-        if (msg.equals("") || msg.equals("d")) {
-            msg = "100";
+        String strMsg = msg;
+
+        int rollMaxValue = 100;
+        if (ROLL_MAX_VALUE.containsKey(entityTypeMessages.getFromGroup())) {
+            rollMaxValue = ROLL_MAX_VALUE.get(entityTypeMessages.getFromGroup());
+        }
+
+        if (msg.equals("") || !msg.contains("d")) {
+            msg = "1d" + rollMaxValue;
+        }
+
+        ArrayList<String> resultRoll = new ArrayList<>();
+
+        String[] everyFunction = msg.split(plus.toString());
+
+        for (String function : everyFunction) {
+            String tmpFunction = function;
+            if (tmpFunction.split("[dD]").length < 2) {
+                tmpFunction = tmpFunction + rollMaxValue;
+            } else if (tmpFunction.split("[dD]")[0].equals("")) {
+                tmpFunction = 1 + tmpFunction;
+            }
+            EntityManyRolls entityManyRolls;
+
+            Matcher mTimes = times.matcher(tmpFunction);
+            String strTimes = "";
+            while (mTimes.find()) {
+                strTimes = mTimes.group(1);
+            }
+            try {
+                entityManyRolls = new EntityManyRolls(tmpFunction.replaceFirst(strTimes, "")).check(entityTypeMessages);
+            } catch (PlayerSetException e) {
+                return;
+            }
+            msg = msg.replaceFirst(function, strTimes + manyRollsProcess(entityManyRolls.getTimes(), entityManyRolls.getRolls()));
+        }
+
+        msg = msg.replace("#", "*");
+        int result;
+        if (isNumeric(msg)) {
+            result = Integer.parseInt(msg);
+        } else {
+            result = (int) ceil(Calculator.conversion(msg));
         }
 
         String nick = "";
@@ -56,53 +100,11 @@ public class Roll {
 
         String resultMessage = nick + "掷出了: ";
 
-        ArrayList<String> strTimesAndRolesList = new ArrayList<>();
-        Matcher matcher = p2.matcher(msg);
-        boolean setMaxValue = true;
-        while (matcher.find()) {
-            strTimesAndRolesList.add(matcher.group(1));
-            setMaxValue = false;
-        }
-        ArrayList<String> resultRoll = new ArrayList<>();
-
-        Matcher matcher1 = p1.matcher(msg);
-        while (matcher1.find()) {
-            strTimesAndRolesList.add(matcher1.group(1) + "100");
-            msg=msg.replaceFirst("(\\d+[dD][^\\d+\\-*/]*)",matcher1.group(1)+"100");
-        }
-
-        for (String strTimesAndRoles : strTimesAndRolesList) {
-            EntityManyRolls entityManyRolls;
-            try {
-                entityManyRolls = new EntityManyRolls(strTimesAndRoles).check(entityTypeMessages);
-            } catch (PlayerSetException e) {
-                return;
-            }
-            resultRoll.add(manyRollsProcess(entityManyRolls.getTimes(), entityManyRolls.getRolls()));
-        }
-        int i = 0;
-        Matcher findFunc = p3.matcher(msg);
-        if (!findFunc.find()) {
-            if (setMaxValue) {
-                resultMessage += msg + "=";
-            } else {
-                resultMessage += "D" + msg + "=";
-            }
-        }
-
-        Matcher findTimesAndRoles = p2.matcher(msg);
-        while (findTimesAndRoles.find()) {
-            msg = msg.replaceFirst(findTimesAndRoles.group(1), resultRoll.get(i));
-            i++;
-        }
-
-        Matcher findFuncAgain = p3.matcher(msg);
-        if (findFuncAgain.find()) {
-            resultMessage += msg + "=" + (int) ceil(Calculator.conversion(msg));
+        if (isNumeric(msg)) {
+            sender(entityTypeMessages, resultMessage + strMsg + "=" + result);
         } else {
-            resultMessage += random(1, Integer.parseInt(msg.replaceAll("d", "")));
+            sender(entityTypeMessages, resultMessage + strMsg + "=" + msg + "=" + result);
         }
-        sender(entityTypeMessages, resultMessage);
     }
 
     public void rh() {
