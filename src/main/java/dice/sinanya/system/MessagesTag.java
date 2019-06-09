@@ -101,4 +101,6 @@ public interface MessagesTag {
     String tagHiy = header + "hiy[ ]*.*";
 
     String tagKp = header + "kp[ ]*.*";
+
+    String tagJRRP=header+"jrrp[ ]*.*";
 }

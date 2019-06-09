@@ -1,5 +1,6 @@
 package dice.sinanya.listener;
 
+import dice.sinanya.dice.Game.Jrrp;
 import dice.sinanya.dice.get.*;
 import dice.sinanya.dice.getbook.Book;
 import dice.sinanya.dice.manager.*;
@@ -107,6 +108,8 @@ class Flow {
 
     private boolean isHiy = false;
 
+    private boolean isJRRP = false;
+
     Flow(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
         String messages = entityTypeMessages.getMsgGet().getMsg().trim();
@@ -171,6 +174,8 @@ class Flow {
         isKp = messages.matches(tagKp);
         isHiy = messages.matches(tagHiy);
 
+        isJRRP = messages.matches(tagJRRP);
+
         isNPC = messages.matches(tagNPC);
 
         isBG = messages.matches(tagBG);
@@ -220,6 +225,7 @@ class Flow {
         Gas gas = new Gas(entityTypeMessages);
         History history = new History(entityTypeMessages);
         RollForDnd rollForDnd = new RollForDnd(entityTypeMessages);
+        Jrrp jrrp=new Jrrp(entityTypeMessages);
 
         if (isR) {
             roll.r();
@@ -339,6 +345,9 @@ class Flow {
             history.hiy();
         }
 
+        if (isJRRP){
+            jrrp.get();
+        }
 
     }
 
