@@ -54,9 +54,8 @@ public class Roll {
 
         if (msg.equals("") || !msg.contains("d")) {
             msg = "1d" + rollMaxValue;
+            strMsg = "1d100";
         }
-
-        ArrayList<String> resultRoll = new ArrayList<>();
 
         String[] everyFunction = msg.split(plus.toString());
 
