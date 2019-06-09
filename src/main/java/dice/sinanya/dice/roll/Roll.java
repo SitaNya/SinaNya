@@ -6,7 +6,6 @@ import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.tools.Calculator;
 import dice.sinanya.tools.CheckResultLevel;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,6 +51,15 @@ public class Roll {
             rollMaxValue = ROLL_MAX_VALUE.get(entityTypeMessages.getFromGroup());
         }
 
+
+        String strTimes = "";
+        int intTimes = 1;
+        Matcher mTimes = times.matcher(msg);
+        while (mTimes.find()) {
+            strTimes = mTimes.group(1);
+        }
+
+
         if (msg.equals("") || !msg.contains("d")) {
             msg = "1d" + rollMaxValue;
             strMsg = "1d100";
@@ -59,50 +67,57 @@ public class Roll {
 
         String[] everyFunction = msg.split(plus.toString());
 
-        for (String function : everyFunction) {
-            String tmpFunction = function;
-            if (tmpFunction.split("[dD]").length < 2) {
-                tmpFunction = tmpFunction + rollMaxValue;
-            } else if (tmpFunction.split("[dD]")[0].equals("")) {
-                tmpFunction = 1 + tmpFunction;
-            }
-            EntityManyRolls entityManyRolls;
-
-            Matcher mTimes = times.matcher(tmpFunction);
-            String strTimes = "";
-            while (mTimes.find()) {
-                strTimes = mTimes.group(1);
-            }
-            try {
-                entityManyRolls = new EntityManyRolls(tmpFunction.replaceFirst(strTimes, "")).check(entityTypeMessages);
-            } catch (PlayerSetException e) {
-                return;
-            }
-            msg = msg.replaceFirst(function, strTimes + manyRollsProcess(entityManyRolls.getTimes(), entityManyRolls.getRolls()));
+        if (everyFunction.length > 1 && !strTimes.equals("")) {
+            sender(entityTypeMessages, "表达式输入错误");
+            return;
         }
 
-        msg = msg.replace("#", "*");
-        int result;
-        if (isNumeric(msg)) {
-            result = Integer.parseInt(msg);
-        } else {
-            result = (int) ceil(Calculator.conversion(msg));
+        if (isNumeric(strTimes.replaceAll("#", ""))) {
+            intTimes = Integer.parseInt(strTimes.replace("#", ""));
         }
 
-        String nick = "";
+        for (int i = 0; i < intTimes; i++) {
+            for (String function : everyFunction) {
+                String tmpFunction = function;
+                if (tmpFunction.split("[dD]").length < 2) {
+                    tmpFunction = tmpFunction + rollMaxValue;
+                } else if (tmpFunction.split("[dD]")[0].equals("")) {
+                    tmpFunction = 1 + tmpFunction;
+                }
+                EntityManyRolls entityManyRolls;
 
-        if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
-            nick = getRoleChooseByFromQQ(entityTypeMessages);
-        } else {
-            nick = getNickName(entityTypeMessages);
-        }
 
-        String resultMessage = nick + "掷出了: ";
+                try {
+                    entityManyRolls = new EntityManyRolls(tmpFunction.replaceFirst(strTimes,"")).check(entityTypeMessages);
+                } catch (PlayerSetException e) {
+                    return;
+                }
+                msg = msg.replaceFirst(function, manyRollsProcess(entityManyRolls.getTimes(), entityManyRolls.getRolls()));
+            }
 
-        if (isNumeric(msg)) {
-            sender(entityTypeMessages, resultMessage + strMsg + "=" + result);
-        } else {
-            sender(entityTypeMessages, resultMessage + strMsg + "=" + msg + "=" + result);
+
+            int result;
+            if (isNumeric(msg)) {
+                result = Integer.parseInt(msg);
+            } else {
+                result = (int) ceil(Calculator.conversion(msg));
+            }
+
+            String nick = "";
+
+            if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
+                nick = getRoleChooseByFromQQ(entityTypeMessages);
+            } else {
+                nick = getNickName(entityTypeMessages);
+            }
+
+            String resultMessage = nick + "掷出了: ";
+
+            if (isNumeric(msg)) {
+                sender(entityTypeMessages, resultMessage + strMsg + "=" + result);
+            } else {
+                sender(entityTypeMessages, resultMessage + strMsg + "=" + msg + "=" + result);
+            }
         }
     }
 

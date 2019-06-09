@@ -3,8 +3,13 @@ package dice.sinanya.system;
 public interface MessagesHelp {
     StringBuilder normalHelp = new StringBuilder()
             .append(".r\n")
-            .append(".r\t.r3d6\t.rd6\t.r3d6+5*3d6-12/6\n")
+            .append(".r\t.rd\t.r3d6\t.rd6\t.r3d6+5*3d6-12/6\t.r4#3d6\t.r4d+8d")
             .append("普通骰掷，支持数学计算，不支持判定")
+            .append("\n-----------------------------------\n")
+
+            .append(".set\n")
+            .append(".set 20")
+            .append("更改骰掷上线，但只作用于.r和.rd")
             .append("\n-----------------------------------\n")
 
             .append(".ra\n")
