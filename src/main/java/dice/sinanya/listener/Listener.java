@@ -44,12 +44,15 @@ public class Listener {
     @Listen(MsgGetTypes.groupMsg)
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGroup msgGroup) {
-        String tagBotOn = ".bot on [CQ:at,qq=1984749515]";
-        String tagBotOff = ".bot off [CQ:at,qq=1984749515]";
-        if (getBot(Long.parseLong(msgGroup.getFromGroup())) || msgGroup.getMsg().trim().equals(tagBotOn)) {
+        String tagBotOn = ".bot on";
+        String tagBotOff = ".bot off";
+        String tagMe = "[CQ:at,qq=1984749515]";
+        if (getBot(Long.parseLong(msgGroup.getFromGroup())) ||
+                msgGroup.getMsg().trim().equals(tagBotOn) ||
+                (msgGroup.getMsg().trim().contains(tagBotOn) && msgGroup.getMsg().trim().contains(tagMe))) {
             new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup)).toGroup();
             return true;
-        } else if (msgGroup.getMsg().trim().equals(tagBotOff)) {
+        } else if (msgGroup.getMsg().trim().equals(tagBotOff) || (msgGroup.getMsg().trim().equals(tagBotOff) && msgGroup.getMsg().trim().contains(tagMe))) {
             msgSender.SENDER.sendGroupMsg(msgGroup.getFromGroup(), STR_ALREADY_DISABLED_ERR);
             return true;
         } else {
@@ -62,10 +65,13 @@ public class Listener {
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgDisGroup msgDisGroup) {
         String tagBotOn = ".bot on";
         String tagBotOff = ".bot off";
-        if (getBot(Long.parseLong(msgDisGroup.getFromDiscuss())) || msgDisGroup.getMsg().trim().equals(tagBotOn)) {
+        String tagMe = "[CQ:at,qq=1984749515]";
+        if (getBot(Long.parseLong(msgDisGroup.getFromDiscuss())) ||
+                msgDisGroup.getMsg().trim().equals(tagBotOn) ||
+                (msgDisGroup.getMsg().trim().contains(tagBotOn) && msgDisGroup.getMsg().trim().contains(tagMe))) {
             new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup)).toDisGroup();
             return true;
-        } else if (msgDisGroup.getMsg().trim().equals(tagBotOff)) {
+        } else if (msgDisGroup.getMsg().trim().equals(tagBotOff) || (msgDisGroup.getMsg().trim().contains(tagBotOff) && msgDisGroup.getMsg().trim().contains(tagMe))) {
             msgSender.SENDER.sendDiscussMsg(msgDisGroup.getFromDiscuss(), STR_ALREADY_DISABLED_ERR);
             return true;
         } else {
