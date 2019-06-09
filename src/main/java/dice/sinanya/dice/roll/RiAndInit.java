@@ -30,6 +30,13 @@ public class RiAndInit {
         int result;
         boolean add = false;
         int random = random(1, 20);
+        StringBuilder name = new StringBuilder();
+        if (msg.contains(" ") && msg.split(" ").length > 1) {
+            for (int i = 1; i < msg.split(" ").length; i++) {
+                name.append(msg.split(" ")[i]).append(" ");
+            }
+            msg = msg.split(" ")[0];
+        }
         if (msg.contains("-")) {
             result = random - Integer.parseInt(msg.replace("-", "").trim());
             msg = msg.replace("-", "").trim();
@@ -43,10 +50,14 @@ public class RiAndInit {
 
         String nick;
 
-        if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
-            nick = getRoleChooseByFromQQ(entityTypeMessages);
+        if (!name.toString().equals(" ")) {
+            nick = name.toString();
         } else {
-            nick = getNickName(entityTypeMessages);
+            if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
+                nick = getRoleChooseByFromQQ(entityTypeMessages);
+            } else {
+                nick = getNickName(entityTypeMessages);
+            }
         }
 
         if (msg.equals("")) {
@@ -54,17 +65,19 @@ public class RiAndInit {
         } else {
             if (add) {
                 sender(entityTypeMessages, nick + "掷出了: D20=" + random + "+" + msg + "=" + result);
+                msgBefore=random + "+" + msg;
             } else {
                 sender(entityTypeMessages, nick + "掷出了: D20=" + random + "-" + msg + "=" + result);
+                msgBefore=random + "-" + msg;
             }
         }
         if (initList.containsKey(entityTypeMessages.getFromGroup())) {
             HashMap<String, String> riList = initList.get(entityTypeMessages.getFromGroup());
-            riList.put(nick, ": D20" + msgBefore + "=" + result);
+            riList.put(nick, ": D20=" + msgBefore + "=" + result);
             initList.put(entityTypeMessages.getFromGroup(), riList);
         } else {
             HashMap<String, String> riList = new HashMap<>();
-            riList.put(nick, ": D20" + msgBefore + "=" + result);
+            riList.put(nick, ": D20=" + msgBefore + "=" + result);
             initList.put(entityTypeMessages.getFromGroup(), riList);
         }
     }

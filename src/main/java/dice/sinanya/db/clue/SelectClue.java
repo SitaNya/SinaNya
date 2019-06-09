@@ -19,11 +19,10 @@ public class SelectClue {
     public String selectClue(EntityClue entityClue) {
         StringBuilder stringBuffer = new StringBuilder();
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from clue where groupId=? and createTime=? and qqId=?";
+            String sql = "select * from clue where groupId=? and createTime=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, entityClue.getGroupId());
                 ps.setDate(2, entityClue.getDate());
-                ps.setString(3, entityClue.getQqId());
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         stringBuffer.append("于 ")

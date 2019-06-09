@@ -8,7 +8,8 @@ import dice.sinanya.exceptions.PlayerSetException;
 
 import java.util.*;
 
-import static dice.sinanya.system.MessagesTag.*;
+import static dice.sinanya.system.MessagesTag.tagStMove;
+import static dice.sinanya.system.MessagesTag.tagStSet;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.GetSkillName.getSkillName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
@@ -69,7 +70,7 @@ public class Roles {
         new SelectRoles().flushRoleChooseByFromQQ(entityTypeMessages);
         new SelectRoles().flushRoleInfoCacheByFromQQ(entityTypeMessages);
         for (Map.Entry<EntityRoleTag, HashMap<String, Integer>> mapEntry : ROLE_INFO_CACHE.entrySet()) {
-            if (checkRoleChooseExistByQQ(qqId) && !getRoleChooseByQQ(qqId).equals(mapEntry.getKey().getRole()) && mapEntry.getKey().getQq()==qqId) {
+            if (checkRoleChooseExistByQQ(qqId) && !getRoleChooseByQQ(qqId).equals(mapEntry.getKey().getRole()) && mapEntry.getKey().getQq() == qqId) {
                 standbyRole.append(mapEntry.getKey().getRole()).append("\n");
             }
         }
@@ -105,6 +106,7 @@ public class Roles {
             add("str");
             add("pow");
             add("con");
+            add("dex");
             add("app");
             add("edu");
             add("siz");

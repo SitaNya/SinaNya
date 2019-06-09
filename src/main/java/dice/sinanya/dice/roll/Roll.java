@@ -29,7 +29,7 @@ import static java.lang.Math.ceil;
  */
 public class Roll {
 
-    private static Pattern p1 = Pattern.compile("(\\d+d\\d+).*[+*-/]");
+    private static Pattern p1 = Pattern.compile("(\\d+[dD][^\\d+\\-*/]*)");
     private static Pattern p2 = Pattern.compile("(\\d+[dD]\\d+)");
     private static Pattern p3 = Pattern.compile("[+*/-]");
     private EntityTypeMessages entityTypeMessages;
@@ -42,7 +42,7 @@ public class Roll {
         String tag = tagR;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
 
-        if (msg.equals("")) {
+        if (msg.equals("") || msg.equals("d")) {
             msg = "100";
         }
 
@@ -64,6 +64,13 @@ public class Roll {
             setMaxValue = false;
         }
         ArrayList<String> resultRoll = new ArrayList<>();
+
+        Matcher matcher1 = p1.matcher(msg);
+        while (matcher1.find()) {
+            strTimesAndRolesList.add(matcher1.group(1) + "100");
+            msg=msg.replaceFirst("(\\d+[dD][^\\d+\\-*/]*)",matcher1.group(1)+"100");
+        }
+
         for (String strTimesAndRoles : strTimesAndRolesList) {
             EntityManyRolls entityManyRolls;
             try {

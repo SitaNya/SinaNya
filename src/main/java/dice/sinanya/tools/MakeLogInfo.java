@@ -24,6 +24,13 @@ public class MakeLogInfo {
             info = info.replaceAll("([\"“”])", "\"");
             if (info.contains("\"")) {
                 result.append(info);
+            } else if ((info.charAt(0) == '(' && !info.contains(")") && !info.contains("）")) || ((info.charAt(0) == '（'||info.charAt(0) == '(') && (info.charAt(info.length() - 1) == ')' || info.charAt(info.length() - 1) == '）'))) {
+                info = info.replaceAll("([(（])", "").replaceAll("([)）])", "");
+                result.append("(")
+                        .append(getNickName(entityTypeMessages))
+                        .append(":")
+                        .append(info)
+                        .append(")");
             } else {
                 result.append(getNickName(entityTypeMessages))
                         .append(":\t")
@@ -32,14 +39,6 @@ public class MakeLogInfo {
                         .append("\"");
             }
 
-            if (info.charAt(0) == '(' || info.charAt(0) == '（') {
-                info = info.replaceAll("([(（])", "\\(").replaceAll("([)）])", "\\)");
-                result.append("(")
-                        .append(getNickName(entityTypeMessages))
-                        .append(":")
-                        .append(info)
-                        .append(")");
-            }
 
             if (info.charAt(0) == '#') {
                 result.append(getNickName(entityTypeMessages))
