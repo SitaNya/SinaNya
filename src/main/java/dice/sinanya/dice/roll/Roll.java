@@ -77,9 +77,12 @@ public class Roll {
         }
 
         for (int i = 0; i < intTimes; i++) {
+            String strResult = msg;
             for (String function : everyFunction) {
                 String tmpFunction = function;
-                if (tmpFunction.split("[dD]").length < 2) {
+                if (tmpFunction.equals("d")) {
+                    tmpFunction = "1d100";
+                } else if (tmpFunction.split("[dD]").length < 2) {
                     tmpFunction = tmpFunction + rollMaxValue;
                 } else if (tmpFunction.split("[dD]")[0].equals("")) {
                     tmpFunction = 1 + tmpFunction;
@@ -87,20 +90,22 @@ public class Roll {
                 EntityManyRolls entityManyRolls;
 
 
-                try {
-                    entityManyRolls = new EntityManyRolls(tmpFunction.replaceFirst(strTimes,"")).check(entityTypeMessages);
-                } catch (PlayerSetException e) {
-                    return;
+                if (!isNumeric(tmpFunction)) {
+                    try {
+                        entityManyRolls = new EntityManyRolls(tmpFunction.replaceFirst(strTimes, "")).check(entityTypeMessages);
+                    } catch (PlayerSetException e) {
+                        return;
+                    }
+                    strResult = strResult.replaceFirst(function, manyRollsProcess(entityManyRolls.getTimes(), entityManyRolls.getRolls()));
                 }
-                msg = msg.replaceFirst(function, manyRollsProcess(entityManyRolls.getTimes(), entityManyRolls.getRolls()));
             }
 
 
             int result;
-            if (isNumeric(msg)) {
-                result = Integer.parseInt(msg);
+            if (isNumeric(strResult)) {
+                result = Integer.parseInt(strResult);
             } else {
-                result = (int) ceil(Calculator.conversion(msg));
+                result = (int) ceil(Calculator.conversion(strResult));
             }
 
             String nick = "";
@@ -116,7 +121,7 @@ public class Roll {
             if (isNumeric(msg)) {
                 sender(entityTypeMessages, resultMessage + strMsg + "=" + result);
             } else {
-                sender(entityTypeMessages, resultMessage + strMsg + "=" + msg + "=" + result);
+                sender(entityTypeMessages, resultMessage + strMsg + "=" + strResult + "=" + result);
             }
         }
     }
