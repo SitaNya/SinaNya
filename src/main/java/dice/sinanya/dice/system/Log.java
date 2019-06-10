@@ -2,9 +2,12 @@ package dice.sinanya.dice.system;
 
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.tools.SaveDocx;
+import org.docx4j.openpackaging.exceptions.Docx4JException;
 
 import static dice.sinanya.system.MessagesLog.logNameForGroup;
 import static dice.sinanya.system.MessagesLog.logSwitchForGroup;
+import static dice.sinanya.system.MessagesLogGetLock.logGetLock;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.LogSave.logSave;
 import static dice.sinanya.tools.LogTag.*;
@@ -60,12 +63,24 @@ public class Log {
         String tag = tagLogGet;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         if (!checkLogTagSwitch(entityTypeMessages, msg)) {
+            if (logGetLock.contains(msg)) {
+                sender(entityTypeMessages, "当前群内有人正在获取日志，请稍等");
+            } else {
+                logGetLock.add(msg);
+            }
             String bigResult = getLogText(new EntityLogTag(entityTypeMessages.getFromGroup(), msg));
             sender(entityTypeMessages, "正在抽取数据库为" + msg + "生成文件");
             logSave(entityTypeMessages.getFromGroup(), msg, bigResult);
+            sender(entityTypeMessages, "正在抽取数据库为" + msg + "生成染色文件");
+            try {
+                new SaveDocx(entityTypeMessages.getFromQQ(), entityTypeMessages.getFromGroup(), msg, bigResult);
+            } catch (Docx4JException e) {
+                e.printStackTrace();
+            }
             sender(entityTypeMessages, msg + "正在发送到您的邮箱" + entityTypeMessages.getFromQQ() + "@qq.com");
             sendMail(entityTypeMessages.getFromQQ(), entityTypeMessages.getFromGroup(), msg);
             sender(entityTypeMessages, "[CQ:at,qq=" + entityTypeMessages.getFromQQ() + "] 已发送到您的QQ邮箱，注意查收");
+            logGetLock.remove(msg);
         } else {
             sender(entityTypeMessages, msg + "仍处于打开状态，请关闭后再试");
         }

@@ -94,10 +94,13 @@ public class SendMail {
 
         if (OSX_MODEL) {
             mb.attachFile("/Users/zhangxiaozhou/Desktop/" + groupId + "/" + logName);
+            mb.attachFile("/Users/zhangxiaozhou/Desktop/" + groupId + "/" + logName + ".docx");
         } else if (WIN_MODEL) {
             mb.attachFile("C:/Files/" + groupId + "/" + logName);
+            mb.attachFile("C:/Files/" + groupId + "/" + logName + ".docx");
         } else if (LINUX_MODEL) {
             mb.attachFile("/tmp/" + groupId + "/" + logName);
+            mb.attachFile("/tmp/" + groupId + "/" + logName + ".docx");
         }
 
         SendMail sm = new SendMail();
