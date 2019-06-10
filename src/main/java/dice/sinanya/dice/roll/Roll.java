@@ -31,8 +31,7 @@ public class Roll {
 
     private static Pattern plus = Pattern.compile("[+*/-]");
     private static Pattern times = Pattern.compile("(\\d+#)");
-    private static Pattern p1 = Pattern.compile("(\\d+[dD][^\\d+\\-*/]*)");
-    private static Pattern p2 = Pattern.compile("(\\d+[dD]\\d+)");
+    private static Pattern p1 = Pattern.compile("(^[dD]\\d+$)");
 
     private EntityTypeMessages entityTypeMessages;
 
@@ -76,6 +75,7 @@ public class Roll {
             intTimes = Integer.parseInt(strTimes.replace("#", ""));
         }
 
+
         for (int i = 0; i < intTimes; i++) {
             String strResult = msg;
             for (String function : everyFunction) {
@@ -117,8 +117,8 @@ public class Roll {
             }
 
             String resultMessage = nick + "掷出了: ";
-
-            if (isNumeric(msg)) {
+            Matcher matcher = p1.matcher(msg);
+            if (isNumeric(msg) || (everyFunction.length == 1 && matcher.find())) {
                 sender(entityTypeMessages, resultMessage + strMsg + "=" + result);
             } else {
                 sender(entityTypeMessages, resultMessage + strMsg + "=" + strResult + "=" + result);

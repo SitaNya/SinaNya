@@ -62,7 +62,7 @@ public class RollAndCheck {
 
 
     public void rav() {
-        String tag = tagRA;
+        String tag = tagRAV;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, msg);
         CheckResultLevel checkResultLevel = new CheckResultLevel(entityRollAndCheck.getRandom(), entityRollAndCheck.getSkill(), false);
@@ -115,7 +115,7 @@ public class RollAndCheck {
     }
 
     public void rcv() {
-        String tag = tagRC;
+        String tag = tagRCV;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, msg);
         CheckResultLevel checkResultLevel = new CheckResultLevel(entityRollAndCheck.getRandom(), entityRollAndCheck.getSkill(), true);

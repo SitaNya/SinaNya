@@ -66,9 +66,8 @@ public class InsertRoles {
         HashMap<String, Integer> propertiesForRole = getRoleInfoByQQ(qqId, role);
         if (propertiesForRole == null) {
             propertiesForRole = new RolesInfo().init();
-        } else {
-            propertiesForRole = new RolesInfo(properties, propertiesForRole).getPropertiesForRole();
         }
+        propertiesForRole = new RolesInfo(properties, propertiesForRole).getPropertiesForRole();
         int num = 0;
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from role where userName=? and qqId=?";

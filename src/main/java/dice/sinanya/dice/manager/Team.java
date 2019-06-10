@@ -130,23 +130,24 @@ public class Team {
 
                 role = getRoleChooseByQQ(qq);
                 hp = prop.get("hp");
-                int con=prop.get("con");
-                int siz=prop.get("siz");
+                int con = prop.get("con");
+                int siz = prop.get("siz");
                 if (add) {
-                    int newHp = hp + entityStrManyRolls.getResult();
+                    int maxHp = (int) ceil((con + siz) / 10);
+                    int newHp = min(hp + entityStrManyRolls.getResult(), maxHp);
                     prop.put("hp", newHp);
                     setRoleInfoFromChooseByQQ(qq, prop);
-                    sender(entityTypeMessages, "已为" + role + "恢复" + entityStrManyRolls.getStrManyRolls() +"="+ entityStrManyRolls.getResult() + "点血量，剩余" + min(newHp,(int) ceil((con + siz) / 10)) + "点");
+                    sender(entityTypeMessages, "已为" + role + "恢复" + entityStrManyRolls.getStrManyRolls() + "=" + entityStrManyRolls.getResult() + "点血量，剩余" + newHp + "点");
                 } else {
                     int newHp = max(0, hp - entityStrManyRolls.getResult());
                     prop.put("hp", newHp);
                     setRoleInfoFromChooseByQQ(qq, prop);
                     if (newHp == 0) {
-                        sender(entityTypeMessages, role + "损失" + entityStrManyRolls.getStrManyRolls() +"="+ entityStrManyRolls.getResult() + "点血量，已死亡");
+                        sender(entityTypeMessages, role + "损失" + entityStrManyRolls.getStrManyRolls() + "=" + entityStrManyRolls.getResult() + "点血量，已死亡");
                     } else if (entityStrManyRolls.getResult() >= floor(hp / 2)) {
-                        sender(entityTypeMessages, "已为" + role + "降低" + entityStrManyRolls.getStrManyRolls() +"="+ entityStrManyRolls.getResult() + "点血量，剩余" + newHp + "点,已进入重伤状态");
+                        sender(entityTypeMessages, "已为" + role + "降低" + entityStrManyRolls.getStrManyRolls() + "=" + entityStrManyRolls.getResult() + "点血量，剩余" + newHp + "点,已进入重伤状态");
                     } else {
-                        sender(entityTypeMessages, "已为" + role + "降低" + entityStrManyRolls.getStrManyRolls() +"="+entityStrManyRolls.getResult() + "点血量，剩余" + newHp + "点");
+                        sender(entityTypeMessages, "已为" + role + "降低" + entityStrManyRolls.getStrManyRolls() + "=" + entityStrManyRolls.getResult() + "点血量，剩余" + newHp + "点");
                     }
                 }
             } else {
