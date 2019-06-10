@@ -39,8 +39,12 @@ public class EntityAntagonize {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof EntityAntagonize)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof EntityAntagonize)) {
+            return false;
+        }
         EntityAntagonize that = (EntityAntagonize) o;
         return getRandom() == that.getRandom() &&
                 getLevel() == that.getLevel() &&

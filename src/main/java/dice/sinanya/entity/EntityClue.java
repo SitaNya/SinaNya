@@ -39,8 +39,12 @@ public class EntityClue {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof EntityClue)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof EntityClue)) {
+            return false;
+        }
         EntityClue that = (EntityClue) o;
         return getGroupId().equals(that.getGroupId()) &&
                 getDate().equals(that.getDate()) &&

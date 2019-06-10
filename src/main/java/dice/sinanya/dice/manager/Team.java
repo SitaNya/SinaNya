@@ -1,10 +1,7 @@
 package dice.sinanya.dice.manager;
 
 import dice.sinanya.db.roles.SelectRoles;
-import dice.sinanya.entity.EntitySanCheck;
-import dice.sinanya.entity.EntityStrManyRolls;
-import dice.sinanya.entity.EntityTeamInfo;
-import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.entity.*;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
 import dice.sinanya.tools.CheckSanCheck;
@@ -15,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static dice.sinanya.system.MessagesTag.*;
+import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.DBAndSize.dbGetter;
 import static dice.sinanya.tools.GetSkillName.getSkillName;
@@ -142,6 +140,7 @@ public class Team {
                     int newHp = max(0, hp - entityStrManyRolls.getResult());
                     prop.put("hp", newHp);
                     setRoleInfoFromChooseByQQ(qq, prop);
+                    ROLE_INFO_CACHE.put(new EntityRoleTag(Long.parseLong(qq), role), prop);
                     if (newHp == 0) {
                         sender(entityTypeMessages, role + "损失" + entityStrManyRolls.getStrManyRolls() + "=" + entityStrManyRolls.getResult() + "点血量，已死亡");
                     } else if (entityStrManyRolls.getResult() >= floor(hp / 2)) {
@@ -214,6 +213,7 @@ public class Team {
                             }
                             prop.put("san", newSan);
                             setRoleInfoFromChooseByQQ(qq, prop);
+                            ROLE_INFO_CACHE.put(new EntityRoleTag(Long.parseLong(qq), role), prop);
                             sender(entityTypeMessages, strResult.toString());
                         } else {
                             sender(entityTypeMessages, "未找到[CQ:at,qq=" + qq + "]的人物卡");

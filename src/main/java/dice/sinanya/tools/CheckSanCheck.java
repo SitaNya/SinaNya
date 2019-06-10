@@ -1,5 +1,6 @@
 package dice.sinanya.tools;
 
+import dice.sinanya.entity.EntityRoleTag;
 import dice.sinanya.entity.EntitySanCheck;
 import dice.sinanya.entity.EntityStrManyRolls;
 import dice.sinanya.entity.EntityTypeMessages;
@@ -9,6 +10,7 @@ import dice.sinanya.exceptions.SanCheckSetException;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
+import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.MakeSkill.makeSkill;
@@ -169,6 +171,7 @@ public class CheckSanCheck {
             if (useCard) {
                 prop.put("san", newSan);
                 setRoleInfoFromChooseByQQ(qq, prop);
+                ROLE_INFO_CACHE.put(new EntityRoleTag(qq, role), prop);
             }
             if (newSan == 0) {
                 strResult.append("\n已永久疯狂");
@@ -212,6 +215,7 @@ public class CheckSanCheck {
             if (useCard) {
                 prop.put("san", newSan);
                 setRoleInfoFromChooseByQQ(qq, prop);
+                ROLE_INFO_CACHE.put(new EntityRoleTag(qq, role), prop);
             }
             if (newSan == 0) {
                 strResult.append("\n已永久疯狂");
@@ -240,6 +244,7 @@ public class CheckSanCheck {
             if (useCard) {
                 prop.put("san", newSan);
                 setRoleInfoFromChooseByQQ(qq, prop);
+                ROLE_INFO_CACHE.put(new EntityRoleTag(qq, role), prop);
             }
             if (newSan == 0) {
                 strResult.append("\n已永久疯狂");
@@ -269,6 +274,7 @@ public class CheckSanCheck {
             if (useCard) {
                 prop.put("san", newSan);
                 setRoleInfoFromChooseByQQ(qq, prop);
+                ROLE_INFO_CACHE.put(new EntityRoleTag(qq, role), prop);
             }
             if (newSan == 0) {
                 strResult.append("\n已永久疯狂");

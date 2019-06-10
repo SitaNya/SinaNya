@@ -29,8 +29,12 @@ public class EntityLogTag {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof EntityLogTag)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof EntityLogTag)) {
+            return false;
+        }
         EntityLogTag that = (EntityLogTag) o;
         return getGroupId().equals(that.getGroupId()) &&
                 getLogName().equals(that.getLogName());
