@@ -47,8 +47,13 @@ public class MakeManyRollsStr {
             Ktimes = Integer.parseInt(mKTimes.group(1));
         }
 
-        resInt = manyRollsForInt(strTimes, strRolls, Ktimes);
-        resStr = manyRollsProcess(strTimes, strRolls, Ktimes);
+        if (strRolls == 0) {
+            resInt = 0;
+            resStr = "0";
+        } else {
+            resInt = manyRollsForInt(strTimes, strRolls, Ktimes);
+            resStr = manyRollsProcess(strTimes, strRolls, Ktimes);
+        }
     }
 
     public String getStr() {
