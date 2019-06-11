@@ -52,6 +52,9 @@ public class RiAndInit {
         Matcher mPlus = plus.matcher(msg);
         while (mPlus.find()) {
             result = (int) ceil(Calculator.conversion(random + msg));
+            if (msg.contains("+")) {
+                add = true;
+            }
         }
 
         if (isNumeric(msg)) {
