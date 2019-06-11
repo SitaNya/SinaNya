@@ -33,6 +33,8 @@ public class Roll {
     private static Pattern times = Pattern.compile("(\\d+#)");
     private static Pattern p1 = Pattern.compile("(^[dD]\\d+$)");
 
+    private static Pattern Text = Pattern.compile("([^+*/\\-dDkK#\\d]+)");
+
     private static Pattern AgainTimes = Pattern.compile("(\\d+)#");
 
     private EntityTypeMessages entityTypeMessages;
@@ -47,13 +49,21 @@ public class Roll {
 
         int intTimes = 1;
 
-        String strMsg = msg;
+        String strMsg = "";
+        Matcher mText = Text.matcher(msg);
+        if (mText.find()) {
+            strMsg = "\t" + mText.group(1) + ":";
+        }
+
+        msg = msg.replaceFirst(Text.toString(), "");
+
+        strMsg += msg;
 
         Matcher mAgainTimes = AgainTimes.matcher(msg);
 
         while (mAgainTimes.find()) {
             intTimes = Integer.parseInt(mAgainTimes.group(1));
-            msg.replaceFirst(AgainTimes.toString(), "");
+            msg = msg.replaceFirst(AgainTimes.toString(), "");
         }
 
         int rollMaxValue = 100;
@@ -70,7 +80,6 @@ public class Roll {
 
         if (msg.equals("") || !msg.contains("d")) {
             msg = "1d" + rollMaxValue;
-            strMsg = "1d100";
         }
 
         String[] everyFunction = msg.split(plus.toString());
@@ -100,7 +109,11 @@ public class Roll {
                     } catch (PlayerSetException e) {
                         return;
                     }
-
+                    if (strMsg.equals("")) {
+                        strMsg = "(" + entityManyRolls.getTimes() + "D" + entityManyRolls.getRolls() + "K" + entityManyRolls.getKtimes() + ")";
+                    } else {
+                        strMsg = strMsg.replaceFirst(function, "(" + entityManyRolls.getTimes() + "D" + entityManyRolls.getRolls() + "K" + entityManyRolls.getKtimes() + ")");
+                    }
                     String strManyRolls = manyRollsProcess(entityManyRolls.getTimes(), entityManyRolls.getRolls(), entityManyRolls.getKtimes());
                     strResult = strResult.replaceFirst(function, strManyRolls);
                 }
@@ -124,13 +137,12 @@ public class Roll {
 
             String resultMessage = nick + "掷出了: ";
             Matcher matcher = p1.matcher(msg);
-            if (isNumeric(msg) || (everyFunction.length == 1 && matcher.find())) {
+            if (isNumeric(msg) || (everyFunction.length == 1 && matcher.find()) || msg.equals("d")) {
                 sender(entityTypeMessages, resultMessage + strMsg + "=" + result);
-            } else if (msg.equals("d")) {
-                sender(entityTypeMessages, resultMessage + strMsg + rollMaxValue + "=" + result);
             } else {
                 if (strResult.equals(String.valueOf(result))) {
                     sender(entityTypeMessages, resultMessage + strMsg + "=" + result);
+                    continue;
                 }
                 sender(entityTypeMessages, resultMessage + strMsg + "=" + strResult + "=" + result);
             }

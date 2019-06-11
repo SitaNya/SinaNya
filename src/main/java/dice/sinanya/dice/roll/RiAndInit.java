@@ -62,17 +62,23 @@ public class RiAndInit {
 
         if (result == 0) {
             result = random;
-            nick = msg;
+            if (msg.equals("")) {
+                nick = getNickName(entityTypeMessages);
+            } else {
+                nick = msg;
+            }
             msg = "";
         }
 
         if (msg.equals("")) {
-            sender(entityTypeMessages, nick + "掷出了: D20=" + result);
+            sender(entityTypeMessages, nick + "的先攻骰掷,掷出了: D20=" + result);
         } else {
             if (add) {
-                sender(entityTypeMessages, nick + "掷出了: D20=" + random + "+" + msg + "=" + result);
+                sender(entityTypeMessages, nick + "的先攻骰掷,掷出了: D20=" + random + "+" + msg + "=" + result);
+                msgBefore = random + "+" + msg + "=";
             } else {
-                sender(entityTypeMessages, nick + "掷出了: D20=" + random + msg + "=" + result);
+                sender(entityTypeMessages, nick + "的先攻骰掷,掷出了: D20=" + random + msg + "=" + result);
+                msgBefore = random + "-" + msg.replace("+", "") + "=";
             }
         }
         if (initList.containsKey(entityTypeMessages.getFromGroup())) {
