@@ -92,10 +92,10 @@ public class MakeCoc6Card implements Callable<String> {
     }
 
     private int get2d6plus6multiply() {
-        return (int) (ceil(Calculator.conversion(manyRollsProcess(2, 6))) + 6);
+        return (int) (ceil(Calculator.conversion(manyRollsProcess(2, 6, 0))) + 6);
     }
 
     private int get3d6multiply() {
-        return (int) ceil(Calculator.conversion(manyRollsProcess(3, 6)));
+        return (int) ceil(Calculator.conversion(manyRollsProcess(3, 6, 0)));
     }
 }

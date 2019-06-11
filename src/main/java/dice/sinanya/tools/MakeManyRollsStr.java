@@ -1,5 +1,8 @@
 package dice.sinanya.tools;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.ManyRolls.manyRollsForInt;
 import static dice.sinanya.tools.ManyRolls.manyRollsProcess;
@@ -10,6 +13,8 @@ public class MakeManyRollsStr {
     private int resInt;
     private String resStr;
 
+    private static Pattern KAndNums = Pattern.compile("[kK]([\\d]+)");
+
     public MakeManyRollsStr(String input) {
         makeManyRollsStr(input);
     }
@@ -18,6 +23,7 @@ public class MakeManyRollsStr {
         String tagNone = "";
         String strFirst = "";
         String strSecond = "";
+        int Ktimes = 1;
 
         if (input.contains("d") || input.contains("D")) {
             strFirst = input.split("[dD]")[0];
@@ -35,8 +41,14 @@ public class MakeManyRollsStr {
         } else {
             strRolls = strTimes;
         }
-        resInt = manyRollsForInt(strTimes, strRolls);
-        resStr = manyRollsProcess(strTimes, strRolls);
+
+        Matcher mKTimes = KAndNums.matcher(input);
+        while (mKTimes.find()) {
+            Ktimes = Integer.parseInt(mKTimes.group(1));
+        }
+
+        resInt = manyRollsForInt(strTimes, strRolls, Ktimes);
+        resStr = manyRollsProcess(strTimes, strRolls, Ktimes);
     }
 
     public String getStr() {

@@ -79,10 +79,10 @@ public class MakeCocCardInfo {
     }
 
     private static int get2d6plus6multiply5() {
-        return (int) (ceil(Calculator.conversion(manyRollsProcess(2, 6))) + 6) * 5;
+        return (int) (ceil(Calculator.conversion(manyRollsProcess(2, 6, 0))) + 6) * 5;
     }
 
     private static int get3d6multiply5() {
-        return (int) ceil(Calculator.conversion(manyRollsProcess(3, 6))) * 5;
+        return (int) ceil(Calculator.conversion(manyRollsProcess(3, 6, 0))) * 5;
     }
 }

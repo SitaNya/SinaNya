@@ -6,6 +6,7 @@ import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -65,7 +66,11 @@ public class SendMail {
                     fileName = efile.nextElement().toString();
                     FileDataSource fds = new FileDataSource(fileName);
                     mbpFile.setDataHandler(new DataHandler(fds));
-                    mbpFile.setFileName(toChinese(fds.getName()));
+                    try {
+                        mbpFile.setFileName(MimeUtility.encodeWord(fds.getName()));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                     mp.addBodyPart(mbpFile);
                 }
                 System.out.println("添加成功");
