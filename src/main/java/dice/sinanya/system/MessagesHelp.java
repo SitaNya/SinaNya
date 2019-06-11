@@ -190,7 +190,7 @@ public interface MessagesHelp {
 
     StringBuilder bookHelp = new StringBuilder()
             .append(".getbook card\n")
-            .append("获取最新版人物卡，非常好用！")
+            .append("获取奈梅斯定制版人物卡，感谢贝尔sama喵巨佬！！卡中第二页有st多人物卡导入字符串，填好后可以直接复制~")
             .append("\n-----------------------------------\n")
 
             .append(".getbook make\n")

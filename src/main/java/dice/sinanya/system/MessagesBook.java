@@ -2,8 +2,8 @@ package dice.sinanya.system;
 
 public interface MessagesBook {
     String strNoExtractionTime = "抱歉，您今天的抽取次数已经用完。请明天再试。";
-    String strGetBookHumanMailTitle = "COC七版规则空白卡19.3.1.xlsx";
-    String strGetBookHumanMailContent = "请使用此链接下载https://share1.heiluo.com/share/link/f87376536f8f4d0baba2178cb621aebe。有更新更好的版本请随时联系窝。";
+    String strGetBookHumanMailTitle = "COC七版规则空白卡奈梅斯·西莉亚私人订制版By贝尔巨佬.xlsx";
+    String strGetBookHumanMailContent = "请使用此链接下载https://pan.baidu.com/s/1M3veskXYFJjwXP1eKHaX4g。有更新更好的版本请随时联系窝。";
     String strGetBookHumanMessage = "COC七版规则空白卡19.3.1.xlsx已经发到你的邮箱啦~~\n记得回复一下邮件哟，不然以后窝发的邮件会被爸爸扔进垃圾桶的。";
     String pathBookOfHuman = "C:/Files/Docment/COC七版规则空白卡19.3.1.xlsx";
     String strGetBookRPMailTitle = "角色扮演三百六十五问.zip";
