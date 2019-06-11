@@ -20,7 +20,6 @@ public class RoleInfo {
             return true;
         } else {
             selectRoles.flushRoleInfoCacheByQQ(qqId);
-            HashMap<String,Integer> tmp=ROLE_INFO_CACHE.get(new EntityRoleTag(Long.parseLong("2730902267"), "缇娜"));
             return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
         }
     }

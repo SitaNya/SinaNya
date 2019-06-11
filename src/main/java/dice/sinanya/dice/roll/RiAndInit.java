@@ -1,6 +1,7 @@
 package dice.sinanya.dice.roll;
 
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.tools.Calculator;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -15,10 +16,12 @@ import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.RoleChoose.checkRoleChooseExistByFromQQ;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.Sender.sender;
+import static java.lang.Math.ceil;
 
 public class RiAndInit {
 
-    private static Pattern num = Pattern.compile("(\\d+)");
+    private static Pattern numAndName = Pattern.compile("([+*/-]{0,1}\\d+)([^\\d]+)");
+    private static Pattern plus = Pattern.compile("([+*/-]\\d)");
 
     private EntityTypeMessages entityTypeMessages;
 
@@ -30,60 +33,46 @@ public class RiAndInit {
         String tag = tagRi;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         String msgBefore = msg;
-        int result;
+        int result = 0;
         boolean add = false;
         int random = random(1, 20);
-        int addValue = 0;
-        StringBuilder name = new StringBuilder();
-        if (msg.contains(" ") && msg.split(" ").length > 1) {
-            for (int i = 1; i < msg.split(" ").length; i++) {
-                name.append(msg.split(" ")[i]).append(" ");
-            }
-            msg = msg.split(" ")[0];
-        }
-
-        Matcher mNum = num.matcher(msg);
-        while (mNum.find()) {
-            addValue = Integer.parseInt(mNum.group(1));
-        }
-        msg = msg.replaceAll(num.toString(), "");
-        if (msg.contains("-")) {
-            result = random - addValue;
-            msg = msg.replace("-", "").trim();
-        } else if (msg.contains("+") || isNumeric(msg)) {
-            result = random + addValue;
-            msg = msg.replace("+", "").trim();
-            add = true;
-        } else if (addValue != 0) {
-            result = random + addValue;
-            msg = msg.replace("+", "").trim();
-            add = true;
-        } else {
-            result = random;
-        }
-
         String nick;
-
-        if (!name.toString().equals("")) {
-            nick = name.toString();
+        if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
+            nick = getRoleChooseByFromQQ(entityTypeMessages);
         } else {
-            if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
-                nick = getRoleChooseByFromQQ(entityTypeMessages);
-            } else {
-                nick = getNickName(entityTypeMessages);
-            }
+            nick = getNickName(entityTypeMessages);
+        }
+
+        Matcher mNumAndName = numAndName.matcher(msg);
+        while (mNumAndName.find()) {
+            msg = mNumAndName.group(1);
+            nick = mNumAndName.group(2);
+        }
+
+        Matcher mPlus = plus.matcher(msg);
+        while (mPlus.find()) {
+            result = (int) ceil(Calculator.conversion(random + msg));
+        }
+
+        if (isNumeric(msg)) {
+            result = random + Integer.parseInt(msg);
+            add = true;
+        }
+
+
+        if (result == 0) {
+            result = random;
+            nick = msg;
+            msg = "";
         }
 
         if (msg.equals("")) {
             sender(entityTypeMessages, nick + "掷出了: D20=" + result);
         } else {
-            nick = msg;
             if (add) {
-                sender(entityTypeMessages, nick + "掷出了: D20=" + random + "+" + addValue + "=" + result);
-                msgBefore = random + "+" + addValue + "=";
+                sender(entityTypeMessages, nick + "掷出了: D20=" + random + "+" + msg + "=" + result);
             } else {
-                sender(entityTypeMessages, nick + "掷出了: D20=" + random + "-" + addValue + "=" + result);
-                msgBefore = random + "-" + addValue + "=";
+                sender(entityTypeMessages, nick + "掷出了: D20=" + random + msg + "=" + result);
             }
         }
         if (initList.containsKey(entityTypeMessages.getFromGroup())) {

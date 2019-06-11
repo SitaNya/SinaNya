@@ -14,7 +14,6 @@ import static dice.sinanya.system.MessagesTag.tagRB;
 import static dice.sinanya.system.MessagesTag.tagRP;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.GetSkillValue.getSkillValue;
-import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.MakeRollCheckResult.makeResult;
 import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.Sender.sender;
@@ -25,7 +24,7 @@ public class RewardAndPunishment {
 
     private EntityTypeMessages entityTypeMessages;
 
-    private static Pattern p1 = Pattern.compile("(\\d+d\\d+).*[+*-/]");
+    private static Pattern SkillNameAndSkill = Pattern.compile("([^\\d]+)(\\d)");
     private static Pattern p2 = Pattern.compile("(\\d+d\\d+)");
     private static Pattern p3 = Pattern.compile("[+*-/]");
     private static Pattern p4 = Pattern.compile("(\\d+)");
@@ -36,7 +35,7 @@ public class RewardAndPunishment {
 
     public void rb() {
         String tag = tagRB;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = entityTypeMessages.getMsgGet().getMsg().trim().replaceFirst(tag.substring(0, tag.length() - 2), "");
         EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, msg);
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -75,7 +74,7 @@ public class RewardAndPunishment {
 
     public void rp() {
         String tag = tagRP;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = entityTypeMessages.getMsgGet().getMsg().trim().replaceFirst(tag.substring(0, tag.length() - 2), "");
         EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, msg);
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -131,8 +130,8 @@ public class RewardAndPunishment {
             }
             skill = Integer.parseInt(msg.split(" ")[1]);
         } else if (msg.contains(" ")) {
-            if (isNumeric(msg)) {
-                times = Integer.parseInt(msg);
+            if (isNumeric(msg.split(" ")[0])) {
+                times = Integer.parseInt(msg.split(" ")[0]);
             } else {
                 times = 1;
             }
