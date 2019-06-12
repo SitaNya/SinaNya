@@ -219,7 +219,7 @@ class Flow {
         TiAndLi tiAndLi = new TiAndLi(entityTypeMessages);
         Help help = new Help(entityTypeMessages);
         Book book = new Book(entityTypeMessages);
-        BG bg = new BG(entityTypeMessages);
+        Bj bj = new Bj(entityTypeMessages);
         NPC npc = new NPC(entityTypeMessages);
         TZ tz = new TZ(entityTypeMessages);
         Gas gas = new Gas(entityTypeMessages);
@@ -326,7 +326,7 @@ class Flow {
         }
 
         if (isBG) {
-            bg.bg();
+            bj.bg();
         }
 
         if (isTZ) {

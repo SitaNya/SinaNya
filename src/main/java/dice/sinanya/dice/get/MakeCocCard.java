@@ -22,6 +22,11 @@ import static dice.sinanya.tools.Sender.sender;
 import static java.lang.Math.ceil;
 import static java.lang.Math.floor;
 
+/**
+ * COC车卡类
+ *
+ * @author zhangxiaozhou
+ */
 public class MakeCocCard {
 
     private EntityTypeMessages entityTypeMessages;
@@ -30,6 +35,7 @@ public class MakeCocCard {
         this.entityTypeMessages = entityTypeMessages;
     }
 
+    @SuppressWarnings("AlibabaMethodTooLong")
     public void coc7d() {
         String nick = getNickName(entityTypeMessages);
         StringBuilder stringBuilder = new StringBuilder();
@@ -128,6 +134,7 @@ public class MakeCocCard {
         sender(entityTypeMessages, stringBuilder.toString());
     }
 
+    @SuppressWarnings("AlibabaMethodTooLong")
     public void coc6d() {
         String nick = getNickName(entityTypeMessages);
         StringBuilder stringBuilder = new StringBuilder();

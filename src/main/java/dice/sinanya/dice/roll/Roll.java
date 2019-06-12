@@ -89,7 +89,6 @@ public class Roll {
             return;
         }
 
-
         for (int i = 0; i < intTimes; i++) {
             String strResult = msg;
             for (String function : everyFunction) {

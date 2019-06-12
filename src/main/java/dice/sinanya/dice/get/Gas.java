@@ -6,6 +6,11 @@ import static dice.sinanya.system.MessagesGas.gasList;
 import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.Sender.sender;
 
+/**
+ * 获取煤气灯特质
+ *
+ * @author zhangxiaozhou
+ */
 public class Gas {
     private EntityTypeMessages entityTypeMessages;
 
