@@ -52,6 +52,9 @@ public class RiAndInit {
         Matcher mPlus = plus.matcher(msg);
         while (mPlus.find()) {
             result = (int) ceil(Calculator.conversion(random + msg));
+            if (msg.contains("+")) {
+                add = true;
+            }
         }
 
         if (isNumeric(msg)) {
@@ -74,8 +77,8 @@ public class RiAndInit {
             sender(entityTypeMessages, nick + "的先攻骰掷,掷出了: D20=" + result);
         } else {
             if (add) {
-                sender(entityTypeMessages, nick + "的先攻骰掷,掷出了: D20=" + random + "+" + msg + "=" + result);
-                msgBefore = random + "+" + msg + "=";
+                sender(entityTypeMessages, nick + "的先攻骰掷,掷出了: D20=" + random + "+" + msg.replace("+", "") + "=" + result);
+                msgBefore = random + "+" + msg.replace("+", "") + "=";
             } else {
                 sender(entityTypeMessages, nick + "的先攻骰掷,掷出了: D20=" + random + msg + "=" + result);
                 msgBefore = random + "-" + msg.replace("+", "") + "=";
