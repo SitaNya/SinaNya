@@ -262,7 +262,7 @@ public class Team extends PropList implements GetDb, Role, AtQq {
             return;
         }
         for (String qq : qqList) {
-            stringBuilder = new Roles(entityTypeMessages).showProp(qq);
+            stringBuilder = new Roles(entityTypeMessages).showProp(entityTypeMessages, qq);
         }
         entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), stringBuilder.toString());
     }

@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.MakeSkillName.makeSkillName;
 import static dice.sinanya.tools.RoleInfo.*;
 
@@ -73,6 +74,9 @@ public class GetSkillValue {
     }
 
     public int getSkill() {
+        if (skill == 0 && isNumeric(msg)) {
+            return Integer.parseInt(msg);
+        }
         return skill;
     }
 

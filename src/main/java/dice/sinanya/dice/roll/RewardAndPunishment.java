@@ -3,21 +3,18 @@ package dice.sinanya.dice.roll;
 import dice.sinanya.entity.EntityBPRoll;
 import dice.sinanya.entity.EntityRollAndCheck;
 import dice.sinanya.entity.EntityTypeMessages;
-import dice.sinanya.tools.Calculator;
 import dice.sinanya.tools.CheckResultLevel;
+import dice.sinanya.tools.GetSkillValue;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static dice.sinanya.system.MessagesTag.tagRB;
 import static dice.sinanya.system.MessagesTag.tagRP;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.GetSkillValue.getSkillValue;
 import static dice.sinanya.tools.MakeRollCheckResult.makeResult;
 import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.Sender.sender;
-import static java.lang.Math.ceil;
 import static java.lang.Math.floor;
 
 /**
@@ -30,14 +27,14 @@ public class RewardAndPunishment {
 
     private EntityTypeMessages entityTypeMessages;
 
-    private static Pattern SkillNameAndSkill = Pattern.compile("([^\\d]+)(\\d)");
-    private static Pattern p2 = Pattern.compile("(\\d+d\\d+)");
-    private static Pattern p3 = Pattern.compile("[+*-/]");
-    private static Pattern p4 = Pattern.compile("(\\d+)");
+//    过滤一个字符串的首字母是不是加减乘除
 
     public RewardAndPunishment(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
     }
+
+    private int multiple = 10;
+//    奖励惩罚都是取10位数
 
     public void rb() {
         String tag = tagRB;
@@ -46,9 +43,8 @@ public class RewardAndPunishment {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        int times = getTimesAndSkill(msg).getTimes();
-        int skill = getTimesAndSkill(msg).getSkill();
-        ArrayList<Integer> listDice = makeBAndPRoll(times);
+        ArrayList<Integer> listDice = makeBAndPRoll(getTimesAndSkill(msg).getTimes());
+//        得到奖励投列表
 
         int min = 10;
         for (int result : listDice) {
@@ -57,25 +53,29 @@ public class RewardAndPunishment {
                 min = result;
             }
         }
+//        取最小值
 
         int random = entityRollAndCheck.getRandom();
 
-        if ((int) floor(random / 10) < min) {
-            min = (int) floor(random / 10);
+        if ((int) floor(random / multiple) < min) {
+            min = (int) floor(random / multiple);
         }
 
-        int resultRandom = min * 10 + random % 10;
+        int resultRandom = min * multiple + random % multiple;
+//        进行替换，高位替换为整个列表中最小值
 
         String strRes;
-        if (skill != 0) {
+        String substring = stringBuilder.substring(0, stringBuilder.length() - 1);
+        if (getTimesAndSkill(msg).getSkill() != 0) {
             strRes = entityRollAndCheck.getNick() +
-                    "进行奖励骰鉴定: D100=" + random + "[奖励骰:" + stringBuilder.toString().substring(0, stringBuilder.toString().length() - 1) + "] = " + resultRandom + "/" + skill +
-                    new CheckResultLevel(resultRandom, skill, false).getLevelResultStr();
+                    "进行奖励骰鉴定: D100=" + random + "[奖励骰:" + substring + "] = " + resultRandom + "/" + getTimesAndSkill(msg).getSkill() +
+                    new CheckResultLevel(resultRandom, getTimesAndSkill(msg).getSkill(), false).getLevelResultStr();
         } else {
             strRes = entityRollAndCheck.getNick() +
-                    "进行奖励骰鉴定: D100=" + random + "[奖励骰:" + stringBuilder.toString().substring(0, stringBuilder.toString().length() - 1) + "] = " + resultRandom;
+                    "进行奖励骰鉴定: D100=" + random + "[奖励骰:" + substring + "] = " + resultRandom;
         }
         sender(entityTypeMessages, strRes);
+//        将列表打印，并根据最后确定的值进行成功登记判定
     }
 
     public void rp() {
@@ -85,9 +85,8 @@ public class RewardAndPunishment {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        int times = getTimesAndSkill(msg).getTimes();
-        int skill = getTimesAndSkill(msg).getSkill();
-        ArrayList<Integer> listDice = makeBAndPRoll(times);
+        ArrayList<Integer> listDice = makeBAndPRoll(getTimesAndSkill(msg).getTimes());
+//        得到惩罚投列表
 
         int max = 0;
         for (int result : listDice) {
@@ -96,25 +95,29 @@ public class RewardAndPunishment {
                 max = result;
             }
         }
+//        取最大值
 
         int random = entityRollAndCheck.getRandom();
 
-        if ((int) floor(random / 10) > max) {
-            max = (int) floor(random / 10);
+        if ((int) floor(random / multiple) > max) {
+            max = (int) floor(random / multiple);
         }
 
-        int resultRandom = max * 10 + random % 10;
+        int resultRandom = max * multiple + random % multiple;
+//        进行替换，高位替换为整个列表中最大值
 
         String strRes;
-        if (skill != 0) {
+        String substring = stringBuilder.substring(0, stringBuilder.length() - 1);
+        if (getTimesAndSkill(msg).getSkill() != 0) {
             strRes = entityRollAndCheck.getNick() +
-                    "进行惩罚骰鉴定: D100=" + random + "[惩罚骰:" + stringBuilder.toString().substring(0, stringBuilder.toString().length() - 1) + "] = " + resultRandom + "/" + skill +
-                    new CheckResultLevel(resultRandom, skill, false).getLevelResultStr();
+                    "进行惩罚骰鉴定: D100=" + random + "[惩罚骰:" + substring + "] = " + resultRandom + "/" + getTimesAndSkill(msg).getSkill() +
+                    new CheckResultLevel(resultRandom, getTimesAndSkill(msg).getSkill(), false).getLevelResultStr();
         } else {
             strRes = entityRollAndCheck.getNick() +
-                    "进行惩罚骰鉴定: D100=" + random + "[惩罚骰:" + stringBuilder.toString().substring(0, stringBuilder.toString().length() - 1) + "] = " + resultRandom;
+                    "进行惩罚骰鉴定: D100=" + random + "[惩罚骰:" + substring + "] = " + resultRandom;
         }
         sender(entityTypeMessages, strRes);
+        //        将列表打印，并根据最后确定的值进行成功登记判定
     }
 
     private ArrayList<Integer> makeBAndPRoll(int times) {
@@ -128,47 +131,23 @@ public class RewardAndPunishment {
     private EntityBPRoll getTimesAndSkill(String msg) {
         int times;
         int skill;
-        if (msg.contains(" ") && isNumeric(msg.split(" ")[1])) {
-            if (msg.split(" ")[0].equals("")) {
-                times = 1;
-            } else {
-                times = Integer.parseInt(msg.split(" ")[0]);
-            }
-            skill = Integer.parseInt(msg.split(" ")[1]);
-        } else if (msg.contains(" ")) {
-            if (isNumeric(msg.split(" ")[0])) {
-                times = Integer.parseInt(msg.split(" ")[0]);
-            } else {
-                times = 1;
-            }
-            Matcher findFuncAgain = p3.matcher(msg.split(" ")[1]);
-            if (findFuncAgain.find()) {
-                int tmpSkill = 0;
-                if (msg.split(" ")[1].charAt(1) != '+' && !Character.isDigit(msg.split(" ")[1].charAt(1))) {
-                    String strFunc = msg.split(" ")[1];
-                    int i = 0;
-                    StringBuilder skillName = new StringBuilder();
-                    while (!Character.isDigit(strFunc.charAt(i)) && strFunc.charAt(i) != '+' && strFunc.charAt(i) != '-' && strFunc.charAt(i) != '*' && strFunc.charAt(i) != '/' && strFunc.charAt(i) != 'x' && strFunc.charAt(i) != 'X') {
-                        skillName.append(strFunc.charAt(i));
-                        i++;
-                    }
-                    strFunc = strFunc.replaceFirst(skillName.toString(), String.valueOf(getSkillValue(entityTypeMessages, skillName.toString())));
-                    skill = (int) ceil(Calculator.conversion(strFunc));
-                } else {
-                    skill = (int) ceil(Calculator.conversion(msg.split(" ")[1]));
-                }
-            } else {
-                skill = getSkillValue(entityTypeMessages, msg.split(" ")[1]);
-            }
+        String space = " ";
 
+        if (msg.contains(space) && isNumeric(msg.split(space)[0])) {
+            times = Integer.parseInt(msg.split(" ")[0]);
+        } else if (isNumeric(msg)) {
+            times = Integer.parseInt(msg);
         } else {
-            if (isNumeric(msg)) {
-                times = Integer.parseInt(msg);
-            } else {
-                times = 1;
-            }
+            times = 1;
+        }
+
+        if (msg.contains(space)) {
+            GetSkillValue getSkillValue = new GetSkillValue(entityTypeMessages, msg.split(" ")[1]);
+            skill = getSkillValue.getSkill();
+        } else {
             skill = 0;
         }
+
         return new EntityBPRoll(times, skill);
     }
 }
