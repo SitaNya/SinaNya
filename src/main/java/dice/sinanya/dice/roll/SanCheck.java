@@ -6,7 +6,7 @@ import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
 import dice.sinanya.tools.CheckSanCheck;
 
-import static dice.sinanya.system.MessagesTag.tagSC;
+import static dice.sinanya.system.MessagesTag.TAG_SC;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.Sender.sender;
 
@@ -19,7 +19,7 @@ public class SanCheck {
     }
 
     public void sc() throws PlayerSetException, SanCheckSetException {
-        String tag = tagSC;
+        String tag = TAG_SC;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         String strCheckValue;
         String strSkill = "";
@@ -34,9 +34,8 @@ public class SanCheck {
         sender(entityTypeMessages, entitySanCheck.getStrSanCheck());
     }
 
-
     public void sc(long qq, String inputMsg) throws PlayerSetException, SanCheckSetException {
-        String tag = tagSC;
+        String tag = TAG_SC;
         String msg = deleteTag(inputMsg, tag.substring(0, tag.length() - 2));
         String strCheckValue;
         String strSkill = "";

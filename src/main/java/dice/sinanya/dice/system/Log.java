@@ -91,7 +91,7 @@ public class Log {
     }
 
     public void del() {
-        String tag = TAG_LOG_DEL;
+        String tag = TAG_LOG_RM;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         if (checkLogTagExist(entityTypeMessages, msg)) {
             if (checkLogTagSwitch(entityTypeMessages, msg)) {

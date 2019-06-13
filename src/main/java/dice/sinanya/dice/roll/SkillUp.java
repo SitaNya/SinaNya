@@ -3,7 +3,7 @@ package dice.sinanya.dice.roll;
 import dice.sinanya.db.roles.InsertRoles;
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.system.MessagesTag.tagEN;
+import static dice.sinanya.system.MessagesTag.TAG_EN;
 import static dice.sinanya.tools.GetSkillValue.getSkillValue;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.RandomInt.random;
@@ -18,7 +18,7 @@ public class SkillUp {
     }
 
     public void en() {
-        String tag = tagEN;
+        String tag = TAG_EN;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         int skill = getSkillValue(entityTypeMessages, msg);
         if (skill == 0) {
