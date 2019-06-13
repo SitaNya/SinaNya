@@ -7,7 +7,7 @@ import dice.sinanya.entity.EntityTypeMessages;
 import java.util.ArrayList;
 import java.util.concurrent.*;
 
-import static dice.sinanya.system.MessagesTag.tagDnd;
+import static dice.sinanya.system.MessagesTag.TAG_DND;
 import static dice.sinanya.tools.GetFutureToString.getFutureToString;
 import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
@@ -27,7 +27,7 @@ public class MakeDndCard implements MakeCard {
     }
 
     public void dnd() {
-        String tag = tagDnd;
+        String tag = TAG_DND;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 11));
 
         int times = getTime(msg);

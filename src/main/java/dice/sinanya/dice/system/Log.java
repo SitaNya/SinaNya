@@ -25,7 +25,7 @@ public class Log {
     }
 
     public void logOn() {
-        String tag = tagLogOn;
+        String tag = TAG_LOG_ON;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
 
@@ -43,7 +43,7 @@ public class Log {
     }
 
     public void logOff() {
-        String tag = tagLogOff;
+        String tag = TAG_LOG_OFF;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         if (checkLogTagExist(entityTypeMessages, msg)) {
             if (checkLogTagSwitch(entityTypeMessages, msg)) {
@@ -60,7 +60,7 @@ public class Log {
     }
 
     public void get() {
-        String tag = tagLogGet;
+        String tag = TAG_LOG_GET;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         if (!checkLogTagSwitch(entityTypeMessages, msg)) {
             if (logGetLock.contains(msg)) {
@@ -91,7 +91,7 @@ public class Log {
     }
 
     public void del() {
-        String tag = tagLogDel;
+        String tag = TAG_LOG_DEL;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         if (checkLogTagExist(entityTypeMessages, msg)) {
             if (checkLogTagSwitch(entityTypeMessages, msg)) {

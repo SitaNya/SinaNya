@@ -12,8 +12,8 @@ import java.util.regex.Pattern;
 
 import static dice.sinanya.system.MessagesError.strHiddenDice;
 import static dice.sinanya.system.MessagesSystem.ROLL_MAX_VALUE;
-import static dice.sinanya.system.MessagesTag.tagR;
-import static dice.sinanya.system.MessagesTag.tagRH;
+import static dice.sinanya.system.MessagesTag.TAGR;
+import static dice.sinanya.system.MessagesTag.TAG_RH;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
@@ -44,7 +44,7 @@ public class Roll {
      * @throws PlayerSetException 如果填写错误，会报错并终止后续逻辑，这个错误类型会包含一个发往来源qq的信息（包括群）
      */
     public void r() throws PlayerSetException {
-        String tag = tagR;
+        String tag = TAGR;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
 
         int intTimes = 1;
@@ -101,7 +101,7 @@ public class Roll {
     }
 
     public void rh() throws PlayerSetException {
-        String tag = tagRH;
+        String tag = TAG_RH;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
 
         GetSkillValue getSkillValue = new GetSkillValue(entityTypeMessages, msg);

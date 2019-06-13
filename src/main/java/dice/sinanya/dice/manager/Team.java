@@ -43,7 +43,7 @@ public class Team extends PropList implements GetDb, Role, AtQq {
     public void set() {
         useRole(entityTypeMessages);
 
-        String tag = tagTeamSet;
+        String tag = TAG_TEAM_SET;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
         for (String qq : qqList) {
@@ -56,7 +56,7 @@ public class Team extends PropList implements GetDb, Role, AtQq {
     public void remove() {
         useRole(entityTypeMessages);
 
-        String tag = tagTeamMove;
+        String tag = TAG_TEAM_MOVE;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
         EntityTeamInfo entityTeamInfo = new EntityTeamInfo(entityTypeMessages.getFromGroup(), qqList);
@@ -88,7 +88,7 @@ public class Team extends PropList implements GetDb, Role, AtQq {
     public void hp() {
         useRole(entityTypeMessages);
 
-        String tag = tagTeamHp;
+        String tag = TAG_TEAM_HP;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
 
@@ -139,7 +139,7 @@ public class Team extends PropList implements GetDb, Role, AtQq {
     public void san() {
         useRole(entityTypeMessages);
 
-        String tag = tagTeamSan;
+        String tag = TAG_TEAM_SAN;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
 

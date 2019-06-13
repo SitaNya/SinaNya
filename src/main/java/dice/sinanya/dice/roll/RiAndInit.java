@@ -8,7 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static dice.sinanya.system.MessagesInit.initList;
-import static dice.sinanya.system.MessagesTag.tagRi;
+import static dice.sinanya.system.MessagesSystem.NONE;
+import static dice.sinanya.system.MessagesTag.TAG_RI;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
@@ -18,9 +19,14 @@ import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.Sender.sender;
 import static java.lang.Math.ceil;
 
+/**
+ * 先攻骰掷及列表
+ *
+ * @author zhangxiaozhou
+ */
 public class RiAndInit {
 
-    private static Pattern numAndName = Pattern.compile("([+*/-]{0,1}\\d+)([^\\d]+)");
+    private static Pattern numAndName = Pattern.compile("([+*/-]?\\d+)([^\\d]+)");
     private static Pattern plus = Pattern.compile("([+*/-]\\d)");
 
     private EntityTypeMessages entityTypeMessages;
@@ -30,7 +36,7 @@ public class RiAndInit {
     }
 
     public void ri() {
-        String tag = tagRi;
+        String tag = TAG_RI;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         String msgBefore = msg;
         int result = 0;
@@ -65,15 +71,15 @@ public class RiAndInit {
 
         if (result == 0) {
             result = random;
-            if (msg.equals("")) {
+            if (msg.equals(NONE)) {
                 nick = getNickName(entityTypeMessages);
             } else {
                 nick = msg;
             }
-            msg = "";
+            msg = NONE;
         }
 
-        if (msg.equals("")) {
+        if (msg.equals(NONE)) {
             sender(entityTypeMessages, nick + "的先攻骰掷,掷出了: D20=" + result);
         } else {
             if (add) {
@@ -89,7 +95,7 @@ public class RiAndInit {
             riList.put(nick, ": D20=" + msgBefore + result);
             initList.put(entityTypeMessages.getFromGroup(), riList);
         } else {
-            HashMap<String, String> riList = new HashMap<>();
+            HashMap<String, String> riList = new HashMap<>(30);
             riList.put(nick, ": D20=" + msgBefore + result);
             initList.put(entityTypeMessages.getFromGroup(), riList);
         }
@@ -122,23 +128,20 @@ public class RiAndInit {
         sender(entityTypeMessages, "已清空本群的先攻列表");
     }
 
-    public static HashMap<String, String> sortHashMap(HashMap<String, String> map) {
+    private static HashMap<String, String> sortHashMap(HashMap<String, String> map) {
         //從HashMap中恢復entry集合，得到全部的鍵值對集合
         Set<Map.Entry<String, String>> entey = map.entrySet();
         //將Set集合轉為List集合，為了實用工具類的排序方法
-        List<Map.Entry<String, String>> list = new ArrayList<Map.Entry<String, String>>(entey);
+        List<Map.Entry<String, String>> list = new ArrayList<>(entey);
         //使用Collections工具類對list進行排序
-        Collections.sort(list, new Comparator<Map.Entry<String, String>>() {
-            @Override
-            public int compare(Map.Entry<String, String> o1, Map.Entry<String, String> o2) {
-                //按照age倒敘排列
-                String[] o1Value = o1.getValue().split("=");
-                String[] o2Value = o2.getValue().split("=");
-                return Integer.parseInt(o2Value[o2Value.length - 1]) - Integer.parseInt(o1Value[o1Value.length - 1]);
-            }
+        list.sort((o1, o2) -> {
+            //按照age倒敘排列
+            String[] o1Value = o1.getValue().split("=");
+            String[] o2Value = o2.getValue().split("=");
+            return Integer.parseInt(o2Value[o2Value.length - 1]) - Integer.parseInt(o1Value[o1Value.length - 1]);
         });
         //創建一個HashMap的子類LinkedHashMap集合
-        LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<>();
         //將list中的數據存入LinkedHashMap中
         for (Map.Entry<String, String> entry : list) {
             linkedHashMap.put(entry.getKey(), entry.getValue());

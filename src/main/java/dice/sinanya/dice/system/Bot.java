@@ -22,7 +22,7 @@ public class Bot {
     }
 
     public void on() {
-        String tag = tagBotOn;
+        String tag = TAG_BOT_ON;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         Matcher matcher = pattern.matcher(msg);
 
@@ -49,7 +49,7 @@ public class Bot {
     }
 
     public void off() {
-        String tag = tagBotOff;
+        String tag = TAG_BOT_OFF;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         Matcher matcher = pattern.matcher(msg);
 
@@ -76,7 +76,7 @@ public class Bot {
     }
 
     public void exit() {
-        String tag = tagBotExit;
+        String tag = TAG_BOT_EXIT;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         Matcher matcher = pattern.matcher(msg);
 

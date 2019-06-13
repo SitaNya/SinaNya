@@ -29,7 +29,6 @@ class Flow {
     private boolean isRH = false;
     private boolean isRA = false;
     private boolean isRC = false;
-    private boolean isRE = false;
     private boolean isRAL = false;
     private boolean isRCL = false;
     private boolean isRAV = false;
@@ -122,93 +121,92 @@ class Flow {
 
     private void checkMessages(String messages) {
 
-        isTeamSet = messages.matches(tagTeamSet);
-        isTeamClr = messages.matches(tagTeamClr);
-        isTeamMove = messages.matches(tagTeamMove);
-        isTeamCall = messages.matches(tagTeamCall);
-        isTeamHp = messages.matches(tagTeamHp);
-        isTeamSan = messages.matches(tagTeamSan);
-        isTeamDesc = messages.matches(tagTeamDesc);
-        isTeamShow = messages.matches(tagTeamShow) && !isTeamSet && !isTeamClr && !isTeamMove && !isTeamCall && !isTeamHp && !isTeamSan && !isTeamDesc;
+        isTeamSet = messages.matches(TAG_TEAM_SET);
+        isTeamClr = messages.matches(TAG_TEAM_CLR);
+        isTeamMove = messages.matches(TAG_TEAM_RM);
+        isTeamCall = messages.matches(TAG_TEAM_CALL);
+        isTeamHp = messages.matches(TAG_TEAM_HP);
+        isTeamSan = messages.matches(TAG_TEAM_SAN);
+        isTeamDesc = messages.matches(TAG_TEAM_DESC);
+        isTeamShow = messages.matches(TAG_TEAM_SHOW) && !isTeamSet && !isTeamClr && !isTeamMove && !isTeamCall && !isTeamHp && !isTeamSan && !isTeamDesc;
 
-        isStShow = messages.matches(tagStShow);
-        isStList = messages.matches(tagStList);
-        isStMove = messages.matches(tagStMove);
-        isStSet = messages.matches(tagStSet) && !isStShow && !isStList && !isStMove;
+        isStShow = messages.matches(TAG_ST_SHOW);
+        isStList = messages.matches(TAG_ST_LIST);
+        isStMove = messages.matches(TAG_ST_RM);
+        isStSet = messages.matches(TAG_ST_SET) && !isStShow && !isStList && !isStMove;
 
-        isBotOn = messages.matches(tagBotOn);
-        isBotOff = messages.matches(tagBotOff);
-        isBotExit = messages.matches(tagBotExit);
-        isBotInfo = messages.matches(tagBotShow) && !isBotOn && !isBotOff && !isBotExit;
+        isBotOn = messages.matches(TAG_BOT_ON);
+        isBotOff = messages.matches(TAG_BOT_OFF);
+        isBotExit = messages.matches(TAG_BOT_EXIT);
+        isBotInfo = messages.matches(TAG_BOT_SHOW) && !isBotOn && !isBotOff && !isBotExit;
 
-        isHelpNormal = messages.matches(tagHelpNormal);
-        isHelpMake = messages.matches(tagHelpMake);
-        isHelpGroup = messages.matches(tagHelpGroup);
-        isHelpBook = messages.matches(tagHelpBook);
-        isHelpDnd = messages.matches(tagHelpDnd);
-        isHelpInfo = messages.matches(tagHelpInfo) && !isHelpNormal && !isHelpMake && !isHelpGroup && !isHelpBook && !isHelpDnd;
+        isHelpNormal = messages.matches(TAG_HELP_NORMAL);
+        isHelpMake = messages.matches(TAG_HELP_MAKE);
+        isHelpGroup = messages.matches(TAG_HELP_GROUP);
+        isHelpBook = messages.matches(TAG_HELP_BOOK);
+        isHelpDnd = messages.matches(TAG_HELP_DND);
+        isHelpInfo = messages.matches(TAG_HELP_INFO) && !isHelpNormal && !isHelpMake && !isHelpGroup && !isHelpBook && !isHelpDnd;
 
-        isCoc7d = messages.matches(tagCoc7d);
-        isCoc6d = messages.matches(tagCoc6d);
-        isCoc6 = messages.matches(tagCoc6);
-        isCoc7 = messages.matches(tagCoc7) && !isCoc7d && !isCoc6d && !isCoc6;
+        isCoc7d = messages.matches(TAG_COC7D);
+        isCoc6d = messages.matches(TAG_COC6D);
+        isCoc6 = messages.matches(TAG_COC6);
+        isCoc7 = messages.matches(TAG_COC7) && !isCoc7d && !isCoc6d && !isCoc6;
 
-        isDnd = messages.matches(tagDnd);
-        isRi = messages.matches(tagRi);
-        isInitClr = messages.matches(tagInitClr);
-        isInit = messages.matches(tagInit) && !isInitClr;
+        isDnd = messages.matches(TAG_DND);
+        isRi = messages.matches(TAG_RI);
+        isInitClr = messages.matches(TAG_INIT_CLR);
+        isInit = messages.matches(TAG_INIT) && !isInitClr;
 
-        isBookCard = messages.matches(tagBookCard);
-        isBookMAKE = messages.matches(tagBookMake);
-        isBookRP = messages.matches(tagBookRP);
-        isBookKP = messages.matches(tagBookKP);
+        isBookCard = messages.matches(TAG_BOOK_CARD);
+        isBookMAKE = messages.matches(TAG_BOOK_MAKE);
+        isBookRP = messages.matches(TAG_BOOK_RP);
+        isBookKP = messages.matches(TAG_BOOK_KP);
 
-        isLogOn = messages.matches(tagLogOn);
-        isLogOff = messages.matches(tagLogOff);
-        isLogGet = messages.matches(tagLogGet);
-        isLogList = messages.matches(tagLogList);
-        isLogDel = messages.matches(tagLogDel);
+        isLogOn = messages.matches(TAG_LOG_ON);
+        isLogOff = messages.matches(TAG_LOG_OFF);
+        isLogGet = messages.matches(TAG_LOG_GET);
+        isLogList = messages.matches(TAG_LOG_LIST);
+        isLogDel = messages.matches(TAG_LOG_RM);
 
 
-        isClueClr = messages.matches(tagClueClr);
-        isClueShow = messages.matches(tagClueShow);
-        isClueRm = messages.matches(tagClueRm);
-        isClueSet = messages.matches(tagClueSet) && !isClueClr && !isClueShow && !isClueRm;
+        isClueClr = messages.matches(TAG_CLUE_CLR);
+        isClueShow = messages.matches(TAG_CLUE_SHOW);
+        isClueRm = messages.matches(TAG_CLUE_RM);
+        isClueSet = messages.matches(TAG_CLUE_SET) && !isClueClr && !isClueShow && !isClueRm;
 
-        isKp = messages.matches(tagKp);
-        isHiy = messages.matches(tagHiy);
+        isKp = messages.matches(TAG_KP);
+        isHiy = messages.matches(TAG_HIY);
 
-        isJRRP = messages.matches(tagJRRP);
+        isJRRP = messages.matches(TAG_JRRP);
 
-        isNPC = messages.matches(tagNPC);
+        isNPC = messages.matches(TAG_NPC);
 
-        isBG = messages.matches(tagBG);
+        isBG = messages.matches(TAG_BG);
 
-        isTZ = messages.matches(tagTZ);
+        isTZ = messages.matches(TAG_TZ);
 
-        isGas = messages.matches(tagGas);
+        isGas = messages.matches(TAG_GAS);
 
-        isTi = messages.matches(tagTi);
-        isLi = messages.matches(tagLi);
+        isTi = messages.matches(TAG_TI);
+        isLi = messages.matches(TAG_LI);
 
-        isRB = messages.matches(tagRB);
-        isRP = messages.matches(tagRP);
+        isRB = messages.matches(TAG_RB);
+        isRP = messages.matches(TAG_RP);
 
-        isSC = messages.matches(tagSC);
+        isSC = messages.matches(TAG_SC);
 
-        isEN = messages.matches(tagEN);
+        isEN = messages.matches(TAG_EN);
 
-        isSetRollMaxValue = messages.matches(tagSetRollMaxValue);
+        isSetRollMaxValue = messages.matches(TAG_SET_ROLL_MAX_VALUE);
 
-        isRAL = messages.matches(tagRAL);
-        isRCL = messages.matches(tagRCL);
-        isRAV = messages.matches(tagRAV);
-        isRCV = messages.matches(tagRCV);
-        isRH = messages.matches(tagRH);
-        isRA = messages.matches(tagRA) && !isRAL && !isRAV;
-        isRC = messages.matches(tagRC) && !isRCL && !isRCV;
-        isRE = messages.matches(tagRE);
-        isR = messages.matches(tagR) && !isRH && !isRA && !isRC && !isRB && !isRP && !isRi && !isRE && !isRAL && !isRCL && !isRAV && !isRCV;
+        isRAL = messages.matches(TAG_RAL);
+        isRCL = messages.matches(TAG_RCL);
+        isRAV = messages.matches(TAG_RAV);
+        isRCV = messages.matches(TAG_RCV);
+        isRH = messages.matches(TAG_RH);
+        isRA = messages.matches(TAG_RA) && !isRAL && !isRAV;
+        isRC = messages.matches(TAG_RC) && !isRCL && !isRCV;
+        isR = messages.matches(TAGR) && !isRH && !isRA && !isRC && !isRB && !isRP && !isRi && !isRAL && !isRCL && !isRAV && !isRCV;
     }
 
     void toPrivate() {
@@ -228,7 +226,6 @@ class Flow {
         Tz tz = new Tz(entityTypeMessages);
         Gas gas = new Gas(entityTypeMessages);
         History history = new History(entityTypeMessages);
-        RollForDnd rollForDnd = new RollForDnd(entityTypeMessages);
         Jrrp jrrp = new Jrrp(entityTypeMessages);
 
         if (isR) {
@@ -241,8 +238,6 @@ class Flow {
             rollAndCheck.ra();
         } else if (isRC) {
             rollAndCheck.rc();
-        } else if (isRE) {
-            rollForDnd.re();
         } else if (isRAL) {
             rollAndCheck.ral();
         } else if (isRCL) {

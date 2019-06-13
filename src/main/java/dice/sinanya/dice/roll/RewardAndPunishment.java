@@ -7,10 +7,8 @@ import dice.sinanya.tools.CheckResultLevel;
 import dice.sinanya.tools.GetSkillValue;
 
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
-import static dice.sinanya.system.MessagesTag.tagRB;
-import static dice.sinanya.system.MessagesTag.tagRP;
+import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.MakeRollCheckResult.makeResult;
 import static dice.sinanya.tools.RandomInt.random;
@@ -37,7 +35,7 @@ public class RewardAndPunishment {
 //    奖励惩罚都是取10位数
 
     public void rb() {
-        String tag = tagRB;
+        String tag = TAG_RB;
         String msg = entityTypeMessages.getMsgGet().getMsg().trim().replaceFirst(tag.substring(0, tag.length() - 2), "");
         EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, msg);
 
@@ -79,7 +77,7 @@ public class RewardAndPunishment {
     }
 
     public void rp() {
-        String tag = tagRP;
+        String tag = TAG_RP;
         String msg = entityTypeMessages.getMsgGet().getMsg().trim().replaceFirst(tag.substring(0, tag.length() - 2), "");
         EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, msg);
 

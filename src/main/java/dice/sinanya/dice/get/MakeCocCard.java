@@ -11,8 +11,8 @@ import dice.sinanya.tools.ThreadCoc7;
 import java.util.ArrayList;
 import java.util.concurrent.*;
 
-import static dice.sinanya.system.MessagesTag.tagCoc6;
-import static dice.sinanya.system.MessagesTag.tagCoc7;
+import static dice.sinanya.system.MessagesTag.TAG_COC6;
+import static dice.sinanya.system.MessagesTag.TAG_COC7;
 import static dice.sinanya.tools.GetFutureToString.getFutureToString;
 import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
@@ -167,7 +167,7 @@ public class MakeCocCard implements MakeCard {
     }
 
     public void coc7() {
-        String tag = tagCoc7;
+        String tag = TAG_COC7;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 11));
         msg = deleteTag(msg, ".coc");
 
@@ -193,7 +193,7 @@ public class MakeCocCard implements MakeCard {
     }
 
     public void coc6() {
-        String tag = tagCoc6;
+        String tag = TAG_COC6;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 11));
 
         int times = getTime(msg);

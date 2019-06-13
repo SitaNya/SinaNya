@@ -1,106 +1,110 @@
 package dice.sinanya.system;
 
+/**
+ * QQ机器人命令识别标签集，在这里添加标签后去Flow.java中设定导向逻辑，即可导向实际的类
+ *
+ * @author zhangxiaozhou
+ */
 public interface MessagesTag {
-    String header = "^[.。][ ]*";
+    String HEADER = "^[.。][ ]*";
 
 
-    String tagR = header + "r.*";
+    String TAGR = HEADER + "r.*";
 
-    String tagRH = header + "rh.*";
-    String tagRA = header + "ra.*";
-    String tagRC = header + "rc.*";
-    String tagRE = header + "re.*";
+    String TAG_RH = HEADER + "rh.*";
+    String TAG_RA = HEADER + "ra.*";
+    String TAG_RC = HEADER + "rc.*";
 
-    String tagRAL = header + "ral.*";
-    String tagRCL = header + "rcl.*";
+    String TAG_RAL = HEADER + "ral.*";
+    String TAG_RCL = HEADER + "rcl.*";
 
-    String tagRAV = header + "rav.*";
-    String tagRCV = header + "rcv.*";
+    String TAG_RAV = HEADER + "rav.*";
+    String TAG_RCV = HEADER + "rcv.*";
 
-    String tagRB = header + "rb.*";
-    String tagRP = header + "rp.*";
+    String TAG_RB = HEADER + "rb.*";
+    String TAG_RP = HEADER + "rp.*";
 
-    String tagSC = header + "sc.*";
+    String TAG_SC = HEADER + "sc.*";
 
-    String tagEN = header + "en.*";
+    String TAG_EN = HEADER + "en.*";
 
-    String tagSetRollMaxValue = header + "set.*";
+    String TAG_SET_ROLL_MAX_VALUE = HEADER + "set.*";
 
-    String headerSt = header + "st[ ]*";
-    String tagStSet = headerSt + ".*";
-    String tagStShow = headerSt + "show.*";
-    String tagStList = headerSt + "list.*";
-    String tagStMove = headerSt + "move.*";
+    String HEADER_ST = HEADER + "st[ ]*";
+    String TAG_ST_SET = HEADER_ST + ".*";
+    String TAG_ST_SHOW = HEADER_ST + "show.*";
+    String TAG_ST_LIST = HEADER_ST + "list.*";
+    String TAG_ST_RM = HEADER_ST + "rm.*";
 
-    String headerTeam = header + "team[ ]*";
-    String tagTeamShow = headerTeam + ".*";
-    String tagTeamSet = headerTeam + "set.*";
-    String tagTeamClr = headerTeam + "clr.*";
-    String tagTeamMove = headerTeam + "rm.*";
-    String tagTeamCall = headerTeam + "call.*";
-    String tagTeamHp = headerTeam + "hp.*";
-    String tagTeamSan = headerTeam + "san.*";
-    String tagTeamDesc = headerTeam + "desc.*";
+    String HEADER_TEAM = HEADER + "team[ ]*";
+    String TAG_TEAM_SHOW = HEADER_TEAM + ".*";
+    String TAG_TEAM_SET = HEADER_TEAM + "set.*";
+    String TAG_TEAM_CLR = HEADER_TEAM + "clr.*";
+    String TAG_TEAM_RM = HEADER_TEAM + "rm.*";
+    String TAG_TEAM_CALL = HEADER_TEAM + "call.*";
+    String TAG_TEAM_HP = HEADER_TEAM + "hp.*";
+    String TAG_TEAM_SAN = HEADER_TEAM + "san.*";
+    String TAG_TEAM_DESC = HEADER_TEAM + "desc.*";
 
-    String headerBot = header + "bot[ ]*";
-    String tagBotShow = headerBot + ".*";
-    String tagBotOn = headerBot + "on.*";
-    String tagBotOff = headerBot + "off.*";
-    String tagBotExit = headerBot + "exit.*";
+    String HEADER_BOT = HEADER + "bot[ ]*";
+    String TAG_BOT_SHOW = HEADER_BOT + ".*";
+    String TAG_BOT_ON = HEADER_BOT + "on.*";
+    String TAG_BOT_OFF = HEADER_BOT + "off.*";
+    String TAG_BOT_EXIT = HEADER_BOT + "exit.*";
 
-    String headerHelp = header + "help[ ]*";
-    String tagHelpInfo = headerHelp + ".*";
-    String tagHelpNormal = headerHelp + "normal.*";
-    String tagHelpMake = headerHelp + "make.*";
-    String tagHelpGroup = headerHelp + "group.*";
-    String tagHelpBook = headerHelp + "book.*";
-    String tagHelpDnd = headerHelp + "dnd.*";
+    String HEADER_HELP = HEADER + "help[ ]*";
+    String TAG_HELP_INFO = HEADER_HELP + ".*";
+    String TAG_HELP_NORMAL = HEADER_HELP + "normal.*";
+    String TAG_HELP_MAKE = HEADER_HELP + "make.*";
+    String TAG_HELP_GROUP = HEADER_HELP + "group.*";
+    String TAG_HELP_BOOK = HEADER_HELP + "book.*";
+    String TAG_HELP_DND = HEADER_HELP + "dnd.*";
 
-    String headerBook = header + "getbook[ ]*";
-    String tagBookCard = headerBook + "card.*";
-    String tagBookRP = headerBook + "rp.*";
-    String tagBookKP = headerBook + "kp.*";
-    String tagBookMake = headerBook + "make.*";
+    String HEADER_BOOK = HEADER + "getbook[ ]*";
+    String TAG_BOOK_CARD = HEADER_BOOK + "card.*";
+    String TAG_BOOK_RP = HEADER_BOOK + "rp.*";
+    String TAG_BOOK_KP = HEADER_BOOK + "kp.*";
+    String TAG_BOOK_MAKE = HEADER_BOOK + "make.*";
 
-    String tagNPC = header + "npc.*";
+    String TAG_NPC = HEADER + "npc.*";
 
-    String tagBG = header + "bg.*";
+    String TAG_BG = HEADER + "bg.*";
 
-    String tagTZ = header + "tz.*";
+    String TAG_TZ = HEADER + "tz.*";
 
-    String tagGas = header + "gas.*";
+    String TAG_GAS = HEADER + "gas.*";
 
-    String headerCoc = header + "coc[ ]*";
-    String tagCoc7 = headerCoc + "[7]{0,1}[ ]*(10|[1-9])*";
-    String tagCoc7d = headerCoc + "[7]{0,1}d[ ]*(10|[1-9])*";
-    String tagCoc6 = headerCoc + "6[ ]*(10|[1-9])*";
-    String tagCoc6d = headerCoc + "6d[ ]*(10|[1-9])*";
+    String HEADER_COC = HEADER + "coc[ ]*";
+    String TAG_COC7 = HEADER_COC + "[7]{0,1}[ ]*(10|[1-9])*";
+    String TAG_COC7D = HEADER_COC + "[7]{0,1}d[ ]*(10|[1-9])*";
+    String TAG_COC6 = HEADER_COC + "6[ ]*(10|[1-9])*";
+    String TAG_COC6D = HEADER_COC + "6d[ ]*(10|[1-9])*";
 
-    String headerLog = header + "log[ ]*";
-    String tagLogOn = headerLog + "on.*";
-    String tagLogOff = headerLog + "off.*";
-    String tagLogGet = headerLog + "get.*";
-    String tagLogList = headerLog + "list.*";
-    String tagLogDel = headerLog + "del.*";
+    String HEADER_LOG = HEADER + "log[ ]*";
+    String TAG_LOG_ON = HEADER_LOG + "on.*";
+    String TAG_LOG_OFF = HEADER_LOG + "off.*";
+    String TAG_LOG_GET = HEADER_LOG + "get.*";
+    String TAG_LOG_LIST = HEADER_LOG + "list.*";
+    String TAG_LOG_RM = HEADER_LOG + "rm.*";
 
-    String tagTi = header + "ti[ ]*.*";
-    String tagLi = header + "li[ ]*.*";
+    String TAG_TI = HEADER + "ti[ ]*.*";
+    String TAG_LI = HEADER + "li[ ]*.*";
 
-    String headerDnd = header + "dnd[ ]*";
-    String tagDnd = headerDnd + "(10|[1-9])*";
-    String tagRi = header + "ri.*";
-    String tagInit = header + "init.*";
-    String tagInitClr = header + "init clr.*";
+    String HEADER_DND = HEADER + "dnd[ ]*";
+    String TAG_DND = HEADER_DND + "(10|[1-9])*";
+    String TAG_RI = HEADER + "ri.*";
+    String TAG_INIT = HEADER + "init.*";
+    String TAG_INIT_CLR = HEADER + "init clr.*";
 
-    String headerClue = header + "clue[ ]*";
-    String tagClueSet = headerClue + ".*";
-    String tagClueShow = headerClue + "show.*";
-    String tagClueRm = headerClue + "rm.*";
-    String tagClueClr = headerClue + "clr.*";
+    String HEADER_CLUE = HEADER + "clue[ ]*";
+    String TAG_CLUE_SET = HEADER_CLUE + ".*";
+    String TAG_CLUE_SHOW = HEADER_CLUE + "show.*";
+    String TAG_CLUE_RM = HEADER_CLUE + "rm.*";
+    String TAG_CLUE_CLR = HEADER_CLUE + "clr.*";
 
-    String tagHiy = header + "hiy[ ]*.*";
+    String TAG_HIY = HEADER + "hiy[ ]*.*";
 
-    String tagKp = header + "kp[ ]*.*";
+    String TAG_KP = HEADER + "kp[ ]*.*";
 
-    String tagJRRP=header+"jrrp[ ]*.*";
+    String TAG_JRRP = HEADER + "jrrp[ ]*.*";
 }

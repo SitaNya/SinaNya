@@ -7,8 +7,8 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import static dice.sinanya.system.MessagesTag.tagClueRm;
-import static dice.sinanya.system.MessagesTag.tagClueSet;
+import static dice.sinanya.system.MessagesTag.TAG_CLUE_RM;
+import static dice.sinanya.system.MessagesTag.TAG_CLUE_SET;
 import static dice.sinanya.tools.Clue.*;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.Sender.sender;
@@ -26,7 +26,7 @@ public class Clue {
     }
 
     public void set() {
-        String tag = tagClueSet;
+        String tag = TAG_CLUE_SET;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         setClue(new EntityClue(entityTypeMessages.getFromGroup(), new Date(new java.util.Date().getTime()), entityTypeMessages.getFromQQ()), msg);
     }
@@ -38,7 +38,7 @@ public class Clue {
     }
 
     public void rm() {
-        String tag = tagClueRm;
+        String tag = TAG_CLUE_RM;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 

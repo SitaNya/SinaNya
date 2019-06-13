@@ -10,8 +10,8 @@ import dice.sinanya.exceptions.PlayerSetException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static dice.sinanya.system.MessagesTag.tagStMove;
-import static dice.sinanya.system.MessagesTag.tagStSet;
+import static dice.sinanya.system.MessagesTag.TAG_ST_MOVE;
+import static dice.sinanya.system.MessagesTag.TAG_ST_SET;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.RoleChoose.*;
@@ -32,7 +32,7 @@ public class Roles extends PropList implements Role {
     public boolean set() throws PlayerSetException {
         useRole(entityTypeMessages);
 
-        String tag = tagStSet;
+        String tag = TAG_ST_SET;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         String sepRoleAndPro = "-";
         String tagRoleNameNone = "";
@@ -87,7 +87,7 @@ public class Roles extends PropList implements Role {
     public void move() {
         useRole(entityTypeMessages);
 
-        String tag = tagStMove;
+        String tag = TAG_ST_MOVE;
         String role = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
         if (checkRoleInfoExistByFromQQ(entityTypeMessages, role)) {
