@@ -11,10 +11,10 @@ import static dice.sinanya.tools.Sender.sender;
  *
  * @author zhangxiaozhou
  */
-public class TZ {
+public class Tz {
     private EntityTypeMessages entityTypeMessages;
 
-    public TZ(EntityTypeMessages entityTypeMessages) {
+    public Tz(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
     }
 

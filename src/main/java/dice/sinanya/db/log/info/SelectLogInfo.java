@@ -19,7 +19,7 @@ public class SelectLogInfo {
     }
 
     public String selectLogInfo(EntityLogTag entityLogTag) {
-        StringBuffer stringBuffer = new StringBuffer();
+        StringBuilder stringBuilder = new StringBuilder();
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from textLog where groupId=? and logName=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -27,8 +27,8 @@ public class SelectLogInfo {
                 ps.setString(2, entityLogTag.getLogName());
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
-                        stringBuffer.append(set.getString("logInfo"));
-                        stringBuffer.append("\n");
+                        stringBuilder.append(set.getString("logInfo"));
+                        stringBuilder.append("\n");
                     }
                 }
             }
@@ -36,6 +36,6 @@ public class SelectLogInfo {
             e.printStackTrace();
             System.out.println();
         }
-        return stringBuffer.toString();
+        return stringBuilder.toString();
     }
 }

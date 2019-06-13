@@ -11,6 +11,8 @@ public interface MessagesSystem {
     Boolean WIN_MODEL = Objects.equals(System.getProperty("os.name").toLowerCase(Locale.US), "Windows 10");
     Boolean LINUX_MODEL = !OSX_MODEL && !WIN_MODEL;
 
+    String NONE="";
+
     String VERSIONS = "0.1.0.0 beta";
     String STR_SUCCESSFULLY_ENABLED_NOTICE = "啊~您需要奈梅斯了吗？我一定会好好努力的";
     String STR_ALREADY_ENABLED_ERR = "嗯！我在的呢，您尽管吩咐吧";

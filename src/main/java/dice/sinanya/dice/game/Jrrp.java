@@ -1,4 +1,4 @@
-package dice.sinanya.dice.Game;
+package dice.sinanya.dice.game;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
@@ -21,7 +21,7 @@ public class Jrrp {
     }
 
     public void get() {
-        String date = toTimestamp(new Date(), "yyyy-MM-dd");
+        String date = toTimestamp(new Date());
         int tmp = 0;
         char[] b = (entityTypeMessages.getFromQQ() + date).toCharArray();
         //转换成响应的ASCLL
@@ -31,12 +31,11 @@ public class Jrrp {
         sender(entityTypeMessages, getNickName(entityTypeMessages) + "的今日人品为: " + (tmp % 100));
     }
 
-    //传入时间
-    public static String toTimestamp(Date date, String geshi) {
-        SimpleDateFormat df = new SimpleDateFormat(geshi);
-        Date s = date;
-        String result = null;
-        result = df.format(s);
+
+    private static String toTimestamp(Date date) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String result;
+        result = df.format(date);
         return result;
     }
 }

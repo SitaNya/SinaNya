@@ -1,30 +1,40 @@
 package dice.sinanya.dice.manager;
 
-import dice.sinanya.db.roles.SelectRoles;
+import dice.sinanya.dice.manager.imal.AtQq;
+import dice.sinanya.dice.manager.imal.PropList;
+import dice.sinanya.dice.manager.imal.Role;
 import dice.sinanya.entity.*;
+import dice.sinanya.entity.imal.GetDb;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
 import dice.sinanya.tools.CheckSanCheck;
 import dice.sinanya.tools.MakeManyRollsStr;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.DBAndSize.dbGetter;
-import static dice.sinanya.tools.GetSkillName.getSkillName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.MakeSkill.makeSkill;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
-import static dice.sinanya.tools.RoleInfo.*;
+import static dice.sinanya.tools.RoleInfo.getRoleInfoFromChooseByQQ;
+import static dice.sinanya.tools.RoleInfo.setRoleInfoFromChooseByQQ;
 import static dice.sinanya.tools.Sender.sender;
 import static dice.sinanya.tools.Team.*;
 import static java.lang.Math.*;
 
-public class Team {
+/**
+ * 管理小队
+ *
+ * @author zhangxiaozhou
+ */
+public class Team extends PropList implements GetDb, Role, AtQq {
+
+    private String regex = "\\[CQ:at,qq=([0-9]+)]";
 
     private EntityTypeMessages entityTypeMessages;
 
@@ -33,20 +43,11 @@ public class Team {
     }
 
     public void set() {
-        new SelectRoles().flushRoleChooseByFromQQ(entityTypeMessages);
-        new SelectRoles().flushRoleInfoCacheByFromQQ(entityTypeMessages);
+        useRole(entityTypeMessages);
 
         String tag = tagTeamSet;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        String regex = "\\[CQ:at,qq=([0-9]+)]";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(msg);
-
-        ArrayList<String> qqList = new ArrayList<>();
-        int i = 0;
-        while (matcher.find()) {
-            qqList.add(matcher.group(1));
-        }
+        ArrayList<String> qqList = getAtQqList(msg);
         for (String qq : qqList) {
             sender(entityTypeMessages, "已将玩家: [CQ:at,qq=" + qq + "]加入小队。可以使用.team查看队伍信息,.team hp/san对成员状态进行强制调整\n其余使用方式请查看.help命令");
         }
@@ -55,23 +56,14 @@ public class Team {
     }
 
     public void remove() {
-        new SelectRoles().flushRoleChooseByFromQQ(entityTypeMessages);
-        new SelectRoles().flushRoleInfoCacheByFromQQ(entityTypeMessages);
+        useRole(entityTypeMessages);
 
         String tag = tagTeamMove;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        String regex = "\\[CQ:at,qq=([0-9]+)]";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(msg);
-
-        ArrayList<String> qqList = new ArrayList<>();
-        while (matcher.find()) {
-            qqList.add(matcher.group(1));
-        }
-        ArrayList<String> tmpQQList = qqList;
+        ArrayList<String> qqList = getAtQqList(msg);
         EntityTeamInfo entityTeamInfo = new EntityTeamInfo(entityTypeMessages.getFromGroup(), qqList);
         removeFromTeam(entityTeamInfo);
-        for (String qq : tmpQQList) {
+        for (String qq : qqList) {
             sender(entityTypeMessages, "已将玩家: [CQ:at,qq=" + qq + "]移出小队,其在这期间损失的血量和san值不会还原。");
         }
     }
@@ -82,8 +74,7 @@ public class Team {
     }
 
     public void call() {
-        new SelectRoles().flushRoleChooseByFromQQ(entityTypeMessages);
-        new SelectRoles().flushRoleInfoCacheByFromQQ(entityTypeMessages);
+        useRole(entityTypeMessages);
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("kp正在呼叫以下成员:");
@@ -97,19 +88,11 @@ public class Team {
     }
 
     public void hp() {
-        new SelectRoles().flushRoleChooseByFromQQ(entityTypeMessages);
-        new SelectRoles().flushRoleInfoCacheByFromQQ(entityTypeMessages);
+        useRole(entityTypeMessages);
 
         String tag = tagTeamHp;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        String regex = "\\[CQ:at,qq=([0-9]+)]";
-        final Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(msg);
-
-        ArrayList<String> qqList = new ArrayList<>();
-        while (matcher.find()) {
-            qqList.add(matcher.group(1));
-        }
+        ArrayList<String> qqList = getAtQqList(msg);
 
         msg = msg.replaceAll(regex, "").trim();
         for (String qq : qqList) {
@@ -156,19 +139,11 @@ public class Team {
     }
 
     public void san() {
-        new SelectRoles().flushRoleChooseByFromQQ(entityTypeMessages);
-        new SelectRoles().flushRoleInfoCacheByFromQQ(entityTypeMessages);
+        useRole(entityTypeMessages);
 
         String tag = tagTeamSan;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        String regex = "\\[CQ:at,qq=([0-9]+)]";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(msg);
-
-        ArrayList<String> qqList = new ArrayList<>();
-        while (matcher.find()) {
-            qqList.add(matcher.group(1));
-        }
+        ArrayList<String> qqList = getAtQqList(msg);
 
         msg = msg.replaceAll(regex, "").trim();
         for (String qq : qqList) {
@@ -192,7 +167,7 @@ public class Team {
                         EntitySanCheck entitySanCheck = checkSanCheck.checkSanCheck("理智", msg);
                         sender(entityTypeMessages, entitySanCheck.getStrSanCheck());
                     } else {
-                        int changeValue = 0;
+                        int changeValue;
                         if (isNumeric(msg)) {
                             changeValue = Integer.parseInt(msg);
                         } else {
@@ -230,8 +205,7 @@ public class Team {
     }
 
     public void show() {
-        new SelectRoles().flushRoleChooseByFromQQ(entityTypeMessages);
-        new SelectRoles().flushRoleInfoCacheByFromQQ(entityTypeMessages);
+        useRole(entityTypeMessages);
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("您的小队情况目前为: ");
@@ -279,6 +253,8 @@ public class Team {
     }
 
     public void desc() {
+        useRole(entityTypeMessages);
+
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("您小队内成员的属性值为:\n");
 
@@ -288,154 +264,8 @@ public class Team {
             return;
         }
         for (String qq : qqList) {
-            ArrayList<String> propMain = new ArrayList<String>() {{
-                add("hp");
-                add("san");
-                add("str");
-                add("pow");
-                add("con");
-                add("app");
-                add("edu");
-                add("siz");
-                add("intValue");
-                add("luck");
-                add("mp");
-            }};
-
-            ArrayList<String> propInvestigationOfCrimes = new ArrayList<String>() {{
-                add("libraryUse");
-                add("investigationOfCrimes");
-                add("listen");
-                add("unlock");
-                add("aWonderfulHand");
-            }};
-
-            ArrayList<String> propTalk = new ArrayList<String>() {{
-                add("persuade");
-                add("intimidate");
-                add("enchantment");
-                add("talkingSkill");
-                add("psychology");
-            }};
-
-            ArrayList<String> propFight = new ArrayList<String>() {{
-                add("aFistFight");
-                add("dodge");
-                add("pistol");
-                add("firstAid");
-                add("medicalScience");
-            }};
-
-            ArrayList<String> allSelect = new ArrayList<String>();
-
-            allSelect.addAll(propMain);
-            allSelect.addAll(propInvestigationOfCrimes);
-            allSelect.addAll(propTalk);
-            allSelect.addAll(propFight);
-
-
-            if (checkRoleInfoFromChooseExistByQQ(qq)) {
-                stringBuilder
-                        .append("\n")
-                        .append("======================================================")
-                        .append("\n")
-                        .append(getRoleChooseByQQ(qq))
-                        .append("的角色: ")
-                        .append("包含有以下数据\n");
-
-                stringBuilder.append("主属性为:\n");
-                ArrayList<String> propMainResult = showProp(propMain);
-                Collections.sort(propMainResult);
-                stringBuilder = formatResult(stringBuilder, propMainResult);
-
-                stringBuilder.append("\n常规侦查技能:\n");
-                ArrayList<String> propInvestigationOfCrimesResult = showProp(propInvestigationOfCrimes);
-                Collections.sort(propInvestigationOfCrimesResult);
-                stringBuilder = formatResult(stringBuilder, propInvestigationOfCrimesResult);
-
-                stringBuilder.append("\n常规社交技能:\n");
-                ArrayList<String> propTalkResult = showProp(propTalk);
-                Collections.sort(propTalkResult);
-                stringBuilder = formatResult(stringBuilder, propTalkResult);
-
-                stringBuilder.append("\n常规战斗技能:\n");
-                ArrayList<String> propFightResult = showProp(propFight);
-                Collections.sort(propFightResult);
-                stringBuilder = formatResult(stringBuilder, propFightResult);
-
-                stringBuilder.append("\n剩余技能值在50以上的技能:\n");
-                ArrayList<String> propUpResult = showProp(allSelect, true);
-                Collections.sort(propUpResult);
-                stringBuilder = formatResult(stringBuilder, propUpResult);
-
-                stringBuilder.append("\n剩余输入了技能值但不足50的技能:\n");
-                ArrayList<String> propDownResult = showProp(allSelect, false);
-                Collections.sort(propDownResult);
-                stringBuilder = formatResult(stringBuilder, propDownResult);
-            } else {
-                stringBuilder.append(getRoleChooseByQQ(qq) + "似乎未设定角色");
-            }
+            stringBuilder = new Roles(entityTypeMessages).showProp(qq);
         }
         entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), stringBuilder.toString());
-    }
-
-    private StringBuilder formatResult(StringBuilder stringBuilder, ArrayList<String> propList) {
-        int rowNum = 0;
-        int propertiesWeight = 13;
-        for (String prop : propList) {
-            if (propList.indexOf(prop) == 0) {
-                stringBuilder.append(prop);
-                int textLen = (prop).length();
-                for (int i = 0; i < propertiesWeight - textLen; i++) {
-                    stringBuilder.append(" ");
-                }
-                continue;
-            }
-            if (rowNum < 3) {
-                stringBuilder.append(prop);
-                int textLen = (prop).length();
-                for (int i = 0; i < propertiesWeight - textLen; i++) {
-                    stringBuilder.append(" ");
-                }
-                rowNum++;
-            } else {
-                stringBuilder.append("\n");
-                stringBuilder.append(prop);
-                int textLen = (prop).length();
-                for (int i = 0; i < propertiesWeight - textLen; i++) {
-                    stringBuilder.append(" ");
-                }
-                rowNum = 0;
-            }
-        }
-        return stringBuilder;
-    }
-
-    private ArrayList<String> showProp(ArrayList<String> propMain) {
-
-        ArrayList<String> result = new ArrayList<>();
-        for (Map.Entry<String, Integer> mapEntry : Objects.requireNonNull(getRoleInfoFromChooseByFromQQ(entityTypeMessages)).entrySet()) {
-            if (propMain.contains(mapEntry.getKey()) && mapEntry.getValue() != 0) {
-                result.add(getSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
-            }
-
-        }
-        return result;
-    }
-
-    private ArrayList<String> showProp(ArrayList<String> propMain, boolean up) {
-        ArrayList<String> result = new ArrayList<>();
-        for (Map.Entry<String, Integer> mapEntry : Objects.requireNonNull(getRoleInfoFromChooseByFromQQ(entityTypeMessages)).entrySet()) {
-            if (!propMain.contains(mapEntry.getKey()) && mapEntry.getValue() != 0) {
-                if (up && mapEntry.getValue() >= 50) {
-                    result.add(getSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
-                } else if (!up && mapEntry.getValue() < 50) {
-                    result.add(getSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
-                }
-
-            }
-
-        }
-        return result;
     }
 }

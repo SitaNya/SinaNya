@@ -8,6 +8,11 @@ import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.Sender.sender;
 
+/**
+ * 管理最大默认骰
+ *
+ * @author zhangxiaozhou
+ */
 public class SetRollMaxValue {
     private EntityTypeMessages entityTypeMessages;
 

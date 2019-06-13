@@ -1,6 +1,6 @@
 package dice.sinanya.listener;
 
-import dice.sinanya.dice.Game.Jrrp;
+import dice.sinanya.dice.game.Jrrp;
 import dice.sinanya.dice.get.*;
 import dice.sinanya.dice.getbook.Book;
 import dice.sinanya.dice.manager.*;
@@ -220,8 +220,8 @@ class Flow {
         Help help = new Help(entityTypeMessages);
         Book book = new Book(entityTypeMessages);
         Bj bj = new Bj(entityTypeMessages);
-        NPC npc = new NPC(entityTypeMessages);
-        TZ tz = new TZ(entityTypeMessages);
+        Npc npc = new Npc(entityTypeMessages);
+        Tz tz = new Tz(entityTypeMessages);
         Gas gas = new Gas(entityTypeMessages);
         History history = new History(entityTypeMessages);
         RollForDnd rollForDnd = new RollForDnd(entityTypeMessages);

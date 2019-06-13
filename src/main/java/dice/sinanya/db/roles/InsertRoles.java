@@ -73,59 +73,7 @@ public class InsertRoles {
             propertiesForRole = new RolesInfo().init();
         }
         propertiesForRole = new RolesInfo(properties, propertiesForRole).getPropertiesForRole();
-        int num = 0;
-        try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from role where userName=? and qqId=?";
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, role);
-                ps.setLong(2, qqId);
-                try (ResultSet set = ps.executeQuery()) {
-                    while (set.next()) {
-                        num++;
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        ROLE_CHOOSE.put(qqId, role);
-        insertRoleChoose(qqId, role);
-        ROLE_INFO_CACHE.put(new EntityRoleTag(qqId, role), propertiesForRole);
-        if (num == 0) {
-            insertInfo(propertiesForRole, qqId, role);
-        } else {
-            updateInfo(propertiesForRole, qqId, role);
-        }
-    }
-
-    @SuppressWarnings("AlibabaMethodTooLong")
-    public void insertRoleInfo(String properties, String role, String qq) {
-        long qqId = Long.parseLong(qq);
-        HashMap<String, Integer> propertiesForRole = getRoleInfoByQQ(qq, role);
-        propertiesForRole = new RolesInfo(properties, propertiesForRole).getPropertiesForRole();
-        int num = 0;
-        try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from role where userName=? and qqId=?";
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, role);
-                ps.setLong(2, qqId);
-                try (ResultSet set = ps.executeQuery()) {
-                    while (set.next()) {
-                        num++;
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        if (num == 0) {
-            insertInfo(propertiesForRole, qqId, role);
-        } else {
-            updateInfo(propertiesForRole, qqId, role);
-        }
-
+        insertRoleInfo(propertiesForRole, role, qqId);
     }
 
     @SuppressWarnings("AlibabaMethodTooLong")
@@ -146,12 +94,21 @@ public class InsertRoles {
             System.out.println(e.getMessage());
         }
 
+        ROLE_CHOOSE.put(qqId, role);
+        insertRoleChoose(qqId, role);
+        ROLE_INFO_CACHE.put(new EntityRoleTag(qqId, role), properties);
+
         if (num == 0) {
             insertInfo(properties, qqId, role);
         } else {
             updateInfo(properties, qqId, role);
         }
 
+    }
+
+    @SuppressWarnings("AlibabaMethodTooLong")
+    public void insertRoleInfo(String properties, String role, String qq) {
+        insertRoleInfo(properties, role, Long.parseLong(qq));
     }
 
 
@@ -234,8 +191,10 @@ public class InsertRoles {
         }
     }
 
+    @SuppressWarnings("AlibabaMethodTooLong")
     private void insertInfo(HashMap<String, Integer> propertiesForRole, long qqId, String role) {
         Timestamp timestamp = getTime(getNowString());
+        //noinspection AlibabaMethodTooLong
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "INSERT INTO role(" +
                     "createTime," +

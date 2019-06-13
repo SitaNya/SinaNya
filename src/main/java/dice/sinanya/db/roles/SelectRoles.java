@@ -62,6 +62,7 @@ public class SelectRoles {
         flushRoleChooseByQQ(qq);
     }
 
+    @SuppressWarnings("AlibabaMethodTooLong")
     private void selectRoleInfoCache(long qqId) {
 
         HashMap<String, HashMap<String, Integer>> tmp3 = new HashMap<>();

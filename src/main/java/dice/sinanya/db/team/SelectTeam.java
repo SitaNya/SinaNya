@@ -31,7 +31,7 @@ public class SelectTeam {
             System.out.println(e.getMessage());
         }
         if (strQqList != null) {
-            return new ArrayList<String>(Arrays.asList(strQqList.split(",")));
+            return new ArrayList<>(Arrays.asList(strQqList.split(",")));
         } else {
             return null;
         }

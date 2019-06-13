@@ -33,9 +33,9 @@ public class InsertLogInfo {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println(entityLogTag);
-            StringBuffer stringBuffer = new StringBuffer();
+            StringBuilder stringBuilder = new StringBuilder();
             for (Map.Entry<EntityLogTag, Boolean> mapEntry : logNameSwitch.entrySet()) {
-                stringBuffer.append("groupId")
+                stringBuilder.append("groupId")
                         .append(":")
                         .append(mapEntry.getKey().getGroupId())
                         .append("\t")
@@ -43,7 +43,7 @@ public class InsertLogInfo {
                         .append(mapEntry.getKey().getLogName())
                         .append("\n");
             }
-            System.out.println(stringBuffer.toString());
+            System.out.println(stringBuilder.toString());
         }
     }
 }

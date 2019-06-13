@@ -32,7 +32,7 @@ public class InsertTeam {
         }
     }
 
-    public void deleteGroup(String group, ArrayList<String> qqList) {
+    private void deleteGroup(String group, ArrayList<String> qqList) {
         try (Connection conn = DbUtil.getConnection()) {
             if (qqList == null) {
                 String sql = "delete from team where groupId=?";
@@ -64,7 +64,7 @@ public class InsertTeam {
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         num++;
-                        qqList = new ArrayList<String>(Arrays.asList(set.getString("qqList").split(",")));
+                        qqList = new ArrayList<>(Arrays.asList(set.getString("qqList").split(",")));
                         if (add) {
                             qqList.addAll(qqChangeList);
                         } else {
@@ -97,9 +97,8 @@ public class InsertTeam {
                 String sql = "update team set " +
                         "qqList=? where groupId=?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    StringBuilder stringBuilder = new StringBuilder();
-                    Set<String> middleHashSet = new HashSet<String>(qqList);
-                    ArrayList<String> afterHashSetList = new ArrayList<String>(middleHashSet);
+                    Set<String> middleHashSet = new HashSet<>(qqList);
+                    ArrayList<String> afterHashSetList = new ArrayList<>(middleHashSet);
 
                     ps.setString(1, StringUtils.join(afterHashSetList, ","));
                     ps.setString(2, entityTeamInfo.getGroup());

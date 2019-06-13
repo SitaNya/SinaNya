@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.tools.RoleChoose.checkRoleChooseExistByQQ;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
 
@@ -48,7 +49,7 @@ public class SelectClue {
             e.printStackTrace();
             System.out.println();
         }
-        if (stringBuffer.toString().equals("")) {
+        if (stringBuffer.toString().equals(NONE)) {
             return stringBuffer.toString();
         } else {
             return stringBuffer.substring(0, stringBuffer.length() - 1);
