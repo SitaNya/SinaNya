@@ -13,6 +13,11 @@ import static dice.sinanya.tools.Clue.*;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.Sender.sender;
 
+/**
+ * 线索集
+ *
+ * @author zhangxiaozhou
+ */
 public class Clue {
     private EntityTypeMessages entityTypeMessages;
 

@@ -14,6 +14,11 @@ import java.util.HashMap;
 import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOSE;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 
+/**
+ * 查询角色信息，包括当前角色和角色内容
+ *
+ * @author zhangxiaozhou
+ */
 public class SelectRoles {
     public SelectRoles() {
     }
@@ -58,13 +63,15 @@ public class SelectRoles {
     }
 
     private void selectRoleInfoCache(long qqId) {
-        HashMap<String, Integer> propertiesForRole = new RolesInfo().getPropertiesForRole();
+
+        HashMap<String, HashMap<String, Integer>> tmp3 = new HashMap<>();
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from role where qqId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setLong(1, qqId);
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
+                        HashMap<String, Integer> propertiesForRole = new RolesInfo().getPropertiesForRole();
                         String role = set.getString("userName");
                         propertiesForRole.put("str", set.getInt("str"));
                         propertiesForRole.put("dex", set.getInt("dex"));

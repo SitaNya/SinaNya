@@ -9,6 +9,11 @@ import java.sql.SQLException;
 
 import static dice.sinanya.system.SystemInfo.SWITCH_BOT;
 
+/**
+ * 查询某个群的开启与关闭情况
+ *
+ * @author zhangxiaozhou
+ */
 public class SelectBot {
     public void selectBot() {
         try (Connection conn = DbUtil.getConnection()) {

@@ -9,6 +9,11 @@ import java.sql.SQLException;
 
 import static dice.sinanya.system.MessagesKP.KpGroup;
 
+/**
+ * 查询kp主群
+ *
+ * @author zhangxiaozhou
+ */
 public class SelectKp {
     public SelectKp() {
     }

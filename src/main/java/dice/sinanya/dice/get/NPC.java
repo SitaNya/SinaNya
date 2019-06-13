@@ -11,6 +11,11 @@ import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.Sender.sender;
 import static java.lang.Math.ceil;
 
+/**
+ * 获取NPC
+ *
+ * @author zhangxiaozhou
+ */
 public class NPC {
 
     private EntityTypeMessages entityTypeMessages;

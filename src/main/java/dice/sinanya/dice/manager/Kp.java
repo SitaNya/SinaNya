@@ -7,6 +7,11 @@ import static dice.sinanya.tools.Kp.getKpGroup;
 import static dice.sinanya.tools.Kp.setKpGroup;
 import static dice.sinanya.tools.Sender.sender;
 
+/**
+ * kp主群
+ *
+ * @author zhangxiaozhou
+ */
 public class Kp {
     private EntityTypeMessages entityTypeMessages;
 

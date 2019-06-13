@@ -13,6 +13,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 录入队伍信息
+ *
+ * @author zhangxiaozhou
+ */
 public class InsertTeam {
 
     public void deleteGroup(String group) {

@@ -7,6 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 录入kp主群
+ *
+ * @author zhangxiaozhou
+ */
 public class InsertKp {
     public void insertKp(String qqId, String groupId) {
         int num = 0;

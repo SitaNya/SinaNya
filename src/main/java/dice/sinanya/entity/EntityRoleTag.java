@@ -6,8 +6,8 @@ import static dice.sinanya.tools.RoleChoose.checkRoleChooseExistByQQ;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
 
 public class EntityRoleTag {
-    long qq;
-    String role;
+    private long qq;
+    private String role;
 
     public EntityRoleTag(long qq, String role) {
         this.qq = qq;

@@ -5,6 +5,11 @@ import dice.sinanya.entity.EntityTypeMessages;
 import static dice.sinanya.system.MessagesBook.*;
 import static dice.sinanya.tools.Sender.sender;
 
+/**
+ * 获取资料集
+ *
+ * @author zhangxiaozhou
+ */
 public class Book {
 
     private EntityTypeMessages entityTypeMessages;

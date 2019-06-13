@@ -8,6 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 录入log开启标签
+ *
+ * @author zhangxiaozhou
+ */
 public class InsertLogTag {
     public InsertLogTag() {
     }

@@ -10,6 +10,11 @@ import java.sql.SQLException;
 
 import static dice.sinanya.system.MessagesHistory.historyList;
 
+/**
+ * 查询骰点历史
+ *
+ * @author zhangxiaozhou
+ */
 public class SelectHistory {
     public SelectHistory() {
     }

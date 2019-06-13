@@ -14,6 +14,11 @@ import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.Sender.sender;
 
+/**
+ * DND车卡类
+ *
+ * @author zhangxiaozhou
+ */
 public class MakeDndCard {
 
     private EntityTypeMessages entityTypeMessages;

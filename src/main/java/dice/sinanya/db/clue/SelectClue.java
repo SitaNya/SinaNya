@@ -11,6 +11,11 @@ import java.sql.SQLException;
 import static dice.sinanya.tools.RoleChoose.checkRoleChooseExistByQQ;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
 
+/**
+ * 获取线索集
+ *
+ * @author zhangxiaozhou
+ */
 public class SelectClue {
 
     public SelectClue() {

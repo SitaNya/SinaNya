@@ -8,6 +8,11 @@ import java.util.Date;
 import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.Sender.sender;
 
+/**
+ * 今日人品
+ *
+ * @author zhangxiaozhou
+ */
 public class Jrrp {
     private EntityTypeMessages entityTypeMessages;
 

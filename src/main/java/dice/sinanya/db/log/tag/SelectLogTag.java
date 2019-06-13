@@ -11,6 +11,11 @@ import java.util.ArrayList;
 
 import static dice.sinanya.system.MessagesLog.logNameSwitch;
 
+/**
+ * 查询log开启标签
+ *
+ * @author zhangxiaozhou
+ */
 public class SelectLogTag {
 
     public SelectLogTag() {

@@ -9,6 +9,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * 查询队伍信息
+ *
+ * @author zhangxiaozhou
+ */
 public class SelectTeam {
     public ArrayList<String> selectTeamInfo(String groupId) {
         String strQqList = null;

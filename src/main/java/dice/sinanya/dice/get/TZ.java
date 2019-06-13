@@ -6,6 +6,11 @@ import static dice.sinanya.system.MessagesTZ.tzList;
 import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.Sender.sender;
 
+/**
+ * 获取自定义特质
+ *
+ * @author zhangxiaozhou
+ */
 public class TZ {
     private EntityTypeMessages entityTypeMessages;
 

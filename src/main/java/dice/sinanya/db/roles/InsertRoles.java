@@ -13,6 +13,11 @@ import static dice.sinanya.tools.GetTime.getNowString;
 import static dice.sinanya.tools.GetTime.getTime;
 import static dice.sinanya.tools.RoleInfo.getRoleInfoByQQ;
 
+/**
+ * 录入角色信息，包括当前角色和角色内容
+ *
+ * @author zhangxiaozhou
+ */
 public class InsertRoles {
     public void insertRoleChoose(long qqId, String role) {
         int num = 0;

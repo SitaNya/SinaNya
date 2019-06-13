@@ -166,11 +166,13 @@ public class RoleInfo {
         long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
         String role;
         if (checkRoleChooseExistByQQ(qqId)) {
+            String tmp = ROLE_CHOOSE.get(qqId);
             role = ROLE_CHOOSE.get(qqId);
         } else {
             return null;
         }
         if (checkRoleInfoExistByQQ(qqId, role)) {
+            HashMap<EntityRoleTag,HashMap< String, Integer>> tmp = ROLE_INFO_CACHE;
             return ROLE_INFO_CACHE.get(new EntityRoleTag(qqId, role));
         } else {
             return null;

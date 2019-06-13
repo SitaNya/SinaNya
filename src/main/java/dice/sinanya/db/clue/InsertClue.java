@@ -7,6 +7,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * 录入线索集
+ *
+ * @author zhangxiaozhou
+ */
 public class InsertClue {
 
     public InsertClue() {

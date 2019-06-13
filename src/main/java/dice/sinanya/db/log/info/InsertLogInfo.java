@@ -10,6 +10,11 @@ import java.util.Map;
 
 import static dice.sinanya.system.MessagesLog.logNameSwitch;
 
+/**
+ * 录入log信息
+ *
+ * @author zhangxiaozhou
+ */
 public class InsertLogInfo {
 
     public InsertLogInfo() {

@@ -8,6 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 查询log信息
+ *
+ * @author zhangxiaozhou
+ */
 public class SelectLogInfo {
 
     public SelectLogInfo() {

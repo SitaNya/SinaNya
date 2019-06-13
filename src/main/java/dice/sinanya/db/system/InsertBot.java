@@ -7,6 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 录入某个群的开启与关闭情况
+ *
+ * @author zhangxiaozhou
+ */
 public class InsertBot {
     public void insertBot(long groupId, boolean switchBot) {
         int num = 0;

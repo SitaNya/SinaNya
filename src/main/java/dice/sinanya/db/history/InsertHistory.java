@@ -8,6 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 录入骰点历史
+ *
+ * @author zhangxiaozhou
+ */
 public class InsertHistory {
     public void insertHistory(EntityHistory entityHistory) {
         int num = 0;
