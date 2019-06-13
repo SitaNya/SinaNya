@@ -3,7 +3,6 @@ package dice.sinanya.dice.system;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.system.MessagesHelp.*;
-import static dice.sinanya.system.MessagesSystem.STR_BOT_HELP;
 import static dice.sinanya.system.MessagesSystem.STR_BOT_INFO;
 import static dice.sinanya.tools.Sender.sender;
 

@@ -23,7 +23,7 @@ import static dice.sinanya.tools.Sender.sender;
  *
  * @author zhangxiaozhou
  */
-public class MakeCocCard extends MakeCard {
+public class MakeCocCard implements MakeCard {
 
     private EntityTypeMessages entityTypeMessages;
 

@@ -20,6 +20,12 @@ import static dice.sinanya.tools.Sender.sender;
 import static java.lang.Math.ceil;
 import static java.lang.Math.floor;
 
+/**
+ * 奖励投、惩罚投
+ * 这两者不再支持计算公式
+ *
+ * @author zhangxiaozhou
+ */
 public class RewardAndPunishment {
 
     private EntityTypeMessages entityTypeMessages;

@@ -12,6 +12,8 @@ import dice.sinanya.dice.system.Log;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import static dice.sinanya.system.MessagesError.strPropErr;
 import static dice.sinanya.system.MessagesError.strSetPropSuccess;
@@ -19,6 +21,8 @@ import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.Sender.sender;
 
 class Flow {
+    private static final Logger Log = LogManager.getLogger(Flow.class);
+
     private EntityTypeMessages entityTypeMessages;
 
     private boolean isR = false;
@@ -225,10 +229,14 @@ class Flow {
         Gas gas = new Gas(entityTypeMessages);
         History history = new History(entityTypeMessages);
         RollForDnd rollForDnd = new RollForDnd(entityTypeMessages);
-        Jrrp jrrp=new Jrrp(entityTypeMessages);
+        Jrrp jrrp = new Jrrp(entityTypeMessages);
 
         if (isR) {
-            roll.r();
+            try {
+                roll.r();
+            } catch (PlayerSetException e) {
+                Log.error(e.getMessage(), e);
+            }
         } else if (isRA) {
             rollAndCheck.ra();
         } else if (isRC) {
@@ -345,7 +353,7 @@ class Flow {
             history.hiy();
         }
 
-        if (isJRRP){
+        if (isJRRP) {
             jrrp.get();
         }
 
@@ -365,7 +373,11 @@ class Flow {
 
 
         if (isRH) {
-            roll.rh();
+            try {
+                roll.rh();
+            } catch (PlayerSetException e) {
+                Log.error(e.getMessage(), e);
+            }
         }
 
         if (isTeamSet) {

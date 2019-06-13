@@ -6,6 +6,7 @@ import dice.sinanya.entity.EntityTypeMessages;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.GetSkillValue.getSkillValue;
@@ -43,7 +44,7 @@ public class MakeRollCheckResult {
             nick = getNickName(entityTypeMessages);
         }
 
-        if (!skillName.toString().equals("")) {
+        if (!skillName.toString().equals(NONE)) {
             skill = getSkillValue(entityTypeMessages, skillName.toString());
         }
         if (skill == 0) {

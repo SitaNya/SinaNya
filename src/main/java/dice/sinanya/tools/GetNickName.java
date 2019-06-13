@@ -2,12 +2,19 @@ package dice.sinanya.tools;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
+import static dice.sinanya.tools.RoleChoose.checkRoleChooseExistByFromQQ;
+import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
+
 /**
  * @author zhangxiaozhou
  */
 public class GetNickName {
 
     public static String getNickName(EntityTypeMessages entityTypeMessages) {
+        if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
+            return getRoleChooseByFromQQ(entityTypeMessages);
+        }
+
         switch (entityTypeMessages.getMsgGetTypes()) {
             case privateMsg:
                 return entityTypeMessages.getMsgPrivate().getNick();

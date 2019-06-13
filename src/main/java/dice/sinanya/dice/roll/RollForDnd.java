@@ -2,11 +2,7 @@ package dice.sinanya.dice.roll;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-import java.util.HashMap;
-
-import static dice.sinanya.system.MessagesInit.initList;
 import static dice.sinanya.system.MessagesTag.tagRE;
-import static dice.sinanya.system.MessagesTag.tagRi;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;

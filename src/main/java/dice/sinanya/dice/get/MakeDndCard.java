@@ -18,7 +18,7 @@ import static dice.sinanya.tools.Sender.sender;
  *
  * @author zhangxiaozhou
  */
-public class MakeDndCard extends MakeCard {
+public class MakeDndCard implements MakeCard {
 
     private EntityTypeMessages entityTypeMessages;
 
@@ -39,7 +39,7 @@ public class MakeDndCard extends MakeCard {
                 .append("\n");
 
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("dnd-make-card-%d").build();
-        ExecutorService exec = new ThreadPoolExecutor(times,times,0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(),namedThreadFactory);
+        ExecutorService exec = new ThreadPoolExecutor(times, times, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), namedThreadFactory);
         ArrayList<Future<String>> results = new ArrayList<>();
         for (int i = 0; i < times; i++) {
             results.add(exec.submit(new dice.sinanya.tools.MakeDndCard()));

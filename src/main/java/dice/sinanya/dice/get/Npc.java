@@ -1,13 +1,12 @@
 package dice.sinanya.dice.get;
 
+import dice.sinanya.dice.get.imal.MakeCard;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.ArrayList;
 
 import static dice.sinanya.system.MessagesNPC.Character;
-import static dice.sinanya.system.MessagesNPC.TZ;
 import static dice.sinanya.system.MessagesNPC.*;
-import static dice.sinanya.tools.MakeCocCardInfo.makeCardInfo;
 import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.Sender.sender;
 import static java.lang.Math.ceil;
@@ -17,7 +16,7 @@ import static java.lang.Math.ceil;
  *
  * @author zhangxiaozhou
  */
-public class Npc {
+public class Npc implements MakeCard {
 
     private EntityTypeMessages entityTypeMessages;
     private int trueAge;
@@ -132,7 +131,7 @@ public class Npc {
                 "点之高" +
                 "\n\n" +
                 "其余属性为:\n\n" +
-                makeCardInfo();
+                getCoc7CardInfo();
         entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), stringBuilder);
     }
 
