@@ -127,10 +127,6 @@ public class Roll {
 //        获取是否存在#表示重复次数
 
         String[] everyFunction = getSkillValue.getResStr().split(plus.toString());
-        if (everyFunction.length > 1 && intTimes != 1) {
-            throw new PlayerSetException(entityTypeMessages);
-        }
-//        如果存在#号次数，则不允许多个表达式相加
 
 
 //        根据#次数循环
