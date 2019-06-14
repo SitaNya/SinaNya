@@ -16,7 +16,7 @@ import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
 import static java.lang.Math.ceil;
 
 public class MakeRollCheckResult {
-    private static Pattern p = Pattern.compile("[+-/*]");
+    private static Pattern p = Pattern.compile("[+*/\\-]");
 
     public static EntityRollAndCheck makeResult(EntityTypeMessages entityTypeMessages, String msg) {
         int random = random(1, 100);
@@ -63,4 +63,5 @@ public class MakeRollCheckResult {
 
         return new EntityRollAndCheck(nick, random, skill);
     }
+
 }

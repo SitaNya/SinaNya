@@ -73,10 +73,6 @@ public class Roll {
             resultMessage.append(msg).append(": ");
         }
         String[] everyFunction = stringBuilderFunction.toString().split(plus.toString());
-        if (everyFunction.length > 1 && intTimes != 1) {
-            throw new PlayerSetException(entityTypeMessages);
-        }
-//        如果存在#号次数，则不允许多个表达式相加
 
         for (int i = 0; i < intTimes; i++) {
 //            根据#次数循环
