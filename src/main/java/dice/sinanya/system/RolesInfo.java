@@ -11,7 +11,7 @@ import static dice.sinanya.tools.RoleInfo.getRoleInfoFromChooseByFromQQ;
  * @author SitaNya
  */
 public class RolesInfo {
-    EntityTypeMessages entityTypeMessages;
+    private EntityTypeMessages entityTypeMessages;
     private String properties;
     private HashMap<String, Integer> propertiesForRole;
 

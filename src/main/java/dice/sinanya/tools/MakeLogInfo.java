@@ -4,7 +4,7 @@ import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.tools.GetNickName.getNickName;
 
-public class MakeLogInfo {
+class MakeLogInfo {
 
     static String makeLogInfo(EntityTypeMessages entityTypeMessages, String info) {
         info = info.trim();

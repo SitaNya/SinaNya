@@ -1,19 +1,18 @@
 package dice.sinanya.tools;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 import static dice.sinanya.tools.GetMaxNumsResult.getMaxNumsResult;
 import static dice.sinanya.tools.RandomInt.random;
 
 public class ManyRolls {
 
-    public static String manyRollsProcess(int times, int rolls, int Ktimes) {
-        if (Ktimes == 0) {
-            Ktimes = times;
+    public static String manyRollsProcess(int times, int rolls, int maxNums) {
+        if (maxNums == 0) {
+            maxNums = times;
         }
         int maxTimesRolls = 10;
         StringBuilder stringBuilder = new StringBuilder(200);
@@ -22,10 +21,13 @@ public class ManyRolls {
             int tmpResult = random(1, rolls);
             return String.valueOf(tmpResult);
         } else if (times > maxTimesRolls) {
-            ExecutorService exec = Executors.newCachedThreadPool();//工头
-            ArrayList<Future<Integer>> results = new ArrayList<Future<Integer>>();//
+            ArrayList<Future<Integer>> results = new ArrayList<>();
+
+            ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("manyRolls-%d").build();
+            ExecutorService exec = new ThreadPoolExecutor(times, times, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), namedThreadFactory);
             for (int i = 0; i < times; i++) {
-                results.add(exec.submit(new MakeManyRollsInThread(rolls)));//submit返回一个Future，代表了即将要返回的结果
+                results.add(exec.submit(new MakeManyRollsInThread(rolls)));
+                //submit返回一个Future，代表了即将要返回的结果
             }
             ArrayList<Integer> tmp = new ArrayList<>();
             for (Future future : results) {
@@ -42,7 +44,7 @@ public class ManyRolls {
                     e.printStackTrace();
                 }
             }
-            for (int intTmp : getMaxNumsResult(tmp, Ktimes)) {
+            for (int intTmp : getMaxNumsResult(tmp, maxNums)) {
                 intResult += intTmp;
             }
             exec.shutdown();
@@ -54,9 +56,9 @@ public class ManyRolls {
                 tmp.add(random(1, rolls));
             }
             int i = 0;
-            for (int tmpRandom : getMaxNumsResult(tmp, Ktimes)) {
+            for (int tmpRandom : getMaxNumsResult(tmp, maxNums)) {
                 stringBuilder.append(tmpRandom);
-                if (i != (Ktimes - 1)) {
+                if (i != (maxNums - 1)) {
                     stringBuilder.append("+");
                 }
                 intResult += tmpRandom;
@@ -67,9 +69,9 @@ public class ManyRolls {
         return stringBuilder.toString();
     }
 
-    public static int manyRollsForInt(int times, int rolls, int Ktimes) {
-        if (Ktimes == 0) {
-            Ktimes = times;
+    static int manyRollsForInt(int times, int rolls, int maxNums) {
+        if (maxNums == 0) {
+            maxNums = times;
         }
         int maxTimesRolls = 10;
         int intResult = 0;
@@ -80,7 +82,7 @@ public class ManyRolls {
             for (int i = 0; i < times; i++) {
                 tmp.add(random(1, rolls));
             }
-            for (int tmpRandom : getMaxNumsResult(tmp, Ktimes)) {
+            for (int tmpRandom : getMaxNumsResult(tmp, maxNums)) {
                 intResult += tmpRandom;
             }
             return intResult;

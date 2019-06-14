@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import static dice.sinanya.system.MessagesNPC.Character;
 import static dice.sinanya.system.MessagesNPC.*;
+import static dice.sinanya.tools.GetName.getRandomName;
 import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.Sender.sender;
 
@@ -91,6 +92,7 @@ public class Npc implements MakeCard {
     private void state() {
         String stringBuilder = "以下是NPC的基本信息:\n" +
                 "姓名:\t" +
+                getRandomName() +
                 "\n" +
                 "年龄\t" +
                 trueAge +

@@ -7,8 +7,8 @@ import dice.sinanya.entity.EntityTypeMessages;
 import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOSE;
 
 public class RoleChoose {
-    static SelectRoles selectRoles = new SelectRoles();
-    static InsertRoles insertRoles = new InsertRoles();
+    private static SelectRoles selectRoles = new SelectRoles();
+    private static InsertRoles insertRoles = new InsertRoles();
 
     public static boolean checkRoleChooseExistByQQ(long qqId) {
         if (ROLE_CHOOSE.containsKey(qqId)) {

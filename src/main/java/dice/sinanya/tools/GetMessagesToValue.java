@@ -8,9 +8,13 @@ import java.util.HashMap;
 import static dice.sinanya.tools.MakeSkillName.makeSkillName;
 
 /**
- * 将传入的msg人物属性信息整理包装为HashMap格式
- *
  * @author SitaNya
+ * 日期: 2019-06-14
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ *
+ * 类说明:将传入的msg人物属性信息整理包装为HashMap格式
  */
 public class GetMessagesToValue {
     private static final Logger Log = LogManager.getLogger(GetMessagesToValue.class);

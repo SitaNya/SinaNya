@@ -12,8 +12,8 @@ import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.RoleChoose.checkRoleChooseExistByQQ;
 
 public class RoleInfo {
-    static SelectRoles selectRoles = new SelectRoles();
-    static InsertRoles insertRoles = new InsertRoles();
+    private static SelectRoles selectRoles = new SelectRoles();
+    private static InsertRoles insertRoles = new InsertRoles();
 
     public static boolean checkRoleInfoExistByQQ(long qqId, String role) {
         if (ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role))) {
@@ -60,7 +60,7 @@ public class RoleInfo {
         }
     }
 
-    public static boolean checkRoleInfoFromChooseExistByFromQQ(EntityTypeMessages entityTypeMessages) {
+    static boolean checkRoleInfoFromChooseExistByFromQQ(EntityTypeMessages entityTypeMessages) {
         long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         String role;
         if (checkRoleChooseExistByQQ(qqId)) {
