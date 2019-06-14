@@ -101,7 +101,7 @@ public interface Role {
             if (!prop.contains(mapEntry.getKey()) && mapEntry.getValue() != 0) {
                 if (up && mapEntry.getValue() >= 50) {
                     result.add(getSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
-                } else if (!up && mapEntry.getValue() < 50) {
+                } else if (!up && mapEntry.getValue() < 50 && mapEntry.getValue() > 5) {
                     result.add(getSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
                 }
 
@@ -201,7 +201,7 @@ public interface Role {
             Collections.sort(propUpResult);
             formatResult(stringBuilder, propUpResult);
 
-            stringBuilder.append("\n剩余输入了技能值但不足50的技能:\n");
+            stringBuilder.append("\n不足50但也不止5的技能:\n");
             ArrayList<String> propDownResult = formatProp(entityTypeMessages, allSelect, false);
             Collections.sort(propDownResult);
             formatResult(stringBuilder, propDownResult);

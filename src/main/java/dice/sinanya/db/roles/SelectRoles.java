@@ -140,6 +140,58 @@ public class SelectRoles {
                         propertiesForRole.put("hypnosis", set.getInt("hypnosis"));
                         propertiesForRole.put("artillery", set.getInt("artillery"));
 
+                        propertiesForRole.put("shipping", set.getInt("shipping"));
+                        propertiesForRole.put("rifle", set.getInt("rifle"));
+                        propertiesForRole.put("aircraftOperation", set.getInt("aircraftOperation"));
+                        propertiesForRole.put("machineGun", set.getInt("machineGun"));
+                        propertiesForRole.put("sing", set.getInt("sing"));
+                        propertiesForRole.put("paint", set.getInt("paint"));
+                        propertiesForRole.put("tillage", set.getInt("tillage"));
+                        propertiesForRole.put("photography", set.getInt("photography"));
+                        propertiesForRole.put("perform", set.getInt("perform"));
+                        propertiesForRole.put("forge", set.getInt("forge"));
+                        propertiesForRole.put("literature", set.getInt("literature"));
+                        propertiesForRole.put("calligraphy", set.getInt("calligraphy"));
+                        propertiesForRole.put("music", set.getInt("music"));
+                        propertiesForRole.put("cooking", set.getInt("cooking"));
+                        propertiesForRole.put("tailor", set.getInt("tailor"));
+                        propertiesForRole.put("haircut", set.getInt("haircut"));
+                        propertiesForRole.put("architecture", set.getInt("architecture"));
+                        propertiesForRole.put("dance", set.getInt("dance"));
+                        propertiesForRole.put("makeWine", set.getInt("makeWine"));
+                        propertiesForRole.put("fishing", set.getInt("fishing"));
+                        propertiesForRole.put("potteryMaking", set.getInt("potteryMaking"));
+                        propertiesForRole.put("sculpture", set.getInt("sculpture"));
+                        propertiesForRole.put("acrobatics", set.getInt("acrobatics"));
+                        propertiesForRole.put("fengshui", set.getInt("fengshui"));
+                        propertiesForRole.put("technicalDrawing", set.getInt("technicalDrawing"));
+                        propertiesForRole.put("typing", set.getInt("typing"));
+                        propertiesForRole.put("shorthand", set.getInt("shorthand"));
+                        propertiesForRole.put("whip", set.getInt("whip"));
+                        propertiesForRole.put("electricSaw", set.getInt("electricSaw"));
+                        propertiesForRole.put("axe", set.getInt("axe"));
+                        propertiesForRole.put("sword", set.getInt("sword"));
+                        propertiesForRole.put("flail", set.getInt("flail"));
+                        propertiesForRole.put("spear", set.getInt("spear"));
+                        propertiesForRole.put("submachineGun", set.getInt("submachineGun"));
+                        propertiesForRole.put("archery", set.getInt("archery"));
+                        propertiesForRole.put("flameEjector", set.getInt("flameEjector"));
+                        propertiesForRole.put("heavyWeapons", set.getInt("heavyWeapons"));
+                        propertiesForRole.put("ride", set.getInt("ride"));
+                        propertiesForRole.put("geology", set.getInt("geology"));
+                        propertiesForRole.put("chemistry", set.getInt("chemistry"));
+                        propertiesForRole.put("biology", set.getInt("biology"));
+                        propertiesForRole.put("mathematics", set.getInt("mathematics"));
+                        propertiesForRole.put("astronomy", set.getInt("astronomy"));
+                        propertiesForRole.put("physics", set.getInt("physics"));
+                        propertiesForRole.put("pharmacy", set.getInt("pharmacy"));
+                        propertiesForRole.put("botany", set.getInt("botany"));
+                        propertiesForRole.put("zoology", set.getInt("zoology"));
+                        propertiesForRole.put("cryptography", set.getInt("cryptography"));
+                        propertiesForRole.put("engineering", set.getInt("engineering"));
+                        propertiesForRole.put("meteorology", set.getInt("meteorology"));
+                        propertiesForRole.put("judicialScience", set.getInt("judicialScience"));
+
                         ROLE_INFO_CACHE.put(new EntityRoleTag(qqId, role), propertiesForRole);
                     }
                 }

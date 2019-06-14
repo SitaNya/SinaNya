@@ -117,7 +117,7 @@ public class InsertRoles {
     private void updateInfo(HashMap<String, Integer> propertiesForRole, long qqId, String role) {
         Timestamp timestamp = getTime(getNowString());
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "update role set createTime=?,  str=?, dex=?, pow=?, con=?, app=?, edu=?, siz=?, intValue=?, san=?, luck=?, mp=?, hp=?, accounting=?, anthropology=?, evaluation=?, archaeology=?, enchantment=?, toClimb=?, computerUsage=?, creditRating=?, cthulhuMythos=?, disguise=?, dodge=?, drive=?, electricalMaintenance=?, electronics=?, talkingSkill=?, aFistFight=?, wrangle=?, pistol=?, firstAid=?, history=?, intimidate=?, jump=?, motherTongue=?, law=?, libraryUse=?, listen=?, `unlock`=?, mechanicalMaintenance=?, medicalScience=?, naturalHistory=?, naturalScience=?, pilotage=?, occultScience=?, operatingHeavyMachinery=?, persuade=?, psychoanalysis=?, psychology=?, horsemanship=?, aWonderfulHand=?, investigationOfCrimes=?, stealth=?, existence=?, swimming=?, throwValue=?, trackValue=?, domesticatedAnimal=?, diving=?, blast=?, lipReading=?, hypnosis=?, artillery=? where userName=? and qqId=? ";
+            String sql = "update role set createTime=?,  str=?, dex=?, pow=?, con=?, app=?, edu=?, siz=?, intValue=?, san=?, luck=?, mp=?, hp=?, accounting=?, anthropology=?, evaluation=?, archaeology=?, enchantment=?, toClimb=?, computerUsage=?, creditRating=?, cthulhuMythos=?, disguise=?, dodge=?, drive=?, electricalMaintenance=?, electronics=?, talkingSkill=?, aFistFight=?, wrangle=?, pistol=?, firstAid=?, history=?, intimidate=?, jump=?, motherTongue=?, law=?, libraryUse=?, listen=?, `unlock`=?, mechanicalMaintenance=?, medicalScience=?, naturalHistory=?, naturalScience=?, pilotage=?, occultScience=?, operatingHeavyMachinery=?, persuade=?, psychoanalysis=?, psychology=?, horsemanship=?, aWonderfulHand=?, investigationOfCrimes=?, stealth=?, existence=?, swimming=?, throwValue=?, trackValue=?, domesticatedAnimal=?, diving=?, blast=?, lipReading=?, hypnosis=?, artillery=?,shipping=?, rifle=?, aircraftOperation=?, machineGun=?, sing=?, paint=?, tillage=?, photography=?, perform=?, forge=?, literature=?, calligraphy=?, music=?, cooking=?, tailor=?, haircut=?, architecture=?, dance=?, makeWine=?, fishing=?, potteryMaking=?, sculpture=?, acrobatics=?, fengshui=?, technicalDrawing=?, typing=?, shorthand=?, whip=?, electricSaw=?, axe=?, sword=?, flail=?, spear=?, submachineGun=?, archery=?, flameEjector=?, heavyWeapons=?, ride=?, geology=?, chemistry=?, biology=?, mathematics=?, astronomy=?, physics=?, pharmacy=?, botany=?, zoology=?, cryptography=?, engineering=?, meteorology=?, judicialScience=? where userName=? and qqId=? ";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setTimestamp(1, timestamp);
                 ps.setInt(2, propertiesForRole.get("str"));
@@ -183,8 +183,59 @@ public class InsertRoles {
                 ps.setInt(62, propertiesForRole.get("lipReading"));
                 ps.setInt(63, propertiesForRole.get("hypnosis"));
                 ps.setInt(64, propertiesForRole.get("artillery"));
-                ps.setString(65, role);
-                ps.setLong(66, qqId);
+                ps.setInt(65, propertiesForRole.get("shipping"));
+                ps.setInt(66, propertiesForRole.get("rifle"));
+                ps.setInt(67, propertiesForRole.get("aircraftOperation"));
+                ps.setInt(68, propertiesForRole.get("machineGun"));
+                ps.setInt(69, propertiesForRole.get("sing"));
+                ps.setInt(70, propertiesForRole.get("paint"));
+                ps.setInt(71, propertiesForRole.get("tillage"));
+                ps.setInt(72, propertiesForRole.get("photography"));
+                ps.setInt(73, propertiesForRole.get("perform"));
+                ps.setInt(74, propertiesForRole.get("forge"));
+                ps.setInt(75, propertiesForRole.get("literature"));
+                ps.setInt(76, propertiesForRole.get("calligraphy"));
+                ps.setInt(77, propertiesForRole.get("music"));
+                ps.setInt(78, propertiesForRole.get("cooking"));
+                ps.setInt(79, propertiesForRole.get("tailor"));
+                ps.setInt(80, propertiesForRole.get("haircut"));
+                ps.setInt(81, propertiesForRole.get("architecture"));
+                ps.setInt(82, propertiesForRole.get("dance"));
+                ps.setInt(83, propertiesForRole.get("makeWine"));
+                ps.setInt(84, propertiesForRole.get("fishing"));
+                ps.setInt(85, propertiesForRole.get("potteryMaking"));
+                ps.setInt(86, propertiesForRole.get("sculpture"));
+                ps.setInt(87, propertiesForRole.get("acrobatics"));
+                ps.setInt(88, propertiesForRole.get("fengshui"));
+                ps.setInt(89, propertiesForRole.get("technicalDrawing"));
+                ps.setInt(90, propertiesForRole.get("typing"));
+                ps.setInt(91, propertiesForRole.get("shorthand"));
+                ps.setInt(92, propertiesForRole.get("whip"));
+                ps.setInt(93, propertiesForRole.get("electricSaw"));
+                ps.setInt(94, propertiesForRole.get("axe"));
+                ps.setInt(95, propertiesForRole.get("sword"));
+                ps.setInt(96, propertiesForRole.get("flail"));
+                ps.setInt(97, propertiesForRole.get("spear"));
+                ps.setInt(98, propertiesForRole.get("submachineGun"));
+                ps.setInt(99, propertiesForRole.get("archery"));
+                ps.setInt(100, propertiesForRole.get("flameEjector"));
+                ps.setInt(101, propertiesForRole.get("heavyWeapons"));
+                ps.setInt(102, propertiesForRole.get("ride"));
+                ps.setInt(103, propertiesForRole.get("geology"));
+                ps.setInt(104, propertiesForRole.get("chemistry"));
+                ps.setInt(105, propertiesForRole.get("biology"));
+                ps.setInt(106, propertiesForRole.get("mathematics"));
+                ps.setInt(107, propertiesForRole.get("astronomy"));
+                ps.setInt(108, propertiesForRole.get("physics"));
+                ps.setInt(109, propertiesForRole.get("pharmacy"));
+                ps.setInt(110, propertiesForRole.get("botany"));
+                ps.setInt(111, propertiesForRole.get("zoology"));
+                ps.setInt(112, propertiesForRole.get("cryptography"));
+                ps.setInt(113, propertiesForRole.get("engineering"));
+                ps.setInt(114, propertiesForRole.get("meteorology"));
+                ps.setInt(115, propertiesForRole.get("judicialScience"));
+                ps.setString(116, role);
+                ps.setLong(117, qqId);
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
@@ -264,7 +315,58 @@ public class InsertRoles {
                     "lipReading," +
                     "hypnosis," +
                     "artillery" +
-                    ") VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    "shipping," +
+                    "rifle," +
+                    "aircraftOperation," +
+                    "machineGun," +
+                    "sing," +
+                    "paint," +
+                    "tillage," +
+                    "photography," +
+                    "perform," +
+                    "forge," +
+                    "literature," +
+                    "calligraphy," +
+                    "music," +
+                    "cooking," +
+                    "tailor," +
+                    "haircut," +
+                    "architecture," +
+                    "dance," +
+                    "makeWine," +
+                    "fishing," +
+                    "potteryMaking," +
+                    "sculpture," +
+                    "acrobatics," +
+                    "fengshui," +
+                    "technicalDrawing," +
+                    "typing," +
+                    "shorthand," +
+                    "whip," +
+                    "electricSaw," +
+                    "axe," +
+                    "sword," +
+                    "flail," +
+                    "spear," +
+                    "submachineGun," +
+                    "archery," +
+                    "flameEjector," +
+                    "heavyWeapons," +
+                    "ride," +
+                    "geology," +
+                    "chemistry," +
+                    "biology," +
+                    "mathematics," +
+                    "astronomy," +
+                    "physics," +
+                    "pharmacy," +
+                    "botany," +
+                    "zoology," +
+                    "cryptography," +
+                    "engineering," +
+                    "meteorology," +
+                    "judicialScience" +
+                    ") VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setTimestamp(1, timestamp);
                 ps.setLong(2, qqId);
@@ -332,6 +434,58 @@ public class InsertRoles {
                 ps.setInt(64, propertiesForRole.get("lipReading"));
                 ps.setInt(65, propertiesForRole.get("hypnosis"));
                 ps.setInt(66, propertiesForRole.get("artillery"));
+
+                ps.setInt(67, propertiesForRole.get("shipping"));
+                ps.setInt(68, propertiesForRole.get("rifle"));
+                ps.setInt(69, propertiesForRole.get("aircraftOperation"));
+                ps.setInt(70, propertiesForRole.get("machineGun"));
+                ps.setInt(71, propertiesForRole.get("sing"));
+                ps.setInt(72, propertiesForRole.get("paint"));
+                ps.setInt(73, propertiesForRole.get("tillage"));
+                ps.setInt(74, propertiesForRole.get("photography"));
+                ps.setInt(75, propertiesForRole.get("perform"));
+                ps.setInt(76, propertiesForRole.get("forge"));
+                ps.setInt(77, propertiesForRole.get("literature"));
+                ps.setInt(78, propertiesForRole.get("calligraphy"));
+                ps.setInt(79, propertiesForRole.get("music"));
+                ps.setInt(80, propertiesForRole.get("cooking"));
+                ps.setInt(81, propertiesForRole.get("tailor"));
+                ps.setInt(82, propertiesForRole.get("haircut"));
+                ps.setInt(83, propertiesForRole.get("architecture"));
+                ps.setInt(84, propertiesForRole.get("dance"));
+                ps.setInt(85, propertiesForRole.get("makeWine"));
+                ps.setInt(86, propertiesForRole.get("fishing"));
+                ps.setInt(87, propertiesForRole.get("potteryMaking"));
+                ps.setInt(88, propertiesForRole.get("sculpture"));
+                ps.setInt(89, propertiesForRole.get("acrobatics"));
+                ps.setInt(90, propertiesForRole.get("fengshui"));
+                ps.setInt(91, propertiesForRole.get("technicalDrawing"));
+                ps.setInt(92, propertiesForRole.get("typing"));
+                ps.setInt(93, propertiesForRole.get("shorthand"));
+                ps.setInt(94, propertiesForRole.get("whip"));
+                ps.setInt(95, propertiesForRole.get("electricSaw"));
+                ps.setInt(96, propertiesForRole.get("axe"));
+                ps.setInt(97, propertiesForRole.get("sword"));
+                ps.setInt(98, propertiesForRole.get("flail"));
+                ps.setInt(99, propertiesForRole.get("spear"));
+                ps.setInt(100, propertiesForRole.get("submachineGun"));
+                ps.setInt(101, propertiesForRole.get("archery"));
+                ps.setInt(102, propertiesForRole.get("flameEjector"));
+                ps.setInt(103, propertiesForRole.get("heavyWeapons"));
+                ps.setInt(104, propertiesForRole.get("ride"));
+                ps.setInt(105, propertiesForRole.get("geology"));
+                ps.setInt(106, propertiesForRole.get("chemistry"));
+                ps.setInt(107, propertiesForRole.get("biology"));
+                ps.setInt(108, propertiesForRole.get("mathematics"));
+                ps.setInt(109, propertiesForRole.get("astronomy"));
+                ps.setInt(110, propertiesForRole.get("physics"));
+                ps.setInt(111, propertiesForRole.get("pharmacy"));
+                ps.setInt(112, propertiesForRole.get("botany"));
+                ps.setInt(113, propertiesForRole.get("zoology"));
+                ps.setInt(114, propertiesForRole.get("cryptography"));
+                ps.setInt(115, propertiesForRole.get("engineering"));
+                ps.setInt(116, propertiesForRole.get("meteorology"));
+                ps.setInt(117, propertiesForRole.get("judicialScience"));
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
@@ -350,7 +504,7 @@ public class InsertRoles {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(),e);
+            Log.error(e.getMessage(), e);
         }
     }
 }
