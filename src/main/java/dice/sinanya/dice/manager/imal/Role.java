@@ -64,8 +64,8 @@ public interface Role {
      * @param entityTypeMessages 传入信息类型用以确定当前QQ号
      */
     default void useRole(EntityTypeMessages entityTypeMessages) {
-        new SelectRoles().flushRoleChooseByFromQQ(entityTypeMessages);
-        new SelectRoles().flushRoleInfoCacheByFromQQ(entityTypeMessages);
+        new SelectRoles().flushRoleChooseByFromQq(entityTypeMessages);
+        new SelectRoles().flushRoleInfoCacheByFromQq(entityTypeMessages);
     }
 
     /**

@@ -3,6 +3,8 @@ package dice.sinanya.db.team;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityTeamInfo;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +21,7 @@ import java.util.Set;
  * @author SitaNya
  */
 public class InsertTeam {
-
+    private static final Logger Log = LogManager.getLogger(InsertTeam.class);
     public void deleteGroup(String group) {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "delete from team where groupId=?";
@@ -28,7 +30,7 @@ public class InsertTeam {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(),e);
         }
     }
 
@@ -49,7 +51,7 @@ public class InsertTeam {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(),e);
         }
     }
 
@@ -75,7 +77,7 @@ public class InsertTeam {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(),e);
         }
 
         if (num == 0) {
@@ -90,7 +92,7 @@ public class InsertTeam {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                Log.error(e.getMessage(),e);
             }
         } else {
             try (Connection conn = DbUtil.getConnection()) {
@@ -105,7 +107,7 @@ public class InsertTeam {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                Log.error(e.getMessage(),e);
             }
         }
     }

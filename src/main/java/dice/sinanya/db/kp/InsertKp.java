@@ -1,6 +1,8 @@
 package dice.sinanya.db.kp;
 
 import dice.sinanya.db.tools.DbUtil;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +15,9 @@ import java.sql.SQLException;
  * @author SitaNya
  */
 public class InsertKp {
+
+    private static final Logger Log = LogManager.getLogger(InsertKp.class);
+
     public void insertKp(String qqId, String groupId) {
         int num = 0;
         try (Connection conn = DbUtil.getConnection()) {
@@ -26,7 +31,7 @@ public class InsertKp {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(),e);
         }
 
         if (num == 0) {
@@ -39,7 +44,7 @@ public class InsertKp {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                Log.error(e.getMessage(),e);
             }
         } else {
             try (Connection conn = DbUtil.getConnection()) {
@@ -52,7 +57,7 @@ public class InsertKp {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                Log.error(e.getMessage(),e);
             }
         }
     }

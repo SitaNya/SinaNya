@@ -3,6 +3,8 @@ package dice.sinanya.db.roles;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityRoleTag;
 import dice.sinanya.system.RolesInfo;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.HashMap;
@@ -19,6 +21,8 @@ import static dice.sinanya.tools.RoleInfo.getRoleInfoByQQ;
  * @author SitaNya
  */
 public class InsertRoles {
+    private static final Logger Log = LogManager.getLogger(InsertRoles.class);
+
     public void insertRoleChoose(long qqId, String role) {
         int num = 0;
         try (Connection conn = DbUtil.getConnection()) {
@@ -32,7 +36,7 @@ public class InsertRoles {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(), e);
         }
 
         if (num == 0) {
@@ -44,12 +48,10 @@ public class InsertRoles {
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     ps.setLong(1, qqId);
                     ps.setString(2, role);
-
-                    System.out.println(ps.toString());
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                Log.error(e.getMessage(), e);
             }
         } else {
             try (Connection conn = DbUtil.getConnection()) {
@@ -61,7 +63,7 @@ public class InsertRoles {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                Log.error(e.getMessage(), e);
             }
         }
     }
@@ -91,7 +93,7 @@ public class InsertRoles {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(), e);
         }
 
         ROLE_CHOOSE.put(qqId, role);
@@ -183,11 +185,10 @@ public class InsertRoles {
                 ps.setInt(64, propertiesForRole.get("artillery"));
                 ps.setString(65, role);
                 ps.setLong(66, qqId);
-                System.out.println(ps.toString());
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(), e);
         }
     }
 
@@ -331,11 +332,10 @@ public class InsertRoles {
                 ps.setInt(64, propertiesForRole.get("lipReading"));
                 ps.setInt(65, propertiesForRole.get("hypnosis"));
                 ps.setInt(66, propertiesForRole.get("artillery"));
-                System.out.println(ps.toString());
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(), e);
         }
     }
 
@@ -350,7 +350,7 @@ public class InsertRoles {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(),e);
         }
     }
 }

@@ -1,12 +1,15 @@
 package dice.sinanya.tools;
 
 import dice.sinanya.entity.MailBean;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -15,10 +18,11 @@ import java.util.Vector;
 import static dice.sinanya.system.MessagesSystem.*;
 
 public class SendMail {
+    private static final Logger Log = LogManager.getLogger(SendMail.class);
 
     private String toChinese(String text) {
         try {
-            text = MimeUtility.encodeText(new String(text.getBytes("UTF-8"), "GB2312"), "GB2312", "B");
+            text = MimeUtility.encodeText(new String(text.getBytes(StandardCharsets.UTF_8), "GB2312"), "GB2312", "B");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,7 +80,7 @@ public class SendMail {
                     }
                     mp.addBodyPart(mbpFile);
                 }
-                System.out.println("添加成功");
+                Log.info("添加成功");
             }
 
             msg.setContent(mp);
@@ -119,12 +123,12 @@ public class SendMail {
         }
 
         SendMail sm = new SendMail();
-        System.out.println("正在发送邮件...");
+        Log.info("正在发送邮件...");
         // 发送邮件
         if (sm.sendMail(mb)) {
-            System.out.println("发送成功!");
+            Log.info("发送成功!");
         } else {
-            System.out.println("发送失败!");
+            Log.info("发送失败!");
         }
     }
 

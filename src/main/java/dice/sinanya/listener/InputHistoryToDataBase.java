@@ -12,7 +12,7 @@ import org.quartz.JobExecutionException;
 import static dice.sinanya.tools.History.setHistory;
 
 @CronTask("* 0/1 * * * ? *")
-public class MyJob implements TimeJob {
+public class InputHistoryToDataBase implements TimeJob {
     /**
      * 这是一个每5秒给qq：1234567890发送一句 'hi!'的定时任务
      */

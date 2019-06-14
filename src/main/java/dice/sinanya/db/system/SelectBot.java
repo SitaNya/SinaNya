@@ -1,6 +1,8 @@
 package dice.sinanya.db.system;
 
 import dice.sinanya.db.tools.DbUtil;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +17,8 @@ import static dice.sinanya.system.SystemInfo.SWITCH_BOT;
  * @author SitaNya
  */
 public class SelectBot {
+    private static final Logger Log = LogManager.getLogger(SelectBot.class);
+
     public void selectBot() {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select groupId,switchBot from switchBot";
@@ -26,7 +30,7 @@ public class SelectBot {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(), e);
         }
     }
 }

@@ -61,7 +61,6 @@ class DbPool {
             Log.debug("get Connection");
         } catch (SQLException e) {
             Log.error("get Connection error: \n" + dataSource.toString() + e.getMessage(), e);
-            System.out.println(e.getMessage());
         }
 
         return conn;

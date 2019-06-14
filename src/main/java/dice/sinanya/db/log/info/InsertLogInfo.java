@@ -2,6 +2,8 @@ package dice.sinanya.db.log.info;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityLogTag;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +18,7 @@ import static dice.sinanya.system.MessagesLog.logNameSwitch;
  * @author SitaNya
  */
 public class InsertLogInfo {
+    private static final Logger Log = LogManager.getLogger(InsertLogInfo.class);
 
     public InsertLogInfo() {
     }
@@ -31,8 +34,7 @@ public class InsertLogInfo {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println(entityLogTag);
+            Log.error(e.getMessage(), e);
             StringBuilder stringBuilder = new StringBuilder();
             for (Map.Entry<EntityLogTag, Boolean> mapEntry : logNameSwitch.entrySet()) {
                 stringBuilder.append("groupId")
@@ -43,7 +45,7 @@ public class InsertLogInfo {
                         .append(mapEntry.getKey().getLogName())
                         .append("\n");
             }
-            System.out.println(stringBuilder.toString());
+            Log.debug(stringBuilder.toString());
         }
     }
 }

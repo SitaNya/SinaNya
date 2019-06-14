@@ -2,6 +2,8 @@ package dice.sinanya.db.log.info;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityLogTag;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +16,8 @@ import java.sql.SQLException;
  * @author SitaNya
  */
 public class SelectLogInfo {
+
+    private static final Logger Log = LogManager.getLogger(SelectLogInfo.class);
 
     public SelectLogInfo() {
     }
@@ -33,8 +37,7 @@ public class SelectLogInfo {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println();
+            Log.error(e.getMessage(),e);
         }
         return stringBuilder.toString();
     }

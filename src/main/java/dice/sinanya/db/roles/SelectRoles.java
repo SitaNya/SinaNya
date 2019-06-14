@@ -4,6 +4,8 @@ import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityRoleTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.system.RolesInfo;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,10 +22,12 @@ import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
  * @author SitaNya
  */
 public class SelectRoles {
+    private static final Logger Log = LogManager.getLogger(SelectRoles.class);
+
     public SelectRoles() {
     }
 
-    public void flushRoleChooseByQQ(long qqId) {
+    public void flushRoleChooseByQq(long qqId) {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from CHOOSE_ROLE where qq=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -35,31 +39,31 @@ public class SelectRoles {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(),e);
         }
     }
 
     @SuppressWarnings("AlibabaMethodTooLong")
-    public void flushRoleInfoCacheByFromQQ(EntityTypeMessages entityTypeMessages) {
+    public void flushRoleInfoCacheByFromQq(EntityTypeMessages entityTypeMessages) {
         long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         selectRoleInfoCache(qqId);
     }
 
     @SuppressWarnings("AlibabaMethodTooLong")
-    public void flushRoleChooseByFromQQ(EntityTypeMessages entityTypeMessages) {
+    public void flushRoleChooseByFromQq(EntityTypeMessages entityTypeMessages) {
         long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         selectRoleInfoCache(qqId);
     }
 
     @SuppressWarnings("AlibabaMethodTooLong")
-    public void flushRoleInfoCacheByQQ(long qqId) {
+    public void flushRoleInfoCacheByQq(long qqId) {
         selectRoleInfoCache(qqId);
     }
 
     @SuppressWarnings("AlibabaMethodTooLong")
-    public void flushRoleInfoCacheByQQ(String qqId) {
+    public void flushRoleInfoCacheByQq(String qqId) {
         long qq = Long.parseLong(qqId);
-        flushRoleChooseByQQ(qq);
+        flushRoleChooseByQq(qq);
     }
 
     @SuppressWarnings("AlibabaMethodTooLong")
@@ -141,7 +145,7 @@ public class SelectRoles {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(),e);
         }
     }
 }

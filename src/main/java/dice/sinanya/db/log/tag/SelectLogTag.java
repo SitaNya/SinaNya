@@ -2,6 +2,8 @@ package dice.sinanya.db.log.tag;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityLogTag;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +19,8 @@ import static dice.sinanya.system.MessagesLog.logNameSwitch;
  * @author SitaNya
  */
 public class SelectLogTag {
+    private static final Logger Log = LogManager.getLogger(SelectLogTag.class);
+
 
     public SelectLogTag() {
     }
@@ -32,7 +36,7 @@ public class SelectLogTag {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Log.error(e.getMessage(),e);
         }
     }
 
@@ -49,7 +53,7 @@ public class SelectLogTag {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Log.error(e.getMessage(),e);
         }
         return tagList;
     }
@@ -68,7 +72,7 @@ public class SelectLogTag {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Log.error(e.getMessage(),e);
         }
         return true;
     }
@@ -87,7 +91,7 @@ public class SelectLogTag {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Log.error(e.getMessage(),e);
         }
         return "未找到";
     }

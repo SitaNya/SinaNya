@@ -2,6 +2,8 @@ package dice.sinanya.db.history;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityHistory;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +16,16 @@ import java.sql.SQLException;
  * @author SitaNya
  */
 public class InsertHistory {
+
+    private static final Logger Log = LogManager.getLogger(InsertHistory.class);
+
+    /**
+     * 将历史骰点信息插入数据库，不过这个语句是由定时器每分钟调用一次的
+     * 如果觉得卡的话可以去调整dice.sinanya.listener.InputHistoryToDatabase里的间隔时间
+     * 先查询是否存在条目，不存在则插入，存在则更新
+     *
+     * @param entityHistory 历史对象
+     */
     public void insertHistory(EntityHistory entityHistory) {
         int num = 0;
         try (Connection conn = DbUtil.getConnection()) {
@@ -27,7 +39,7 @@ public class InsertHistory {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(), e);
         }
 
         if (num == 0) {
@@ -47,7 +59,7 @@ public class InsertHistory {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                Log.error(e.getMessage(), e);
             }
         } else {
             try (Connection conn = DbUtil.getConnection()) {
@@ -67,7 +79,7 @@ public class InsertHistory {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                Log.error(e.getMessage(), e);
             }
         }
     }

@@ -1,5 +1,8 @@
 package dice.sinanya.tools;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,6 +13,8 @@ import java.util.Date;
  * @author SitaNya
  */
 public class GetTime {
+    private static final Logger Log = LogManager.getLogger(GetTime.class);
+
     /**
      * @return 获取当前时间（格式化后的）
      */
@@ -31,7 +36,7 @@ public class GetTime {
         try {
             d = format.parse(time);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(), e);
         }
 
         return new Timestamp((d != null)

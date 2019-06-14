@@ -265,7 +265,7 @@ class Flow {
                     sender(entityTypeMessages, strPropErr);
                 }
             } catch (PlayerSetException e) {
-                System.out.println(e.getMessage());
+                Log.error(e.getMessage(),e);
             }
         } else if (isStShow) {
             roles.show();

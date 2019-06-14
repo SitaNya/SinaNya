@@ -1,6 +1,8 @@
 package dice.sinanya.db.system;
 
 import dice.sinanya.db.tools.DbUtil;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +15,7 @@ import java.sql.SQLException;
  * @author SitaNya
  */
 public class InsertBot {
+    private static final Logger Log = LogManager.getLogger(InsertBot.class);
     public void insertBot(long groupId, boolean switchBot) {
         int num = 0;
         try (Connection conn = DbUtil.getConnection()) {
@@ -26,7 +29,7 @@ public class InsertBot {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(),e);
         }
 
         if (num == 0) {
@@ -41,7 +44,7 @@ public class InsertBot {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                Log.error(e.getMessage(),e);
             }
         } else {
             try (Connection conn = DbUtil.getConnection()) {
@@ -53,7 +56,7 @@ public class InsertBot {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                Log.error(e.getMessage(),e);
             }
         }
     }

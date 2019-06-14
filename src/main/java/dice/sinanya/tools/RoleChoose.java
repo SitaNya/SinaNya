@@ -14,7 +14,7 @@ public class RoleChoose {
         if (ROLE_CHOOSE.containsKey(qqId)) {
             return true;
         } else {
-            selectRoles.flushRoleChooseByQQ(qqId);
+            selectRoles.flushRoleChooseByQq(qqId);
             return ROLE_CHOOSE.containsKey(qqId);
         }
     }
@@ -24,7 +24,7 @@ public class RoleChoose {
         if (ROLE_CHOOSE.containsKey(qqId)) {
             return true;
         } else {
-            selectRoles.flushRoleChooseByQQ(qqId);
+            selectRoles.flushRoleChooseByQq(qqId);
             return ROLE_CHOOSE.containsKey(qqId);
         }
     }
@@ -34,7 +34,7 @@ public class RoleChoose {
         if (ROLE_CHOOSE.containsKey(qqId)) {
             return true;
         } else {
-            selectRoles.flushRoleChooseByQQ(qqId);
+            selectRoles.flushRoleChooseByQq(qqId);
             return ROLE_CHOOSE.containsKey(qqId);
         }
     }

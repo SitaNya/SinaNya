@@ -2,6 +2,8 @@ package dice.sinanya.db.log.tag;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityLogTag;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +16,9 @@ import java.sql.SQLException;
  * @author SitaNya
  */
 public class InsertLogTag {
+
+    private static final Logger Log = LogManager.getLogger(InsertLogTag.class);
+
     public InsertLogTag() {
     }
 
@@ -31,7 +36,7 @@ public class InsertLogTag {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(), e);
         }
 
         if (num == 0) {
@@ -45,7 +50,7 @@ public class InsertLogTag {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                Log.error(e.getMessage(), e);
             }
         } else {
             try (Connection conn = DbUtil.getConnection()) {
@@ -57,7 +62,7 @@ public class InsertLogTag {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                Log.error(e.getMessage(), e);
             }
         }
 
@@ -72,7 +77,7 @@ public class InsertLogTag {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Log.error(e.getMessage(), e);
         }
 
         try (Connection conn = DbUtil.getConnection()) {
@@ -83,7 +88,7 @@ public class InsertLogTag {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Log.error(e.getMessage(), e);
         }
     }
 }

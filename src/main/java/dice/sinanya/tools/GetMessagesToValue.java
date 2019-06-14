@@ -1,5 +1,8 @@
 package dice.sinanya.tools;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.util.HashMap;
 
 import static dice.sinanya.tools.MakeSkillName.makeSkillName;
@@ -10,6 +13,8 @@ import static dice.sinanya.tools.MakeSkillName.makeSkillName;
  * @author SitaNya
  */
 public class GetMessagesToValue {
+    private static final Logger Log = LogManager.getLogger(GetMessagesToValue.class);
+
     public static HashMap<String, Integer> getMessagesToValue(HashMap<String, Integer> propertiesDefault, String msg) {
         StringBuilder strSkillValue = new StringBuilder();
         StringBuilder strSkillName = new StringBuilder();
@@ -32,8 +37,7 @@ public class GetMessagesToValue {
                 strSkillName = new StringBuilder();
                 strSkillValue = new StringBuilder();
             } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
-                System.out.println(strSkillName.toString());
+                Log.error(e.getMessage(), e);
             }
         }
         return propertiesDefault;

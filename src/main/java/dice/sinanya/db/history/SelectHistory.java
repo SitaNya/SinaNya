@@ -2,6 +2,8 @@ package dice.sinanya.db.history;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityHistory;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +18,7 @@ import static dice.sinanya.system.MessagesHistory.historyList;
  * @author SitaNya
  */
 public class SelectHistory {
+    private static final Logger Log = LogManager.getLogger(SelectHistory.class);
     public SelectHistory() {
     }
 
@@ -31,7 +34,7 @@ public class SelectHistory {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(),e);
         }
     }
 }

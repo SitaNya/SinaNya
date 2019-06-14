@@ -1,6 +1,8 @@
 package dice.sinanya.db.team;
 
 import dice.sinanya.db.tools.DbUtil;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +17,7 @@ import java.util.Arrays;
  * @author SitaNya
  */
 public class SelectTeam {
+    private static final Logger Log = LogManager.getLogger(SelectTeam.class);
     public ArrayList<String> selectTeamInfo(String groupId) {
         String strQqList = null;
         try (Connection conn = DbUtil.getConnection()) {
@@ -28,7 +31,7 @@ public class SelectTeam {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(),e);
         }
         if (strQqList != null) {
             return new ArrayList<>(Arrays.asList(strQqList.split(",")));
