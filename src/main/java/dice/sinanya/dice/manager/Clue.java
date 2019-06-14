@@ -16,7 +16,7 @@ import static dice.sinanya.tools.Sender.sender;
 /**
  * 线索集
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class Clue {
     private EntityTypeMessages entityTypeMessages;

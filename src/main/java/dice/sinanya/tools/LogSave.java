@@ -13,7 +13,7 @@ public class LogSave {
         // 1：利用File类找到要操作的对象
         File file = null;
         if (OSX_MODEL) {
-            file = new File("/Users/zhangxiaozhou/Desktop/" + groupId + "/" + logName);
+            file = new File("/Users/SitaNya/Desktop/" + groupId + "/" + logName);
         } else if (WIN_MODEL) {
             file = new File("C:/Files/" + groupId + "/" + logName);
         } else if (LINUX_MODEL) {

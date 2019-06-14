@@ -1,7 +1,7 @@
 package dice.sinanya.system;
 
 /**
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public interface MessagesError {
 

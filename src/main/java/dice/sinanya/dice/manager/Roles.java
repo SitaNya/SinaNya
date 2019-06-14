@@ -19,7 +19,7 @@ import static dice.sinanya.tools.RoleInfo.*;
 import static dice.sinanya.tools.Sender.sender;
 
 /**
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class Roles extends PropList implements Role {
     private EntityTypeMessages entityTypeMessages;

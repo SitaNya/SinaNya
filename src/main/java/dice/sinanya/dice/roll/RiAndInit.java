@@ -22,7 +22,7 @@ import static java.lang.Math.ceil;
 /**
  * 先攻骰掷及列表
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class RiAndInit {
 

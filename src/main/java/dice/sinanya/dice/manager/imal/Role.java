@@ -16,7 +16,7 @@ import static dice.sinanya.tools.RoleInfo.getRoleInfoFromChooseByFromQQ;
 /**
  * 声明使用角色
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public interface Role {
 

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 /**
  * 录入线索集
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class InsertClue {
 

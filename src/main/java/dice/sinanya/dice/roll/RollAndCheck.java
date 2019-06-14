@@ -28,7 +28,7 @@ import static dice.sinanya.tools.MakeRollCheckResult.makeResult;
 import static dice.sinanya.tools.Sender.sender;
 
 /**
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class RollAndCheck {
     private static final Logger Log = LogManager.getLogger(RollAndCheck.class);

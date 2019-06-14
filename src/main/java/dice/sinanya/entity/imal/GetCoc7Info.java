@@ -3,7 +3,7 @@ package dice.sinanya.entity.imal;
 /**
  * 获取Coc7版信息卡的附加信息，比如伤害加值或体型等
  * 
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public interface GetCoc7Info extends GetDb{
 

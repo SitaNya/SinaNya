@@ -8,7 +8,7 @@ import static java.lang.Math.ceil;
 /**
  * 获取coc人物卡的一些共有数据
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class CocCardInfo {
 

@@ -8,7 +8,7 @@ import static dice.sinanya.tools.Sender.sender;
 /**
  * 获取资料集
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class Book {
 

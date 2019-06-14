@@ -8,7 +8,7 @@ import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 /**
  * 生成卡片信息接口
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public interface MakeCard {
 

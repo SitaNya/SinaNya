@@ -9,7 +9,7 @@ import static dice.sinanya.tools.Sender.sender;
 /**
  * 获取自定义特质
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class Tz {
     private EntityTypeMessages entityTypeMessages;

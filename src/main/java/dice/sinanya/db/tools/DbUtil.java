@@ -3,7 +3,7 @@ package dice.sinanya.db.tools;
 import java.sql.Connection;
 
 /**
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class DbUtil {
     /**

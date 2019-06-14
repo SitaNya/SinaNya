@@ -14,7 +14,7 @@ import static java.lang.Math.ceil;
 /**
  * 获取NPC
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class Npc implements MakeCard {
 

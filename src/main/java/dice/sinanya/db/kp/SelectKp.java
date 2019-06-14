@@ -12,7 +12,7 @@ import static dice.sinanya.system.MessagesKP.KpGroup;
 /**
  * 查询kp主群
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class SelectKp {
     public SelectKp() {

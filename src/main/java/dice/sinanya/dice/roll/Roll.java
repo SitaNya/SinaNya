@@ -24,7 +24,7 @@ import static java.lang.Math.ceil;
 /**
  * .r的逻辑
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class Roll {
 

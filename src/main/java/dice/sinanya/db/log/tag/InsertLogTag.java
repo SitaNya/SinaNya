@@ -11,7 +11,7 @@ import java.sql.SQLException;
 /**
  * 录入log开启标签
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class InsertLogTag {
     public InsertLogTag() {

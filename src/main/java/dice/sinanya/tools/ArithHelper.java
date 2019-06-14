@@ -3,7 +3,7 @@ package dice.sinanya.tools;
 /**
  * 对数学公式进行计算
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class ArithHelper {
 

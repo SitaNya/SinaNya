@@ -14,7 +14,7 @@ import static dice.sinanya.system.MessagesLog.logNameSwitch;
 /**
  * 查询log开启标签
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class SelectLogTag {
 

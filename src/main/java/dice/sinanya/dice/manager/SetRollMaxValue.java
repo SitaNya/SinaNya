@@ -11,7 +11,7 @@ import static dice.sinanya.tools.Sender.sender;
 /**
  * 管理最大默认骰
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class SetRollMaxValue {
     private EntityTypeMessages entityTypeMessages;

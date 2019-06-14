@@ -12,7 +12,7 @@ import java.util.Arrays;
 /**
  * 查询队伍信息
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class SelectTeam {
     public ArrayList<String> selectTeamInfo(String groupId) {

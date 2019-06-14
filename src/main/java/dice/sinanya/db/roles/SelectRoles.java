@@ -17,7 +17,7 @@ import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 /**
  * 查询角色信息，包括当前角色和角色内容
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class SelectRoles {
     public SelectRoles() {

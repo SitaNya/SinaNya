@@ -7,7 +7,7 @@ import java.util.concurrent.Callable;
 /**
  * 返回一张简易coc6人物卡字符串，可以被多线程调用
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class ThreadCoc6 implements Callable<String>, MakeCard {
 

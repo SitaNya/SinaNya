@@ -126,7 +126,7 @@ public class SaveDocx {
         }
         File file = null;
         if (OSX_MODEL) {
-            file = new File("/Users/zhangxiaozhou/Desktop/" + groupId + "/" + msg + ".docx");
+            file = new File("/Users/SitaNya/Desktop/" + groupId + "/" + msg + ".docx");
         } else if (WIN_MODEL) {
             file = new File("C:/Files/" + groupId + "/" + msg + ".docx");
         } else if (LINUX_MODEL) {

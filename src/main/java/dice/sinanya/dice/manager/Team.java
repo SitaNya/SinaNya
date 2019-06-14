@@ -28,7 +28,7 @@ import static java.lang.Math.*;
 /**
  * 管理小队
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class Team extends PropList implements GetDb, Role, AtQq {
 

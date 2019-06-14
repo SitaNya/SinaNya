@@ -10,7 +10,7 @@ import com.forte.qqrobot.sender.MsgSender;
 import static dice.sinanya.tools.CheckValue.checkValue;
 
 /**
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class EntityTypeMessages {
     private MsgGetTypes msgGetTypes;

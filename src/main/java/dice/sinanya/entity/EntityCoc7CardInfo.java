@@ -8,7 +8,7 @@ import static java.lang.Math.floor;
 /**
  * 7版数据细化
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class EntityCoc7CardInfo extends CocCardInfo implements GetCoc7Info {
     private int luck;

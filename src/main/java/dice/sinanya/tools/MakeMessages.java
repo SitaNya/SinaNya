@@ -1,7 +1,7 @@
 package dice.sinanya.tools;
 
 /**
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class MakeMessages {
     public static String deleteTag(String message, String tag) {

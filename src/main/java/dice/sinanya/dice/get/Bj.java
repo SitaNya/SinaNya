@@ -11,7 +11,7 @@ import static dice.sinanya.tools.Sender.sender;
 /**
  * 获取人物背景
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class Bj {
 

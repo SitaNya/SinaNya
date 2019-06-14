@@ -16,7 +16,7 @@ import java.util.Set;
 /**
  * 录入队伍信息
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class InsertTeam {
 

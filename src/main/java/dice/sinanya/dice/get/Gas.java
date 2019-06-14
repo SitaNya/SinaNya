@@ -9,7 +9,7 @@ import static dice.sinanya.tools.Sender.sender;
 /**
  * 获取煤气灯特质
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class Gas {
     private EntityTypeMessages entityTypeMessages;

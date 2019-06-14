@@ -3,7 +3,7 @@ package dice.sinanya.system;
 /**
  * QQ机器人命令识别标签集，在这里添加标签后去Flow.java中设定导向逻辑，即可导向实际的类
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public interface MessagesTag {
     String HEADER = "^[.。][ ]*";

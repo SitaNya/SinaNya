@@ -13,7 +13,7 @@ import static java.lang.Math.ceil;
 /**
  * 根据一个类似于3D6K3的字符串计算，返回计算表达式和结果
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class GetRollResultAndStr {
     EntityTypeMessages entityTypeMessages;

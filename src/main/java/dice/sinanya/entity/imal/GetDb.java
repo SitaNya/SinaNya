@@ -3,7 +3,7 @@ package dice.sinanya.entity.imal;
 /**
  * 获取DB加值接口
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public interface GetDb {
 

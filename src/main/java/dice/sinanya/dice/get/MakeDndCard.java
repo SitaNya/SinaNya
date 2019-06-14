@@ -16,7 +16,7 @@ import static dice.sinanya.tools.Sender.sender;
 /**
  * DND车卡类
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class MakeDndCard implements MakeCard {
 

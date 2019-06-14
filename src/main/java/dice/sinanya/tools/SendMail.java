@@ -98,8 +98,8 @@ public class SendMail {
         mb.setContent("日志邮件测试"); // 设置邮件的正文
 
         if (OSX_MODEL) {
-            mb.attachFile("/Users/zhangxiaozhou/Desktop/" + groupId + "/" + logName);
-            mb.attachFile("/Users/zhangxiaozhou/Desktop/" + groupId + "/" + logName + ".docx");
+            mb.attachFile("/Users/SitaNya/Desktop/" + groupId + "/" + logName);
+            mb.attachFile("/Users/SitaNya/Desktop/" + groupId + "/" + logName + ".docx");
         } else if (WIN_MODEL) {
             mb.attachFile("C:/Files/" + groupId + "/" + logName);
             mb.attachFile("C:/Files/" + groupId + "/" + logName + ".docx");

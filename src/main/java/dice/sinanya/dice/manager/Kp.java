@@ -10,7 +10,7 @@ import static dice.sinanya.tools.Sender.sender;
 /**
  * kp主群
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class Kp {
     private EntityTypeMessages entityTypeMessages;

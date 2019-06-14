@@ -15,7 +15,7 @@ import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
 /**
  * 获取线索集
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class SelectClue {
 

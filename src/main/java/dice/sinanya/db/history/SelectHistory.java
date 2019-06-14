@@ -13,7 +13,7 @@ import static dice.sinanya.system.MessagesHistory.historyList;
 /**
  * 查询骰点历史
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class SelectHistory {
     public SelectHistory() {

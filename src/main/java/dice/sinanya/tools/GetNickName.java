@@ -6,7 +6,7 @@ import static dice.sinanya.tools.RoleChoose.checkRoleChooseExistByFromQQ;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
 
 /**
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class GetNickName {
 

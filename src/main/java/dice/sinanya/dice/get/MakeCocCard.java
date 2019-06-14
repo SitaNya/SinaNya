@@ -21,7 +21,7 @@ import static dice.sinanya.tools.Sender.sender;
 /**
  * COC车卡类
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class MakeCocCard implements MakeCard {
 

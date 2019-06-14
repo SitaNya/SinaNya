@@ -11,7 +11,7 @@ import java.sql.SQLException;
 /**
  * 录入骰点历史
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class InsertHistory {
     public void insertHistory(EntityHistory entityHistory) {

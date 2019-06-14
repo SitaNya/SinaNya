@@ -8,7 +8,7 @@ import static dice.sinanya.tools.LogTag.getOthorLogTrue;
 import static dice.sinanya.tools.LogText.setLogText;
 
 /**
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class Sender {
     public static void sender(EntityTypeMessages entityTypeMessages, String messages) {

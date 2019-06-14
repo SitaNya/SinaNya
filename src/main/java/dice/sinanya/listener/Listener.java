@@ -20,7 +20,7 @@ import static dice.sinanya.tools.LogText.setLogText;
 import static dice.sinanya.tools.SwitchBot.getBot;
 
 /**
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class Listener {
 

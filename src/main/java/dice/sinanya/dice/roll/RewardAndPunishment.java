@@ -19,7 +19,7 @@ import static java.lang.Math.floor;
  * 奖励投、惩罚投
  * 这两者不再支持计算公式
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class RewardAndPunishment {
 

@@ -13,7 +13,7 @@ import static dice.sinanya.system.MessagesLog.logNameSwitch;
 /**
  * 录入log信息
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class InsertLogInfo {
 

@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * 当前时间的相关方法
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class GetTime {
     /**

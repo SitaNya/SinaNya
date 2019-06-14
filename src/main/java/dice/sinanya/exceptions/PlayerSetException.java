@@ -6,7 +6,7 @@ import static dice.sinanya.system.MessagesError.strValueErr;
 import static dice.sinanya.tools.Sender.sender;
 
 /**
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class PlayerSetException extends Exception {
 

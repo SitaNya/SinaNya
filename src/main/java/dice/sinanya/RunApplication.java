@@ -7,7 +7,7 @@ import com.forte.qqrobot.sender.MsgSender;
 import com.forte.qqrobot.utils.CQCodeUtil;
 
 /**
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class RunApplication implements LemocApp {
     public static void main(String[] args) {

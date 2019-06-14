@@ -10,7 +10,7 @@ import java.sql.SQLException;
 /**
  * 录入kp主群
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class InsertKp {
     public void insertKp(String qqId, String groupId) {

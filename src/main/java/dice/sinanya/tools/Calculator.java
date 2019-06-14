@@ -9,7 +9,7 @@ import java.util.Stack;
  * 传入算数表达式，将返回一个浮点值结果
  * 如果计算过程错误，将返回一个NaN
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class Calculator {
     /**

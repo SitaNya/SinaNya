@@ -11,7 +11,7 @@ import static dice.sinanya.tools.Sender.sender;
 /**
  * 今日人品
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class Jrrp {
     private EntityTypeMessages entityTypeMessages;

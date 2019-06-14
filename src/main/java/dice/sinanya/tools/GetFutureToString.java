@@ -7,7 +7,7 @@ import java.util.concurrent.Future;
 /**
  * 将多线程的Future列表转化为String字符串结果
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class GetFutureToString {
     public static String getFutureToString(StringBuilder stringBuilder,ArrayList<Future<String>> results) {

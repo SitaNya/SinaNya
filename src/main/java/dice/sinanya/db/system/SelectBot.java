@@ -12,7 +12,7 @@ import static dice.sinanya.system.SystemInfo.SWITCH_BOT;
 /**
  * 查询某个群的开启与关闭情况
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class SelectBot {
     public void selectBot() {

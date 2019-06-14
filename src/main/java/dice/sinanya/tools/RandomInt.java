@@ -3,7 +3,7 @@ package dice.sinanya.tools;
 import java.util.Random;
 
 /**
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class RandomInt {
     public static int random(int lowest, int highest) {

@@ -9,7 +9,7 @@ import static dice.sinanya.system.MessagesSystem.ROLL_MAX_VALUE;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 
 /**
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class EntityManyRolls {
     private int times = 1;

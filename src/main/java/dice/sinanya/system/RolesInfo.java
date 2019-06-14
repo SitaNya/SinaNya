@@ -8,7 +8,7 @@ import static dice.sinanya.tools.GetMessaggeToValue.getMessaggeToValue;
 import static dice.sinanya.tools.RoleInfo.getRoleInfoFromChooseByFromQQ;
 
 /**
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class RolesInfo {
     EntityTypeMessages entityTypeMessages;

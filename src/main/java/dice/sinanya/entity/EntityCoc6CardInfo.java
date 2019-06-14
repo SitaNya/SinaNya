@@ -8,7 +8,7 @@ import static java.lang.Math.ceil;
 /**
  * 6版数据细化
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class EntityCoc6CardInfo extends CocCardInfo implements GetDb {
 

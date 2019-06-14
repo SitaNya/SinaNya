@@ -11,7 +11,7 @@ import java.sql.SQLException;
 /**
  * 查询log信息
  *
- * @author zhangxiaozhou
+ * @author SitaNya
  */
 public class SelectLogInfo {
 
