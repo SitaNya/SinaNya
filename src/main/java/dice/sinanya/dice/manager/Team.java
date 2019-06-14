@@ -40,7 +40,7 @@ public class Team extends PropList implements GetDb, Role, AtQq {
 
     private String regex = "\\[CQ:at,qq=([0-9]+)]";
 
-    private Pattern plus = Pattern.compile("[+*/-]");
+    private Pattern plus = Pattern.compile("[+*/\\-]");
 
     private EntityTypeMessages entityTypeMessages;
 

@@ -27,7 +27,7 @@ import static java.lang.Math.ceil;
 public class RiAndInit {
 
     private static Pattern numAndName = Pattern.compile("([+*/-]?\\d+)([^\\d]+)");
-    private static Pattern plus = Pattern.compile("([+*/-]\\d)");
+    private static Pattern plus = Pattern.compile("([+*/\\-]\\d)");
 
     private EntityTypeMessages entityTypeMessages;
 

@@ -28,9 +28,9 @@ import static java.lang.Math.ceil;
  */
 public class Roll {
 
-    private static Pattern plus = Pattern.compile("[+*/-]");
+    private static Pattern plus = Pattern.compile("[+*/\\-]");
 
-    private static Pattern function = Pattern.compile("([+*/-dDkK#\\d]+)");
+    private static Pattern function = Pattern.compile("([+*/\\-dDkK#\\d]+)");
 
     private static Pattern AgainTimes = Pattern.compile("(\\d+)#");
 

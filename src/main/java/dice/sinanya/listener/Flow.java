@@ -23,7 +23,7 @@ import static dice.sinanya.tools.Sender.sender;
 /**
  * 入口分流类，结合MessagesTag中配置的正则表达式，将被机器人捕捉的小心分流给各个逻辑模块
  * 如果你要添加一个新的命令，需要先去MessagesTag处添加相应的正则表达式，然后在这里分别添加以下内容
- *
+ * <p>
  * 1.   isXXXX  布尔值
  * 2.   isXXXX=messages.matches(TAG_XXXXX); 为布尔值赋值
  * 3.   在toPrivate或toPrivateAndGroup中根据需要new自己写的逻辑类并通过布尔值去激活
@@ -265,7 +265,7 @@ class Flow {
                     sender(entityTypeMessages, strPropErr);
                 }
             } catch (PlayerSetException e) {
-                Log.error(e.getMessage(),e);
+                Log.error(e.getMessage(), e);
             }
         } else if (isStShow) {
             roles.show();
@@ -279,7 +279,7 @@ class Flow {
             try {
                 sanCheck.sc();
             } catch (PlayerSetException | SanCheckSetException e) {
-                e.printStackTrace();
+                Log.error(e.getMessage(), e);
             }
         }
 
