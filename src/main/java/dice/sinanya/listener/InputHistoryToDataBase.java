@@ -9,7 +9,7 @@ import com.forte.qqrobot.utils.CQCodeUtil;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import static dice.sinanya.tools.History.setHistory;
+import static dice.sinanya.tools.getinfo.History.setHistory;
 
 @CronTask("* 0/1 * * * ? *")
 public class InputHistoryToDataBase implements TimeJob {

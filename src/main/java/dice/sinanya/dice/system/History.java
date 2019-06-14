@@ -3,8 +3,8 @@ package dice.sinanya.dice.system;
 import dice.sinanya.entity.EntityHistory;
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.tools.History.changeHistory;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.getinfo.History.changeHistory;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * 骰点历史信息

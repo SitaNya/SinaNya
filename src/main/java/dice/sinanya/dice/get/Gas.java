@@ -3,8 +3,8 @@ package dice.sinanya.dice.get;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.system.MessagesGas.gasList;
-import static dice.sinanya.tools.RandomInt.random;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.getinfo.RandomInt.random;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * 获取煤气灯特质

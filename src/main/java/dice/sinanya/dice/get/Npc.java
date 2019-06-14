@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 import static dice.sinanya.system.MessagesNPC.Character;
 import static dice.sinanya.system.MessagesNPC.*;
-import static dice.sinanya.tools.GetName.getRandomName;
-import static dice.sinanya.tools.RandomInt.random;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.getinfo.GetName.getRandomName;
+import static dice.sinanya.tools.getinfo.RandomInt.random;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * 获取NPC

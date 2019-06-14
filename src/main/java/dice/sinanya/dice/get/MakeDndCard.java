@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.concurrent.*;
 
 import static dice.sinanya.system.MessagesTag.TAG_DND;
-import static dice.sinanya.tools.GetFutureToString.getFutureToString;
-import static dice.sinanya.tools.GetNickName.getNickName;
-import static dice.sinanya.tools.MakeMessages.deleteTag;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.makedata.GetFutureToString.getFutureToString;
+import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * DND车卡类
@@ -42,7 +42,7 @@ public class MakeDndCard implements MakeCard {
         ExecutorService exec = new ThreadPoolExecutor(times, times, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), namedThreadFactory);
         ArrayList<Future<String>> results = new ArrayList<>();
         for (int i = 0; i < times; i++) {
-            results.add(exec.submit(new dice.sinanya.tools.MakeDndCard()));
+            results.add(exec.submit(new dice.sinanya.tools.makedata.MakeDndCard()));
         }
 
         String resDnd = getFutureToString(stringBuilder, results);

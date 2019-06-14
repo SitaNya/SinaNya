@@ -3,9 +3,9 @@ package dice.sinanya.dice.roll;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.system.TiAndLi.*;
-import static dice.sinanya.tools.RandomInt.random;
-import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.getinfo.RandomInt.random;
+import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * 临时疯狂与永久疯狂

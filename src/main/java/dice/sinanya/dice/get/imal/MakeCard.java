@@ -3,7 +3,7 @@ package dice.sinanya.dice.get.imal;
 import dice.sinanya.entity.EntityCoc6CardInfo;
 import dice.sinanya.entity.EntityCoc7CardInfo;
 
-import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
+import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
 
 /**
  * 生成卡片信息接口

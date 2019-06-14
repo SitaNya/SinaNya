@@ -2,19 +2,19 @@ package dice.sinanya.dice.system;
 
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
-import dice.sinanya.tools.SaveDocx;
+import dice.sinanya.tools.log.SaveDocx;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 
 import static dice.sinanya.system.MessagesLog.logNameForGroup;
 import static dice.sinanya.system.MessagesLog.logSwitchForGroup;
 import static dice.sinanya.system.MessagesLogGetLock.logGetLock;
 import static dice.sinanya.system.MessagesTag.*;
-import static dice.sinanya.tools.LogSave.logSave;
-import static dice.sinanya.tools.LogTag.*;
-import static dice.sinanya.tools.LogText.getLogText;
-import static dice.sinanya.tools.MakeMessages.deleteTag;
-import static dice.sinanya.tools.SendMail.sendMail;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.log.LogSave.logSave;
+import static dice.sinanya.tools.getinfo.LogTag.*;
+import static dice.sinanya.tools.getinfo.LogText.getLogText;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.log.SendMail.sendMail;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * 日志记录

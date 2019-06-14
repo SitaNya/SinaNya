@@ -4,11 +4,11 @@ import dice.sinanya.db.roles.InsertRoles;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.system.MessagesTag.TAG_EN;
-import static dice.sinanya.tools.GetSkillValue.getSkillValue;
-import static dice.sinanya.tools.MakeMessages.deleteTag;
-import static dice.sinanya.tools.RandomInt.random;
-import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.getinfo.GetSkillValue.getSkillValue;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.getinfo.RandomInt.random;
+import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * .en的相关类

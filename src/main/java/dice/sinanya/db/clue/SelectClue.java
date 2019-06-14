@@ -11,8 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static dice.sinanya.system.MessagesSystem.NONE;
-import static dice.sinanya.tools.RoleChoose.checkRoleChooseExistByQQ;
-import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
+import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByQQ;
+import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 
 /**
  * 获取线索集

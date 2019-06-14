@@ -3,18 +3,18 @@ package dice.sinanya.dice.roll;
 import dice.sinanya.entity.EntityRewardAndPunishment;
 import dice.sinanya.entity.EntityRollAndCheck;
 import dice.sinanya.entity.EntityTypeMessages;
-import dice.sinanya.tools.CheckResultLevel;
-import dice.sinanya.tools.GetSkillValue;
+import dice.sinanya.tools.checkdata.CheckResultLevel;
+import dice.sinanya.tools.getinfo.GetSkillValue;
 
 import java.util.ArrayList;
 
 import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.TAG_RB;
 import static dice.sinanya.system.MessagesTag.TAG_RP;
-import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.MakeRollCheckResult.makeResult;
-import static dice.sinanya.tools.RandomInt.random;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
+import static dice.sinanya.tools.makedata.MakeRollCheckResult.makeResult;
+import static dice.sinanya.tools.getinfo.RandomInt.random;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * 奖励投、惩罚投

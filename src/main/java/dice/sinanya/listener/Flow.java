@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
 import static dice.sinanya.system.MessagesError.strPropErr;
 import static dice.sinanya.system.MessagesError.strSetPropSuccess;
 import static dice.sinanya.system.MessagesTag.*;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * 入口分流类，结合MessagesTag中配置的正则表达式，将被机器人捕捉的小心分流给各个逻辑模块

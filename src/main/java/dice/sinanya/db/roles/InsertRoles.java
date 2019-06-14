@@ -11,9 +11,9 @@ import java.util.HashMap;
 
 import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOSE;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
-import static dice.sinanya.tools.GetTime.getNowString;
-import static dice.sinanya.tools.GetTime.getTime;
-import static dice.sinanya.tools.RoleInfo.getRoleInfoByQQ;
+import static dice.sinanya.tools.getinfo.GetTime.getNowString;
+import static dice.sinanya.tools.getinfo.GetTime.getTime;
+import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoByQQ;
 
 /**
  * 录入角色信息，包括当前角色和角色内容

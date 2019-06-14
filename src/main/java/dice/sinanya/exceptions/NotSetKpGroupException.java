@@ -3,7 +3,7 @@ package dice.sinanya.exceptions;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.system.MessagesError.strValueErr;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * 未设定kp管理群报错

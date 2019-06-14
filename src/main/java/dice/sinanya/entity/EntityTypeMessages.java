@@ -7,7 +7,7 @@ import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgGroup;
 import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgPrivate;
 import com.forte.qqrobot.sender.MsgSender;
 
-import static dice.sinanya.tools.CheckValue.checkValue;
+import static dice.sinanya.tools.checkdata.CheckValue.checkValue;
 
 /**
  * @author SitaNya

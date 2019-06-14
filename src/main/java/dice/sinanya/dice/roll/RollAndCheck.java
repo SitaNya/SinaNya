@@ -8,9 +8,9 @@ import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.ManyRollsFormatException;
 import dice.sinanya.exceptions.ManyRollsTimesTooMoreException;
 import dice.sinanya.exceptions.NotSetKpGroupException;
-import dice.sinanya.tools.CheckResultLevel;
-import dice.sinanya.tools.MakeRal;
-import dice.sinanya.tools.MakeRcl;
+import dice.sinanya.tools.checkdata.CheckResultLevel;
+import dice.sinanya.tools.makedata.MakeRal;
+import dice.sinanya.tools.makedata.MakeRcl;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -20,13 +20,13 @@ import java.util.concurrent.*;
 import static dice.sinanya.system.MessagesAntagonize.Antagonize;
 import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.*;
-import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.GetNickName.getNickName;
-import static dice.sinanya.tools.History.changeHistory;
-import static dice.sinanya.tools.Kp.getKpGroup;
-import static dice.sinanya.tools.MakeMessages.deleteTag;
-import static dice.sinanya.tools.MakeRollCheckResult.makeResult;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
+import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
+import static dice.sinanya.tools.getinfo.History.changeHistory;
+import static dice.sinanya.tools.getinfo.Kp.getKpGroup;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.makedata.MakeRollCheckResult.makeResult;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * @author SitaNya

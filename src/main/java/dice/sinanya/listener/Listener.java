@@ -14,10 +14,10 @@ import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.system.MessagesSystem.STR_ALREADY_DISABLED_ERR;
-import static dice.sinanya.tools.LogTag.checkOthorLogTrue;
-import static dice.sinanya.tools.LogTag.getOtherLogTrue;
-import static dice.sinanya.tools.LogText.setLogText;
-import static dice.sinanya.tools.SwitchBot.getBot;
+import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
+import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
+import static dice.sinanya.tools.getinfo.LogText.setLogText;
+import static dice.sinanya.tools.getinfo.SwitchBot.getBot;
 
 /**
  * @author SitaNya

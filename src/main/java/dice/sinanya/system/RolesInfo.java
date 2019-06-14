@@ -4,8 +4,8 @@ import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.HashMap;
 
-import static dice.sinanya.tools.GetMessagesToValue.getMessagesToValue;
-import static dice.sinanya.tools.RoleInfo.getRoleInfoFromChooseByFromQQ;
+import static dice.sinanya.tools.getinfo.GetMessagesToValue.getMessagesToValue;
+import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByFromQQ;
 
 /**
  * @author SitaNya

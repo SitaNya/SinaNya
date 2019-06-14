@@ -4,7 +4,7 @@ import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.system.MessagesHelp.*;
 import static dice.sinanya.system.MessagesSystem.STR_BOT_INFO;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * 帮助信息

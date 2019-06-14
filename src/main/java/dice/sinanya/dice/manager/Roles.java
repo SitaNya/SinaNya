@@ -13,10 +13,10 @@ import java.util.Map;
 import static dice.sinanya.system.MessagesTag.TAG_ST_RM;
 import static dice.sinanya.system.MessagesTag.TAG_ST_SET;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
-import static dice.sinanya.tools.MakeMessages.deleteTag;
-import static dice.sinanya.tools.RoleChoose.*;
-import static dice.sinanya.tools.RoleInfo.*;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.getinfo.RoleChoose.*;
+import static dice.sinanya.tools.getinfo.RoleInfo.*;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * @author SitaNya

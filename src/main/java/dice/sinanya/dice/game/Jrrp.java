@@ -5,8 +5,8 @@ import dice.sinanya.entity.EntityTypeMessages;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static dice.sinanya.tools.GetNickName.getNickName;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * 今日人品

@@ -3,9 +3,9 @@ package dice.sinanya.dice.manager;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.NotSetKpGroupException;
 
-import static dice.sinanya.tools.Kp.getKpGroup;
-import static dice.sinanya.tools.Kp.setKpGroup;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.getinfo.Kp.getKpGroup;
+import static dice.sinanya.tools.getinfo.Kp.setKpGroup;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * kp主群

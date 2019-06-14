@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 import static dice.sinanya.system.MessagesSystem.*;
 import static dice.sinanya.system.MessagesTag.*;
-import static dice.sinanya.tools.MakeMessages.deleteTag;
-import static dice.sinanya.tools.Sender.sender;
-import static dice.sinanya.tools.SwitchBot.*;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.log.Sender.sender;
+import static dice.sinanya.tools.getinfo.SwitchBot.*;
 
 /**
  * 机器人开启、关闭、退群

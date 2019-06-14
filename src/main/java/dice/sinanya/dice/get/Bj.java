@@ -5,8 +5,8 @@ import dice.sinanya.entity.EntityTypeMessages;
 import java.util.ArrayList;
 
 import static dice.sinanya.system.MessagesBG.*;
-import static dice.sinanya.tools.RandomInt.random;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.getinfo.RandomInt.random;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * 获取人物背景

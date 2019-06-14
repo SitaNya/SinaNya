@@ -5,18 +5,18 @@ import dice.sinanya.dice.get.imal.MakeCard;
 import dice.sinanya.entity.EntityCoc6CardInfo;
 import dice.sinanya.entity.EntityCoc7CardInfo;
 import dice.sinanya.entity.EntityTypeMessages;
-import dice.sinanya.tools.ThreadCoc6;
-import dice.sinanya.tools.ThreadCoc7;
+import dice.sinanya.tools.makedata.ThreadCoc6;
+import dice.sinanya.tools.makedata.ThreadCoc7;
 
 import java.util.ArrayList;
 import java.util.concurrent.*;
 
 import static dice.sinanya.system.MessagesTag.TAG_COC6;
 import static dice.sinanya.system.MessagesTag.TAG_COC7;
-import static dice.sinanya.tools.GetFutureToString.getFutureToString;
-import static dice.sinanya.tools.GetNickName.getNickName;
-import static dice.sinanya.tools.MakeMessages.deleteTag;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.makedata.GetFutureToString.getFutureToString;
+import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * COC车卡类

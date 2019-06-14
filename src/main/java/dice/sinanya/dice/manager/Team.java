@@ -10,8 +10,8 @@ import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.entity.imal.GetDb;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
-import dice.sinanya.tools.CheckSanCheck;
-import dice.sinanya.tools.MakeManyRollsStr;
+import dice.sinanya.tools.checkdata.CheckSanCheck;
+import dice.sinanya.tools.makedata.MakeManyRollsStr;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,14 +19,14 @@ import java.util.regex.Pattern;
 
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
-import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.MakeMessages.deleteTag;
-import static dice.sinanya.tools.MakeRollCheckResult.getResFunctionAndResultInt;
-import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
-import static dice.sinanya.tools.RoleInfo.getRoleInfoFromChooseByQQ;
-import static dice.sinanya.tools.RoleInfo.setRoleInfoFromChooseByQQ;
-import static dice.sinanya.tools.Sender.sender;
-import static dice.sinanya.tools.Team.*;
+import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.makedata.MakeRollCheckResult.getResFunctionAndResultInt;
+import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
+import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByQQ;
+import static dice.sinanya.tools.getinfo.RoleInfo.setRoleInfoFromChooseByQQ;
+import static dice.sinanya.tools.log.Sender.sender;
+import static dice.sinanya.tools.getinfo.Team.*;
 import static java.lang.Integer.min;
 import static java.lang.Math.max;
 

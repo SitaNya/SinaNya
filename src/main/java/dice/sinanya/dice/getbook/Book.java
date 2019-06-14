@@ -3,7 +3,7 @@ package dice.sinanya.dice.getbook;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.system.MessagesBook.*;
-import static dice.sinanya.tools.Sender.sender;
+import static dice.sinanya.tools.log.Sender.sender;
 
 /**
  * 获取资料集

@@ -1,8 +1,8 @@
 package dice.sinanya.entity.imal;
 
-import dice.sinanya.tools.Calculator;
+import dice.sinanya.tools.makedata.Calculator;
 
-import static dice.sinanya.tools.ManyRolls.manyRollsProcess;
+import static dice.sinanya.tools.makedata.ManyRolls.manyRollsProcess;
 import static java.lang.Math.ceil;
 
 /**

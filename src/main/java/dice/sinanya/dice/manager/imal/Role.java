@@ -8,10 +8,10 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 
-import static dice.sinanya.tools.GetSkillName.getSkillName;
-import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
-import static dice.sinanya.tools.RoleInfo.checkRoleInfoFromChooseExistByQQ;
-import static dice.sinanya.tools.RoleInfo.getRoleInfoFromChooseByFromQQ;
+import static dice.sinanya.tools.getinfo.GetSkillName.getSkillName;
+import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
+import static dice.sinanya.tools.getinfo.RoleInfo.checkRoleInfoFromChooseExistByQQ;
+import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByFromQQ;
 
 /**
  * 声明使用角色
