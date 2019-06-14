@@ -5,8 +5,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.beans.PropertyVetoException;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Properties;
 
 
 /**
@@ -29,15 +35,19 @@ class DbPool {
     private DbPool() {
         Log.info("Begin create DbPool");
         try {
+            InputStreamReader isr = new InputStreamReader(new FileInputStream("src/main/resources/conf/db.properties"), StandardCharsets.UTF_8);
+            BufferedReader bufferedReader = new BufferedReader(isr);
+            Properties prop = new Properties();
+            prop.load(bufferedReader);
             dataSource = new ComboPooledDataSource();
 
-            dataSource.setDriverClass("com.mysql.jdbc.Driver");
-            dataSource.setJdbcUrl("jdbc:mysql://123.207.150.160:3306/roles?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull");
-            dataSource.setUser("root");
-            dataSource.setPassword("rong");
+            dataSource.setDriverClass(prop.getProperty("jdbcdriver"));
+            dataSource.setJdbcUrl(prop.getProperty("url"));
+            dataSource.setUser(prop.getProperty("username"));
+            dataSource.setPassword(prop.getProperty("password"));
             dataSource.setIdleConnectionTestPeriod(3600);
             Log.info("create DbPool");
-        } catch (PropertyVetoException e) {
+        } catch (PropertyVetoException | IOException e) {
             Log.error(e.getMessage(), e);
         }
     }

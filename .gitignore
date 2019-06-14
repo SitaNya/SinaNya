@@ -51,3 +51,6 @@
 /out
 .idea
 *.idea
+
+# Directories for DB
+/src/main/resources/db.properties
