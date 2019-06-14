@@ -15,7 +15,7 @@ public class EntityClue {
 
     public EntityClue(String groupId, java.sql.Date date, String qqId) {
         this.groupId = groupId;
-        this.date = (Date)date.clone();
+        this.date = (Date) date.clone();
         this.qqId = qqId;
     }
 

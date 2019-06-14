@@ -31,7 +31,7 @@ public class InsertKp {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(),e);
+            Log.error(e.getMessage(), e);
         }
 
         if (num == 0) {
@@ -44,7 +44,7 @@ public class InsertKp {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                Log.error(e.getMessage(),e);
+                Log.error(e.getMessage(), e);
             }
         } else {
             try (Connection conn = DbUtil.getConnection()) {
@@ -57,7 +57,7 @@ public class InsertKp {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                Log.error(e.getMessage(),e);
+                Log.error(e.getMessage(), e);
             }
         }
     }

@@ -15,8 +15,9 @@ public interface MakeCard {
 
     /**
      * 获取生成卡片个数
-     * @param msg   输入值
-     * @return  返回次数
+     *
+     * @param msg 输入值
+     * @return 返回次数
      */
     default int getTime(String msg) {
         int times = 1;

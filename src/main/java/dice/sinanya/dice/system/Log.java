@@ -78,7 +78,7 @@ public class Log {
             logSave(entityTypeMessages.getFromGroup(), msg, bigResult);
             sender(entityTypeMessages, "正在抽取数据库为" + msg + "生成染色文件");
             try {
-                new SaveDocx(entityTypeMessages.getFromGroup(),entityTypeMessages.getFromQq(), msg, bigResult);
+                new SaveDocx(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq(), msg, bigResult);
             } catch (Docx4JException e) {
                 e.printStackTrace();
             }

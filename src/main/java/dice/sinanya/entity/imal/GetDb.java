@@ -7,18 +7,18 @@ package dice.sinanya.entity.imal;
  */
 public interface GetDb {
 
-     int SIZE_LEVEL1 = 2;
-     int SIZE_LEVEL2 = 64;
-     int SIZE_LEVEL3 = 84;
-     int SIZE_LEVEL4 = 124;
-     int SIZE_LEVEL5 = 164;
-     int SIZE_LEVEL6 = 204;
+    int SIZE_LEVEL1 = 2;
+    int SIZE_LEVEL2 = 64;
+    int SIZE_LEVEL3 = 84;
+    int SIZE_LEVEL4 = 124;
+    int SIZE_LEVEL5 = 164;
+    int SIZE_LEVEL6 = 204;
 
     /**
      * 获取db加值字符串
      *
      * @param a 传入数字a为力量与体型之和
-     * @return  返回DB加值字符串
+     * @return 返回DB加值字符串
      */
     default String dbGetter(int a) {
 

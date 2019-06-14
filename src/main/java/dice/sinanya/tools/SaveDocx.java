@@ -132,7 +132,7 @@ public class SaveDocx {
         }
         assert file != null;
         if (!file.getParentFile().exists()) {
-            if (!file.getParentFile().mkdirs()){
+            if (!file.getParentFile().mkdirs()) {
                 Log.error("docx染色文件未能成功生成");
             }
         }

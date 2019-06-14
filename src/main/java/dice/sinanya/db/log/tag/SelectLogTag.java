@@ -36,7 +36,7 @@ public class SelectLogTag {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(),e);
+            Log.error(e.getMessage(), e);
         }
     }
 
@@ -53,7 +53,7 @@ public class SelectLogTag {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(),e);
+            Log.error(e.getMessage(), e);
         }
         return tagList;
     }
@@ -72,7 +72,7 @@ public class SelectLogTag {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(),e);
+            Log.error(e.getMessage(), e);
         }
         return true;
     }
@@ -91,7 +91,7 @@ public class SelectLogTag {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(),e);
+            Log.error(e.getMessage(), e);
         }
         return "未找到";
     }

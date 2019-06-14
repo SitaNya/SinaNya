@@ -4,7 +4,6 @@ import dice.sinanya.entity.EntityRollAndCheck;
 import dice.sinanya.entity.EntityStrManyRolls;
 import dice.sinanya.entity.EntityTypeMessages;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

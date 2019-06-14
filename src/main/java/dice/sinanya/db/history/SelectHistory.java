@@ -19,6 +19,7 @@ import static dice.sinanya.system.MessagesHistory.historyList;
  */
 public class SelectHistory {
     private static final Logger Log = LogManager.getLogger(SelectHistory.class);
+
     public SelectHistory() {
     }
 
@@ -34,7 +35,7 @@ public class SelectHistory {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(),e);
+            Log.error(e.getMessage(), e);
         }
     }
 }

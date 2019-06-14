@@ -19,7 +19,7 @@ public class Tz {
     }
 
     public void get() {
-        int random8 = random(0, tzList.size()-1);
+        int random8 = random(0, tzList.size() - 1);
         int random20 = random(0, 19);
 
         sender(entityTypeMessages, tzList.get(random8).get(random20));

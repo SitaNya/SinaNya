@@ -37,7 +37,7 @@ public class SelectLogInfo {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(),e);
+            Log.error(e.getMessage(), e);
         }
         return stringBuilder.toString();
     }

@@ -2,16 +2,16 @@ package dice.sinanya.entity.imal;
 
 /**
  * 获取Coc7版信息卡的附加信息，比如伤害加值或体型等
- * 
+ *
  * @author SitaNya
  */
-public interface GetCoc7Info extends GetDb{
+public interface GetCoc7Info extends GetDb {
 
     /**
      * 获取体型加值
      *
      * @param a 传入str与siz之和
-     * @return  返回体型值
+     * @return 返回体型值
      */
     default int buildGetter(int a) {
         if (a >= SIZE_LEVEL1 && a <= SIZE_LEVEL2) {
@@ -32,10 +32,10 @@ public interface GetCoc7Info extends GetDb{
     /**
      * 根据传入的参数计算移动值
      *
-     * @param str   力量
-     * @param siz   体型
-     * @param dex   敏捷
-     * @return  移动值
+     * @param str 力量
+     * @param siz 体型
+     * @param dex 敏捷
+     * @return 移动值
      */
     default int movGetter(int str, int siz, int dex) {
         if (dex < siz && str < siz) {

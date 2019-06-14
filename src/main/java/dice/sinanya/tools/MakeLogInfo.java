@@ -24,7 +24,7 @@ class MakeLogInfo {
             info = info.replaceAll("([\"“”])", "\"");
             if (info.contains("\"")) {
                 result.append(info);
-            } else if ((info.charAt(0) == '(' && !info.contains(")") && !info.contains("）")) || ((info.charAt(0) == '（'||info.charAt(0) == '(') && (info.charAt(info.length() - 1) == ')' || info.charAt(info.length() - 1) == '）'))) {
+            } else if ((info.charAt(0) == '(' && !info.contains(")") && !info.contains("）")) || ((info.charAt(0) == '（' || info.charAt(0) == '(') && (info.charAt(info.length() - 1) == ')' || info.charAt(info.length() - 1) == '）'))) {
                 info = info.replaceAll("([(（])", "").replaceAll("([)）])", "");
                 result.append("(")
                         .append(getNickName(entityTypeMessages))

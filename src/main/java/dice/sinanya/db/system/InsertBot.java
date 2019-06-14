@@ -16,6 +16,7 @@ import java.sql.SQLException;
  */
 public class InsertBot {
     private static final Logger Log = LogManager.getLogger(InsertBot.class);
+
     public void insertBot(long groupId, boolean switchBot) {
         int num = 0;
         try (Connection conn = DbUtil.getConnection()) {
@@ -29,7 +30,7 @@ public class InsertBot {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(),e);
+            Log.error(e.getMessage(), e);
         }
 
         if (num == 0) {
@@ -44,7 +45,7 @@ public class InsertBot {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                Log.error(e.getMessage(),e);
+                Log.error(e.getMessage(), e);
             }
         } else {
             try (Connection conn = DbUtil.getConnection()) {
@@ -56,7 +57,7 @@ public class InsertBot {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                Log.error(e.getMessage(),e);
+                Log.error(e.getMessage(), e);
             }
         }
     }

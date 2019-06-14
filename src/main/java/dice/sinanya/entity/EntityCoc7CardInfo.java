@@ -3,8 +3,6 @@ package dice.sinanya.entity;
 import dice.sinanya.entity.imal.CocCardInfo;
 import dice.sinanya.entity.imal.GetCoc7Info;
 
-import static java.lang.Math.floor;
-
 /**
  * 7版数据细化对象
  *

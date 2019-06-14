@@ -4,8 +4,6 @@ import dice.sinanya.dice.manager.imal.AtQq;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static dice.sinanya.system.MessagesSystem.*;
 import static dice.sinanya.system.MessagesTag.*;

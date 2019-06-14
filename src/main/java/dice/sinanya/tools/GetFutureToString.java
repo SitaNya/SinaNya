@@ -10,7 +10,7 @@ import java.util.concurrent.Future;
  * @author SitaNya
  */
 public class GetFutureToString {
-    public static String getFutureToString(StringBuilder stringBuilder,ArrayList<Future<String>> results) {
+    public static String getFutureToString(StringBuilder stringBuilder, ArrayList<Future<String>> results) {
         for (Future future : results) {
             while (!future.isDone()) {
                 try {

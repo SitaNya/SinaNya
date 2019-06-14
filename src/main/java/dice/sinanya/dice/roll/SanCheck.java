@@ -5,7 +5,6 @@ import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
 import dice.sinanya.tools.CheckSanCheck;
 
-import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.TAG_SC;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.Sender.sender;

@@ -18,6 +18,7 @@ import java.util.Arrays;
  */
 public class SelectTeam {
     private static final Logger Log = LogManager.getLogger(SelectTeam.class);
+
     public ArrayList<String> selectTeamInfo(String groupId) {
         String strQqList = null;
         try (Connection conn = DbUtil.getConnection()) {
@@ -31,7 +32,7 @@ public class SelectTeam {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(),e);
+            Log.error(e.getMessage(), e);
         }
         if (strQqList != null) {
             return new ArrayList<>(Arrays.asList(strQqList.split(",")));

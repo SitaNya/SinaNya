@@ -39,7 +39,7 @@ public class SelectRoles {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(),e);
+            Log.error(e.getMessage(), e);
         }
     }
 
@@ -197,7 +197,7 @@ public class SelectRoles {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(),e);
+            Log.error(e.getMessage(), e);
         }
     }
 }

@@ -2,6 +2,7 @@ package dice.sinanya.entity;
 
 /**
  * 骰点过程包装类，包含最终的结果和骰点表达式
+ *
  * @author SitaNya
  */
 public class EntityStrManyRolls {

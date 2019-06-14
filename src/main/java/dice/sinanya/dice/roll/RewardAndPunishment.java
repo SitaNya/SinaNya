@@ -9,12 +9,12 @@ import dice.sinanya.tools.GetSkillValue;
 import java.util.ArrayList;
 
 import static dice.sinanya.system.MessagesSystem.SPACE;
-import static dice.sinanya.system.MessagesTag.*;
+import static dice.sinanya.system.MessagesTag.TAG_RB;
+import static dice.sinanya.system.MessagesTag.TAG_RP;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.MakeRollCheckResult.makeResult;
 import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.Sender.sender;
-import static java.lang.Math.floor;
 
 /**
  * 奖励投、惩罚投

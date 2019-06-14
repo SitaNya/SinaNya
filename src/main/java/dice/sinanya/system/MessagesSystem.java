@@ -11,7 +11,7 @@ public interface MessagesSystem {
     Boolean WIN_MODEL = Objects.equals(System.getProperty("os.name").toLowerCase(Locale.US), "Windows 10");
     Boolean LINUX_MODEL = !OSX_MODEL && !WIN_MODEL;
 
-    String NONE="";
+    String NONE = "";
     String SPACE = " ";
 
     String VERSIONS = "0.1.0.0 beta";

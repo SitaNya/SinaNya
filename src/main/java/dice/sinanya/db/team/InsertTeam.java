@@ -22,6 +22,7 @@ import java.util.Set;
  */
 public class InsertTeam {
     private static final Logger Log = LogManager.getLogger(InsertTeam.class);
+
     public void deleteGroup(String group) {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "delete from team where groupId=?";
@@ -30,7 +31,7 @@ public class InsertTeam {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(),e);
+            Log.error(e.getMessage(), e);
         }
     }
 
@@ -51,7 +52,7 @@ public class InsertTeam {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(),e);
+            Log.error(e.getMessage(), e);
         }
     }
 
@@ -77,7 +78,7 @@ public class InsertTeam {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(),e);
+            Log.error(e.getMessage(), e);
         }
 
         if (num == 0) {
@@ -92,7 +93,7 @@ public class InsertTeam {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                Log.error(e.getMessage(),e);
+                Log.error(e.getMessage(), e);
             }
         } else {
             try (Connection conn = DbUtil.getConnection()) {
@@ -107,7 +108,7 @@ public class InsertTeam {
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
-                Log.error(e.getMessage(),e);
+                Log.error(e.getMessage(), e);
             }
         }
     }

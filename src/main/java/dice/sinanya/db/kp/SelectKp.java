@@ -18,6 +18,7 @@ import static dice.sinanya.system.MessagesKP.KpGroup;
  */
 public class SelectKp {
     private static final Logger Log = LogManager.getLogger(SelectKp.class);
+
     public SelectKp() {
     }
 
@@ -32,7 +33,7 @@ public class SelectKp {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(),e);
+            Log.error(e.getMessage(), e);
         }
     }
 }
