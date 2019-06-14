@@ -6,6 +6,11 @@ import dice.sinanya.entity.EntityTypeMessages;
 import static dice.sinanya.tools.History.changeHistory;
 import static dice.sinanya.tools.Sender.sender;
 
+/**
+ * 骰点历史信息
+ *
+ * @author SitaNya
+ */
 public class History {
 
     private EntityTypeMessages entityTypeMessages;
@@ -16,7 +21,7 @@ public class History {
 
     public void hiy() {
         StringBuilder stringBuilder = new StringBuilder();
-        EntityHistory entityHistory = changeHistory(entityTypeMessages.getFromQQ());
+        EntityHistory entityHistory = changeHistory(entityTypeMessages.getFromQq());
 
         stringBuilder.append("您使用奈梅斯以来，共计产生以下历史数据:\n")
                 .append("骰点:\t")
@@ -56,7 +61,6 @@ public class History {
 
                 .append("平均值:\t")
                 .append(entityHistory.getMean())
-                .append("")
                 .append("\n")
 
                 .append("总成功数:\t")

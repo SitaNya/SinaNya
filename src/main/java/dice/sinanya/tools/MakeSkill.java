@@ -30,6 +30,7 @@ public class MakeSkill {
                 && skill.charAt(i) != 'd'
                 && skill.charAt(i) != 'D') {
             strSkillName.append(skill.charAt(i));
+            i++;
         }
         if (!strSkillName.toString().equals(tagNone)) {
             skill = skill.replaceFirst(strSkillName.toString(), String.valueOf(getSkillValue(qq, strSkillName.toString())));

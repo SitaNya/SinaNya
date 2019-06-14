@@ -2,9 +2,14 @@ package dice.sinanya.entity;
 
 import java.util.Objects;
 
+/**
+ * 日志标签对象，包含群号和日志名
+ *
+ * @author SitaNya
+ */
 public class EntityLogTag {
-    String groupId;
-    String logName;
+    private String groupId;
+    private String logName;
 
     public EntityLogTag(String groupId, String logName) {
         this.groupId = groupId;
@@ -21,10 +26,6 @@ public class EntityLogTag {
 
     public String getLogName() {
         return logName;
-    }
-
-    public void setLogName(String logName) {
-        this.logName = logName;
     }
 
     @Override

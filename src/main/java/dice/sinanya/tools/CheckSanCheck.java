@@ -1,34 +1,31 @@
 package dice.sinanya.tools;
 
 import dice.sinanya.entity.EntityRoleTag;
-import dice.sinanya.entity.EntitySanCheck;
-import dice.sinanya.entity.EntityStrManyRolls;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
 
 import java.util.HashMap;
-import java.util.regex.Pattern;
 
+import static dice.sinanya.system.MessagesSystem.NONE;
+import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.GetNickName.getNickName;
-import static dice.sinanya.tools.MakeSkill.makeSkill;
 import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
 import static dice.sinanya.tools.RoleInfo.*;
 import static dice.sinanya.tools.Sender.sender;
-import static java.lang.Math.*;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 public class CheckSanCheck {
     EntityTypeMessages entityTypeMessages;
-    String tagNone = "";
-    long qq;
-    private static Pattern pContainD = Pattern.compile("(\\d+[dD]\\d+)");
+    private long qq;
 
     public CheckSanCheck(EntityTypeMessages entityTypeMessages) {
-        qq = Long.parseLong(entityTypeMessages.getFromQQ());
+        qq = Long.parseLong(entityTypeMessages.getFromQq());
         this.entityTypeMessages = entityTypeMessages;
     }
 
@@ -42,107 +39,108 @@ public class CheckSanCheck {
         this.entityTypeMessages = entityTypeMessages;
     }
 
-    public void addSanCheck(String skill, String strAddValue) throws PlayerSetException {
-
-        if (skill.equals("")) {
-            skill = "理智";
-        }
-
-        StringBuilder strResult = new StringBuilder();
-
-        String role = "";
-        int san;
+    public void addSanCheck(String function) throws PlayerSetException {
+        String role = NONE;
+        int san = 0;
         int cthulhuMythos = 0;
 
-        int changeValue = 0;
-        String changeFuncion = "";
+        int changeValue;
+        String changeFunction;
+        String strAddValue;
+
+
+        if (function.contains(SPACE) && !function.split(SPACE)[1].isEmpty()) {
+            strAddValue = function.split(SPACE)[0];
+            if (isNumeric(function.split(SPACE)[1])) {
+                san = Integer.parseInt(function.split(SPACE)[1]);
+            }
+        } else {
+            strAddValue = function;
+        }
+
+
         if (isNumeric(strAddValue)) {
             changeValue = Integer.parseInt(strAddValue);
-            changeFuncion = strAddValue;
+            changeFunction = strAddValue;
         } else {
             MakeManyRollsStr makeManyRollsStr = new MakeManyRollsStr(strAddValue);
             changeValue = makeManyRollsStr.getRes();
-            changeFuncion = makeManyRollsStr.getStr();
+            changeFunction = makeManyRollsStr.getStr();
         }
-
-        EntityStrManyRolls entityStrManyRolls = makeSkill(skill, qq);
-
 
         HashMap<String, Integer> prop = getRoleInfoFromChooseByFromQQ(entityTypeMessages);
         if (prop != null) {
             role = getRoleChooseByFromQQ(entityTypeMessages);
-            if (entityStrManyRolls.getResult() != 0) {
-                san = entityStrManyRolls.getResult();
-            } else {
+            if (san == 0) {
                 san = prop.get("san");
                 cthulhuMythos = prop.get("cthulhuMythos");
             }
             prop.put("san", san + changeValue);
         } else {
-            if (entityStrManyRolls.getResult() != 0) {
-                san = entityStrManyRolls.getResult();
-            } else {
+            if (san == 0) {
                 throw new PlayerSetException(entityTypeMessages);
             }
         }
         setRoleInfoFromChooseByQQ(qq, prop);
-        sender(entityTypeMessages, "已为" + role + "恢复" + changeFuncion + "=" + changeValue + "点理智值，剩余" + min((san + changeValue), 99 - cthulhuMythos) + "点");
+        sender(entityTypeMessages, "已为" + role + "恢复" + changeFunction + "=" + changeValue + "点理智值，剩余" + min((san + changeValue), 99 - cthulhuMythos) + "点");
     }
 
-    public EntitySanCheck checkSanCheck(String skill, String strCheckValue) throws SanCheckSetException, PlayerSetException {
+    @SuppressWarnings("AlibabaMethodTooLong")
+    public String checkSanCheck(String function) throws SanCheckSetException, PlayerSetException {
+        int levelFumbleLine = 100;
+        String sanFunctionSeq = "/";
 
-        if (skill.equals("")) {
-            skill = "理智";
+        String strCheckValue;
+        String role;
+        int san = 0;
+
+        if (function.contains(SPACE) && !function.split(SPACE)[1].isEmpty()) {
+            strCheckValue = function.split(SPACE)[0];
+            if (isNumeric(function.split(SPACE)[1])) {
+                san = Integer.parseInt(function.split(SPACE)[1]);
+            }
+        } else {
+            strCheckValue = function;
         }
-        int level;
 
-        StringBuilder strResult = new StringBuilder();
-
-        String role = "";
-        int san;
-
-        if (!strCheckValue.contains("/") || strCheckValue.split("/")[0].equals(tagNone) || strCheckValue.split("/")[1].equals(tagNone)) {
+        String tagNone = NONE;
+        if (!strCheckValue.contains(sanFunctionSeq) || strCheckValue.split(sanFunctionSeq)[0].equals(tagNone) || strCheckValue.split(sanFunctionSeq)[1].equals(tagNone)) {
             throw new SanCheckSetException(entityTypeMessages);
         }
 
-        String strSuccess = strCheckValue.split("/")[0];
-        String strFail = strCheckValue.split("/")[1];
+        String strSuccess = strCheckValue.split(sanFunctionSeq)[0];
+        String strFail = strCheckValue.split(sanFunctionSeq)[1];
 
         MakeManyRollsStr mSuccess = new MakeManyRollsStr(strSuccess);
         MakeManyRollsStr mFail = new MakeManyRollsStr(strFail);
-
-        EntityStrManyRolls entityStrManyRolls = makeSkill(skill, qq);
-
 
         boolean useCard = false;
         HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);
         if (prop != null) {
             role = getRoleChooseByQQ(qq);
-            if (!skill.equals("理智")) {
-                san = entityStrManyRolls.getResult();
-            } else {
+            if (san == 0) {
                 san = prop.get("san");
                 useCard = true;
             }
         } else {
             role = getNickName(entityTypeMessages);
-            if (entityStrManyRolls.getResult() != 0) {
-                san = entityStrManyRolls.getResult();
-            } else {
+            if (san == 0) {
                 throw new PlayerSetException(entityTypeMessages);
             }
         }
 
+        StringBuilder strResult = new StringBuilder();
         strResult.append(role)
                 .append("的理智检定结果:")
                 .append("\n");
 
         int random = random(1, 100);
-        if (random == 100) {
+        String regexFunctionSeq = "[dD]";
+        if (random == levelFumbleLine) {
             int maxSan = 0;
-            if (strFail.contains("D") || strFail.contains("d")) {
-                if (isNumeric(strFail.split("[dD]")[1])) {
-                    maxSan = Integer.parseInt(strFail.split("[dD]")[1]);
+            if (hasFunctionSeq(strFail)) {
+                if (isNumeric(strFail.split(regexFunctionSeq)[1])) {
+                    maxSan = Integer.parseInt(strFail.split(regexFunctionSeq)[1]);
                 } else {
                     sender(entityTypeMessages, "sc格式错误");
                 }
@@ -169,23 +167,14 @@ public class CheckSanCheck {
                     .append(newSan)
                     .append("点");
             if (useCard) {
-                prop.put("san", newSan);
-                setRoleInfoFromChooseByQQ(qq, prop);
-                ROLE_INFO_CACHE.put(new EntityRoleTag(qq, role), prop);
+                setCard(newSan, prop, role);
             }
-            if (newSan == 0) {
-                strResult.append("\n已永久疯狂");
-            } else if (maxSan >= 5) {
-                strResult.append("\n已进入临时性疯狂");
-            } else if (maxSan >= floor(san / 5)) {
-                strResult.append("\n已因单次损失值进入不定性疯狂");
-            }
-            level = 3;
+            makeInsane(strResult, newSan, san);
         } else if (random == 1) {
             int minSan = 0;
-            if (strSuccess.contains("D") || strSuccess.contains("d")) {
-                if (isNumeric(strSuccess.split("[dD]")[0])) {
-                    minSan = Integer.parseInt(strSuccess.split("[dD]")[0]);
+            if (hasFunctionSeq(strSuccess)) {
+                if (isNumeric(strSuccess.split(regexFunctionSeq)[0])) {
+                    minSan = Integer.parseInt(strSuccess.split(regexFunctionSeq)[0]);
                 } else {
                     sender(entityTypeMessages, "sc格式错误");
                 }
@@ -213,18 +202,9 @@ public class CheckSanCheck {
                     .append("点");
 
             if (useCard) {
-                prop.put("san", newSan);
-                setRoleInfoFromChooseByQQ(qq, prop);
-                ROLE_INFO_CACHE.put(new EntityRoleTag(qq, role), prop);
+                setCard(newSan, prop, role);
             }
-            if (newSan == 0) {
-                strResult.append("\n已永久疯狂");
-            } else if (minSan >= 5) {
-                strResult.append("\n已进入临时性疯狂");
-            } else if (minSan >= floor(san / 5)) {
-                strResult.append("\n已因单次损失值进入不定性疯狂");
-            }
-            level = 0;
+            makeInsane(strResult, newSan, san);
         } else if (random <= san) {
             int newSan = max(0, san - mSuccess.getRes());
             strResult
@@ -242,20 +222,10 @@ public class CheckSanCheck {
                     .append(newSan)
                     .append("点");
             if (useCard) {
-                prop.put("san", newSan);
-                setRoleInfoFromChooseByQQ(qq, prop);
-                ROLE_INFO_CACHE.put(new EntityRoleTag(qq, role), prop);
+                setCard(newSan, prop, role);
             }
-            if (newSan == 0) {
-                strResult.append("\n已永久疯狂");
-            } else if (mSuccess.getRes() >= 5) {
-                strResult.append("\n已进入临时性疯狂");
-            } else if (mSuccess.getRes() >= floor(san / 5)) {
-                strResult.append("\n已因单次损失值进入不定性疯狂");
-            }
-            level = 1;
+            makeInsane(strResult, newSan, san);
         } else {
-            int tmp = mFail.getRes();
             int newSan = max(0, san - mFail.getRes());
             strResult
                     .append(random)
@@ -272,19 +242,30 @@ public class CheckSanCheck {
                     .append(newSan)
                     .append("点");
             if (useCard) {
-                prop.put("san", newSan);
-                setRoleInfoFromChooseByQQ(qq, prop);
-                ROLE_INFO_CACHE.put(new EntityRoleTag(qq, role), prop);
+                setCard(newSan, prop, role);
             }
-            if (newSan == 0) {
-                strResult.append("\n已永久疯狂");
-            } else if (mFail.getRes() >= 5) {
-                strResult.append("\n已进入临时性疯狂");
-            } else if (mFail.getRes() >= floor(san / 5)) {
-                strResult.append("\n已因单次损失值进入不定性疯狂");
-            }
-            level = 2;
+            makeInsane(strResult, newSan, san);
         }
-        return new EntitySanCheck(level, strResult.toString());
+        return strResult.toString();
+    }
+
+    private void setCard(int newSan, HashMap<String, Integer> prop, String role) {
+        prop.put("san", newSan);
+        setRoleInfoFromChooseByQQ(qq, prop);
+        ROLE_INFO_CACHE.put(new EntityRoleTag(qq, role), prop);
+    }
+
+    private void makeInsane(StringBuilder strResult, int newSan, int san) {
+        if (newSan == 0) {
+            strResult.append("\n已永久疯狂");
+        } else if (san - newSan >= 5) {
+            strResult.append("\n已进入临时性疯狂");
+        } else if (san - newSan >= san / 5) {
+            strResult.append("\n已因单次损失值进入不定性疯狂");
+        }
+    }
+
+    private boolean hasFunctionSeq(String function) {
+        return function.contains("D") || function.contains("d");
     }
 }

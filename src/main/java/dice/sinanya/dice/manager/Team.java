@@ -3,7 +3,10 @@ package dice.sinanya.dice.manager;
 import dice.sinanya.dice.manager.imal.AtQq;
 import dice.sinanya.dice.manager.imal.PropList;
 import dice.sinanya.dice.manager.imal.Role;
-import dice.sinanya.entity.*;
+import dice.sinanya.entity.EntityRoleTag;
+import dice.sinanya.entity.EntityStrManyRolls;
+import dice.sinanya.entity.EntityTeamInfo;
+import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.entity.imal.GetDb;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
@@ -56,7 +59,7 @@ public class Team extends PropList implements GetDb, Role, AtQq {
     public void remove() {
         useRole(entityTypeMessages);
 
-        String tag = TAG_TEAM_MOVE;
+        String tag = TAG_TEAM_RM;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
         EntityTeamInfo entityTeamInfo = new EntityTeamInfo(entityTypeMessages.getFromGroup(), qqList);
@@ -112,7 +115,7 @@ public class Team extends PropList implements GetDb, Role, AtQq {
                 int con = prop.get("con");
                 int siz = prop.get("siz");
                 if (add) {
-                    int maxHp = (int) ceil((con + siz) / 10);
+                    int maxHp = (con + siz) / 10;
                     int newHp = min(hp + entityStrManyRolls.getResult(), maxHp);
                     prop.put("hp", newHp);
                     setRoleInfoFromChooseByQQ(qq, prop);
@@ -124,7 +127,7 @@ public class Team extends PropList implements GetDb, Role, AtQq {
                     ROLE_INFO_CACHE.put(new EntityRoleTag(Long.parseLong(qq), role), prop);
                     if (newHp == 0) {
                         sender(entityTypeMessages, role + "损失" + entityStrManyRolls.getStrManyRolls() + "=" + entityStrManyRolls.getResult() + "点血量，已死亡");
-                    } else if (entityStrManyRolls.getResult() >= floor(hp / 2)) {
+                    } else if (entityStrManyRolls.getResult() >= hp / 2) {
                         sender(entityTypeMessages, "已为" + role + "降低" + entityStrManyRolls.getStrManyRolls() + "=" + entityStrManyRolls.getResult() + "点血量，剩余" + newHp + "点,已进入重伤状态");
                     } else {
                         sender(entityTypeMessages, "已为" + role + "降低" + entityStrManyRolls.getStrManyRolls() + "=" + entityStrManyRolls.getResult() + "点血量，剩余" + newHp + "点");
@@ -155,15 +158,15 @@ public class Team extends PropList implements GetDb, Role, AtQq {
 
             if (add) {
                 try {
-                    checkSanCheck.addSanCheck("理智", msg);
+                    checkSanCheck.addSanCheck(msg);
                 } catch (PlayerSetException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
                     if (msg.contains("/")) {
-                        EntitySanCheck entitySanCheck = checkSanCheck.checkSanCheck("理智", msg);
-                        sender(entityTypeMessages, entitySanCheck.getStrSanCheck());
+                        String result = checkSanCheck.checkSanCheck(msg);
+                        sender(entityTypeMessages, result);
                     } else {
                         int changeValue;
                         if (isNumeric(msg)) {
@@ -181,7 +184,7 @@ public class Team extends PropList implements GetDb, Role, AtQq {
                                 strResult.append("\n已永久疯狂");
                             } else if (changeValue >= 5) {
                                 strResult.append("\n已进入临时性疯狂");
-                            } else if (changeValue >= floor(prop.get("san") / 5)) {
+                            } else if (changeValue >= prop.get("san") / 5) {
                                 strResult.append("\n已因单次损失值进入不定性疯狂");
                             }
                             prop.put("san", newSan);
@@ -231,7 +234,7 @@ public class Team extends PropList implements GetDb, Role, AtQq {
                         .append("血量=")
                         .append(hp)
                         .append("/")
-                        .append((int) ceil((con + siz) / 10))
+                        .append((con + siz) / 10)
                         .append("  ")
                         .append("san值=")
                         .append(san)
@@ -264,6 +267,6 @@ public class Team extends PropList implements GetDb, Role, AtQq {
         for (String qq : qqList) {
             stringBuilder = new Roles(entityTypeMessages).showProp(entityTypeMessages, qq);
         }
-        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), stringBuilder.toString());
+        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), stringBuilder.toString());
     }
 }

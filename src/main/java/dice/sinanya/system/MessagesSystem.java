@@ -12,6 +12,7 @@ public interface MessagesSystem {
     Boolean LINUX_MODEL = !OSX_MODEL && !WIN_MODEL;
 
     String NONE="";
+    String SPACE = " ";
 
     String VERSIONS = "0.1.0.0 beta";
     String STR_SUCCESSFULLY_ENABLED_NOTICE = "啊~您需要奈梅斯了吗？我一定会好好努力的";

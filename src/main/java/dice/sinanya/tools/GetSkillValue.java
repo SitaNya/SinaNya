@@ -23,7 +23,7 @@ public class GetSkillValue {
     private int skill = 0;
 
     public GetSkillValue(EntityTypeMessages entityTypeMessages, String msg) {
-        this.qq = Long.parseLong(entityTypeMessages.getFromQQ());
+        this.qq = Long.parseLong(entityTypeMessages.getFromQq());
         this.msg = msg;
         replaceSkill(qq);
     }

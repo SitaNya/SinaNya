@@ -35,7 +35,7 @@ public class MakeRollCheckResult {
             skillName.append(msg.charAt(i));
             i++;
         }
-        String nick = "";
+        String nick;
         int skill = 0;
 
         if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {

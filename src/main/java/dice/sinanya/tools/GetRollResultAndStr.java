@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 import static dice.sinanya.system.MessagesSystem.ROLL_MAX_VALUE;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.ManyRolls.manyRollsProcess;
-import static java.lang.Math.ceil;
 
 /**
  * 根据一个类似于3D6K3的字符串计算，返回计算表达式和结果
@@ -16,21 +15,18 @@ import static java.lang.Math.ceil;
  * @author SitaNya
  */
 public class GetRollResultAndStr {
-    EntityTypeMessages entityTypeMessages;
     private String msg;
 
     private Pattern function = Pattern.compile("(\\d*)[dD](\\d*)[kK]?(\\d*)");
 
     private int times = 1;
     private int maxRolls;
-    private int maxNums=1;
+    private int maxNums = 1;
 
     private String resStr = "";
-    private int resInt = 0;
     private String strFunction = "";
 
     public GetRollResultAndStr(EntityTypeMessages entityTypeMessages, String msg) {
-        this.entityTypeMessages = entityTypeMessages;
         this.msg = msg;
         maxRolls = entityTypeMessages.getFromGroup() != null ? 100 : ROLL_MAX_VALUE.get(entityTypeMessages.getFromGroup());
         makeResult();
@@ -39,7 +35,6 @@ public class GetRollResultAndStr {
     private void makeResult() {
 
         if (isNumeric(msg)) {
-            resInt = Integer.getInteger(msg);
             resStr = msg;
             strFunction = msg;
             return;
@@ -62,7 +57,6 @@ public class GetRollResultAndStr {
         }
 
         resStr = manyRollsProcess(times, maxRolls, maxNums);
-        resInt = (int) (ceil(Calculator.conversion(resStr)));
 
         if (maxNums == times) {
             strFunction = times + "D" + maxRolls;
@@ -73,10 +67,6 @@ public class GetRollResultAndStr {
 
     public String getResStr() {
         return resStr;
-    }
-
-    public int getResInt() {
-        return resInt;
     }
 
     public String getFunction() {

@@ -2,10 +2,15 @@ package dice.sinanya.entity;
 
 import java.util.Objects;
 
+/**
+ * 对抗类型对象
+ *
+ * @author SitaNya
+ */
 public class EntityAntagonize {
-    int random;
-    int level;
-    int skill;
+    private int random;
+    private int level;
+    private int skill;
 
     public EntityAntagonize(int random, int level, int skill) {
         this.random = random;
@@ -23,10 +28,6 @@ public class EntityAntagonize {
 
     public int getLevel() {
         return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
     }
 
     public int getSkill() {

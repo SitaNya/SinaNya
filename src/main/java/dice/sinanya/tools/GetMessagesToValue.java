@@ -4,8 +4,13 @@ import java.util.HashMap;
 
 import static dice.sinanya.tools.MakeSkillName.makeSkillName;
 
-public class GetMessaggeToValue {
-    public static HashMap<String, Integer> getMessaggeToValue(HashMap<String, Integer> propertiesDefault, String msg) {
+/**
+ * 将传入的msg人物属性信息整理包装为HashMap格式
+ *
+ * @author SitaNya
+ */
+public class GetMessagesToValue {
+    public static HashMap<String, Integer> getMessagesToValue(HashMap<String, Integer> propertiesDefault, String msg) {
         StringBuilder strSkillValue = new StringBuilder();
         StringBuilder strSkillName = new StringBuilder();
         for (int i = 0; i < msg.length(); ) {

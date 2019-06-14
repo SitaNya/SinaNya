@@ -6,9 +6,10 @@ import static dice.sinanya.tools.RandomInt.random;
 
 public class MakeManyRollsInThread implements Callable<Integer> {
 
-    int maxValue;
-    public MakeManyRollsInThread(int maxValue) {
-        this.maxValue=maxValue;
+    private int maxValue;
+
+    MakeManyRollsInThread(int maxValue) {
+        this.maxValue = maxValue;
     }
 
     @Override

@@ -51,7 +51,7 @@ public class RoleInfo {
 
 
     public static boolean checkRoleInfoExistByFromQQ(EntityTypeMessages entityTypeMessages, String role) {
-        long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
+        long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         if (ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role))) {
             return true;
         } else {
@@ -61,7 +61,7 @@ public class RoleInfo {
     }
 
     public static boolean checkRoleInfoFromChooseExistByFromQQ(EntityTypeMessages entityTypeMessages) {
-        long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
+        long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         String role;
         if (checkRoleChooseExistByQQ(qqId)) {
             role = ROLE_CHOOSE.get(qqId);
@@ -154,7 +154,7 @@ public class RoleInfo {
     }
 
     public static HashMap<String, Integer> getRoleInfoByFromQQ(EntityTypeMessages entityTypeMessages, String role) {
-        long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
+        long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         if (checkRoleInfoExistByQQ(qqId, role)) {
             return ROLE_INFO_CACHE.get(new EntityRoleTag(qqId, role));
         } else {
@@ -163,7 +163,7 @@ public class RoleInfo {
     }
 
     public static HashMap<String, Integer> getRoleInfoFromChooseByFromQQ(EntityTypeMessages entityTypeMessages) {
-        long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
+        long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         String role;
         if (checkRoleChooseExistByQQ(qqId)) {
             String tmp = ROLE_CHOOSE.get(qqId);
@@ -172,7 +172,6 @@ public class RoleInfo {
             return null;
         }
         if (checkRoleInfoExistByQQ(qqId, role)) {
-            HashMap<EntityRoleTag,HashMap< String, Integer>> tmp = ROLE_INFO_CACHE;
             return ROLE_INFO_CACHE.get(new EntityRoleTag(qqId, role));
         } else {
             return null;
@@ -191,7 +190,7 @@ public class RoleInfo {
     }
 
     public static void setRoleInfoByFromQQ(EntityTypeMessages entityTypeMessages, String role, String prop) {
-        long qq = Long.parseLong(entityTypeMessages.getFromQQ());
+        long qq = Long.parseLong(entityTypeMessages.getFromQq());
         insertRoles.insertRoleInfo(prop, role, qq);
         selectRoles.flushRoleInfoCacheByQQ(qq);
     }
@@ -220,7 +219,7 @@ public class RoleInfo {
     }
 
     public static void setRoleInfoFromChooseByFromQQ(EntityTypeMessages entityTypeMessages, String prop) {
-        long qq = Long.parseLong(entityTypeMessages.getFromQQ());
+        long qq = Long.parseLong(entityTypeMessages.getFromQq());
         String role;
         if (checkRoleChooseExistByQQ(qq)) {
             role = ROLE_CHOOSE.get(qq);
@@ -255,7 +254,7 @@ public class RoleInfo {
     }
 
     public static void setRoleInfoFromChooseByFromQQ(EntityTypeMessages entityTypeMessages, HashMap<String, Integer> prop) {
-        long qq = Long.parseLong(entityTypeMessages.getFromQQ());
+        long qq = Long.parseLong(entityTypeMessages.getFromQq());
         String role;
         if (checkRoleChooseExistByQQ(qq)) {
             role = ROLE_CHOOSE.get(qq);

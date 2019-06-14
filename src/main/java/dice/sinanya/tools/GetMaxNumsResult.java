@@ -3,12 +3,15 @@ package dice.sinanya.tools;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class GetMaxKTimes {
+/**
+ * @author SitaNya
+ */
+class GetMaxNumsResult {
 
-    public static ArrayList<Integer> getMaxKTimes(ArrayList<Integer> input, int Ktimes) {
+    static ArrayList<Integer> getMaxNumsResult(ArrayList<Integer> input, int maxNums) {
         Collections.sort(input);
         ArrayList<Integer> result = new ArrayList<>();
-        for (int i = input.size()-1; i >= (input.size()-Ktimes); i--) {
+        for (int i = input.size() - 1; i >= (input.size() - maxNums); i--) {
             result.add(input.get(i));
         }
         return result;

@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import static dice.sinanya.tools.GetMaxKTimes.getMaxKTimes;
+import static dice.sinanya.tools.GetMaxNumsResult.getMaxNumsResult;
 import static dice.sinanya.tools.RandomInt.random;
 
 public class ManyRolls {
@@ -42,7 +42,7 @@ public class ManyRolls {
                     e.printStackTrace();
                 }
             }
-            for (int intTmp : getMaxKTimes(tmp, Ktimes)) {
+            for (int intTmp : getMaxNumsResult(tmp, Ktimes)) {
                 intResult += intTmp;
             }
             exec.shutdown();
@@ -54,7 +54,7 @@ public class ManyRolls {
                 tmp.add(random(1, rolls));
             }
             int i = 0;
-            for (int tmpRandom : getMaxKTimes(tmp, Ktimes)) {
+            for (int tmpRandom : getMaxNumsResult(tmp, Ktimes)) {
                 stringBuilder.append(tmpRandom);
                 if (i != (Ktimes - 1)) {
                     stringBuilder.append("+");
@@ -80,7 +80,7 @@ public class ManyRolls {
             for (int i = 0; i < times; i++) {
                 tmp.add(random(1, rolls));
             }
-            for (int tmpRandom : getMaxKTimes(tmp, Ktimes)) {
+            for (int tmpRandom : getMaxNumsResult(tmp, Ktimes)) {
                 intResult += tmpRandom;
             }
             return intResult;

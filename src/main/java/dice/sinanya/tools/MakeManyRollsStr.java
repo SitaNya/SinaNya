@@ -9,11 +9,10 @@ import static dice.sinanya.tools.ManyRolls.manyRollsProcess;
 
 public class MakeManyRollsStr {
     private int strTimes = 1;
-    private int strRolls = 100;
     private int resInt;
     private String resStr;
 
-    private static Pattern KAndNums = Pattern.compile("[kK]([\\d]+)");
+    private static Pattern KeyAndNums = Pattern.compile("[kK]([\\d]+)");
 
     public MakeManyRollsStr(String input) {
         makeManyRollsStr(input);
@@ -23,7 +22,7 @@ public class MakeManyRollsStr {
         String tagNone = "";
         String strFirst = "";
         String strSecond = "";
-        int Ktimes = 1;
+        int maxNums = 1;
 
         if (input.contains("d") || input.contains("D")) {
             strFirst = input.split("[dD]")[0];
@@ -36,23 +35,24 @@ public class MakeManyRollsStr {
             strTimes = Integer.parseInt(strFirst);
         }
 
+        int strRolls;
         if (isNumeric(strSecond) && !strSecond.equals(tagNone)) {
             strRolls = Integer.parseInt(strSecond);
         } else {
             strRolls = strTimes;
         }
 
-        Matcher mKTimes = KAndNums.matcher(input);
-        while (mKTimes.find()) {
-            Ktimes = Integer.parseInt(mKTimes.group(1));
+        Matcher mKeyAndNums = KeyAndNums.matcher(input);
+        while (mKeyAndNums.find()) {
+            maxNums = Integer.parseInt(mKeyAndNums.group(1));
         }
 
         if (strRolls == 0) {
             resInt = 0;
             resStr = "0";
         } else {
-            resInt = manyRollsForInt(strTimes, strRolls, Ktimes);
-            resStr = manyRollsProcess(strTimes, strRolls, Ktimes);
+            resInt = manyRollsForInt(strTimes, strRolls, maxNums);
+            resStr = manyRollsProcess(strTimes, strRolls, maxNums);
         }
     }
 

@@ -15,7 +15,7 @@ import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.system.MessagesSystem.STR_ALREADY_DISABLED_ERR;
 import static dice.sinanya.tools.LogTag.checkOthorLogTrue;
-import static dice.sinanya.tools.LogTag.getOthorLogTrue;
+import static dice.sinanya.tools.LogTag.getOtherLogTrue;
 import static dice.sinanya.tools.LogText.setLogText;
 import static dice.sinanya.tools.SwitchBot.getBot;
 
@@ -86,7 +86,7 @@ public class Listener {
         if (getBot(Long.parseLong(msgGroup.getFromGroup())) || msgGroup.getMsg().trim().equals(tagBotOn)) {
             EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
             if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
-                setLogText(entityTypeMessages, new EntityLogTag(entityTypeMessages.getFromGroup(), getOthorLogTrue(entityTypeMessages.getFromGroup())), msgGet.getMsg());
+                setLogText(entityTypeMessages, new EntityLogTag(entityTypeMessages.getFromGroup(), getOtherLogTrue(entityTypeMessages.getFromGroup())), msgGet.getMsg());
             }
             return true;
         } else if (msgGroup.getMsg().trim().equals(tagBotOff)) {
@@ -104,7 +104,7 @@ public class Listener {
         if (getBot(Long.parseLong(msgDisGroup.getFromDiscuss())) || msgDisGroup.getMsg().trim().equals(tagBotOn)) {
             EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
             if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
-                setLogText(entityTypeMessages, new EntityLogTag(entityTypeMessages.getFromGroup(), getOthorLogTrue(entityTypeMessages.getFromGroup())), msgGet.getMsg());
+                setLogText(entityTypeMessages, new EntityLogTag(entityTypeMessages.getFromGroup(), getOtherLogTrue(entityTypeMessages.getFromGroup())), msgGet.getMsg());
             }
             return true;
         } else if (msgDisGroup.getMsg().trim().equals(tagBotOff)) {

@@ -2,7 +2,7 @@ package dice.sinanya.tools;
 
 import java.util.HashMap;
 
-public class MakeSkillName {
+class MakeSkillName {
     static HashMap<String, String> skillTable = new HashMap<String, String>(100) {{
         put("力量", "str");
         put("敏捷", "dex");
@@ -91,11 +91,7 @@ public class MakeSkillName {
         put("炮术", "artillery");
     }};
 
-    public static String makeSkillName(String skillName) {
-        if (skillTable.containsKey(skillName)) {
-            return skillTable.get(skillName);
-        } else {
-            return skillName;
-        }
+    static String makeSkillName(String skillName) {
+        return skillTable.getOrDefault(skillName, skillName);
     }
 }

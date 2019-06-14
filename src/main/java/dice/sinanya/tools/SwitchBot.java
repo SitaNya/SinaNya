@@ -6,8 +6,8 @@ import dice.sinanya.db.system.SelectBot;
 import static dice.sinanya.system.SystemInfo.SWITCH_BOT;
 
 public class SwitchBot {
-    static InsertBot insertBot = new InsertBot();
-    static SelectBot selectBot = new SelectBot();
+    private static InsertBot insertBot = new InsertBot();
+    private static SelectBot selectBot = new SelectBot();
 
     public static void botOn(Long groupId) {
         SWITCH_BOT.put(groupId, true);

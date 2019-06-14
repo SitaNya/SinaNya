@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import static dice.sinanya.system.MessagesLog.*;
 
 public class LogTag {
-    static SelectLogTag selectLogTag = new SelectLogTag();
-    static InsertLogTag insertLogTag = new InsertLogTag();
+    private static SelectLogTag selectLogTag = new SelectLogTag();
+    private static InsertLogTag insertLogTag = new InsertLogTag();
 
     public static boolean checkLogTagExist(EntityTypeMessages entityTypeMessages, String logName) {
         EntityLogTag entityLogTag = new EntityLogTag(entityTypeMessages.getFromGroup(), logName);
@@ -33,12 +33,13 @@ public class LogTag {
         }
     }
 
-    public static String getOthorLogTrue(String groupId) {
+    public static String getOtherLogTrue(String groupId) {
+        String tagNotFound = "未找到";
         if (checkOthorLogTrue(groupId) && logNameForGroup.get(groupId) != null) {
             return logNameForGroup.get(groupId);
         } else {
             String name = selectLogTag.getOthorLogTrue(groupId);
-            if (!name.equals("未找到")) {
+            if (!name.equals(tagNotFound)) {
                 logNameForGroup.put(groupId, name);
                 return name;
             } else {

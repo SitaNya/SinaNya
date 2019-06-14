@@ -28,12 +28,12 @@ public class Clue {
     public void set() {
         String tag = TAG_CLUE_SET;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        setClue(new EntityClue(entityTypeMessages.getFromGroup(), new Date(new java.util.Date().getTime()), entityTypeMessages.getFromQQ()), msg);
+        setClue(new EntityClue(entityTypeMessages.getFromGroup(), new Date(new java.util.Date().getTime()), entityTypeMessages.getFromQq()), msg);
     }
 
     public void show() {
 
-        String result = getClue(new EntityClue(entityTypeMessages.getFromGroup(), new Date(new java.util.Date().getTime()), entityTypeMessages.getFromQQ()));
+        String result = getClue(new EntityClue(entityTypeMessages.getFromGroup(), new Date(new java.util.Date().getTime()), entityTypeMessages.getFromQq()));
         sender(entityTypeMessages, result);
     }
 
@@ -43,7 +43,7 @@ public class Clue {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
-            delClue(new EntityClue(entityTypeMessages.getFromGroup(), new Date(format.parse(msg).getTime()), entityTypeMessages.getFromQQ()));
+            delClue(new EntityClue(entityTypeMessages.getFromGroup(), new Date(format.parse(msg).getTime()), entityTypeMessages.getFromQq()));
         } catch (ParseException e) {
             e.printStackTrace();
         }

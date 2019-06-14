@@ -11,8 +11,8 @@ import static dice.sinanya.system.MessagesHistory.historyList;
 
 public class History {
 
-    static SelectHistory selectHistory = new SelectHistory();
-    static InsertHistory insertHistory = new InsertHistory();
+    private static SelectHistory selectHistory = new SelectHistory();
+    private static InsertHistory insertHistory = new InsertHistory();
 
     public static void setHistory() {
         for (Map.Entry<String, EntityHistory> mapEntry : historyList.entrySet()) {

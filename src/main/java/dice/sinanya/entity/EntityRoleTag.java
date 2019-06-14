@@ -2,9 +2,11 @@ package dice.sinanya.entity;
 
 import java.util.Objects;
 
-import static dice.sinanya.tools.RoleChoose.checkRoleChooseExistByQQ;
-import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
-
+/**
+ * 角色标签对象，这个不同于角色信息，是用来标注此qq当前激活角色的
+ *
+ * @author SitaNya
+ */
 public class EntityRoleTag {
     private long qq;
     private String role;
@@ -18,15 +20,6 @@ public class EntityRoleTag {
         }
     }
 
-    public EntityRoleTag(EntityTypeMessages entityTypeMessages) {
-        this.qq = Long.parseLong(entityTypeMessages.getFromQQ());
-        if (checkRoleChooseExistByQQ(qq)) {
-            this.role = getRoleChooseByQQ(qq);
-        } else {
-            this.role = "未找到";
-        }
-    }
-
     public long getQq() {
         return qq;
     }
@@ -37,10 +30,6 @@ public class EntityRoleTag {
 
     public String getRole() {
         return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     @Override

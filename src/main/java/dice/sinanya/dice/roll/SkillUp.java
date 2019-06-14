@@ -10,6 +10,11 @@ import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.Sender.sender;
 
+/**
+ * .en的相关类
+ *
+ * @author SitaNya
+ */
 public class SkillUp {
     private EntityTypeMessages entityTypeMessages;
 
@@ -28,8 +33,9 @@ public class SkillUp {
 
         int random = random(1, 100);
 
+        int strFumbleLevel = 100;
         StringBuilder stringBuilder = new StringBuilder();
-        if (random > skill || random == 100) {
+        if (random > skill || random == strFumbleLevel) {
             int skillUp = random(1, 10);
             stringBuilder
                     .append(getRoleChooseByFromQQ(entityTypeMessages))
@@ -42,7 +48,7 @@ public class SkillUp {
                     .append(skillUp)
                     .append("点，目前为:")
                     .append(skill + skillUp);
-            new InsertRoles().insertRoleInfo(msg + (skill + skillUp), getRoleChooseByFromQQ(entityTypeMessages), entityTypeMessages.getFromQQ());
+            new InsertRoles().insertRoleInfo(msg + (skill + skillUp), getRoleChooseByFromQQ(entityTypeMessages), entityTypeMessages.getFromQq());
             sender(entityTypeMessages, stringBuilder.toString());
         } else {
             stringBuilder

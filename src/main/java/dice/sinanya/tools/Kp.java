@@ -8,20 +8,20 @@ import dice.sinanya.exceptions.NotSetKpGroupException;
 import static dice.sinanya.system.MessagesKP.KpGroup;
 
 public class Kp {
-    static SelectKp selectKp = new SelectKp();
-    static InsertKp insertKp = new InsertKp();
+    private static SelectKp selectKp = new SelectKp();
+    private static InsertKp insertKp = new InsertKp();
 
     public static void setKpGroup(EntityTypeMessages entityTypeMessages, String group) {
-        insertKp.insertKp(entityTypeMessages.getFromQQ(), group);
+        insertKp.insertKp(entityTypeMessages.getFromQq(), group);
     }
 
     public static String getKpGroup(EntityTypeMessages entityTypeMessages) throws NotSetKpGroupException {
-        if (KpGroup.containsKey(entityTypeMessages.getFromQQ())) {
-            return KpGroup.get(entityTypeMessages.getFromQQ());
+        if (KpGroup.containsKey(entityTypeMessages.getFromQq())) {
+            return KpGroup.get(entityTypeMessages.getFromQq());
         } else {
             selectKp.flushKp();
-            if (KpGroup.containsKey(entityTypeMessages.getFromQQ())) {
-                return KpGroup.get(entityTypeMessages.getFromQQ());
+            if (KpGroup.containsKey(entityTypeMessages.getFromQq())) {
+                return KpGroup.get(entityTypeMessages.getFromQq());
             } else {
                 throw new NotSetKpGroupException(entityTypeMessages);
             }

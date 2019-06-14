@@ -2,9 +2,14 @@ package dice.sinanya.entity;
 
 import java.util.ArrayList;
 
+/**
+ * 小队信息对象，包装了ArrayList列表形式的QQ列表与群号
+ *
+ * @author SitaNya
+ */
 public class EntityTeamInfo {
     private String group;
-    private ArrayList<String> qqList = new ArrayList<>();
+    private ArrayList<String> qqList;
 
     public EntityTeamInfo(String group, ArrayList<String> qqList) {
         this.group = group;
@@ -23,7 +28,4 @@ public class EntityTeamInfo {
         return qqList;
     }
 
-    public void setQqList(ArrayList<String> qqList) {
-        this.qqList = qqList;
-    }
 }

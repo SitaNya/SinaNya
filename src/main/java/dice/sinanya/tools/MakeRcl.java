@@ -9,7 +9,7 @@ import static dice.sinanya.tools.MakeRollCheckResult.makeResult;
 
 public class MakeRcl implements Callable<Integer> {
     EntityTypeMessages entityTypeMessages;
-    String rolls;
+    private String rolls;
 
     public MakeRcl(EntityTypeMessages entityTypeMessages, String rolls) {
         this.entityTypeMessages = entityTypeMessages;

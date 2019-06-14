@@ -1,13 +1,14 @@
 package dice.sinanya.tools;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import java.io.*;
 
 import static dice.sinanya.system.MessagesSystem.*;
 
 public class LogSave {
+    private static final Logger Log = LogManager.getLogger(LogSave.class);
 
     public static void logSave(String groupId, String logName, String info) {
         // 1：利用File类找到要操作的对象
@@ -22,17 +23,25 @@ public class LogSave {
 
         assert file != null;
         if (!file.getParentFile().exists()) {
-            file.getParentFile().mkdirs();
+            if (!file.getParentFile().mkdirs()) {
+                Log.error("文件未能保存");
+            }
         }
 
         //2：准备输出流
-        Writer out;
+        BufferedWriter out = null;
         try {
-            out = new FileWriter(file);
+            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "GBK"));
             out.write(info);
-            out.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.error(e.getMessage(), e);
+        } finally {
+            try {
+                assert out != null;
+                out.close();
+            } catch (IOException e) {
+                Log.error(e.getMessage(), e);
+            }
         }
     }
 }

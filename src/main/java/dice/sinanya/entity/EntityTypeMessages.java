@@ -42,7 +42,7 @@ public class EntityTypeMessages {
         this.msgDisGroup = msgDisGroup;
     }
 
-    public String getFromQQ() {
+    public String getFromQq() {
         switch (msgGetTypes) {
             case groupMsg:
                 return msgGroup.getFromQQ();

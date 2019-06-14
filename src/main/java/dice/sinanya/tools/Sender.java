@@ -4,7 +4,7 @@ import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.tools.LogTag.checkOthorLogTrue;
-import static dice.sinanya.tools.LogTag.getOthorLogTrue;
+import static dice.sinanya.tools.LogTag.getOtherLogTrue;
 import static dice.sinanya.tools.LogText.setLogText;
 
 /**
@@ -13,7 +13,7 @@ import static dice.sinanya.tools.LogText.setLogText;
 public class Sender {
     public static void sender(EntityTypeMessages entityTypeMessages, String messages) {
         if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
-            setLogText(new EntityLogTag(entityTypeMessages.getFromGroup(), getOthorLogTrue(entityTypeMessages.getFromGroup())), messages);
+            setLogText(new EntityLogTag(entityTypeMessages.getFromGroup(), getOtherLogTrue(entityTypeMessages.getFromGroup())), messages);
         }
         switch (entityTypeMessages.getMsgGetTypes()) {
             case privateMsg:

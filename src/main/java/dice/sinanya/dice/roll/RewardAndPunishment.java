@@ -1,6 +1,6 @@
 package dice.sinanya.dice.roll;
 
-import dice.sinanya.entity.EntityBPRoll;
+import dice.sinanya.entity.EntityRewardAndPunishment;
 import dice.sinanya.entity.EntityRollAndCheck;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.tools.CheckResultLevel;
@@ -8,6 +8,7 @@ import dice.sinanya.tools.GetSkillValue;
 
 import java.util.ArrayList;
 
+import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.MakeRollCheckResult.makeResult;
@@ -55,8 +56,8 @@ public class RewardAndPunishment {
 
         int random = entityRollAndCheck.getRandom();
 
-        if ((int) floor(random / multiple) < min) {
-            min = (int) floor(random / multiple);
+        if (random / multiple < min) {
+            min = random / multiple;
         }
 
         int resultRandom = min * multiple + random % multiple;
@@ -97,8 +98,8 @@ public class RewardAndPunishment {
 
         int random = entityRollAndCheck.getRandom();
 
-        if ((int) floor(random / multiple) > max) {
-            max = (int) floor(random / multiple);
+        if (random / multiple > max) {
+            max = random / multiple;
         }
 
         int resultRandom = max * multiple + random % multiple;
@@ -126,12 +127,11 @@ public class RewardAndPunishment {
         return result;
     }
 
-    private EntityBPRoll getTimesAndSkill(String msg) {
+    private EntityRewardAndPunishment getTimesAndSkill(String msg) {
         int times;
         int skill;
-        String space = " ";
 
-        if (msg.contains(space) && isNumeric(msg.split(space)[0])) {
+        if (msg.contains(SPACE) && isNumeric(msg.split(SPACE)[0])) {
             times = Integer.parseInt(msg.split(" ")[0]);
         } else if (isNumeric(msg)) {
             times = Integer.parseInt(msg);
@@ -139,13 +139,13 @@ public class RewardAndPunishment {
             times = 1;
         }
 
-        if (msg.contains(space)) {
+        if (msg.contains(SPACE)) {
             GetSkillValue getSkillValue = new GetSkillValue(entityTypeMessages, msg.split(" ")[1]);
             skill = getSkillValue.getSkill();
         } else {
             skill = 0;
         }
 
-        return new EntityBPRoll(times, skill);
+        return new EntityRewardAndPunishment(times, skill);
     }
 }

@@ -6,7 +6,7 @@ import dice.sinanya.entity.imal.GetDb;
 import static java.lang.Math.ceil;
 
 /**
- * 6版数据细化
+ * 6版数据细化对象
  *
  * @author SitaNya
  */

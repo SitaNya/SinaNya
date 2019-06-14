@@ -1,15 +1,21 @@
 package dice.sinanya.entity;
 
+import java.sql.Date;
 import java.util.Objects;
 
+/**
+ * 线索类型对象
+ *
+ * @author SitaNya
+ */
 public class EntityClue {
-    String groupId;
-    java.sql.Date date;
-    String qqId;
+    private String groupId;
+    private java.sql.Date date;
+    private String qqId;
 
     public EntityClue(String groupId, java.sql.Date date, String qqId) {
         this.groupId = groupId;
-        this.date = date;
+        this.date = (Date)date.clone();
         this.qqId = qqId;
     }
 
@@ -22,11 +28,7 @@ public class EntityClue {
     }
 
     public java.sql.Date getDate() {
-        return date;
-    }
-
-    public void setDate(java.sql.Date date) {
-        this.date = date;
+        return this.date;
     }
 
     public String getQqId() {

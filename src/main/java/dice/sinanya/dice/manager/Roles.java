@@ -10,7 +10,7 @@ import dice.sinanya.exceptions.PlayerSetException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static dice.sinanya.system.MessagesTag.TAG_ST_MOVE;
+import static dice.sinanya.system.MessagesTag.TAG_ST_RM;
 import static dice.sinanya.system.MessagesTag.TAG_ST_SET;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
@@ -39,7 +39,7 @@ public class Roles extends PropList implements Role {
         int lenRoleAndPro = 2;
         String properties;
         InsertRoles insertRoles = new InsertRoles();
-        long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
+        long qqId = Long.parseLong(entityTypeMessages.getFromQq());
 
         String role;
         if (msg.contains(sepRoleAndPro) && msg.split(sepRoleAndPro).length == lenRoleAndPro) {
@@ -60,7 +60,7 @@ public class Roles extends PropList implements Role {
     public void list() {
         useRole(entityTypeMessages);
 
-        long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
+        long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("您当前使用角色: \n");
         if (checkRoleChooseExistByQQ(qqId)) {
@@ -87,9 +87,9 @@ public class Roles extends PropList implements Role {
     public void move() {
         useRole(entityTypeMessages);
 
-        String tag = TAG_ST_MOVE;
+        String tag = TAG_ST_RM;
         String role = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
+        long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         if (checkRoleInfoExistByFromQQ(entityTypeMessages, role)) {
             if (getRoleChooseByQQ(qqId).equals(role)) {
                 sender(entityTypeMessages, "您不能删除当前选定角色");
@@ -103,7 +103,7 @@ public class Roles extends PropList implements Role {
     public void show() {
         useRole(entityTypeMessages);
 
-        String qq = entityTypeMessages.getFromQQ();
+        String qq = entityTypeMessages.getFromQq();
         StringBuilder stringBuilder = showProp(entityTypeMessages, qq);
         sender(entityTypeMessages, stringBuilder.toString());
     }

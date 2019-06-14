@@ -6,6 +6,8 @@ import static dice.sinanya.tools.RoleChoose.checkRoleChooseExistByFromQQ;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
 
 /**
+ * 获取昵称，如果已经设定了人物卡则默认给人物卡名字，没设定的话给QQ昵称
+ *
  * @author SitaNya
  */
 public class GetNickName {

@@ -6,9 +6,9 @@ import static dice.sinanya.tools.GetNickName.getNickName;
 
 public class MakeLogInfo {
 
-    public static String makeLogInfo(EntityTypeMessages entityTypeMessages, String info) {
+    static String makeLogInfo(EntityTypeMessages entityTypeMessages, String info) {
         info = info.trim();
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
 
         if (info.contains("log")) {
             return "";
@@ -48,7 +48,7 @@ public class MakeLogInfo {
         }
     }
 
-    public static String makeLogInfo(String info) {
+    static String makeLogInfo(String info) {
         info = info.trim();
         StringBuilder result = new StringBuilder();
         if (info.contains("暗骰结果") || info.contains("日志")) {

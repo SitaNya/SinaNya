@@ -8,11 +8,18 @@ import java.util.ArrayList;
 import static dice.sinanya.system.MessagesLevel.LEVEL_MAP;
 import static dice.sinanya.tools.RandomInt.random;
 
+/**
+ * 根据当前骰点值、技能值、是否使用规则书来判定成功等级
+ *
+ * @author SitaNya
+ */
 public class CheckResultLevel {
     private int random;
     private int skill;
     private boolean ruleBook;
     private int level;
+    private int ruleFumble = 100;
+    private int ruleCriticalSuccess = 1;
 
     public CheckResultLevel(int random, int skill, boolean ruleBook) {
         this.random = random;
@@ -22,44 +29,26 @@ public class CheckResultLevel {
 
     private String checkResultLevel() {
         if (ruleBook) {
-            if (random == 100) {
+            if (random == ruleFumble) {
                 level = 0;
                 return "strFumble";
-            } else if (random <= skill && random <= 1) {
+            } else if (random <= skill && random <= ruleCriticalSuccess) {
                 level = 5;
                 return "strCriticalSuccess";
-            } else if (random <= skill && random <= skill / 5) {
-                level = 4;
-                return "strExtremeSuccess";
-            } else if (random <= skill && random <= skill / 2) {
-                level = 3;
-                return "strHardSuccess";
-            } else if (random <= skill) {
-                level = 2;
-                return "strSuccess";
             } else {
-                level = 1;
-                return "strFailure";
+                return checkNotNeedRules();
             }
         } else {
-            if (random >= 95 && random >= skill) {
+            ruleFumble = 95;
+            ruleCriticalSuccess = 5;
+            if (random >= ruleFumble && random >= skill) {
                 level = 0;
                 return "strFumble";
-            } else if (random <= skill && random <= 5) {
+            } else if (random <= skill && random <= ruleCriticalSuccess) {
                 level = 5;
                 return "strCriticalSuccess";
-            } else if (random <= skill && random <= skill / 5) {
-                level = 4;
-                return "strExtremeSuccess";
-            } else if (random <= skill && random <= skill / 2) {
-                level = 3;
-                return "strHardSuccess";
-            } else if (random <= skill) {
-                level = 2;
-                return "strSuccess";
             } else {
-                level = 1;
-                return "strFailure";
+                return checkNotNeedRules();
             }
         }
     }
@@ -78,5 +67,23 @@ public class CheckResultLevel {
     public EntityAntagonize getAntagonize() {
         checkResultLevel();
         return new EntityAntagonize(random, level, skill);
+    }
+
+    private String checkNotNeedRules() {
+        int levelExtremeLine = 5;
+        int levelHeadLine = 2;
+        if (random <= skill && random <= skill / levelExtremeLine) {
+            level = 4;
+            return "strExtremeSuccess";
+        } else if (random <= skill && random <= skill / levelHeadLine) {
+            level = 3;
+            return "strHardSuccess";
+        } else if (random <= skill) {
+            level = 2;
+            return "strSuccess";
+        } else {
+            level = 1;
+            return "strFailure";
+        }
     }
 }

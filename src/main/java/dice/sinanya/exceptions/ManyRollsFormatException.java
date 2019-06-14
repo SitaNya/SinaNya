@@ -6,15 +6,13 @@ import static dice.sinanya.system.MessagesError.strValueErr;
 import static dice.sinanya.tools.Sender.sender;
 
 /**
- * 玩家属性输入错误报错
+ * 多重骰点格式错误
  *
  * @author SitaNya
  */
-public class PlayerSetException extends Exception {
-
-    public PlayerSetException(EntityTypeMessages entityTypeMessages) {
-        super("很抱歉，参数输入错误。应该类似.st角色名-力量50体质60");
+public class ManyRollsFormatException extends Exception{
+    public ManyRollsFormatException(EntityTypeMessages entityTypeMessages) {
+        super("请按照\".ral 值 次数\"的格式输入");
         sender(entityTypeMessages, strValueErr);
     }
-
 }

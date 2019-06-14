@@ -1,20 +1,21 @@
 package dice.sinanya.entity;
 
-public class EntityBPRoll {
-    int times;
-    int skill;
+/**
+ * 惩罚投、奖励投对象
+ *
+ * @author SitaNya
+ */
+public class EntityRewardAndPunishment {
+    private int times;
+    private int skill;
 
-    public EntityBPRoll(int times, int skill) {
+    public EntityRewardAndPunishment(int times, int skill) {
         this.times = times;
         this.skill = skill;
     }
 
     public int getTimes() {
         return times;
-    }
-
-    public void setTimes(int times) {
-        this.times = times;
     }
 
     public int getSkill() {

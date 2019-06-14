@@ -5,10 +5,10 @@ import java.util.Collections;
 
 import static dice.sinanya.tools.RandomInt.random;
 
-public class MakeDndCardInfo {
+class MakeDndCardInfo {
 
-    public static String makeDndCardInfo() {
-        StringBuffer stringBuffer = new StringBuffer();
+    static String makeDndCardInfo() {
+        StringBuilder stringBuffer = new StringBuilder();
         int str = get4d6k3multiply();
         int con = get4d6k3multiply();
         int dex = get4d6k3multiply();

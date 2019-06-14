@@ -9,8 +9,8 @@ import static dice.sinanya.tools.MakeLogInfo.makeLogInfo;
 
 public class LogText {
 
-    static SelectLogInfo selectLogInfo = new SelectLogInfo();
-    static InsertLogInfo insertLogInfo = new InsertLogInfo();
+    private static SelectLogInfo selectLogInfo = new SelectLogInfo();
+    private static InsertLogInfo insertLogInfo = new InsertLogInfo();
 
     public static void setLogText(EntityTypeMessages entityTypeMessages, EntityLogTag entityLogTag, String info) {
         info = makeLogInfo(entityTypeMessages, info);

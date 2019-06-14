@@ -7,6 +7,12 @@ import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.Sender.sender;
 
+/**
+ * 临时疯狂与永久疯狂
+ * .ti与.li
+ *
+ * @author SitaNya
+ */
 public class TiAndLi {
 
     private EntityTypeMessages entityTypeMessages;
@@ -24,21 +30,7 @@ public class TiAndLi {
                 .append("1D10=")
                 .append(indexTi + 1)
                 .append("\n");
-        String strTi = ti.get(indexTi);
-        switch (indexTi) {
-            case 9:
-                int indexPanic = random(0, strPanic.size() - 1);
-                strTi = String.format(strTi, "1D10=" + random(1, 10), "1D" + strPanic.size() + "=" + (indexPanic + 1), strPanic.get(indexPanic));
-                break;
-            case 8:
-                int indexFear = random(0, strFear.size() - 1);
-                strTi = String.format(strTi, "1D10=" + random(1, 10), "1D" + strFear.size() + "=" + (indexFear + 1), strFear.get(indexFear));
-                break;
-            default:
-                strTi = String.format(strTi, "1D10=" + random(1, 10));
-                break;
-        }
-        stringBuilder.append(strTi);
+        symptomFormatAndSend(stringBuilder, indexTi);
         sender(entityTypeMessages, stringBuilder.toString());
     }
 
@@ -51,8 +43,14 @@ public class TiAndLi {
                 .append("1D10=")
                 .append(indexLi + 1)
                 .append("\n");
-        String strLi = li.get(indexLi);
-        switch (indexLi) {
+
+        symptomFormatAndSend(stringBuilder, indexLi);
+        sender(entityTypeMessages, stringBuilder.toString());
+    }
+
+    private void symptomFormatAndSend(StringBuilder stringBuilder, int index) {
+        String strLi = li.get(index);
+        switch (index) {
             case 9:
                 int indexPanic = random(0, strPanic.size() - 1);
                 strLi = String.format(strLi, "1D10=" + random(1, 10), "1D" + strPanic.size() + "=" + (indexPanic + 1), strPanic.get(indexPanic));
@@ -66,6 +64,6 @@ public class TiAndLi {
                 break;
         }
         stringBuilder.append(strLi);
-        sender(entityTypeMessages, stringBuilder.toString());
+
     }
 }

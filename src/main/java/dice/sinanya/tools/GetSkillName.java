@@ -4,6 +4,11 @@ import java.util.Map;
 
 import static dice.sinanya.tools.MakeSkillName.skillTable;
 
+/**
+ * 将技能名规整化为系统可以识别的技能名（英文）
+ *
+ * @author SitaNya
+ */
 public class GetSkillName {
 
     public static String getSkillName(String skillId) {

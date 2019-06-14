@@ -16,16 +16,16 @@ import static dice.sinanya.system.MessagesSystem.*;
 
 public class SendMail {
 
-    public String toChinese(String text) {
+    private String toChinese(String text) {
         try {
-            text = MimeUtility.encodeText(new String(text.getBytes(), "GB2312"), "GB2312", "B");
+            text = MimeUtility.encodeText(new String(text.getBytes("UTF-8"), "GB2312"), "GB2312", "B");
         } catch (Exception e) {
             e.printStackTrace();
         }
         return text;
     }
 
-    public boolean sendMail(MailBean mb) {
+    private boolean sendMail(MailBean mb) {
         String host = mb.getHost();
         final String username = mb.getUsername();
         final String password = mb.getPassword();
@@ -33,14 +33,17 @@ public class SendMail {
         String to = mb.getTo();
         String subject = mb.getSubject();
         String content = mb.getContent();
-        String fileName = mb.getFilename();
+        String fileName;
         Vector<String> file = mb.getFile();
 
         Properties props = System.getProperties();
-        props.put("mail.smtp.host", host); // 设置SMTP的主机
-        props.put("mail.smtp.auth", "true"); // 需要经过验证
+        props.put("mail.smtp.host", host);
+        // 设置SMTP的主机
+        props.put("mail.smtp.auth", "true");
+        // 需要经过验证
 
         Session session = Session.getInstance(props, new Authenticator() {
+            @Override
             public PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }
@@ -63,7 +66,7 @@ public class SendMail {
                 Enumeration<String> efile = file.elements();
                 while (efile.hasMoreElements()) {
                     MimeBodyPart mbpFile = new MimeBodyPart();
-                    fileName = efile.nextElement().toString();
+                    fileName = efile.nextElement();
                     FileDataSource fds = new FileDataSource(fileName);
                     mbpFile.setDataHandler(new DataHandler(fds));
                     try {
@@ -89,13 +92,20 @@ public class SendMail {
 
     public static void sendMail(String to, String groupId, String logName) {
         MailBean mb = new MailBean();
-        mb.setHost("smtp.qq.com"); // 设置SMTP主机(163)，若用126，则设为：smtp.126.com
-        mb.setUsername("2730902267@qq.com"); // 设置发件人邮箱的用户名
-        mb.setPassword("kktjwuakdafbdcej"); // 设置发件人邮箱的密码，需将*号改成正确的密码
-        mb.setFrom("2730902267@qq.com"); // 设置发件人的邮箱
-        mb.setTo(to + "@qq.com"); // 设置收件人的邮箱
-        mb.setSubject(logName); // 设置邮件的主题
-        mb.setContent("日志邮件测试"); // 设置邮件的正文
+        mb.setHost("smtp.qq.com");
+        // 设置SMTP主机(163)，若用126，则设为：smtp.126.com
+        mb.setUsername("2730902267@qq.com");
+        // 设置发件人邮箱的用户名
+        mb.setPassword("kktjwuakdafbdcej");
+        // 设置发件人邮箱的密码，需将*号改成正确的密码
+        mb.setFrom("2730902267@qq.com");
+        // 设置发件人的邮箱
+        mb.setTo(to + "@qq.com");
+        // 设置收件人的邮箱
+        mb.setSubject(logName);
+        // 设置邮件的主题
+        mb.setContent("日志邮件测试");
+        // 设置邮件的正文
 
         if (OSX_MODEL) {
             mb.attachFile("/Users/SitaNya/Desktop/" + groupId + "/" + logName);

@@ -10,7 +10,7 @@ import static dice.sinanya.tools.MakeRollCheckResult.makeResult;
 public class MakeRal implements Callable<Integer> {
 
     EntityTypeMessages entityTypeMessages;
-    String rolls;
+    private String rolls;
 
     public MakeRal(EntityTypeMessages entityTypeMessages, String rolls) {
         this.entityTypeMessages = entityTypeMessages;

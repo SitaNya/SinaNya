@@ -1,5 +1,6 @@
 package dice.sinanya.dice.system;
 
+import dice.sinanya.dice.manager.imal.AtQq;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.ArrayList;
@@ -12,10 +13,14 @@ import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.Sender.sender;
 import static dice.sinanya.tools.SwitchBot.*;
 
-public class Bot {
+/**
+ * 机器人开启、关闭、退群
+ *
+ * @author SitaNya
+ */
+public class Bot implements AtQq {
 
     private EntityTypeMessages entityTypeMessages;
-    Pattern pattern = Pattern.compile("\\[CQ:at,qq=([0-9]+)]");
 
     public Bot(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
@@ -24,12 +29,8 @@ public class Bot {
     public void on() {
         String tag = TAG_BOT_ON;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        Matcher matcher = pattern.matcher(msg);
 
-        ArrayList<String> qqList = new ArrayList<>();
-        while (matcher.find()) {
-            qqList.add(matcher.group(1));
-        }
+        ArrayList<String> qqList = getAtQqList(msg);
 
         for (String qq : qqList) {
             if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {
@@ -51,12 +52,8 @@ public class Bot {
     public void off() {
         String tag = TAG_BOT_OFF;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        Matcher matcher = pattern.matcher(msg);
 
-        ArrayList<String> qqList = new ArrayList<>();
-        while (matcher.find()) {
-            qqList.add(matcher.group(1));
-        }
+        ArrayList<String> qqList = getAtQqList(msg);
 
         for (String qq : qqList) {
             if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {
@@ -78,12 +75,8 @@ public class Bot {
     public void exit() {
         String tag = TAG_BOT_EXIT;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        Matcher matcher = pattern.matcher(msg);
 
-        ArrayList<String> qqList = new ArrayList<>();
-        while (matcher.find()) {
-            qqList.add(matcher.group(1));
-        }
+        ArrayList<String> qqList = getAtQqList(msg);
 
         for (String qq : qqList) {
             if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {

@@ -6,6 +6,8 @@ import static dice.sinanya.system.MessagesError.strValueErr;
 import static dice.sinanya.tools.Sender.sender;
 
 /**
+ * SanCheck表达式输入错误报错
+ *
  * @author SitaNya
  */
 public class SanCheckSetException extends Exception {

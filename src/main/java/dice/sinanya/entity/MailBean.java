@@ -2,16 +2,36 @@ package dice.sinanya.entity;
 
 import java.util.Vector;
 
+/**
+ * 邮箱发件对象
+ *
+ * @author SitaNya
+ */
 public class MailBean {
-    private String to; // 收件人
-    private String from; // 发件人
-    private String host; // SMTP主机
-    private String username; // 发件人的用户名
-    private String password; // 发件人的密码
-    private String subject; // 邮件主题
-    private String content; // 邮件正文
-    Vector<String> file; // 多个附件
-    private String filename; // 附件的文件名
+
+    /**
+     * @param to    收件人
+     * @param from  发件人
+     * @param host  SMTP主机
+     * @param username  发件人的用户名
+     * @param password  发件人的密码
+     * @param subject  邮件主题
+     * @param content  邮件正文
+     * @param file  多个附件
+     * @param filename  附件的文件名
+     */
+    private String to;
+    private String from;
+    private String host;
+    private String username;
+    private String password;
+    private String subject;
+    private String content;
+    private Vector<String> file;
+    private String filename;
+
+    public MailBean() {
+    }
 
     public String getTo() {
         return to;
@@ -73,18 +93,18 @@ public class MailBean {
         return filename;
     }
 
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
-
     public Vector<String> getFile() {
         return file;
     }
 
     public void attachFile(String fileName) {
         if (file == null) {
-            file = new Vector<String>();
+            file = new Vector<>();
         }
         file.addElement(fileName);
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }

@@ -1,5 +1,7 @@
 package dice.sinanya.tools;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.docx4j.jaxb.Context;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -17,14 +19,14 @@ import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
 
 public class SaveDocx {
 
-    WordprocessingMLPackage wordMLPackage;
-    ObjectFactory factory = Context.getWmlObjectFactory();
+    private static final Logger Log = LogManager.getLogger(SaveDocx.class);
+    private WordprocessingMLPackage wordMlPackage;
+    private ObjectFactory factory;
 
-    public void makePDF(String inputText, String inputColor) throws Docx4JException {
+    private void makePdf(String inputText, String inputColor) {
         // word对象
 
-
-        MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
+        MainDocumentPart documentPart = wordMlPackage.getMainDocumentPart();
 
         documentPart.addObject(createTitle(inputText, inputColor));
     }
@@ -35,7 +37,8 @@ public class SaveDocx {
 
         //设置字体
         font.setAscii("宋体");
-        font.setEastAsia("宋体");//经测试发现这个设置生效
+        font.setEastAsia("宋体");
+        //经测试发现这个设置生效
         rpr.setRFonts(font);
 
         //设置颜色
@@ -93,7 +96,7 @@ public class SaveDocx {
     }
 
     public SaveDocx(String groupId, String qqId, String msg, final String bigResult) throws Docx4JException {
-        wordMLPackage = WordprocessingMLPackage.createPackage();
+        wordMlPackage = WordprocessingMLPackage.createPackage();
         String fromName = "";
         int colorTag = 100;
         for (final String line : bigResult.split("\n")) {
@@ -117,12 +120,7 @@ public class SaveDocx {
             } else if (getRoleChooseByQQ(qqId).equals(fromName)) {
                 colorTag = 12;
             }
-//            else if (line.length() > 1&& !line.split(":")[1].equals("")) {
-//                if (testOut(line.split(":")[1])) {
-//                    colorTag = 10;
-//                }
-//            }
-            makePDF(line, RBG.get(colorTag));
+            makePdf(line, RBG.get(colorTag));
         }
         File file = null;
         if (OSX_MODEL) {
@@ -134,22 +132,12 @@ public class SaveDocx {
         }
         assert file != null;
         if (!file.getParentFile().exists()) {
-            file.getParentFile().mkdirs();
+            if (!file.getParentFile().mkdirs()){
+                Log.error("docx染色文件未能成功生成");
+            }
         }
-        wordMLPackage.save(file);
+        wordMlPackage.save(file);
+        factory = Context.getWmlObjectFactory();
     }
 
-    private String makeAssci(String inputKey) {
-        int tmp = 0;
-        char[] b = (inputKey).toCharArray();
-        //转换成响应的ASCLL
-        for (char c : b) {
-            tmp += (int) c;
-        }
-        return RBG.get(tmp % 10);
-    }
-
-    private boolean testOut(String line) {
-        return (line.charAt(0) == '(' && !line.contains(")") && !line.contains("）")) || ((line.charAt(0) == '（' || line.charAt(0) == '(') && (line.charAt(line.length() - 1) == ')' || line.charAt(line.length() - 1) == '）'));
-    }
 }

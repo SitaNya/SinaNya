@@ -3,7 +3,7 @@ package dice.sinanya.dice.manager;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.system.MessagesSystem.ROLL_MAX_VALUE;
-import static dice.sinanya.system.MessagesTag.tagSetRollMaxValue;
+import static dice.sinanya.system.MessagesTag.TAG_SET_ROLL_MAX_VALUE;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.Sender.sender;
@@ -21,7 +21,7 @@ public class SetRollMaxValue {
     }
 
     public void set() {
-        String tag = tagSetRollMaxValue;
+        String tag = TAG_SET_ROLL_MAX_VALUE;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         if (isNumeric(msg)) {
             ROLL_MAX_VALUE.put(entityTypeMessages.getFromGroup(), Integer.parseInt(msg));

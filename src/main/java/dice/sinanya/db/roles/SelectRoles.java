@@ -41,13 +41,13 @@ public class SelectRoles {
 
     @SuppressWarnings("AlibabaMethodTooLong")
     public void flushRoleInfoCacheByFromQQ(EntityTypeMessages entityTypeMessages) {
-        long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
+        long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         selectRoleInfoCache(qqId);
     }
 
     @SuppressWarnings("AlibabaMethodTooLong")
     public void flushRoleChooseByFromQQ(EntityTypeMessages entityTypeMessages) {
-        long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
+        long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         selectRoleInfoCache(qqId);
     }
 
@@ -64,8 +64,6 @@ public class SelectRoles {
 
     @SuppressWarnings("AlibabaMethodTooLong")
     private void selectRoleInfoCache(long qqId) {
-
-        HashMap<String, HashMap<String, Integer>> tmp3 = new HashMap<>();
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from role where qqId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {

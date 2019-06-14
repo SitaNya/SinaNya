@@ -16,6 +16,11 @@ import static dice.sinanya.tools.MakeMessages.deleteTag;
 import static dice.sinanya.tools.SendMail.sendMail;
 import static dice.sinanya.tools.Sender.sender;
 
+/**
+ * 日志记录
+ *
+ * @author SitaNya
+ */
 public class Log {
 
     private EntityTypeMessages entityTypeMessages;
@@ -29,7 +34,7 @@ public class Log {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
 
-            sender(entityTypeMessages, getOthorLogTrue(entityTypeMessages.getFromGroup()) + "已处于开启状态，请先关闭它");
+            sender(entityTypeMessages, getOtherLogTrue(entityTypeMessages.getFromGroup()) + "已处于开启状态，请先关闭它");
         } else {
             if (checkLogTagExist(entityTypeMessages, msg)) {
                 sender(entityTypeMessages, msg + "已在本群中存在，已为您重新激活日志，之后的消息将在原日志后追加");
@@ -73,13 +78,13 @@ public class Log {
             logSave(entityTypeMessages.getFromGroup(), msg, bigResult);
             sender(entityTypeMessages, "正在抽取数据库为" + msg + "生成染色文件");
             try {
-                new SaveDocx(entityTypeMessages.getFromGroup(),entityTypeMessages.getFromQQ(), msg, bigResult);
+                new SaveDocx(entityTypeMessages.getFromGroup(),entityTypeMessages.getFromQq(), msg, bigResult);
             } catch (Docx4JException e) {
                 e.printStackTrace();
             }
-            sender(entityTypeMessages, msg + "正在发送到您的邮箱" + entityTypeMessages.getFromQQ() + "@qq.com");
-            sendMail(entityTypeMessages.getFromQQ(), entityTypeMessages.getFromGroup(), msg);
-            sender(entityTypeMessages, "[CQ:at,qq=" + entityTypeMessages.getFromQQ() + "] 已发送到您的QQ邮箱，注意查收");
+            sender(entityTypeMessages, msg + "正在发送到您的邮箱" + entityTypeMessages.getFromQq() + "@qq.com");
+            sendMail(entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup(), msg);
+            sender(entityTypeMessages, "[CQ:at,qq=" + entityTypeMessages.getFromQq() + "] 已发送到您的QQ邮箱，注意查收");
             logGetLock.remove(msg);
         } else {
             sender(entityTypeMessages, msg + "仍处于打开状态，请关闭后再试");

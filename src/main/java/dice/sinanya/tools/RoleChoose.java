@@ -30,7 +30,7 @@ public class RoleChoose {
     }
 
     public static boolean checkRoleChooseExistByFromQQ(EntityTypeMessages entityTypeMessages) {
-        long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
+        long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         if (ROLE_CHOOSE.containsKey(qqId)) {
             return true;
         } else {
@@ -58,7 +58,7 @@ public class RoleChoose {
 
     public static String getRoleChooseByFromQQ(EntityTypeMessages entityTypeMessages) {
         if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
-            return ROLE_CHOOSE.get(Long.parseLong(entityTypeMessages.getFromQQ()));
+            return ROLE_CHOOSE.get(Long.parseLong(entityTypeMessages.getFromQq()));
         } else {
             return "未找到当前角色";
         }
@@ -76,7 +76,7 @@ public class RoleChoose {
     }
 
     public static void setRoleChooseByFromQQ(EntityTypeMessages entityTypeMessages, String role) {
-        long qqId = Long.parseLong(entityTypeMessages.getFromQQ());
+        long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         ROLE_CHOOSE.put(qqId, role);
         insertRoles.insertRoleChoose(qqId, role);
     }

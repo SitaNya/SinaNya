@@ -5,8 +5,8 @@ import dice.sinanya.entity.EntityAntagonize;
 import dice.sinanya.entity.EntityHistory;
 import dice.sinanya.entity.EntityRollAndCheck;
 import dice.sinanya.entity.EntityTypeMessages;
-import dice.sinanya.exceptions.ManyRollsFormatError;
-import dice.sinanya.exceptions.ManyRollsTimesTooMore;
+import dice.sinanya.exceptions.ManyRollsFormatException;
+import dice.sinanya.exceptions.ManyRollsTimesTooMoreException;
 import dice.sinanya.exceptions.NotSetKpGroupException;
 import dice.sinanya.tools.CheckResultLevel;
 import dice.sinanya.tools.MakeRal;
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.concurrent.*;
 
 import static dice.sinanya.system.MessagesAntagonize.Antagonize;
+import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.GetNickName.getNickName;
@@ -33,7 +34,11 @@ import static dice.sinanya.tools.Sender.sender;
 public class RollAndCheck {
     private static final Logger Log = LogManager.getLogger(RollAndCheck.class);
 
+    private String defaultGroupId = "0";
+
     private EntityTypeMessages entityTypeMessages;
+
+    private ArrayList<Future<Integer>> results = new ArrayList<>();
 
     public RollAndCheck(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
@@ -59,12 +64,13 @@ public class RollAndCheck {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, msg);
         CheckResultLevel checkResultLevel = new CheckResultLevel(entityRollAndCheck.getRandom(), entityRollAndCheck.getSkill(), false);
+        //        使用房规进行判定结果
         String stringBuilder = entityRollAndCheck.getNick() +
                 "进行鉴定: D100=" + entityRollAndCheck.getRandom() + "/" + entityRollAndCheck.getSkill() +
                 checkResultLevel.getLevelResultStr();
-        changeHistory(entityTypeMessages.getFromQQ()).update(checkResultLevel.getLevelAndRandom());
+        changeHistory(entityTypeMessages.getFromQq()).update(checkResultLevel.getLevelAndRandom());
         String groupId;
-        if (entityTypeMessages.getFromGroup().equals("0")) {
+        if (entityTypeMessages.getFromGroup().equals(defaultGroupId)) {
             try {
                 groupId = getKpGroup(entityTypeMessages);
                 sender(entityTypeMessages, "本次对抗将用于群" + groupId);
@@ -76,7 +82,7 @@ public class RollAndCheck {
             groupId = entityTypeMessages.getFromGroup();
 
         }
-        if (Antagonize.containsKey(groupId) && !groupId.equals("0")) {
+        if (Antagonize.containsKey(groupId) && !groupId.equals(defaultGroupId)) {
             EntityAntagonize entityAntagonize = Antagonize.get(groupId);
             EntityAntagonize thisEntityAntagonize = checkResultLevel.getAntagonize();
 
@@ -84,7 +90,7 @@ public class RollAndCheck {
             checkAntagonize(entityTypeMessages, thisEntityAntagonize, entityAntagonize, groupId);
             Antagonize.remove(groupId);
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, "对抗结束");
-        } else if (!groupId.equals("0")) {
+        } else if (!groupId.equals(defaultGroupId)) {
             sender(entityTypeMessages, stringBuilder);
             Antagonize.put(groupId, checkResultLevel.getAntagonize());
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, getNickName(entityTypeMessages) + "发起一次对抗");
@@ -98,12 +104,13 @@ public class RollAndCheck {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, msg);
         CheckResultLevel checkResultLevel = new CheckResultLevel(entityRollAndCheck.getRandom(), entityRollAndCheck.getSkill(), true);
+//                使用规则书进行判定结果
         String stringBuilder = entityRollAndCheck.getNick() +
                 "进行鉴定: D100=" + entityRollAndCheck.getRandom() + "/" + entityRollAndCheck.getSkill() +
                 checkResultLevel.getLevelResultStr();
-        changeHistory(entityTypeMessages.getFromQQ()).update(checkResultLevel.getLevelAndRandom());
+        changeHistory(entityTypeMessages.getFromQq()).update(checkResultLevel.getLevelAndRandom());
         String groupId;
-        if (entityTypeMessages.getFromGroup().equals("0")) {
+        if (entityTypeMessages.getFromGroup().equals(defaultGroupId)) {
             try {
                 groupId = getKpGroup(entityTypeMessages);
 
@@ -114,14 +121,14 @@ public class RollAndCheck {
         } else {
             groupId = entityTypeMessages.getFromGroup();
         }
-        if (Antagonize.containsKey(groupId) && !groupId.equals("0")) {
+        if (Antagonize.containsKey(groupId) && !groupId.equals(defaultGroupId)) {
             EntityAntagonize entityAntagonize = Antagonize.get(groupId);
             EntityAntagonize thisEntityAntagonize = checkResultLevel.getAntagonize();
             sender(entityTypeMessages, stringBuilder);
             checkAntagonize(entityTypeMessages, thisEntityAntagonize, entityAntagonize, groupId);
             Antagonize.remove(groupId);
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, "对抗结束");
-        } else if (!groupId.equals("0")) {
+        } else if (!groupId.equals(defaultGroupId)) {
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, getNickName(entityTypeMessages) + "发起一次对抗");
             sender(entityTypeMessages, stringBuilder);
             Antagonize.put(groupId, checkResultLevel.getAntagonize());
@@ -133,19 +140,18 @@ public class RollAndCheck {
     public void ral() {
         String tag = TAG_RAL;
         EntityHistory entityHistory = new EntityHistory("0");
-        StringBuilder stringBuilder = new StringBuilder();
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         try {
             checkManyRollsError(msg);
-        } catch (ManyRollsTimesTooMore | ManyRollsFormatError manyRollsTimesTooMore) {
-            Log.error(manyRollsTimesTooMore.getMessage(), manyRollsTimesTooMore);
+        } catch (ManyRollsTimesTooMoreException | ManyRollsFormatException manyRollsTimesTooMoreException) {
+            Log.error(manyRollsTimesTooMoreException.getMessage(), manyRollsTimesTooMoreException);
         }
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("coc-ral-%d").build();
         ExecutorService exec = new ThreadPoolExecutor(Integer.parseInt(msg.split(" ")[1]), Integer.parseInt(msg.split(" ")[1]), 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), namedThreadFactory);
-        ArrayList<Future<Integer>> results = new ArrayList<>();
-        for (int i = 0; i < Integer.parseInt(msg.split(" ")[1]); i++) {
+//        声明一个多线程池coc-ral用于包装多次骰掷
+        for (int i = 0; i < Integer.parseInt(msg.split(SPACE)[1]); i++) {
             results.add(exec.submit(new MakeRal(entityTypeMessages, msg.split(" ")[0])));
-            //submit返回一个Future，代表了即将要返回的结果
+            //将MakeRal类加入多线程池以保证速度
         }
 
         try {
@@ -155,52 +161,25 @@ public class RollAndCheck {
         }
 
         exec.shutdown();
-        stringBuilder
-                .append("大成功:\t")
-                .append(entityHistory.getCriticalSuccess())
-                .append("次")
-                .append("\n")
-
-                .append("极难成功:\t")
-                .append(entityHistory.getExtremeSuccess())
-                .append("次")
-                .append("\n")
-
-                .append("困难成功:\t")
-                .append(entityHistory.getHardSuccess())
-                .append("次")
-                .append("\n")
-
-                .append("成功:\t")
-                .append(entityHistory.getSuccess())
-                .append("次")
-                .append("\n")
-
-                .append("失败:\t")
-                .append(entityHistory.getFailure())
-                .append("次")
-                .append("\n")
-
-                .append("大失败:\t")
-                .append(entityHistory.getFumble())
-                .append("次");
-        sender(entityTypeMessages, stringBuilder.toString());
+        formatRxlAndSend(entityHistory);
     }
 
     public void rcl() {
         String tag = TAG_RCL;
         EntityHistory entityHistory = new EntityHistory("0");
-        StringBuilder stringBuilder = new StringBuilder();
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+
         try {
             checkManyRollsError(msg);
-        } catch (ManyRollsTimesTooMore | ManyRollsFormatError manyRollsTimesTooMore) {
-            Log.error(manyRollsTimesTooMore.getMessage(), manyRollsTimesTooMore);
+        } catch (ManyRollsTimesTooMoreException | ManyRollsFormatException manyRollsTimesTooMoreException) {
+            Log.error(manyRollsTimesTooMoreException.getMessage(), manyRollsTimesTooMoreException);
         }
+
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("coc-rcl-%d").build();
         ExecutorService exec = new ThreadPoolExecutor(Integer.parseInt(msg.split(" ")[1]), Integer.parseInt(msg.split(" ")[1]), 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), namedThreadFactory);
-        ArrayList<Future<Integer>> results = new ArrayList<>();
-        for (int i = 0; i < Integer.parseInt(msg.split(" ")[1]); i++) {
+        //        声明一个多线程池coc-rcl用于包装多次骰掷
+
+        for (int i = 0; i < Integer.parseInt(msg.split(SPACE)[1]); i++) {
             results.add(exec.submit(new MakeRcl(entityTypeMessages, msg.split(" ")[0])));
             //submit返回一个Future，代表了即将要返回的结果
         }
@@ -211,36 +190,7 @@ public class RollAndCheck {
             Log.error(e.getMessage(), e);
         }
         exec.shutdown();
-        stringBuilder
-                .append("大成功:\t")
-                .append(entityHistory.getCriticalSuccess())
-                .append("次")
-                .append("\n")
-
-                .append("极难成功:\t")
-                .append(entityHistory.getExtremeSuccess())
-                .append("次")
-                .append("\n")
-
-                .append("困难成功:\t")
-                .append(entityHistory.getHardSuccess())
-                .append("次")
-                .append("\n")
-
-                .append("成功:\t")
-                .append(entityHistory.getSuccess())
-                .append("次")
-                .append("\n")
-
-                .append("失败:\t")
-                .append(entityHistory.getFailure())
-                .append("次")
-                .append("\n")
-
-                .append("大失败:\t")
-                .append(entityHistory.getFumble())
-                .append("次");
-        sender(entityTypeMessages, stringBuilder.toString());
+        formatRxlAndSend(entityHistory);
     }
 
     private String check(String msg, Boolean ruleBook) {
@@ -249,15 +199,16 @@ public class RollAndCheck {
         String result = entityRollAndCheck.getNick() +
                 "进行鉴定: D100=" + entityRollAndCheck.getRandom() + "/" + entityRollAndCheck.getSkill() +
                 checkResultLevel.getLevelResultStr();
-        changeHistory(entityTypeMessages.getFromQQ()).update(checkResultLevel.getLevelAndRandom());
+        changeHistory(entityTypeMessages.getFromQq()).update(checkResultLevel.getLevelAndRandom());
         return result;
     }
 
     private void checkAntagonize(EntityTypeMessages entityTypeMessages, EntityAntagonize thisAntagonize, EntityAntagonize lastAntagonize, String groupId) {
+        int successMinLevel = 2;
         if (lastAntagonize.getLevel() > thisAntagonize.getLevel()) {
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, "先手胜利");
         } else if (lastAntagonize.getLevel() == thisAntagonize.getLevel()) {
-            if (lastAntagonize.getLevel() < 2 && thisAntagonize.getLevel() < 2) {
+            if (lastAntagonize.getLevel() < successMinLevel && thisAntagonize.getLevel() < successMinLevel) {
                 entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, "全部失败，平手");
             } else if (lastAntagonize.getRandom() < thisAntagonize.getRandom()) {
                 entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, "先手胜利");
@@ -271,16 +222,15 @@ public class RollAndCheck {
         }
     }
 
-    private void checkManyRollsError(String msg) throws ManyRollsTimesTooMore, ManyRollsFormatError {
-        String space = " ";
+    private void checkManyRollsError(String msg) throws ManyRollsTimesTooMoreException, ManyRollsFormatException {
         int numParams = 2;
         int maxTimes = 1000;
-        if (!msg.contains(space) || msg.split(space).length != numParams || !isNumeric(msg.split(space)[0]) || !isNumeric(msg.split(space)[1])) {
-            throw new ManyRollsFormatError(entityTypeMessages);
+        if (!msg.contains(SPACE) || msg.split(SPACE).length != numParams || !isNumeric(msg.split(SPACE)[0]) || !isNumeric(msg.split(SPACE)[1])) {
+            throw new ManyRollsFormatException(entityTypeMessages);
         }
 
-        if (Integer.parseInt(msg.split(space)[1]) > maxTimes) {
-            throw new ManyRollsTimesTooMore(entityTypeMessages);
+        if (Integer.parseInt(msg.split(SPACE)[1]) > maxTimes) {
+            throw new ManyRollsTimesTooMoreException(entityTypeMessages);
         }
     }
 
@@ -289,6 +239,33 @@ public class RollAndCheck {
             Thread.sleep(100);
             entityHistory.update((int) future.get());
         }
+    }
+
+    private void formatRxlAndSend(EntityHistory entityHistory) {
+        String stringBuilder = "大成功:\t" +
+                entityHistory.getCriticalSuccess() +
+                "次" +
+                "\n" +
+                "极难成功:\t" +
+                entityHistory.getExtremeSuccess() +
+                "次" +
+                "\n" +
+                "困难成功:\t" +
+                entityHistory.getHardSuccess() +
+                "次" +
+                "\n" +
+                "成功:\t" +
+                entityHistory.getSuccess() +
+                "次" +
+                "\n" +
+                "失败:\t" +
+                entityHistory.getFailure() +
+                "次" +
+                "\n" +
+                "大失败:\t" +
+                entityHistory.getFumble() +
+                "次";
+        sender(entityTypeMessages, stringBuilder);
     }
 
 }

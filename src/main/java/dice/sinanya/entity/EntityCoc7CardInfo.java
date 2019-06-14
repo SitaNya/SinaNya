@@ -6,7 +6,7 @@ import dice.sinanya.entity.imal.GetCoc7Info;
 import static java.lang.Math.floor;
 
 /**
- * 7版数据细化
+ * 7版数据细化对象
  *
  * @author SitaNya
  */
@@ -25,7 +25,7 @@ public class EntityCoc7CardInfo extends CocCardInfo implements GetCoc7Info {
         this.luck = get3d6multiply() * 5;
         this.hasLuck = notLuck + luck;
 
-        this.hp = (int) floor((siz * 5 + con * 5) / 10);
+        this.hp = (siz * 5 + con * 5) / 10;
         this.san = pow * 5;
         this.mp = pow;
         this.db = dbGetter(siz * 5 + str * 5);

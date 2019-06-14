@@ -23,7 +23,7 @@ public class Jrrp {
     public void get() {
         String date = toTimestamp(new Date());
         int tmp = 0;
-        char[] b = (entityTypeMessages.getFromQQ() + date).toCharArray();
+        char[] b = (entityTypeMessages.getFromQq() + date).toCharArray();
         //转换成响应的ASCLL
         for (char c : b) {
             tmp += (int) c;

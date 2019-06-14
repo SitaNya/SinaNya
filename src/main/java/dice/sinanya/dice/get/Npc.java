@@ -9,7 +9,6 @@ import static dice.sinanya.system.MessagesNPC.Character;
 import static dice.sinanya.system.MessagesNPC.*;
 import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.Sender.sender;
-import static java.lang.Math.ceil;
 
 /**
  * 获取NPC
@@ -112,7 +111,7 @@ public class Npc implements MakeCard {
                 "\n" +
                 "3.\t" +
                 randomFromList(TZ);
-        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), stringBuilder);
+        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), stringBuilder);
     }
 
     private void prop() {
@@ -132,7 +131,7 @@ public class Npc implements MakeCard {
                 "\n\n" +
                 "其余属性为:\n\n" +
                 getCoc7CardInfo();
-        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), stringBuilder);
+        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), stringBuilder);
     }
 
     private String randomFromList(ArrayList<String> infoList) {
@@ -141,6 +140,6 @@ public class Npc implements MakeCard {
 
     private String randomFromListSmall(ArrayList<String> infoList) {
         int random = random(1, 3);
-        return infoList.get(random(0, (int) ceil((infoList.size() - 1) / random)));
+        return infoList.get(random(0, (infoList.size() - 1 / random)));
     }
 }

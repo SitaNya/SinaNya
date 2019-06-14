@@ -1,16 +1,21 @@
 package dice.sinanya.entity;
 
+/**
+ * 历史骰点信息对象
+ *
+ * @author SitaNya
+ */
 public class EntityHistory {
 
-    String qqId;
-    int Fumble = 0;
-    int CriticalSuccess = 0;
-    int ExtremeSuccess = 0;
-    int HardSuccess = 0;
-    int Success = 0;
-    int Failure = 0;
-    int times = 0;
-    int mean = 0;
+    private String qqId;
+    private int fumble = 0;
+    private int criticalSuccess = 0;
+    private int extremeSuccess = 0;
+    private int hardSuccess = 0;
+    private int success = 0;
+    private int failure = 0;
+    private int times = 0;
+    private int mean = 0;
 
     public EntityHistory(String qqId) {
         this.qqId = qqId;
@@ -18,12 +23,12 @@ public class EntityHistory {
 
     public EntityHistory(String qqId, int fumble, int criticalSuccess, int extremeSuccess, int hardSuccess, int success, int failure, int times, int mean) {
         this.qqId = qqId;
-        Fumble = fumble;
-        CriticalSuccess = criticalSuccess;
-        ExtremeSuccess = extremeSuccess;
-        HardSuccess = hardSuccess;
-        Success = success;
-        Failure = failure;
+        this.fumble = fumble;
+        this.criticalSuccess = criticalSuccess;
+        this.extremeSuccess = extremeSuccess;
+        this.hardSuccess = hardSuccess;
+        this.success = success;
+        this.failure = failure;
         this.times = times;
         this.mean = mean;
     }
@@ -37,51 +42,27 @@ public class EntityHistory {
     }
 
     public int getFumble() {
-        return Fumble;
-    }
-
-    public void setFumble(int fumble) {
-        Fumble = fumble;
+        return fumble;
     }
 
     public int getCriticalSuccess() {
-        return CriticalSuccess;
-    }
-
-    public void setCriticalSuccess(int criticalSuccess) {
-        CriticalSuccess = criticalSuccess;
+        return criticalSuccess;
     }
 
     public int getExtremeSuccess() {
-        return ExtremeSuccess;
-    }
-
-    public void setExtremeSuccess(int extremeSuccess) {
-        ExtremeSuccess = extremeSuccess;
+        return extremeSuccess;
     }
 
     public int getHardSuccess() {
-        return HardSuccess;
-    }
-
-    public void setHardSuccess(int hardSuccess) {
-        HardSuccess = hardSuccess;
+        return hardSuccess;
     }
 
     public int getSuccess() {
-        return Success;
-    }
-
-    public void setSuccess(int success) {
-        Success = success;
+        return success;
     }
 
     public int getFailure() {
-        return Failure;
-    }
-
-    public void setFailure(int failure) {
-        Failure = failure;
+        return failure;
     }
 
     public int getTimes() {
@@ -96,58 +77,41 @@ public class EntityHistory {
         return mean;
     }
 
-    public void setMean(int mean) {
+    private void setMean(int mean) {
         this.mean = (this.mean * (times - 1) + mean) / times;
     }
 
     public void update(EntityLevelResult entityLevelResult) {
         int level = entityLevelResult.getLevel();
         int value = entityLevelResult.getResult();
-        switch (level) {
-            case 0:
-                Fumble++;
-                break;
-            case 5:
-                CriticalSuccess++;
-                break;
-            case 4:
-                ExtremeSuccess++;
-                break;
-            case 3:
-                HardSuccess++;
-                break;
-            case 2:
-                Success++;
-                break;
-            case 1:
-                Failure++;
-                break;
-            default:
-                break;
-        }
+        updateLevel(level);
         times++;
         setMean(value);
     }
 
     public void update(int level) {
+        updateLevel(level);
+    }
+
+    private void updateLevel(int level) {
         switch (level) {
             case 0:
-                Fumble++;
+                fumble++;
                 break;
             case 5:
-                CriticalSuccess++;
+                criticalSuccess++;
                 break;
             case 4:
-                ExtremeSuccess++;
+                extremeSuccess++;
                 break;
             case 3:
-                HardSuccess++;
+                hardSuccess++;
                 break;
             case 2:
-                Success++;
+                success++;
                 break;
             case 1:
-                Failure++;
+                failure++;
                 break;
             default:
                 break;

@@ -163,12 +163,12 @@ public class Roll {
 
             if (skill != 0) {
                 String resLevel = new CheckResultLevel(intHidden, skill, true).getLevelResultStr();
-                entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), "您在群" + entityTypeMessages.getFromGroup() + "的暗骰结果为:\n" + strFunction + "=" + strResult + "=" + intHidden + "/" + skill + "\n" + resLevel);
+                entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + entityTypeMessages.getFromGroup() + "的暗骰结果为:\n" + strFunction + "=" + strResult + "=" + intHidden + "/" + skill + "\n" + resLevel);
             } else {
                 if (isNumeric(strFunction)) {
-                    entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), "您在群" + entityTypeMessages.getFromGroup() + "的暗骰结果为:\n1D" + maxRolls + "=" + result);
+                    entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + entityTypeMessages.getFromGroup() + "的暗骰结果为:\n1D" + maxRolls + "=" + result);
                 } else {
-                    entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQQ(), "您在群" + entityTypeMessages.getFromGroup() + "的暗骰结果为:\n" + strFunction + "=" + strResult + "=" + result);
+                    entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + entityTypeMessages.getFromGroup() + "的暗骰结果为:\n" + strFunction + "=" + strResult + "=" + result);
                 }
             }
         }
