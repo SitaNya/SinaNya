@@ -4,14 +4,13 @@ import dice.sinanya.dice.manager.imal.AtQq;
 import dice.sinanya.dice.manager.imal.PropList;
 import dice.sinanya.dice.manager.imal.Role;
 import dice.sinanya.entity.EntityRoleTag;
+import dice.sinanya.entity.EntityStrManyRolls;
 import dice.sinanya.entity.EntityTeamInfo;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.entity.imal.GetDb;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
-import dice.sinanya.tools.Calculator;
 import dice.sinanya.tools.CheckSanCheck;
-import dice.sinanya.tools.GetRollResultAndStr;
 import dice.sinanya.tools.MakeManyRollsStr;
 
 import java.util.ArrayList;
@@ -22,13 +21,13 @@ import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
+import static dice.sinanya.tools.MakeRollCheckResult.getResFunctionAndResultInt;
 import static dice.sinanya.tools.RoleChoose.getRoleChooseByQQ;
 import static dice.sinanya.tools.RoleInfo.getRoleInfoFromChooseByQQ;
 import static dice.sinanya.tools.RoleInfo.setRoleInfoFromChooseByQQ;
 import static dice.sinanya.tools.Sender.sender;
 import static dice.sinanya.tools.Team.*;
 import static java.lang.Integer.min;
-import static java.lang.Math.ceil;
 import static java.lang.Math.max;
 
 /**
@@ -110,27 +109,8 @@ public class Team extends PropList implements GetDb, Role, AtQq {
 
             String[] everyFunction = msg.split(plus.toString());
 
-            String strResult = msg;
-            String strFunction = msg;
-            for (String function : everyFunction) {
-                if (!isNumeric(function)) {
-                    GetRollResultAndStr resRollResultAndStr = new GetRollResultAndStr(entityTypeMessages, function);
 
-                    strResult = strResult.replaceFirst(function, resRollResultAndStr.getResStr());
-                    strFunction = strFunction.replaceFirst(function, resRollResultAndStr.getFunction());
-                }
-            }
-//            将原3d6替换为(5+5+1)，塞回原字符串里。
-//            如原本是3d6+3d6，替换后是（5+5+1）+（4+3+6）
-//            其中strResult存储了数学表达式如（5+5+1）+（4+3+6）
-//            而strFunction存储了最初的字符表达式，如3d6+3d6
-
-            int result;
-            if (isNumeric(strResult)) {
-                result = Integer.parseInt(strResult);
-            } else {
-                result = (int) ceil(Calculator.conversion(strResult));
-            }
+            EntityStrManyRolls entityStrManyRolls = getResFunctionAndResultInt(entityTypeMessages, msg, everyFunction);
 
             String role;
             int hp;
@@ -143,21 +123,21 @@ public class Team extends PropList implements GetDb, Role, AtQq {
                 int siz = prop.get("siz");
                 if (add) {
                     int maxHp = (con + siz) / 10;
-                    int newHp = min(hp + result, maxHp);
+                    int newHp = min(hp + entityStrManyRolls.getResult(), maxHp);
                     prop.put("hp", newHp);
                     setRoleInfoFromChooseByQQ(qq, prop);
-                    sender(entityTypeMessages, "已为" + role + "恢复" + strFunction + "=" + result + "点血量，剩余" + newHp + "点");
+                    sender(entityTypeMessages, "已为" + role + "恢复" + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getResult() + "点血量，剩余" + newHp + "点");
                 } else {
-                    int newHp = max(0, hp - result);
+                    int newHp = max(0, hp - entityStrManyRolls.getResult());
                     prop.put("hp", newHp);
                     setRoleInfoFromChooseByQQ(qq, prop);
                     ROLE_INFO_CACHE.put(new EntityRoleTag(Long.parseLong(qq), role), prop);
                     if (newHp == 0) {
-                        sender(entityTypeMessages, role + "损失" + strFunction + "=" + result + "点血量，已死亡");
-                    } else if (result >= hp / 2) {
-                        sender(entityTypeMessages, "已为" + role + "降低" + strFunction + "=" + result + "点血量，剩余" + newHp + "点,已进入重伤状态");
+                        sender(entityTypeMessages, role + "损失" + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getResult() + "点血量，已死亡");
+                    } else if (entityStrManyRolls.getResult() >= hp / 2) {
+                        sender(entityTypeMessages, "已为" + role + "降低" + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getResult() + "点血量，剩余" + newHp + "点,已进入重伤状态");
                     } else {
-                        sender(entityTypeMessages, "已为" + role + "降低" + strFunction + "=" + result + "点血量，剩余" + newHp + "点");
+                        sender(entityTypeMessages, "已为" + role + "降低" + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getResult() + "点血量，剩余" + newHp + "点");
                     }
                 }
             } else {

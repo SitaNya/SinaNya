@@ -238,11 +238,7 @@ class Flow {
         Jrrp jrrp = new Jrrp(entityTypeMessages);
 
         if (isR) {
-            try {
-                roll.r();
-            } catch (PlayerSetException e) {
-                Log.error(e.getMessage(), e);
-            }
+            roll.r();
         } else if (isRA) {
             rollAndCheck.ra();
         } else if (isRC) {
@@ -377,11 +373,7 @@ class Flow {
 
 
         if (isRH) {
-            try {
-                roll.rh();
-            } catch (PlayerSetException e) {
-                Log.error(e.getMessage(), e);
-            }
+            roll.rh();
         }
 
         if (isTeamSet) {

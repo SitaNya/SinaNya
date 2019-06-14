@@ -5,16 +5,30 @@ package dice.sinanya.entity;
  * @author SitaNya
  */
 public class EntityStrManyRolls {
-    private String strManyRolls;
+    private String strFunction;
+    private String strResult;
     private int result;
 
-    public EntityStrManyRolls(String strManyRolls, int result) {
-        this.strManyRolls = strManyRolls;
+    public EntityStrManyRolls(String strFunction, String strResult, int result) {
+        this.strFunction = strFunction;
+        this.strResult = strResult;
         this.result = result;
     }
 
-    public String getStrManyRolls() {
-        return strManyRolls;
+    public String getStrFunction() {
+        return strFunction;
+    }
+
+    public void setStrFunction(String strFunction) {
+        this.strFunction = strFunction;
+    }
+
+    public String getStrResult() {
+        return strResult;
+    }
+
+    public void setStrResult(String strResult) {
+        this.strResult = strResult;
     }
 
     public int getResult() {

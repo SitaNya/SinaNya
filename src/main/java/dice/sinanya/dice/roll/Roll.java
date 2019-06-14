@@ -1,7 +1,7 @@
 package dice.sinanya.dice.roll;
 
+import dice.sinanya.entity.EntityStrManyRolls;
 import dice.sinanya.entity.EntityTypeMessages;
-import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.tools.Calculator;
 import dice.sinanya.tools.CheckResultLevel;
 import dice.sinanya.tools.GetRollResultAndStr;
@@ -17,6 +17,7 @@ import static dice.sinanya.system.MessagesTag.TAG_RH;
 import static dice.sinanya.tools.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.GetNickName.getNickName;
 import static dice.sinanya.tools.MakeMessages.deleteTag;
+import static dice.sinanya.tools.MakeRollCheckResult.getResFunctionAndResultInt;
 import static dice.sinanya.tools.RandomInt.random;
 import static dice.sinanya.tools.Sender.sender;
 import static java.lang.Math.ceil;
@@ -42,10 +43,8 @@ public class Roll {
 
     /**
      * .r包含.rd的内容
-     *
-     * @throws PlayerSetException 如果填写错误，会报错并终止后续逻辑，这个错误类型会包含一个发往来源qq的信息（包括群）
      */
-    public void r() throws PlayerSetException {
+    public void r() {
         String tag = TAGR;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
 
@@ -76,41 +75,19 @@ public class Roll {
 
         for (int i = 0; i < intTimes; i++) {
 //            根据#次数循环
-            String strFunction = stringBuilderFunction.toString();
-            String strResult = stringBuilderFunction.toString();
-            for (String function : everyFunction) {
-                if (!isNumeric(function)) {
-                    GetRollResultAndStr resRollResultAndStr = new GetRollResultAndStr(entityTypeMessages, function);
-
-                    strResult = strResult.replaceFirst(function, resRollResultAndStr.getResStr());
-                    strFunction = strFunction.replaceFirst(function, resRollResultAndStr.getFunction());
-                }
-            }
-//            将原3d6替换为(5+5+1)，塞回原字符串里。
-//            如原本是3d6+3d6，替换后是（5+5+1）+（4+3+6）
-//            其中strResult存储了数学表达式如（5+5+1）+（4+3+6）
-//            而strFunction存储了最初的字符表达式，如3d6+3d6
+            EntityStrManyRolls entityStrManyRolls = getResFunctionAndResultInt(entityTypeMessages, stringBuilderFunction.toString(), everyFunction);
 
 
-            int result;
-            if (isNumeric(strResult)) {
-                result = Integer.parseInt(strResult);
+            if (isNumeric(entityStrManyRolls.getStrResult())) {
+                sender(entityTypeMessages, resultMessage + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getResult());
             } else {
-                result = (int) ceil(Calculator.conversion(strResult));
-            }
-//            由于Calculator.conversion处理纯数字时会错误的返回0，因此这里做一下判断
-
-
-            if (isNumeric(strResult)) {
-                sender(entityTypeMessages, resultMessage + strFunction + "=" + result);
-            } else {
-                sender(entityTypeMessages, resultMessage + strFunction + "=" + strResult + "=" + result);
+                sender(entityTypeMessages, resultMessage + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getStrResult() + "=" + entityStrManyRolls.getResult());
             }
 //            如果骰纯数字，则不显示表达式
         }
     }
 
-    public void rh() throws PlayerSetException {
+    public void rh() {
         String tag = TAG_RH;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
 
