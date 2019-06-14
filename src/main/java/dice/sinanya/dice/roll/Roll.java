@@ -30,6 +30,8 @@ public class Roll {
 
     private static Pattern plus = Pattern.compile("[+*/-]");
 
+    private static Pattern function = Pattern.compile("([+*/-dDkK#\\d]+)");
+
     private static Pattern AgainTimes = Pattern.compile("(\\d+)#");
 
     private EntityTypeMessages entityTypeMessages;
@@ -47,6 +49,12 @@ public class Roll {
         String tag = TAGR;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
 
+        String nick = getNickName(entityTypeMessages);
+
+
+        StringBuilder stringBuilderFunction = new StringBuilder();
+        StringBuilder resultMessage = new StringBuilder(nick + "掷出了: ");
+
         int intTimes = 1;
         Matcher mAgainTimes = AgainTimes.matcher(msg);
         while (mAgainTimes.find()) {
@@ -55,7 +63,16 @@ public class Roll {
         }
 //        获取是否存在#表示重复次数
 
-        String[] everyFunction = msg.split(plus.toString());
+        Matcher mFunction = function.matcher(msg);
+
+        if (mFunction.find()) {
+            stringBuilderFunction.append(mFunction.group(1));
+            msg = msg.replaceFirst(function.toString(), "");
+        }
+        if (!msg.isEmpty()) {
+            resultMessage.append(msg).append(": ");
+        }
+        String[] everyFunction = stringBuilderFunction.toString().split(plus.toString());
         if (everyFunction.length > 1 && intTimes != 1) {
             throw new PlayerSetException(entityTypeMessages);
         }
@@ -63,8 +80,8 @@ public class Roll {
 
         for (int i = 0; i < intTimes; i++) {
 //            根据#次数循环
-            String strResult = msg;
-            String strFunction = msg;
+            String strFunction = stringBuilderFunction.toString();
+            String strResult = stringBuilderFunction.toString();
             for (String function : everyFunction) {
                 if (!isNumeric(function)) {
                     GetRollResultAndStr resRollResultAndStr = new GetRollResultAndStr(entityTypeMessages, function);
@@ -87,10 +104,7 @@ public class Roll {
             }
 //            由于Calculator.conversion处理纯数字时会错误的返回0，因此这里做一下判断
 
-            String nick = getNickName(entityTypeMessages);
 
-
-            String resultMessage = nick + "掷出了: ";
             if (isNumeric(strResult)) {
                 sender(entityTypeMessages, resultMessage + strFunction + "=" + result);
             } else {
@@ -152,7 +166,7 @@ public class Roll {
 //            由于Calculator.conversion处理纯数字时会错误的返回0，因此这里做一下判断
 
 
-            int maxRolls = entityTypeMessages.getFromGroup() != null ? 100 : ROLL_MAX_VALUE.get(entityTypeMessages.getFromGroup());
+            int maxRolls = ROLL_MAX_VALUE.getOrDefault(entityTypeMessages.getFromGroup(), 100);
 
             int intHidden = random(1, maxRolls);
 

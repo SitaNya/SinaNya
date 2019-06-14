@@ -8329,7 +8329,8 @@ public interface MessagesName {
         add("马丁内斯");
         add("罗宾森");
         add("克拉克");
-        add("罗德里格斯", "路易斯");
+        add("罗德里格斯");
+        add("路易斯");
         add("李");
         add("沃克");
         add("霍尔");
@@ -8544,7 +8545,8 @@ public interface MessagesName {
         add("仲代");
         add("井上");
         add("吉川");
-        add("手冢", "友坂");
+        add("手冢");
+        add("友坂");
         add("宫泽");
         add("樱井");
         add("大野");
@@ -8762,7 +8764,8 @@ public interface MessagesName {
         add("绀野");
         add("原田");
         add("原纱");
-        add("金田", "锦织");
+        add("金田");
+        add("锦织");
         add("能登");
         add("牧野");
         add("堀江");

@@ -28,7 +28,8 @@ public class GetRollResultAndStr {
 
     public GetRollResultAndStr(EntityTypeMessages entityTypeMessages, String msg) {
         this.msg = msg;
-        maxRolls = entityTypeMessages.getFromGroup() != null ? 100 : ROLL_MAX_VALUE.get(entityTypeMessages.getFromGroup());
+        maxRolls = ROLL_MAX_VALUE.getOrDefault(entityTypeMessages.getFromGroup(), 100)
+        ;
         makeResult();
     }
 
