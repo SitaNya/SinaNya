@@ -104,6 +104,7 @@ public class MakeSkillName {
         put("心理学", "psychology");
         put("骑术", "horsemanship");
         put("妙手", "aWonderfulHand");
+        put("侦察", "investigationOfCrimes");
         put("侦查", "investigationOfCrimes");
         put("潜行", "stealth");
         put("生存", "existence");

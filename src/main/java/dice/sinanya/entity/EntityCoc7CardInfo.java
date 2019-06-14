@@ -21,7 +21,7 @@ public class EntityCoc7CardInfo extends CocCardInfo implements GetCoc7Info {
 
     public EntityCoc7CardInfo() {
         this.luck = get3d6multiply() * 5;
-        this.hasLuck = notLuck + luck;
+        this.hasLuck = notLuck * 5 + luck;
 
         this.hp = (siz * 5 + con * 5) / 10;
         this.san = pow * 5;
@@ -105,6 +105,6 @@ public class EntityCoc7CardInfo extends CocCardInfo implements GetCoc7Info {
 
     @Override
     public int getNotLuck() {
-        return notLuck;
+        return notLuck * 5;
     }
 }
