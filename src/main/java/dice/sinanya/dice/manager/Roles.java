@@ -46,6 +46,7 @@ public class Roles extends PropList implements Role {
             role = msg.split(sepRoleAndPro)[0];
             properties = msg.split(sepRoleAndPro)[1];
             insertRoles.insertRoleInfo(properties, role, qqId);
+            return true;
         } else if (!msg.equals(tagRoleNameNone)) {
             role = msg;
             if (checkRoleInfoExistByQQ(qqId, role)) {
@@ -53,8 +54,10 @@ public class Roles extends PropList implements Role {
             } else {
                 throw new PlayerSetException(entityTypeMessages);
             }
+            return true;
+        } else {
+            return false;
         }
-        return true;
     }
 
     public void list() {
