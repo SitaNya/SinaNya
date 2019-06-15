@@ -57,16 +57,5 @@
     <orderEntry type="library" name="Maven: antlr:antlr:2.7.7" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:19.0" level="project" />
     <orderEntry type="library" name="Maven: com.thedeanda:lorem:2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.docx4j:docx4j-core:8.1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.docx4j:docx4j-openxml-objects:8.1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.docx4j:docx4j-openxml-objects-pml:8.1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.docx4j:docx4j-openxml-objects-sml:8.1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.commons:commons-compress:1.18" level="project" />
-    <orderEntry type="library" name="Maven: org.docx4j.org.apache:xalan-metainf:8.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.docx4j.org.apache:xalan-interpretive:8.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.docx4j.org.apache:xalan-serializer:8.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.checkerframework:checker-qual:2.8.1" level="project" />
-    <orderEntry type="library" name="Maven: com.google.errorprone:error_prone_annotations:2.3.3" level="project" />
-    <orderEntry type="library" name="Maven: com.google.guava:failureaccess:1.0.1" level="project" />
   </component>
 </module>
