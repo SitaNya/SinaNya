@@ -49,12 +49,12 @@
     </build>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/io.github.ForteScarlet/simple-robot-core -->
-        <dependency>
-            <groupId>io.github.ForteScarlet</groupId>
-            <artifactId>simple-robot-core</artifactId>
-            <version>0.9-BETA</version>
-        </dependency>
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/io.github.ForteScarlet/simple-robot-core &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.github.ForteScarlet</groupId>-->
+<!--            <artifactId>simple-robot-core</artifactId>-->
+<!--            <version>0.9-BETA</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.github.ForteScarlet.simple-robot-core</groupId>
             <artifactId>component-forlemoc</artifactId>

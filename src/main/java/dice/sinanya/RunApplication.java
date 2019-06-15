@@ -6,6 +6,9 @@ import com.forte.qqrobot.component.forlemoc.LinkConfiguration;
 import com.forte.qqrobot.sender.MsgSender;
 import com.forte.qqrobot.utils.CQCodeUtil;
 
+import static dice.sinanya.system.GetMessagesSystem.initMessagesSystem;
+import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
+
 /**
  * @author SitaNya
  * 日期: 2019-06-15
@@ -16,14 +19,15 @@ import com.forte.qqrobot.utils.CQCodeUtil;
  */
 public class RunApplication implements LemocApp {
     public static void main(String[] args) {
+        initMessagesSystem();
         new LemocApplication().run(new RunApplication());
     }
 
     @Override
     public void before(LinkConfiguration configuration) {
         configuration.setScannerPackage("dice.sinanya.listener");
-        configuration.setLinkIp("123.207.150.160");
-        configuration.setPort(25304);
+        configuration.setLinkIp(messagesSystem.get("hostIp"));
+        configuration.setPort(Integer.parseInt(messagesSystem.get("hostPort")));
     }
 
     @Override

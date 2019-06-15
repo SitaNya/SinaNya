@@ -5,11 +5,12 @@ import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.ArrayList;
 
-import static dice.sinanya.system.MessagesSystem.*;
+import static dice.sinanya.system.GetMessagesSystem.*;
+import static dice.sinanya.system.MessagesSystem.STR_BOT_VERSIONS;
 import static dice.sinanya.system.MessagesTag.*;
-import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
-import static dice.sinanya.tools.log.Sender.sender;
 import static dice.sinanya.tools.getinfo.SwitchBot.*;
+import static dice.sinanya.tools.log.Sender.sender;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 
 /**
  * 机器人开启、关闭、退群
@@ -38,10 +39,10 @@ public class Bot implements AtQq {
                     return;
                 }
                 if (getBot(groupId)) {
-                    sender(entityTypeMessages, STR_ALREADY_ENABLED_ERR);
+                    sender(entityTypeMessages, messagesSystem.get("botAlreadyStart"));
                 } else {
                     botOn(groupId);
-                    sender(entityTypeMessages, STR_SUCCESSFULLY_ENABLED_NOTICE);
+                    sender(entityTypeMessages, messagesSystem.get("botStart"));
                 }
             }
         }
@@ -61,10 +62,10 @@ public class Bot implements AtQq {
                     return;
                 }
                 if (!getBot(groupId)) {
-                    sender(entityTypeMessages, STR_ALREADY_DISABLED_ERR);
+                    sender(entityTypeMessages, messagesSystem.get("botAlreadyStop"));
                 } else {
                     botOff(groupId);
-                    sender(entityTypeMessages, STR_SUCCESSFULLY_DISABLED_NOTICE);
+                    sender(entityTypeMessages, messagesSystem.get("botStop"));
                 }
             }
         }
@@ -78,7 +79,7 @@ public class Bot implements AtQq {
 
         for (String qq : qqList) {
             if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {
-                sender(entityTypeMessages, STR_EXIT_INFO);
+                sender(entityTypeMessages, messagesSystem.get("botExit"));
                 entityTypeMessages.getMsgSender().SETTER.setGroupLeave(entityTypeMessages.getFromGroup());
             }
         }

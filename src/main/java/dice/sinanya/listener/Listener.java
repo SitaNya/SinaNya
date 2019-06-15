@@ -13,7 +13,7 @@ import com.forte.qqrobot.sender.MsgSender;
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.system.MessagesSystem.STR_ALREADY_DISABLED_ERR;
+import static dice.sinanya.system.GetMessagesSystem.*;
 import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
 import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
 import static dice.sinanya.tools.getinfo.LogText.setLogText;
@@ -26,7 +26,6 @@ public class Listener {
 
 
     private Listener() {
-
     }
 
     @Constr
@@ -53,7 +52,7 @@ public class Listener {
             new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup)).toGroup();
             return true;
         } else if (msgGroup.getMsg().trim().equals(tagBotOff) || (msgGroup.getMsg().trim().equals(tagBotOff) && msgGroup.getMsg().trim().contains(tagMe))) {
-            msgSender.SENDER.sendGroupMsg(msgGroup.getFromGroup(), STR_ALREADY_DISABLED_ERR);
+            msgSender.SENDER.sendGroupMsg(msgGroup.getFromGroup(), messagesSystem.get("botAlreadyStop"));
             return true;
         } else {
             return true;
@@ -72,7 +71,7 @@ public class Listener {
             new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup)).toDisGroup();
             return true;
         } else if (msgDisGroup.getMsg().trim().equals(tagBotOff) || (msgDisGroup.getMsg().trim().contains(tagBotOff) && msgDisGroup.getMsg().trim().contains(tagMe))) {
-            msgSender.SENDER.sendDiscussMsg(msgDisGroup.getFromDiscuss(), STR_ALREADY_DISABLED_ERR);
+            msgSender.SENDER.sendDiscussMsg(msgDisGroup.getFromDiscuss(), messagesSystem.get("botAlreadyStop"));
             return true;
         } else {
             return true;
@@ -90,7 +89,7 @@ public class Listener {
             }
             return true;
         } else if (msgGroup.getMsg().trim().equals(tagBotOff)) {
-            msgSender.SENDER.sendGroupMsg(msgGroup.getFromGroup(), STR_ALREADY_DISABLED_ERR);
+            msgSender.SENDER.sendGroupMsg(msgGroup.getFromGroup(), messagesSystem.get("botAlreadyStop"));
             return true;
         } else {
             return true;
@@ -108,7 +107,7 @@ public class Listener {
             }
             return true;
         } else if (msgDisGroup.getMsg().trim().equals(tagBotOff)) {
-            msgSender.SENDER.sendGroupMsg(msgDisGroup.getFromDiscuss(), STR_ALREADY_DISABLED_ERR);
+            msgSender.SENDER.sendGroupMsg(msgDisGroup.getFromDiscuss(), messagesSystem.get("botAlreadyStop"));
             return true;
         } else {
             return true;

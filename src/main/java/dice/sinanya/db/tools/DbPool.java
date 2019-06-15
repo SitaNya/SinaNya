@@ -14,6 +14,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
+
 
 /**
  * 数据库连接池
@@ -35,19 +37,15 @@ class DbPool {
     private DbPool() {
         Log.info("Begin create DbPool");
         try {
-            InputStreamReader isr = new InputStreamReader(new FileInputStream("./db.properties"), StandardCharsets.UTF_8);
-            BufferedReader bufferedReader = new BufferedReader(isr);
-            Properties prop = new Properties();
-            prop.load(bufferedReader);
             dataSource = new ComboPooledDataSource();
 
             dataSource.setDriverClass("com.mysql.jdbc.Driver");
             dataSource.setJdbcUrl("jdbc:mysql://123.207.150.160:3306/roles?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull");
             dataSource.setUser("root");
-            dataSource.setPassword(prop.getProperty("password"));
+            dataSource.setPassword(messagesSystem.get("dbPassword"));
             dataSource.setIdleConnectionTestPeriod(3600);
             Log.info("create DbPool");
-        } catch (PropertyVetoException | IOException e) {
+        } catch (PropertyVetoException e) {
             Log.error(e.getMessage(), e);
         }
     }
