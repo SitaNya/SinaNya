@@ -81,7 +81,7 @@ public class GetMessagesSystem {
     public static void initMessagesSystem() {
         Properties prop = new Properties();
         try {
-            File file = new File("conf/sinanya.properties");
+            File file = new File("sinanya.properties");
             if (!file.exists()) {
                 file = new File("src/main/resources/sinanya.properties");
             }

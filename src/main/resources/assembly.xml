@@ -14,8 +14,46 @@
     <includeBaseDirectory>true</includeBaseDirectory>
     <fileSets>
         <fileSet>
+            <directory>${project.basedir}/logs</directory>
+            <outputDirectory>logs</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/pid</directory>
+            <outputDirectory>pid</outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>src/main/resources/conf</directory>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>conf</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}</directory>
+            <outputDirectory/>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <outputDirectory>conf</outputDirectory>
+            <excludes>
+                <exclude>assembly.xml</exclude>
+                <!--<exclude>log4j.properties</exclude>-->
+            </excludes>
         </fileSet>
     </fileSets>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+            <scope>runtime</scope>
+            <!--             <unpack>false</unpack> -->
+            <excludes>
+                <!--                 <exclude>${project.name}-${project.version}</exclude> -->
+                <exclude>${groupId}:${artifactId}</exclude>
+            </excludes>
+        </dependencySet>
+    </dependencySets>
 </assembly>

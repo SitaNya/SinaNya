@@ -3,7 +3,7 @@
 
     <Properties>
         <Property name="pattern_layout">%d %-5p (%F:%L) - %m%n</Property>
-        <Property name="LOG_HOME">../logs/</Property>
+        <Property name="LOG_HOME">./logs/</Property>
     </Properties>
 
     <Appenders>
@@ -30,7 +30,6 @@
     </Appenders>
 
     <Loggers>
-
         <Logger name="dice.sinanya" level="INFO">
             <AppenderRef ref="sinanya"/>
         </Logger>
