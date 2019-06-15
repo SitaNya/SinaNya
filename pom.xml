@@ -9,7 +9,6 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <start-class>dice.sinanya.RunApplication</start-class>
         <jdk.version>1.8</jdk.version>
     </properties>
     <build>
