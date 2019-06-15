@@ -2,7 +2,7 @@ package dice.sinanya.dice.getbook;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.system.MessagesBook.*;
+import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.log.Sender.sender;
 
 /**
@@ -19,19 +19,19 @@ public class Book {
     }
 
     public void card() {
-        sender(entityTypeMessages, strGetBookHumanMailContent);
+        sender(entityTypeMessages, messagesSystem.get("bookCard"));
     }
 
     public void rp() {
-        sender(entityTypeMessages, strGetBookRPMailContent);
+        sender(entityTypeMessages, messagesSystem.get("bookRP"));
     }
 
     public void kp() {
-        sender(entityTypeMessages, strGetBookKPMailContent);
+        sender(entityTypeMessages, messagesSystem.get("bookKp"));
     }
 
     public void make() {
-        sender(entityTypeMessages, strGetBookMakeCardMailContent);
+        sender(entityTypeMessages, messagesSystem.get("bookMake"));
     }
 
 }

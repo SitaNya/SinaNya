@@ -4,7 +4,7 @@ import dice.sinanya.entity.EntityRoleTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
-import dice.sinanya.tools.makedata.MakeManyRollsStr;
+import dice.sinanya.tools.makedata.GetRollResultAndStr;
 
 import java.util.HashMap;
 
@@ -64,9 +64,9 @@ public class CheckSanCheck {
             changeValue = Integer.parseInt(strAddValue);
             changeFunction = strAddValue;
         } else {
-            MakeManyRollsStr makeManyRollsStr = new MakeManyRollsStr(strAddValue);
-            changeValue = makeManyRollsStr.getRes();
-            changeFunction = makeManyRollsStr.getStr();
+            GetRollResultAndStr getRollResultAndStr = new GetRollResultAndStr(entityTypeMessages, strAddValue);
+            changeValue = getRollResultAndStr.getResInt();
+            changeFunction = getRollResultAndStr.getResStr();
         }
 
         HashMap<String, Integer> prop = getRoleInfoFromChooseByFromQQ(entityTypeMessages);
@@ -112,8 +112,8 @@ public class CheckSanCheck {
         String strSuccess = strCheckValue.split(sanFunctionSeq)[0];
         String strFail = strCheckValue.split(sanFunctionSeq)[1];
 
-        MakeManyRollsStr mSuccess = new MakeManyRollsStr(strSuccess);
-        MakeManyRollsStr mFail = new MakeManyRollsStr(strFail);
+        GetRollResultAndStr mSuccess = new GetRollResultAndStr(entityTypeMessages, strSuccess);
+        GetRollResultAndStr mFail = new GetRollResultAndStr(entityTypeMessages, strFail);
 
         boolean useCard = false;
         HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);
@@ -207,7 +207,7 @@ public class CheckSanCheck {
             }
             makeInsane(strResult, newSan, san);
         } else if (random <= san) {
-            int newSan = max(0, san - mSuccess.getRes());
+            int newSan = max(0, san - mSuccess.getResInt());
             strResult
                     .append(random)
                     .append("/")
@@ -217,7 +217,7 @@ public class CheckSanCheck {
                     .append("你的理智值减少")
                     .append(strSuccess)
                     .append("=")
-                    .append(mSuccess.getRes())
+                    .append(mSuccess.getResInt())
                     .append("点")
                     .append(",当前剩余")
                     .append(newSan)
@@ -227,7 +227,7 @@ public class CheckSanCheck {
             }
             makeInsane(strResult, newSan, san);
         } else {
-            int newSan = max(0, san - mFail.getRes());
+            int newSan = max(0, san - mFail.getResInt());
             strResult
                     .append(random)
                     .append("/")
@@ -237,7 +237,7 @@ public class CheckSanCheck {
                     .append("你的理智值减少")
                     .append(strFail)
                     .append("=")
-                    .append(mFail.getRes())
+                    .append(mFail.getResInt())
                     .append("点")
                     .append(",当前剩余")
                     .append(newSan)

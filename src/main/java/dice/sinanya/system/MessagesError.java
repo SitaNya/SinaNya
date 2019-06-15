@@ -8,7 +8,7 @@ public interface MessagesError {
 
     String strValueErr = "那个……您输入的值似乎有问题哦？奈梅斯很难办的QwQ\n应该类似.st角色名-力量50体质60";
     String strDiceTimesTooBig = "太……太多了！我有些忙不过来，可以少一些吗……";
-    String strHiddenDice = "kp在暗骰~请kp大大好心一些！（鞠躬））";
+    String strHiddenDice = "kp在暗骰~请kp大大好心一些！（鞠躬）";
     String strSetPropSuccess = "奈梅斯好好地记住您了！也请您好好表现哦！";
     String strPropErr = "这个属性是不是输入的有点问题？奈梅斯看不懂来着";
     String strNameNumCannotBeZero = "生成数量不能为零!请输入1-10之间的数字!";

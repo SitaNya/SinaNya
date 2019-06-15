@@ -5,12 +5,12 @@ package dice.sinanya.entity;
  *
  * @author SitaNya
  */
-public class EntityRollAndCheck {
+public class EntityNickAndRandomAndSkill {
     private String nick;
     private int random;
     private int skill;
 
-    public EntityRollAndCheck(String nick, int random, int skill) {
+    public EntityNickAndRandomAndSkill(String nick, int random, int skill) {
         this.nick = nick;
         this.random = random;
         this.skill = skill;

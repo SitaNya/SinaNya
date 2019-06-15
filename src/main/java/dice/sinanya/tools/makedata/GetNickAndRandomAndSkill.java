@@ -1,7 +1,6 @@
 package dice.sinanya.tools.makedata;
 
-import dice.sinanya.entity.EntityRollAndCheck;
-import dice.sinanya.entity.EntityStrManyRolls;
+import dice.sinanya.entity.EntityNickAndRandomAndSkill;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.regex.Matcher;
@@ -16,10 +15,10 @@ import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByFromQQ
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
 import static java.lang.Math.ceil;
 
-public class MakeRollCheckResult {
+public class GetNickAndRandomAndSkill {
     private static Pattern p = Pattern.compile("[+*/\\-]");
 
-    public static EntityRollAndCheck makeResult(EntityTypeMessages entityTypeMessages, String msg) {
+    public static EntityNickAndRandomAndSkill getNickAndRandomAndSkill(EntityTypeMessages entityTypeMessages, String msg) {
         int random = random(1, 100);
 
         StringBuilder skillName = new StringBuilder();
@@ -62,35 +61,7 @@ public class MakeRollCheckResult {
         }
 
 
-        return new EntityRollAndCheck(nick, random, skill);
-    }
-
-    public static EntityStrManyRolls getResFunctionAndResultInt(EntityTypeMessages entityTypeMessages, String inputMsg, String[] everyFunction) {
-        String strFunction = inputMsg;
-        String strResult = inputMsg;
-        for (String function : everyFunction) {
-            if (!isNumeric(function)) {
-                GetRollResultAndStr resRollResultAndStr = new GetRollResultAndStr(entityTypeMessages, function);
-
-                strResult = strResult.replaceFirst(function, resRollResultAndStr.getResStr());
-                strFunction = strFunction.replaceFirst(function, resRollResultAndStr.getFunction());
-            }
-        }
-//            将原3d6替换为(5+5+1)，塞回原字符串里。
-//            如原本是3d6+3d6，替换后是（5+5+1）+（4+3+6）
-//            其中strResult存储了数学表达式如（5+5+1）+（4+3+6）
-//            而strFunction存储了最初的字符表达式，如3d6+3d6
-
-
-        int result;
-        if (isNumeric(strResult)) {
-            result = Integer.parseInt(strResult);
-        } else {
-            result = (int) ceil(Calculator.conversion(strResult));
-        }
-//            由于Calculator.conversion处理纯数字时会错误的返回0，因此这里做一下判断
-
-        return new EntityStrManyRolls(strFunction, strResult, result);
+        return new EntityNickAndRandomAndSkill(nick, random, skill);
     }
 
 }

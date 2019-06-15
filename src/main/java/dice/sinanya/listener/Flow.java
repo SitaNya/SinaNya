@@ -15,8 +15,7 @@ import dice.sinanya.exceptions.SanCheckSetException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import static dice.sinanya.system.MessagesError.strPropErr;
-import static dice.sinanya.system.MessagesError.strSetPropSuccess;
+import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.log.Sender.sender;
 
@@ -256,9 +255,9 @@ class Flow {
         if (isStSet) {
             try {
                 if (roles.set()) {
-                    sender(entityTypeMessages, strSetPropSuccess);
+                    sender(entityTypeMessages, messagesSystem.get("setPropSuccess"));
                 } else {
-                    sender(entityTypeMessages, strPropErr);
+                    sender(entityTypeMessages, messagesSystem.get("setHelp"));
                 }
             } catch (PlayerSetException e) {
                 Log.error(e.getMessage(), e);

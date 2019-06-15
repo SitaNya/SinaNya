@@ -11,7 +11,7 @@ import dice.sinanya.entity.imal.GetDb;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
 import dice.sinanya.tools.checkdata.CheckSanCheck;
-import dice.sinanya.tools.makedata.MakeManyRollsStr;
+import dice.sinanya.tools.makedata.GetRollResultAndStr;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,13 +20,13 @@ import java.util.regex.Pattern;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
-import static dice.sinanya.tools.makedata.MakeRollCheckResult.getResFunctionAndResultInt;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByQQ;
 import static dice.sinanya.tools.getinfo.RoleInfo.setRoleInfoFromChooseByQQ;
-import static dice.sinanya.tools.log.Sender.sender;
 import static dice.sinanya.tools.getinfo.Team.*;
+import static dice.sinanya.tools.log.Sender.sender;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.makedata.GetRollResultAndStr.getResFunctionAndResultInt;
 import static java.lang.Integer.min;
 import static java.lang.Math.max;
 
@@ -179,7 +179,7 @@ public class Team extends PropList implements GetDb, Role, AtQq {
                         if (isNumeric(msg)) {
                             changeValue = Integer.parseInt(msg);
                         } else {
-                            changeValue = new MakeManyRollsStr(msg).getRes();
+                            changeValue = new GetRollResultAndStr(entityTypeMessages, msg).getResInt();
                         }
                         HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);
                         if (prop != null) {

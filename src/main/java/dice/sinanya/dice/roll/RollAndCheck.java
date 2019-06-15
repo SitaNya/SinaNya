@@ -3,7 +3,7 @@ package dice.sinanya.dice.roll;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import dice.sinanya.entity.EntityAntagonize;
 import dice.sinanya.entity.EntityHistory;
-import dice.sinanya.entity.EntityRollAndCheck;
+import dice.sinanya.entity.EntityNickAndRandomAndSkill;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.ManyRollsFormatException;
 import dice.sinanya.exceptions.ManyRollsTimesTooMoreException;
@@ -25,7 +25,7 @@ import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.History.changeHistory;
 import static dice.sinanya.tools.getinfo.Kp.getKpGroup;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
-import static dice.sinanya.tools.makedata.MakeRollCheckResult.makeResult;
+import static dice.sinanya.tools.makedata.GetNickAndRandomAndSkill.getNickAndRandomAndSkill;
 import static dice.sinanya.tools.log.Sender.sender;
 
 /**
@@ -62,11 +62,11 @@ public class RollAndCheck {
     public void rav() {
         String tag = TAG_RAV;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, msg);
-        CheckResultLevel checkResultLevel = new CheckResultLevel(entityRollAndCheck.getRandom(), entityRollAndCheck.getSkill(), false);
+        EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
+        CheckResultLevel checkResultLevel = new CheckResultLevel(entityNickAndRandomAndSkill.getRandom(), entityNickAndRandomAndSkill.getSkill(), false);
         //        使用房规进行判定结果
-        String stringBuilder = entityRollAndCheck.getNick() +
-                "进行鉴定: D100=" + entityRollAndCheck.getRandom() + "/" + entityRollAndCheck.getSkill() +
+        String stringBuilder = entityNickAndRandomAndSkill.getNick() +
+                "进行鉴定: D100=" + entityNickAndRandomAndSkill.getRandom() + "/" + entityNickAndRandomAndSkill.getSkill() +
                 checkResultLevel.getLevelResultStr();
         changeHistory(entityTypeMessages.getFromQq()).update(checkResultLevel.getLevelAndRandom());
         String groupId;
@@ -102,11 +102,11 @@ public class RollAndCheck {
     public void rcv() {
         String tag = TAG_RCV;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, msg);
-        CheckResultLevel checkResultLevel = new CheckResultLevel(entityRollAndCheck.getRandom(), entityRollAndCheck.getSkill(), true);
+        EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
+        CheckResultLevel checkResultLevel = new CheckResultLevel(entityNickAndRandomAndSkill.getRandom(), entityNickAndRandomAndSkill.getSkill(), true);
 //                使用规则书进行判定结果
-        String stringBuilder = entityRollAndCheck.getNick() +
-                "进行鉴定: D100=" + entityRollAndCheck.getRandom() + "/" + entityRollAndCheck.getSkill() +
+        String stringBuilder = entityNickAndRandomAndSkill.getNick() +
+                "进行鉴定: D100=" + entityNickAndRandomAndSkill.getRandom() + "/" + entityNickAndRandomAndSkill.getSkill() +
                 checkResultLevel.getLevelResultStr();
         changeHistory(entityTypeMessages.getFromQq()).update(checkResultLevel.getLevelAndRandom());
         String groupId;
@@ -194,10 +194,10 @@ public class RollAndCheck {
     }
 
     private String check(String msg, Boolean ruleBook) {
-        EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, msg);
-        CheckResultLevel checkResultLevel = new CheckResultLevel(entityRollAndCheck.getRandom(), entityRollAndCheck.getSkill(), ruleBook);
-        String result = entityRollAndCheck.getNick() +
-                "进行鉴定: D100=" + entityRollAndCheck.getRandom() + "/" + entityRollAndCheck.getSkill() +
+        EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
+        CheckResultLevel checkResultLevel = new CheckResultLevel(entityNickAndRandomAndSkill.getRandom(), entityNickAndRandomAndSkill.getSkill(), ruleBook);
+        String result = entityNickAndRandomAndSkill.getNick() +
+                "进行鉴定: D100=" + entityNickAndRandomAndSkill.getRandom() + "/" + entityNickAndRandomAndSkill.getSkill() +
                 checkResultLevel.getLevelResultStr();
         changeHistory(entityTypeMessages.getFromQq()).update(checkResultLevel.getLevelAndRandom());
         return result;

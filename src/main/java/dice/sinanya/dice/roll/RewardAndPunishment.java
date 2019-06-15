@@ -1,7 +1,7 @@
 package dice.sinanya.dice.roll;
 
 import dice.sinanya.entity.EntityRewardAndPunishment;
-import dice.sinanya.entity.EntityRollAndCheck;
+import dice.sinanya.entity.EntityNickAndRandomAndSkill;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.tools.checkdata.CheckResultLevel;
 import dice.sinanya.tools.getinfo.GetSkillValue;
@@ -12,7 +12,7 @@ import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.TAG_RB;
 import static dice.sinanya.system.MessagesTag.TAG_RP;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.makedata.MakeRollCheckResult.makeResult;
+import static dice.sinanya.tools.makedata.GetNickAndRandomAndSkill.getNickAndRandomAndSkill;
 import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.log.Sender.sender;
 
@@ -38,7 +38,7 @@ public class RewardAndPunishment {
     public void rb() {
         String tag = TAG_RB;
         String msg = entityTypeMessages.getMsgGet().getMsg().trim().replaceFirst(tag.substring(0, tag.length() - 2), "");
-        EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, msg);
+        EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
 
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -54,7 +54,7 @@ public class RewardAndPunishment {
         }
 //        取最小值
 
-        int random = entityRollAndCheck.getRandom();
+        int random = entityNickAndRandomAndSkill.getRandom();
 
         if (random / multiple < min) {
             min = random / multiple;
@@ -66,11 +66,11 @@ public class RewardAndPunishment {
         String strRes;
         String substring = stringBuilder.substring(0, stringBuilder.length() - 1);
         if (getTimesAndSkill(msg).getSkill() != 0) {
-            strRes = entityRollAndCheck.getNick() +
+            strRes = entityNickAndRandomAndSkill.getNick() +
                     "进行奖励骰鉴定: D100=" + random + "[奖励骰:" + substring + "] = " + resultRandom + "/" + getTimesAndSkill(msg).getSkill() +
                     new CheckResultLevel(resultRandom, getTimesAndSkill(msg).getSkill(), false).getLevelResultStr();
         } else {
-            strRes = entityRollAndCheck.getNick() +
+            strRes = entityNickAndRandomAndSkill.getNick() +
                     "进行奖励骰鉴定: D100=" + random + "[奖励骰:" + substring + "] = " + resultRandom;
         }
         sender(entityTypeMessages, strRes);
@@ -80,7 +80,7 @@ public class RewardAndPunishment {
     public void rp() {
         String tag = TAG_RP;
         String msg = entityTypeMessages.getMsgGet().getMsg().trim().replaceFirst(tag.substring(0, tag.length() - 2), "");
-        EntityRollAndCheck entityRollAndCheck = makeResult(entityTypeMessages, msg);
+        EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
 
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -96,7 +96,7 @@ public class RewardAndPunishment {
         }
 //        取最大值
 
-        int random = entityRollAndCheck.getRandom();
+        int random = entityNickAndRandomAndSkill.getRandom();
 
         if (random / multiple > max) {
             max = random / multiple;
@@ -108,11 +108,11 @@ public class RewardAndPunishment {
         String strRes;
         String substring = stringBuilder.substring(0, stringBuilder.length() - 1);
         if (getTimesAndSkill(msg).getSkill() != 0) {
-            strRes = entityRollAndCheck.getNick() +
+            strRes = entityNickAndRandomAndSkill.getNick() +
                     "进行惩罚骰鉴定: D100=" + random + "[惩罚骰:" + substring + "] = " + resultRandom + "/" + getTimesAndSkill(msg).getSkill() +
                     new CheckResultLevel(resultRandom, getTimesAndSkill(msg).getSkill(), false).getLevelResultStr();
         } else {
-            strRes = entityRollAndCheck.getNick() +
+            strRes = entityNickAndRandomAndSkill.getNick() +
                     "进行惩罚骰鉴定: D100=" + random + "[惩罚骰:" + substring + "] = " + resultRandom;
         }
         sender(entityTypeMessages, strRes);

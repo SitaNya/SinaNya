@@ -10,14 +10,14 @@ import dice.sinanya.tools.getinfo.GetSkillValue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static dice.sinanya.system.MessagesError.strHiddenDice;
+import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesSystem.ROLL_MAX_VALUE;
 import static dice.sinanya.system.MessagesTag.TAGR;
 import static dice.sinanya.system.MessagesTag.TAG_RH;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
-import static dice.sinanya.tools.makedata.MakeRollCheckResult.getResFunctionAndResultInt;
+import static dice.sinanya.tools.makedata.GetRollResultAndStr.getResFunctionAndResultInt;
 import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.log.Sender.sender;
 import static java.lang.Math.ceil;
@@ -123,8 +123,7 @@ public class Roll {
 //            其中strResult存储了数学表达式如（5+5+1）+（4+3+6）
 //            而strFunction存储了最初的字符表达式，如3d6+3d6
 
-            sender(entityTypeMessages, strHiddenDice);
-
+            sender(entityTypeMessages, messagesSystem.get("hiddenDice"));
 
             int result;
             if (isNumeric(strResult)) {
