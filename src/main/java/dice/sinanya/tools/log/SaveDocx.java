@@ -19,14 +19,11 @@ import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 public class SaveDocx {
 
     private static final Logger Log = LogManager.getLogger(SaveDocx.class);
-    private WordprocessingMLPackage wordMlPackage;
     private ObjectFactory factory;
+    private MainDocumentPart documentPart;
 
     private void makePdf(String inputText, String inputColor) {
         // word对象
-
-        MainDocumentPart documentPart = wordMlPackage.getMainDocumentPart();
-
         documentPart.addObject(createTitle(inputText, inputColor));
     }
 
@@ -95,8 +92,9 @@ public class SaveDocx {
     }
 
     public SaveDocx(String groupId, String qqId, String msg, final String bigResult) throws Docx4JException {
-        wordMlPackage = WordprocessingMLPackage.createPackage();
+        WordprocessingMLPackage wordMlPackage = WordprocessingMLPackage.createPackage();
         factory = Context.getWmlObjectFactory();
+        documentPart = wordMlPackage.getMainDocumentPart();
         String fromName = "";
         int colorTag = 100;
         for (final String line : bigResult.split("\n")) {
@@ -122,7 +120,7 @@ public class SaveDocx {
             }
             makePdf(line, RBG.get(colorTag));
         }
-        File file = new File("./saveLogs" + groupId + "/" + msg + ".docx");
+        File file = new File("./saveLogs/" + groupId + "/" + msg + ".docx");
         if (!file.getParentFile().exists()) {
             if (!file.getParentFile().mkdirs()) {
                 Log.error("docx染色文件未能成功生成");
