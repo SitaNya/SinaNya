@@ -7,10 +7,10 @@ import dice.sinanya.exceptions.NotFoundSkillException;
 import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesTag.TAG_EN;
 import static dice.sinanya.tools.getinfo.GetSkillValue.getSkillValue;
-import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.log.Sender.sender;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 
 /**
  * .en的相关类

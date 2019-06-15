@@ -25,8 +25,8 @@ import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByQQ;
 import static dice.sinanya.tools.getinfo.RoleInfo.setRoleInfoFromChooseByQQ;
 import static dice.sinanya.tools.getinfo.Team.*;
 import static dice.sinanya.tools.log.Sender.sender;
-import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.makedata.GetRollResultAndStr.getResFunctionAndResultInt;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static java.lang.Integer.min;
 import static java.lang.Math.max;
 

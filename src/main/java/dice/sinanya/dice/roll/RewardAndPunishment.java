@@ -1,7 +1,7 @@
 package dice.sinanya.dice.roll;
 
-import dice.sinanya.entity.EntityRewardAndPunishment;
 import dice.sinanya.entity.EntityNickAndRandomAndSkill;
+import dice.sinanya.entity.EntityRewardAndPunishment;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.tools.checkdata.CheckResultLevel;
 import dice.sinanya.tools.getinfo.GetSkillValue;
@@ -12,9 +12,9 @@ import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.TAG_RB;
 import static dice.sinanya.system.MessagesTag.TAG_RP;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.makedata.GetNickAndRandomAndSkill.getNickAndRandomAndSkill;
 import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.log.Sender.sender;
+import static dice.sinanya.tools.makedata.GetNickAndRandomAndSkill.getNickAndRandomAndSkill;
 
 /**
  * 奖励投、惩罚投

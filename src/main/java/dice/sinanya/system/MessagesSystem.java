@@ -1,16 +1,10 @@
 package dice.sinanya.system;
 
 import java.util.HashMap;
-import java.util.Locale;
-import java.util.Objects;
 
 public interface MessagesSystem {
 
     HashMap<String, Integer> ROLL_MAX_VALUE = new HashMap<>();
-
-    Boolean OSX_MODEL = Objects.equals(System.getProperty("os.name").toLowerCase(Locale.US), "mac os x");
-    Boolean WIN_MODEL = Objects.equals(System.getProperty("os.name").toLowerCase(Locale.US), "Windows 10");
-    Boolean LINUX_MODEL = !OSX_MODEL && !WIN_MODEL;
 
     String NONE = "";
     String SPACE = " ";

@@ -13,10 +13,10 @@ import java.util.concurrent.*;
 
 import static dice.sinanya.system.MessagesTag.TAG_COC6;
 import static dice.sinanya.system.MessagesTag.TAG_COC7;
-import static dice.sinanya.tools.makedata.GetFutureToString.getFutureToString;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
-import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.log.Sender.sender;
+import static dice.sinanya.tools.makedata.GetFutureToString.getFutureToString;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 
 /**
  * COC车卡类

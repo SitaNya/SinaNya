@@ -14,7 +14,6 @@ import java.util.HashMap;
 
 import static dice.sinanya.system.MessagesLogColorTag.logColorTag;
 import static dice.sinanya.system.MessagesRGB.RBG;
-import static dice.sinanya.system.MessagesSystem.*;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 
 public class SaveDocx {
@@ -122,19 +121,7 @@ public class SaveDocx {
             }
             makePdf(line, RBG.get(colorTag));
         }
-        File file = null;
-        if (OSX_MODEL) {
-            if (new File("/Users/SitaNya/Desktop/").exists()) {
-                file = new File("/Users/SitaNya/Desktop/" + groupId + "/" +  msg + ".docx");
-            }else{
-                file=new File("/Users/zhangxiaozhou//Desktop/" + groupId + "/" +  msg + ".docx");
-            }
-        } else if (WIN_MODEL) {
-            file = new File("C:/Files/" + groupId + "/" + msg + ".docx");
-        } else if (LINUX_MODEL) {
-            file = new File("/tmp/" + groupId + "/" + msg + ".docx");
-        }
-        assert file != null;
+        File file = new File("./saveLogs" + groupId + "/" + msg + ".docx");
         if (!file.getParentFile().exists()) {
             if (!file.getParentFile().mkdirs()) {
                 Log.error("docx染色文件未能成功生成");

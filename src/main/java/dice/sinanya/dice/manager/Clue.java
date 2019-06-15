@@ -10,8 +10,8 @@ import java.text.SimpleDateFormat;
 import static dice.sinanya.system.MessagesTag.TAG_CLUE_RM;
 import static dice.sinanya.system.MessagesTag.TAG_CLUE_SET;
 import static dice.sinanya.tools.getinfo.Clue.*;
-import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.log.Sender.sender;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 
 /**
  * 线索集

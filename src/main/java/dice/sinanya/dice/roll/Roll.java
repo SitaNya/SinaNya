@@ -2,10 +2,10 @@ package dice.sinanya.dice.roll;
 
 import dice.sinanya.entity.EntityStrManyRolls;
 import dice.sinanya.entity.EntityTypeMessages;
-import dice.sinanya.tools.makedata.Calculator;
 import dice.sinanya.tools.checkdata.CheckResultLevel;
-import dice.sinanya.tools.makedata.GetRollResultAndStr;
 import dice.sinanya.tools.getinfo.GetSkillValue;
+import dice.sinanya.tools.makedata.Calculator;
+import dice.sinanya.tools.makedata.GetRollResultAndStr;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,10 +16,10 @@ import static dice.sinanya.system.MessagesTag.TAGR;
 import static dice.sinanya.system.MessagesTag.TAG_RH;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
-import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
-import static dice.sinanya.tools.makedata.GetRollResultAndStr.getResFunctionAndResultInt;
 import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.log.Sender.sender;
+import static dice.sinanya.tools.makedata.GetRollResultAndStr.getResFunctionAndResultInt;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static java.lang.Math.ceil;
 
 /**

@@ -8,15 +8,12 @@ import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
-
-import static dice.sinanya.system.MessagesSystem.*;
 
 public class SendMail {
     private static final Logger Log = LogManager.getLogger(SendMail.class);
@@ -112,22 +109,8 @@ public class SendMail {
         mb.setContent("日志邮件测试");
         // 设置邮件的正文
 
-        if (OSX_MODEL) {
-            if (new File("/Users/SitaNya/Desktop/").exists()) {
-                mb.attachFile("/Users/SitaNya/Desktop/" + groupId + "/" + logName);
-                mb.attachFile("/Users/SitaNya/Desktop/" + groupId + "/" + logName + ".docx");
-            }else{
-                mb.attachFile("/Users/zhangxiaozhou/Desktop/" + groupId + "/" + logName);
-                mb.attachFile("/Users/zhangxiaozhou/Desktop/" + groupId + "/" + logName + ".docx");
-            }
-
-        } else if (WIN_MODEL) {
-            mb.attachFile("C:/Files/" + groupId + "/" + logName);
-            mb.attachFile("C:/Files/" + groupId + "/" + logName + ".docx");
-        } else if (LINUX_MODEL) {
-            mb.attachFile("/tmp/" + groupId + "/" + logName);
-            mb.attachFile("/tmp/" + groupId + "/" + logName + ".docx");
-        }
+        mb.attachFile("./saveLogs/" + groupId + "/" + logName);
+        mb.attachFile("./saveLogs/" + groupId + "/" + logName + ".docx");
 
         SendMail sm = new SendMail();
         Log.info("正在发送邮件...");

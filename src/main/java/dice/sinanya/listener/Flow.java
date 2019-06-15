@@ -404,8 +404,8 @@ class Flow {
         }
 
         if (isEN) {
-            try{
-            skillUp.en();
+            try {
+                skillUp.en();
             } catch (NotFoundSkillException e) {
                 Log.error(e.getMessage(), e);
             }

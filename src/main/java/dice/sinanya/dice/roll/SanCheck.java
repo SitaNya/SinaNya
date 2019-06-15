@@ -6,8 +6,8 @@ import dice.sinanya.exceptions.SanCheckSetException;
 import dice.sinanya.tools.checkdata.CheckSanCheck;
 
 import static dice.sinanya.system.MessagesTag.TAG_SC;
-import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.log.Sender.sender;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 
 /**
  * .sc逻辑类

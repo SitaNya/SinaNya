@@ -10,7 +10,6 @@ import static dice.sinanya.system.MessagesNPC.*;
 import static dice.sinanya.tools.getinfo.GetName.getRandomName;
 import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.log.Sender.sender;
-import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 /**

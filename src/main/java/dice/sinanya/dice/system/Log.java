@@ -40,7 +40,7 @@ public class Log {
             if (checkLogTagExist(entityTypeMessages, msg)) {
                 sender(entityTypeMessages, msg + messagesSystem.get("appendLog"));
             } else {
-                sender(entityTypeMessages, msg +messagesSystem.get("createLog"));
+                sender(entityTypeMessages, msg + messagesSystem.get("createLog"));
             }
             logNameForGroup.put(entityTypeMessages.getFromGroup(), msg);
             logSwitchForGroup.put(entityTypeMessages.getFromGroup(), true);
