@@ -41,7 +41,6 @@
             <outputDirectory>conf</outputDirectory>
             <excludes>
                 <exclude>assembly.xml</exclude>
-                <!--<exclude>log4j.properties</exclude>-->
             </excludes>
         </fileSet>
     </fileSets>
