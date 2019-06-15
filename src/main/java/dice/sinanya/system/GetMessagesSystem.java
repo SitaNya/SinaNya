@@ -14,7 +14,7 @@ import java.util.Properties;
  * 电子邮箱: sitanya@qq.com
  * 维护群(QQ): 162279609
  * 有任何问题欢迎咨询
- * 类说明:
+ * 类说明: 设定默认回复语，并读取配置文件中的回复语
  */
 public class GetMessagesSystem {
     private static Logger log = LogManager.getLogger(GetMessagesSystem.class.getName());
