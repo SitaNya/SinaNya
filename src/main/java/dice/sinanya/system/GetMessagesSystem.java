@@ -80,8 +80,9 @@ public class GetMessagesSystem {
 
     public static void initMessagesSystem() {
         Properties prop = new Properties();
+        File file=null;
         try {
-            File file = new File("conf/sinanya.properties");
+            file = new File("conf/sinanya.properties");
             if (!file.exists()) {
                 file = new File("src/main/resources/sinanya.properties");
             }
@@ -89,6 +90,7 @@ public class GetMessagesSystem {
             BufferedReader bufferedReader = new BufferedReader(isr);
             prop.load(bufferedReader);
         } catch (IOException e) {
+            log.error(file.getAbsolutePath());
             log.error(e.getMessage(), e);
         }
 
