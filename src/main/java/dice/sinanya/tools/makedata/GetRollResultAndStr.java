@@ -31,15 +31,14 @@ public class GetRollResultAndStr {
 
     public GetRollResultAndStr(EntityTypeMessages entityTypeMessages, String msg) {
         this.msg = msg;
-        maxRolls = ROLL_MAX_VALUE.getOrDefault(entityTypeMessages.getFromGroup(), 100)
-        ;
+        maxRolls = ROLL_MAX_VALUE.getOrDefault(entityTypeMessages.getFromGroup(), 100);
         makeResult();
     }
 
     private void makeResult() {
 
         if (isNumeric(msg)) {
-            resInt = Integer.getInteger(msg);
+            resInt = Integer.parseInt(msg);
             resStr = msg;
             strFunction = msg;
             return;
@@ -61,8 +60,13 @@ public class GetRollResultAndStr {
             }
         }
 
-        resInt = (int) (ceil(Calculator.conversion(resStr)));
         resStr = manyRollsProcess(times, maxRolls, maxNums);
+        if (isNumeric(resStr)) {
+            resInt = Integer.parseInt(resStr);
+        } else {
+            resInt = (int) (ceil(Calculator.conversion(resStr)));
+        }
+
 
         if (maxNums == times) {
             strFunction = times + "D" + maxRolls;
