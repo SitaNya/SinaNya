@@ -28,7 +28,7 @@ case ${startStop} in
     fi
 
     echo starting sinanya
-    sinanyaScript='java -cp '"$bin"'/../lib/*:'"$bin"'/../conf/*:'"$Jar_Dir"' -Dlog4j.configurationFile='"$bin"'/../conf/log4j2.xml -Xms4096m -Xmx8192m dice.sinanya.RunApplication'
+    sinanyaScript='java -cp '"$bin"'/../lib/*:'"$bin"'/../conf/*:'"$Jar_Dir"' -Dlog4j.configurationFile='"$bin"'/../conf/log4j2.xml -Xms1024m -Xmx2048m dice.sinanya.RunApplication'
     echo ${sinanyaScript}
     nohup ${sinanyaScript} >/dev/null 2>&1 &
 
