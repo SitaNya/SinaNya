@@ -8,6 +8,14 @@ import java.util.concurrent.*;
 import static dice.sinanya.tools.getinfo.GetMaxNumsResult.getMaxNumsResult;
 import static dice.sinanya.tools.getinfo.RandomInt.random;
 
+/**
+ * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明:多重骰掷，比如3d6k2时，如何计算具体的结果，这里会返回字符串式的Process:(5+3+4)结果与Int:12两个值，分别作为
+ */
 public class ManyRolls {
 
     public static String manyRollsProcess(int times, int rolls, int maxNums) {
