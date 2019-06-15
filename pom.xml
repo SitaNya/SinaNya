@@ -25,9 +25,11 @@
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
+                    <descriptor>src/main/resources/assembly.xml</descriptor>
+                    <finalName>${project.name}-${project.version}</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <!--这里要替换成jar包main方法所在类 -->
                             <mainClass>dice.sinanya.RunApplication</mainClass>
                         </manifest>
                     </archive>

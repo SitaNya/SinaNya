@@ -51,6 +51,3 @@
 /out
 .idea
 *.idea
-
-# Config
-/src/main/resources/sinanya.properties
