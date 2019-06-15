@@ -2,7 +2,9 @@ package dice.sinanya.dice.roll;
 
 import dice.sinanya.db.roles.InsertRoles;
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.exceptions.NotFoundSkillException;
 
+import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesTag.TAG_EN;
 import static dice.sinanya.tools.getinfo.GetSkillValue.getSkillValue;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
@@ -22,13 +24,12 @@ public class SkillUp {
         this.entityTypeMessages = entityTypeMessages;
     }
 
-    public void en() {
+    public void en() throws NotFoundSkillException {
         String tag = TAG_EN;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         int skill = getSkillValue(entityTypeMessages, msg);
         if (skill == 0) {
-            sender(entityTypeMessages, "没有找到您的技能哦");
-            return;
+            throw new NotFoundSkillException(entityTypeMessages);
         }
 
         int random = random(1, 100);
@@ -47,7 +48,8 @@ public class SkillUp {
                     .append("您的技能增长了")
                     .append(skillUp)
                     .append("点，目前为:")
-                    .append(skill + skillUp);
+                    .append(skill + skillUp)
+                    .append(messagesSystem.get("enSuccess"));
             new InsertRoles().insertRoleInfo(msg + (skill + skillUp), getRoleChooseByFromQQ(entityTypeMessages), entityTypeMessages.getFromQq());
             sender(entityTypeMessages, stringBuilder.toString());
         } else {
@@ -57,7 +59,8 @@ public class SkillUp {
                     .append(random)
                     .append("/")
                     .append(skill)
-                    .append("失败!");
+                    .append("失败!")
+                    .append(messagesSystem.get("enFailed"));
             sender(entityTypeMessages, stringBuilder.toString());
         }
     }

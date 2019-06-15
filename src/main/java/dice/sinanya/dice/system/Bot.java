@@ -5,7 +5,7 @@ import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.ArrayList;
 
-import static dice.sinanya.system.GetMessagesSystem.*;
+import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesSystem.STR_BOT_VERSIONS;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.SwitchBot.*;
@@ -35,7 +35,7 @@ public class Bot implements AtQq {
             if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {
                 long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
                 if (groupId == 0) {
-                    sender(entityTypeMessages, "无法在私聊中使用");
+                    sender(entityTypeMessages, messagesSystem.get("can'tInPrivate"));
                     return;
                 }
                 if (getBot(groupId)) {

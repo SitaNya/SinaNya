@@ -2,6 +2,7 @@ package dice.sinanya.exceptions;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
+import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesError.strValueErr;
 import static dice.sinanya.tools.log.Sender.sender;
 
@@ -13,8 +14,8 @@ import static dice.sinanya.tools.log.Sender.sender;
 public class NotSetKpGroupException extends Exception {
 
     public NotSetKpGroupException(EntityTypeMessages entityTypeMessages) {
-        super("您未设置KP管理群");
-        sender(entityTypeMessages, strValueErr);
+        super(messagesSystem.get("needKpGroup"));
+        sender(entityTypeMessages, messagesSystem.get("needKpGroup"));
     }
 
 }

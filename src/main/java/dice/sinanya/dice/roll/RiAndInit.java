@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesInit.initList;
 import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.system.MessagesTag.TAG_RI;
@@ -104,7 +105,7 @@ public class RiAndInit {
     public void init() {
         StringBuilder stringBuffer = new StringBuilder();
         if (!initList.containsKey(entityTypeMessages.getFromGroup())) {
-            sender(entityTypeMessages, "先攻列表为空");
+            sender(entityTypeMessages, messagesSystem.get("dndInitIsEmtpy"));
             return;
         }
         stringBuffer.append("先攻列表为:\n");
@@ -125,7 +126,7 @@ public class RiAndInit {
 
     public void clr() {
         initList.remove(entityTypeMessages.getFromGroup());
-        sender(entityTypeMessages, "已清空本群的先攻列表");
+        sender(entityTypeMessages, messagesSystem.get("clrDndInit"));
     }
 
     private static HashMap<String, String> sortHashMap(HashMap<String, String> map) {

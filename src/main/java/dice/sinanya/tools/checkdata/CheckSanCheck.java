@@ -8,6 +8,7 @@ import dice.sinanya.tools.makedata.GetRollResultAndStr;
 
 import java.util.HashMap;
 
+import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
@@ -22,7 +23,7 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 public class CheckSanCheck {
-    EntityTypeMessages entityTypeMessages;
+    private EntityTypeMessages entityTypeMessages;
     private long qq;
 
     public CheckSanCheck(EntityTypeMessages entityTypeMessages) {
@@ -166,7 +167,8 @@ public class CheckSanCheck {
                     .append("点")
                     .append(",当前剩余")
                     .append(newSan)
-                    .append("点");
+                    .append("点")
+                    .append(messagesSystem.get("sanCheckFumble"));
             if (useCard) {
                 setCard(newSan, prop, role);
             }
@@ -200,7 +202,8 @@ public class CheckSanCheck {
                     .append("点")
                     .append(",当前剩余")
                     .append(newSan)
-                    .append("点");
+                    .append("点")
+                    .append(messagesSystem.get("sanCheckCriticalSuccess"));
 
             if (useCard) {
                 setCard(newSan, prop, role);
@@ -221,7 +224,8 @@ public class CheckSanCheck {
                     .append("点")
                     .append(",当前剩余")
                     .append(newSan)
-                    .append("点");
+                    .append("点")
+                    .append(messagesSystem.get("sanCheckSuccess"));
             if (useCard) {
                 setCard(newSan, prop, role);
             }
@@ -241,7 +245,8 @@ public class CheckSanCheck {
                     .append("点")
                     .append(",当前剩余")
                     .append(newSan)
-                    .append("点");
+                    .append("点")
+                    .append(messagesSystem.get("sanCheckFailure"));
             if (useCard) {
                 setCard(newSan, prop, role);
             }
@@ -258,11 +263,14 @@ public class CheckSanCheck {
 
     private void makeInsane(StringBuilder strResult, int newSan, int san) {
         if (newSan == 0) {
-            strResult.append("\n已永久疯狂");
+            strResult.append("\n已永久疯狂")
+                    .append(messagesSystem.get("symptom"));
         } else if (san - newSan >= 5) {
-            strResult.append("\n已进入临时性疯狂");
+            strResult.append("\n已进入临时性疯狂")
+                    .append(messagesSystem.get("symptom"));
         } else if (san - newSan >= san / 5) {
-            strResult.append("\n已因单次损失值进入不定性疯狂");
+            strResult.append("\n已因单次损失值进入不定性疯狂")
+                    .append(messagesSystem.get("symptom"));
         }
     }
 

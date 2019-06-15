@@ -10,6 +10,8 @@ import dice.sinanya.dice.system.Help;
 import dice.sinanya.dice.system.History;
 import dice.sinanya.dice.system.Log;
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.exceptions.NotFoundSkillException;
+import dice.sinanya.exceptions.NotSetKpGroupException;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
 import org.apache.log4j.LogManager;
@@ -247,9 +249,17 @@ class Flow {
         } else if (isRCL) {
             rollAndCheck.rcl();
         } else if (isRAV) {
-            rollAndCheck.rav();
+            try {
+                rollAndCheck.rav();
+            } catch (NotSetKpGroupException e) {
+                Log.error(e.getMessage(), e);
+            }
         } else if (isRCV) {
-            rollAndCheck.rcv();
+            try {
+                rollAndCheck.rcv();
+            } catch (NotSetKpGroupException e) {
+                Log.error(e.getMessage(), e);
+            }
         }
 
         if (isStSet) {
@@ -394,7 +404,11 @@ class Flow {
         }
 
         if (isEN) {
+            try{
             skillUp.en();
+            } catch (NotFoundSkillException e) {
+                Log.error(e.getMessage(), e);
+            }
         }
 
         if (isBotOn) {

@@ -2,6 +2,7 @@ package dice.sinanya.exceptions;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
+import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesError.strValueErr;
 import static dice.sinanya.tools.log.Sender.sender;
 
@@ -13,8 +14,8 @@ import static dice.sinanya.tools.log.Sender.sender;
 public class SanCheckSetException extends Exception {
 
     public SanCheckSetException(EntityTypeMessages entityTypeMessages) {
-        super("很抱歉，参数输入错误。应该类似1/1d3|1d6/1d3|0/1这样的表达式");
-        sender(entityTypeMessages, strValueErr);
+        super(messagesSystem.get("sanCheck"));
+        sender(entityTypeMessages, messagesSystem.get("sanCheck"));
     }
 
 }

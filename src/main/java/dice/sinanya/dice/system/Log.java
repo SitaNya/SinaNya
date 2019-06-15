@@ -5,16 +5,17 @@ import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.tools.log.SaveDocx;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 
+import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesLog.logNameForGroup;
 import static dice.sinanya.system.MessagesLog.logSwitchForGroup;
 import static dice.sinanya.system.MessagesLogGetLock.logGetLock;
 import static dice.sinanya.system.MessagesTag.*;
-import static dice.sinanya.tools.log.LogSave.logSave;
 import static dice.sinanya.tools.getinfo.LogTag.*;
 import static dice.sinanya.tools.getinfo.LogText.getLogText;
-import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.log.LogSave.logSave;
 import static dice.sinanya.tools.log.SendMail.sendMail;
 import static dice.sinanya.tools.log.Sender.sender;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 
 /**
  * 日志记录
@@ -34,12 +35,12 @@ public class Log {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
 
-            sender(entityTypeMessages, getOtherLogTrue(entityTypeMessages.getFromGroup()) + "已处于开启状态，请先关闭它");
+            sender(entityTypeMessages, getOtherLogTrue(entityTypeMessages.getFromGroup()) + messagesSystem.get("alreadyOpen"));
         } else {
             if (checkLogTagExist(entityTypeMessages, msg)) {
-                sender(entityTypeMessages, msg + "已在本群中存在，已为您重新激活日志，之后的消息将在原日志后追加");
+                sender(entityTypeMessages, msg + messagesSystem.get("appendLog"));
             } else {
-                sender(entityTypeMessages, msg + "已创建");
+                sender(entityTypeMessages, msg +messagesSystem.get("createLog"));
             }
             logNameForGroup.put(entityTypeMessages.getFromGroup(), msg);
             logSwitchForGroup.put(entityTypeMessages.getFromGroup(), true);
@@ -57,10 +58,10 @@ public class Log {
                 logSwitchForGroup.put(entityTypeMessages.getFromGroup(), false);
                 sender(entityTypeMessages, msg + "已关闭，现在可以使用\".log get " + msg + "\"进行获取");
             } else {
-                sender(entityTypeMessages, msg + "已处于关闭状态");
+                sender(entityTypeMessages, msg + messagesSystem.get("alreadyClose"));
             }
         } else {
-            sender(entityTypeMessages, "未在此群中找到此日志");
+            sender(entityTypeMessages, messagesSystem.get("notFoundLog"));
         }
     }
 
@@ -69,7 +70,7 @@ public class Log {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         if (!checkLogTagSwitch(entityTypeMessages, msg)) {
             if (logGetLock.contains(msg)) {
-                sender(entityTypeMessages, "当前群内有人正在获取日志，请稍等");
+                sender(entityTypeMessages, messagesSystem.get("readLock"));
             } else {
                 logGetLock.add(msg);
             }
@@ -100,7 +101,7 @@ public class Log {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         if (checkLogTagExist(entityTypeMessages, msg)) {
             if (checkLogTagSwitch(entityTypeMessages, msg)) {
-                sender(entityTypeMessages, "您不可以删除未关闭的日志");
+                sender(entityTypeMessages, messagesSystem.get("deleteOpenLog"));
             } else {
                 delLog(new EntityLogTag(entityTypeMessages.getFromGroup(), msg));
                 sender(entityTypeMessages, "已删除日志: " + msg);

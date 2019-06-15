@@ -25,6 +25,57 @@ public class GetMessagesSystem {
         put("botStop", "机器人已关闭");
         put("botAlreadyStop", "机器人当前处于关闭状态");
         put("botExit", "正在退出群");
+
+        put("bookCard", "COC七版规则空白卡奈梅斯·西莉亚私人订制版By贝尔巨佬.xlsx\n请使用此链接下载https://pan.baidu.com/s/1M3veskXYFJjwXP1eKHaX4g。有更新更好的版本请随时联系窝。");
+        put("bookRP", "角色扮演三百六十五问.zip\n请使用此链接下载https://share1.heiluo.com/share/link/8b93f1f15a974d4a9fda1890863a0af1。有更新更好的版本请随时联系窝。");
+        put("bookKp", "克苏鲁的呼唤第七版守秘人规则书 Version1901.pdf\n请使用此链接下载https://share1.heiluo.com/share/link/e88daa8d6565440cbff0a8f7c9c8fe29。有更新更好的版本请随时联系窝。\n此外提供网盘下载版，上面的链接无需登录即可查看。\n链接：https://pan.baidu.com/s/12XSQc9EEBsfEhhQEesc6nw");
+        put("bookMake", "车卡指南.pdf\n请使用此链接下载https://share1.heiluo.com/share/link/0e1083cdb8144b109be07fd4ef09b082。有更新更好的版本请随时联系窝。\n此外提供网盘下载版，上面的链接无需登录即可查看。\n链接：https://pan.baidu.com/s/1HHo1B1F9kMRIFDB8J9Ulww 提取码：ql5h");
+
+        put("manyRollsFormat", "请按照\".ral 值 次数\"的格式输入");
+        put("diceTimesTooBig", "骰点次数过多");
+
+        put("setPropFormat", "请符合格式.st角色名-力量50体质60");
+        put("setHelp", ".st命令使用错误，请使用.help make命令查看具体用法");
+        put("NotFoundSkill", "您未设置角色卡");
+
+        put("dndInitIsEmtpy", "先攻列表为空");
+
+        put("needKpGroup", "未设置kp群");
+
+        put("can'tInPrivate", "此命令私聊不可用");
+
+        put("alreadyOpen", "日志已经处于开启状态，无法再次开启");
+        put("alreadyClose", "日志已经处于关闭状态，无法再次关闭");
+        put("notFoundLog", "未找到日志");
+        put("readLock", "正在有人取日志，请稍后");
+        put("deleteOpenLog", "无法删除打开的日志，请先关闭");
+
+        put("sanCheck", "请符合1/1d3|1d6/1d3|0/1这样的san check格式");
+
+        put("setPropSuccess", "已记录人物卡");
+
+        put("clrDndInit", "清空先攻列表");
+
+        put("antagonizeOver", "对抗结束");
+        put("antagonizeFirstSuccess", "先手胜利");
+        put("antagonizeSecondSuccess", "后手胜利");
+        put("antagonizeAllFailed", "全部失败");
+        put("antagonizeDraw", "平手");
+
+        put("symptom", "");
+
+        put("enSuccess", "");
+        put("enFailed", "");
+
+        put("hiddenDice", "kp正在进行暗骰");
+
+        put("appendLog", "日志已重新开启，将在原基础上追加");
+        put("createLog", "日志已创建");
+
+        put("sanCheckFumble", "");
+        put("sanCheckCriticalSuccess", "");
+        put("sanCheckSuccess", "");
+        put("sanCheckFailure", "");
     }};
 
     public static void initMessagesSystem() {

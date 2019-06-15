@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.concurrent.*;
 
+import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesAntagonize.Antagonize;
 import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.*;
@@ -24,9 +25,9 @@ import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.History.changeHistory;
 import static dice.sinanya.tools.getinfo.Kp.getKpGroup;
-import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
-import static dice.sinanya.tools.makedata.GetNickAndRandomAndSkill.getNickAndRandomAndSkill;
 import static dice.sinanya.tools.log.Sender.sender;
+import static dice.sinanya.tools.makedata.GetNickAndRandomAndSkill.getNickAndRandomAndSkill;
+import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 
 /**
  * @author SitaNya
@@ -59,7 +60,7 @@ public class RollAndCheck {
     }
 
 
-    public void rav() {
+    public void rav() throws NotSetKpGroupException {
         String tag = TAG_RAV;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
@@ -89,17 +90,17 @@ public class RollAndCheck {
             sender(entityTypeMessages, stringBuilder);
             checkAntagonize(entityTypeMessages, thisEntityAntagonize, entityAntagonize, groupId);
             Antagonize.remove(groupId);
-            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, "对抗结束");
+            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeOver"));
         } else if (!groupId.equals(defaultGroupId)) {
             sender(entityTypeMessages, stringBuilder);
             Antagonize.put(groupId, checkResultLevel.getAntagonize());
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, getNickName(entityTypeMessages) + "发起一次对抗");
         } else {
-            sender(entityTypeMessages, "您需要使用.kp设定kp群后才可以在私聊中回应或进行对抗");
+            throw new NotSetKpGroupException(entityTypeMessages);
         }
     }
 
-    public void rcv() {
+    public void rcv() throws NotSetKpGroupException {
         String tag = TAG_RCV;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
@@ -127,13 +128,13 @@ public class RollAndCheck {
             sender(entityTypeMessages, stringBuilder);
             checkAntagonize(entityTypeMessages, thisEntityAntagonize, entityAntagonize, groupId);
             Antagonize.remove(groupId);
-            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, "对抗结束");
+            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeOver"));
         } else if (!groupId.equals(defaultGroupId)) {
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, getNickName(entityTypeMessages) + "发起一次对抗");
             sender(entityTypeMessages, stringBuilder);
             Antagonize.put(groupId, checkResultLevel.getAntagonize());
         } else {
-            sender(entityTypeMessages, "您需要使用.kp设定kp群后才可以在私聊中回应或进行对抗");
+            throw new NotSetKpGroupException(entityTypeMessages);
         }
     }
 
@@ -206,19 +207,19 @@ public class RollAndCheck {
     private void checkAntagonize(EntityTypeMessages entityTypeMessages, EntityAntagonize thisAntagonize, EntityAntagonize lastAntagonize, String groupId) {
         int successMinLevel = 2;
         if (lastAntagonize.getLevel() > thisAntagonize.getLevel()) {
-            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, "先手胜利");
+            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeFirstSuccess"));
         } else if (lastAntagonize.getLevel() == thisAntagonize.getLevel()) {
             if (lastAntagonize.getLevel() < successMinLevel && thisAntagonize.getLevel() < successMinLevel) {
-                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, "全部失败，平手");
+                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeAllFailed"));
             } else if (lastAntagonize.getRandom() < thisAntagonize.getRandom()) {
-                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, "先手胜利");
+                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeFirstSuccess"));
             } else if (lastAntagonize.getSkill() > thisAntagonize.getSkill()) {
-                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, "先手胜利");
+                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeFirstSuccess"));
             } else if (lastAntagonize.getSkill() == thisAntagonize.getSkill()) {
-                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, "平手");
+                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeDraw"));
             }
         } else {
-            sender(entityTypeMessages, "后手胜利");
+            sender(entityTypeMessages, messagesSystem.get("antagonizeSecondSuccess"));
         }
     }
 

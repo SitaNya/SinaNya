@@ -2,6 +2,7 @@ package dice.sinanya.dice.roll;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
+import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.TiAndLi.*;
 import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
@@ -64,6 +65,6 @@ public class TiAndLi {
                 break;
         }
         stringBuilder.append(strLi);
-
+        stringBuilder.append(messagesSystem.get("symptom"));
     }
 }

@@ -10,9 +10,9 @@ import static dice.sinanya.tools.log.Sender.sender;
  *
  * @author SitaNya
  */
-public class ManyRollsFormatException extends Exception {
-    public ManyRollsFormatException(EntityTypeMessages entityTypeMessages) {
-        super(messagesSystem.get("manyRollsFormat"));
-        sender(entityTypeMessages, messagesSystem.get("manyRollsFormat"));
+public class NotFoundSkillException extends Exception {
+    public NotFoundSkillException(EntityTypeMessages entityTypeMessages) {
+        super(messagesSystem.get("NotFoundSkill"));
+        sender(entityTypeMessages, messagesSystem.get("NotFoundSkill"));
     }
 }
