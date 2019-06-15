@@ -96,6 +96,7 @@ public class SaveDocx {
 
     public SaveDocx(String groupId, String qqId, String msg, final String bigResult) throws Docx4JException {
         wordMlPackage = WordprocessingMLPackage.createPackage();
+        factory = Context.getWmlObjectFactory();
         String fromName = "";
         int colorTag = 100;
         for (final String line : bigResult.split("\n")) {
@@ -128,7 +129,6 @@ public class SaveDocx {
             }
         }
         wordMlPackage.save(file);
-        factory = Context.getWmlObjectFactory();
     }
 
 }
