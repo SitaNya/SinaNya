@@ -14,7 +14,11 @@ public class LogSave {
         // 1：利用File类找到要操作的对象
         File file = null;
         if (OSX_MODEL) {
-            file = new File("/Users/SitaNya/Desktop/" + groupId + "/" + logName);
+            if (new File("/Users/SitaNya/Desktop/").exists()) {
+                file = new File("/Users/SitaNya/Desktop/" + groupId + "/" + logName);
+            }else{
+                file=new File("/Users/zhangxiaozhou//Desktop/" + groupId + "/" + logName);
+            }
         } else if (WIN_MODEL) {
             file = new File("C:/Files/" + groupId + "/" + logName);
         } else if (LINUX_MODEL) {
@@ -24,7 +28,7 @@ public class LogSave {
         assert file != null;
         if (!file.getParentFile().exists()) {
             if (!file.getParentFile().mkdirs()) {
-                Log.error("文件未能保存");
+                Log.error("上层目录未能创建");
             }
         }
 

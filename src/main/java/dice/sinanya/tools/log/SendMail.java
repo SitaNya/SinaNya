@@ -8,6 +8,7 @@ import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
@@ -112,8 +113,14 @@ public class SendMail {
         // 设置邮件的正文
 
         if (OSX_MODEL) {
-            mb.attachFile("/Users/SitaNya/Desktop/" + groupId + "/" + logName);
-            mb.attachFile("/Users/SitaNya/Desktop/" + groupId + "/" + logName + ".docx");
+            if (new File("/Users/SitaNya/Desktop/").exists()) {
+                mb.attachFile("/Users/SitaNya/Desktop/" + groupId + "/" + logName);
+                mb.attachFile("/Users/SitaNya/Desktop/" + groupId + "/" + logName + ".docx");
+            }else{
+                mb.attachFile("/Users/zhangxiaozhou/Desktop/" + groupId + "/" + logName);
+                mb.attachFile("/Users/zhangxiaozhou/Desktop/" + groupId + "/" + logName + ".docx");
+            }
+
         } else if (WIN_MODEL) {
             mb.attachFile("C:/Files/" + groupId + "/" + logName);
             mb.attachFile("C:/Files/" + groupId + "/" + logName + ".docx");
