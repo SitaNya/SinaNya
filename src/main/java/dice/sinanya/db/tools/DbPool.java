@@ -35,7 +35,7 @@ class DbPool {
     private DbPool() {
         Log.info("Begin create DbPool");
         try {
-            InputStreamReader isr = new InputStreamReader(new FileInputStream("src/main/resources/conf/db.properties"), StandardCharsets.UTF_8);
+            InputStreamReader isr = new InputStreamReader(new FileInputStream("src/main/resources/db.properties"), StandardCharsets.UTF_8);
             BufferedReader bufferedReader = new BufferedReader(isr);
             Properties prop = new Properties();
             prop.load(bufferedReader);
