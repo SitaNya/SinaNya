@@ -26,10 +26,6 @@
             <outputDirectory>pid</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>src/main/resources</directory>
-            <outputDirectory>conf</outputDirectory>
-        </fileSet>
-        <fileSet>
             <directory>${project.build.directory}</directory>
             <outputDirectory/>
             <includes>
