@@ -10,6 +10,8 @@ import static dice.sinanya.system.MessagesNPC.*;
 import static dice.sinanya.tools.getinfo.GetName.getRandomName;
 import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.log.Sender.sender;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 /**
  * 获取NPC
@@ -142,6 +144,6 @@ public class Npc implements MakeCard {
 
     private String randomFromListSmall(ArrayList<String> infoList) {
         int random = random(1, 3);
-        return infoList.get(random(0, (infoList.size() - 1 / random)));
+        return infoList.get(random(0, min(1, (infoList.size() - random))));
     }
 }
