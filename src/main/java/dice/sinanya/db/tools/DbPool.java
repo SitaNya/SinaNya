@@ -41,9 +41,9 @@ class DbPool {
             prop.load(bufferedReader);
             dataSource = new ComboPooledDataSource();
 
-            dataSource.setDriverClass(prop.getProperty("jdbcdriver"));
-            dataSource.setJdbcUrl(prop.getProperty("url"));
-            dataSource.setUser(prop.getProperty("username"));
+            dataSource.setDriverClass("com.mysql.jdbc.Driver");
+            dataSource.setJdbcUrl("jdbc:mysql://123.207.150.160:3306/roles?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull");
+            dataSource.setUser("root");
             dataSource.setPassword(prop.getProperty("password"));
             dataSource.setIdleConnectionTestPeriod(3600);
             Log.info("create DbPool");
