@@ -21,11 +21,11 @@ public class GetName {
     }
 
     private static String getEnglishName() {
-        return getFromList(EnglishFirstName) + getFromList(EnglishLastName) + "(" + getFromList(EnglishFirstNameChineseTranslation) + getFromList(EnglishLastNameChineseTranslation) + ")";
+        return getFromList(EnglishFirstName) + "·" + getFromList(EnglishLastName) + "(" + getFromList(EnglishFirstNameChineseTranslation) + "·" + getFromList(EnglishLastNameChineseTranslation) + ")";
     }
 
     private static String getJapaneseName() {
-        return getFromList(JapaneseSurname) + getFromList(JapaneseFirstName);
+        return getFromList(JapaneseSurname) + " " + getFromList(JapaneseFirstName);
     }
 
     public static String getRandomName() {
