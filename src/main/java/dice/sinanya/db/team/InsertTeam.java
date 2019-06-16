@@ -1,6 +1,7 @@
 package dice.sinanya.db.team;
 
 import dice.sinanya.db.tools.DbUtil;
+import dice.sinanya.entity.EntityQqAndGroup;
 import dice.sinanya.entity.EntityTeamInfo;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.LogManager;
@@ -10,10 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author SitaNya
@@ -25,6 +23,62 @@ import java.util.Set;
  */
 public class InsertTeam {
     private static final Logger Log = LogManager.getLogger(InsertTeam.class);
+
+    /**
+     * 将teamEn静态变量遍历后更新到数据库中
+     *
+     * @param mapEntry 遍历后的teamEn静态变量元素
+     */
+    public void saveTeamEnToDatabase(Map.Entry<EntityQqAndGroup, ArrayList<String>> mapEntry) {
+        try (Connection conn = DbUtil.getConnection()) {
+            String sql = "update teamEn set enSkill=? where groupId=? and qqId=?";
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, StringUtils.join(mapEntry.getValue(), ","));
+                ps.setString(2, mapEntry.getKey().getGroupId());
+                ps.setString(3, mapEntry.getKey().getQqId());
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            Log.error(e.getMessage(), e);
+        }
+    }
+
+
+    /**
+     * 删除某人的En标记
+     *
+     * @param qqId    qq号
+     * @param groupId 群号
+     */
+    public void deleteTeamEnToDatabase(String qqId, String groupId) {
+        try (Connection conn = DbUtil.getConnection()) {
+            String sql = "delete from teamEn where groupId=? and qqId=?";
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, qqId);
+                ps.setString(2, groupId);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            Log.error(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 清空某个队伍的En标记
+     *
+     * @param groupId 群号
+     */
+    public void clrTeamEnToDatabase(String groupId) {
+        try (Connection conn = DbUtil.getConnection()) {
+            String sql = "delete from teamEn where groupId=? ";
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, groupId);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            Log.error(e.getMessage(), e);
+        }
+    }
 
     /**
      * 删除某个群的所有队伍信息
@@ -44,7 +98,7 @@ public class InsertTeam {
     }
 
     /**
-     * 删除某个群队伍中的某一个人
+     * 删除某个群队伍中的某一个人,如果传入的qqList为null，则删除整个小队
      *
      * @param groupId 群号
      */
@@ -73,7 +127,7 @@ public class InsertTeam {
      * 修改某个群中的队伍信息
      *
      * @param entityTeamInfo 队伍信息类，包含了成员QQ号列表和群号
-     * @param add true为添加队员，false为删除队员
+     * @param add            true为添加队员，false为删除队员
      */
     public void changeTeamInfo(EntityTeamInfo entityTeamInfo, boolean add) {
         int num = 0;

@@ -24,7 +24,7 @@ import static dice.sinanya.tools.makedata.GetNickAndRandomAndSkill.getNickAndRan
  * 有任何问题欢迎咨询
  * 类说明: 奖励骰、惩罚投。这两者不再支持计算公式
  */
-public class RewardAndPunishment {
+public class RewardAndPunishment implements En {
 
     private EntityTypeMessages entityTypeMessages;
 
@@ -71,13 +71,16 @@ public class RewardAndPunishment {
         String strRes;
         String substring = stringBuilder.substring(0, stringBuilder.length() - 1);
         if (getTimesAndSkill(msg).getSkill() != 0) {
+            CheckResultLevel checkResultLevel = new CheckResultLevel(resultRandom, getTimesAndSkill(msg).getSkill(), false);
             strRes = entityNickAndRandomAndSkill.getNick() +
                     "进行奖励骰鉴定: D100=" + random + "[奖励骰:" + substring + "] = " + resultRandom + "/" + getTimesAndSkill(msg).getSkill() +
-                    new CheckResultLevel(resultRandom, getTimesAndSkill(msg).getSkill(), false).getLevelResultStr();
+                    checkResultLevel.getLevelResultStr();
+            checkEn(checkResultLevel.getLevel(),msg, entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup());
         } else {
             strRes = entityNickAndRandomAndSkill.getNick() +
                     "进行奖励骰鉴定: D100=" + random + "[奖励骰:" + substring + "] = " + resultRandom;
         }
+
         sender(entityTypeMessages, strRes);
 //        将列表打印，并根据最后确定的值进行成功登记判定
     }
@@ -116,9 +119,11 @@ public class RewardAndPunishment {
         String strRes;
         String substring = stringBuilder.substring(0, stringBuilder.length() - 1);
         if (getTimesAndSkill(msg).getSkill() != 0) {
+            CheckResultLevel checkResultLevel = new CheckResultLevel(resultRandom, getTimesAndSkill(msg).getSkill(), false);
             strRes = entityNickAndRandomAndSkill.getNick() +
                     "进行惩罚骰鉴定: D100=" + random + "[惩罚骰:" + substring + "] = " + resultRandom + "/" + getTimesAndSkill(msg).getSkill() +
-                    new CheckResultLevel(resultRandom, getTimesAndSkill(msg).getSkill(), false).getLevelResultStr();
+                    checkResultLevel.getLevelResultStr();
+            checkEn(checkResultLevel.getLevel(), msg, entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup());
         } else {
             strRes = entityNickAndRandomAndSkill.getNick() +
                     "进行惩罚骰鉴定: D100=" + random + "[惩罚骰:" + substring + "] = " + resultRandom;

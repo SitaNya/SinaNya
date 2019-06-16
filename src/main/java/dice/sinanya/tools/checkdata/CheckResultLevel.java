@@ -86,4 +86,8 @@ public class CheckResultLevel {
             return "strFailure";
         }
     }
+
+    public int getLevel() {
+        return level;
+    }
 }

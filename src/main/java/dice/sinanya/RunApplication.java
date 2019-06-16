@@ -8,6 +8,7 @@ import com.forte.qqrobot.utils.CQCodeUtil;
 
 import static dice.sinanya.system.GetMessagesSystem.initMessagesSystem;
 import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.Team.flushTeamEn;
 
 /**
  * @author SitaNya
@@ -20,6 +21,9 @@ import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 public class RunApplication implements LemocApp {
     public static void main(String[] args) {
         initMessagesSystem();
+//        读取配置文件
+        flushTeamEn();
+//        从数据库中读取幕间成长的缓存
         new LemocApplication().run(new RunApplication());
     }
 

@@ -9,8 +9,11 @@ import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.entity.imal.GetDb;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
+import dice.sinanya.exceptions.TeamIsEmptyException;
 import dice.sinanya.tools.checkdata.CheckSanCheck;
 import dice.sinanya.tools.makedata.GetRollResultAndStr;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +42,8 @@ import static java.lang.Math.max;
  */
 public class Team implements GetDb, Role, AtQq {
 
+    private static Logger log = LogManager.getLogger(Team.class.getName());
+
     private String regex = "\\[CQ:at,qq=([0-9]+)]";
 
     private Pattern plus = Pattern.compile("[+*/\\-]");
@@ -66,7 +71,7 @@ public class Team implements GetDb, Role, AtQq {
     }
 
     /**
-     * 将@到的成员移出小队
+     * 将@到的成员移出小队，也会清空该队员的技能成功记录
      */
     public void remove() {
         useRole(entityTypeMessages);
@@ -76,16 +81,18 @@ public class Team implements GetDb, Role, AtQq {
         ArrayList<String> qqList = getAtQqList(msg);
         EntityTeamInfo entityTeamInfo = new EntityTeamInfo(entityTypeMessages.getFromGroup(), qqList);
         removeFromTeam(entityTeamInfo);
+        rmTeamEn(entityTypeMessages.getFromGroup());
         for (String qq : qqList) {
             sender(entityTypeMessages, "已将玩家: [CQ:at,qq=" + qq + "]移出小队,其在这期间损失的血量和san值不会还原。");
         }
     }
 
     /**
-     * 将本群小队清空
+     * 将本群小队清空，也会清空队员的技能成功记录
      */
     public void clr() {
         clearTeam(entityTypeMessages.getFromGroup());
+        clrTeamEn(entityTypeMessages.getFromGroup());
         sender(entityTypeMessages, "已清空本群小队");
     }
 
@@ -244,8 +251,12 @@ public class Team implements GetDb, Role, AtQq {
         stringBuilder.append("您的小队情况目前为: ");
         ArrayList<String> qqList = queryTeam(entityTypeMessages.getFromGroup());
         if (qqList == null) {
-            sender(entityTypeMessages, "小队成员为空");
-            return;
+            try {
+                throw new TeamIsEmptyException(entityTypeMessages);
+            } catch (TeamIsEmptyException e) {
+                log.error(e.getMessage(), e);
+                return;
+            }
         }
         for (String qq : qqList) {
             HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);
@@ -292,16 +303,46 @@ public class Team implements GetDb, Role, AtQq {
         useRole(entityTypeMessages);
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("您小队内成员的属性值为:\n");
 
         ArrayList<String> qqList = queryTeam(entityTypeMessages.getFromGroup());
         if (qqList == null) {
-            sender(entityTypeMessages, "小队成员为空");
-            return;
+            try {
+                throw new TeamIsEmptyException(entityTypeMessages);
+            } catch (TeamIsEmptyException e) {
+                log.error(e.getMessage(), e);
+                return;
+            }
+        } else {
+            stringBuilder.append("您小队内成员的属性值为:\n");
         }
         for (String qq : qqList) {
             stringBuilder = new Roles(entityTypeMessages).showProp(entityTypeMessages, qq);
         }
         entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), stringBuilder.toString());
+    }
+
+    /**
+     * 显示当前小队所有成员当前激活角色的技能成功情况
+     */
+    public void en() {
+        useRole(entityTypeMessages);
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        ArrayList<String> qqList = queryTeam(entityTypeMessages.getFromGroup());
+        if (qqList == null) {
+            try {
+                throw new TeamIsEmptyException(entityTypeMessages);
+            } catch (TeamIsEmptyException e) {
+                log.error(e.getMessage(), e);
+                return;
+            }
+        } else {
+            stringBuilder.append("以下是您小队中成员的技能成功情况:\n");
+        }
+        for (String qq : qqList) {
+            stringBuilder.append(getTeamEn(entityTypeMessages, qq)).append("\n");
+        }
+        sender(entityTypeMessages, stringBuilder.substring(0, stringBuilder.length() - 1));
     }
 }

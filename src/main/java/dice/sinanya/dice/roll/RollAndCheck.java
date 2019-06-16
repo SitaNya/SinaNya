@@ -37,7 +37,7 @@ import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
  * 有任何问题欢迎咨询
  * 类说明: ra、rc判定，ral、rcl多次骰点，rav、rcv对抗
  */
-public class RollAndCheck {
+public class RollAndCheck implements En {
     private static final Logger Log = LogManager.getLogger(RollAndCheck.class);
 
     private String defaultGroupId = "0";
@@ -85,6 +85,7 @@ public class RollAndCheck {
         String stringBuilder = entityNickAndRandomAndSkill.getNick() +
                 "进行鉴定: D100=" + entityNickAndRandomAndSkill.getRandom() + "/" + entityNickAndRandomAndSkill.getSkill() +
                 checkResultLevel.getLevelResultStr();
+        checkEn(checkResultLevel.getLevel(), msg, entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup());
         changeHistory(entityTypeMessages.getFromQq()).update(checkResultLevel.getLevelAndRandom());
         String groupId;
         if (entityTypeMessages.getFromGroup().equals(defaultGroupId)) {
@@ -130,6 +131,7 @@ public class RollAndCheck {
         String stringBuilder = entityNickAndRandomAndSkill.getNick() +
                 "进行鉴定: D100=" + entityNickAndRandomAndSkill.getRandom() + "/" + entityNickAndRandomAndSkill.getSkill() +
                 checkResultLevel.getLevelResultStr();
+        checkEn(checkResultLevel.getLevel(), msg, entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup());
         changeHistory(entityTypeMessages.getFromQq()).update(checkResultLevel.getLevelAndRandom());
         String groupId;
         if (entityTypeMessages.getFromGroup().equals(defaultGroupId)) {
@@ -235,6 +237,7 @@ public class RollAndCheck {
         String result = entityNickAndRandomAndSkill.getNick() +
                 "进行鉴定: D100=" + entityNickAndRandomAndSkill.getRandom() + "/" + entityNickAndRandomAndSkill.getSkill() +
                 checkResultLevel.getLevelResultStr();
+        checkEn(checkResultLevel.getLevel(), msg, entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup());
         changeHistory(entityTypeMessages.getFromQq()).update(checkResultLevel.getLevelAndRandom());
         return result;
     }
@@ -287,9 +290,9 @@ public class RollAndCheck {
      * 等待多线程骰点的结果被标记位isDone后，将结果更新到一个临时的骰点信息中
      *
      * @param entityHistory 临时的骰点信息，用于计算本次的各种成功次数
-     * @param results 多线程骰点的对象列表
+     * @param results       多线程骰点的对象列表
      * @throws InterruptedException 如果没有isDone，则休眠，其间发生问题可能引发InterruptedException
-     * @throws ExecutionException 多线程执行故障
+     * @throws ExecutionException   多线程执行故障
      */
     private void updateHistory(EntityHistory entityHistory, ArrayList<Future<Integer>> results) throws InterruptedException, ExecutionException {
         for (Future future : results) {

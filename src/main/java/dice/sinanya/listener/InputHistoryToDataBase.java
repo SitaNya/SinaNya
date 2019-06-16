@@ -10,6 +10,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import static dice.sinanya.tools.getinfo.History.setHistory;
+import static dice.sinanya.tools.getinfo.Team.saveTeamEn;
 
 @CronTask("* 0/1 * * * ? *")
 public class InputHistoryToDataBase implements TimeJob {
@@ -19,6 +20,7 @@ public class InputHistoryToDataBase implements TimeJob {
     @Override
     public void execute(MsgSender msgSender, CQCodeUtil cqCodeUtil) {
         setHistory();
+        saveTeamEn();
     }
 
     @Override

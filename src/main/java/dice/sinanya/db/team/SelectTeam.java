@@ -1,6 +1,7 @@
 package dice.sinanya.db.team;
 
 import dice.sinanya.db.tools.DbUtil;
+import dice.sinanya.entity.EntityQqAndGroup;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -10,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static dice.sinanya.system.MessagesTeamEn.teamEn;
 
 /**
  * @author SitaNya
@@ -21,6 +24,24 @@ import java.util.Arrays;
  */
 public class SelectTeam {
     private static final Logger Log = LogManager.getLogger(SelectTeam.class);
+
+    /**
+     * 从数据库中刷新幕间成长的缓存到teamEn静态变量
+     */
+    public void flushTeamEnFromDatabase() {
+        try (Connection conn = DbUtil.getConnection()) {
+            String sql = "select * from teamEn";
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                try (ResultSet set = ps.executeQuery()) {
+                    while (set.next()) {
+                        teamEn.put(new EntityQqAndGroup(set.getString("groupId"), set.getString("qq")), new ArrayList<>(Arrays.asList(set.getString("enSkill").split(","))));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            Log.error(e.getMessage(), e);
+        }
+    }
 
     /**
      * 查询某个群中队伍的成员QQ号列表

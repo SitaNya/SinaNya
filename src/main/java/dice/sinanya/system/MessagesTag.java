@@ -45,6 +45,7 @@ public interface MessagesTag {
     String TAG_TEAM_HP = HEADER_TEAM + "hp.*";
     String TAG_TEAM_SAN = HEADER_TEAM + "san.*";
     String TAG_TEAM_DESC = HEADER_TEAM + "desc.*";
+    String TAG_TEAM_EN = HEADER_TEAM + "en.*";
 
     String HEADER_BOT = HEADER + "bot[ ]*";
     String TAG_BOT_SHOW = HEADER_BOT + ".*";

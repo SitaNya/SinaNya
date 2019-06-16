@@ -66,6 +66,7 @@ class Flow {
     private boolean isTeamHp = false;
     private boolean isTeamSan = false;
     private boolean isTeamDesc = false;
+    private boolean isTeamEn = false;
 
     private boolean isBotInfo = false;
     private boolean isBotOn = false;
@@ -138,7 +139,8 @@ class Flow {
         isTeamHp = messages.matches(TAG_TEAM_HP);
         isTeamSan = messages.matches(TAG_TEAM_SAN);
         isTeamDesc = messages.matches(TAG_TEAM_DESC);
-        isTeamShow = messages.matches(TAG_TEAM_SHOW) && !isTeamSet && !isTeamClr && !isTeamMove && !isTeamCall && !isTeamHp && !isTeamSan && !isTeamDesc;
+        isTeamEn = messages.matches(TAG_TEAM_EN);
+        isTeamShow = messages.matches(TAG_TEAM_SHOW) && !isTeamSet && !isTeamClr && !isTeamMove && !isTeamCall && !isTeamHp && !isTeamSan && !isTeamDesc && !isTeamEn;
 
         isStShow = messages.matches(TAG_ST_SHOW);
         isStList = messages.matches(TAG_ST_LIST);
@@ -401,6 +403,8 @@ class Flow {
             team.san();
         } else if (isTeamDesc) {
             team.desc();
+        } else if (isTeamEn) {
+            team.en();
         }
 
         if (isEN) {
