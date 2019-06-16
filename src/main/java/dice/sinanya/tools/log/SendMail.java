@@ -15,6 +15,8 @@ import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
 
+import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
+
 public class SendMail {
     private static final Logger Log = LogManager.getLogger(SendMail.class);
 
@@ -96,9 +98,9 @@ public class SendMail {
         MailBean mb = new MailBean();
         mb.setHost("smtp.qq.com");
         // 设置SMTP主机(163)，若用126，则设为：smtp.126.com
-        mb.setUsername("2730902267@qq.com");
+        mb.setUsername(messagesSystem.get("mailUserName"));
         // 设置发件人邮箱的用户名
-        mb.setPassword("kktjwuakdafbdcej");
+        mb.setPassword(messagesSystem.get("kktjwuakdafbdcej"));
         // 设置发件人邮箱的密码，需将*号改成正确的密码
         mb.setFrom("2730902267@qq.com");
         // 设置发件人的邮箱
@@ -106,7 +108,7 @@ public class SendMail {
         // 设置收件人的邮箱
         mb.setSubject(logName);
         // 设置邮件的主题
-        mb.setContent("日志邮件测试");
+        mb.setContent("在群: "+ groupId+" 中的log日志: "+logName+"\n其中docx为染色文件用word打开，无后缀为文本文件用txt打开，收到邮件烦请回复\n遇到问题请加群162279609进行反馈");
         // 设置邮件的正文
 
         mb.attachFile("../saveLogs/" + groupId + "/" + logName);

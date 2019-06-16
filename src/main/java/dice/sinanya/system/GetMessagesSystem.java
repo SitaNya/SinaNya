@@ -76,6 +76,9 @@ public class GetMessagesSystem {
         put("sanCheckCriticalSuccess", "");
         put("sanCheckSuccess", "");
         put("sanCheckFailure", "");
+
+        put("mailUserName", "2730902267@qq.com");
+        put("mailPassword", "kktjwuakdafbdcej");
     }};
 
     public static void initMessagesSystem() {
