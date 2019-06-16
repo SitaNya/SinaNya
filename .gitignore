@@ -51,3 +51,8 @@
 /out
 .idea
 *.idea
+
+#ignore Log and logs and pid
+/saveLogs
+/logs
+/pid
