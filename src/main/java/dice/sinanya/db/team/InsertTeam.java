@@ -16,18 +16,26 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 录入队伍信息
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 录入、删除、更新队伍信息，这里其实只包含QQ账号列表而不包含成员状态。QQ账号会拿到角色信息相关逻辑中再获得角色信息。
  */
 public class InsertTeam {
     private static final Logger Log = LogManager.getLogger(InsertTeam.class);
 
-    public void deleteGroup(String group) {
+    /**
+     * 删除某个群的所有队伍信息
+     *
+     * @param groupId 群号
+     */
+    public void deleteGroup(String groupId) {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "delete from team where groupId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, group);
+                ps.setString(1, groupId);
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
@@ -35,19 +43,24 @@ public class InsertTeam {
         }
     }
 
-    private void deleteGroup(String group, ArrayList<String> qqList) {
+    /**
+     * 删除某个群队伍中的某一个人
+     *
+     * @param groupId 群号
+     */
+    private void deleteGroup(String groupId, ArrayList<String> qqList) {
         try (Connection conn = DbUtil.getConnection()) {
             if (qqList == null) {
                 String sql = "delete from team where groupId=?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    ps.setString(1, group);
+                    ps.setString(1, groupId);
                     ps.executeUpdate();
                 }
             } else {
                 String sql = "update team set qqList=? where groupId=?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     ps.setString(1, StringUtils.join(qqList, ","));
-                    ps.setString(2, group);
+                    ps.setString(2, groupId);
                     ps.executeUpdate();
                 }
             }
@@ -56,7 +69,13 @@ public class InsertTeam {
         }
     }
 
-    public void insertTeamInfo(EntityTeamInfo entityTeamInfo, boolean add) {
+    /**
+     * 修改某个群中的队伍信息
+     *
+     * @param entityTeamInfo 队伍信息类，包含了成员QQ号列表和群号
+     * @param add true为添加队员，false为删除队员
+     */
+    public void changeTeamInfo(EntityTeamInfo entityTeamInfo, boolean add) {
         int num = 0;
         ArrayList<String> qqChangeList = entityTeamInfo.getQqList();
         ArrayList<String> qqList = new ArrayList<>();

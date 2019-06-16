@@ -1,7 +1,6 @@
 package dice.sinanya.dice.manager;
 
 import dice.sinanya.db.roles.InsertRoles;
-import dice.sinanya.dice.manager.imal.PropList;
 import dice.sinanya.dice.manager.imal.Role;
 import dice.sinanya.entity.EntityRoleTag;
 import dice.sinanya.entity.EntityTypeMessages;
@@ -20,14 +19,27 @@ import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 
 /**
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 人物卡角色
  */
-public class Roles extends PropList implements Role {
+public class Roles implements Role {
     private EntityTypeMessages entityTypeMessages;
 
     public Roles(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
     }
 
+    /**
+     * 人物卡变更，“.st角色”视为切换角色
+     * “.st角色-属性50”视为修改或添加属性，这取决于是否可以找到这张人物卡，找到的话只修改提及的值，未找到的话其余所有属性置为初始属性
+     * 初始属性情况可以参见dice.sinanya.system.RolesInfo
+     *
+     * @return set是否成功
+     * @throws PlayerSetException 如果字符串无法解析，会报错并在原渠道回复，回复语可以在配置文件中修改
+     */
     @SuppressWarnings("AlibabaMethodTooLong")
     public boolean set() throws PlayerSetException {
         useRole(entityTypeMessages);
@@ -60,6 +72,9 @@ public class Roles extends PropList implements Role {
         }
     }
 
+    /**
+     * 返回当前查询QQ的角色列表
+     */
     public void list() {
         useRole(entityTypeMessages);
 
@@ -87,6 +102,9 @@ public class Roles extends PropList implements Role {
         sender(entityTypeMessages, result.substring(0, result.length() - 1));
     }
 
+    /**
+     * 移除某个角色
+     */
     public void move() {
         useRole(entityTypeMessages);
 
@@ -103,6 +121,9 @@ public class Roles extends PropList implements Role {
         }
     }
 
+    /**
+     * 显示角色的技能信息
+     */
     public void show() {
         useRole(entityTypeMessages);
 

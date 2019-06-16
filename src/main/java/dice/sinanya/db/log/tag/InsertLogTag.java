@@ -11,9 +11,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * 录入log开启标签
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 录入log开启标签，不包含log日志内容
  */
 public class InsertLogTag {
 
@@ -22,6 +25,12 @@ public class InsertLogTag {
     public InsertLogTag() {
     }
 
+    /**
+     * 插入一条日志开关标记
+     *
+     * @param entityLogTag 日志标志对象，包含群、日志名
+     * @param logSwitch 开关，true为开，false为关
+     */
     public void insertLogTag(EntityLogTag entityLogTag, boolean logSwitch) {
         int num = 0;
         try (Connection conn = DbUtil.getConnection()) {
@@ -68,6 +77,11 @@ public class InsertLogTag {
 
     }
 
+    /**
+     * 删除数据库中所有关于某个群中某个日志的标记位，并删除其所有的日志信息
+     *
+     * @param entityLogTag 日志标志对象，包含群、日志名
+     */
     public void deleteLog(EntityLogTag entityLogTag) {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "delete from tagLog where groupId=? and logName=?";

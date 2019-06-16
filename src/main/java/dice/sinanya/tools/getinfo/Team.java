@@ -11,11 +11,11 @@ public class Team {
     private static SelectTeam selectTeam = new SelectTeam();
 
     public static void addIntoTeam(EntityTeamInfo entityTeamInfo) {
-        insertTeam.insertTeamInfo(entityTeamInfo, true);
+        insertTeam.changeTeamInfo(entityTeamInfo, true);
     }
 
     public static void removeFromTeam(EntityTeamInfo entityTeamInfo) {
-        insertTeam.insertTeamInfo(entityTeamInfo, false);
+        insertTeam.changeTeamInfo(entityTeamInfo, false);
     }
 
     public static void clearTeam(String group) {

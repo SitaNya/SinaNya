@@ -10,14 +10,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * 录入kp主群
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 录入KP主群类
  */
 public class InsertKp {
 
     private static final Logger Log = LogManager.getLogger(InsertKp.class);
 
+    /**
+     * 将kp主群设定插入或更新到数据库中
+     *
+     * @param qqId    QQ号
+     * @param groupId 群号
+     */
     public void insertKp(String qqId, String groupId) {
         int num = 0;
         try (Connection conn = DbUtil.getConnection()) {

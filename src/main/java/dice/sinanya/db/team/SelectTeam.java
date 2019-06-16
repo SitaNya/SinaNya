@@ -12,13 +12,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * 查询队伍信息
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 查询队伍QQ号列表，这些QQ号会用到角色逻辑中以获取角色信息
  */
 public class SelectTeam {
     private static final Logger Log = LogManager.getLogger(SelectTeam.class);
 
+    /**
+     * 查询某个群中队伍的成员QQ号列表
+     *
+     * @param groupId 群号
+     * @return 成员列表
+     */
     public ArrayList<String> selectTeamInfo(String groupId) {
         String strQqList = null;
         try (Connection conn = DbUtil.getConnection()) {

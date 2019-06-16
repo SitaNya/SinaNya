@@ -10,13 +10,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * 录入某个群的开启与关闭情况
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 录入机器人在某个群内的开关情况
  */
 public class InsertBot {
     private static final Logger Log = LogManager.getLogger(InsertBot.class);
 
+    /**
+     * 将机器人的开关值插入某个群，true为开启，false为关闭
+     *
+     * @param groupId 群号
+     * @param switchBot 开关
+     */
     public void insertBot(long groupId, boolean switchBot) {
         int num = 0;
         try (Connection conn = DbUtil.getConnection()) {

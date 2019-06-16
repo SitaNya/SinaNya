@@ -1,7 +1,6 @@
 package dice.sinanya.dice.manager;
 
 import dice.sinanya.dice.manager.imal.AtQq;
-import dice.sinanya.dice.manager.imal.PropList;
 import dice.sinanya.dice.manager.imal.Role;
 import dice.sinanya.entity.EntityRoleTag;
 import dice.sinanya.entity.EntityStrManyRolls;
@@ -31,11 +30,14 @@ import static java.lang.Integer.min;
 import static java.lang.Math.max;
 
 /**
- * 管理小队
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 管理小队
  */
-public class Team extends PropList implements GetDb, Role, AtQq {
+public class Team implements GetDb, Role, AtQq {
 
     private String regex = "\\[CQ:at,qq=([0-9]+)]";
 
@@ -47,6 +49,9 @@ public class Team extends PropList implements GetDb, Role, AtQq {
         this.entityTypeMessages = entityTypeMessages;
     }
 
+    /**
+     * 将@到的成员加入小队
+     */
     public void set() {
         useRole(entityTypeMessages);
 
@@ -60,6 +65,9 @@ public class Team extends PropList implements GetDb, Role, AtQq {
         addIntoTeam(entityTeamInfo);
     }
 
+    /**
+     * 将@到的成员移出小队
+     */
     public void remove() {
         useRole(entityTypeMessages);
 
@@ -73,11 +81,17 @@ public class Team extends PropList implements GetDb, Role, AtQq {
         }
     }
 
+    /**
+     * 将本群小队清空
+     */
     public void clr() {
         clearTeam(entityTypeMessages.getFromGroup());
         sender(entityTypeMessages, "已清空本群小队");
     }
 
+    /**
+     * 自动@本群小队中所有成员
+     */
     public void call() {
         useRole(entityTypeMessages);
 
@@ -92,6 +106,10 @@ public class Team extends PropList implements GetDb, Role, AtQq {
         sender(entityTypeMessages, stringBuilder.toString());
     }
 
+    /**
+     * 调整@到的小队成员的血量，默认为减少，可以使用1D3或1D3+20之类的表达式，每个小队成员都会单独计算表达式
+     * 使用+为前缀则恢复血量
+     */
     public void hp() {
         useRole(entityTypeMessages);
 
@@ -146,6 +164,10 @@ public class Team extends PropList implements GetDb, Role, AtQq {
         }
     }
 
+    /**
+     * 调整@到的小队成员的理智值，默认为减少，可以使用1D3/1d6或1D3+20之类的表达式，每个小队成员都会单独计算表达式
+     * 使用+为前缀则恢复理智值
+     */
     public void san() {
         useRole(entityTypeMessages);
 
@@ -212,6 +234,9 @@ public class Team extends PropList implements GetDb, Role, AtQq {
         }
     }
 
+    /**
+     * 显示当前小队的情况，会根据小队成员的当前激活人物自动计算得出
+     */
     public void show() {
         useRole(entityTypeMessages);
 
@@ -260,6 +285,9 @@ public class Team extends PropList implements GetDb, Role, AtQq {
         sender(entityTypeMessages, stringBuilder.toString());
     }
 
+    /**
+     * 显示当前小队所有成员当前激活角色的技能情况，私聊发送给命令触发人
+     */
     public void desc() {
         useRole(entityTypeMessages);
 

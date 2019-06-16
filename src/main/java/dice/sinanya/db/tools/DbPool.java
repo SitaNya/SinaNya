@@ -12,15 +12,16 @@ import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 
 
 /**
- * 数据库连接池
+ * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 数据库连接池定义类，没有特殊必要不需要改动
  */
 class DbPool {
     private static final Logger Log = LogManager.getLogger(DbPool.class.getName());
     private static DbPool instance;
-
-    /*
-     * 根据本地db.properties文件中的内容创建连接池
-     */
 
     static {
         instance = new DbPool();
@@ -28,6 +29,9 @@ class DbPool {
 
     private ComboPooledDataSource dataSource;
 
+    /**
+     * 初始化信息类，这里声明了驱动、用户名、密码等各种信息，其中密码是从配置文件中取得的
+     */
     private DbPool() {
         Log.info("Begin create DbPool");
         try {

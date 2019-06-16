@@ -3,12 +3,18 @@ package dice.sinanya.dice.get.imal;
 import dice.sinanya.entity.EntityCoc6CardInfo;
 import dice.sinanya.entity.EntityCoc7CardInfo;
 
+import java.util.ArrayList;
+
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
+import static dice.sinanya.tools.getinfo.RandomInt.random;
 
 /**
- * 生成卡片信息接口
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 接口说明: 生成COC、DND人物卡接口
  */
 public interface MakeCard {
 
@@ -131,4 +137,5 @@ public interface MakeCard {
                 " " +
                 "占总点数的:" + String.valueOf((coc7CardInfo.getHasLuck() * 1.0 / 630) * 100).substring(0, 5) + "%";
     }
+
 }

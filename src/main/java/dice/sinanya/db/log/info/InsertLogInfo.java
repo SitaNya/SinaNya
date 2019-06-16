@@ -13,9 +13,12 @@ import java.util.Map;
 import static dice.sinanya.system.MessagesLog.logNameSwitch;
 
 /**
- * 录入log信息
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 录入log信息类，这里是实际的log内容而不是log是否开启的标签
  */
 public class InsertLogInfo {
     private static final Logger Log = LogManager.getLogger(InsertLogInfo.class);
@@ -23,6 +26,12 @@ public class InsertLogInfo {
     public InsertLogInfo() {
     }
 
+    /**
+     * 将某个群的某个日志的某一条信息插入到数据库中
+     *
+     * @param entityLogTag 日志标志对象，包含群、日志名
+     * @param info         信息，通常是一句话
+     */
     public void insertLogTag(EntityLogTag entityLogTag, String info) {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "INSERT INTO textLog(" +

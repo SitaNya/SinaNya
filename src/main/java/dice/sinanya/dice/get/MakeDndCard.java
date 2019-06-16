@@ -14,9 +14,12 @@ import static dice.sinanya.tools.makedata.GetFutureToString.getFutureToString;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 
 /**
- * DND车卡类
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: DND车卡
  */
 public class MakeDndCard implements MakeCard {
 
@@ -26,6 +29,9 @@ public class MakeDndCard implements MakeCard {
         this.entityTypeMessages = entityTypeMessages;
     }
 
+    /**
+     * DND简易车卡，可以根据参数生成多张
+     */
     public void dnd() {
         String tag = TAG_DND;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 11));

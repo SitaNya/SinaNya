@@ -16,13 +16,22 @@ import static dice.sinanya.tools.getinfo.GetTime.getTime;
 import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoByQQ;
 
 /**
- * 录入角色信息，包括当前角色和角色内容
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 录入角色信息，包含当前激活角色和角色内容（分两张表存储），log内容的信息会在另一个类中初始化好，未设定的技能将置为初始值
  */
 public class InsertRoles {
     private static final Logger Log = LogManager.getLogger(InsertRoles.class);
 
+    /**
+     * 将某个QQ当前选择角色置为某个角色名，这个信息是跨群的，这也就是为什么在一个群中切角色，其它群也自动切换
+     *
+     * @param qqId qq号
+     * @param role 角色名
+     */
     public void insertRoleChoose(long qqId, String role) {
         int num = 0;
         try (Connection conn = DbUtil.getConnection()) {
@@ -68,7 +77,13 @@ public class InsertRoles {
         }
     }
 
-    @SuppressWarnings("AlibabaMethodTooLong")
+    /**
+     * 将角色信息字符串格式化后插入数据库，给某一个QQ的某一个角色
+     *
+     * @param properties 角色信息字符串，如“力量50体质60智力50体型30意志70侦查40聆听70……”
+     * @param role       角色名
+     * @param qqId       qq号
+     */
     public void insertRoleInfo(String properties, String role, long qqId) {
         HashMap<String, Integer> propertiesForRole = getRoleInfoByQQ(qqId, role);
         if (propertiesForRole == null) {
@@ -78,7 +93,13 @@ public class InsertRoles {
         insertRoleInfo(propertiesForRole, role, qqId);
     }
 
-    @SuppressWarnings("AlibabaMethodTooLong")
+    /**
+     * 将已经格式化好的HashMap给某一个QQ的某一个角色
+     *
+     * @param properties 角色信息字符串格式化后的HashMap类，属性名是key，属性值是value
+     * @param role 角色名
+     * @param qqId qq号
+     */
     public void insertRoleInfo(HashMap<String, Integer> properties, String role, long qqId) {
         int num = 0;
         try (Connection conn = DbUtil.getConnection()) {
@@ -108,12 +129,26 @@ public class InsertRoles {
 
     }
 
-    @SuppressWarnings("AlibabaMethodTooLong")
+    /**
+     * 将角色信息字符串格式化后插入数据库，给某一个QQ的某一个角色
+     *
+     * @param properties 角色信息字符串，如“力量50体质60智力50体型30意志70侦查40聆听70……”
+     * @param role       角色名
+     * @param qq       qq号，这里可以支持String类型传入
+     */
     public void insertRoleInfo(String properties, String role, String qq) {
         insertRoleInfo(properties, role, Long.parseLong(qq));
     }
 
 
+    /**
+     * 更新某个QQ号中某个角色的属性值
+     *
+     * @param propertiesForRole 角色信息字符串格式化后的HashMap类，属性名是key，属性值是value
+     * @param qqId qq号
+     * @param role 角色名
+     */
+    @SuppressWarnings("AlibabaMethodTooLong")
     private void updateInfo(HashMap<String, Integer> propertiesForRole, long qqId, String role) {
         Timestamp timestamp = getTime(getNowString());
         try (Connection conn = DbUtil.getConnection()) {
@@ -243,6 +278,14 @@ public class InsertRoles {
         }
     }
 
+
+    /**
+     * 插入某个QQ号中某个角色的属性值
+     *
+     * @param propertiesForRole 角色信息字符串格式化后的HashMap类，属性名是key，属性值是value
+     * @param qqId qq号
+     * @param role 角色名
+     */
     @SuppressWarnings("AlibabaMethodTooLong")
     private void insertInfo(HashMap<String, Integer> propertiesForRole, long qqId, String role) {
         Timestamp timestamp = getTime(getNowString());
@@ -375,6 +418,12 @@ public class InsertRoles {
         }
     }
 
+    /**
+     * 删除某个QQ号的某个角色，由于当前角色不可删除，因此这里不用再改变一次CHOOSE_ROLE表的值
+     *
+     * @param qqId QQ号
+     * @param role 角色
+     */
     public void deleteInfo(long qqId, String role) {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "delete from role where " +

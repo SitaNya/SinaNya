@@ -18,6 +18,15 @@ import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByFromQQ;
  *
  * @author SitaNya
  */
+
+/**
+ * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 接口说明: 角色接口，实现此接口则可以通过其下的方法调用或修改人物卡中的信息
+ */
 public interface Role {
 
     ArrayList<String> PROP_MAIN = new ArrayList<String>() {{

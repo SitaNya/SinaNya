@@ -13,6 +13,10 @@ public class EntityClue {
     private java.sql.Date date;
     private String qqId;
 
+    public EntityClue(String groupId) {
+        this.groupId = groupId;
+    }
+
     public EntityClue(String groupId, java.sql.Date date, String qqId) {
         this.groupId = groupId;
         this.date = (Date) date.clone();

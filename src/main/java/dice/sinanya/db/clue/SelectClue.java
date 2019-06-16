@@ -14,10 +14,14 @@ import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByQQ;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 
+
 /**
- * 获取线索集
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 线索获取类，查询并包装成对象
  */
 public class SelectClue {
 

@@ -1,23 +1,24 @@
 package dice.sinanya.dice.get;
 
+import dice.sinanya.dice.get.imal.GetRandomList;
 import dice.sinanya.dice.get.imal.MakeCard;
 import dice.sinanya.entity.EntityTypeMessages;
-
-import java.util.ArrayList;
 
 import static dice.sinanya.system.MessagesNPC.Character;
 import static dice.sinanya.system.MessagesNPC.*;
 import static dice.sinanya.tools.getinfo.GetName.getRandomName;
 import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.log.Sender.sender;
-import static java.lang.Math.min;
 
 /**
- * 获取NPC
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 生成NPC
  */
-public class Npc implements MakeCard {
+public class Npc implements MakeCard, GetRandomList {
 
     private EntityTypeMessages entityTypeMessages;
     private int trueAge;
@@ -26,12 +27,18 @@ public class Npc implements MakeCard {
         this.entityTypeMessages = entityTypeMessages;
     }
 
+    /**
+     * 生成NPC入口类，分别生成3批数据
+     */
     public void npc() {
         forPC();
         state();
         prop();
     }
 
+    /**
+     * 生成外貌数据，发送到来源群中
+     */
     private void forPC() {
         int ageLevel1 = 95;
         int ageLevel2 = 90;
@@ -90,6 +97,9 @@ public class Npc implements MakeCard {
         sender(entityTypeMessages, stringBuilder.toString());
     }
 
+    /**
+     * 生成特点信息，私聊发送给命令触发者
+     */
     private void state() {
         String stringBuilder = "以下是NPC的基本信息:\n" +
                 "姓名:\t" +
@@ -117,6 +127,10 @@ public class Npc implements MakeCard {
         entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), stringBuilder);
     }
 
+    /**
+     * 生成属性信息，私聊发送给命令触发者
+     * 这里特长技能定义为最低60最高80
+     */
     private void prop() {
         String stringBuilder = "以下是NPC的性格可选信息:\n" +
                 "实际性格:\t" +
@@ -135,14 +149,5 @@ public class Npc implements MakeCard {
                 "其余属性为:\n\n" +
                 getCoc7CardInfo();
         entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), stringBuilder);
-    }
-
-    private String randomFromList(ArrayList<String> infoList) {
-        return infoList.get(random(0, infoList.size() - 1));
-    }
-
-    private String randomFromListSmall(ArrayList<String> infoList) {
-        int random = random(1, 3);
-        return infoList.get(random(0, min(1, (infoList.size() - random))));
     }
 }

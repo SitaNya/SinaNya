@@ -1,17 +1,20 @@
 package dice.sinanya.dice.get;
 
+import dice.sinanya.dice.get.imal.GetRandomList;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.system.MessagesTZ.tzList;
-import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.log.Sender.sender;
 
 /**
- * 获取自定义特质
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 获取自定义特质，这些特质是不符合规则书的
  */
-public class Tz {
+public class Tz implements GetRandomList {
     private EntityTypeMessages entityTypeMessages;
 
     public Tz(EntityTypeMessages entityTypeMessages) {
@@ -19,9 +22,6 @@ public class Tz {
     }
 
     public void get() {
-        int random8 = random(0, tzList.size() - 1);
-        int random20 = random(0, 19);
-
-        sender(entityTypeMessages, tzList.get(random8).get(random20));
+        sender(entityTypeMessages, randomNestList(tzList));
     }
 }

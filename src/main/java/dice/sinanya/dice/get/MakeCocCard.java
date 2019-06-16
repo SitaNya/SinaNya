@@ -19,9 +19,12 @@ import static dice.sinanya.tools.makedata.GetFutureToString.getFutureToString;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 
 /**
- * COC车卡类
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: COC车卡
  */
 public class MakeCocCard implements MakeCard {
 
@@ -31,6 +34,9 @@ public class MakeCocCard implements MakeCard {
         this.entityTypeMessages = entityTypeMessages;
     }
 
+    /**
+     * COC7版详细车卡
+     */
     @SuppressWarnings("AlibabaMethodTooLong")
     public void coc7d() {
         String nick = getNickName(entityTypeMessages);
@@ -102,6 +108,9 @@ public class MakeCocCard implements MakeCard {
         sender(entityTypeMessages, stringBuilder);
     }
 
+    /**
+     * COC6版详细车卡
+     */
     @SuppressWarnings("AlibabaMethodTooLong")
     public void coc6d() {
         String nick = getNickName(entityTypeMessages);
@@ -166,6 +175,9 @@ public class MakeCocCard implements MakeCard {
         sender(entityTypeMessages, stringBuilder);
     }
 
+    /**
+     * COC7版简易车卡，可以根据参数生成多张
+     */
     public void coc7() {
         String tag = TAG_COC7;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 11));
@@ -192,6 +204,9 @@ public class MakeCocCard implements MakeCard {
         sender(entityTypeMessages, resCoc7.substring(0, resCoc7.length() - 1));
     }
 
+    /**
+     * COC6版简易车卡，可以根据参数生成多张
+     */
     public void coc6() {
         String tag = TAG_COC6;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 11));

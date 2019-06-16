@@ -10,9 +10,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
- * 录入线索集
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 线索入库类，包含更新、插入、删除、清空
  */
 public class InsertClue {
 

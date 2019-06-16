@@ -17,9 +17,12 @@ import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOSE;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 
 /**
- * 查询角色信息，包括当前角色和角色内容
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 查询角色信息，其中当前激活角色信息和角色技能信息的结果不会反回，而是自动刷写到静态变量中
  */
 public class SelectRoles {
     private static final Logger Log = LogManager.getLogger(SelectRoles.class);
@@ -27,6 +30,11 @@ public class SelectRoles {
     public SelectRoles() {
     }
 
+    /**
+     * 刷新某个QQ号的当前角色
+     *
+     * @param qqId QQ号
+     */
     public void flushRoleChooseByQq(long qqId) {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from CHOOSE_ROLE where qq=?";
@@ -43,29 +51,52 @@ public class SelectRoles {
         }
     }
 
-    @SuppressWarnings("AlibabaMethodTooLong")
-    public void flushRoleInfoCacheByFromQq(EntityTypeMessages entityTypeMessages) {
-        long qqId = Long.parseLong(entityTypeMessages.getFromQq());
-        selectRoleInfoCache(qqId);
-    }
 
-    @SuppressWarnings("AlibabaMethodTooLong")
+    /**
+     * 刷新当前使用命令人的当前角色
+     *
+     * @param entityTypeMessages 信息包装类，里面可以取到某条消息的发送QQ号
+     */
     public void flushRoleChooseByFromQq(EntityTypeMessages entityTypeMessages) {
         long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         selectRoleInfoCache(qqId);
     }
 
-    @SuppressWarnings("AlibabaMethodTooLong")
+    /**
+     * 刷新某个QQ号的角色信息
+     *
+     * @param qqId QQ号
+     */
     public void flushRoleInfoCacheByQq(long qqId) {
         selectRoleInfoCache(qqId);
     }
 
-    @SuppressWarnings("AlibabaMethodTooLong")
+    /**
+     * 刷新某个QQ号的角色信息
+     *
+     * @param qqId QQ号，String类型
+     */
     public void flushRoleInfoCacheByQq(String qqId) {
         long qq = Long.parseLong(qqId);
         flushRoleChooseByQq(qq);
     }
 
+    /**
+     * 刷新当前使用命令人的角色信息
+     *
+     * @param entityTypeMessages 信息包装类，里面可以取到某条消息的发送QQ号
+     */
+    public void flushRoleInfoCacheByFromQq(EntityTypeMessages entityTypeMessages) {
+        long qqId = Long.parseLong(entityTypeMessages.getFromQq());
+        selectRoleInfoCache(qqId);
+    }
+
+
+    /**
+     * 实际查询某个QQ号的角色信息
+     *
+     * @param qqId QQ号
+     */
     @SuppressWarnings("AlibabaMethodTooLong")
     private void selectRoleInfoCache(long qqId) {
         try (Connection conn = DbUtil.getConnection()) {

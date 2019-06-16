@@ -11,10 +11,14 @@ import java.sql.SQLException;
 
 import static dice.sinanya.system.MessagesKP.KpGroup;
 
+
 /**
- * 查询kp主群
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 查询KP主群类，刷写到静态变量中，只在静态变量中找不到时才需要使用
  */
 public class SelectKp {
     private static final Logger Log = LogManager.getLogger(SelectKp.class);
@@ -22,6 +26,9 @@ public class SelectKp {
     public SelectKp() {
     }
 
+    /**
+     * 刷新kp主群设定到静态变量中，只有静态变量中找不到某人的kp主群记录时才会使用
+     */
     public void flushKp() {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from kp";
