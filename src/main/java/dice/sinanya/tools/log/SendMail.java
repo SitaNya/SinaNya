@@ -109,8 +109,8 @@ public class SendMail {
         mb.setContent("日志邮件测试");
         // 设置邮件的正文
 
-        mb.attachFile("./saveLogs/" + groupId + "/" + logName);
-        mb.attachFile("./saveLogs/" + groupId + "/" + logName + ".docx");
+        mb.attachFile("../saveLogs/" + groupId + "/" + logName);
+        mb.attachFile("../saveLogs/" + groupId + "/" + logName + ".docx");
 
         SendMail sm = new SendMail();
         Log.info("正在发送邮件...");

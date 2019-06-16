@@ -120,7 +120,7 @@ public class SaveDocx {
             }
             makePdf(line, RBG.get(colorTag));
         }
-        File file = new File("./saveLogs/" + groupId + "/" + msg + ".docx");
+        File file = new File("../saveLogs/" + groupId + "/" + msg + ".docx");
         if (!file.getParentFile().exists()) {
             if (!file.getParentFile().mkdirs()) {
                 Log.error("docx染色文件未能成功生成");

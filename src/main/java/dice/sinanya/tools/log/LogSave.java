@@ -10,7 +10,7 @@ public class LogSave {
 
     public static void logSave(String groupId, String logName, String info) {
         // 1：利用File类找到要操作的对象
-        File file = new File("./saveLogs/" + groupId + "/" + logName);
+        File file = new File("../saveLogs/" + groupId + "/" + logName);
 
         if (!file.getParentFile().exists()) {
             if (!file.getParentFile().mkdirs()) {
