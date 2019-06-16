@@ -6,8 +6,8 @@ import com.forte.qqrobot.component.forlemoc.LinkConfiguration;
 import com.forte.qqrobot.sender.MsgSender;
 import com.forte.qqrobot.utils.CQCodeUtil;
 
-import static dice.sinanya.system.GetMessagesSystem.initMessagesSystem;
-import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.initMessagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.Team.flushTeamEn;
 
 /**

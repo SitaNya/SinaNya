@@ -1,5 +1,13 @@
 package dice.sinanya.system;
 
+/**
+ * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 接口说明: 帮助的静态信息
+ */
 public interface MessagesHelp {
     StringBuilder normalHelp = new StringBuilder()
             .append(".r\n")

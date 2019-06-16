@@ -23,7 +23,7 @@ public class InsertBot {
     /**
      * 将机器人的开关值插入某个群，true为开启，false为关闭
      *
-     * @param groupId 群号
+     * @param groupId   群号
      * @param switchBot 开关
      */
     public void insertBot(long groupId, boolean switchBot) {

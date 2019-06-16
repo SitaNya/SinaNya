@@ -4,11 +4,19 @@ import java.sql.Date;
 import java.util.Objects;
 
 /**
- * 线索类型对象
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 线索集对象
  */
 public class EntityClue {
+    /**
+     * @param groupId 群号
+     * @param date 日期时间戳，用于删除某一条线索的key
+     * @param qqId qq号，记录是谁录入的这条线索
+     */
     private String groupId;
     private java.sql.Date date;
     private String qqId;

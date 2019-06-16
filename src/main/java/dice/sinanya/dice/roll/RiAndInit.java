@@ -7,11 +7,11 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesInit.initList;
 import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.system.MessagesTag.TAG_RI;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByFromQQ;

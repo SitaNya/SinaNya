@@ -29,7 +29,7 @@ public class InsertLogTag {
      * 插入一条日志开关标记
      *
      * @param entityLogTag 日志标志对象，包含群、日志名
-     * @param logSwitch 开关，true为开，false为关
+     * @param logSwitch    开关，true为开，false为关
      */
     public void insertLogTag(EntityLogTag entityLogTag, boolean logSwitch) {
         int num = 0;

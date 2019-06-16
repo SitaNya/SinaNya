@@ -1,11 +1,19 @@
 package dice.sinanya.entity;
 
 /**
- * 包装骰点信息对象，包含骰点人昵称、骰点结果、技能值
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 包装骰点信息对象，包含骰点人昵称、骰点结果、技能值
  */
 public class EntityNickAndRandomAndSkill {
+    /**
+     * @param nick 骰点人昵称
+     * @param random 骰点结果值
+     * @param skill 技能值
+     */
     private String nick;
     private int random;
     private int skill;

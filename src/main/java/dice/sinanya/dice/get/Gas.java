@@ -4,7 +4,6 @@ import dice.sinanya.dice.get.imal.GetRandomList;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.system.MessagesGas.gasList;
-import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.log.Sender.sender;
 
 /**

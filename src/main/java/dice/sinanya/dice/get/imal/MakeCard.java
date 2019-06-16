@@ -3,10 +3,7 @@ package dice.sinanya.dice.get.imal;
 import dice.sinanya.entity.EntityCoc6CardInfo;
 import dice.sinanya.entity.EntityCoc7CardInfo;
 
-import java.util.ArrayList;
-
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.getinfo.RandomInt.random;
 
 /**
  * @author SitaNya

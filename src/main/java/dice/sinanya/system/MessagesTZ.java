@@ -3,6 +3,14 @@ package dice.sinanya.system;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 接口说明: 自定义特质的静态信息
+ */
 public interface MessagesTZ {
     ArrayList<String> tz0 = new ArrayList<String>() {{
         add("害怕夜晚(D):你因为某些原因害怕夜晚,深夜12点以后还要活动的话,“IDEA”和“知识”判定的成功范围变为各自的2分之1。但是擅长早起");

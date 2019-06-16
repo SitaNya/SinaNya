@@ -8,9 +8,13 @@ import java.util.Objects;
  * 电子邮箱: sitanya@qq.com
  * 维护群(QQ): 162279609
  * 有任何问题欢迎咨询
- * 类说明:
+ * 类说明: QQ和群号的包装对象
  */
 public class EntityQqAndGroup {
+    /**
+     * @param groupId 群号
+     * @param qqId qq号
+     */
     private String groupId;
     private String qqId;
 

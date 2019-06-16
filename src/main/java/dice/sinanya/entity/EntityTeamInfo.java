@@ -3,9 +3,12 @@ package dice.sinanya.entity;
 import java.util.ArrayList;
 
 /**
- * 小队信息对象，包装了ArrayList列表形式的QQ列表与群号
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 小队信息对象，包装了ArrayList列表形式的QQ列表与群号
  */
 public class EntityTeamInfo {
     private String group;

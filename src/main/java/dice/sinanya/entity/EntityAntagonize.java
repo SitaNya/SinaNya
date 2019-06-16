@@ -3,11 +3,20 @@ package dice.sinanya.entity;
 import java.util.Objects;
 
 /**
- * 对抗类型对象
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 对抗对象
  */
 public class EntityAntagonize {
+
+    /**
+     * @param random 随机数结果
+     * @param level 成功等级
+     * @param skill 技能等级
+     */
     private int random;
     private int level;
     private int skill;

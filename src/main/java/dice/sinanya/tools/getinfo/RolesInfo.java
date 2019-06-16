@@ -1,4 +1,4 @@
-package dice.sinanya.system;
+package dice.sinanya.tools.getinfo;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
@@ -9,6 +9,11 @@ import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByFromQQ;
 
 /**
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 接口说明: 煤气灯的静态对象信息
  */
 public class RolesInfo {
     private EntityTypeMessages entityTypeMessages;

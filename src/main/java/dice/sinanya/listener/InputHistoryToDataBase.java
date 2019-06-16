@@ -12,6 +12,16 @@ import org.quartz.JobExecutionException;
 import static dice.sinanya.tools.getinfo.History.setHistory;
 import static dice.sinanya.tools.getinfo.Team.saveTeamEn;
 
+/**
+ * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 定时任务类，会根据设定的时间每隔多久自动执行一次
+ * <p>
+ * 这里的“* 0/1 * * * ? *”表示每分钟执行一次，具体怎么写请去查crontab的使用
+ */
 @CronTask("* 0/1 * * * ? *")
 public class InputHistoryToDataBase implements TimeJob {
     /**

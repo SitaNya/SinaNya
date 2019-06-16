@@ -9,11 +9,22 @@ import static dice.sinanya.system.MessagesLevel.LEVEL_MAP;
 import static dice.sinanya.tools.getinfo.RandomInt.random;
 
 /**
- * 根据当前骰点值、技能值、是否使用规则书来判定成功等级
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 根据当前骰点值、技能值、是否使用规则书来判定成功等级
  */
 public class CheckResultLevel {
+    /**
+     * @param random 随机骰点结果
+     * @param skill 技能值
+     * @param ruleBook 是否使用规则书
+     * @param level 成功等级
+     * @param ruleFumble 定义大失败的值
+     * @param ruleCriticalSuccess 定义大成功的值
+     */
     private int random;
     private int skill;
     private boolean ruleBook;
@@ -27,6 +38,9 @@ public class CheckResultLevel {
         this.ruleBook = ruleBook;
     }
 
+    /**
+     * @return 根据是否使用规则书，来返回字符串的成功等级
+     */
     private String checkResultLevel() {
         if (ruleBook) {
             if (random == ruleFumble) {
@@ -53,22 +67,34 @@ public class CheckResultLevel {
         }
     }
 
+    /**
+     * @return 根据字符串的成功等级，获取随机的回复语
+     */
     public String getLevelResultStr() {
         String strlevel = checkResultLevel();
         ArrayList<String> resultInfo = LEVEL_MAP.get(strlevel);
         return resultInfo.get(random(0, resultInfo.size() - 1));
     }
 
+    /**
+     * @return 判断成功等级后，返回包含成功等级和随机骰结果的成功等级对象
+     */
     public EntityLevelResult getLevelAndRandom() {
         checkResultLevel();
         return new EntityLevelResult(level, random);
     }
 
+    /**
+     * @return 判断成功等级后，返回包含成功等级、随机骰结果和技能值的对抗对象
+     */
     public EntityAntagonize getAntagonize() {
         checkResultLevel();
         return new EntityAntagonize(random, level, skill);
     }
 
+    /**
+     * @return 判断逻辑中不需要规则书的部分
+     */
     private String checkNotNeedRules() {
         int levelExtremeLine = 5;
         int levelHeadLine = 2;
@@ -87,6 +113,9 @@ public class CheckResultLevel {
         }
     }
 
+    /**
+     * @return 返回成功等级的标志数字
+     */
     public int getLevel() {
         return level;
     }

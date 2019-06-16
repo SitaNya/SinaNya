@@ -1,13 +1,9 @@
 package dice.sinanya.dice.get;
 
 import dice.sinanya.dice.get.imal.GetRandomList;
-import dice.sinanya.dice.get.imal.MakeCard;
 import dice.sinanya.entity.EntityTypeMessages;
 
-import java.util.ArrayList;
-
 import static dice.sinanya.system.MessagesBG.*;
-import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.log.Sender.sender;
 
 /**

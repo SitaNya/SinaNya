@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * 维护群(QQ): 162279609
  * 有任何问题欢迎咨询
  * <p>
- * 类说明:
+ * 类说明: 姓名静态信息
  */
 public interface MessagesName {
     ArrayList<String> ChineseSurname = new ArrayList<String>() {{

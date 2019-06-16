@@ -2,8 +2,8 @@ package dice.sinanya.dice.roll;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.TiAndLi.*;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.log.Sender.sender;
@@ -64,8 +64,8 @@ public class TiAndLi {
      * 将疯狂症状格式化后返回
      *
      * @param stringBuilder 传入的StringBuilder对象，由于java特性，这个对象在append后无需return
-     * @param strSymptom 疯狂症状字符串，因为临时和总结的字符串不同，这里当做参数传入
-     * @param index 具体疯狂的下标，9为狂躁症，8为恐惧症需要做额外信息补充
+     * @param strSymptom    疯狂症状字符串，因为临时和总结的字符串不同，这里当做参数传入
+     * @param index         具体疯狂的下标，9为狂躁症，8为恐惧症需要做额外信息补充
      */
     private void symptomFormatAndSend(StringBuilder stringBuilder, String strSymptom, int index) {
         switch (index) {

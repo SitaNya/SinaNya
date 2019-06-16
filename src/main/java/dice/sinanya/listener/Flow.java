@@ -17,14 +17,19 @@ import dice.sinanya.exceptions.SanCheckSetException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesTag.*;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.log.Sender.sender;
 
 /**
- * 入口分流类，结合MessagesTag中配置的正则表达式，将被机器人捕捉的小心分流给各个逻辑模块
- * 如果你要添加一个新的命令，需要先去MessagesTag处添加相应的正则表达式，然后在这里分别添加以下内容
+ * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 入口分流类，结合MessagesTag中配置的正则表达式，将被机器人捕捉的小心分流给各个逻辑模块
  * <p>
+ * 如果你要添加一个新的命令，需要先去MessagesTag处添加相应的正则表达式，然后在这里分别添加以下内容
  * 1.   isXXXX  布尔值
  * 2.   isXXXX=messages.matches(TAG_XXXXX); 为布尔值赋值
  * 3.   在toPrivate或toPrivateAndGroup中根据需要new自己写的逻辑类并通过布尔值去激活

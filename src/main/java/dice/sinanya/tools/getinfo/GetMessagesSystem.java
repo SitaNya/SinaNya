@@ -1,4 +1,4 @@
-package dice.sinanya.system;
+package dice.sinanya.tools.getinfo;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -19,6 +19,9 @@ import java.util.Properties;
 public class GetMessagesSystem {
     private static Logger log = LogManager.getLogger(GetMessagesSystem.class.getName());
 
+    /**
+     * 各种回复的默认值，保证配置文件里写错或者删掉了，也不会报错
+     */
     public static HashMap<String, String> messagesSystem = new HashMap<String, String>() {{
         put("botStart", "机器人已开启");
         put("botAlreadyStart", "机器人当前处于开启状态");
@@ -85,9 +88,12 @@ public class GetMessagesSystem {
         put("mailPassword", "kktjwuakdafbdcej");
     }};
 
+    /**
+     * 读取配置文件，默认从bin目录的上一层找conf目录，然后找sinanya.properties文件，也就是说如果启动时不在bin目录，可能会找不到文件
+     */
     public static void initMessagesSystem() {
         Properties prop = new Properties();
-        File file=null;
+        File file = null;
         try {
             file = new File("../conf/sinanya.properties");
             if (!file.exists()) {

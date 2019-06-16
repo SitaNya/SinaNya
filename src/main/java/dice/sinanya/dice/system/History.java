@@ -7,9 +7,12 @@ import static dice.sinanya.tools.getinfo.History.changeHistory;
 import static dice.sinanya.tools.log.Sender.sender;
 
 /**
- * 骰点历史信息
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 骰点历史信息类
  */
 public class History {
 
@@ -19,6 +22,9 @@ public class History {
         this.entityTypeMessages = entityTypeMessages;
     }
 
+    /**
+     * 打印历史信息
+     */
     public void hiy() {
         StringBuilder stringBuilder = new StringBuilder();
         EntityHistory entityHistory = changeHistory(entityTypeMessages.getFromQq());

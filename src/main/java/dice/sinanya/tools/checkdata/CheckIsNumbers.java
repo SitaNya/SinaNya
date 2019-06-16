@@ -2,6 +2,11 @@ package dice.sinanya.tools.checkdata;
 
 /**
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 检查是否是数字
  */
 public class CheckIsNumbers {
 

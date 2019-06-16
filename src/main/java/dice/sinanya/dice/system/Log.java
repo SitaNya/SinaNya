@@ -5,11 +5,11 @@ import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.tools.log.SaveDocx;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 
-import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesLog.logNameForGroup;
 import static dice.sinanya.system.MessagesLog.logSwitchForGroup;
 import static dice.sinanya.system.MessagesLogGetLock.logGetLock;
 import static dice.sinanya.system.MessagesTag.*;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.LogTag.*;
 import static dice.sinanya.tools.getinfo.LogText.getLogText;
 import static dice.sinanya.tools.log.LogSave.logSave;
@@ -18,9 +18,12 @@ import static dice.sinanya.tools.log.Sender.sender;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 
 /**
- * 日志记录
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 日志记录类
  */
 public class Log {
 
@@ -30,6 +33,9 @@ public class Log {
         this.entityTypeMessages = entityTypeMessages;
     }
 
+    /**
+     * 记录开启，若已存在则重新开启日志进行追加，若不存在则关闭日志
+     */
     public void logOn() {
         String tag = TAG_LOG_ON;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
@@ -48,6 +54,9 @@ public class Log {
         }
     }
 
+    /**
+     * 日志关闭
+     */
     public void logOff() {
         String tag = TAG_LOG_OFF;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
@@ -65,6 +74,9 @@ public class Log {
         }
     }
 
+    /**
+     * 日志get，无法get开启的日志
+     */
     public void get() {
         String tag = TAG_LOG_GET;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
@@ -92,10 +104,16 @@ public class Log {
         }
     }
 
+    /**
+     * 当前群内日志列表
+     */
     public void list() {
         sender(entityTypeMessages, getTagList(entityTypeMessages.getFromGroup()));
     }
 
+    /**
+     * 删除日志
+     */
     public void del() {
         String tag = TAG_LOG_RM;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));

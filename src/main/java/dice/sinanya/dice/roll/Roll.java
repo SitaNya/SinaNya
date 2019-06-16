@@ -8,11 +8,11 @@ import dice.sinanya.tools.getinfo.GetSkillValue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesSystem.ROLL_MAX_VALUE;
 import static dice.sinanya.system.MessagesTag.TAGR;
 import static dice.sinanya.system.MessagesTag.TAG_RH;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.log.Sender.sender;

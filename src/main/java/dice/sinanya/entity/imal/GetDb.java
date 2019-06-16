@@ -1,9 +1,12 @@
 package dice.sinanya.entity.imal;
 
 /**
- * 获取DB加值接口
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 接口说明: 获取DB加值，默认方法为coc7版
  */
 public interface GetDb {
 

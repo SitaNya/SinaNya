@@ -15,7 +15,7 @@ import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
 
-import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 
 public class SendMail {
     private static final Logger Log = LogManager.getLogger(SendMail.class);
@@ -108,7 +108,7 @@ public class SendMail {
         // 设置收件人的邮箱
         mb.setSubject(logName);
         // 设置邮件的主题
-        mb.setContent("在群: "+ groupId+" 中的log日志: "+logName+"\n其中docx为染色文件用word打开，无后缀为文本文件用txt打开，收到邮件烦请回复\n遇到问题请加群162279609进行反馈");
+        mb.setContent("在群: " + groupId + " 中的log日志: " + logName + "\n其中docx为染色文件用word打开，无后缀为文本文件用txt打开，收到邮件烦请回复\n遇到问题请加群162279609进行反馈");
         // 设置邮件的正文
 
         mb.attachFile("../saveLogs/" + groupId + "/" + logName);

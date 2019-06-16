@@ -4,6 +4,16 @@ package dice.sinanya.system;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 接口说明: 骰点回复的静态信息
+ * <p>
+ * 用列表保存后可以实现随机回复词
+ */
 public interface MessagesLevel {
 
 

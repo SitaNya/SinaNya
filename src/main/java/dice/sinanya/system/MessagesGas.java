@@ -3,6 +3,14 @@ package dice.sinanya.system;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 接口说明: 煤气灯的静态信息
+ */
 public interface MessagesGas {
     ArrayList<String> gas0 = new ArrayList<String>() {{
         add("任意选择一个有(D)记号的特征。");

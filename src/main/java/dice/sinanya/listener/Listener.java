@@ -13,7 +13,7 @@ import com.forte.qqrobot.sender.MsgSender;
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
 import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
 import static dice.sinanya.tools.getinfo.LogText.setLogText;
@@ -21,6 +21,11 @@ import static dice.sinanya.tools.getinfo.SwitchBot.getBot;
 
 /**
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 总监听入口类，这里是实际上接收到消息的第一个类
  */
 public class Listener {
 
@@ -33,6 +38,16 @@ public class Listener {
         return new Listener();
     }
 
+    /**
+     * 私聊入口类
+     * 机器人的开启关闭也是在这一层识别的
+     *
+     * @param msgGet      消息实体
+     * @param msgGetTypes 消息来源类型
+     * @param msgSender   发送器
+     * @param msgPrivate  私聊消息对象
+     * @return 返回值固定为true
+     */
     @Listen(MsgGetTypes.privateMsg)
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgPrivate msgPrivate) {
@@ -40,6 +55,16 @@ public class Listener {
         return true;
     }
 
+    /**
+     * 群消息入口类
+     * 机器人的开启关闭也是在这一层识别的
+     *
+     * @param msgGet      消息实体
+     * @param msgGetTypes 消息来源类型
+     * @param msgSender   发送器
+     * @param msgGroup    群消息对象
+     * @return 返回值固定为true
+     */
     @Listen(MsgGetTypes.groupMsg)
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGroup msgGroup) {
@@ -59,6 +84,16 @@ public class Listener {
         }
     }
 
+    /**
+     * 讨论组入口类
+     * 机器人的开启关闭也是在这一层识别的
+     *
+     * @param msgGet      消息实体
+     * @param msgGetTypes 消息来源类型
+     * @param msgSender   发送器
+     * @param msgDisGroup 讨论组消息对象
+     * @return 返回值固定为true
+     */
     @Listen(MsgGetTypes.discussMsg)
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgDisGroup msgDisGroup) {
@@ -78,6 +113,16 @@ public class Listener {
         }
     }
 
+    /**
+     * 群无过滤入口类，用于日志消息的捕捉
+     * 机器人的开启关闭也是在这一层识别的
+     *
+     * @param msgGet      消息实体
+     * @param msgGetTypes 消息来源类型
+     * @param msgSender   发送器
+     * @param msgGroup    群消息对象
+     * @return 返回值固定为true
+     */
     @Listen(MsgGetTypes.groupMsg)
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGroup msgGroup) {
         String tagBotOn = ".bot on";
@@ -96,6 +141,16 @@ public class Listener {
         }
     }
 
+    /**
+     * 讨论组无过滤入口类，用于日志消息的捕捉
+     * 机器人的开启关闭也是在这一层识别的
+     *
+     * @param msgGet      消息实体
+     * @param msgGetTypes 消息来源类型
+     * @param msgSender   发送器
+     * @param msgDisGroup 讨论组消息对象
+     * @return 返回值固定为true
+     */
     @Listen(MsgGetTypes.discussMsg)
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgDisGroup msgDisGroup) {
         String tagBotOn = ".bot on";

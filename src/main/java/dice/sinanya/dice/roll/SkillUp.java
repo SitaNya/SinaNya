@@ -4,8 +4,8 @@ import dice.sinanya.db.roles.InsertRoles;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.NotFoundSkillException;
 
-import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesTag.TAG_EN;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.GetSkillValue.getSkillValue;
 import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;

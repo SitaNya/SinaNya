@@ -1,9 +1,12 @@
 package dice.sinanya.entity.imal;
 
 /**
- * 获取Coc7版信息卡的附加信息，比如伤害加值或体型等
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 接口说明: 获取coc7的一些特有属性，如体型，移动等
  */
 public interface GetCoc7Info extends GetDb {
 

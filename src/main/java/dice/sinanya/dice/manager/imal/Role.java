@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 
-import static dice.sinanya.tools.getinfo.GetSkillName.getSkillName;
+import static dice.sinanya.tools.getinfo.ReplaceSkillName.replaceSkillName;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 import static dice.sinanya.tools.getinfo.RoleInfo.checkRoleInfoFromChooseExistByQQ;
 import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByFromQQ;
@@ -89,7 +89,7 @@ public interface Role {
         ArrayList<String> result = new ArrayList<>();
         for (Map.Entry<String, Integer> mapEntry : Objects.requireNonNull(getRoleInfoFromChooseByFromQQ(entityTypeMessages)).entrySet()) {
             if (propMain.contains(mapEntry.getKey()) && mapEntry.getValue() != 0) {
-                result.add(getSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
+                result.add(replaceSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
             }
 
         }
@@ -109,9 +109,9 @@ public interface Role {
         for (Map.Entry<String, Integer> mapEntry : Objects.requireNonNull(getRoleInfoFromChooseByFromQQ(entityTypeMessages)).entrySet()) {
             if (!prop.contains(mapEntry.getKey()) && mapEntry.getValue() != 0) {
                 if (up && mapEntry.getValue() >= 50) {
-                    result.add(getSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
+                    result.add(replaceSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
                 } else if (!up && mapEntry.getValue() < 50 && mapEntry.getValue() > 5) {
-                    result.add(getSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
+                    result.add(replaceSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
                 }
 
             }

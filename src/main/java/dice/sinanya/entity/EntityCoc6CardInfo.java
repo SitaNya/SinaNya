@@ -6,12 +6,23 @@ import dice.sinanya.entity.imal.GetDb;
 import static java.lang.Math.ceil;
 
 /**
- * 6版数据细化对象
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 6版细化对象
  */
 public class EntityCoc6CardInfo extends CocCardInfo implements GetDb {
 
+    /**
+     * @param luck 幸运
+     * @param hp 血量
+     * @param san 理智
+     * @param idea 灵感
+     * @param know 知识
+     * @param db 伤害加值
+     */
     private int luck;
 
     private int hp;
@@ -20,6 +31,9 @@ public class EntityCoc6CardInfo extends CocCardInfo implements GetDb {
     private int know;
     private String db;
 
+    /**
+     * 这里给一些需要*5的数据做了*5处理，并计算了DB
+     */
     public EntityCoc6CardInfo() {
         this.luck = pow * 5;
 
@@ -31,7 +45,7 @@ public class EntityCoc6CardInfo extends CocCardInfo implements GetDb {
     }
 
     /**
-     * 获取db加值字符串
+     * 获取db加值字符串，这里进行了重写为6版数据，默认接口是7版
      *
      * @param a 传入数字a为力量与体型之和
      * @return 返回DB加值字符串

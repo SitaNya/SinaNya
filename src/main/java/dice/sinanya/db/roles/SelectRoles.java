@@ -3,7 +3,7 @@ package dice.sinanya.db.roles;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityRoleTag;
 import dice.sinanya.entity.EntityTypeMessages;
-import dice.sinanya.system.RolesInfo;
+import dice.sinanya.tools.getinfo.RolesInfo;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

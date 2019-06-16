@@ -10,6 +10,14 @@ import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.getinfo.MakeSkillName.makeSkillName;
 import static dice.sinanya.tools.getinfo.RoleInfo.*;
 
+/**
+ * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 获取技能值
+ */
 public class GetSkillValue {
 
     private Pattern skillNameRegex = Pattern.compile("([\\u4e00-\\u9fa5]+)");

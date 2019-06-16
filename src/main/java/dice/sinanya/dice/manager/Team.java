@@ -10,7 +10,7 @@ import dice.sinanya.entity.imal.GetDb;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
 import dice.sinanya.exceptions.TeamIsEmptyException;
-import dice.sinanya.tools.checkdata.CheckSanCheck;
+import dice.sinanya.tools.makedata.MakeSanCheck;
 import dice.sinanya.tools.makedata.GetRollResultAndStr;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -190,18 +190,18 @@ public class Team implements GetDb, Role, AtQq {
                 add = true;
             }
 
-            CheckSanCheck checkSanCheck = new CheckSanCheck(entityTypeMessages, qq);
+            MakeSanCheck makeSanCheck = new MakeSanCheck(entityTypeMessages, qq);
 
             if (add) {
                 try {
-                    checkSanCheck.addSanCheck(msg);
+                    makeSanCheck.addSanCheck(msg);
                 } catch (PlayerSetException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
                     if (msg.contains("/")) {
-                        String result = checkSanCheck.checkSanCheck(msg);
+                        String result = makeSanCheck.checkSanCheck(msg);
                         sender(entityTypeMessages, result);
                     } else {
                         int changeValue;

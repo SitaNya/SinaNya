@@ -66,7 +66,7 @@ public class Clue {
      * 清除一个群内的全部线索
      */
     public void clr() {
-        delClue(entityTypeMessages.getFromGroup());
+        clrClue(entityTypeMessages.getFromGroup());
         sender(entityTypeMessages, "清除线索");
     }
 }

@@ -6,12 +6,25 @@ import static dice.sinanya.tools.makedata.ManyRolls.manyRollsProcess;
 import static java.lang.Math.ceil;
 
 /**
- * 获取coc人物卡的一些共有数据
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 获取coc卡的一些共有数据，注意这里获取的数据是未经*5的coc6版本
  */
 public class CocCardInfo {
 
+    /**
+     * @param str 力量
+     * @param siz 体型
+     * @param dex 敏捷
+     * @param app 外貌
+     * @param intValue 智力
+     * @param pow 意志
+     * @param edu 教育
+     * @param notLuck 不含幸运总和
+     */
     protected int str = get3d6multiply();
     protected int con = get3d6multiply();
     protected int siz = get2d6plus6multiply();

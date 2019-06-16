@@ -17,11 +17,11 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.concurrent.*;
 
-import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesAntagonize.Antagonize;
 import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.History.changeHistory;
 import static dice.sinanya.tools.getinfo.Kp.getKpGroup;

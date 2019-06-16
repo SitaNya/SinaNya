@@ -2,6 +2,14 @@ package dice.sinanya.system;
 
 import java.util.ArrayList;
 
+/**
+ * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 接口说明: 人物背景的静态信息
+ */
 public interface MessagesBG {
     ArrayList<String> Info = new ArrayList<String>() {{
         add("结实的");

@@ -16,10 +16,17 @@ import static dice.sinanya.tools.getinfo.MakeSkillName.makeSkillName;
  * <p>
  * 类说明:将传入的msg人物属性信息整理包装为HashMap格式
  */
-public class GetMessagesToValue {
+class GetMessagesToValue {
     private static final Logger Log = LogManager.getLogger(GetMessagesToValue.class);
 
-    public static HashMap<String, Integer> getMessagesToValue(HashMap<String, Integer> propertiesDefault, String msg) {
+    /**
+     * 将输入的属性值字符串转变为HashMap形式
+     *
+     * @param properties 属性值的HashMap列表，包含了所有技能和技能值。如果是新卡则所有技能都是默认值
+     * @param msg 属性值字符串
+     * @return 新生成的HashMap属性值列表
+     */
+    static HashMap<String, Integer> getMessagesToValue(HashMap<String, Integer> properties, String msg) {
         StringBuilder strSkillValue = new StringBuilder();
         StringBuilder strSkillName = new StringBuilder();
         for (int i = 0; i < msg.length(); ) {
@@ -37,13 +44,13 @@ public class GetMessagesToValue {
             }
 
             try {
-                propertiesDefault.put(makeSkillName(strSkillName.toString()), Integer.parseInt(strSkillValue.toString()));
+                properties.put(makeSkillName(strSkillName.toString()), Integer.parseInt(strSkillValue.toString()));
                 strSkillName = new StringBuilder();
                 strSkillValue = new StringBuilder();
             } catch (NumberFormatException e) {
                 Log.error(e.getMessage(), e);
             }
         }
-        return propertiesDefault;
+        return properties;
     }
 }

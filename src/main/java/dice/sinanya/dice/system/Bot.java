@@ -5,17 +5,20 @@ import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.ArrayList;
 
-import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesSystem.STR_BOT_VERSIONS;
 import static dice.sinanya.system.MessagesTag.*;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.SwitchBot.*;
 import static dice.sinanya.tools.log.Sender.sender;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 
 /**
- * 机器人开启、关闭、退群
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 机器人控制类，如开关退群等
  */
 public class Bot implements AtQq {
 
@@ -25,6 +28,9 @@ public class Bot implements AtQq {
         this.entityTypeMessages = entityTypeMessages;
     }
 
+    /**
+     * 开启
+     */
     public void on() {
         String tag = TAG_BOT_ON;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
@@ -48,6 +54,9 @@ public class Bot implements AtQq {
         }
     }
 
+    /**
+     * 关闭
+     */
     public void off() {
         String tag = TAG_BOT_OFF;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
@@ -71,6 +80,9 @@ public class Bot implements AtQq {
         }
     }
 
+    /**
+     * 退群
+     */
     public void exit() {
         String tag = TAG_BOT_EXIT;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
@@ -85,6 +97,9 @@ public class Bot implements AtQq {
         }
     }
 
+    /**
+     * 机器人信息
+     */
     public void info() {
         sender(entityTypeMessages, STR_BOT_VERSIONS.toString());
     }

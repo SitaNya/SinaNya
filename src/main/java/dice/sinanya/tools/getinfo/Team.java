@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static dice.sinanya.system.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.system.MessagesTeamEn.teamEn;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByQQ;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 
@@ -52,7 +52,7 @@ public class Team {
         if (teamEn.containsKey(entityQqAndGroup)) {
             String role;
             if (checkRoleChooseExistByQQ(qqId)) {
-                role = getRoleChooseByQQ(qqId)+": ";
+                role = getRoleChooseByQQ(qqId) + ": ";
             } else {
                 role = "[CQ:at,qq=" + qqId + "]: ";
             }

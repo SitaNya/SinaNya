@@ -3,11 +3,18 @@ package dice.sinanya.entity;
 import java.util.Objects;
 
 /**
- * 日志标签对象，包含群号和日志名
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 日志标签对象，包含群号和日志名
  */
 public class EntityLogTag {
+    /**
+     * @param groupId 群号
+     * @param logName 日志名称
+     */
     private String groupId;
     private String logName;
 

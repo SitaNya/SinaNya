@@ -2,7 +2,7 @@ package dice.sinanya.db.roles;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityRoleTag;
-import dice.sinanya.system.RolesInfo;
+import dice.sinanya.tools.getinfo.RolesInfo;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -97,8 +97,8 @@ public class InsertRoles {
      * 将已经格式化好的HashMap给某一个QQ的某一个角色
      *
      * @param properties 角色信息字符串格式化后的HashMap类，属性名是key，属性值是value
-     * @param role 角色名
-     * @param qqId qq号
+     * @param role       角色名
+     * @param qqId       qq号
      */
     public void insertRoleInfo(HashMap<String, Integer> properties, String role, long qqId) {
         int num = 0;
@@ -134,7 +134,7 @@ public class InsertRoles {
      *
      * @param properties 角色信息字符串，如“力量50体质60智力50体型30意志70侦查40聆听70……”
      * @param role       角色名
-     * @param qq       qq号，这里可以支持String类型传入
+     * @param qq         qq号，这里可以支持String类型传入
      */
     public void insertRoleInfo(String properties, String role, String qq) {
         insertRoleInfo(properties, role, Long.parseLong(qq));
@@ -145,8 +145,8 @@ public class InsertRoles {
      * 更新某个QQ号中某个角色的属性值
      *
      * @param propertiesForRole 角色信息字符串格式化后的HashMap类，属性名是key，属性值是value
-     * @param qqId qq号
-     * @param role 角色名
+     * @param qqId              qq号
+     * @param role              角色名
      */
     @SuppressWarnings("AlibabaMethodTooLong")
     private void updateInfo(HashMap<String, Integer> propertiesForRole, long qqId, String role) {
@@ -283,8 +283,8 @@ public class InsertRoles {
      * 插入某个QQ号中某个角色的属性值
      *
      * @param propertiesForRole 角色信息字符串格式化后的HashMap类，属性名是key，属性值是value
-     * @param qqId qq号
-     * @param role 角色名
+     * @param qqId              qq号
+     * @param role              角色名
      */
     @SuppressWarnings("AlibabaMethodTooLong")
     private void insertInfo(HashMap<String, Integer> propertiesForRole, long qqId, String role) {

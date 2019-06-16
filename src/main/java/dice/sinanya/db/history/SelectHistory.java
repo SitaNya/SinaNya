@@ -29,6 +29,7 @@ public class SelectHistory {
 
     /**
      * 将某个QQ号的历史信息刷新，通常只有在静态变量中找不到某人的记录时才会使用
+     *
      * @param qqId 需要刷新的QQ号
      */
     public void flushHistory(String qqId) {

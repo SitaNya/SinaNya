@@ -1,11 +1,18 @@
 package dice.sinanya.entity;
 
 /**
- * 惩罚投、奖励投对象
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 惩罚投、奖励投对象
  */
 public class EntityRewardAndPunishment {
+    /**
+     * @param times 惩罚、奖励骰个数
+     * @param skill 技能值
+     */
     private int times;
     private int skill;
 

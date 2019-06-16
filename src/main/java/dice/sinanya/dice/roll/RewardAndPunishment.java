@@ -75,7 +75,7 @@ public class RewardAndPunishment implements En {
             strRes = entityNickAndRandomAndSkill.getNick() +
                     "进行奖励骰鉴定: D100=" + random + "[奖励骰:" + substring + "] = " + resultRandom + "/" + getTimesAndSkill(msg).getSkill() +
                     checkResultLevel.getLevelResultStr();
-            checkEn(checkResultLevel.getLevel(),msg, entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup());
+            checkEn(checkResultLevel.getLevel(), msg, entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup());
         } else {
             strRes = entityNickAndRandomAndSkill.getNick() +
                     "进行奖励骰鉴定: D100=" + random + "[奖励骰:" + substring + "] = " + resultRandom;

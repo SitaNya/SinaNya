@@ -2,6 +2,16 @@ package dice.sinanya.system;
 
 import java.util.HashMap;
 
+/**
+ * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 接口说明: 颜色的静态信息
+ * <p>
+ * 这里我挑了一些比较方便看的颜色，括号内颜色是灰色，骰子颜色是橘红色，kp颜色是鲜红色
+ */
 public interface MessagesRGB {
     HashMap<Integer, String> RBG = new HashMap<Integer, String>() {{
         put(0, "FF7F24");
