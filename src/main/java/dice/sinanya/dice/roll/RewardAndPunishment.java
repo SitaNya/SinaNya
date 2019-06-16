@@ -17,10 +17,12 @@ import static dice.sinanya.tools.log.Sender.sender;
 import static dice.sinanya.tools.makedata.GetNickAndRandomAndSkill.getNickAndRandomAndSkill;
 
 /**
- * 奖励投、惩罚投
- * 这两者不再支持计算公式
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 奖励骰、惩罚投。这两者不再支持计算公式
  */
 public class RewardAndPunishment {
 
@@ -35,6 +37,9 @@ public class RewardAndPunishment {
     private int multiple = 10;
 //    奖励惩罚都是取10位数
 
+    /**
+     * 奖励骰
+     */
     public void rb() {
         String tag = TAG_RB;
         String msg = entityTypeMessages.getMsgGet().getMsg().trim().replaceFirst(tag.substring(0, tag.length() - 2), "");
@@ -77,6 +82,9 @@ public class RewardAndPunishment {
 //        将列表打印，并根据最后确定的值进行成功登记判定
     }
 
+    /**
+     * 惩罚骰
+     */
     public void rp() {
         String tag = TAG_RP;
         String msg = entityTypeMessages.getMsgGet().getMsg().trim().replaceFirst(tag.substring(0, tag.length() - 2), "");
@@ -119,6 +127,12 @@ public class RewardAndPunishment {
         //        将列表打印，并根据最后确定的值进行成功登记判定
     }
 
+    /**
+     * 根据奖励骰或惩罚骰的个数，返回一定数量的0-9随机数列表
+     *
+     * @param times 个数
+     * @return 随机数列表
+     */
     private ArrayList<Integer> makeBAndPRoll(int times) {
         ArrayList<Integer> result = new ArrayList<>();
         for (int i = 0; i < times; i++) {
@@ -127,20 +141,33 @@ public class RewardAndPunishment {
         return result;
     }
 
+    /**
+     * 取出输入信息中的技能值（如果是技能名，则替换为技能值），与惩罚/奖励骰个数，包装后返回
+     *
+     * @param msg 参数信息字符串，是去除了.rp|.rb后剩下的所有信息
+     * @return 惩罚、奖励骰方法，包含技能值和个数
+     */
     private EntityRewardAndPunishment getTimesAndSkill(String msg) {
         int times;
         int skill;
 
+        /*
+        因为rb格式为“.rb个数 技能”，因此空格前的如果是数字，或者只包含数字则认为是个数。否则个数默认为1
+         */
         if (msg.contains(SPACE) && isNumeric(msg.split(SPACE)[0])) {
-            times = Integer.parseInt(msg.split(" ")[0]);
+            times = Integer.parseInt(msg.split(SPACE)[0]);
         } else if (isNumeric(msg)) {
             times = Integer.parseInt(msg);
         } else {
             times = 1;
         }
 
+        /*
+        如果包含空格，则第二个参数一定存在且为技能，传递给GetSkillValue方法
+        如果是数字则直接认为是技能，如果文字则查找对方当前人物卡确定技能值
+         */
         if (msg.contains(SPACE)) {
-            GetSkillValue getSkillValue = new GetSkillValue(entityTypeMessages, msg.split(" ")[1]);
+            GetSkillValue getSkillValue = new GetSkillValue(entityTypeMessages, msg.split(SPACE)[1]);
             skill = getSkillValue.getSkill();
         } else {
             skill = 0;

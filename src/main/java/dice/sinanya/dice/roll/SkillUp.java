@@ -13,9 +13,12 @@ import static dice.sinanya.tools.log.Sender.sender;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 
 /**
- * .en的相关类
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 幕间成长
  */
 public class SkillUp {
     private EntityTypeMessages entityTypeMessages;
@@ -24,6 +27,11 @@ public class SkillUp {
         this.entityTypeMessages = entityTypeMessages;
     }
 
+    /**
+     * 若未设定技能，则无法进行en，而单纯的.en 60从自然逻辑上讲是无意义的
+     *
+     * @throws NotFoundSkillException 可能因未找到技能而无法成长
+     */
     public void en() throws NotFoundSkillException {
         String tag = TAG_EN;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));

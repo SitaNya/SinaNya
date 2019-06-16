@@ -31,6 +31,11 @@ import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 
 /**
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: ra、rc判定，ral、rcl多次骰点，rav、rcv对抗
  */
 public class RollAndCheck {
     private static final Logger Log = LogManager.getLogger(RollAndCheck.class);
@@ -45,6 +50,9 @@ public class RollAndCheck {
         this.entityTypeMessages = entityTypeMessages;
     }
 
+    /**
+     * 房规判定
+     */
     public void ra() {
         String tag = TAG_RA;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
@@ -52,6 +60,9 @@ public class RollAndCheck {
         sender(entityTypeMessages, result);
     }
 
+    /**
+     * 规则书判定
+     */
     public void rc() {
         String tag = TAG_RC;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
@@ -60,6 +71,11 @@ public class RollAndCheck {
     }
 
 
+    /**
+     * 房规对抗
+     *
+     * @throws NotSetKpGroupException 如果私聊未设置kp主群，则会报此错误
+     */
     public void rav() throws NotSetKpGroupException {
         String tag = TAG_RAV;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
@@ -76,7 +92,7 @@ public class RollAndCheck {
                 groupId = getKpGroup(entityTypeMessages);
                 sender(entityTypeMessages, "本次对抗将用于群" + groupId);
             } catch (NotSetKpGroupException e) {
-                e.printStackTrace();
+                Log.error(e.getMessage(), e);
                 groupId = "0";
             }
         } else {
@@ -100,6 +116,11 @@ public class RollAndCheck {
         }
     }
 
+    /**
+     * 规则书对抗
+     *
+     * @throws NotSetKpGroupException 如果私聊未设置kp主群，则会报此错误
+     */
     public void rcv() throws NotSetKpGroupException {
         String tag = TAG_RCV;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
@@ -116,13 +137,14 @@ public class RollAndCheck {
                 groupId = getKpGroup(entityTypeMessages);
 
             } catch (NotSetKpGroupException e) {
-                e.printStackTrace();
+                Log.error(e.getMessage(), e);
                 groupId = "0";
             }
         } else {
             groupId = entityTypeMessages.getFromGroup();
         }
         if (Antagonize.containsKey(groupId) && !groupId.equals(defaultGroupId)) {
+//            静态对象Antagonize中包含了以群号为key的EntityAntagonize对象，如果包含的话，那么就说明上一次对抗已经发起了，这次直接给结果
             EntityAntagonize entityAntagonize = Antagonize.get(groupId);
             EntityAntagonize thisEntityAntagonize = checkResultLevel.getAntagonize();
             sender(entityTypeMessages, stringBuilder);
@@ -130,6 +152,7 @@ public class RollAndCheck {
             Antagonize.remove(groupId);
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeOver"));
         } else if (!groupId.equals(defaultGroupId)) {
+//            静态对象Antagonize中包含了以群号为key的EntityAntagonize对象，如果不包含的话，那么就说明这次是发起对抗，直接插入进去
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, getNickName(entityTypeMessages) + "发起一次对抗");
             sender(entityTypeMessages, stringBuilder);
             Antagonize.put(groupId, checkResultLevel.getAntagonize());
@@ -138,6 +161,10 @@ public class RollAndCheck {
         }
     }
 
+
+    /**
+     * 房规多次骰点
+     */
     public void ral() {
         String tag = TAG_RAL;
         EntityHistory entityHistory = new EntityHistory("0");
@@ -165,6 +192,9 @@ public class RollAndCheck {
         formatRxlAndSend(entityHistory);
     }
 
+    /**
+     * 规则书多次骰点
+     */
     public void rcl() {
         String tag = TAG_RCL;
         EntityHistory entityHistory = new EntityHistory("0");
@@ -194,6 +224,11 @@ public class RollAndCheck {
         formatRxlAndSend(entityHistory);
     }
 
+    /**
+     * @param msg      输入信息，可能包含骰点表达式、技能等
+     * @param ruleBook 是否使用规则书
+     * @return 包装后的骰点结果字符串
+     */
     private String check(String msg, Boolean ruleBook) {
         EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
         CheckResultLevel checkResultLevel = new CheckResultLevel(entityNickAndRandomAndSkill.getRandom(), entityNickAndRandomAndSkill.getSkill(), ruleBook);
@@ -204,6 +239,14 @@ public class RollAndCheck {
         return result;
     }
 
+    /**
+     * 根据本次和上次对抗结果，分别对比成功等级->骰点大小->技能上限。返回包装后的对抗结果
+     *
+     * @param entityTypeMessages 包装信息类，包含发送消息用的方法
+     * @param thisAntagonize     这次对抗的骰点结果
+     * @param lastAntagonize     已存储的对抗骰点结果
+     * @param groupId            群号
+     */
     private void checkAntagonize(EntityTypeMessages entityTypeMessages, EntityAntagonize thisAntagonize, EntityAntagonize lastAntagonize, String groupId) {
         int successMinLevel = 2;
         if (lastAntagonize.getLevel() > thisAntagonize.getLevel()) {
@@ -223,6 +266,11 @@ public class RollAndCheck {
         }
     }
 
+    /**
+     * @param msg 检查骰点次数是否超过限制
+     * @throws ManyRollsTimesTooMoreException 骰点次数太多
+     * @throws ManyRollsFormatException       骰点表达式不合规范
+     */
     private void checkManyRollsError(String msg) throws ManyRollsTimesTooMoreException, ManyRollsFormatException {
         int numParams = 2;
         int maxTimes = 1000;
@@ -235,13 +283,28 @@ public class RollAndCheck {
         }
     }
 
+    /**
+     * 等待多线程骰点的结果被标记位isDone后，将结果更新到一个临时的骰点信息中
+     *
+     * @param entityHistory 临时的骰点信息，用于计算本次的各种成功次数
+     * @param results 多线程骰点的对象列表
+     * @throws InterruptedException 如果没有isDone，则休眠，其间发生问题可能引发InterruptedException
+     * @throws ExecutionException 多线程执行故障
+     */
     private void updateHistory(EntityHistory entityHistory, ArrayList<Future<Integer>> results) throws InterruptedException, ExecutionException {
         for (Future future : results) {
-            Thread.sleep(100);
+            while (!future.isDone()) {
+                Thread.sleep(100);
+            }
             entityHistory.update((int) future.get());
         }
     }
 
+    /**
+     * 将临时骰点信息包装成回复语发送
+     *
+     * @param entityHistory 临时的骰点信息，用于计算本次的各种成功次数
+     */
     private void formatRxlAndSend(EntityHistory entityHistory) {
         String stringBuilder = "大成功:\t" +
                 entityHistory.getCriticalSuccess() +

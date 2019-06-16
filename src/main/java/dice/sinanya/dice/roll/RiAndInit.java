@@ -21,9 +21,12 @@ import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static java.lang.Math.ceil;
 
 /**
- * 先攻骰掷及列表
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: DND先攻骰掷及列表
  */
 public class RiAndInit {
 
@@ -36,6 +39,10 @@ public class RiAndInit {
         this.entityTypeMessages = entityTypeMessages;
     }
 
+    /**
+     * 先攻骰掷，这里支持加值和减值计算，并且如果信息中包含汉字，则和对方昵称放在一起（通常kp使用）
+     * 返回结果后还会把结果插入先攻列表记录，用于打印先攻列表
+     */
     public void ri() {
         String tag = TAG_RI;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
@@ -53,7 +60,7 @@ public class RiAndInit {
         Matcher mNumAndName = numAndName.matcher(msg);
         while (mNumAndName.find()) {
             msg = mNumAndName.group(1);
-            nick = mNumAndName.group(2);
+            nick = mNumAndName.group(2) + "(" + getNickName(entityTypeMessages) + ")";
         }
 
         Matcher mPlus = plus.matcher(msg);
@@ -102,6 +109,9 @@ public class RiAndInit {
         }
     }
 
+    /**
+     * 打印先攻列表，根据群号确定列表后，根据骰点最终结果排序后顺序打印
+     */
     public void init() {
         StringBuilder stringBuffer = new StringBuilder();
         if (!initList.containsKey(entityTypeMessages.getFromGroup())) {
@@ -124,11 +134,20 @@ public class RiAndInit {
         sender(entityTypeMessages, stringBuffer.substring(0, stringBuffer.length() - 1));
     }
 
+    /**
+     * 清空先攻列表
+     */
     public void clr() {
         initList.remove(entityTypeMessages.getFromGroup());
         sender(entityTypeMessages, messagesSystem.get("clrDndInit"));
     }
 
+    /**
+     * 根据value从大到小排序先攻列表
+     *
+     * @param map 先攻列表，key为骰点人+骰点过程，value为骰点结果
+     * @return 排序后的map
+     */
     private static HashMap<String, String> sortHashMap(HashMap<String, String> map) {
         //從HashMap中恢復entry集合，得到全部的鍵值對集合
         Set<Map.Entry<String, String>> entey = map.entrySet();
