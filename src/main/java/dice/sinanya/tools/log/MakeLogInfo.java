@@ -16,13 +16,20 @@ public class MakeLogInfo {
 
         if (info.charAt(0) == '.' || info.trim().charAt(0) == '。') {
             result
-                    .append("=========================================================================================\n")
+                    .append("\n=========================================================================================\n")
                     .append(getNickName(entityTypeMessages))
                     .append("发起骰掷");
             return result.toString();
         } else {
             info = info.replaceAll("([\"“”])", "\"");
-            if (info.contains("\"")) {
+            boolean fristIsTalk = info.charAt(0) == '"' || info.charAt(0) == '“' || info.charAt(0) == '”';
+            boolean lastIsTalk = info.charAt(info.length() - 1) == '"' || info.charAt(info.length() - 1) == '“' || info.charAt(info.length() - 1) == '”';
+            if (fristIsTalk && lastIsTalk) {
+                result.append(getNickName(entityTypeMessages))
+                        .append(":\t")
+                        .append("\"")
+                        .append(info.replace("\"", ""))
+                        .append("\"");
                 result.append(info);
             } else if ((info.charAt(0) == '(' && !info.contains(")") && !info.contains("）")) || ((info.charAt(0) == '（' || info.charAt(0) == '(') && (info.charAt(info.length() - 1) == ')' || info.charAt(info.length() - 1) == '）'))) {
                 info = info.replaceAll("([(（])", "").replaceAll("([)）])", "");
@@ -58,7 +65,7 @@ public class MakeLogInfo {
 
         result.append(info)
                 .append("\n")
-                .append("=========================================================================================");
+                .append("=========================================================================================\n");
 
         return result.toString();
     }
