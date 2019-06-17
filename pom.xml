@@ -93,11 +93,10 @@
             <version>2.3.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.renjin.cran/randtoolbox -->
         <dependency>
-            <groupId>org.renjin.cran</groupId>
-            <artifactId>randtoolbox</artifactId>
-            <version>1.16-b205</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.6.1</version>
         </dependency>
 
 

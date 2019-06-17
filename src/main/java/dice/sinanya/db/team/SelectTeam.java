@@ -30,7 +30,7 @@ public class SelectTeam {
      */
     public void flushTeamEnFromDatabase() {
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from TEAM_EN";
+            String sql = "select * from teamEn";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
