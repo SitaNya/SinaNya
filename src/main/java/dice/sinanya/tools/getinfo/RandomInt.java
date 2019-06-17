@@ -11,6 +11,7 @@ public class RandomInt {
         while (result == 0) {
             MersenneTwister mersenneTwister=new MersenneTwister();
             result = mersenneTwister.nextInt(highest + 1 - lowest) + lowest;
+
         }
         return result;
     }
