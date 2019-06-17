@@ -20,7 +20,7 @@ import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 public class SendMail {
     private static final Logger Log = LogManager.getLogger(SendMail.class);
 
-    private String toChinese(String text) {
+    private static String toChinese(String text) {
         try {
             text = MimeUtility.encodeText(new String(text.getBytes(StandardCharsets.UTF_8), "GB2312"), "GB2312", "B");
         } catch (Exception e) {
@@ -106,9 +106,9 @@ public class SendMail {
         // 设置发件人的邮箱
         mb.setTo(to + "@qq.com");
         // 设置收件人的邮箱
-        mb.setSubject(logName);
+        mb.setSubject(toChinese(logName));
         // 设置邮件的主题
-        mb.setContent("在群: " + groupId + " 中的log日志: " + logName + "\n其中docx为染色文件用word打开，无后缀为文本文件用txt打开，收到邮件烦请回复\n遇到问题请加群162279609进行反馈");
+        mb.setContent(toChinese("在群: " + groupId + " 中的log日志: " + logName + "\n其中docx为染色文件用word打开，无后缀为文本文件用txt打开，收到邮件烦请回复\n遇到问题请加群162279609进行反馈"));
         // 设置邮件的正文
 
         mb.attachFile("../saveLogs/" + groupId + "/" + logName);
