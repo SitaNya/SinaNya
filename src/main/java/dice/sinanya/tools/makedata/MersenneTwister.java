@@ -18,7 +18,7 @@ public strictfp class MersenneTwister extends java.util.Random implements Serial
      * @param mt the array for the state vector
      * @param mti mti==N+1 means mt[N] is not initialized
      */
-    private static final long serialVersionUID = -4035832775130174188L;
+    private static final long serialVersionUID = -8219700664442619525L;
     private static final int N = 624;
     private static final int M = 397;
     private static final int MATRIX_A = 0x9908b0df;
