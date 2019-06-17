@@ -29,7 +29,7 @@ public class EntityHistory {
     private int success = 0;
     private int failure = 0;
     private int times = 0;
-    private int mean = 0;
+    private double mean = 0.0;
 
     public EntityHistory(String qqId) {
         this.qqId = qqId;
@@ -88,7 +88,7 @@ public class EntityHistory {
     }
 
     public int getMean() {
-        return mean;
+        return (int) Math.floor(mean);
     }
 
     private void setMean(int mean) {
