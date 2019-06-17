@@ -1,11 +1,9 @@
 package dice.sinanya.tools.getinfo;
 
-import dice.sinanya.dice.get.imal.GetRandomList;
-
 import java.util.ArrayList;
 
 import static dice.sinanya.system.MessagesName.*;
-import static dice.sinanya.tools.getinfo.RandomInt.random;
+import static dice.sinanya.tools.makedata.RandomInt.random;
 
 /**
  * @author  SitaNya

@@ -2,7 +2,7 @@ package dice.sinanya.db.roles;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityRoleTag;
-import dice.sinanya.tools.getinfo.RolesInfo;
+import dice.sinanya.tools.getinfo.MakeRolesInfo;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -87,9 +87,9 @@ public class InsertRoles {
     public void insertRoleInfo(String properties, String role, long qqId) {
         HashMap<String, Integer> propertiesForRole = getRoleInfoByQQ(qqId, role);
         if (propertiesForRole == null) {
-            propertiesForRole = new RolesInfo().init();
+            propertiesForRole = new MakeRolesInfo().init();
         }
-        propertiesForRole = new RolesInfo(properties, propertiesForRole).getPropertiesForRole();
+        propertiesForRole = new MakeRolesInfo(properties, propertiesForRole).getPropertiesForRole();
         insertRoleInfo(propertiesForRole, role, qqId);
     }
 

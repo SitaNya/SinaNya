@@ -35,7 +35,7 @@ public class Roles implements Role {
     /**
      * 人物卡变更，“.st角色”视为切换角色
      * “.st角色-属性50”视为修改或添加属性，这取决于是否可以找到这张人物卡，找到的话只修改提及的值，未找到的话其余所有属性置为初始属性
-     * 初始属性情况可以参见dice.sinanya.system.RolesInfo
+     * 初始属性情况可以参见dice.sinanya.system.MakeRolesInfo
      *
      * @return set是否成功
      * @throws PlayerSetException 如果字符串无法解析，会报错并在原渠道回复，回复语可以在配置文件中修改

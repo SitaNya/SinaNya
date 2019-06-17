@@ -1,4 +1,4 @@
-package dice.sinanya.tools.getinfo;
+package dice.sinanya.tools.makedata;
 
 import java.util.Random;
 
@@ -7,6 +7,16 @@ import static java.lang.Math.max;
 
 /**
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 最重要的随机数生成类，骰娘的所有随机数都取决于这里
+ *
+ * 这里为了效果，没有使用单纯的随机数，而是微正态分布
+ *
+ * 也就是说，不是以绝对公平的随机为准
+ * 而是以千次骰点成功率符合跑团预期为准
  */
 public class RandomInt {
     /**

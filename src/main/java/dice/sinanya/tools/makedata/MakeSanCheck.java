@@ -4,7 +4,6 @@ import dice.sinanya.entity.EntityRoleTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
-import dice.sinanya.tools.makedata.GetRollResultAndStr;
 
 import java.util.HashMap;
 
@@ -14,11 +13,11 @@ import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
-import static dice.sinanya.tools.getinfo.RandomInt.random;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 import static dice.sinanya.tools.getinfo.RoleInfo.*;
 import static dice.sinanya.tools.log.Sender.sender;
+import static dice.sinanya.tools.makedata.RandomInt.random;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 

@@ -1,6 +1,5 @@
 package dice.sinanya.dice.manager.imal;
 
-import dice.sinanya.db.roles.SelectRoles;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.ArrayList;

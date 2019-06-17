@@ -1,4 +1,4 @@
-package dice.sinanya.tools.getinfo;
+package dice.sinanya.tools.makedata;
 
 import java.util.ArrayList;
 import java.util.Collections;

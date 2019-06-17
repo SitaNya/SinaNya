@@ -8,9 +8,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * 当前时间的相关方法
- *
  * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 当前时间的相关方法
  */
 public class GetTime {
     private static final Logger Log = LogManager.getLogger(GetTime.class);

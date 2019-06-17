@@ -2,7 +2,18 @@ package dice.sinanya.tools.getinfo;
 
 import java.util.HashMap;
 
-public class MakeSkillName {
+/**
+ * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 技能名对照表
+ */
+class MakeSkillName {
+    /**
+     * @param skillTable 标记了所有技能名的不同叫法，如生命和hp都会被这个对象重置为hp
+     */
     static HashMap<String, String> skillTable = new HashMap<String, String>(100) {{
         put("力量", "str");
         put("敏捷", "dex");
@@ -170,7 +181,14 @@ public class MakeSkillName {
         put("司法科学", "judicialScience");
     }};
 
-    public static String makeSkillName(String skillName) {
+    /**
+     * 如果skillTable中存在这个技能名的key，则返回规整后的value，如“司法科学”将返回“judicialScience”
+     * 如果skillTable中不存在这个技能名的key，则返回传入值本身，如“司法科xue”将返回“司法科xue”
+     *
+     * @param skillName 传入技能名
+     * @return 格式化后的技能名
+     */
+    static String makeSkillName(String skillName) {
         return skillTable.getOrDefault(skillName, skillName);
     }
 }

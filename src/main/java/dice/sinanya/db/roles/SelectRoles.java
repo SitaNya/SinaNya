@@ -2,8 +2,7 @@ package dice.sinanya.db.roles;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityRoleTag;
-import dice.sinanya.entity.EntityTypeMessages;
-import dice.sinanya.tools.getinfo.RolesInfo;
+import dice.sinanya.tools.getinfo.MakeRolesInfo;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -58,7 +57,7 @@ public class SelectRoles {
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
-                        HashMap<String, Integer> propertiesForRole = new RolesInfo().getPropertiesForRole();
+                        HashMap<String, Integer> propertiesForRole = new MakeRolesInfo().getPropertiesForRole();
                         String role = set.getString("userName");
                         long qqId=Long.parseLong(set.getString("qqId"));
                         propertiesForRole.put("str", set.getInt("str"));

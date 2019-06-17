@@ -3,7 +3,7 @@ package dice.sinanya.tools.makedata;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static dice.sinanya.tools.getinfo.RandomInt.random;
+import static dice.sinanya.tools.makedata.RandomInt.random;
 
 class MakeDndCardInfo {
 

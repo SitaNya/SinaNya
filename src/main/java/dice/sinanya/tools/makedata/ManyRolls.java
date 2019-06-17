@@ -7,8 +7,8 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.concurrent.*;
 
-import static dice.sinanya.tools.getinfo.GetMaxNumsResult.getMaxNumsResult;
-import static dice.sinanya.tools.getinfo.RandomInt.random;
+import static dice.sinanya.tools.makedata.GetMaxNumsResult.getMaxNumsResult;
+import static dice.sinanya.tools.makedata.RandomInt.random;
 
 /**
  * @author SitaNya

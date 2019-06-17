@@ -3,7 +3,7 @@ package dice.sinanya.dice.get.imal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static dice.sinanya.tools.getinfo.RandomInt.random;
+import static dice.sinanya.tools.makedata.RandomInt.random;
 import static java.lang.Math.min;
 
 /**

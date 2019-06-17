@@ -6,7 +6,7 @@ import dice.sinanya.entity.EntityLevelResult;
 import java.util.ArrayList;
 
 import static dice.sinanya.system.MessagesLevel.LEVEL_MAP;
-import static dice.sinanya.tools.getinfo.RandomInt.random;
+import static dice.sinanya.tools.makedata.RandomInt.random;
 
 /**
  * @author SitaNya

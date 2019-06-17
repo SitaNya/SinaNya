@@ -10,8 +10,8 @@ import dice.sinanya.entity.imal.GetDb;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
 import dice.sinanya.exceptions.TeamIsEmptyException;
-import dice.sinanya.tools.makedata.MakeSanCheck;
 import dice.sinanya.tools.makedata.GetRollResultAndStr;
+import dice.sinanya.tools.makedata.MakeSanCheck;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

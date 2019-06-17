@@ -2,7 +2,7 @@ package dice.sinanya.tools.makedata;
 
 import java.util.concurrent.Callable;
 
-import static dice.sinanya.tools.getinfo.RandomInt.random;
+import static dice.sinanya.tools.makedata.RandomInt.random;
 
 public class MakeManyRollsInThread implements Callable<Integer> {
 

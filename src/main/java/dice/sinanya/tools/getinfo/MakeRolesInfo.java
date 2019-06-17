@@ -13,30 +13,33 @@ import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByFromQQ;
  * 电子邮箱: sitanya@qq.com
  * 维护群(QQ): 162279609
  * 有任何问题欢迎咨询
- * 接口说明: 煤气灯的静态对象信息
+ * 类说明: 角色信息的具体包装生成处理类
+ *
+ * 这里完成了从属性字符串到HashMap的过程
+ * 定义了所有技能的初始值
  */
-public class RolesInfo {
+public class MakeRolesInfo {
     private EntityTypeMessages entityTypeMessages;
     private String properties;
     private HashMap<String, Integer> propertiesForRole;
 
-    public RolesInfo(EntityTypeMessages entityTypeMessages, String properties) {
+    public MakeRolesInfo(EntityTypeMessages entityTypeMessages, String properties) {
         this.properties = properties;
         propertiesForRole = makeProperties();
         this.entityTypeMessages = entityTypeMessages;
     }
 
-    public RolesInfo(String properties) {
+    public MakeRolesInfo(String properties) {
         this.properties = properties;
         propertiesForRole = makeProperties();
     }
 
-    public RolesInfo(String properties, HashMap<String, Integer> propertiesDefault) {
+    public MakeRolesInfo(String properties, HashMap<String, Integer> propertiesDefault) {
         this.properties = properties;
         propertiesForRole = makeProperties(propertiesDefault);
     }
 
-    public RolesInfo() {
+    public MakeRolesInfo() {
         propertiesForRole = init();
     }
 
@@ -48,6 +51,12 @@ public class RolesInfo {
         return propertiesForRole;
     }
 
+    /**
+     * 先尝试获取命令发起者的当前所选角色的所有属性列表，不存在的话这里会得到propertiesDefault=null
+     * 将propertiesDefault对象和传入的属性字符串放到getMessagesToValue方法中进行包装，同技能会用字符串中的值覆盖原值
+     *
+     * @return 包装完成的HashMap对象
+     */
     private HashMap<String, Integer> makeProperties() {
         HashMap<String, Integer> propertiesDefault = getRoleInfoFromChooseByFromQQ(entityTypeMessages);
 
@@ -58,6 +67,12 @@ public class RolesInfo {
         return propertiesDefault;
     }
 
+    /**
+     * 传入指定属性列表，和字符串一起包装后返回。全程不干涉具体是哪个QQ的哪个角色
+     *
+     * @param propertiesDefault 传入的属性HashMap列表对象
+     * @return 包装后的对象
+     */
     private HashMap<String, Integer> makeProperties(HashMap<String, Integer> propertiesDefault) {
 
         String strInputNone = "";
@@ -67,8 +82,13 @@ public class RolesInfo {
         return propertiesDefault;
     }
 
+    /**
+     * 初始化属性值列表，里面包含了所有技能的初始值（当然不包括比如莫里斯舞之类太过偏门的技能）
+     *
+     * @return 初始化后的属性值列表
+     */
     public HashMap<String, Integer> init() {
-        return new HashMap<String, Integer>(500) {{
+        return new HashMap<String, Integer>(200) {{
             put("str", 0);
             put("dex", 0);
             put("pow", 0);
