@@ -13,7 +13,7 @@ public class LogTag {
     private static SelectLogTag selectLogTag = new SelectLogTag();
     private static InsertLogTag insertLogTag = new InsertLogTag();
 
-    public static void flushLogTag(){
+    public static void flushLogTag() {
         selectLogTag.flushLogTagFromDatabase();
     }
 
@@ -52,7 +52,7 @@ public class LogTag {
         if (checkLogTagExist(entityTypeMessages, logName)) {
             return logNameSwitch.get(entityLogTag);
         } else {
-            return true;
+            return false;
         }
     }
 

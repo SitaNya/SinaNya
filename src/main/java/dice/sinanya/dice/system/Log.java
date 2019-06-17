@@ -3,6 +3,8 @@ package dice.sinanya.dice.system;
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.tools.log.SaveDocx;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 
 import static dice.sinanya.system.MessagesLog.logNameForGroup;
@@ -26,6 +28,8 @@ import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
  * 类说明: 日志记录类
  */
 public class Log {
+
+    private static final Logger log = LogManager.getLogger(Log.class.getName());
 
     private EntityTypeMessages entityTypeMessages;
 
@@ -93,7 +97,7 @@ public class Log {
             try {
                 new SaveDocx(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq(), msg, bigResult);
             } catch (Docx4JException e) {
-                e.printStackTrace();
+                log.error(e.getMessage(), e);
             }
             sender(entityTypeMessages, msg + "正在发送到您的邮箱" + entityTypeMessages.getFromQq() + "@qq.com");
             sendMail(entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup(), msg);

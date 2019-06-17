@@ -163,7 +163,7 @@ public class Listener {
      * 内容为将某一句消息插入log数据库
      *
      * @param entityTypeMessages 消息封装类
-     * @param msgGet 消息对象
+     * @param msgGet             消息对象
      */
     private void setLogs(EntityTypeMessages entityTypeMessages, MsgGet msgGet) {
         if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
@@ -173,11 +173,12 @@ public class Listener {
 
     /**
      * 根据消息信息和是否包含at自己更改机器人开关
+     *
      * @param entityTypeMessages 消息封装类
-     * @param messages 消息字符串
+     * @param messages           消息字符串
      */
     private void changeBotSwitch(EntityTypeMessages entityTypeMessages, String messages) {
-        if (messages.trim().contains(tagBotOn) && messages.trim().contains(tagMe)) {
+        if ((messages.trim().contains(tagBotOn) && messages.trim().contains(tagMe)) || (messages.trim().contains(tagBotOn) && !messages.trim().contains("[CQ:at"))) {
             new Bot(entityTypeMessages).on();
         } else if (messages.trim().contains(tagBotOff) && messages.trim().contains(tagMe)) {
             new Bot(entityTypeMessages).off();
