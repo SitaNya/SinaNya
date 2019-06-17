@@ -1,5 +1,6 @@
 package dice.sinanya.db.history;
 
+import com.forte.qqrobot.BaseConfiguration;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityHistory;
 import org.apache.log4j.LogManager;
@@ -32,8 +33,9 @@ public class SelectHistory {
      */
     public void flushHistoryFromDatabase() {
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from history where qqId=?";
+            String sql = "select * from history where botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, BaseConfiguration.getLocalQQCode());
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         historyList.put(set.getString("qqId"), new EntityHistory(set.getString("qqId"), set.getInt("Fumble"), set.getInt("CriticalSuccess"), set.getInt("ExtremeSuccess"), set.getInt("HardSuccess"), set.getInt("Success"), set.getInt("Failure"), set.getInt("times"), set.getInt("mean")));

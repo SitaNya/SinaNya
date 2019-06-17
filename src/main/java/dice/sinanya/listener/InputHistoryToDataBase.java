@@ -20,9 +20,10 @@ import static dice.sinanya.tools.getinfo.Team.saveTeamEn;
  * 有任何问题欢迎咨询
  * 类说明: 定时任务类，会根据设定的时间每隔多久自动执行一次
  * <p>
- * 这里的“* 0/1 * * * ? *”表示每分钟执行一次，具体怎么写请去查crontab的使用
+ * 这里的“0 * * * * ? *”表示每分钟执行一次，具体怎么写请去查crontab的使用
+ * 前5位应该是:分 时 日 月 周
  */
-@CronTask("* 0/1 * * * ? *")
+@CronTask("* * * * * ? *")
 public class InputHistoryToDataBase implements TimeJob {
     /**
      * 这是一个每5秒给qq：1234567890发送一句 'hi!'的定时任务

@@ -6,7 +6,7 @@ import dice.sinanya.entity.EntityTypeMessages;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static dice.sinanya.system.MessagesSystem.ROLL_MAX_VALUE;
+import static dice.sinanya.system.MessagesRollMaxValue.ROLL_MAX_VALUE;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.makedata.ManyRolls.manyRollsProcess;
 import static java.lang.Math.ceil;

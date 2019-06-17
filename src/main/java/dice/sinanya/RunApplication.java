@@ -29,6 +29,7 @@ public class RunApplication implements LemocApp {
     public static void main(String[] args) {
         initMessagesSystem();
 //        读取配置文件
+        new LemocApplication().run(new RunApplication());
         flushTeamEn();
 //        从数据库中读取幕间成长到缓存
         flushMaxRolls();
@@ -45,7 +46,6 @@ public class RunApplication implements LemocApp {
 //        从数据库中读取kp主群设定到缓存
         flushHistory();
 //        从数据库中读取骰点历史信息到缓存
-        new LemocApplication().run(new RunApplication());
     }
 
     @Override
@@ -53,6 +53,7 @@ public class RunApplication implements LemocApp {
         configuration.setScannerPackage("dice.sinanya.listener");
         configuration.setLinkIp(messagesSystem.get("hostIp"));
         configuration.setPort(Integer.parseInt(messagesSystem.get("hostPort")));
+        configuration.setLocalQQCode(messagesSystem.get("loginQQ"));
     }
 
     @Override

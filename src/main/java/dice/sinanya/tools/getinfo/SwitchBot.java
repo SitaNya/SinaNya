@@ -7,7 +7,6 @@ import static dice.sinanya.system.SystemInfo.SWITCH_BOT;
 
 public class SwitchBot {
     private static InsertBot insertBot = new InsertBot();
-    private static SelectBot selectBot = new SelectBot();
 
     public static void botOn(Long groupId) {
         SWITCH_BOT.put(groupId, true);
@@ -23,13 +22,8 @@ public class SwitchBot {
         if (SWITCH_BOT.containsKey(groupId)) {
             return SWITCH_BOT.get(groupId);
         } else {
-            selectBot.selectBot();
-            if (SWITCH_BOT.containsKey(groupId)) {
-                return SWITCH_BOT.get(groupId);
-            } else {
-                insertBot.insertBot(groupId, true);
-                return true;
-            }
+            insertBot.insertBot(groupId, true);
+            return true;
         }
     }
 }

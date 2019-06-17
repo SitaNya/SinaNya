@@ -1,5 +1,6 @@
 package dice.sinanya.listener;
 
+import com.forte.qqrobot.BaseConfiguration;
 import dice.sinanya.dice.game.Jrrp;
 import dice.sinanya.dice.get.*;
 import dice.sinanya.dice.getbook.Book;
