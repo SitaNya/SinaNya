@@ -17,13 +17,13 @@ import java.util.HashMap;
 public interface MessagesLog {
 
     /**
-     * @param logNameSwitch 记录某个群的某个日志是否打开
-     * @param logSwitchForGroup 记录某个群是否有日志打开
-     * @param logNameForGroup 记录某个群存在哪些日志
+     * @param LOG_NAME_SWITCH 记录某个群的某个日志是否打开
+     * @param LOG_SWITCH_FOR_GROUP 记录某个群是否有日志打开
+     * @param LOG_NAME_FOR_GROUP 记录某个群存在哪些日志
      */
-    HashMap<EntityLogTag, Boolean> logNameSwitch = new HashMap<EntityLogTag, Boolean>();
+    HashMap<EntityLogTag, Boolean> LOG_NAME_SWITCH = new HashMap<EntityLogTag, Boolean>();
 
-    HashMap<String, Boolean> logSwitchForGroup = new HashMap<>();
+    HashMap<String, Boolean> LOG_SWITCH_FOR_GROUP = new HashMap<>();
 
-    HashMap<String, String> logNameForGroup = new HashMap<>();
+    HashMap<String, String> LOG_NAME_FOR_GROUP = new HashMap<>();
 }

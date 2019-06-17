@@ -6,7 +6,7 @@ import dice.sinanya.entity.EntityHistory;
 
 import java.util.Map;
 
-import static dice.sinanya.system.MessagesHistory.historyList;
+import static dice.sinanya.system.MessagesHistory.HISTORY_LIST;
 
 
 public class History {
@@ -19,17 +19,17 @@ public class History {
     }
 
     public static void setHistory() {
-        for (Map.Entry<String, EntityHistory> mapEntry : historyList.entrySet()) {
+        for (Map.Entry<String, EntityHistory> mapEntry : HISTORY_LIST.entrySet()) {
             insertHistory.insertHistory(mapEntry.getValue());
         }
     }
 
     public static EntityHistory changeHistory(String qqId) {
-        if (historyList.containsKey(qqId)) {
-            return historyList.get(qqId);
+        if (HISTORY_LIST.containsKey(qqId)) {
+            return HISTORY_LIST.get(qqId);
         } else {
-            historyList.put(qqId, new EntityHistory(qqId));
-            return historyList.get(qqId);
+            HISTORY_LIST.put(qqId, new EntityHistory(qqId));
+            return HISTORY_LIST.get(qqId);
         }
     }
 }

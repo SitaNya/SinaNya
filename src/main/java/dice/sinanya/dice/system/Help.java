@@ -25,35 +25,35 @@ public class Help {
      * 骰点帮助
      */
     public void normal() {
-        sender(entityTypeMessages, normalHelp.toString());
+        sender(entityTypeMessages, NORMAL_HELP.toString());
     }
 
     /**
      * 车卡帮助
      */
     public void make() {
-        sender(entityTypeMessages, makeHelp.toString());
+        sender(entityTypeMessages, MAKE_HELP.toString());
     }
 
     /**
      * 带团帮助
      */
     public void group() {
-        sender(entityTypeMessages, groupHelp.toString());
+        sender(entityTypeMessages, GROUP_HELP.toString());
     }
 
     /**
      * 获取资料帮助
      */
     public void book() {
-        sender(entityTypeMessages, bookHelp.toString());
+        sender(entityTypeMessages, BOOK_HELP.toString());
     }
 
     /**
      * dnd帮助
      */
     public void dnd() {
-        sender(entityTypeMessages, dndHelp.toString());
+        sender(entityTypeMessages, DND_HELP.toString());
     }
 
     /**

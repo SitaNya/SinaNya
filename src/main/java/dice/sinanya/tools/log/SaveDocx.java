@@ -12,8 +12,8 @@ import java.io.File;
 import java.math.BigInteger;
 import java.util.HashMap;
 
-import static dice.sinanya.system.MessagesLogColorTag.logColorTag;
-import static dice.sinanya.system.MessagesRGB.RBG;
+import static dice.sinanya.system.MessagesLogColorTag.LOG_COLOR_TAG;
+import static dice.sinanya.system.MessagesRGB.RGB;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 
 public class SaveDocx {
@@ -99,17 +99,17 @@ public class SaveDocx {
         int colorTag = 100;
         for (final String line : bigResult.split("\n")) {
             if (line.contains(":") && !line.split(":")[0].equals("")) {
-                if (!logColorTag.containsKey(groupId)) {
-                    logColorTag.put(groupId, new HashMap<String, Integer>() {{
+                if (!LOG_COLOR_TAG.containsKey(groupId)) {
+                    LOG_COLOR_TAG.put(groupId, new HashMap<String, Integer>() {{
                         put(line.split(":")[0], 1);
                     }});
                 } else {
-                    HashMap<String, Integer> tmp = logColorTag.get(groupId);
+                    HashMap<String, Integer> tmp = LOG_COLOR_TAG.get(groupId);
                     if (!tmp.containsKey(line.split(":")[0])) {
                         tmp.put(line.split(":")[0], tmp.size());
                     }
                 }
-                colorTag = logColorTag.get(groupId).get(line.split(":")[0]);
+                colorTag = LOG_COLOR_TAG.get(groupId).get(line.split(":")[0]);
                 fromName = line.split(":")[0];
             } else if (line.contains("=========================================================================================")) {
                 colorTag = 11;
@@ -118,7 +118,7 @@ public class SaveDocx {
             } else if (getRoleChooseByQQ(qqId).equals(fromName)) {
                 colorTag = 12;
             }
-            makePdf(line, RBG.get(colorTag));
+            makePdf(line, RGB.get(colorTag));
         }
         File file = new File("../saveLogs/" + groupId + "/" + msg + ".docx");
         if (!file.getParentFile().exists()) {

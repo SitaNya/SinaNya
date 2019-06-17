@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * 接口说明: 人物背景的静态信息
  */
 public interface MessagesBG {
-    ArrayList<String> Info = new ArrayList<String>() {{
+    ArrayList<String> INFO = new ArrayList<String>() {{
         add("结实的");
         add("英俊的");
         add("笨拙的");
@@ -49,7 +49,7 @@ public interface MessagesBG {
         add("迟钝的");
         add("虚弱的");
     }};
-    ArrayList<String> Persuasion = new ArrayList<String>() {{
+    ArrayList<String> PERSUASION = new ArrayList<String>() {{
         add("１：你信仰并祈并一位大能。（例如毗沙门天、耶稣基督、海尔·塞拉西一世）");
         add("２：人类无需上帝。（例如坚定的无神论者，人文主义者，世俗主义者）");
         add("３：科学万能！科学万岁！你将选择其中之一。（例如进化论，低温学，太空探索）");
@@ -61,7 +61,7 @@ public interface MessagesBG {
         add("９：“金钱就是力量，我的朋友，我将竭尽全力获取我能看到的一切。”（例如贪婪心，进取心，冷酷心）");
         add("１０：竞选者/激进主义者。（例如女权运动人，平等主义家，工会权柄）");
     }};
-    ArrayList<String> ImportantPersonr = new ArrayList<String>() {{
+    ArrayList<String> IMPORTANT_PERSONS = new ArrayList<String>() {{
         add("１：父辈。（例如母亲，父亲，继母）");
         add("２：祖父辈。（例如外祖母，祖父）");
         add("３：兄弟。（例如妹妹，半血亲妹妹，无血缘妹妹）");
@@ -73,7 +73,7 @@ public interface MessagesBG {
         add("９：游戏中的另一位调查员伙伴。随机或自选。");
         add("１０：游戏中另一外ＮＰＣ。详情咨询你的守秘人");
     }};
-    ArrayList<String> ImportantPersonrInfo = new ArrayList<String>() {{
+    ArrayList<String> IMPORTANT_PERSONS_INFO = new ArrayList<String>() {{
         add("１：你欠了他们人情。他们帮助了你什么？（例如，经济上，困难时期的庇护，给你第一份工作）");
         add("２：他们教会了你一些东西。（例如，技能，如何去爱，如何成为男子汉）");
         add("３：他们给了你生命的意义。（例如，你渴望成为他们那样的人，你苦苦追寻着他们，你想让他们高兴）");
@@ -85,7 +85,7 @@ public interface MessagesBG {
         add("９：你试图证明你比他们更出色。他们的缺点是？（例如，懒惰，酗酒，冷漠）");
         add("１０：他们扰乱了你的人生，而你寻求复仇。发生了什么？（例如，射杀爱人之日，国破家亡之时，明镜两分之际）");
     }};
-    ArrayList<String> ImportantMap = new ArrayList<String>() {{
+    ArrayList<String> IMPORTANT_MAP = new ArrayList<String>() {{
         add("１：你最爱的学府。（例如，中学，大学）");
         add("２：你的故乡。（例如，乡下老家，小镇村，大都市）");
         add("３：相识初恋之处。（例如，音乐会，度假村，核弹避难所）");
@@ -97,7 +97,7 @@ public interface MessagesBG {
         add("９：生命中最高兴时的所在。（例如，初吻时坐着的公园长椅，你的大学）");
         add("１０：工作地点。（例如，办公室，图书馆，银行）");
     }};
-    ArrayList<String> Precious = new ArrayList<String>() {{
+    ArrayList<String> PRECIOUS = new ArrayList<String>() {{
         add("１：与你得意技相关之物。（例如华服，假ＩＤ卡，青铜指虎）");
         add("２：职业必需品。（例如医疗包，汽车，撬锁器）");
         add("３：童年的遗留物。（例如漫画书，随身小刀，幸运币）");
@@ -109,7 +109,7 @@ public interface MessagesBG {
         add("９：武器。（例如，半自动左轮，老旧的猎用来福，靴刃）");
         add("１０：宠物。（例如狗，猫，乌龟）");
     }};
-    ArrayList<String> speciality = new ArrayList<String>() {{
+    ArrayList<String> SPECIALITY = new ArrayList<String>() {{
         add("１：慷慨大方。（例如，小费大手，及时雨，慈善家）");
         add("２：善待动物。（例如，爱猫人士，农场出生，与马同舞）");
         add("３：梦想家。（例如，惯常异想天开，预言家，创造者）");

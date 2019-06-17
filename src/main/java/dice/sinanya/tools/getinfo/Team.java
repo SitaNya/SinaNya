@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static dice.sinanya.system.MessagesTeamEn.teamEn;
+import static dice.sinanya.system.MessagesTeamEn.TEAM_EN;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByQQ;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
@@ -37,7 +37,7 @@ public class Team {
     }
 
     public static void saveTeamEn() {
-        for (Map.Entry<EntityQqAndGroup, ArrayList<String>> mapEntry : teamEn.entrySet()) {
+        for (Map.Entry<EntityQqAndGroup, ArrayList<String>> mapEntry : TEAM_EN.entrySet()) {
             insertTeam.saveTeamEnToDatabase(mapEntry);
         }
     }
@@ -48,15 +48,15 @@ public class Team {
 
     public static String getTeamEn(EntityTypeMessages entityTypeMessages, String qqId) {
         EntityQqAndGroup entityQqAndGroup = new EntityQqAndGroup(entityTypeMessages.getFromGroup(), qqId);
-        HashMap<EntityQqAndGroup, ArrayList<String>> tmp = teamEn;
-        if (teamEn.containsKey(entityQqAndGroup)) {
+        HashMap<EntityQqAndGroup, ArrayList<String>> tmp = TEAM_EN;
+        if (TEAM_EN.containsKey(entityQqAndGroup)) {
             String role;
             if (checkRoleChooseExistByQQ(qqId)) {
                 role = getRoleChooseByQQ(qqId) + ": ";
             } else {
                 role = "[CQ:at,qq=" + qqId + "]: ";
             }
-            return role + StringUtils.join(teamEn.get(entityQqAndGroup), ",");
+            return role + StringUtils.join(TEAM_EN.get(entityQqAndGroup), ",");
         } else {
             return String.format(messagesSystem.get("teamMemberEnIsEmpty"), qqId);
         }

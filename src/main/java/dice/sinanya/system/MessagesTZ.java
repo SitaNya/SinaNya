@@ -12,7 +12,7 @@ import java.util.HashMap;
  * 接口说明: 自定义特质的静态信息
  */
 public interface MessagesTZ {
-    ArrayList<String> tz0 = new ArrayList<String>() {{
+    ArrayList<String> TZ0 = new ArrayList<String>() {{
         add("害怕夜晚(D):你因为某些原因害怕夜晚,深夜12点以后还要活动的话,“IDEA”和“知识”判定的成功范围变为各自的2分之1。但是擅长早起");
         add("快速恢复:你的恢复能力比一般人要强,生命力的回复判定结果+1");
         add("容易招怪物的喜爱。如果被怪物带走了的话,不会被杀,而是会被监禁或是更糟糕。");
@@ -34,7 +34,7 @@ public interface MessagesTZ {
         add("调查员是个迷信的人,依赖着护身符,仪式或者愚蠢的信念。遭遇超自然现象的时候比通常多损失1点SAN值,即使原本不损失的情况下可能变成损失1点。");
         add("重新投掷一次,如果是(D)的特性就再任意选择一个不带(D)的特性获得,如果说是不带(D)的特性,那么就任意选择一个带(D)特性获得。");
     }};
-    ArrayList<String> tz1 = new ArrayList<String>() {{
+    ArrayList<String> TZ1 = new ArrayList<String>() {{
         add("调查员见到血液或者流血就会感觉到身体不适,失去更多的SAN值。也可能因为疾病的原因无法靠近或通过流血现场。");
         add("你受到动物的喜爱，大多数动物会跟探索者亲近");
         add("探索者因为国籍,性别,人种,宗教或者过去的犯罪记录等原因失去了社会上的名誉地位。作为其影响,调查员可能减少自由活动时间甚至所有的交涉系技能减少[1D4*10]甚至更多。具体的影响玩家和KP商议决定。");
@@ -56,7 +56,7 @@ public interface MessagesTZ {
         add("这位调查员怎么说也太胖了点。鉴定一次[幸运],失败的话投掷一个D6,1~3 CON-5,4~6 APP-5。");
         add("没有特性，但是获得3D3*10的兴趣点");
     }};
-    ArrayList<String> tz2 = new ArrayList<String>() {{
+    ArrayList<String> TZ2 = new ArrayList<String>() {{
         add("任意选择一个特性");
         add("你拥有一个幸运的护身符，当这个护身符在身上的时候Luck+5，如果没带在身边就会招来不幸Luck-5。");
         add("调查员因精神,疾病等原因苦于身体抽搐,扭曲等症状。鉴定一次[幸运],失败的话减少1D2*5点DEX和5点APP。");
@@ -78,7 +78,7 @@ public interface MessagesTZ {
         add("你调查员拥有从恐怖环境中生还的经验(海难,战争,恐怖分子劫持,地震等等)。因为这个经历可能给调查员带来某种长久的影响(通常程度的恐怖症状,或者其他的精神障碍等)，所以SAN-1D6，如果出点为6，则获得一项永久的精神障碍（玩家和KP商议决定，可以从疯狂表里面挑）。可以选择任意一个技能获得一次成长，选择的技能需要有合理的理由。");
         add("重新投掷一次，如果是（D）的特性就再任意选择一个不带（D）的特性获得，如果说是不带（D）的特性，那么就任意选择一个带（D）特性获得。");
     }};
-    ArrayList<String> tz3 = new ArrayList<String>() {{
+    ArrayList<String> TZ3 = new ArrayList<String>() {{
         add("由玩家和KP商议决定,调查员由于特定的国籍,人种或者宗教的原因受到他人歧视，其他人接触这位调查员时会表现出敌意");
         add("调查员在某些方面手法十分高明，选择[锁匠][妙手]其中一项技能增加[DEX/5]。");
         add("由玩家和KP商议决定,调查员对于特定的国籍,人种或者宗教具有无理由的反感。调查员接触此类人群时会表现出敌意。");
@@ -100,7 +100,7 @@ public interface MessagesTZ {
         add("你的人生十分悲惨，SAN-1D10,玩家和KP必须给调查员设定一个悲惨背景，比如失去爱人,子孙或者其他血亲的悲剧，重要之人可以根据情况填写已故之人。");
         add("没有特性，但是获得3D3*10的兴趣点");
     }};
-    ArrayList<String> tz4 = new ArrayList<String>() {{
+    ArrayList<String> TZ4 = new ArrayList<String>() {{
         add("任意选择一个特性");
         add("调查员在政治,经济或者甚至军事环境里持有某种程度的权力。选择一个领域，投掷D100,信用评级变更为那个数值，但是如果超过职业允许上限的话则无法添加技能点。企业地位影响融资,政治地位可能所属某种政府机关,军队地位远超本身拥有的军衔也说不定。详细的情况和KP商议决定。");
         add("调查员被吉普赛人,魔女,法师,外国原住民等施予了诅咒,诅咒效果由KP决定。KP也可以决定解除诅咒的条件。");
@@ -122,7 +122,7 @@ public interface MessagesTZ {
         add("对调查员来说金钱至上。任何状况下都优先考虑金钱。为此欺骗他人也是正常的,欺骗对象也包含其他调查员，他们可能会被收买而反水。");
         add("重新投掷一次，如果是（D）的特性就再任意选择一个不带（D）的特性获得，如果说是不带（D）的特性，那么就任意选择一个带（D）特性获得。");
     }};
-    ArrayList<String> tz5 = new ArrayList<String>() {{
+    ArrayList<String> TZ5 = new ArrayList<String>() {{
         add("你因为各种原因持有着某种魔术道具，KP可以给予调查员一个魔术道具(可以杀伤神话生物的附魔武器,召唤神话生物的专用道具,占卜用品,POW储藏器等等)。调查员如果想要知道这件道具的详细性质需要通过一个[POW/2]的鉴定。");
         add("调查员不会抛弃自己的家人,朋友,伙伴,在力所能及的范围内一定会帮助他们。这种性格也使他和自己熟系的人交涉时获得10的加值。");
         add("你的一些经历让你十分厌恶动物，在使用与动物有关的技能时，技能成功率减少[1D6*5]");
@@ -144,7 +144,7 @@ public interface MessagesTZ {
         add("你做事十分笨拙，甚至因此经常把事情弄黄，大失败的几率变成通常的2倍。");
         add("没有特性，但是获得3D3*10的兴趣点");
     }};
-    ArrayList<String> tz6 = new ArrayList<String>() {{
+    ArrayList<String> TZ6 = new ArrayList<String>() {{
         add("重新投掷一次，如果是（D）的特性就再任意选择一个不带（D）的特性获得，如果说是不带（D）的特性，那么就任意选择一个带（D）特性获得。");
         add("你拥有成为魔法师的资质，学习咒文时只需要正常的一半时间,成功率也变更为[INT的数值]。");
         add("你经常锻炼，对某些运动比较擅长，可以在[攀爬][跳跃][游泳]之中挑选一项技能成长20，或者是两项成长10，或者是三项成长5，这三个技能以外的运动相关检定成功率上升[1D3*5]");
@@ -166,7 +166,7 @@ public interface MessagesTZ {
         add("你在空闲之余有研究语言或者你本身就在做相关的职业，即使语言不通的情况下也有可能和对象成功的交流,增加一个辅助技能[语言学家],初期技能值为[INT或者EDU/2]。");
         add("重新投掷两次，得到那两个特性");
     }};
-    ArrayList<String> tz7 = new ArrayList<String>() {{
+    ArrayList<String> TZ7 = new ArrayList<String>() {{
         add("你的身体倍棒，CON+1D3*5。");
         add("你十分擅长驱使动物去做事，与驱使动物有关的技能时增加[(1D4+1)*5]");
         add("你的身手比其他人好，投掷1D6。1~3=DEX+5,4~5=DEX+10,6=DEX+15。");
@@ -189,14 +189,14 @@ public interface MessagesTZ {
         add("没有特性，但是获得3D3*10的兴趣点");
     }};
 
-    HashMap<Integer, ArrayList<String>> tzList = new HashMap<Integer, ArrayList<String>>() {{
-        put(0, tz0);
-        put(1, tz1);
-        put(2, tz2);
-        put(3, tz3);
-        put(4, tz4);
-        put(5, tz5);
-        put(6, tz6);
-        put(7, tz7);
+    HashMap<Integer, ArrayList<String>> TZ_LIST = new HashMap<Integer, ArrayList<String>>() {{
+        put(0, TZ0);
+        put(1, TZ1);
+        put(2, TZ2);
+        put(3, TZ3);
+        put(4, TZ4);
+        put(5, TZ5);
+        put(6, TZ6);
+        put(7, TZ7);
     }};
 }

@@ -19,27 +19,27 @@ public class LogTag {
 
     public static boolean checkLogTagExist(EntityTypeMessages entityTypeMessages, String logName) {
         EntityLogTag entityLogTag = new EntityLogTag(entityTypeMessages.getFromGroup(), logName);
-        return logNameSwitch.containsKey(entityLogTag);
+        return LOG_NAME_SWITCH.containsKey(entityLogTag);
     }
 
     public static boolean checkOthorLogTrue(String groupId) {
-        if (logSwitchForGroup.containsKey(groupId)) {
-            return logSwitchForGroup.get(groupId);
+        if (LOG_SWITCH_FOR_GROUP.containsKey(groupId)) {
+            return LOG_SWITCH_FOR_GROUP.get(groupId);
         } else {
             boolean switchLogFroGroup = !selectLogTag.checkOthorLogTrue(groupId);
-            logSwitchForGroup.put(groupId, switchLogFroGroup);
+            LOG_SWITCH_FOR_GROUP.put(groupId, switchLogFroGroup);
             return switchLogFroGroup;
         }
     }
 
     public static String getOtherLogTrue(String groupId) {
         String tagNotFound = "未找到";
-        if (checkOthorLogTrue(groupId) && logNameForGroup.get(groupId) != null) {
-            return logNameForGroup.get(groupId);
+        if (checkOthorLogTrue(groupId) && LOG_NAME_FOR_GROUP.get(groupId) != null) {
+            return LOG_NAME_FOR_GROUP.get(groupId);
         } else {
             String name = selectLogTag.getOthorLogTrue(groupId);
             if (!name.equals(tagNotFound)) {
-                logNameForGroup.put(groupId, name);
+                LOG_NAME_FOR_GROUP.put(groupId, name);
                 return name;
             } else {
                 return name;
@@ -50,7 +50,7 @@ public class LogTag {
     public static boolean checkLogTagSwitch(EntityTypeMessages entityTypeMessages, String logName) {
         EntityLogTag entityLogTag = new EntityLogTag(entityTypeMessages.getFromGroup(), logName);
         if (checkLogTagExist(entityTypeMessages, logName)) {
-            return logNameSwitch.get(entityLogTag);
+            return LOG_NAME_SWITCH.get(entityLogTag);
         } else {
             return false;
         }
@@ -59,7 +59,7 @@ public class LogTag {
     public static void setLogTagSwitch(EntityTypeMessages entityTypeMessages, String logName, boolean logSwitch) {
         EntityLogTag entityLogTag = new EntityLogTag(entityTypeMessages.getFromGroup(), logName);
         insertLogTag.insertLogTag(entityLogTag, logSwitch);
-        logNameSwitch.put(entityLogTag, logSwitch);
+        LOG_NAME_SWITCH.put(entityLogTag, logSwitch);
     }
 
     public static String getTagList(String groupId) {
@@ -75,6 +75,6 @@ public class LogTag {
 
     public static void delLog(EntityLogTag entityLogTag) {
         insertLogTag.deleteLog(entityLogTag);
-        logNameSwitch.remove(entityLogTag);
+        LOG_NAME_SWITCH.remove(entityLogTag);
     }
 }

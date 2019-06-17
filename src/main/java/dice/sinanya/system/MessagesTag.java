@@ -114,8 +114,8 @@ public interface MessagesTag {
     String TAG_LOG_RM = HEADER_LOG + "rm.*";
 
     //    获取疯狂症状相关标签
-    String TAG_TI = HEADER + "ti[ ]*.*";
-    String TAG_LI = HEADER + "li[ ]*.*";
+    String TAG_TI = HEADER + "TI[ ]*.*";
+    String TAG_LI = HEADER + "LI[ ]*.*";
 
     //    获取DND骰点相关标签
     String HEADER_DND = HEADER + "dnd[ ]*";

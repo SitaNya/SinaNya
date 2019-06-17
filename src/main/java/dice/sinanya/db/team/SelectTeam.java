@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static dice.sinanya.system.MessagesTeamEn.teamEn;
+import static dice.sinanya.system.MessagesTeamEn.TEAM_EN;
 
 /**
  * @author SitaNya
@@ -30,11 +30,11 @@ public class SelectTeam {
      */
     public void flushTeamEnFromDatabase() {
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from teamEn";
+            String sql = "select * from TEAM_EN";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
-                        teamEn.put(new EntityQqAndGroup(set.getString("groupId"), set.getString("qq")), new ArrayList<>(Arrays.asList(set.getString("enSkill").split(","))));
+                        TEAM_EN.put(new EntityQqAndGroup(set.getString("groupId"), set.getString("qq")), new ArrayList<>(Arrays.asList(set.getString("enSkill").split(","))));
                     }
                 }
             }

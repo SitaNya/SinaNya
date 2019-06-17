@@ -31,7 +31,7 @@ public class InsertTeam {
      */
     public void saveTeamEnToDatabase(Map.Entry<EntityQqAndGroup, ArrayList<String>> mapEntry) {
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "update teamEn set enSkill=? where groupId=? and qqId=?";
+            String sql = "update TEAM_EN set enSkill=? where groupId=? and qqId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, StringUtils.join(mapEntry.getValue(), ","));
                 ps.setString(2, mapEntry.getKey().getGroupId());
@@ -52,7 +52,7 @@ public class InsertTeam {
      */
     public void deleteTeamEnToDatabase(String qqId, String groupId) {
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "delete from teamEn where groupId=? and qqId=?";
+            String sql = "delete from TEAM_EN where groupId=? and qqId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, qqId);
                 ps.setString(2, groupId);
@@ -70,7 +70,7 @@ public class InsertTeam {
      */
     public void clrTeamEnToDatabase(String groupId) {
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "delete from teamEn where groupId=? ";
+            String sql = "delete from TEAM_EN where groupId=? ";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, groupId);
                 ps.executeUpdate();

@@ -7,9 +7,9 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 
-import static dice.sinanya.system.MessagesLog.logNameForGroup;
-import static dice.sinanya.system.MessagesLog.logSwitchForGroup;
-import static dice.sinanya.system.MessagesLogGetLock.logGetLock;
+import static dice.sinanya.system.MessagesLog.LOG_NAME_FOR_GROUP;
+import static dice.sinanya.system.MessagesLog.LOG_SWITCH_FOR_GROUP;
+import static dice.sinanya.system.MessagesLogGetLock.LOG_GET_LOCK;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.LogTag.*;
@@ -52,8 +52,8 @@ public class Log {
             } else {
                 sender(entityTypeMessages, msg + messagesSystem.get("createLog"));
             }
-            logNameForGroup.put(entityTypeMessages.getFromGroup(), msg);
-            logSwitchForGroup.put(entityTypeMessages.getFromGroup(), true);
+            LOG_NAME_FOR_GROUP.put(entityTypeMessages.getFromGroup(), msg);
+            LOG_SWITCH_FOR_GROUP.put(entityTypeMessages.getFromGroup(), true);
             setLogTagSwitch(entityTypeMessages, msg, true);
         }
     }
@@ -67,8 +67,8 @@ public class Log {
         if (checkLogTagExist(entityTypeMessages, msg)) {
             if (checkLogTagSwitch(entityTypeMessages, msg)) {
                 setLogTagSwitch(entityTypeMessages, msg, false);
-                logNameForGroup.remove(entityTypeMessages.getFromGroup());
-                logSwitchForGroup.put(entityTypeMessages.getFromGroup(), false);
+                LOG_NAME_FOR_GROUP.remove(entityTypeMessages.getFromGroup());
+                LOG_SWITCH_FOR_GROUP.put(entityTypeMessages.getFromGroup(), false);
                 sender(entityTypeMessages, msg + "已关闭，现在可以使用\".log get " + msg + "\"进行获取");
             } else {
                 sender(entityTypeMessages, msg + messagesSystem.get("alreadyClose"));
@@ -85,10 +85,10 @@ public class Log {
         String tag = TAG_LOG_GET;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         if (!checkLogTagSwitch(entityTypeMessages, msg)) {
-            if (logGetLock.contains(msg)) {
+            if (LOG_GET_LOCK.contains(msg)) {
                 sender(entityTypeMessages, messagesSystem.get("readLock"));
             } else {
-                logGetLock.add(msg);
+                LOG_GET_LOCK.add(msg);
             }
             String bigResult = getLogText(new EntityLogTag(entityTypeMessages.getFromGroup(), msg));
             sender(entityTypeMessages, "正在抽取数据库为" + msg + "生成文件");
@@ -102,7 +102,7 @@ public class Log {
             sender(entityTypeMessages, msg + "正在发送到您的邮箱" + entityTypeMessages.getFromQq() + "@qq.com");
             sendMail(entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup(), msg);
             sender(entityTypeMessages, "[CQ:at,qq=" + entityTypeMessages.getFromQq() + "] 已发送到您的QQ邮箱，注意查收");
-            logGetLock.remove(msg);
+            LOG_GET_LOCK.remove(msg);
         } else {
             sender(entityTypeMessages, msg + "仍处于打开状态，请关闭后再试");
         }

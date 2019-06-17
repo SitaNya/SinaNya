@@ -14,5 +14,5 @@ import java.util.HashMap;
  * 接口说明: 小队技能成功情况的记录，用于记录EN
  */
 public interface MessagesTeamEn {
-    HashMap<EntityQqAndGroup, ArrayList<String>> teamEn = new HashMap<>();
+    HashMap<EntityQqAndGroup, ArrayList<String>> TEAM_EN = new HashMap<>();
 }

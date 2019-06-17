@@ -9,7 +9,7 @@ package dice.sinanya.system;
  * 接口说明: 帮助的静态信息
  */
 public interface MessagesHelp {
-    StringBuilder normalHelp = new StringBuilder()
+    StringBuilder NORMAL_HELP = new StringBuilder()
             .append(".r\n")
             .append(".r\t.rd\t.r3d6\t.rd6\t.r3d6+5*3d6-12/6\t.r4#3d6\t.r4d+8d")
             .append("普通骰掷，支持数学计算，不支持判定")
@@ -65,7 +65,7 @@ public interface MessagesHelp {
             .append(".rcv 50\t.rcv 50+10\t.rcv 力量\t.rcv 力量+10\t.rcv 力量*3\n")
             .append("对抗骰掷，与rav相同，不过使用的是规则书判定");
 
-    StringBuilder makeHelp = new StringBuilder()
+    StringBuilder MAKE_HELP = new StringBuilder()
             .append(".coc\n")
             .append(".coc\t.coc7\t.coc7 5\t.coc 5\n")
             .append("生成7版简易人物卡")
@@ -122,7 +122,7 @@ public interface MessagesHelp {
             .append(".st show\n")
             .append("查看当前选定的人物卡的属性");
 
-    StringBuilder groupHelp = new StringBuilder()
+    StringBuilder GROUP_HELP = new StringBuilder()
             .append(".kp\n")
             .append("将自己设为本群内的kp，同一时间只能设置一个kp。此命令设置后，下方的对抗、查看队伍中角色技能等功能才可以正常运作")
             .append("\n-----------------------------------\n")
@@ -200,7 +200,7 @@ public interface MessagesHelp {
             .append(".rcv 50\t.rcv 50+10\t.rcv 力量\t.rcv 力量+10\t.rcv 力量*3\n")
             .append("对抗骰掷，与rav相同，不过使用的是规则书判定");
 
-    StringBuilder bookHelp = new StringBuilder()
+    StringBuilder BOOK_HELP = new StringBuilder()
             .append(".getbook card\n")
             .append("获取奈梅斯定制版人物卡，感谢贝尔sama喵巨佬！！卡中第二页有st多人物卡导入字符串，填好后可以直接复制~")
             .append("\n-----------------------------------\n")
@@ -216,7 +216,7 @@ public interface MessagesHelp {
             .append(".getbook rp\n")
             .append("角色扮演365问，不过只有问没有答，估计还是要读的人自己思考吧");
 
-    StringBuffer dndHelp = new StringBuffer()
+    StringBuffer DND_HELP = new StringBuffer()
             .append(".re\n")
             .append(".re\t.re+10\t.re-10\n")
             .append("dnd专用的D20骰点，目前仅支持加减")

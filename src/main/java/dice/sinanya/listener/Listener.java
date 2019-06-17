@@ -30,9 +30,6 @@ import static dice.sinanya.tools.getinfo.SwitchBot.getBot;
  */
 public class Listener {
     private String tagBotOn = ".bot on";
-    private String tagBotOff = ".bot off";
-    private String tagBotInfo = ".bot";
-    private String tagBotExit = ".bot exit";
     private String tagMe = "[CQ:at,qq=" + messagesSystem.get("loginQQ") + "]";
 
     private Listener() {
@@ -178,6 +175,9 @@ public class Listener {
      * @param messages           消息字符串
      */
     private void changeBotSwitch(EntityTypeMessages entityTypeMessages, String messages) {
+        String tagBotOff = ".bot off";
+        String tagBotInfo = ".bot";
+        String tagBotExit = ".bot exit";
         if ((messages.trim().contains(tagBotOn) && messages.trim().contains(tagMe)) || (messages.trim().contains(tagBotOn) && !messages.trim().contains("[CQ:at"))) {
             new Bot(entityTypeMessages).on();
         } else if (messages.trim().contains(tagBotOff) && messages.trim().contains(tagMe)) {

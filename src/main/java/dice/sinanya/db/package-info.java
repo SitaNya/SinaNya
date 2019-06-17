@@ -11,6 +11,7 @@
  * kp kp主群设定
  * log 日志
  * roles 人物卡角色
+ * setdefaultrolls 默认骰点
  * system 机器人开关
  * team 队伍信息
  * tools 数据库工具包

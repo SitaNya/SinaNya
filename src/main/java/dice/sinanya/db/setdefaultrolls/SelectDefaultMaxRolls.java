@@ -17,7 +17,9 @@ import static dice.sinanya.system.MessagesRollMaxValue.ROLL_MAX_VALUE;
  * 电子邮箱: sitanya@qq.com
  * 维护群(QQ): 162279609
  * 有任何问题欢迎咨询
- * 类说明:
+ * 类说明: 默认骰点上限查询类
+ *
+ * 直接刷新到静态变量
  */
 public class SelectDefaultMaxRolls {
     private static final Logger Log = LogManager.getLogger(SelectDefaultMaxRolls.class.getName());

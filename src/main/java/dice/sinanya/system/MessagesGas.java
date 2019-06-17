@@ -12,7 +12,7 @@ import java.util.HashMap;
  * 接口说明: 煤气灯的静态信息
  */
 public interface MessagesGas {
-    ArrayList<String> gas0 = new ArrayList<String>() {{
+    ArrayList<String> GAS0 = new ArrayList<String>() {{
         add("任意选择一个有(D)记号的特征。");
         add("高龄(D):年龄追加[(1D3+1)*10]岁,参照6版标准规则,超过30岁后开始获得EDU加值,40岁以后开始对于身体属性造成减值。");
         add("优雅的岁数: 40岁开始对身体能力造成减值的规则改为从50岁开始。");
@@ -34,7 +34,7 @@ public interface MessagesGas {
         add("再投掷三次,由玩家选择其中一个作为特征。");
         add("再投掷三次,玩家和KP各选择一个特征。");
     }};
-    ArrayList<String> gas1 = new ArrayList<String>() {{
+    ArrayList<String> GAS1 = new ArrayList<String>() {{
         add("再投掷一次,获得那个特征:特征具有(D)时,玩家可以再额外选择一个其他任意特征获得。特征没有(D)时,玩家必须再同时选择一个(D)特征。");
         add("诅咒(D):调查员被吉普赛人,魔女,法师,外国原住民等施予了诅咒,诅咒效果等同[邪眼]咒文或者由KP决定。KP也可以决定解除诅咒的条件。");
         add("黑暗先祖(D):调查员具有邪恶的一族,外国人,食人族,甚至神话生物的血统。投掷一个D100,出点越大,血统也越可怖。");
@@ -56,7 +56,7 @@ public interface MessagesGas {
         add("没有特征但是可以选择任意技能(可多选)获得总计3D20点技能加值。");
         add("玩家自己选择一个特征。");
     }};
-    ArrayList<String> gas2 = new ArrayList<String>() {{
+    ArrayList<String> GAS2 = new ArrayList<String>() {{
         add("再投掷三次,玩家和KP各选择一个。");
         add("贪婪(D):对调查员来说金钱至上。任何状况下都优先考虑金钱。为此欺骗他人也是正常的,欺骗对象也包含其他调查员。");
         add("悲叹人生:SAN-1D10,玩家和KP给调查员设定一个背景(失去爱人,子孙或者其他血亲的悲剧)。");
@@ -78,7 +78,7 @@ public interface MessagesGas {
         add("虽然没有特侦但是职业技能值获得额外的3D20的技能点。");
         add("玩家自己选择一个特征。");
     }};
-    ArrayList<String> gas3 = new ArrayList<String>() {{
+    ArrayList<String> GAS3 = new ArrayList<String>() {{
         add("虽然没有特征,但是调查员的持有现金为通常规则的2倍。");
         add("魔术道具:KP可以给予调查员一个魔术道具(可以杀伤神话生物的附魔武器,召唤神话生物的专用道具,占卜用品,POW储藏器等等)。调查员如果想要知道这件道具的详细性质需要通过一个[POW*0.2]的鉴定。");
         add("射击名人(手枪,步枪以及霰弹枪中选择一项):选择的这项火器技能+[2D3*5]%。");
@@ -100,7 +100,7 @@ public interface MessagesGas {
         add("虽然没有特征但是任意技能获得3D20点技能点。");
         add("再投掷一次,获得那个特征:特征具有(D)时,玩家可以再额外选择一个其他任意特征获得。特征没有(D)时,玩家必须再同时选择一个(D)特征。");
     }};
-    ArrayList<String> gas4 = new ArrayList<String>() {{
+    ArrayList<String> GAS4 = new ArrayList<String>() {{
         add("虽然没有特征但是职业技能值额外获得3D20点技能点。");
         add("恐怖症/疯狂(D):调查员身患恐怖症状或者疯狂症状。参考6/7版标准规则随机决定症状,或者选择想要的症状。遭遇到自身症状根源的恐怖或者物品时,如果SAN CHECK失败,那么调查员将无法抑制自己的恐怖或者被魅惑。");
         add("权力/阶级/企业地位:调查员在政治,经济或者甚至军事环境里持有某种程度的权力。投掷D100,出点越大权力越大。企业地位影响融资,政治地位可能所属某种政府机关,军队地位远超本身拥有的军衔也说不定。[信用+25%。详细的情况和KP商议决定。");
@@ -122,7 +122,7 @@ public interface MessagesGas {
         add("再投掷一次,获得那个特征:特征具有(D)时,玩家可以再额外选择一个其他任意特征获得。特征没有(D)时,玩家必须再同时选择一个(D)特征。");
         add("再投掷两次并获得那两个特征。");
     }};
-    ArrayList<String> gas5 = new ArrayList<String>() {{
+    ArrayList<String> GAS5 = new ArrayList<String>() {{
         add("投掷三次,玩家和KP各选择一个特征。");
         add("病弱(D):CON-1D3*5。");
         add("巧妙的手法:[钳工]技能增加[DEX]%,可以在偷窃或者魔术的时候使用。");
@@ -145,12 +145,12 @@ public interface MessagesGas {
         add("投掷两次,玩家任意选择其中一项特征。");
     }};
 
-    HashMap<Integer, ArrayList<String>> gasList = new HashMap<Integer, ArrayList<String>>() {{
-        put(0, gas0);
-        put(1, gas1);
-        put(2, gas2);
-        put(3, gas3);
-        put(4, gas4);
-        put(5, gas5);
+    HashMap<Integer, ArrayList<String>> GAS_LIST = new HashMap<Integer, ArrayList<String>>() {{
+        put(0, GAS0);
+        put(1, GAS1);
+        put(2, GAS2);
+        put(3, GAS3);
+        put(4, GAS4);
+        put(5, GAS5);
     }};
 }

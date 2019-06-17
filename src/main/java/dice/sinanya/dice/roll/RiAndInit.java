@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static dice.sinanya.system.MessagesInit.initList;
+import static dice.sinanya.system.MessagesInit.INIT_LIST;
 import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.system.MessagesTag.TAG_RI;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
@@ -98,14 +98,14 @@ public class RiAndInit {
                 msgBefore = random + "-" + msg.replace("+", "") + "=";
             }
         }
-        if (initList.containsKey(entityTypeMessages.getFromGroup())) {
-            HashMap<String, String> riList = initList.get(entityTypeMessages.getFromGroup());
+        if (INIT_LIST.containsKey(entityTypeMessages.getFromGroup())) {
+            HashMap<String, String> riList = INIT_LIST.get(entityTypeMessages.getFromGroup());
             riList.put(nick, ": D20=" + msgBefore + result);
-            initList.put(entityTypeMessages.getFromGroup(), riList);
+            INIT_LIST.put(entityTypeMessages.getFromGroup(), riList);
         } else {
             HashMap<String, String> riList = new HashMap<>(30);
             riList.put(nick, ": D20=" + msgBefore + result);
-            initList.put(entityTypeMessages.getFromGroup(), riList);
+            INIT_LIST.put(entityTypeMessages.getFromGroup(), riList);
         }
     }
 
@@ -114,13 +114,13 @@ public class RiAndInit {
      */
     public void init() {
         StringBuilder stringBuffer = new StringBuilder();
-        if (!initList.containsKey(entityTypeMessages.getFromGroup())) {
+        if (!INIT_LIST.containsKey(entityTypeMessages.getFromGroup())) {
             sender(entityTypeMessages, messagesSystem.get("dndInitIsEmtpy"));
             return;
         }
         stringBuffer.append("先攻列表为:\n");
         int i = 1;
-        for (Map.Entry<String, HashMap<String, String>> mapEntry : initList.entrySet()) {
+        for (Map.Entry<String, HashMap<String, String>> mapEntry : INIT_LIST.entrySet()) {
             HashMap<String, String> sort = sortHashMap(mapEntry.getValue());
             for (Map.Entry<String, String> mapEntry2 : sort.entrySet()) {
                 stringBuffer.append(i)
@@ -138,7 +138,7 @@ public class RiAndInit {
      * 清空先攻列表
      */
     public void clr() {
-        initList.remove(entityTypeMessages.getFromGroup());
+        INIT_LIST.remove(entityTypeMessages.getFromGroup());
         sender(entityTypeMessages, messagesSystem.get("clrDndInit"));
     }
 

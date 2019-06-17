@@ -218,6 +218,9 @@ class Flow {
         isR = messages.matches(TAGR) && !isRH && !isRA && !isRC && !isRB && !isRP && !isRi && !isRAL && !isRCL && !isRAV && !isRCV;
     }
 
+    /**
+     * 私聊逻辑，同时在私聊和群中生效
+     */
     void toPrivate() {
         Roll roll = new Roll(entityTypeMessages);
         Roles roles = new Roles(entityTypeMessages);
@@ -363,6 +366,10 @@ class Flow {
 
     }
 
+    /**
+     * 群逻辑区块，所有在这里声明的逻辑都会在群、讨论组中生效。
+     * 此外，虽然私聊的逻辑在群中生效，但这里设置的群逻辑并不会在私聊中生效
+     */
     private void toPrivateAndGroup() {
         Roll roll = new Roll(entityTypeMessages);
         Team team = new Team(entityTypeMessages);
@@ -449,10 +456,16 @@ class Flow {
         toPrivate();
     }
 
+    /**
+     * 将群分流到群逻辑区块
+     */
     void toGroup() {
         toPrivateAndGroup();
     }
 
+    /**
+     * 将讨论组分流到群逻辑区块
+     */
     void toDisGroup() {
         toPrivateAndGroup();
     }

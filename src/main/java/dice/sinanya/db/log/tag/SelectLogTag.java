@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static dice.sinanya.system.MessagesLog.logNameSwitch;
+import static dice.sinanya.system.MessagesLog.LOG_NAME_SWITCH;
 
 /**
  * @author SitaNya
@@ -37,7 +37,7 @@ public class SelectLogTag {
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
-                        logNameSwitch.put(new EntityLogTag(set.getString("groupId"), set.getString("logName")), set.getBoolean("logSwitch"));
+                        LOG_NAME_SWITCH.put(new EntityLogTag(set.getString("groupId"), set.getString("logName")), set.getBoolean("logSwitch"));
                     }
                 }
             }

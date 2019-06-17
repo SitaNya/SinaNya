@@ -28,25 +28,25 @@ public class Bj implements GetRandomList {
     public void bg() {
 
         String stringBuilder = "个人描述:\t\t" +
-                randomFromList(Info) +
+                randomFromList(INFO) +
                 "\n" +
                 "思想信念:\t\t" +
-                randomFromList(Persuasion) +
+                randomFromList(PERSUASION) +
                 "\n" +
                 "重要之人:\t\t" +
-                randomFromList(ImportantPersonr) +
+                randomFromList(IMPORTANT_PERSONS) +
                 "\n" +
                 "重要之人理由:\t" +
-                randomFromList(ImportantPersonrInfo) +
+                randomFromList(IMPORTANT_PERSONS_INFO) +
                 "\n" +
                 "意义非凡之地:\t" +
-                randomFromList(ImportantMap) +
+                randomFromList(IMPORTANT_MAP) +
                 "\n" +
                 "宝贵之物:\t\t" +
-                randomFromList(Precious) +
+                randomFromList(PRECIOUS) +
                 "\n" +
                 "调查员特点:\t\t" +
-                randomFromList(speciality) +
+                randomFromList(SPECIALITY) +
                 "\n" +
                 "既然决定了背景，就一定要好好扮演不要出戏哦！";
         sender(entityTypeMessages, stringBuilder);

@@ -5,7 +5,7 @@ import dice.sinanya.db.kp.SelectKp;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.NotSetKpGroupException;
 
-import static dice.sinanya.system.MessagesKP.KpGroup;
+import static dice.sinanya.system.MessagesKP.KP_GROUP;
 
 public class Kp {
     private static SelectKp selectKp = new SelectKp();
@@ -20,8 +20,8 @@ public class Kp {
     }
 
     public static String getKpGroup(EntityTypeMessages entityTypeMessages) throws NotSetKpGroupException {
-        if (KpGroup.containsKey(entityTypeMessages.getFromQq())) {
-            return KpGroup.get(entityTypeMessages.getFromQq());
+        if (KP_GROUP.containsKey(entityTypeMessages.getFromQq())) {
+            return KP_GROUP.get(entityTypeMessages.getFromQq());
         } else {
             throw new NotSetKpGroupException(entityTypeMessages);
         }

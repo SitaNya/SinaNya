@@ -13,5 +13,5 @@ import java.util.HashMap;
  * 将对方的昵称hash后存到这里，可以确保同一个人说话用同一种颜色
  */
 public interface MessagesLogColorTag {
-    HashMap<String, HashMap<String, Integer>> logColorTag = new HashMap<>();
+    HashMap<String, HashMap<String, Integer>> LOG_COLOR_TAG = new HashMap<>();
 }

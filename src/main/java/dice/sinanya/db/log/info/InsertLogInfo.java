@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Map;
 
-import static dice.sinanya.system.MessagesLog.logNameSwitch;
+import static dice.sinanya.system.MessagesLog.LOG_NAME_SWITCH;
 
 /**
  * @author SitaNya
@@ -45,7 +45,7 @@ public class InsertLogInfo {
         } catch (SQLException e) {
             Log.error(e.getMessage(), e);
             StringBuilder stringBuilder = new StringBuilder();
-            for (Map.Entry<EntityLogTag, Boolean> mapEntry : logNameSwitch.entrySet()) {
+            for (Map.Entry<EntityLogTag, Boolean> mapEntry : LOG_NAME_SWITCH.entrySet()) {
                 stringBuilder.append("groupId")
                         .append(":")
                         .append(mapEntry.getKey().getGroupId())

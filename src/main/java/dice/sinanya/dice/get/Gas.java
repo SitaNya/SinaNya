@@ -3,7 +3,7 @@ package dice.sinanya.dice.get;
 import dice.sinanya.dice.get.imal.GetRandomList;
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.system.MessagesGas.gasList;
+import static dice.sinanya.system.MessagesGas.GAS_LIST;
 import static dice.sinanya.tools.log.Sender.sender;
 
 /**
@@ -25,6 +25,6 @@ public class Gas implements GetRandomList {
      * 获取煤气灯特质并发送
      */
     public void get() {
-        sender(entityTypeMessages, randomNestList(gasList));
+        sender(entityTypeMessages, randomNestList(GAS_LIST));
     }
 }

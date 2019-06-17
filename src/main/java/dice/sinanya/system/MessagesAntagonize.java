@@ -15,5 +15,5 @@ import java.util.HashMap;
  * 所有数据优先从静态对象取，取不到再去找数据库，这样可以提高效率
  */
 public interface MessagesAntagonize {
-    HashMap<String, EntityAntagonize> Antagonize = new HashMap<>();
+    HashMap<String, EntityAntagonize> ANTAGONIZE = new HashMap<>();
 }

@@ -14,5 +14,5 @@ import java.util.HashMap;
  * 所有数据优先从静态对象取，取不到再去找数据库，这样可以提高效率
  */
 public interface MessagesHistory {
-    HashMap<String, EntityHistory> historyList = new HashMap<>();
+    HashMap<String, EntityHistory> HISTORY_LIST = new HashMap<>();
 }

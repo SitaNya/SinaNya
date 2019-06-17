@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static dice.sinanya.system.MessagesHistory.historyList;
+import static dice.sinanya.system.MessagesHistory.HISTORY_LIST;
 
 
 /**
@@ -38,7 +38,7 @@ public class SelectHistory {
                 ps.setString(1, BaseConfiguration.getLocalQQCode());
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
-                        historyList.put(set.getString("qqId"), new EntityHistory(set.getString("qqId"), set.getInt("Fumble"), set.getInt("CriticalSuccess"), set.getInt("ExtremeSuccess"), set.getInt("HardSuccess"), set.getInt("Success"), set.getInt("Failure"), set.getInt("times"), set.getInt("mean")));
+                        HISTORY_LIST.put(set.getString("qqId"), new EntityHistory(set.getString("qqId"), set.getInt("Fumble"), set.getInt("CriticalSuccess"), set.getInt("ExtremeSuccess"), set.getInt("HardSuccess"), set.getInt("Success"), set.getInt("Failure"), set.getInt("times"), set.getInt("mean")));
                     }
                 }
             }

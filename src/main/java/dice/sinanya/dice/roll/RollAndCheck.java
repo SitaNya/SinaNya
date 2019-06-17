@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.concurrent.*;
 
-import static dice.sinanya.system.MessagesAntagonize.Antagonize;
+import static dice.sinanya.system.MessagesAntagonize.ANTAGONIZE;
 import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
@@ -100,17 +100,17 @@ public class RollAndCheck implements En {
             groupId = entityTypeMessages.getFromGroup();
 
         }
-        if (Antagonize.containsKey(groupId) && !groupId.equals(defaultGroupId)) {
-            EntityAntagonize entityAntagonize = Antagonize.get(groupId);
+        if (ANTAGONIZE.containsKey(groupId) && !groupId.equals(defaultGroupId)) {
+            EntityAntagonize entityAntagonize = ANTAGONIZE.get(groupId);
             EntityAntagonize thisEntityAntagonize = checkResultLevel.getAntagonize();
 
             sender(entityTypeMessages, stringBuilder);
             checkAntagonize(entityTypeMessages, thisEntityAntagonize, entityAntagonize, groupId);
-            Antagonize.remove(groupId);
+            ANTAGONIZE.remove(groupId);
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeOver"));
         } else if (!groupId.equals(defaultGroupId)) {
             sender(entityTypeMessages, stringBuilder);
-            Antagonize.put(groupId, checkResultLevel.getAntagonize());
+            ANTAGONIZE.put(groupId, checkResultLevel.getAntagonize());
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, getNickName(entityTypeMessages) + "发起一次对抗");
         } else {
             throw new NotSetKpGroupException(entityTypeMessages);
@@ -145,19 +145,19 @@ public class RollAndCheck implements En {
         } else {
             groupId = entityTypeMessages.getFromGroup();
         }
-        if (Antagonize.containsKey(groupId) && !groupId.equals(defaultGroupId)) {
+        if (ANTAGONIZE.containsKey(groupId) && !groupId.equals(defaultGroupId)) {
 //            静态对象Antagonize中包含了以群号为key的EntityAntagonize对象，如果包含的话，那么就说明上一次对抗已经发起了，这次直接给结果
-            EntityAntagonize entityAntagonize = Antagonize.get(groupId);
+            EntityAntagonize entityAntagonize = ANTAGONIZE.get(groupId);
             EntityAntagonize thisEntityAntagonize = checkResultLevel.getAntagonize();
             sender(entityTypeMessages, stringBuilder);
             checkAntagonize(entityTypeMessages, thisEntityAntagonize, entityAntagonize, groupId);
-            Antagonize.remove(groupId);
+            ANTAGONIZE.remove(groupId);
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeOver"));
         } else if (!groupId.equals(defaultGroupId)) {
 //            静态对象Antagonize中包含了以群号为key的EntityAntagonize对象，如果不包含的话，那么就说明这次是发起对抗，直接插入进去
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, getNickName(entityTypeMessages) + "发起一次对抗");
             sender(entityTypeMessages, stringBuilder);
-            Antagonize.put(groupId, checkResultLevel.getAntagonize());
+            ANTAGONIZE.put(groupId, checkResultLevel.getAntagonize());
         } else {
             throw new NotSetKpGroupException(entityTypeMessages);
         }

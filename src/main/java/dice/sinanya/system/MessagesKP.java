@@ -12,5 +12,5 @@ import java.util.HashMap;
  * 所有数据优先从静态对象取，取不到再去找数据库，这样可以提高效率
  */
 public interface MessagesKP {
-    HashMap<String, String> KpGroup = new HashMap<>();
+    HashMap<String, String> KP_GROUP = new HashMap<>();
 }

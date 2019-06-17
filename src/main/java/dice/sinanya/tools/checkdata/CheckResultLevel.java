@@ -45,10 +45,10 @@ public class CheckResultLevel {
         if (ruleBook) {
             if (random == ruleFumble) {
                 level = 0;
-                return "strFumble";
+                return "STR_FUMBLE";
             } else if (random <= skill && random <= ruleCriticalSuccess) {
                 level = 5;
-                return "strCriticalSuccess";
+                return "STR_CRITICAL_SUCCESS";
             } else {
                 return checkNotNeedRules();
             }
@@ -57,10 +57,10 @@ public class CheckResultLevel {
             ruleCriticalSuccess = 5;
             if (random >= ruleFumble && random >= skill) {
                 level = 0;
-                return "strFumble";
+                return "STR_FUMBLE";
             } else if (random <= skill && random <= ruleCriticalSuccess) {
                 level = 5;
-                return "strCriticalSuccess";
+                return "STR_CRITICAL_SUCCESS";
             } else {
                 return checkNotNeedRules();
             }
@@ -100,16 +100,16 @@ public class CheckResultLevel {
         int levelHeadLine = 2;
         if (random <= skill && random <= skill / levelExtremeLine) {
             level = 4;
-            return "strExtremeSuccess";
+            return "STR_EXTREME_SUCCESS";
         } else if (random <= skill && random <= skill / levelHeadLine) {
             level = 3;
-            return "strHardSuccess";
+            return "STR_HARD_SUCCESS";
         } else if (random <= skill) {
             level = 2;
-            return "strSuccess";
+            return "STR_SUCCESS";
         } else {
             level = 1;
-            return "strFailure";
+            return "STR_FAILURE";
         }
     }
 

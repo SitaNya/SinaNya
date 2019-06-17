@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static dice.sinanya.system.MessagesKP.KpGroup;
+import static dice.sinanya.system.MessagesKP.KP_GROUP;
 
 
 /**
@@ -35,7 +35,7 @@ public class SelectKp {
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
-                        KpGroup.put(set.getString("qqId"), set.getString("groupId"));
+                        KP_GROUP.put(set.getString("qqId"), set.getString("groupId"));
                     }
                 }
             }

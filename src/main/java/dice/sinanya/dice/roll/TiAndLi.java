@@ -29,8 +29,8 @@ public class TiAndLi {
      */
     public void ti() {
         StringBuilder stringBuilder = new StringBuilder();
-        int indexTi = random(0, ti.size() - 1);
-        String strTi = ti.get(indexTi);
+        int indexTi = random(0, TI.size() - 1);
+        String strTi = TI.get(indexTi);
         stringBuilder
                 .append(getRoleChooseByFromQQ(entityTypeMessages))
                 .append("的疯狂发作-临时症状:\n")
@@ -46,8 +46,8 @@ public class TiAndLi {
      */
     public void li() {
         StringBuilder stringBuilder = new StringBuilder();
-        int indexLi = random(0, li.size() - 1);
-        String strLi = li.get(indexLi);
+        int indexLi = random(0, LI.size() - 1);
+        String strLi = LI.get(indexLi);
         stringBuilder
                 .append(getRoleChooseByFromQQ(entityTypeMessages))
                 .append("的疯狂发作-总结症状:\n")
@@ -70,12 +70,12 @@ public class TiAndLi {
     private void symptomFormatAndSend(StringBuilder stringBuilder, String strSymptom, int index) {
         switch (index) {
             case 9:
-                int indexPanic = random(0, strPanic.size() - 1);
-                strSymptom = String.format(strSymptom, "1D10=" + random(1, 10), "1D" + strPanic.size() + "=" + (indexPanic + 1), strPanic.get(indexPanic));
+                int indexPanic = random(0, STR_PANIC.size() - 1);
+                strSymptom = String.format(strSymptom, "1D10=" + random(1, 10), "1D" + STR_PANIC.size() + "=" + (indexPanic + 1), STR_PANIC.get(indexPanic));
                 break;
             case 8:
-                int indexFear = random(0, strFear.size() - 1);
-                strSymptom = String.format(strSymptom, "1D10=" + random(1, 10), "1D" + strFear.size() + "=" + (indexFear + 1), strFear.get(indexFear));
+                int indexFear = random(0, STR_FEAR.size() - 1);
+                strSymptom = String.format(strSymptom, "1D10=" + random(1, 10), "1D" + STR_FEAR.size() + "=" + (indexFear + 1), STR_FEAR.get(indexFear));
                 break;
             default:
                 strSymptom = String.format(strSymptom, "1D10=" + random(1, 10));
