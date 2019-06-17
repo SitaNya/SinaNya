@@ -4,6 +4,7 @@ import dice.sinanya.entity.EntityQqAndGroup;
 
 import java.util.ArrayList;
 
+import static dice.sinanya.system.MessagesLog.logSwitchForGroup;
 import static dice.sinanya.system.MessagesTeamEn.teamEn;
 
 /**
@@ -18,7 +19,7 @@ public interface En {
 
     default void checkEn(int level, String skillName, String qqId, String groupId) {
         EntityQqAndGroup entityQqAndGroup = new EntityQqAndGroup(groupId, qqId);
-        if (level > 1) {
+        if (level > 1 && logSwitchForGroup.get(groupId)) {
             if (teamEn.containsKey(entityQqAndGroup)) {
                 ArrayList<String> enSkillList = teamEn.get(entityQqAndGroup);
                 enSkillList.remove(skillName);
