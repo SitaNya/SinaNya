@@ -1,5 +1,8 @@
 package dice.sinanya.tools.makedata;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -10,20 +13,21 @@ import java.util.concurrent.Future;
  * @author SitaNya
  */
 public class GetFutureToString {
+    private static Logger log = LogManager.getLogger(GetFutureToString.class.getName());
     public static String getFutureToString(StringBuilder stringBuilder, ArrayList<Future<String>> results) {
         for (Future future : results) {
             while (!future.isDone()) {
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error(e.getMessage(), e);
                 }
             }
             try {
                 stringBuilder.append(future.get());
                 stringBuilder.append("\n");
             } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
+                log.error(e.getMessage(), e);
             }
         }
         return stringBuilder.toString();

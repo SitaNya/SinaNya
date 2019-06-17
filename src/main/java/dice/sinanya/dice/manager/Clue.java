@@ -2,6 +2,8 @@ package dice.sinanya.dice.manager;
 
 import dice.sinanya.entity.EntityClue;
 import dice.sinanya.entity.EntityTypeMessages;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Date;
 import java.text.ParseException;
@@ -22,6 +24,8 @@ import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
  * 类说明: 线索集
  */
 public class Clue {
+    private static Logger log = LogManager.getLogger(Clue.class.getName());
+
     private EntityTypeMessages entityTypeMessages;
 
     public Clue(EntityTypeMessages entityTypeMessages) {
@@ -57,7 +61,7 @@ public class Clue {
         try {
             delClue(new EntityClue(entityTypeMessages.getFromGroup(), new Date(format.parse(msg).getTime()), entityTypeMessages.getFromQq()));
         } catch (ParseException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
         sender(entityTypeMessages, "已删除线索");
     }

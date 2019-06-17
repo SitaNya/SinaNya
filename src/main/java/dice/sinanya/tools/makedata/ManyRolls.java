@@ -1,6 +1,8 @@
 package dice.sinanya.tools.makedata;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.concurrent.*;
@@ -17,6 +19,7 @@ import static dice.sinanya.tools.getinfo.RandomInt.random;
  * 类说明:多重骰掷，比如3d6k2时，如何计算具体的结果，这里会返回字符串式的Process:(5+3+4)结果与Int:12两个值，分别作为
  */
 public class ManyRolls {
+    private static Logger log = LogManager.getLogger(ManyRolls.class.getName());
 
     public static String manyRollsProcess(int times, int rolls, int maxNums) {
         if (maxNums == 0) {
@@ -43,13 +46,13 @@ public class ManyRolls {
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        log.error(e.getMessage(), e);
                     }
                 }
                 try {
                     tmp.add((int) future.get());
                 } catch (InterruptedException | ExecutionException e) {
-                    e.printStackTrace();
+                    log.error(e.getMessage(), e);
                 }
             }
             for (int intTmp : getMaxNumsResult(tmp, maxNums)) {

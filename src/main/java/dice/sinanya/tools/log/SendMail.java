@@ -18,13 +18,13 @@ import java.util.Vector;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 
 public class SendMail {
-    private static final Logger Log = LogManager.getLogger(SendMail.class);
+    private static final Logger log = LogManager.getLogger(SendMail.class);
 
     private static String toChinese(String text) {
         try {
             text = MimeUtility.encodeText(new String(text.getBytes(StandardCharsets.UTF_8), "GB2312"), "GB2312", "B");
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
         return text;
     }
@@ -76,19 +76,19 @@ public class SendMail {
                     try {
                         mbpFile.setFileName(MimeUtility.encodeWord(fds.getName()));
                     } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
+                        log.error(e.getMessage(), e);
                     }
                     mp.addBodyPart(mbpFile);
                 }
-                Log.info("添加成功");
+                log.error("添加成功");
             }
 
             msg.setContent(mp);
             msg.setSentDate(new Date());
             Transport.send(msg);
 
-        } catch (MessagingException me) {
-            me.printStackTrace();
+        } catch (MessagingException e) {
+            log.error(e.getMessage(), e);
             return false;
         }
         return true;
@@ -102,7 +102,7 @@ public class SendMail {
         // 设置发件人邮箱的用户名
         mb.setPassword(messagesSystem.get("mailPassword"));
         // 设置发件人邮箱的密码，需将*号改成正确的密码
-        mb.setFrom("2730902267@qq.com");
+        mb.setFrom(messagesSystem.get("loginQQ") + "@qq.com");
         // 设置发件人的邮箱
         mb.setTo(to + "@qq.com");
         // 设置收件人的邮箱
@@ -115,12 +115,12 @@ public class SendMail {
         mb.attachFile("../saveLogs/" + groupId + "/" + logName + ".docx");
 
         SendMail sm = new SendMail();
-        Log.info("正在发送邮件...");
+        log.info("正在发送邮件...");
         // 发送邮件
         if (sm.sendMail(mb)) {
-            Log.info("发送成功!");
+            log.info("发送成功!");
         } else {
-            Log.info("发送失败!");
+            log.info("发送失败!");
         }
     }
 

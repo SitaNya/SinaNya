@@ -186,7 +186,7 @@ public class Team implements GetDb, Role, AtQq {
                 try {
                     makeSanCheck.addSanCheck(msg);
                 } catch (PlayerSetException e) {
-                    e.printStackTrace();
+                    log.error(e.getMessage(), e);
                 }
             } else {
                 try {
@@ -223,7 +223,7 @@ public class Team implements GetDb, Role, AtQq {
                     }
 
                 } catch (SanCheckSetException | PlayerSetException e) {
-                    e.printStackTrace();
+                    log.error(e.getMessage(), e);
                 }
             }
 
