@@ -1,10 +1,12 @@
 package dice.sinanya.dice.system;
 
 import dice.sinanya.dice.manager.imal.AtQq;
+import dice.sinanya.entity.EntityGroupCensus;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.ArrayList;
 
+import static dice.sinanya.db.system.SelectBot.selectBot;
 import static dice.sinanya.system.MessagesSystem.STR_BOT_VERSIONS;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
@@ -37,6 +39,9 @@ public class Bot implements AtQq {
 
         ArrayList<String> qqList = getAtQqList(msg);
 
+        if (qqList.size() == 0) {
+            qqList.add(messagesSystem.get("loginQQ"));
+        }
         for (String qq : qqList) {
             if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {
                 long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
@@ -101,6 +106,7 @@ public class Bot implements AtQq {
      * 机器人信息
      */
     public void info() {
-        sender(entityTypeMessages, STR_BOT_VERSIONS.toString());
+        EntityGroupCensus entityGroupCensus = selectBot();
+        sender(entityTypeMessages, STR_BOT_VERSIONS.toString() + "\n目前供职于: " + entityGroupCensus.getGroupNum() + " 个群，其中 " + entityGroupCensus.getOnNum() + " 个群处于开启状态");
     }
 }

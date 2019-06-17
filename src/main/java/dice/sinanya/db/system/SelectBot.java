@@ -1,6 +1,7 @@
 package dice.sinanya.db.system;
 
 import dice.sinanya.db.tools.DbUtil;
+import dice.sinanya.entity.EntityGroupCensus;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -38,5 +39,29 @@ public class SelectBot {
         } catch (SQLException e) {
             Log.error(e.getMessage(), e);
         }
+    }
+
+    /**
+     * 通过查询开关列表，得到有多少开启的群，加入多少群
+     */
+    public static EntityGroupCensus selectBot() {
+        int groupNum = 0;
+        int onNum = 0;
+        try (Connection conn = DbUtil.getConnection()) {
+            String sql = "select groupId,switchBot from switchBot";
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                try (ResultSet set = ps.executeQuery()) {
+                    while (set.next()) {
+                        groupNum++;
+                        if (set.getBoolean("switchBot")) {
+                            onNum++;
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            Log.error(e.getMessage(), e);
+        }
+        return new EntityGroupCensus(groupNum, onNum);
     }
 }

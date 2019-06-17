@@ -73,11 +73,6 @@ class Flow {
     private boolean isTeamDesc = false;
     private boolean isTeamEn = false;
 
-    private boolean isBotInfo = false;
-    private boolean isBotOn = false;
-    private boolean isBotOff = false;
-    private boolean isBotExit = false;
-
     private boolean isHelpNormal = false;
     private boolean isHelpMake = false;
     private boolean isHelpGroup = false;
@@ -153,12 +148,6 @@ class Flow {
         isStMove = messages.matches(TAG_ST_RM);
         isStSet = messages.matches(TAG_ST_SET) && !isStShow && !isStList && !isStMove;
 //        人物卡角色正则匹配逻辑
-
-        isBotOn = messages.matches(TAG_BOT_ON);
-        isBotOff = messages.matches(TAG_BOT_OFF);
-        isBotExit = messages.matches(TAG_BOT_EXIT);
-        isBotInfo = messages.matches(TAG_BOT_SHOW) && !isBotOn && !isBotOff && !isBotExit;
-//        这里注意，因为BotOn和BotOff是在监听层面处理的，所以这里只是用于过滤并不在下方产生实际逻辑
 
         isHelpNormal = messages.matches(TAG_HELP_NORMAL);
         isHelpMake = messages.matches(TAG_HELP_MAKE);
@@ -304,10 +293,6 @@ class Flow {
             rewardAndPunishment.rp();
         }
 
-        if (isBotInfo) {
-            bot.info();
-        }
-
         if (isCoc7d) {
             makeCocCard.coc7d();
         } else if (isCoc7) {
@@ -421,10 +406,6 @@ class Flow {
             } catch (NotFoundSkillException e) {
                 Log.error(e.getMessage(), e);
             }
-        }
-
-        if (isBotExit) {
-            bot.exit();
         }
 
         if (isLogOn) {

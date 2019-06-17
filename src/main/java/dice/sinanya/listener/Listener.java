@@ -31,6 +31,8 @@ import static dice.sinanya.tools.getinfo.SwitchBot.getBot;
 public class Listener {
     private String tagBotOn = ".bot on";
     private String tagBotOff = ".bot off";
+    private String tagBotInfo = ".bot";
+    private String tagBotExit = ".bot exit";
     private String tagMe = "[CQ:at,qq=" + messagesSystem.get("loginQQ") + "]";
 
     private Listener() {
@@ -71,8 +73,10 @@ public class Listener {
     @Listen(MsgGetTypes.groupMsg)
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGroup msgGroup) {
+        EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
+        changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
         if (getBot(Long.parseLong(msgGroup.getFromGroup()))) {
-            new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup)).toGroup();
+            new Flow(entityTypeMessages).toGroup();
             return true;
         } else {
             return true;
@@ -92,8 +96,10 @@ public class Listener {
     @Listen(MsgGetTypes.discussMsg)
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgDisGroup msgDisGroup) {
+        EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
+        changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
         if (getBot(Long.parseLong(msgDisGroup.getFromDiscuss()))) {
-            new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup)).toDisGroup();
+            new Flow(entityTypeMessages).toDisGroup();
             return true;
         } else {
             return true;
@@ -112,17 +118,14 @@ public class Listener {
      */
     @Listen(MsgGetTypes.groupMsg)
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGroup msgGroup) {
+        EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
+        if (msgGroup.getMsg().charAt(0) != '.') {
+            changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
+        }
         if (getBot(Long.parseLong(msgGroup.getFromGroup())) ||
                 msgGroup.getMsg().trim().equals(tagBotOn) ||
                 (msgGroup.getMsg().trim().contains(tagBotOn) && msgGroup.getMsg().trim().contains(tagMe))) {
-            EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
             setLogs(entityTypeMessages, msgGet);
-            changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
-            return true;
-        } else if (msgGroup.getMsg().trim().equals(tagBotOff) || (msgGroup.getMsg().trim().contains(tagBotOff) && msgGroup.getMsg().trim().contains(tagMe))) {
-            msgSender.SENDER.sendGroupMsg(msgGroup.getFromGroup(), messagesSystem.get("botAlreadyStop"));
-            EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
-            changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
             return true;
         } else {
             return true;
@@ -141,17 +144,14 @@ public class Listener {
      */
     @Listen(MsgGetTypes.discussMsg)
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgDisGroup msgDisGroup) {
+        EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
+        if (msgDisGroup.getMsg().charAt(0) != '.') {
+            changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
+        }
         if (getBot(Long.parseLong(msgDisGroup.getFromDiscuss())) ||
                 msgDisGroup.getMsg().trim().equals(tagBotOn) ||
                 (msgDisGroup.getMsg().trim().contains(tagBotOn) && msgDisGroup.getMsg().trim().contains(tagMe))) {
-            EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
             setLogs(entityTypeMessages, msgGet);
-            changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
-            return true;
-        } else if (msgDisGroup.getMsg().trim().equals(tagBotOff) || (msgDisGroup.getMsg().trim().contains(tagBotOff) && msgDisGroup.getMsg().trim().contains(tagMe))) {
-            msgSender.SENDER.sendGroupMsg(msgDisGroup.getFromDiscuss(), messagesSystem.get("botAlreadyStop"));
-            EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
-            changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
             return true;
         } else {
             return true;
@@ -182,6 +182,10 @@ public class Listener {
             new Bot(entityTypeMessages).on();
         } else if (messages.trim().contains(tagBotOff) && messages.trim().contains(tagMe)) {
             new Bot(entityTypeMessages).off();
+        } else if (messages.trim().contains(tagBotExit) && messages.trim().contains(tagMe)) {
+            new Bot(entityTypeMessages).exit();
+        } else if (messages.trim().contains(tagBotInfo)) {
+            new Bot(entityTypeMessages).info();
         }
     }
 }
