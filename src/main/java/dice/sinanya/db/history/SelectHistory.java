@@ -28,18 +28,15 @@ public class SelectHistory {
     }
 
     /**
-     * 将某个QQ号的历史信息刷新，通常只有在静态变量中找不到某人的记录时才会使用
-     *
-     * @param qqId 需要刷新的QQ号
+     * 读取数据库中的骰点历史信息到缓存
      */
-    public void flushHistory(String qqId) {
+    public void flushHistoryFromDatabase() {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from history where qqId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, qqId);
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
-                        historyList.put(qqId, new EntityHistory(qqId, set.getInt("Fumble"), set.getInt("CriticalSuccess"), set.getInt("ExtremeSuccess"), set.getInt("HardSuccess"), set.getInt("Success"), set.getInt("Failure"), set.getInt("times"), set.getInt("mean")));
+                        historyList.put(set.getString("qqId"), new EntityHistory(set.getString("qqId"), set.getInt("Fumble"), set.getInt("CriticalSuccess"), set.getInt("ExtremeSuccess"), set.getInt("HardSuccess"), set.getInt("Success"), set.getInt("Failure"), set.getInt("times"), set.getInt("mean")));
                     }
                 }
             }

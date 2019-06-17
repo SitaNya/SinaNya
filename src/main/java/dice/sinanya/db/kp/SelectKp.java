@@ -29,7 +29,7 @@ public class SelectKp {
     /**
      * 刷新kp主群设定到静态变量中，只有静态变量中找不到某人的kp主群记录时才会使用
      */
-    public void flushKp() {
+    public void flushKpFromDatabase() {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from kp";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {

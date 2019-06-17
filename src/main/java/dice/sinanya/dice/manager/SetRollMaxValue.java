@@ -2,9 +2,10 @@ package dice.sinanya.dice.manager;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.system.MessagesSystem.ROLL_MAX_VALUE;
+import static dice.sinanya.system.MessagesRollMaxValue.ROLL_MAX_VALUE;
 import static dice.sinanya.system.MessagesTag.TAG_SET_ROLL_MAX_VALUE;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
+import static dice.sinanya.tools.getinfo.DefaultMaxRolls.setMaxRolls;
 import static dice.sinanya.tools.log.Sender.sender;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 
@@ -31,6 +32,7 @@ public class SetRollMaxValue {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         if (isNumeric(msg)) {
             ROLL_MAX_VALUE.put(entityTypeMessages.getFromGroup(), Integer.parseInt(msg));
+            setMaxRolls(entityTypeMessages.getFromGroup(), Integer.parseInt(msg));
             sender(entityTypeMessages, "当前群的默认骰改为" + msg);
         } else {
             sender(entityTypeMessages, "输入数值有误");

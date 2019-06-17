@@ -58,8 +58,6 @@ public class Team implements GetDb, Role, AtQq {
      * 将@到的成员加入小队
      */
     public void set() {
-        useRole(entityTypeMessages);
-
         String tag = TAG_TEAM_SET;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
@@ -74,8 +72,6 @@ public class Team implements GetDb, Role, AtQq {
      * 将@到的成员移出小队，也会清空该队员的技能成功记录
      */
     public void remove() {
-        useRole(entityTypeMessages);
-
         String tag = TAG_TEAM_RM;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
@@ -100,8 +96,6 @@ public class Team implements GetDb, Role, AtQq {
      * 自动@本群小队中所有成员
      */
     public void call() {
-        useRole(entityTypeMessages);
-
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("kp正在呼叫以下成员:");
         for (String qq : queryTeam(entityTypeMessages.getFromGroup())
@@ -118,8 +112,6 @@ public class Team implements GetDb, Role, AtQq {
      * 使用+为前缀则恢复血量
      */
     public void hp() {
-        useRole(entityTypeMessages);
-
         String tag = TAG_TEAM_HP;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
@@ -176,8 +168,6 @@ public class Team implements GetDb, Role, AtQq {
      * 使用+为前缀则恢复理智值
      */
     public void san() {
-        useRole(entityTypeMessages);
-
         String tag = TAG_TEAM_SAN;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
@@ -245,8 +235,6 @@ public class Team implements GetDb, Role, AtQq {
      * 显示当前小队的情况，会根据小队成员的当前激活人物自动计算得出
      */
     public void show() {
-        useRole(entityTypeMessages);
-
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("您的小队情况目前为: ");
         ArrayList<String> qqList = queryTeam(entityTypeMessages.getFromGroup());
@@ -300,8 +288,6 @@ public class Team implements GetDb, Role, AtQq {
      * 显示当前小队所有成员当前激活角色的技能情况，私聊发送给命令触发人
      */
     public void desc() {
-        useRole(entityTypeMessages);
-
         StringBuilder stringBuilder = new StringBuilder();
 
         ArrayList<String> qqList = queryTeam(entityTypeMessages.getFromGroup());
@@ -325,8 +311,6 @@ public class Team implements GetDb, Role, AtQq {
      * 显示当前小队所有成员当前激活角色的技能成功情况
      */
     public void en() {
-        useRole(entityTypeMessages);
-
         StringBuilder stringBuilder = new StringBuilder();
 
         ArrayList<String> qqList = queryTeam(entityTypeMessages.getFromGroup());

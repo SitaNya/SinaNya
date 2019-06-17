@@ -10,33 +10,22 @@ public class RoleChoose {
     private static SelectRoles selectRoles = new SelectRoles();
     private static InsertRoles insertRoles = new InsertRoles();
 
+    public static void flushRoleChoose(){
+        selectRoles.flushRoleChooseFromDatabase();
+    }
+
     public static boolean checkRoleChooseExistByQQ(long qqId) {
-        if (ROLE_CHOOSE.containsKey(qqId)) {
-            return true;
-        } else {
-            selectRoles.flushRoleChooseByQq(qqId);
-            return ROLE_CHOOSE.containsKey(qqId);
-        }
+        return ROLE_CHOOSE.containsKey(qqId);
     }
 
     public static boolean checkRoleChooseExistByQQ(String qq) {
         long qqId = Long.parseLong(qq);
-        if (ROLE_CHOOSE.containsKey(qqId)) {
-            return true;
-        } else {
-            selectRoles.flushRoleChooseByQq(qqId);
-            return ROLE_CHOOSE.containsKey(qqId);
-        }
+        return ROLE_CHOOSE.containsKey(qqId);
     }
 
     public static boolean checkRoleChooseExistByFromQQ(EntityTypeMessages entityTypeMessages) {
         long qqId = Long.parseLong(entityTypeMessages.getFromQq());
-        if (ROLE_CHOOSE.containsKey(qqId)) {
-            return true;
-        } else {
-            selectRoles.flushRoleChooseByQq(qqId);
-            return ROLE_CHOOSE.containsKey(qqId);
-        }
+        return ROLE_CHOOSE.containsKey(qqId);
     }
 
     public static String getRoleChooseByQQ(String qqId) {

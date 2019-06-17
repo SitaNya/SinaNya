@@ -42,8 +42,6 @@ public class Roles implements Role {
      */
     @SuppressWarnings("AlibabaMethodTooLong")
     public boolean set() throws PlayerSetException {
-        useRole(entityTypeMessages);
-
         String tag = TAG_ST_SET;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         String sepRoleAndPro = "-";
@@ -76,8 +74,6 @@ public class Roles implements Role {
      * 返回当前查询QQ的角色列表
      */
     public void list() {
-        useRole(entityTypeMessages);
-
         long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("您当前使用角色: \n");
@@ -106,8 +102,6 @@ public class Roles implements Role {
      * 移除某个角色
      */
     public void move() {
-        useRole(entityTypeMessages);
-
         String tag = TAG_ST_RM;
         String role = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         long qqId = Long.parseLong(entityTypeMessages.getFromQq());
@@ -125,8 +119,6 @@ public class Roles implements Role {
      * 显示角色的技能信息
      */
     public void show() {
-        useRole(entityTypeMessages);
-
         String qq = entityTypeMessages.getFromQq();
         StringBuilder stringBuilder = showProp(entityTypeMessages, qq);
         sender(entityTypeMessages, stringBuilder.toString());

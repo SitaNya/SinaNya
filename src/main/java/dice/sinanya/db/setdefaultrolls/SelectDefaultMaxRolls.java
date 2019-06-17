@@ -1,4 +1,4 @@
-package dice.sinanya.db.system;
+package dice.sinanya.db.setdefaultrolls;
 
 import dice.sinanya.db.tools.DbUtil;
 import org.apache.log4j.LogManager;
@@ -9,29 +9,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static dice.sinanya.system.SystemInfo.SWITCH_BOT;
+import static dice.sinanya.system.MessagesRollMaxValue.ROLL_MAX_VALUE;
 
 /**
  * @author SitaNya
- * 日期: 2019-06-15
+ * 日期: 2019-06-17
  * 电子邮箱: sitanya@qq.com
  * 维护群(QQ): 162279609
  * 有任何问题欢迎咨询
- * 类说明: 查询所有开关的情况，并刷新到变量中，一般只在变量中找不到时才会使用
+ * 类说明:
  */
-public class SelectBot {
-    private static final Logger Log = LogManager.getLogger(SelectBot.class);
+public class SelectDefaultMaxRolls {
+    private static final Logger Log = LogManager.getLogger(SelectDefaultMaxRolls.class.getName());
 
     /**
-     * 将所有开关值刷写到静态变量中
+     * 从数据库刷写默认骰最大值到静态变量
      */
-    public static void flushBot() {
+    public void flushMaxRollsFromDatabase() {
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select groupId,switchBot from switchBot";
+            String sql = "select * from maxRolls";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
-                        SWITCH_BOT.put(set.getLong("groupId"), set.getBoolean("switchBot"));
+                        ROLL_MAX_VALUE.put(set.getString("groupId"), set.getInt("maxRolls"));
                     }
                 }
             }

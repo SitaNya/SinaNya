@@ -14,6 +14,10 @@ public class History {
     private static SelectHistory selectHistory = new SelectHistory();
     private static InsertHistory insertHistory = new InsertHistory();
 
+    public static void flushHistory() {
+        selectHistory.flushHistoryFromDatabase();
+    }
+
     public static void setHistory() {
         for (Map.Entry<String, EntityHistory> mapEntry : historyList.entrySet()) {
             insertHistory.insertHistory(mapEntry.getValue());
@@ -24,13 +28,8 @@ public class History {
         if (historyList.containsKey(qqId)) {
             return historyList.get(qqId);
         } else {
-            selectHistory.flushHistory(qqId);
-            if (historyList.containsKey(qqId)) {
-                return historyList.get(qqId);
-            } else {
-                historyList.put(qqId, new EntityHistory(qqId));
-                return historyList.get(qqId);
-            }
+            historyList.put(qqId, new EntityHistory(qqId));
+            return historyList.get(qqId);
         }
     }
 }

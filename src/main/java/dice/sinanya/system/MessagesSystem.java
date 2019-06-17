@@ -11,9 +11,6 @@ import java.util.HashMap;
  * 接口说明: .bot回复静态信息
  */
 public interface MessagesSystem {
-
-    HashMap<String, Integer> ROLL_MAX_VALUE = new HashMap<>();
-
     String NONE = "";
     String SPACE = " ";
 

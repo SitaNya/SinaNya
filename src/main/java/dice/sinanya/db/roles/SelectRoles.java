@@ -31,15 +31,12 @@ public class SelectRoles {
     }
 
     /**
-     * 刷新某个QQ号的当前角色
-     *
-     * @param qqId QQ号
+     * 刷新当前角色信息到缓存
      */
-    public void flushRoleChooseByQq(long qqId) {
+    public void flushRoleChooseFromDatabase() {
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from CHOOSE_ROLE where qq=?";
+            String sql = "select * from CHOOSE_ROLE";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setLong(1, qqId);
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         ROLE_CHOOSE.put(set.getLong("qq"), set.getString("role"));
@@ -51,62 +48,19 @@ public class SelectRoles {
         }
     }
 
-
     /**
-     * 刷新当前使用命令人的当前角色
-     *
-     * @param entityTypeMessages 信息包装类，里面可以取到某条消息的发送QQ号
-     */
-    public void flushRoleChooseByFromQq(EntityTypeMessages entityTypeMessages) {
-        long qqId = Long.parseLong(entityTypeMessages.getFromQq());
-        selectRoleInfoCache(qqId);
-    }
-
-    /**
-     * 刷新某个QQ号的角色信息
-     *
-     * @param qqId QQ号
-     */
-    public void flushRoleInfoCacheByQq(long qqId) {
-        selectRoleInfoCache(qqId);
-    }
-
-    /**
-     * 刷新某个QQ号的角色信息
-     *
-     * @param qqId QQ号，String类型
-     */
-    public void flushRoleInfoCacheByQq(String qqId) {
-        long qq = Long.parseLong(qqId);
-        flushRoleChooseByQq(qq);
-    }
-
-    /**
-     * 刷新当前使用命令人的角色信息
-     *
-     * @param entityTypeMessages 信息包装类，里面可以取到某条消息的发送QQ号
-     */
-    public void flushRoleInfoCacheByFromQq(EntityTypeMessages entityTypeMessages) {
-        long qqId = Long.parseLong(entityTypeMessages.getFromQq());
-        selectRoleInfoCache(qqId);
-    }
-
-
-    /**
-     * 实际查询某个QQ号的角色信息
-     *
-     * @param qqId QQ号
+     * 将数据库中关于角色信息的内容读进缓存
      */
     @SuppressWarnings("AlibabaMethodTooLong")
-    private void selectRoleInfoCache(long qqId) {
+    public void flushRoleInfoCacheFromDatabase() {
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from role where qqId=?";
+            String sql = "select * from role";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setLong(1, qqId);
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         HashMap<String, Integer> propertiesForRole = new RolesInfo().getPropertiesForRole();
                         String role = set.getString("userName");
+                        long qqId=Long.parseLong(set.getString("qqId"));
                         propertiesForRole.put("str", set.getInt("str"));
                         propertiesForRole.put("dex", set.getInt("dex"));
                         propertiesForRole.put("pow", set.getInt("pow"));

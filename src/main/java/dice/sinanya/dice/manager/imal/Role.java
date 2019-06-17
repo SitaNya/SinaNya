@@ -14,12 +14,6 @@ import static dice.sinanya.tools.getinfo.RoleInfo.checkRoleInfoFromChooseExistBy
 import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByFromQQ;
 
 /**
- * 声明使用角色
- *
- * @author SitaNya
- */
-
-/**
  * @author SitaNya
  * 日期: 2019-06-15
  * 电子邮箱: sitanya@qq.com
@@ -66,16 +60,6 @@ public interface Role {
         add("firstAid");
         add("medicalScience");
     }};
-
-    /**
-     * 刷新当前角色和角色信息
-     *
-     * @param entityTypeMessages 传入信息类型用以确定当前QQ号
-     */
-    default void useRole(EntityTypeMessages entityTypeMessages) {
-        new SelectRoles().flushRoleChooseByFromQq(entityTypeMessages);
-        new SelectRoles().flushRoleInfoCacheByFromQq(entityTypeMessages);
-    }
 
     /**
      * 格式化属性值为xxx:50

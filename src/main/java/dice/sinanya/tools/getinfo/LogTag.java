@@ -13,14 +13,13 @@ public class LogTag {
     private static SelectLogTag selectLogTag = new SelectLogTag();
     private static InsertLogTag insertLogTag = new InsertLogTag();
 
+    public static void flushLogTag(){
+        selectLogTag.flushLogTagFromDatabase();
+    }
+
     public static boolean checkLogTagExist(EntityTypeMessages entityTypeMessages, String logName) {
         EntityLogTag entityLogTag = new EntityLogTag(entityTypeMessages.getFromGroup(), logName);
-        if (logNameSwitch.containsKey(entityLogTag)) {
-            return true;
-        } else {
-            selectLogTag.flushLogTag();
-            return logNameSwitch.containsKey(entityLogTag);
-        }
+        return logNameSwitch.containsKey(entityLogTag);
     }
 
     public static boolean checkOthorLogTrue(String groupId) {

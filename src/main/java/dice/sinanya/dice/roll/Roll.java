@@ -8,7 +8,7 @@ import dice.sinanya.tools.getinfo.GetSkillValue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static dice.sinanya.system.MessagesSystem.ROLL_MAX_VALUE;
+import static dice.sinanya.system.MessagesRollMaxValue.ROLL_MAX_VALUE;
 import static dice.sinanya.system.MessagesTag.TAGR;
 import static dice.sinanya.system.MessagesTag.TAG_RH;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;

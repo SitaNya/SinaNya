@@ -11,6 +11,10 @@ public class Kp {
     private static SelectKp selectKp = new SelectKp();
     private static InsertKp insertKp = new InsertKp();
 
+    public static void flushKp() {
+        selectKp.flushKpFromDatabase();
+    }
+
     public static void setKpGroup(EntityTypeMessages entityTypeMessages, String group) {
         insertKp.insertKp(entityTypeMessages.getFromQq(), group);
     }
@@ -19,12 +23,7 @@ public class Kp {
         if (KpGroup.containsKey(entityTypeMessages.getFromQq())) {
             return KpGroup.get(entityTypeMessages.getFromQq());
         } else {
-            selectKp.flushKp();
-            if (KpGroup.containsKey(entityTypeMessages.getFromQq())) {
-                return KpGroup.get(entityTypeMessages.getFromQq());
-            } else {
-                throw new NotSetKpGroupException(entityTypeMessages);
-            }
+            throw new NotSetKpGroupException(entityTypeMessages);
         }
     }
 }

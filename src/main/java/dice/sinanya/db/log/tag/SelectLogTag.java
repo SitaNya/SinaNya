@@ -31,7 +31,7 @@ public class SelectLogTag {
     /**
      * 刷新日志标记位对应的开关值到静态变量中
      */
-    public void flushLogTag() {
+    public void flushLogTagFromDatabase() {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from tagLog";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {

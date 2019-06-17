@@ -15,23 +15,17 @@ public class RoleInfo {
     private static SelectRoles selectRoles = new SelectRoles();
     private static InsertRoles insertRoles = new InsertRoles();
 
+    public static void flushRoleInfoCache() {
+        selectRoles.flushRoleInfoCacheFromDatabase();
+    }
+
     public static boolean checkRoleInfoExistByQQ(long qqId, String role) {
-        if (ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role))) {
-            return true;
-        } else {
-            selectRoles.flushRoleInfoCacheByQq(qqId);
-            return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
-        }
+        return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
     }
 
     public static boolean checkRoleInfoExistByQQ(String qq, String role) {
         long qqId = Long.parseLong(qq);
-        if (ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role))) {
-            return true;
-        } else {
-            selectRoles.flushRoleInfoCacheByQq(qqId);
-            return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
-        }
+        return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
     }
 
     public static boolean checkRoleInfoExistForChooseByQQ(long qqId) {
@@ -41,23 +35,13 @@ public class RoleInfo {
         } else {
             return false;
         }
-        if (ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role))) {
-            return true;
-        } else {
-            selectRoles.flushRoleInfoCacheByQq(qqId);
-            return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
-        }
+        return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
     }
 
 
     public static boolean checkRoleInfoExistByFromQQ(EntityTypeMessages entityTypeMessages, String role) {
         long qqId = Long.parseLong(entityTypeMessages.getFromQq());
-        if (ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role))) {
-            return true;
-        } else {
-            selectRoles.flushRoleInfoCacheByQq(qqId);
-            return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
-        }
+        return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
     }
 
     public static boolean checkRoleInfoFromChooseExistByFromQQ(EntityTypeMessages entityTypeMessages) {
@@ -68,12 +52,7 @@ public class RoleInfo {
         } else {
             return false;
         }
-        if (ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role))) {
-            return true;
-        } else {
-            selectRoles.flushRoleInfoCacheByQq(qqId);
-            return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
-        }
+        return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
     }
 
     public static boolean checkRoleInfoFromChooseExistByQQ(String qq) {
@@ -84,12 +63,7 @@ public class RoleInfo {
         } else {
             return false;
         }
-        if (ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role))) {
-            return true;
-        } else {
-            selectRoles.flushRoleInfoCacheByQq(qqId);
-            return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
-        }
+        return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
     }
 
     public static boolean checkRoleInfoFromChooseExistByQQ(long qqId) {
@@ -99,12 +73,7 @@ public class RoleInfo {
         } else {
             return false;
         }
-        if (ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role))) {
-            return true;
-        } else {
-            selectRoles.flushRoleInfoCacheByQq(qqId);
-            return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
-        }
+        return ROLE_INFO_CACHE.containsKey(new EntityRoleTag(qqId, role));
     }
 
     public static HashMap<String, Integer> getRoleInfoByQQ(long qqId, String role) {
@@ -181,18 +150,15 @@ public class RoleInfo {
     public static void setRoleInfoByQQ(String qqId, String role, String prop) {
         long qq = Long.parseLong(qqId);
         insertRoles.insertRoleInfo(prop, role, qq);
-        selectRoles.flushRoleInfoCacheByQq(qq);
     }
 
     public static void setRoleInfoByQQ(long qq, String role, String prop) {
         insertRoles.insertRoleInfo(prop, role, qq);
-        selectRoles.flushRoleInfoCacheByQq(qq);
     }
 
     public static void setRoleInfoByFromQQ(EntityTypeMessages entityTypeMessages, String role, String prop) {
         long qq = Long.parseLong(entityTypeMessages.getFromQq());
         insertRoles.insertRoleInfo(prop, role, qq);
-        selectRoles.flushRoleInfoCacheByQq(qq);
     }
 
     public static void setRoleInfoFromChooseByQQ(String qqId, String prop) {
@@ -204,7 +170,6 @@ public class RoleInfo {
             return;
         }
         insertRoles.insertRoleInfo(prop, role, qq);
-        selectRoles.flushRoleInfoCacheByQq(qq);
     }
 
     public static void setRoleInfoFromChooseByQQ(long qq, String prop) {
@@ -215,7 +180,6 @@ public class RoleInfo {
             return;
         }
         insertRoles.insertRoleInfo(prop, role, qq);
-        selectRoles.flushRoleInfoCacheByQq(qq);
     }
 
     public static void setRoleInfoFromChooseByFromQQ(EntityTypeMessages entityTypeMessages, String prop) {
@@ -227,7 +191,6 @@ public class RoleInfo {
             return;
         }
         insertRoles.insertRoleInfo(prop, role, qq);
-        selectRoles.flushRoleInfoCacheByQq(qq);
     }
 
     public static void setRoleInfoFromChooseByQQ(String qqId, HashMap<String, Integer> prop) {
@@ -239,7 +202,6 @@ public class RoleInfo {
             return;
         }
         insertRoles.insertRoleInfo(prop, role, qq);
-        selectRoles.flushRoleInfoCacheByQq(qq);
     }
 
     public static void setRoleInfoFromChooseByQQ(long qq, HashMap<String, Integer> prop) {
@@ -250,7 +212,6 @@ public class RoleInfo {
             return;
         }
         insertRoles.insertRoleInfo(prop, role, qq);
-        selectRoles.flushRoleInfoCacheByQq(qq);
     }
 
     public static void setRoleInfoFromChooseByFromQQ(EntityTypeMessages entityTypeMessages, HashMap<String, Integer> prop) {
@@ -262,7 +223,6 @@ public class RoleInfo {
             return;
         }
         insertRoles.insertRoleInfo(prop, role, qq);
-        selectRoles.flushRoleInfoCacheByQq(qq);
     }
 
     public static void removeRoleByQQ(String qqId, String role) {
