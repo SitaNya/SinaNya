@@ -1,6 +1,5 @@
 package dice.sinanya.listener;
 
-import com.forte.qqrobot.BaseConfiguration;
 import dice.sinanya.dice.game.Jrrp;
 import dice.sinanya.dice.get.*;
 import dice.sinanya.dice.getbook.Book;
@@ -147,16 +146,19 @@ class Flow {
         isTeamDesc = messages.matches(TAG_TEAM_DESC);
         isTeamEn = messages.matches(TAG_TEAM_EN);
         isTeamShow = messages.matches(TAG_TEAM_SHOW) && !isTeamSet && !isTeamClr && !isTeamMove && !isTeamCall && !isTeamHp && !isTeamSan && !isTeamDesc && !isTeamEn;
+//        小队正则匹配逻辑
 
         isStShow = messages.matches(TAG_ST_SHOW);
         isStList = messages.matches(TAG_ST_LIST);
         isStMove = messages.matches(TAG_ST_RM);
         isStSet = messages.matches(TAG_ST_SET) && !isStShow && !isStList && !isStMove;
+//        人物卡角色正则匹配逻辑
 
         isBotOn = messages.matches(TAG_BOT_ON);
         isBotOff = messages.matches(TAG_BOT_OFF);
         isBotExit = messages.matches(TAG_BOT_EXIT);
         isBotInfo = messages.matches(TAG_BOT_SHOW) && !isBotOn && !isBotOff && !isBotExit;
+//        这里注意，因为BotOn和BotOff是在监听层面处理的，所以这里只是用于过滤并不在下方产生实际逻辑
 
         isHelpNormal = messages.matches(TAG_HELP_NORMAL);
         isHelpMake = messages.matches(TAG_HELP_MAKE);
@@ -421,11 +423,7 @@ class Flow {
             }
         }
 
-        if (isBotOn) {
-            bot.on();
-        } else if (isBotOff) {
-            bot.off();
-        } else if (isBotExit) {
+        if (isBotExit) {
             bot.exit();
         }
 

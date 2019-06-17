@@ -67,7 +67,7 @@ public class Bot implements AtQq {
             if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {
                 long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
                 if (groupId == 0) {
-                    sender(entityTypeMessages, "无法在私聊中使用");
+                    sender(entityTypeMessages, messagesSystem.get("can'tInPrivate"));
                     return;
                 }
                 if (!getBot(groupId)) {

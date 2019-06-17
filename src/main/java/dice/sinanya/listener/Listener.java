@@ -10,6 +10,7 @@ import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgDisGroup;
 import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgGroup;
 import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgPrivate;
 import com.forte.qqrobot.sender.MsgSender;
+import dice.sinanya.dice.system.Bot;
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 
@@ -28,7 +29,9 @@ import static dice.sinanya.tools.getinfo.SwitchBot.getBot;
  * 类说明: 总监听入口类，这里是实际上接收到消息的第一个类
  */
 public class Listener {
-
+    private String tagBotOn = ".bot on";
+    private String tagBotOff = ".bot off";
+    private String tagMe = "[CQ:at,qq=" + messagesSystem.get("loginQQ") + "]";
 
     private Listener() {
     }
@@ -68,16 +71,8 @@ public class Listener {
     @Listen(MsgGetTypes.groupMsg)
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGroup msgGroup) {
-        String tagBotOn = ".bot on";
-        String tagBotOff = ".bot off";
-        String tagMe = "[CQ:at,qq=1984749515]";
-        if (getBot(Long.parseLong(msgGroup.getFromGroup())) ||
-                msgGroup.getMsg().trim().equals(tagBotOn) ||
-                (msgGroup.getMsg().trim().contains(tagBotOn) && msgGroup.getMsg().trim().contains(tagMe))) {
+        if (getBot(Long.parseLong(msgGroup.getFromGroup()))) {
             new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup)).toGroup();
-            return true;
-        } else if (msgGroup.getMsg().trim().equals(tagBotOff) || (msgGroup.getMsg().trim().equals(tagBotOff) && msgGroup.getMsg().trim().contains(tagMe))) {
-            msgSender.SENDER.sendGroupMsg(msgGroup.getFromGroup(), messagesSystem.get("botAlreadyStop"));
             return true;
         } else {
             return true;
@@ -97,16 +92,8 @@ public class Listener {
     @Listen(MsgGetTypes.discussMsg)
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgDisGroup msgDisGroup) {
-        String tagBotOn = ".bot on";
-        String tagBotOff = ".bot off";
-        String tagMe = "[CQ:at,qq=1984749515]";
-        if (getBot(Long.parseLong(msgDisGroup.getFromDiscuss())) ||
-                msgDisGroup.getMsg().trim().equals(tagBotOn) ||
-                (msgDisGroup.getMsg().trim().contains(tagBotOn) && msgDisGroup.getMsg().trim().contains(tagMe))) {
+        if (getBot(Long.parseLong(msgDisGroup.getFromDiscuss()))) {
             new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup)).toDisGroup();
-            return true;
-        } else if (msgDisGroup.getMsg().trim().equals(tagBotOff) || (msgDisGroup.getMsg().trim().contains(tagBotOff) && msgDisGroup.getMsg().trim().contains(tagMe))) {
-            msgSender.SENDER.sendDiscussMsg(msgDisGroup.getFromDiscuss(), messagesSystem.get("botAlreadyStop"));
             return true;
         } else {
             return true;
@@ -125,16 +112,17 @@ public class Listener {
      */
     @Listen(MsgGetTypes.groupMsg)
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGroup msgGroup) {
-        String tagBotOn = ".bot on";
-        String tagBotOff = ".bot off";
-        if (getBot(Long.parseLong(msgGroup.getFromGroup())) || msgGroup.getMsg().trim().equals(tagBotOn)) {
+        if (getBot(Long.parseLong(msgGroup.getFromGroup())) ||
+                msgGroup.getMsg().trim().equals(tagBotOn) ||
+                (msgGroup.getMsg().trim().contains(tagBotOn) && msgGroup.getMsg().trim().contains(tagMe))) {
             EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
-            if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
-                setLogText(entityTypeMessages, new EntityLogTag(entityTypeMessages.getFromGroup(), getOtherLogTrue(entityTypeMessages.getFromGroup())), msgGet.getMsg());
-            }
+            setLogs(entityTypeMessages, msgGet);
+            changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
             return true;
-        } else if (msgGroup.getMsg().trim().equals(tagBotOff)) {
+        } else if (msgGroup.getMsg().trim().equals(tagBotOff) || (msgGroup.getMsg().trim().contains(tagBotOff) && msgGroup.getMsg().trim().contains(tagMe))) {
             msgSender.SENDER.sendGroupMsg(msgGroup.getFromGroup(), messagesSystem.get("botAlreadyStop"));
+            EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
+            changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
             return true;
         } else {
             return true;
@@ -153,19 +141,46 @@ public class Listener {
      */
     @Listen(MsgGetTypes.discussMsg)
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgDisGroup msgDisGroup) {
-        String tagBotOn = ".bot on";
-        String tagBotOff = ".bot off";
-        if (getBot(Long.parseLong(msgDisGroup.getFromDiscuss())) || msgDisGroup.getMsg().trim().equals(tagBotOn)) {
+        if (getBot(Long.parseLong(msgDisGroup.getFromDiscuss())) ||
+                msgDisGroup.getMsg().trim().equals(tagBotOn) ||
+                (msgDisGroup.getMsg().trim().contains(tagBotOn) && msgDisGroup.getMsg().trim().contains(tagMe))) {
             EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
-            if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
-                setLogText(entityTypeMessages, new EntityLogTag(entityTypeMessages.getFromGroup(), getOtherLogTrue(entityTypeMessages.getFromGroup())), msgGet.getMsg());
-            }
+            setLogs(entityTypeMessages, msgGet);
+            changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
             return true;
-        } else if (msgDisGroup.getMsg().trim().equals(tagBotOff)) {
+        } else if (msgDisGroup.getMsg().trim().equals(tagBotOff) || (msgDisGroup.getMsg().trim().contains(tagBotOff) && msgDisGroup.getMsg().trim().contains(tagMe))) {
             msgSender.SENDER.sendGroupMsg(msgDisGroup.getFromDiscuss(), messagesSystem.get("botAlreadyStop"));
+            EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
+            changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
             return true;
         } else {
             return true;
+        }
+    }
+
+    /**
+     * 判断群中是否有其它日志打开，因为是check所以没有的话则返回true，并将当前群的锁置为true
+     * 内容为将某一句消息插入log数据库
+     *
+     * @param entityTypeMessages 消息封装类
+     * @param msgGet 消息对象
+     */
+    private void setLogs(EntityTypeMessages entityTypeMessages, MsgGet msgGet) {
+        if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
+            setLogText(entityTypeMessages, new EntityLogTag(entityTypeMessages.getFromGroup(), getOtherLogTrue(entityTypeMessages.getFromGroup())), msgGet.getMsg());
+        }
+    }
+
+    /**
+     * 根据消息信息和是否包含at自己更改机器人开关
+     * @param entityTypeMessages 消息封装类
+     * @param messages 消息字符串
+     */
+    private void changeBotSwitch(EntityTypeMessages entityTypeMessages, String messages) {
+        if (messages.trim().contains(tagBotOn) && messages.trim().contains(tagMe)) {
+            new Bot(entityTypeMessages).on();
+        } else if (messages.trim().contains(tagBotOff) && messages.trim().contains(tagMe)) {
+            new Bot(entityTypeMessages).off();
         }
     }
 }
