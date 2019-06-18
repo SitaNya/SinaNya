@@ -3,6 +3,7 @@ package dice.sinanya.dice.manager;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.NotSetKpGroupException;
 
+import static dice.sinanya.system.MessagesKP.KP_GROUP;
 import static dice.sinanya.tools.getinfo.Kp.getKpGroup;
 import static dice.sinanya.tools.getinfo.Kp.setKpGroup;
 import static dice.sinanya.tools.makedata.Sender.sender;
@@ -27,6 +28,7 @@ public class Kp {
      */
     public void set() {
         setKpGroup(entityTypeMessages, entityTypeMessages.getFromGroup());
+        KP_GROUP.put(entityTypeMessages.getFromQq(),entityTypeMessages.getFromGroup());
         sender(entityTypeMessages, "已设置此群为您的带团群");
     }
 

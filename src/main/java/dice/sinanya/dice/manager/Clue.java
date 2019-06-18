@@ -5,14 +5,14 @@ import dice.sinanya.entity.EntityTypeMessages;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.sql.Date;
-import java.text.ParseException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 import static dice.sinanya.system.MessagesTag.TAG_CLUE_RM;
 import static dice.sinanya.system.MessagesTag.TAG_CLUE_SET;
 import static dice.sinanya.tools.getinfo.Clue.*;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.makedata.MakeTimeStamp.getTime;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
@@ -39,7 +39,7 @@ public class Clue {
     public void set() {
         String tag = TAG_CLUE_SET;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        setClue(new EntityClue(entityTypeMessages.getFromGroup(), new Date(new java.util.Date().getTime()), entityTypeMessages.getFromQq()), msg);
+        setClue(new EntityClue(entityTypeMessages.getFromGroup(), new Timestamp(System.currentTimeMillis()), entityTypeMessages.getFromQq()), msg);
     }
 
     /**
@@ -56,13 +56,9 @@ public class Clue {
     public void rm() {
         String tag = TAG_CLUE_RM;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        try {
-            delClue(new EntityClue(entityTypeMessages.getFromGroup(), new Date(format.parse(msg).getTime()), entityTypeMessages.getFromQq()));
-        } catch (ParseException e) {
-            log.error(e.getMessage(), e);
-        }
+        delClue(new EntityClue(entityTypeMessages.getFromGroup(), getTime(msg), entityTypeMessages.getFromQq()));
         sender(entityTypeMessages, "已删除线索");
     }
 

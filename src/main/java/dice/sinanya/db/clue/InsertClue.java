@@ -36,7 +36,7 @@ public class InsertClue {
                     "groupId, createTime, qqId,info) VALUES(?,?,?,?)";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, entityClue.getGroupId());
-                ps.setDate(2, entityClue.getDate());
+                ps.setTimestamp(2, entityClue.getDate());
                 ps.setString(3, entityClue.getQqId());
                 ps.setString(4, info);
                 ps.executeUpdate();
@@ -57,7 +57,7 @@ public class InsertClue {
                     "groupId=? and createTime=? and qqId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, entityClue.getGroupId());
-                ps.setDate(2, entityClue.getDate());
+                ps.setTimestamp(2, entityClue.getDate());
                 ps.setString(3, entityClue.getQqId());
                 ps.executeUpdate();
             }

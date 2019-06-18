@@ -1,6 +1,6 @@
 package dice.sinanya.entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 /**
@@ -18,16 +18,16 @@ public class EntityClue {
      * @param qqId qq号，记录是谁录入的这条线索
      */
     private String groupId;
-    private java.sql.Date date;
+    private Timestamp date;
     private String qqId;
 
     public EntityClue(String groupId) {
         this.groupId = groupId;
     }
 
-    public EntityClue(String groupId, java.sql.Date date, String qqId) {
+    public EntityClue(String groupId, Timestamp date, String qqId) {
         this.groupId = groupId;
-        this.date = (Date) date.clone();
+        this.date = date;
         this.qqId = qqId;
     }
 
@@ -39,7 +39,7 @@ public class EntityClue {
         this.groupId = groupId;
     }
 
-    public java.sql.Date getDate() {
+    public Timestamp getDate() {
         return this.date;
     }
 

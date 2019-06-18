@@ -5,10 +5,8 @@ import dice.sinanya.entity.EntityClue;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.SimpleDateFormat;
 
 import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByQQ;
@@ -38,16 +36,17 @@ public class SelectClue {
      */
     public String selectClue(EntityClue entityClue) {
         StringBuilder stringBuffer = new StringBuilder();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from clue where groupId=?";
+            String sql = "select date_format(createTime,'%Y-%m-%d %H:%i:%s') as createTime,qqId,info from clue where groupId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, entityClue.getGroupId());
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         stringBuffer.append("于 ")
-                                .append(set.getDate("createTime"))
+                                .append(set.getString("createTime"))
                                 .append(" 由 ");
-                        if (checkRoleChooseExistByQQ(entityClue.getQqId())) {
+                        if (checkRoleChooseExistByQQ(set.getString("qqId"))) {
                             stringBuffer.append(getRoleChooseByQQ(set.getString("qqId")));
                         } else {
                             stringBuffer.append(set.getString("qqId"));
