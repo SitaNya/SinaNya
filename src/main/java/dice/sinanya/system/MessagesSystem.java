@@ -13,13 +13,16 @@ public interface MessagesSystem {
     String NONE = "";
     String SPACE = " ";
 
-    String VERSIONS = "0.1.0.0 beta";
+    String VERSIONS = "0.95.0.0 beta";
 
     StringBuilder STR_BOT_VERSIONS = new StringBuilder()
             .append("Dice made in java\n")
             .append("By SitaNya\n")
             .append("Versions is:\t")
-            .append(VERSIONS);
+            .append(VERSIONS)
+            .append("\n项目文档:\thttps://sitcnya.gitbook.io/sinanya/")
+            .append("\n项目地址:\thttps://github.com/sitanya/SinaNya/")
+            .append("\n交流及BUG反馈群:\t162279609");
 
     StringBuilder STR_BOT_HELP = new StringBuilder()
             .append("命令索引:\n")
