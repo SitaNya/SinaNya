@@ -73,6 +73,6 @@ description: 基于酷Q的，使用Java语言开发的，面向COC/DND跑团的�
 
 在开始之前，为了方便帮助大家，我需要先向大家了解一下需求:
 
-1. [您是一个新手，不太想自己写任何代码，只是单纯的想做一个自己的骰子机器人。当然，如果能自定义一些个性回复词那就更好了](https://app.gitbook.com/@sitcnya/s/sinanya/~/edit/drafts/-LhfFvTZUZ8VIK2Psprs/wo-shi-yi-ming-xin-shou)
-2. [您是一位开发者，除了自定义回复词之外您还想要增加自己独有的功能。](https://app.gitbook.com/@sitcnya/s/sinanya/~/edit/drafts/-LhfFvTZUZ8VIK2Psprs/wo-shi-yi-wei-kai-fa-zhe)
+1. [您是一个新手，不太想自己写任何代码，只是单纯的想做一个自己的骰子机器人。当然，如果能自定义一些个性回复词那就更好了](https://sitcnya.gitbook.io/sinanya/wo-shi-yi-ming-xin-shou)
+2. [您是一位开发者，除了自定义回复词之外您还想要增加自己独有的功能。](https://sitcnya.gitbook.io/sinanya/wo-shi-yi-wei-kai-fa-zhe)
 
