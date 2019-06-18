@@ -184,8 +184,6 @@ public class Listener {
             new Bot(entityTypeMessages).off();
         } else if (messages.trim().contains(tagBotExit) && messages.trim().contains(tagMe)) {
             new Bot(entityTypeMessages).exit();
-        } else if (messages.trim().contains(tagBotInfo)) {
-            new Bot(entityTypeMessages).info();
         }
     }
 }
