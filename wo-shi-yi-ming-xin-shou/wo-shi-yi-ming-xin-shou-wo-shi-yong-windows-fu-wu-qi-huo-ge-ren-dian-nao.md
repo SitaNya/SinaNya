@@ -1,16 +1,10 @@
 ---
-description: Linux服务器搭建说明
+description: Windows服务器搭建说明
 ---
 
-# 我是一名新手，我使用Linux服务器
+# 我是一名新手，我使用Windows服务器或个人电脑
 
-## 我是一名新手，我使用Linux服务器
-
-Linux服务器搭建说明 
-
-**你应购买Centos7的服务器，因为只有Centos7的服务器默认支持Docker服务**
-
-## 准备
+## 准备环境
 
 ### JDK
 
@@ -20,48 +14,54 @@ Linux服务器搭建说明
 
 [JDK1.8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 
-下载应该获得一个.rpm结尾的文件，使用命令
-
-`yum localinstall -y jdk-8u211-linux-x64.rpm`
-
-即可完成安装
-
 ### 酷Q
 
-你可以按照以下教程获得一个Linux下的酷Q
+酷Q是骰子机器人的最重要部分，感谢叉叉姐姐的软件！
 
-[酷Q on docker](https://cqp.cc/t/34558)
+你可以从
+
+[酷Q](https://cqp.cc/)
+
+下载到酷Q软件
 
 ### 服务本体
+
+如果你在上一个页面忘记下载了服务本体，可以从下方的链接下载
+
+[SinaNya](https://github.com/sitanya/SinaNya/releases)
+
+最终格式为.tar.gz，实际上是压缩包，可以使用winrar解压后得到目录SinaNya
+
+将其上传到服务器上即可
 
 ### Lemoc
 
 下载的服务本体解压后，可以看到SinaNya文件夹，进去后可以找到bin目录
 
-bin目录下存在一个文件名为`org.ruiko.lemoc.cpk`的文件，将它放到酷Q的app目录下即可，这个目录如果你按照上方教程操作，应该是`/root/coolq-data/app`
+bin目录下存在一个文件名为`org.ruiko.lemoc.cpk`的文件，将它放到酷Q的app目录下即可
 
 ### 启动酷Q
 
 首先你的骰子QQ号必须开启设备锁，具体如何开启请百度
 
-尝试启动酷Q，按照[酷Q on docker](https://cqp.cc/t/34558)教程中的方式打开网页进入，找到悬浮窗，右键按照如下步骤打开应用管理
+尝试启动酷Q，找到悬浮窗，右键按照如下步骤打开应用管理
 
-![](.gitbook/assets/6b802414173cda85a8a827a3479303c1.png)
+![&#x9177;Q](../.gitbook/assets/6b802414173cda85a8a827a3479303c1.png)
 
 打开应用管理后寻找Lemoc
 
-![](.gitbook/assets/3413c185ccb4f3d96e9b6e2db13c9774.png)
+![&#x5E94;&#x7528;&#x7BA1;&#x7406;](../.gitbook/assets/3413c185ccb4f3d96e9b6e2db13c9774.png)
 
 右侧寻找菜单，关闭服务 右侧寻找菜单，设置
 
-![](.gitbook/assets/fa5a153746c474daceae301d6b4cf21a.png)
+![Lemoc&#x8BBE;&#x7F6E;](../.gitbook/assets/fa5a153746c474daceae301d6b4cf21a.png)
 
 * 确认端口号，默认为25303无需更改
 * 确认默认勾选的“仅本机连接”取消勾选
 
 > 这里Lemoc有一个小bug，关闭服务后可能会显示“”导致无法开启设置页面，这时重启酷Q再试一次即可 ![](media/15608698791397/15608725506449.jpg)
 
-![](.gitbook/assets/b96580882b7e79bc132efa03d3056f78.png)
+![&#x5C0F;BUG&#xFF0C;&#x91CD;&#x542F;&#x5373;&#x53EF;](../.gitbook/assets/b96580882b7e79bc132efa03d3056f78.png)
 
 ## 修改配置文件
 
@@ -176,17 +176,11 @@ loginQQ=1984749515
 
 ## 启动
 
-cd到SinaNya/bin下
+进入bin目录，可以看到有个文件叫start.bat，双击它会出现一个窗口，这就是启动了
 
-`sh ./deamons.sh start`即可启动
-
-**注意必须在bin目录下，程序中有取相对路径的地方！！！**
+**注意不要关闭它，关闭它服务就停止了**
 
 ## 如何重启、更新
-
-同样cd到SinaNya/bin下
-
-`sh ./deamons.sh restart`即可重启 `sh ./deamons.sh stop`即可停止
 
 下载新版的SinaNya.tar.gz，按照刚才提到的上述方式重新布置即可（通常配置文件可以沿用）
 
@@ -194,5 +188,7 @@ cd到SinaNya/bin下
 
 ## 如果我遇到问题了怎么办
 
-SinaNya/logs目录下的所有文件反馈到交流群`162279609`即可
+窗口注意不要关闭，截图窗口内的信息到交流群`162279609`进行反馈
+
+如果窗口已经关闭，SinaNya/logs目录下的所有文件反馈到交流群即可
 
