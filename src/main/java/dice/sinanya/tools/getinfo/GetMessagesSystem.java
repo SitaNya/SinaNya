@@ -86,6 +86,13 @@ public class GetMessagesSystem {
 
         put("mailUserName", "2730902267@qq.com");
         put("mailPassword", "kktjwuakdafbdcej");
+
+        put("CRITICAL_SUCCESS", "");
+        put("EXTREME_SUCCESS", "");
+        put("HARD_SUCCESS", "");
+        put("SUCCESS", "");
+        put("FAILURE", "");
+        put("FUMBLE", "");
     }};
 
     /**
