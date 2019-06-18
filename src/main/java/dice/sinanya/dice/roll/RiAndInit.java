@@ -33,6 +33,8 @@ public class RiAndInit {
     private static Pattern numAndName = Pattern.compile("([+*/-]?\\d+)([^\\d]+)");
     private static Pattern plus = Pattern.compile("([+*/\\-]\\d)");
 
+    private Pattern nickNameRegex = Pattern.compile("([\\u4e00-\\u9fa5]+)");
+
     private EntityTypeMessages entityTypeMessages;
 
     public RiAndInit(EntityTypeMessages entityTypeMessages) {
@@ -76,15 +78,15 @@ public class RiAndInit {
             add = true;
         }
 
-
+        Matcher mNickNameRegex = nickNameRegex.matcher(msg);
         if (result == 0) {
             result = random;
-            if (msg.equals(NONE)) {
-                nick = getNickName(entityTypeMessages);
-            } else {
+            if (mNickNameRegex.find()) {
                 nick = msg;
+                msg = NONE;
+            } else {
+                nick = getNickName(entityTypeMessages);
             }
-            msg = NONE;
         }
 
         if (msg.equals(NONE)) {
@@ -98,13 +100,22 @@ public class RiAndInit {
                 msgBefore = random + "-" + msg.replace("+", "") + "=";
             }
         }
+        Matcher mMsgBefore = nickNameRegex.matcher(msgBefore);
         if (INIT_LIST.containsKey(entityTypeMessages.getFromGroup())) {
             HashMap<String, String> riList = INIT_LIST.get(entityTypeMessages.getFromGroup());
-            riList.put(nick, ": D20=" + msgBefore + result);
+            if (mMsgBefore.find()) {
+                riList.put(nick, ": D20=" + result);
+            } else {
+                riList.put(nick, ": D20=" + msgBefore + "=" + result);
+            }
             INIT_LIST.put(entityTypeMessages.getFromGroup(), riList);
         } else {
             HashMap<String, String> riList = new HashMap<>(30);
-            riList.put(nick, ": D20=" + msgBefore + result);
+            if (mMsgBefore.find()) {
+                riList.put(nick, ": D20=" + result);
+            } else {
+                riList.put(nick, ": D20=" + msgBefore + "=" + result);
+            }
             INIT_LIST.put(entityTypeMessages.getFromGroup(), riList);
         }
     }
