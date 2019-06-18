@@ -5,6 +5,14 @@ import java.util.Collections;
 
 import static dice.sinanya.tools.makedata.RandomInt.random;
 
+/**
+ * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: DND多线程车卡中的信息生成类
+ */
 class MakeDndCardInfo {
 
     static String makeDndCardInfo() {
@@ -46,6 +54,9 @@ class MakeDndCardInfo {
         return stringBuffer.toString();
     }
 
+    /**
+     * @return 生成4D6K3的值
+     */
     private static int get4d6k3multiply() {
         ArrayList<Integer> rollsList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {

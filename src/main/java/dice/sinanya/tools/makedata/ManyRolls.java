@@ -16,11 +16,21 @@ import static dice.sinanya.tools.makedata.RandomInt.random;
  * 电子邮箱: sitanya@qq.com
  * 维护群(QQ): 162279609
  * 有任何问题欢迎咨询
- * 类说明:多重骰掷，比如3d6k2时，如何计算具体的结果，这里会返回字符串式的Process:(5+3+4)结果与Int:12两个值，分别作为
+ * 类说明:多重骰掷
+ *
+ * 比如3d6k2时，如何计算具体的结果，这里会返回字符串式的Process:(5+3+4)结果与Int:12两个值，分别作为
  */
 public class ManyRolls {
     private static Logger log = LogManager.getLogger(ManyRolls.class.getName());
 
+    /**
+     * 根据骰点次数，最大值，取最大值个数，返回数字字符串
+     *
+     * @param times   次数
+     * @param rolls   骰点最大值
+     * @param maxNums 取最大值个数
+     * @return 格式化好的数字字符串，如(3+6+4)
+     */
     public static String manyRollsProcess(int times, int rolls, int maxNums) {
         if (maxNums == 0) {
             maxNums = times;
@@ -80,6 +90,14 @@ public class ManyRolls {
         return stringBuilder.toString();
     }
 
+    /**
+     * 根据骰点次数，最大值，取最大值个数，返回最终结果
+     *
+     * @param times 次数
+     * @param rolls 骰点最大值
+     * @param maxNums 取最大值个数
+     * @return 最终结果，如15
+     */
     static int manyRollsForInt(int times, int rolls, int maxNums) {
         if (maxNums == 0) {
             maxNums = times;

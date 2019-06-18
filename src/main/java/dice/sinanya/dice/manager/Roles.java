@@ -14,8 +14,8 @@ import static dice.sinanya.system.MessagesTag.TAG_ST_SET;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.getinfo.RoleChoose.*;
 import static dice.sinanya.tools.getinfo.RoleInfo.*;
-import static dice.sinanya.tools.log.Sender.sender;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
  * @author SitaNya

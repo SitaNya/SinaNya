@@ -26,9 +26,9 @@ import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByQQ;
 import static dice.sinanya.tools.getinfo.RoleInfo.setRoleInfoFromChooseByQQ;
 import static dice.sinanya.tools.getinfo.Team.*;
-import static dice.sinanya.tools.log.Sender.sender;
 import static dice.sinanya.tools.makedata.GetRollResultAndStr.getResFunctionAndResultInt;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.makedata.Sender.sender;
 import static java.lang.Integer.min;
 import static java.lang.Math.max;
 
@@ -77,8 +77,8 @@ public class Team implements GetDb, Role, AtQq {
         ArrayList<String> qqList = getAtQqList(msg);
         EntityTeamInfo entityTeamInfo = new EntityTeamInfo(entityTypeMessages.getFromGroup(), qqList);
         removeFromTeam(entityTeamInfo);
-        rmTeamEn(entityTypeMessages.getFromGroup());
         for (String qq : qqList) {
+            rmTeamEn(qq, entityTypeMessages.getFromGroup());
             sender(entityTypeMessages, "已将玩家: [CQ:at,qq=" + qq + "]移出小队,其在这期间损失的血量和san值不会还原。");
         }
     }

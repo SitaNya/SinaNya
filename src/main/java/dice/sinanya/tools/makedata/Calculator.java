@@ -4,12 +4,16 @@ import java.util.Collections;
 import java.util.Stack;
 
 /**
- * 算数表达式求值
+ * @author SitaNya
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 算数表达式求值
+ *
  * 直接调用Calculator的类方法conversion()
  * 传入算数表达式，将返回一个浮点值结果
  * 如果计算过程错误，将返回一个NaN
- *
- * @author SitaNya
  */
 public class Calculator {
     /**

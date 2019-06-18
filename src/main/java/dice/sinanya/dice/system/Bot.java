@@ -11,8 +11,8 @@ import static dice.sinanya.system.MessagesSystem.STR_BOT_VERSIONS;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.SwitchBot.*;
-import static dice.sinanya.tools.log.Sender.sender;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
  * @author SitaNya

@@ -4,7 +4,7 @@ import dice.sinanya.entity.EntityHistory;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.tools.getinfo.History.changeHistory;
-import static dice.sinanya.tools.log.Sender.sender;
+import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
  * @author SitaNya

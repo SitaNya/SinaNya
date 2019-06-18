@@ -15,9 +15,9 @@ import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByFromQQ;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
-import static dice.sinanya.tools.log.Sender.sender;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.makedata.RandomInt.random;
+import static dice.sinanya.tools.makedata.Sender.sender;
 import static java.lang.Math.ceil;
 
 /**

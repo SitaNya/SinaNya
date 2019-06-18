@@ -16,8 +16,8 @@ import static dice.sinanya.tools.getinfo.LogTag.*;
 import static dice.sinanya.tools.getinfo.LogText.getLogText;
 import static dice.sinanya.tools.log.LogSave.logSave;
 import static dice.sinanya.tools.log.SendMail.sendMail;
-import static dice.sinanya.tools.log.Sender.sender;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
  * @author SitaNya

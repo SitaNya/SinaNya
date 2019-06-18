@@ -5,8 +5,8 @@ import dice.sinanya.entity.EntityTypeMessages;
 import static dice.sinanya.system.TiAndLi.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
-import static dice.sinanya.tools.log.Sender.sender;
 import static dice.sinanya.tools.makedata.RandomInt.random;
+import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
  * @author SitaNya

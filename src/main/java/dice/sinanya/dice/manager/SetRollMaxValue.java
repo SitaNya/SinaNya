@@ -6,8 +6,8 @@ import static dice.sinanya.system.MessagesRollMaxValue.ROLL_MAX_VALUE;
 import static dice.sinanya.system.MessagesTag.TAG_SET_ROLL_MAX_VALUE;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.getinfo.DefaultMaxRolls.setMaxRolls;
-import static dice.sinanya.tools.log.Sender.sender;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
  * @author SitaNya

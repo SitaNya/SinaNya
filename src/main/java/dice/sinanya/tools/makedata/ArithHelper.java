@@ -1,9 +1,12 @@
 package dice.sinanya.tools.makedata;
 
 /**
- * 对数学公式进行计算
- *
- * @author SitaNya
+ * @author 网上随便找的，如果有侵犯请随时联系我
+ * 日期: 2019-06-15
+ * 电子邮箱: sitanya@qq.com
+ * 维护群(QQ): 162279609
+ * 有任何问题欢迎咨询
+ * 类说明: 对数学公式进行计算
  */
 public class ArithHelper {
 

@@ -23,7 +23,11 @@ import static dice.sinanya.tools.getinfo.Team.flushTeamEn;
  * 电子邮箱: sitanya@qq.com
  * 维护群(QQ): 162279609
  * 有任何问题欢迎咨询
- * 类说明: 整个程序的入口类，这里主要需要修改的是服务器类，下一版会改为读取配置文件
+ * 类说明: 整个程序的入口类
+ *
+ * 这里可以修改的是before方法(但我已经改造为配置文件了，因此可以不动这个方法）
+ * 此外这里声明了大量服务启动时需要从服务器中获取的缓存数据
+ *
  */
 public class RunApplication implements LemocApp {
     public static void main(String[] args) {

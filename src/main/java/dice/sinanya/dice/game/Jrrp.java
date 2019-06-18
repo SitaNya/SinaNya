@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
-import static dice.sinanya.tools.log.Sender.sender;
+import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
  * @author SitaNya

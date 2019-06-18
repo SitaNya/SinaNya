@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
 
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
-import static dice.sinanya.tools.log.Sender.sender;
+import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
  * @author SitaNya

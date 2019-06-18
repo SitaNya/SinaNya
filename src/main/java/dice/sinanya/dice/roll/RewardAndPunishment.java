@@ -12,9 +12,9 @@ import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.TAG_RB;
 import static dice.sinanya.system.MessagesTag.TAG_RP;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.log.Sender.sender;
 import static dice.sinanya.tools.makedata.GetNickAndRandomAndSkill.getNickAndRandomAndSkill;
 import static dice.sinanya.tools.makedata.RandomInt.random;
+import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
  * @author SitaNya

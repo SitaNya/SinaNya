@@ -11,7 +11,7 @@ import java.util.Collections;
  * 有任何问题欢迎咨询
  * 类说明: 获取指定个数的最大骰点结果（XDXK3中的3）
  */
-public class GetMaxNumsResult {
+class GetMaxNumsResult {
 
     /**
      * 给K参数的方法，取一系列骰点结果中的最大值
@@ -20,7 +20,7 @@ public class GetMaxNumsResult {
      * @param maxNums 取其中最大几个值
      * @return 最终取出来的最大值列表
      */
-    public static ArrayList<Integer> getMaxNumsResult(ArrayList<Integer> input, int maxNums) {
+    static ArrayList<Integer> getMaxNumsResult(ArrayList<Integer> input, int maxNums) {
         Collections.sort(input);
         ArrayList<Integer> result = new ArrayList<>();
         for (int i = input.size() - 1; i >= (input.size() - maxNums); i--) {

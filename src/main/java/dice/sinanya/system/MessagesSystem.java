@@ -1,6 +1,5 @@
 package dice.sinanya.system;
 
-import java.util.HashMap;
 
 /**
  * @author SitaNya
