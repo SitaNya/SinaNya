@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 
+import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.tools.getinfo.MakeSkillName.makeSkillName;
 
 /**
@@ -44,9 +45,11 @@ class GetMessagesToValue {
             }
 
             try {
-                properties.put(makeSkillName(strSkillName.toString()), Integer.parseInt(strSkillValue.toString()));
-                strSkillName = new StringBuilder();
-                strSkillValue = new StringBuilder();
+                if (!strSkillValue.toString().equals(NONE)) {
+                    properties.put(makeSkillName(strSkillName.toString()), Integer.parseInt(strSkillValue.toString()));
+                    strSkillName = new StringBuilder();
+                    strSkillValue = new StringBuilder();
+                }
             } catch (NumberFormatException e) {
                 Log.error(e.getMessage(), e);
             }
