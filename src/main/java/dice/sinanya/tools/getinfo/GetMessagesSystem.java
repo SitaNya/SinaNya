@@ -73,7 +73,7 @@ public class GetMessagesSystem {
         put("hiddenDice", "kp正在进行暗骰");
 
         put("teamIsEmpty", "您的小队为空");
-        put("teamMemberEnIsEmpty", "[CQ:at,qq=%s]的技能成功记录为空");
+        put("teamMemberEnIsEmpty", "的技能成功记录为空");
 
 
         put("appendLog", "日志已重新开启，将在原基础上追加");

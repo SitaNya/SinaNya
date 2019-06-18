@@ -101,7 +101,7 @@ public class Team {
             }
             return role + StringUtils.join(TEAM_EN.get(entityQqAndGroup), ",");
         } else {
-            return String.format(messagesSystem.get("teamMemberEnIsEmpty"), qqId);
+            return "[CQ:at,qq=" + qqId + "]" + messagesSystem.get("teamMemberEnIsEmpty");
         }
     }
 
