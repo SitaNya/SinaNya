@@ -94,10 +94,10 @@ public class RiAndInit {
         } else {
             if (add) {
                 sender(entityTypeMessages, nick + "的先攻骰掷,掷出了: D20=" + random + "+" + msg.replace("+", "") + "=" + result);
-                msgBefore = random + "+" + msg.replace("+", "") + "=";
+                msgBefore = random + "+" + msg.replace("+", "").replace("-","") + "=";
             } else {
                 sender(entityTypeMessages, nick + "的先攻骰掷,掷出了: D20=" + random + msg + "=" + result);
-                msgBefore = random + "-" + msg.replace("+", "") + "=";
+                msgBefore = random + "-" + msg.replace("+", "").replace("-","") + "=";
             }
         }
         Matcher mMsgBefore = nickNameRegex.matcher(msgBefore);
@@ -106,7 +106,7 @@ public class RiAndInit {
             if (mMsgBefore.find()) {
                 riList.put(nick, ": D20=" + result);
             } else {
-                riList.put(nick, ": D20=" + msgBefore + "=" + result);
+                riList.put(nick, ": D20=" + msgBefore  + result);
             }
             INIT_LIST.put(entityTypeMessages.getFromGroup(), riList);
         } else {
@@ -114,7 +114,7 @@ public class RiAndInit {
             if (mMsgBefore.find()) {
                 riList.put(nick, ": D20=" + result);
             } else {
-                riList.put(nick, ": D20=" + msgBefore + "=" + result);
+                riList.put(nick, ": D20=" + msgBefore + result);
             }
             INIT_LIST.put(entityTypeMessages.getFromGroup(), riList);
         }
