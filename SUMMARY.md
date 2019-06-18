@@ -1,10 +1,28 @@
 # Table of contents
 
 * [SinaNya](README.md)
-* [我是一名新手](wo-shi-yi-ming-xin-shou.md)
-* [我是一名新手，我使用Windows服务器或个人电脑](wo-shi-yi-ming-xin-shou-wo-shi-yong-windows-fu-wu-qi-huo-ge-ren-dian-nao.md)
-* [我是一名新手，我使用Linux服务器](wo-shi-yi-ming-xin-shou-wo-shi-yong-linux-fu-wu-qi.md)
-* [我是一位开发者](wo-shi-yi-wei-kai-fa-zhe.md)
+* [搭建说明](da-jian-shuo-ming/README.md)
+  * [我是一位开发者](da-jian-shuo-ming/wo-shi-yi-wei-kai-fa-zhe.md)
+  * [我是一名新手](da-jian-shuo-ming/wo-shi-yi-ming-xin-shou/README.md)
+    * [我是一名新手，我使用Windows服务器或个人电脑](da-jian-shuo-ming/wo-shi-yi-ming-xin-shou/wo-shi-yi-ming-xin-shou-wo-shi-yong-windows-fu-wu-qi-huo-ge-ren-dian-nao.md)
+    * [我是一名新手，我使用Linux服务器](da-jian-shuo-ming/wo-shi-yi-ming-xin-shou/wo-shi-yi-ming-xin-shou-wo-shi-yong-linux-fu-wu-qi.md)
+* [SinaNya命令](sinanya-ming-ling/README.md)
+  * [骰点命令](sinanya-ming-ling/dian-ming-ling/README.md)
+    * [常用命令](sinanya-ming-ling/dian-ming-ling/chang-yong-ming-ling.md)
+    * [附加指令](sinanya-ming-ling/dian-ming-ling/fu-jia-zhi-ling.md)
+    * [DND](sinanya-ming-ling/dian-ming-ling/dnd.md)
+  * [跑团管理](sinanya-ming-ling/pao-tuan-guan-li/README.md)
+    * [人物卡](sinanya-ming-ling/pao-tuan-guan-li/ren-wu-ka.md)
+    * [小队](sinanya-ming-ling/pao-tuan-guan-li/xiao-dui.md)
+    * [日志](sinanya-ming-ling/pao-tuan-guan-li/ri-zhi.md)
+    * [线索](sinanya-ming-ling/pao-tuan-guan-li/xian-suo.md)
+  * [数据生成](sinanya-ming-ling/shu-ju-sheng-cheng/README.md)
+    * [车卡命令](sinanya-ming-ling/shu-ju-sheng-cheng/che-ka-ming-ling.md)
+    * [生成指令](sinanya-ming-ling/shu-ju-sheng-cheng/sheng-cheng-zhi-ling.md)
+  * [半娱乐性命令](sinanya-ming-ling/ban-yu-le-xing-ming-ling.md)
+* [SinaNya协议](sinanya-xie-yi.md)
+* [公开掷骰机器人列表](gong-kai-zhi-ji-qi-ren-lie-biao.md)
+* [关于SinaNya](guan-yu-sinanya.md)
 
 ## 标题
 
