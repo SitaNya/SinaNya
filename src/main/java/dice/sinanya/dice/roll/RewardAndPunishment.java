@@ -15,6 +15,7 @@ import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.makedata.GetNickAndRandomAndSkill.getNickAndRandomAndSkill;
 import static dice.sinanya.tools.makedata.RandomInt.random;
 import static dice.sinanya.tools.makedata.Sender.sender;
+import static java.lang.Math.min;
 
 /**
  * @author SitaNya
@@ -47,6 +48,8 @@ public class RewardAndPunishment implements En {
 
         StringBuilder stringBuilder = new StringBuilder();
 
+        int random = entityNickAndRandomAndSkill.getRandom();
+
         ArrayList<Integer> listDice = makeBAndPRoll(getTimesAndSkill(msg).getTimes());
 //        得到奖励投列表
 
@@ -54,12 +57,14 @@ public class RewardAndPunishment implements En {
         for (int result : listDice) {
             stringBuilder.append(result).append(",");
             if (result < min) {
-                min = result;
+                if (random%10!=0 || result!=0){
+                    min = result;
+                }
             }
         }
 //        取最小值
 
-        int random = entityNickAndRandomAndSkill.getRandom();
+
 
         if (random / multiple < min) {
             min = random / multiple;
@@ -67,6 +72,7 @@ public class RewardAndPunishment implements En {
 
         int resultRandom = min * multiple + random % multiple;
 //        进行替换，高位替换为整个列表中最小值
+
 
         String strRes;
         String substring = stringBuilder.substring(0, stringBuilder.length() - 1);
