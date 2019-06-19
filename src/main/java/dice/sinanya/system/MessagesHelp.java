@@ -114,8 +114,8 @@ public interface MessagesHelp {
             .append("选择人物卡，当不带有减号分割时将会视为选择你的人物卡。每个人同一时间仅能激活一张人物卡")
             .append("\n-----------------------------------\n")
 
-            .append(".st move\n")
-            .append(".st move 缇娜\t.st move 安娜\n")
+            .append(".st rm\n")
+            .append(".st rm 缇娜\t.st rm 安娜\n")
             .append("移除某一张人物卡，无法移除已选择的人物卡")
             .append("\n-----------------------------------\n")
 
@@ -185,6 +185,24 @@ public interface MessagesHelp {
             .append("删除某个日志，基本很少会用到，删除后就再也找不回来了")
             .append("\n-----------------------------------\n")
 
+            .append(".clue\n")
+            .append(".clue 线索1\n")
+            .append("录入某条线索")
+            .append("\n-----------------------------------\n")
+
+            .append(".clue show\n")
+            .append("显示所有线索")
+            .append("\n-----------------------------------\n")
+
+            .append(".clue rm\n")
+            .append(".clue rm 2019-06-24 18:21:33\n")
+            .append("删除某条线索\n")
+            .append("\n-----------------------------------\n")
+
+            .append(".clue clr\n")
+            .append("清空所有线索")
+            .append("\n-----------------------------------\n")
+
             .append(".npc\n")
             .append("生成一个NPC，部分发送到群里给PC，部分私聊KP，注意这可不是车卡用的！")
             .append("\n-----------------------------------\n")
@@ -217,11 +235,6 @@ public interface MessagesHelp {
             .append("角色扮演365问，不过只有问没有答，估计还是要读的人自己思考吧");
 
     StringBuffer DND_HELP = new StringBuffer()
-            .append(".re\n")
-            .append(".re\t.re+10\t.re-10\n")
-            .append("dnd专用的D20骰点，目前仅支持加减")
-            .append("\n-----------------------------------\n")
-
             .append(".dnd\n")
             .append(".dnd\t.dnd 10\n")
             .append("生成dnd英雄人物卡")

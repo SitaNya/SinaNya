@@ -133,6 +133,7 @@ class Flow {
     }
 
     private void checkMessages(String messages) {
+        messages = messages.toLowerCase();
 
         isTeamSet = messages.matches(TAG_TEAM_SET);
         isTeamClr = messages.matches(TAG_TEAM_CLR);

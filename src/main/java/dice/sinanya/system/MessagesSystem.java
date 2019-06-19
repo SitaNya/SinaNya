@@ -13,7 +13,7 @@ public interface MessagesSystem {
     String NONE = "";
     String SPACE = " ";
 
-    String VERSIONS = "0.95.0.0 beta";
+    String VERSIONS = "0.97.0.0 beta";
 
     StringBuilder STR_BOT_VERSIONS = new StringBuilder()
             .append("Dice made in java\n")
