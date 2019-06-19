@@ -14,6 +14,10 @@ description: Windows服务器搭建说明
 
 [JDK1.8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 
+> 如果你很清楚什么是JDK比如玩过MC之类的，那么你应该知道自己电脑上装没装
+>
+> 如果你不清楚这是什么，那么你电脑上多半没装，请安装
+
 ### 酷Q
 
 酷Q是骰子机器人的最重要部分，感谢叉叉姐姐的软件！
@@ -62,6 +66,14 @@ bin目录下存在一个文件名为`org.ruiko.lemoc.cpk`的文件，将它放�
 > 这里Lemoc有一个小bug，关闭服务后可能会显示“”导致无法开启设置页面，这时重启酷Q再试一次即可 ![](media/15608698791397/15608725506449.jpg)
 
 ![&#x5C0F;BUG&#xFF0C;&#x91CD;&#x542F;&#x5373;&#x53EF;](../../.gitbook/assets/b96580882b7e79bc132efa03d3056f78.png)
+
+### 千万别忘了启动Lemoc，它不会自动启动！
+
+![](../../.gitbook/assets/a04e4d1e-c0e4-412d-ab1a-9c6115b73d05%20%281%29.png)
+
+### 我的Lemoc无法关掉“仅主机连接”该怎么办？
+
+你的hostIP填写127.0.0.1即可
 
 ## 修改配置文件
 

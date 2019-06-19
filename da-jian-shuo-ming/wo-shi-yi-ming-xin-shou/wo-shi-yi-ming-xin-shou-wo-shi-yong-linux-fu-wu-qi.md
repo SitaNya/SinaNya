@@ -63,6 +63,10 @@ bin目录下存在一个文件名为`org.ruiko.lemoc.cpk`的文件，将它放�
 
 ![](../../.gitbook/assets/b96580882b7e79bc132efa03d3056f78.png)
 
+### 千万别忘了启动Lemoc，它不会自动启动！
+
+![](../../.gitbook/assets/a04e4d1e-c0e4-412d-ab1a-9c6115b73d05.png)
+
 ## 修改配置文件
 
 打开SinaNya/conf目录，下面有个文件叫sinanya.properties，使用记事本或者其它文本工具打开它
