@@ -8,8 +8,8 @@ description: 简易搭建指南
 
 首先，抱歉我还要确定一件事
 
-* [您目前使用linux系统](https://sitcnya.gitbook.io/sinanya/wo-shi-yi-ming-xin-shou/wo-shi-yi-ming-xin-shou-wo-shi-yong-linux-fu-wu-qi)
-* [您目前使用windows服务器或个人电脑](https://sitcnya.gitbook.io/sinanya/wo-shi-yi-ming-xin-shou/wo-shi-yi-ming-xin-shou-wo-shi-yong-windows-fu-wu-qi-huo-ge-ren-dian-nao)
+* [您目前使用linux系统](https://sitcnya.gitbook.io/sinanya/da-jian-shuo-ming/wo-shi-yi-ming-xin-shou/wo-shi-yi-ming-xin-shou-wo-shi-yong-windows-fu-wu-qi-huo-ge-ren-dian-nao)
+* [您目前使用windows服务器或个人电脑](https://sitcnya.gitbook.io/sinanya/da-jian-shuo-ming/wo-shi-yi-ming-xin-shou/wo-shi-yi-ming-xin-shou-wo-shi-yong-linux-fu-wu-qi)
 
 这将对应2种完全不同的配置方式，而这两个系统的优劣区别我想上一节已经大概阐述过了
 
