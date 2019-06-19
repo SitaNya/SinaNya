@@ -1,5 +1,6 @@
 package dice.sinanya.db.system;
 
+import com.forte.qqrobot.BaseConfiguration;
 import dice.sinanya.db.tools.DbUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -29,9 +30,10 @@ public class InsertBot {
     public void insertBot(long groupId, boolean switchBot) {
         int num = 0;
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from switchBot where groupId=?";
+            String sql = "select * from switchBot where groupId=? and botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setLong(1, groupId);
+                ps.setString(2, BaseConfiguration.getLocalQQCode());
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         num++;
@@ -45,12 +47,14 @@ public class InsertBot {
         if (num == 0) {
             try (Connection conn = DbUtil.getConnection()) {
                 String sql = "INSERT INTO switchBot(" +
+                        "botId," +
                         "groupId," +
                         "switchBot" +
-                        ") VALUES(?,?)";
+                        ") VALUES(?,?,?)";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    ps.setLong(1, groupId);
-                    ps.setBoolean(2, switchBot);
+                    ps.setString(1,BaseConfiguration.getLocalQQCode());
+                    ps.setLong(2, groupId);
+                    ps.setBoolean(3, switchBot);
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
@@ -59,10 +63,11 @@ public class InsertBot {
         } else {
             try (Connection conn = DbUtil.getConnection()) {
                 String sql = "update switchBot set " +
-                        "switchBot=? where groupId=?";
+                        "switchBot=? where groupId=? and botId=?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     ps.setBoolean(1, switchBot);
                     ps.setLong(2, groupId);
+                    ps.setString(3,BaseConfiguration.getLocalQQCode());
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {
