@@ -17,6 +17,8 @@ import static dice.sinanya.tools.getinfo.RoleInfo.*;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
+import static dice.sinanya.system.MessagesSystem.NONE;
+
 /**
  * @author SitaNya
  * 日期: 2019-06-15
@@ -54,9 +56,13 @@ public class Roles implements Role {
         String role;
         if (msg.contains(sepRoleAndPro) && msg.split(sepRoleAndPro).length == lenRoleAndPro) {
             role = msg.split(sepRoleAndPro)[0];
-            properties = msg.split(sepRoleAndPro)[1];
-            insertRoles.insertRoleInfo(properties, role, qqId);
-            return true;
+            if (role != null && !role.equals(NONE)) {
+                properties = msg.split(sepRoleAndPro)[1];
+                insertRoles.insertRoleInfo(properties, role, qqId);
+                return true;
+            } else {
+                return false;
+            }
         } else if (!msg.equals(tagRoleNameNone)) {
             role = msg;
             if (checkRoleInfoExistByQQ(qqId, role)) {
