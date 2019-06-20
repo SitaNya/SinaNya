@@ -122,7 +122,7 @@ public interface MessagesTag {
     String TAG_DND = HEADER_DND + "(10|[1-9])*";
     String TAG_RI = HEADER + "ri.*";
     String TAG_INIT = HEADER + "init.*";
-    String TAG_INIT_CLR = HEADER + "init clr.*";
+    String TAG_INIT_CLR = HEADER + "init[ ]*clr.*";
 
     //    获取线索集相关标签
     String HEADER_CLUE = HEADER + "clue[ ]*";
