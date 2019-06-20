@@ -302,7 +302,7 @@ public class Team implements GetDb, Role, AtQq {
             stringBuilder.append("您小队内成员的属性值为:\n");
         }
         for (String qq : qqList) {
-            stringBuilder = new Roles(entityTypeMessages).showProp(entityTypeMessages, qq);
+            stringBuilder.append(new Roles(entityTypeMessages).showProp(entityTypeMessages, qq));
         }
         entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), stringBuilder.toString());
     }
