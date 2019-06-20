@@ -180,7 +180,8 @@ public class Listener {
         String tagBotExit = ".bot exit";
         if ((messages.trim().contains(tagBotOn) && messages.trim().contains(tagMe)) || (messages.trim().contains(tagBotOn) && !messages.trim().contains("[CQ:at"))) {
             new Bot(entityTypeMessages).on();
-        } else if (messages.trim().contains(tagBotOff) && messages.trim().contains(tagMe)) {
+        } else if (messages.trim().contains(tagBotOff) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotOff) && !messages.trim().contains("[CQ:at")))
+        {
             new Bot(entityTypeMessages).off();
         } else if (messages.trim().contains(tagBotExit) && messages.trim().contains(tagMe)) {
             new Bot(entityTypeMessages).exit();
