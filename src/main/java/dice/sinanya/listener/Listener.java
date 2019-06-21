@@ -183,7 +183,7 @@ public class Listener {
         } else if (messages.trim().contains(tagBotOff) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotOff) && !messages.trim().contains("[CQ:at")))
         {
             new Bot(entityTypeMessages).off();
-        } else if (messages.trim().contains(tagBotExit) && messages.trim().contains(tagMe)) {
+        } else if (messages.trim().contains(tagBotExit) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotInfo) && !messages.trim().contains("[CQ:at"))) {
             new Bot(entityTypeMessages).exit();
         }
     }
