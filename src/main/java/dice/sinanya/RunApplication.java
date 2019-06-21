@@ -66,6 +66,7 @@ public class RunApplication implements HttpApp {
         configuration.setIp(messagesSystem.get("hostIp"));
         configuration.setServerPort(Integer.parseInt(messagesSystem.get("javaPort")));
         configuration.setJavaPort(Integer.parseInt(messagesSystem.get("serverPort")));
+        configuration.setLocalQQCode(messagesSystem.get("loginQQ"));
     }
 
     @Override

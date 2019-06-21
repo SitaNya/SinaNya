@@ -1,6 +1,7 @@
 package dice.sinanya.db.system;
 
 import com.forte.qqrobot.BaseConfiguration;
+import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityGroupCensus;
 import org.apache.log4j.LogManager;
@@ -31,7 +32,7 @@ public class SelectBot {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select groupId,switchBot from switchBot where botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, BaseConfiguration.getLocalQQCode());
+                ps.setString(1, HttpConfiguration.getLocalQQCode());
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         SWITCH_BOT.put(set.getLong("groupId"), set.getBoolean("switchBot"));
@@ -52,7 +53,7 @@ public class SelectBot {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select groupId,switchBot from switchBot where botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1,BaseConfiguration.getLocalQQCode());
+                ps.setString(1,HttpConfiguration.getLocalQQCode());
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         groupNum++;

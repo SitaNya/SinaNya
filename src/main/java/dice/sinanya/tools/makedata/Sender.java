@@ -30,13 +30,13 @@ public class Sender {
         }
         switch (entityTypeMessages.getMsgGetTypes()) {
             case privateMsg:
-                entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getMsgPrivate().getQQ(), messages);
+                entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getMsgPrivate().getQQCode(), messages);
                 break;
             case groupMsg:
-                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(entityTypeMessages.getMsgGroup().getQQ(), messages);
+                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(entityTypeMessages.getMsgGroup().getGroupCode(), messages);
                 break;
             case discussMsg:
-                entityTypeMessages.getMsgSender().SENDER.sendDiscussMsg(entityTypeMessages.getMsgDisGroup().getQQ(), messages);
+                entityTypeMessages.getMsgSender().SENDER.sendDiscussMsg(entityTypeMessages.getMsgDisGroup().getGroupCode(), messages);
                 break;
             default:
                 entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg("450609203", entityTypeMessages + "\nmessages: " + messages);

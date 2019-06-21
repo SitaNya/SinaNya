@@ -1,5 +1,6 @@
 package dice.sinanya.listener;
 
+import com.forte.qqrobot.BaseConfiguration;
 import com.forte.qqrobot.anno.Constr;
 import com.forte.qqrobot.anno.Filter;
 import com.forte.qqrobot.anno.Listen;
@@ -9,6 +10,7 @@ import com.forte.qqrobot.beans.messages.msgget.MsgGet;
 import com.forte.qqrobot.beans.messages.msgget.PrivateMsg;
 import com.forte.qqrobot.beans.messages.types.MsgGetTypes;
 import com.forte.qqrobot.beans.types.KeywordMatchType;
+import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
 import com.forte.qqrobot.sender.MsgSender;
 import dice.sinanya.dice.system.Bot;
 import dice.sinanya.entity.EntityLogTag;
@@ -31,7 +33,7 @@ import static dice.sinanya.tools.getinfo.SwitchBot.getBot;
  */
 public class Listener {
     private String tagBotOn = ".bot on";
-    private String tagMe = "[CQ:at,qq=" + messagesSystem.get("loginQQ") + "]";
+    private String tagMe = "[CQ:at,qq=" + HttpConfiguration.getLocalQQCode() + "]";
 
     private Listener() {
     }
@@ -73,7 +75,7 @@ public class Listener {
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
         changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
-        if (getBot(Long.parseLong(msgGroup.getGroup()))) {
+        if (getBot(Long.parseLong(msgGroup.getGroupCode()))) {
             new Flow(entityTypeMessages).toGroup();
             return true;
         } else {
@@ -96,7 +98,7 @@ public class Listener {
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
         changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
-        if (getBot(Long.parseLong(msgDisGroup.getGroup()))) {
+        if (getBot(Long.parseLong(msgDisGroup.getGroupCode()))) {
             new Flow(entityTypeMessages).toDisGroup();
             return true;
         } else {
@@ -120,7 +122,7 @@ public class Listener {
         if (msgGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
         }
-        if (getBot(Long.parseLong(msgGroup.getGroup())) ||
+        if (getBot(Long.parseLong(msgGroup.getGroupCode())) ||
                 msgGroup.getMsg().trim().equals(tagBotOn) ||
                 (msgGroup.getMsg().trim().contains(tagBotOn) && msgGroup.getMsg().trim().contains(tagMe))) {
             setLogs(entityTypeMessages, msgGet);
@@ -146,7 +148,7 @@ public class Listener {
         if (msgDisGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
         }
-        if (getBot(Long.parseLong(msgDisGroup.getGroup())) ||
+        if (getBot(Long.parseLong(msgDisGroup.getGroupCode())) ||
                 msgDisGroup.getMsg().trim().equals(tagBotOn) ||
                 (msgDisGroup.getMsg().trim().contains(tagBotOn) && msgDisGroup.getMsg().trim().contains(tagMe))) {
             setLogs(entityTypeMessages, msgGet);

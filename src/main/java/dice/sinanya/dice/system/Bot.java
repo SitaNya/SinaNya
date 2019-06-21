@@ -1,5 +1,7 @@
 package dice.sinanya.dice.system;
 
+import com.forte.qqrobot.BaseConfiguration;
+import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
 import dice.sinanya.dice.manager.imal.AtQq;
 import dice.sinanya.entity.EntityGroupCensus;
 import dice.sinanya.entity.EntityTypeMessages;
@@ -40,10 +42,10 @@ public class Bot implements AtQq {
         ArrayList<String> qqList = getAtQqList(msg);
 
         if (qqList.size() == 0) {
-            qqList.add(messagesSystem.get("loginQQ"));
+            qqList.add(HttpConfiguration.getLocalQQCode());
         }
         for (String qq : qqList) {
-            if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {
+            if (qq.equals(HttpConfiguration.getLocalQQCode())) {
                 long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
                 if (groupId == 0) {
                     sender(entityTypeMessages, messagesSystem.get("can'tInPrivate"));
@@ -69,7 +71,7 @@ public class Bot implements AtQq {
         ArrayList<String> qqList = getAtQqList(msg);
 
         for (String qq : qqList) {
-            if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {
+            if (qq.equals(HttpConfiguration.getLocalQQCode())) {
                 long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
                 if (groupId == 0) {
                     sender(entityTypeMessages, messagesSystem.get("can'tInPrivate"));
@@ -95,8 +97,13 @@ public class Bot implements AtQq {
         ArrayList<String> qqList = getAtQqList(msg);
 
         for (String qq : qqList) {
-            if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {
+            if (qq.equals(HttpConfiguration.getLocalQQCode())) {
                 sender(entityTypeMessages, messagesSystem.get("botExit"));
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 entityTypeMessages.getMsgSender().SETTER.setGroupLeave(entityTypeMessages.getFromGroup());
             }
         }

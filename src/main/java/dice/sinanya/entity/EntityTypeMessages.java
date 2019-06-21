@@ -64,9 +64,9 @@ public class EntityTypeMessages {
             case groupMsg:
                 return msgGroup.getQQ();
             case discussMsg:
-                return msgDisGroup.getQQ();
+                return msgDisGroup.getQQCode();
             case privateMsg:
-                return msgPrivate.getQQ();
+                return msgPrivate.getQQCode();
             default:
                 return "450609203";
         }
@@ -78,9 +78,9 @@ public class EntityTypeMessages {
     public String getFromGroup() {
         switch (msgGetTypes) {
             case groupMsg:
-                return msgGroup.getGroup();
+                return msgGroup.getGroupCode();
             case discussMsg:
-                return msgDisGroup.getGroup();
+                return msgDisGroup.getGroupCode();
             default:
                 return "0";
         }
