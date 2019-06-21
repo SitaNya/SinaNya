@@ -1,5 +1,6 @@
 package dice.sinanya.tools.getinfo;
 
+import com.forte.qqrobot.beans.messages.RootBean;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByFromQQ;
@@ -13,7 +14,7 @@ import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
  * 有任何问题欢迎咨询
  * 类说明: 获取昵称
  */
-public class GetNickName {
+public class GetNickName implements RootBean {
 
     /**
      * 如果已经设定了人物卡则默认给人物卡名字，没设定的话给QQ昵称
@@ -28,11 +29,11 @@ public class GetNickName {
 
         switch (entityTypeMessages.getMsgGetTypes()) {
             case privateMsg:
-                return entityTypeMessages.getMsgPrivate().getNick();
+//                return entityTypeMessages.getMsgGet().get;
             case groupMsg:
-                return entityTypeMessages.getMsgGroup().getUsername();
+//                return entityTypeMessages.getMsgGroup().getUsername();
             case discussMsg:
-                return entityTypeMessages.getMsgDisGroup().getNick();
+//                return entityTypeMessages.getMsgDisGroup().getNick();
             default:
                 entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg("450609203", entityTypeMessages.toString());
                 return entityTypeMessages.toString();

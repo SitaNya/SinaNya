@@ -1,10 +1,11 @@
 package dice.sinanya.entity;
 
+import com.forte.qqrobot.beans.messages.msgget.DiscussMsg;
+import com.forte.qqrobot.beans.messages.msgget.GroupMsg;
 import com.forte.qqrobot.beans.messages.msgget.MsgGet;
+import com.forte.qqrobot.beans.messages.msgget.PrivateMsg;
 import com.forte.qqrobot.beans.messages.types.MsgGetTypes;
-import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgDisGroup;
-import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgGroup;
-import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgPrivate;
+
 import com.forte.qqrobot.sender.MsgSender;
 
 import static dice.sinanya.tools.checkdata.CheckValue.checkValue;
@@ -29,26 +30,26 @@ public class EntityTypeMessages {
     private MsgGetTypes msgGetTypes;
     private MsgSender msgSender;
     private MsgGet msgGet;
-    private MsgGroup msgGroup;
-    private MsgDisGroup msgDisGroup;
-    private MsgPrivate msgPrivate;
+    private GroupMsg msgGroup;
+    private DiscussMsg msgDisGroup;
+    private PrivateMsg msgPrivate;
 
 
-    public EntityTypeMessages(MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGet msgGet, MsgPrivate msgPrivate) {
+    public EntityTypeMessages(MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGet msgGet, PrivateMsg msgPrivate) {
         this.msgGetTypes = msgGetTypes;
         this.msgSender = msgSender;
         this.msgGet = msgGet;
         this.msgPrivate = msgPrivate;
     }
 
-    public EntityTypeMessages(MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGet msgGet, MsgGroup msgGroup) {
+    public EntityTypeMessages(MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGet msgGet, GroupMsg msgGroup) {
         this.msgGetTypes = msgGetTypes;
         this.msgSender = msgSender;
         this.msgGet = msgGet;
         this.msgGroup = msgGroup;
     }
 
-    public EntityTypeMessages(MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGet msgGet, MsgDisGroup msgDisGroup) {
+    public EntityTypeMessages(MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGet msgGet, DiscussMsg msgDisGroup) {
         this.msgGetTypes = msgGetTypes;
         this.msgSender = msgSender;
         this.msgGet = msgGet;
@@ -61,11 +62,11 @@ public class EntityTypeMessages {
     public String getFromQq() {
         switch (msgGetTypes) {
             case groupMsg:
-                return msgGroup.getFromQQ();
+                return msgGroup.getQQ();
             case discussMsg:
-                return msgDisGroup.getFromQQ();
+                return msgDisGroup.getQQ();
             case privateMsg:
-                return msgPrivate.getFromQQ();
+                return msgPrivate.getQQ();
             default:
                 return "450609203";
         }
@@ -77,9 +78,9 @@ public class EntityTypeMessages {
     public String getFromGroup() {
         switch (msgGetTypes) {
             case groupMsg:
-                return msgGroup.getFromGroup();
+                return msgGroup.getGroup();
             case discussMsg:
-                return msgDisGroup.getFromDiscuss();
+                return msgDisGroup.getGroup();
             default:
                 return "0";
         }
@@ -97,15 +98,15 @@ public class EntityTypeMessages {
         return msgGet;
     }
 
-    public MsgGroup getMsgGroup() {
+    public GroupMsg getMsgGroup() {
         return msgGroup;
     }
 
-    public MsgDisGroup getMsgDisGroup() {
+    public DiscussMsg getMsgDisGroup() {
         return msgDisGroup;
     }
 
-    public MsgPrivate getMsgPrivate() {
+    public PrivateMsg getMsgPrivate() {
         return msgPrivate;
     }
 

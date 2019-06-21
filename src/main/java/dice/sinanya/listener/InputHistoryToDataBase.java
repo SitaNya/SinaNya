@@ -35,7 +35,7 @@ public class InputHistoryToDataBase implements TimeJob {
     }
 
     @Override
-    public void execute(JobExecutionContext context) throws JobExecutionException {
+    public void execute(JobExecutionContext context) {
         try {
             CQCodeUtil cqCodeUtil = TimeTaskContext.getCQCodeUtil(context);
             MsgSender msgSender = TimeTaskContext.getMsgSender(context);

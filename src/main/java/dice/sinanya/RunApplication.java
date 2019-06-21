@@ -1,8 +1,8 @@
 package dice.sinanya;
 
-import com.forte.qqrobot.component.forlemoc.LemocApp;
-import com.forte.qqrobot.component.forlemoc.LemocApplication;
-import com.forte.qqrobot.component.forlemoc.LinkConfiguration;
+import com.forte.qqrobot.component.forhttpapi.HttpApp;
+import com.forte.qqrobot.component.forhttpapi.HttpApplication;
+import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
 import com.forte.qqrobot.exception.RobotRuntionException;
 import com.forte.qqrobot.sender.MsgSender;
 import com.forte.qqrobot.utils.CQCodeUtil;
@@ -31,12 +31,12 @@ import static dice.sinanya.tools.log.SendMail.sendMail;
  * 此外这里声明了大量服务启动时需要从服务器中获取的缓存数据
  *
  */
-public class RunApplication implements LemocApp {
+public class RunApplication implements HttpApp {
     public static void main(String[] args) {
         initMessagesSystem();
 //        读取配置文件
         try {
-            new LemocApplication().run(new RunApplication());
+            new HttpApplication().run(new RunApplication());
             flushTeamEn();
 //        从数据库中读取幕间成长到缓存
             flushMaxRolls();
@@ -59,12 +59,11 @@ public class RunApplication implements LemocApp {
     }
 
     @Override
-    public void before(LinkConfiguration configuration) {
+    public void before(HttpConfiguration configuration) {
         configuration.setScannerPackage("dice.sinanya.listener");
-        configuration.setLinkIp(messagesSystem.get("hostIp"));
-        configuration.setPort(Integer.parseInt(messagesSystem.get("hostPort")));
+        configuration.setIp(messagesSystem.get("hostIp"));
+        configuration.setServerPort(Integer.parseInt(messagesSystem.get("hostPort")));
         configuration.setLocalQQCode(messagesSystem.get("loginQQ"));
-        configuration.setRetryTime(5);
     }
 
     @Override

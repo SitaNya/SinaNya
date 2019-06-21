@@ -1,5 +1,6 @@
 package dice.sinanya.listener;
 
+import com.forte.qqrobot.beans.messages.OriginalAble;
 import dice.sinanya.dice.game.Jrrp;
 import dice.sinanya.dice.get.*;
 import dice.sinanya.dice.getbook.Book;
@@ -35,7 +36,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 3.   在toPrivate或toPrivateAndGroup中根据需要new自己写的逻辑类并通过布尔值去激活
  */
 @SuppressWarnings("AlibabaLowerCamelCaseVariableNaming")
-class Flow {
+class Flow implements OriginalAble {
     private static final Logger Log = LogManager.getLogger(Flow.class);
 
     private EntityTypeMessages entityTypeMessages;
@@ -129,6 +130,7 @@ class Flow {
     Flow(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
         String messages = entityTypeMessages.getMsgGet().getMsg().trim();
+        sender(entityTypeMessages,getOriginalData());
         checkMessages(messages);
     }
 
@@ -480,4 +482,8 @@ class Flow {
         toPrivateAndGroup();
     }
 
+    @Override
+    public String getOriginalData() {
+        return getOriginalData();
+    }
 }

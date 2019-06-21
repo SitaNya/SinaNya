@@ -3,12 +3,12 @@ package dice.sinanya.listener;
 import com.forte.qqrobot.anno.Constr;
 import com.forte.qqrobot.anno.Filter;
 import com.forte.qqrobot.anno.Listen;
+import com.forte.qqrobot.beans.messages.msgget.DiscussMsg;
+import com.forte.qqrobot.beans.messages.msgget.GroupMsg;
 import com.forte.qqrobot.beans.messages.msgget.MsgGet;
+import com.forte.qqrobot.beans.messages.msgget.PrivateMsg;
 import com.forte.qqrobot.beans.messages.types.MsgGetTypes;
 import com.forte.qqrobot.beans.types.KeywordMatchType;
-import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgDisGroup;
-import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgGroup;
-import com.forte.qqrobot.component.forlemoc.beans.msgget.MsgPrivate;
 import com.forte.qqrobot.sender.MsgSender;
 import dice.sinanya.dice.system.Bot;
 import dice.sinanya.entity.EntityLogTag;
@@ -52,7 +52,7 @@ public class Listener {
      */
     @Listen(MsgGetTypes.privateMsg)
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
-    public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgPrivate msgPrivate) {
+    public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, PrivateMsg msgPrivate) {
         new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgPrivate)).toPrivate();
         return true;
     }
@@ -69,10 +69,10 @@ public class Listener {
      */
     @Listen(MsgGetTypes.groupMsg)
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
-    public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGroup msgGroup) {
+    public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
         changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
-        if (getBot(Long.parseLong(msgGroup.getFromGroup()))) {
+        if (getBot(Long.parseLong(msgGroup.getGroup()))) {
             new Flow(entityTypeMessages).toGroup();
             return true;
         } else {
@@ -92,10 +92,10 @@ public class Listener {
      */
     @Listen(MsgGetTypes.discussMsg)
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
-    public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgDisGroup msgDisGroup) {
+    public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
         changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
-        if (getBot(Long.parseLong(msgDisGroup.getFromDiscuss()))) {
+        if (getBot(Long.parseLong(msgDisGroup.getGroup()))) {
             new Flow(entityTypeMessages).toDisGroup();
             return true;
         } else {
@@ -114,12 +114,12 @@ public class Listener {
      * @return 返回值固定为true
      */
     @Listen(MsgGetTypes.groupMsg)
-    public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGroup msgGroup) {
+    public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
         if (msgGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
         }
-        if (getBot(Long.parseLong(msgGroup.getFromGroup())) ||
+        if (getBot(Long.parseLong(msgGroup.getGroup())) ||
                 msgGroup.getMsg().trim().equals(tagBotOn) ||
                 (msgGroup.getMsg().trim().contains(tagBotOn) && msgGroup.getMsg().trim().contains(tagMe))) {
             setLogs(entityTypeMessages, msgGet);
@@ -140,12 +140,12 @@ public class Listener {
      * @return 返回值固定为true
      */
     @Listen(MsgGetTypes.discussMsg)
-    public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, MsgDisGroup msgDisGroup) {
+    public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
         if (msgDisGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
         }
-        if (getBot(Long.parseLong(msgDisGroup.getFromDiscuss())) ||
+        if (getBot(Long.parseLong(msgDisGroup.getGroup())) ||
                 msgDisGroup.getMsg().trim().equals(tagBotOn) ||
                 (msgDisGroup.getMsg().trim().contains(tagBotOn) && msgDisGroup.getMsg().trim().contains(tagMe))) {
             setLogs(entityTypeMessages, msgGet);
