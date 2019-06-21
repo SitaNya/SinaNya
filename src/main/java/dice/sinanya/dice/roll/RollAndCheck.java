@@ -22,6 +22,7 @@ import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.History.changeHistory;
 import static dice.sinanya.tools.getinfo.Kp.getKpGroup;
@@ -91,7 +92,7 @@ public class RollAndCheck implements En {
         if (entityTypeMessages.getFromGroup().equals(defaultGroupId)) {
             try {
                 groupId = getKpGroup(entityTypeMessages);
-                sender(entityTypeMessages, "本次对抗将用于群" + groupId);
+                sender(entityTypeMessages, "本次对抗将用于群"  +getGroupName(entityTypeMessages)+"("+ entityTypeMessages.getFromGroup() + ")");
             } catch (NotSetKpGroupException e) {
                 Log.error(e.getMessage(), e);
                 groupId = "0";
@@ -137,7 +138,7 @@ public class RollAndCheck implements En {
         if (entityTypeMessages.getFromGroup().equals(defaultGroupId)) {
             try {
                 groupId = getKpGroup(entityTypeMessages);
-
+                sender(entityTypeMessages, "本次对抗将用于群"  +getGroupName(entityTypeMessages)+"("+ entityTypeMessages.getFromGroup() + ")");
             } catch (NotSetKpGroupException e) {
                 Log.error(e.getMessage(), e);
                 groupId = "0";

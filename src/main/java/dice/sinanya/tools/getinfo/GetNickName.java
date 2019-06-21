@@ -1,6 +1,7 @@
 package dice.sinanya.tools.getinfo;
 
 import com.forte.qqrobot.beans.messages.RootBean;
+import com.forte.qqrobot.utils.CQCodeUtil;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByFromQQ;
@@ -29,11 +30,33 @@ public class GetNickName implements RootBean {
 
         switch (entityTypeMessages.getMsgGetTypes()) {
             case privateMsg:
-//                return entityTypeMessages.getMsgGet().get;
+                return entityTypeMessages.getMsgSender().getPersonInfoByCode(entityTypeMessages.getFromQq()).getName();
             case groupMsg:
-//                return entityTypeMessages.getMsgGroup().getUsername();
+                return entityTypeMessages.getMsgGroup().getUsername();
             case discussMsg:
-//                return entityTypeMessages.getMsgDisGroup().getNick();
+                return entityTypeMessages.getMsgDisGroup().getNick();
+            default:
+                entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg("450609203", entityTypeMessages.toString());
+                return entityTypeMessages.toString();
+        }
+    }
+
+    /**
+     * 返回群或讨论组名
+     *
+     * @param entityTypeMessages 消息包装类
+     * @return 昵称
+     */
+    public static String getGroupName(EntityTypeMessages entityTypeMessages) {
+        if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
+            return getRoleChooseByFromQQ(entityTypeMessages);
+        }
+
+        switch (entityTypeMessages.getMsgGetTypes()) {
+            case groupMsg:
+                return entityTypeMessages.getMsgGroup().getUsername();
+            case discussMsg:
+                return entityTypeMessages.getMsgDisGroup().getNick();
             default:
                 entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg("450609203", entityTypeMessages.toString());
                 return entityTypeMessages.toString();
