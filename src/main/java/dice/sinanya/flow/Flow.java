@@ -1,4 +1,4 @@
-package dice.sinanya.listener;
+package dice.sinanya.flow;
 
 import com.forte.qqrobot.beans.messages.OriginalAble;
 import dice.sinanya.dice.game.Jrrp;
@@ -36,7 +36,8 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 3.   在toPrivate或toPrivateAndGroup中根据需要new自己写的逻辑类并通过布尔值去激活
  */
 @SuppressWarnings("AlibabaLowerCamelCaseVariableNaming")
-class Flow implements OriginalAble {
+public
+class Flow{
     private static final Logger Log = LogManager.getLogger(Flow.class);
 
     private EntityTypeMessages entityTypeMessages;
@@ -127,10 +128,9 @@ class Flow implements OriginalAble {
 
     private boolean isBot = false;
 
-    Flow(EntityTypeMessages entityTypeMessages) {
+    public Flow(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
         String messages = entityTypeMessages.getMsgGet().getMsg().trim();
-        sender(entityTypeMessages,getOriginalData());
         checkMessages(messages);
     }
 
@@ -228,7 +228,7 @@ class Flow implements OriginalAble {
     /**
      * 私聊逻辑，同时在私聊和群中生效
      */
-    void toPrivate() {
+    public void toPrivate() {
         Roll roll = new Roll(entityTypeMessages);
         Roles roles = new Roles(entityTypeMessages);
         SanCheck sanCheck = new SanCheck(entityTypeMessages);
@@ -373,7 +373,6 @@ class Flow implements OriginalAble {
 
         if (isBot) {
             new Bot(entityTypeMessages).info();
-            ;
         }
 
     }
@@ -471,19 +470,14 @@ class Flow implements OriginalAble {
     /**
      * 将群分流到群逻辑区块
      */
-    void toGroup() {
+    public void toGroup() {
         toPrivateAndGroup();
     }
 
     /**
      * 将讨论组分流到群逻辑区块
      */
-    void toDisGroup() {
+    public void toDisGroup() {
         toPrivateAndGroup();
-    }
-
-    @Override
-    public String getOriginalData() {
-        return getOriginalData();
     }
 }

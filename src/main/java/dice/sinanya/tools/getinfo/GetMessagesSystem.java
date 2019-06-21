@@ -87,6 +87,9 @@ public class GetMessagesSystem {
         put("mailUserName", "2730902267@qq.com");
         put("mailPassword", "kktjwuakdafbdcej");
         put("masterMail", "450609203@qq.com");
+        put("serverPort", "15514");
+        put("javaPort", "9999");
+        put("hostIp", "127.0.0.1");
 
         put("CRITICAL_SUCCESS", "");
         put("EXTREME_SUCCESS", "");

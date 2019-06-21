@@ -13,6 +13,7 @@ import com.forte.qqrobot.sender.MsgSender;
 import dice.sinanya.dice.system.Bot;
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.flow.Flow;
 
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
