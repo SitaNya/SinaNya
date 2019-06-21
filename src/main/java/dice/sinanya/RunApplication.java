@@ -58,6 +58,7 @@ public class RunApplication implements LemocApp {
         configuration.setLinkIp(messagesSystem.get("hostIp"));
         configuration.setPort(Integer.parseInt(messagesSystem.get("hostPort")));
         configuration.setLocalQQCode(messagesSystem.get("loginQQ"));
+        configuration.setRetryTime(30);
     }
 
     @Override
