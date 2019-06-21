@@ -25,6 +25,7 @@ import static java.lang.Math.ceil;
  */
 public class GetNickAndRandomAndSkill {
     private static Pattern p = Pattern.compile("[+*/\\-]");
+    private static Pattern skillNamePatten = Pattern.compile("([^\\d+*\\-/]+)");
 
     /**
      * 从传入的整体信息中获取昵称、随机值、技能值
@@ -36,20 +37,11 @@ public class GetNickAndRandomAndSkill {
     public static EntityNickAndRandomAndSkill getNickAndRandomAndSkill(EntityTypeMessages entityTypeMessages, String msg) {
         int random = random(1, 100);
 
-        StringBuilder skillName = new StringBuilder();
-        int i = 0;
-//        过滤所有非空格、非数字、非符号的内容，就只剩下技能名（以后可能改成正则进行匹配
-        while (i < msg.length() && !Character.isSpaceChar(msg.charAt(i)) &&
-                !Character.isDigit(msg.charAt(i)) &&
-                msg.charAt(i) != ':' &&
-                msg.charAt(i) != '=' &&
-                msg.charAt(i) != '+' &&
-                msg.charAt(i) != '-' &&
-                msg.charAt(i) != '*' &&
-                msg.charAt(i) != 'x' &&
-                msg.charAt(i) != '/') {
-            skillName.append(msg.charAt(i));
-            i++;
+        String skillName = "";
+        Matcher mSkillName = skillNamePatten.matcher(msg);
+        if (mSkillName.find()) {
+            skillName = mSkillName.group(1);
+            msg = msg.replaceFirst(skillNamePatten.toString(), "");
         }
         String nick;
         int skill = 0;
@@ -62,21 +54,21 @@ public class GetNickAndRandomAndSkill {
         }
 
 //        根据找到的技能名查询技能值
-        if (!skillName.toString().equals(NONE)) {
-            skill = getSkillValue(entityTypeMessages, skillName.toString());
+        if (!skillName.equals(NONE)) {
+            skill = getSkillValue(entityTypeMessages, skillName);
         }
 
-//        如果没找到技能名，则看看整段消息是不是数字技能值
+//        如果没找到技能名，则看看剩余消息是不是数字技能值
         if (skill == 0) {
-            if (isNumeric(msg.substring(i).trim())) {
-                skill = Integer.parseInt(msg.substring(i).trim());
+            if (isNumeric(msg.trim())) {
+                skill = Integer.parseInt(msg.trim());
             }
         }
 
 //        如果正段消息包含运算符，则将传入消息中的技能明天喜欢为技能值返回
         Matcher m = p.matcher(msg);
         if (m.find()) {
-            msg = msg.replaceAll(skillName.toString(), String.valueOf(skill));
+            msg = msg.replaceAll(skillName, String.valueOf(skill));
             skill = (int) ceil(Calculator.conversion(msg));
         }
 

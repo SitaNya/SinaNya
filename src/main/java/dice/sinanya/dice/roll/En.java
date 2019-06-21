@@ -3,6 +3,7 @@ package dice.sinanya.dice.roll;
 import dice.sinanya.entity.EntityQqAndGroup;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static dice.sinanya.system.MessagesLog.LOG_SWITCH_FOR_GROUP;
 import static dice.sinanya.system.MessagesTeamEn.TEAM_EN;
@@ -27,7 +28,7 @@ public interface En {
      */
     default void checkEn(int level, String skillName, String qqId, String groupId) {
         EntityQqAndGroup entityQqAndGroup = new EntityQqAndGroup(groupId, qqId);
-        if (level > 1 && LOG_SWITCH_FOR_GROUP.get(groupId)) {
+        if (level > 1 && LOG_SWITCH_FOR_GROUP.containsKey(groupId) && LOG_SWITCH_FOR_GROUP.get(groupId)) {
             if (TEAM_EN.containsKey(entityQqAndGroup)) {
                 ArrayList<String> enSkillList = TEAM_EN.get(entityQqAndGroup);
                 enSkillList.remove(skillName);
