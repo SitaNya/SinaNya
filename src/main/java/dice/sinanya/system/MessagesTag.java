@@ -99,7 +99,7 @@ public interface MessagesTag {
     String TAG_GAS = HEADER + "gas.*";
 
     //    获取COC人物卡相关标签，注意这里的正则表达式不同，因为需要匹配后续数字的格式
-    String HEADER_COC = HEADER + "coc[ ]*";
+    String HEADER_COC = HEADER + "[cC][oO][cC][ ]*";
     String TAG_COC7 = HEADER_COC + "[7]{0,1}[ ]*(10|[1-9])*";
     String TAG_COC7D = HEADER_COC + "[7]{0,1}d[ ]*(10|[1-9])*";
     String TAG_COC6 = HEADER_COC + "6[ ]*(10|[1-9])*";
@@ -118,7 +118,7 @@ public interface MessagesTag {
     String TAG_LI = HEADER + "li[ ]*.*";
 
     //    获取DND骰点相关标签
-    String HEADER_DND = HEADER + "dnd[ ]*";
+    String HEADER_DND = HEADER + "[dD][nN][dD][ ]*";
     String TAG_DND = HEADER_DND + "(10|[1-9])*";
     String TAG_RI = HEADER + "ri.*";
     String TAG_INIT = HEADER + "init.*";

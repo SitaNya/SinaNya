@@ -3,6 +3,7 @@ package dice.sinanya;
 import com.forte.qqrobot.component.forlemoc.LemocApp;
 import com.forte.qqrobot.component.forlemoc.LemocApplication;
 import com.forte.qqrobot.component.forlemoc.LinkConfiguration;
+import com.forte.qqrobot.exception.RobotRuntionException;
 import com.forte.qqrobot.sender.MsgSender;
 import com.forte.qqrobot.utils.CQCodeUtil;
 
@@ -16,6 +17,7 @@ import static dice.sinanya.tools.getinfo.LogTag.flushLogTag;
 import static dice.sinanya.tools.getinfo.RoleChoose.flushRoleChoose;
 import static dice.sinanya.tools.getinfo.RoleInfo.flushRoleInfoCache;
 import static dice.sinanya.tools.getinfo.Team.flushTeamEn;
+import static dice.sinanya.tools.log.SendMail.sendMail;
 
 /**
  * @author SitaNya
@@ -33,23 +35,27 @@ public class RunApplication implements LemocApp {
     public static void main(String[] args) {
         initMessagesSystem();
 //        读取配置文件
-        new LemocApplication().run(new RunApplication());
-        flushTeamEn();
+        try {
+            new LemocApplication().run(new RunApplication());
+            flushTeamEn();
 //        从数据库中读取幕间成长到缓存
-        flushMaxRolls();
+            flushMaxRolls();
 //        从数据库中读取最大默认骰到缓存
-        flushBot();
+            flushBot();
 //        从数据库中读取机器人开关到缓存
-        flushRoleChoose();
+            flushRoleChoose();
 //        从数据库中读取当前已选角色到缓存
-        flushRoleInfoCache();
+            flushRoleInfoCache();
 //        从数据库中读取角色信息到缓存
-        flushLogTag();
+            flushLogTag();
 //        从数据库中读取日志开关到缓存
-        flushKp();
+            flushKp();
 //        从数据库中读取kp主群设定到缓存
-        flushHistory();
+            flushHistory();
 //        从数据库中读取骰点历史信息到缓存
+        }catch (RobotRuntionException e){
+            sendMail();
+        }
     }
 
     @Override
@@ -58,7 +64,7 @@ public class RunApplication implements LemocApp {
         configuration.setLinkIp(messagesSystem.get("hostIp"));
         configuration.setPort(Integer.parseInt(messagesSystem.get("hostPort")));
         configuration.setLocalQQCode(messagesSystem.get("loginQQ"));
-        configuration.setRetryTime(30);
+        configuration.setRetryTime(5);
     }
 
     @Override

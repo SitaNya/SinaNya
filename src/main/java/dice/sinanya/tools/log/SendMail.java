@@ -82,6 +82,37 @@ public class SendMail {
     }
 
     /**
+     * 设定邮件必要的信息
+     *
+     */
+    public static void sendMail() {
+        MailBean mb = new MailBean();
+        mb.setHost("smtp.qq.com");
+        // 设置SMTP主机(163)，若用126，则设为：smtp.126.com
+        mb.setUsername(messagesSystem.get("mailUserName"));
+        // 设置发件人邮箱的用户名
+        mb.setPassword(messagesSystem.get("mailPassword"));
+        // 设置发件人邮箱的密码，需将*号改成正确的密码
+        mb.setFrom(messagesSystem.get("mailUserName"));
+        // 设置发件人的邮箱
+        mb.setTo(messagesSystem.get("masterMail"));
+        // 设置收件人的邮箱
+        mb.setSubject("骰娘宕机");
+        // 设置邮件的主题
+        mb.setContent("您的骰娘: "+messagesSystem.get("loginQQ")+" 失去响应，请查看");
+        // 设置邮件的正文
+
+        SendMail sm = new SendMail();
+        log.info("正在发送邮件...");
+        // 发送邮件
+        if (sm.sendMail(mb)) {
+            log.info("发送成功!");
+        } else {
+            log.info("发送失败!");
+        }
+    }
+
+    /**
      * 实际发送邮件
      *
      * @param mb 传入的邮件对象
