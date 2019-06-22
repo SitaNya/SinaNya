@@ -13,6 +13,9 @@ public interface MessagesSystem {
     String NONE = "";
     String SPACE = " ";
 
+    long LoginQQ=0;
+
+
     String VERSIONS = "0.97.0.0 beta";
 
     StringBuilder STR_BOT_VERSIONS = new StringBuilder()

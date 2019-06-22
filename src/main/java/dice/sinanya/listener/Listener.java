@@ -3,6 +3,7 @@ package dice.sinanya.listener;
 import com.forte.qqrobot.anno.Constr;
 import com.forte.qqrobot.anno.Filter;
 import com.forte.qqrobot.anno.Listen;
+import com.forte.qqrobot.anno.depend.Beans;
 import com.forte.qqrobot.beans.messages.msgget.DiscussMsg;
 import com.forte.qqrobot.beans.messages.msgget.GroupMsg;
 import com.forte.qqrobot.beans.messages.msgget.MsgGet;
@@ -16,6 +17,7 @@ import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.flow.Flow;
 
+import static dice.sinanya.system.MessagesSystem.LoginQQ;
 import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
 import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
 import static dice.sinanya.tools.getinfo.LogText.setLogText;
@@ -181,6 +183,7 @@ public class Listener {
         String tagBotInfo = ".bot";
         String tagBotExit = ".bot exit";
         String tagMe = "[CQ:at,qq=" + entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ() + "]";
+
         if ((messages.trim().contains(tagBotOn) && messages.trim().contains(tagMe)) || (messages.trim().contains(tagBotOn) && !messages.trim().contains("[CQ:at"))) {
             new Bot(entityTypeMessages).on();
         } else if (messages.trim().contains(tagBotOff) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotOff) && !messages.trim().contains("[CQ:at")))
