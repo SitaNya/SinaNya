@@ -17,7 +17,7 @@ import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.flow.Flow;
 
-import static dice.sinanya.system.MessagesSystem.LoginQQ;
+import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
 import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
 import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
 import static dice.sinanya.tools.getinfo.LogText.setLogText;
@@ -55,7 +55,10 @@ public class Listener {
     @Listen(MsgGetTypes.privateMsg)
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, PrivateMsg msgPrivate) {
-        new Flow(new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgPrivate)).toPrivate();
+        EntityTypeMessages entityTypeMessages=new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgPrivate);
+        new Flow(entityTypeMessages).toPrivate();
+        entityLoginQQInfo.setLoginQQ(Long.parseLong(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ()));
+        entityLoginQQInfo.setLoginQQNick(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getName());
         return true;
     }
 
@@ -73,6 +76,8 @@ public class Listener {
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
+        entityLoginQQInfo.setLoginQQ(Long.parseLong(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ()));
+        entityLoginQQInfo.setLoginQQNick(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getName());
         changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
         if (getBot(Long.parseLong(msgGroup.getGroupCode()))) {
             new Flow(entityTypeMessages).toGroup();
@@ -96,6 +101,8 @@ public class Listener {
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
+        entityLoginQQInfo.setLoginQQ(Long.parseLong(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ()));
+        entityLoginQQInfo.setLoginQQNick(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getName());
         changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
         if (getBot(Long.parseLong(msgDisGroup.getGroupCode()))) {
             new Flow(entityTypeMessages).toDisGroup();
@@ -118,6 +125,8 @@ public class Listener {
     @Listen(MsgGetTypes.groupMsg)
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
+        entityLoginQQInfo.setLoginQQ(Long.parseLong(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ()));
+        entityLoginQQInfo.setLoginQQNick(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getName());
          String tagMe = "[CQ:at,qq=" + entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ() + "]";
         if (msgGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
@@ -145,6 +154,8 @@ public class Listener {
     @Listen(MsgGetTypes.discussMsg)
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
+        entityLoginQQInfo.setLoginQQ(Long.parseLong(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ()));
+        entityLoginQQInfo.setLoginQQNick(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getName());
         String tagMe = "[CQ:at,qq=" + entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ() + "]";
         if (msgDisGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
@@ -183,7 +194,8 @@ public class Listener {
         String tagBotInfo = ".bot";
         String tagBotExit = ".bot exit";
         String tagMe = "[CQ:at,qq=" + entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ() + "]";
-
+        entityLoginQQInfo.setLoginQQ(Long.parseLong(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ()));
+        entityLoginQQInfo.setLoginQQNick(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getName());
         if ((messages.trim().contains(tagBotOn) && messages.trim().contains(tagMe)) || (messages.trim().contains(tagBotOn) && !messages.trim().contains("[CQ:at"))) {
             new Bot(entityTypeMessages).on();
         } else if (messages.trim().contains(tagBotOff) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotOff) && !messages.trim().contains("[CQ:at")))

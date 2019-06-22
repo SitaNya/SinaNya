@@ -17,6 +17,7 @@ import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
 
+import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 
 /**
@@ -101,7 +102,7 @@ public class SendMail {
         // 设置收件人的邮箱
         mb.setSubject("骰娘宕机");
         // 设置邮件的主题
-        mb.setContent("您的骰娘失去响应，请查看\n"+messages);
+        mb.setContent("您的骰娘:"+entityLoginQQInfo.getLoginQQNick()+"("+entityLoginQQInfo.getLoginQQ()+")失去响应，请查看\n"+messages);
         // 设置邮件的正文
 
         SendMail sm = new SendMail();

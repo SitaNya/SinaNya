@@ -1,6 +1,8 @@
 package dice.sinanya.system;
 
 
+import dice.sinanya.entity.EntityLoginQQInfo;
+
 /**
  * @author SitaNya
  * 日期: 2019-06-15
@@ -13,7 +15,7 @@ public interface MessagesSystem {
     String NONE = "";
     String SPACE = " ";
 
-    long LoginQQ=0;
+    EntityLoginQQInfo entityLoginQQInfo=new EntityLoginQQInfo("未找到昵称",0);
 
 
     String VERSIONS = "0.97.0.0 beta";

@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
+
 
 /**
  * @author SitaNya
@@ -24,11 +26,6 @@ public class InsertHistory {
 
     private static final Logger Log = LogManager.getLogger(InsertHistory.class);
 
-    EntityTypeMessages entityTypeMessages;
-
-    public InsertHistory(EntityTypeMessages entityTypeMessages){
-        this.entityTypeMessages=entityTypeMessages;
-    }
 
     /**
      * 将历史骰点信息插入数据库，不过这个语句是由定时器每分钟调用一次的
@@ -43,7 +40,7 @@ public class InsertHistory {
             String sql = "select * from history where qqId=? and botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, entityHistory.getQqId());
-                ps.setString(2, entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ());
+                ps.setString(2, String.valueOf(entityLoginQQInfo.getLoginQQ()));
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         num++;
@@ -58,7 +55,7 @@ public class InsertHistory {
             try (Connection conn = DbUtil.getConnection()) {
                 String sql = "INSERT INTO history(botId,qqId,Fumble,CriticalSuccess,ExtremeSuccess,HardSuccess,Success,Failure,times,mean) VALUES(?,?,?,?,?,?,?,?,?,?)";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    ps.setString(1,entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ());
+                    ps.setString(1,String.valueOf(entityLoginQQInfo.getLoginQQ()));
                     ps.setString(2, entityHistory.getQqId());
                     ps.setInt(3, entityHistory.getFumble());
                     ps.setInt(4, entityHistory.getCriticalSuccess());
@@ -87,7 +84,7 @@ public class InsertHistory {
                     ps.setInt(7, entityHistory.getTimes());
                     ps.setInt(8, entityHistory.getMean());
                     ps.setString(9, entityHistory.getQqId());
-                    ps.setString(10, entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ());
+                    ps.setString(10, String.valueOf(entityLoginQQInfo.getLoginQQ()));
 
                     ps.executeUpdate();
                 }
