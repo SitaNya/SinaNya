@@ -1,8 +1,8 @@
 package dice.sinanya.db.system;
 
-import com.forte.qqrobot.BaseConfiguration;
 import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
 import dice.sinanya.db.tools.DbUtil;
+import dice.sinanya.entity.EntityTypeMessages;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -21,6 +21,11 @@ import java.sql.SQLException;
  */
 public class InsertBot {
     private static final Logger Log = LogManager.getLogger(InsertBot.class);
+    EntityTypeMessages entityTypeMessages;
+
+    public InsertBot(EntityTypeMessages entityTypeMessages){
+        this.entityTypeMessages=entityTypeMessages;
+    }
 
     /**
      * 将机器人的开关值插入某个群，true为开启，false为关闭
@@ -34,7 +39,7 @@ public class InsertBot {
             String sql = "select * from switchBot where groupId=? and botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setLong(1, groupId);
-                ps.setString(2, HttpConfiguration.getLocalQQCode());
+                ps.setString(2,entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ());
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         num++;
@@ -53,7 +58,7 @@ public class InsertBot {
                         "switchBot" +
                         ") VALUES(?,?,?)";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    ps.setString(1, HttpConfiguration.getLocalQQCode());
+                    ps.setString(1, entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ());
                     ps.setLong(2, groupId);
                     ps.setBoolean(3, switchBot);
                     ps.executeUpdate();
@@ -68,7 +73,7 @@ public class InsertBot {
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     ps.setBoolean(1, switchBot);
                     ps.setLong(2, groupId);
-                    ps.setString(3,HttpConfiguration.getLocalQQCode());
+                    ps.setString(3,entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ());
                     ps.executeUpdate();
                 }
             } catch (SQLException e) {

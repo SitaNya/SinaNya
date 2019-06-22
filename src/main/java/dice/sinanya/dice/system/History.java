@@ -29,7 +29,7 @@ public class History {
         StringBuilder stringBuilder = new StringBuilder();
         EntityHistory entityHistory = changeHistory(entityTypeMessages.getFromQq());
 
-        stringBuilder.append("您使用奈梅斯以来，共计产生以下历史数据:\n")
+        stringBuilder.append("您使用" + entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getName() + "以来，共计产生以下历史数据:\n")
                 .append("骰点:\t")
                 .append(entityHistory.getTimes())
                 .append("次")

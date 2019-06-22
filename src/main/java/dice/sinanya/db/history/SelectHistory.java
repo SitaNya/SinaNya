@@ -1,9 +1,9 @@
 package dice.sinanya.db.history;
 
-import com.forte.qqrobot.BaseConfiguration;
 import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityHistory;
+import dice.sinanya.entity.EntityTypeMessages;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -26,7 +26,9 @@ import static dice.sinanya.system.MessagesHistory.HISTORY_LIST;
 public class SelectHistory {
     private static final Logger Log = LogManager.getLogger(SelectHistory.class);
 
-    public SelectHistory() {
+    EntityTypeMessages entityTypeMessages;
+    public SelectHistory(EntityTypeMessages entityTypeMessages) {
+        this.entityTypeMessages=entityTypeMessages;
     }
 
     /**
@@ -36,7 +38,7 @@ public class SelectHistory {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from history where botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, HttpConfiguration.getLocalQQCode());
+                ps.setString(1,entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ());
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         HISTORY_LIST.put(set.getString("qqId"), new EntityHistory(set.getString("qqId"), set.getInt("Fumble"), set.getInt("CriticalSuccess"), set.getInt("ExtremeSuccess"), set.getInt("HardSuccess"), set.getInt("Success"), set.getInt("Failure"), set.getInt("times"), set.getInt("mean")));

@@ -1,6 +1,5 @@
 package dice.sinanya.listener;
 
-import com.forte.qqrobot.BaseConfiguration;
 import com.forte.qqrobot.anno.Constr;
 import com.forte.qqrobot.anno.Filter;
 import com.forte.qqrobot.anno.Listen;
@@ -17,7 +16,6 @@ import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.flow.Flow;
 
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
 import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
 import static dice.sinanya.tools.getinfo.LogText.setLogText;
@@ -33,7 +31,6 @@ import static dice.sinanya.tools.getinfo.SwitchBot.getBot;
  */
 public class Listener {
     private String tagBotOn = ".bot on";
-    private String tagMe = "[CQ:at,qq=" + HttpConfiguration.getLocalQQCode() + "]";
 
     private Listener() {
     }
@@ -119,6 +116,7 @@ public class Listener {
     @Listen(MsgGetTypes.groupMsg)
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
+         String tagMe = "[CQ:at,qq=" + entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ() + "]";
         if (msgGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
         }
@@ -145,6 +143,7 @@ public class Listener {
     @Listen(MsgGetTypes.discussMsg)
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
+        String tagMe = "[CQ:at,qq=" + entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ() + "]";
         if (msgDisGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
         }
@@ -181,6 +180,7 @@ public class Listener {
         String tagBotOff = ".bot off";
         String tagBotInfo = ".bot";
         String tagBotExit = ".bot exit";
+        String tagMe = "[CQ:at,qq=" + entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ() + "]";
         if ((messages.trim().contains(tagBotOn) && messages.trim().contains(tagMe)) || (messages.trim().contains(tagBotOn) && !messages.trim().contains("[CQ:at"))) {
             new Bot(entityTypeMessages).on();
         } else if (messages.trim().contains(tagBotOff) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotOff) && !messages.trim().contains("[CQ:at")))

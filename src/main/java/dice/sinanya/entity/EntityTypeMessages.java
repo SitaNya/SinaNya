@@ -5,7 +5,6 @@ import com.forte.qqrobot.beans.messages.msgget.GroupMsg;
 import com.forte.qqrobot.beans.messages.msgget.MsgGet;
 import com.forte.qqrobot.beans.messages.msgget.PrivateMsg;
 import com.forte.qqrobot.beans.messages.types.MsgGetTypes;
-
 import com.forte.qqrobot.sender.MsgSender;
 
 import static dice.sinanya.tools.checkdata.CheckValue.checkValue;

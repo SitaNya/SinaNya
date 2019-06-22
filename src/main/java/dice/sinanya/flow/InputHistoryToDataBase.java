@@ -7,7 +7,6 @@ import com.forte.qqrobot.timetask.TimeJob;
 import com.forte.qqrobot.timetask.TimeTaskContext;
 import com.forte.qqrobot.utils.CQCodeUtil;
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 
 import static dice.sinanya.tools.getinfo.History.setHistory;
 import static dice.sinanya.tools.getinfo.Team.saveTeamEn;

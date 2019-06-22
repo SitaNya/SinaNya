@@ -1,6 +1,5 @@
 package dice.sinanya.flow;
 
-import com.forte.qqrobot.beans.messages.OriginalAble;
 import dice.sinanya.dice.game.Jrrp;
 import dice.sinanya.dice.get.*;
 import dice.sinanya.dice.getbook.Book;

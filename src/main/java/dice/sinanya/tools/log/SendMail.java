@@ -1,7 +1,7 @@
 package dice.sinanya.tools.log;
 
-import com.forte.qqrobot.BaseConfiguration;
 import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
+import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.entity.MailBean;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -87,7 +87,7 @@ public class SendMail {
      * 设定邮件必要的信息
      *
      */
-    public static void sendMail() {
+    public static void sendMail(String messages) {
         MailBean mb = new MailBean();
         mb.setHost("smtp.qq.com");
         // 设置SMTP主机(163)，若用126，则设为：smtp.126.com
@@ -101,7 +101,7 @@ public class SendMail {
         // 设置收件人的邮箱
         mb.setSubject("骰娘宕机");
         // 设置邮件的主题
-        mb.setContent("您的骰娘: "+ HttpConfiguration.getLocalQQCode()+" 失去响应，请查看");
+        mb.setContent("您的骰娘失去响应，请查看\n"+messages);
         // 设置邮件的正文
 
         SendMail sm = new SendMail();

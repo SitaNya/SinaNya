@@ -27,17 +27,16 @@ import static dice.sinanya.tools.log.SendMail.sendMail;
  * 维护群(QQ): 162279609
  * 有任何问题欢迎咨询
  * 类说明: 整个程序的入口类
- *
+ * <p>
  * 这里可以修改的是before方法(但我已经改造为配置文件了，因此可以不动这个方法）
  * 此外这里声明了大量服务启动时需要从服务器中获取的缓存数据
- *
  */
 @AllBeans(value = "dice.sinanya.listener")
 public class RunApplication implements HttpApp {
     public static void main(String[] args) {
         initMessagesSystem();
 //        读取配置文件
-//        try {
+        try {
             new HttpApplication().run(new RunApplication());
             flushTeamEn();
 //        从数据库中读取幕间成长到缓存
@@ -55,9 +54,9 @@ public class RunApplication implements HttpApp {
 //        从数据库中读取kp主群设定到缓存
             flushHistory();
 //        从数据库中读取骰点历史信息到缓存
-//        }catch (RobotRuntionException e){
-//            sendMail();
-//        }
+        } catch (RobotRuntionException e) {
+            sendMail(e.getMessage());
+        }
     }
 
     @Override
@@ -66,7 +65,6 @@ public class RunApplication implements HttpApp {
         configuration.setIp(messagesSystem.get("hostIp"));
         configuration.setServerPort(Integer.parseInt(messagesSystem.get("javaPort")));
         configuration.setJavaPort(Integer.parseInt(messagesSystem.get("serverPort")));
-        configuration.setLocalQQCode(messagesSystem.get("loginQQ"));
     }
 
     @Override

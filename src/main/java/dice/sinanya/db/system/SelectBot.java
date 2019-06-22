@@ -1,9 +1,8 @@
 package dice.sinanya.db.system;
 
-import com.forte.qqrobot.BaseConfiguration;
-import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityGroupCensus;
+import dice.sinanya.entity.EntityTypeMessages;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -25,6 +24,12 @@ import static dice.sinanya.system.SystemInfo.SWITCH_BOT;
 public class SelectBot {
     private static final Logger Log = LogManager.getLogger(SelectBot.class);
 
+    private static EntityTypeMessages entityTypeMessages;
+
+    public SelectBot(EntityTypeMessages entityTypeMessages){
+        SelectBot.entityTypeMessages =entityTypeMessages;
+    }
+
     /**
      * 将所有开关值刷写到静态变量中
      */
@@ -32,7 +37,7 @@ public class SelectBot {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select groupId,switchBot from switchBot where botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, HttpConfiguration.getLocalQQCode());
+                ps.setString(1, entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ());
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         SWITCH_BOT.put(set.getLong("groupId"), set.getBoolean("switchBot"));
@@ -53,7 +58,7 @@ public class SelectBot {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select groupId,switchBot from switchBot where botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1,HttpConfiguration.getLocalQQCode());
+                ps.setString(1,entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ());
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         groupNum++;

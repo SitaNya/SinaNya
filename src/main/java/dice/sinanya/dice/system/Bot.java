@@ -1,6 +1,5 @@
 package dice.sinanya.dice.system;
 
-import com.forte.qqrobot.BaseConfiguration;
 import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
 import dice.sinanya.dice.manager.imal.AtQq;
 import dice.sinanya.entity.EntityGroupCensus;
@@ -42,10 +41,10 @@ public class Bot implements AtQq {
         ArrayList<String> qqList = getAtQqList(msg);
 
         if (qqList.size() == 0) {
-            qqList.add(HttpConfiguration.getLocalQQCode());
+            qqList.add(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ());
         }
         for (String qq : qqList) {
-            if (qq.equals(HttpConfiguration.getLocalQQCode())) {
+            if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {
                 long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
                 if (groupId == 0) {
                     sender(entityTypeMessages, messagesSystem.get("can'tInPrivate"));
@@ -71,7 +70,7 @@ public class Bot implements AtQq {
         ArrayList<String> qqList = getAtQqList(msg);
 
         for (String qq : qqList) {
-            if (qq.equals(HttpConfiguration.getLocalQQCode())) {
+            if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {
                 long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
                 if (groupId == 0) {
                     sender(entityTypeMessages, messagesSystem.get("can'tInPrivate"));
@@ -97,7 +96,7 @@ public class Bot implements AtQq {
         ArrayList<String> qqList = getAtQqList(msg);
 
         for (String qq : qqList) {
-            if (qq.equals(HttpConfiguration.getLocalQQCode())) {
+            if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {
                 sender(entityTypeMessages, messagesSystem.get("botExit"));
                 try {
                     Thread.sleep(500);

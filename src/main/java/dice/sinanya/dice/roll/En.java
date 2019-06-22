@@ -3,7 +3,6 @@ package dice.sinanya.dice.roll;
 import dice.sinanya.entity.EntityQqAndGroup;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static dice.sinanya.system.MessagesLog.LOG_SWITCH_FOR_GROUP;
 import static dice.sinanya.system.MessagesTeamEn.TEAM_EN;

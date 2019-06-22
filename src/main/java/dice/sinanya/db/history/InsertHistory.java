@@ -1,9 +1,8 @@
 package dice.sinanya.db.history;
 
-import com.forte.qqrobot.BaseConfiguration;
-import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityHistory;
+import dice.sinanya.entity.EntityTypeMessages;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -25,6 +24,12 @@ public class InsertHistory {
 
     private static final Logger Log = LogManager.getLogger(InsertHistory.class);
 
+    EntityTypeMessages entityTypeMessages;
+
+    public InsertHistory(EntityTypeMessages entityTypeMessages){
+        this.entityTypeMessages=entityTypeMessages;
+    }
+
     /**
      * 将历史骰点信息插入数据库，不过这个语句是由定时器每分钟调用一次的
      * 如果觉得卡的话可以去调整dice.sinanya.listener.InputHistoryToDatabase里的间隔时间
@@ -38,7 +43,7 @@ public class InsertHistory {
             String sql = "select * from history where qqId=? and botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, entityHistory.getQqId());
-                ps.setString(2, HttpConfiguration.getLocalQQCode());
+                ps.setString(2, entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ());
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         num++;
@@ -53,7 +58,7 @@ public class InsertHistory {
             try (Connection conn = DbUtil.getConnection()) {
                 String sql = "INSERT INTO history(botId,qqId,Fumble,CriticalSuccess,ExtremeSuccess,HardSuccess,Success,Failure,times,mean) VALUES(?,?,?,?,?,?,?,?,?,?)";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    ps.setString(1,HttpConfiguration.getLocalQQCode());
+                    ps.setString(1,entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ());
                     ps.setString(2, entityHistory.getQqId());
                     ps.setInt(3, entityHistory.getFumble());
                     ps.setInt(4, entityHistory.getCriticalSuccess());
@@ -82,7 +87,7 @@ public class InsertHistory {
                     ps.setInt(7, entityHistory.getTimes());
                     ps.setInt(8, entityHistory.getMean());
                     ps.setString(9, entityHistory.getQqId());
-                    ps.setString(10, HttpConfiguration.getLocalQQCode());
+                    ps.setString(10, entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ());
 
                     ps.executeUpdate();
                 }

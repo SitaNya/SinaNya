@@ -5,7 +5,10 @@ import dice.sinanya.entity.EntityClue;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 import static dice.sinanya.system.MessagesSystem.NONE;
