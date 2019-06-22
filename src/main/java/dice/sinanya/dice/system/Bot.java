@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import static dice.sinanya.db.system.SelectBot.selectBot;
 import static dice.sinanya.system.MessagesSystem.STR_BOT_VERSIONS;
+import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.SwitchBot.*;
@@ -41,10 +42,10 @@ public class Bot implements AtQq {
         ArrayList<String> qqList = getAtQqList(msg);
 
         if (qqList.size() == 0) {
-            qqList.add(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ());
+            qqList.add(String.valueOf(entityLoginQQInfo.getLoginQQ()));
         }
         for (String qq : qqList) {
-            if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {
+            if (qq.equals(String.valueOf(entityLoginQQInfo.getLoginQQ()))) {
                 long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
                 if (groupId == 0) {
                     sender(entityTypeMessages, messagesSystem.get("can'tInPrivate"));
@@ -70,11 +71,11 @@ public class Bot implements AtQq {
         ArrayList<String> qqList = getAtQqList(msg);
 
         if (qqList.size() == 0) {
-            qqList.add(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ());
+            qqList.add(String.valueOf(entityLoginQQInfo.getLoginQQ()));
         }
 
         for (String qq : qqList) {
-            if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {
+            if (qq.equals(String.valueOf(entityLoginQQInfo.getLoginQQ()))) {
                 long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
                 if (groupId == 0) {
                     sender(entityTypeMessages, messagesSystem.get("can'tInPrivate"));
@@ -100,7 +101,7 @@ public class Bot implements AtQq {
         ArrayList<String> qqList = getAtQqList(msg);
 
         for (String qq : qqList) {
-            if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {
+            if (qq.equals(String.valueOf(entityLoginQQInfo.getLoginQQ()))) {
                 sender(entityTypeMessages, messagesSystem.get("botExit"));
                 try {
                     Thread.sleep(500);

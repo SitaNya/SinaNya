@@ -39,27 +39,6 @@ public class RunApplication implements HttpApp {
 //        读取配置文件
         try {
             new HttpApplication().run(new RunApplication());
-            while (true) {
-                if (entityLoginQQInfo.getLoginQQ() != 0) {
-                    flushTeamEn();
-//        从数据库中读取幕间成长到缓存
-                    flushMaxRolls();
-//        从数据库中读取最大默认骰到缓存
-                    flushBot();
-//        从数据库中读取机器人开关到缓存
-                    flushRoleChoose();
-//        从数据库中读取当前已选角色到缓存
-                    flushRoleInfoCache();
-//        从数据库中读取角色信息到缓存
-                    flushLogTag();
-//        从数据库中读取日志开关到缓存
-                    flushKp();
-//        从数据库中读取kp主群设定到缓存
-                    flushHistory();
-//        从数据库中读取骰点历史信息到缓存
-                    break;
-                }
-            }
         } catch (RobotRuntionException e) {
             sendMail(e.getMessage());
         }
@@ -69,12 +48,29 @@ public class RunApplication implements HttpApp {
     public void before(HttpConfiguration configuration) {
         configuration.setScannerPackage("dice.sinanya.listener");
         configuration.setIp(messagesSystem.get("hostIp"));
+        configuration.setServerPath("/coolq/demo.php");
         configuration.setServerPort(Integer.parseInt(messagesSystem.get("javaPort")));
         configuration.setJavaPort(Integer.parseInt(messagesSystem.get("serverPort")));
     }
 
     @Override
     public void after(CQCodeUtil cqCodeUtil, MsgSender sender) {
-
+        entityLoginQQInfo.setLoginQQ(Long.parseLong(sender.GETTER.getLoginQQInfo().getQQ()));
+        entityLoginQQInfo.setLoginQQNick(sender.GETTER.getLoginQQInfo().getName());
+        //        从数据库中读取幕间成长到缓存
+        flushMaxRolls();
+//        从数据库中读取最大默认骰到缓存
+        flushBot();
+//        从数据库中读取机器人开关到缓存
+        flushRoleChoose();
+//        从数据库中读取当前已选角色到缓存
+        flushRoleInfoCache();
+//        从数据库中读取角色信息到缓存
+        flushLogTag();
+//        从数据库中读取日志开关到缓存
+        flushKp();
+//        从数据库中读取kp主群设定到缓存
+        flushHistory();
+//        从数据库中读取骰点历史信息到缓存
     }
 }
