@@ -61,7 +61,7 @@ public class Listener {
     @Listen(MsgGetTypes.privateMsg)
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, PrivateMsg msgPrivate) {
-        EntityTypeMessages entityTypeMessages=new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgPrivate);
+        EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgPrivate);
         flushData(entityTypeMessages);
         new Flow(entityTypeMessages).toPrivate();
         return true;
@@ -126,11 +126,10 @@ public class Listener {
      * @return 返回值固定为true
      */
     @Listen(MsgGetTypes.groupMsg)
-    @Filter(value = "[^.]")
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
         flushData(entityTypeMessages);
-         String tagMe = "[CQ:at,qq=" + entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ() + "]";
+        String tagMe = "[CQ:at,qq=" + entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ() + "]";
         if (msgGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
         }
@@ -155,7 +154,6 @@ public class Listener {
      * @return 返回值固定为true
      */
     @Listen(MsgGetTypes.discussMsg)
-    @Filter(value = "[^.]")
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
         flushData(entityTypeMessages);
@@ -197,18 +195,25 @@ public class Listener {
         String tagBotInfo = ".bot";
         String tagBotExit = ".bot exit";
         String tagMe = "[CQ:at,qq=" + entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ() + "]";
-        if ((messages.trim().contains(tagBotOn) && messages.trim().contains(tagMe)) || (messages.trim().contains(tagBotOn) && !messages.trim().contains("[CQ:at"))) {
+
+        boolean botOn = messages.trim().contains(tagBotOn) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotOn) && !messages.trim().contains("[CQ:at"));
+        boolean botOff = messages.trim().contains(tagBotOff) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotOff) && !messages.trim().contains("[CQ:at"));
+        boolean botExit = messages.trim().contains(tagBotExit) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotExit) && !messages.trim().contains("[CQ:at"));
+        boolean botInfo = (messages.trim().contains(tagBotInfo) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotInfo) && !messages.trim().contains("[CQ:at"))) && !botOn && !botOff && !botExit;
+
+        if (botOn) {
             new Bot(entityTypeMessages).on();
-        } else if (messages.trim().contains(tagBotOff) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotOff) && !messages.trim().contains("[CQ:at")))
-        {
+        } else if (botOff) {
             new Bot(entityTypeMessages).off();
-        } else if (messages.trim().contains(tagBotExit) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotInfo) && !messages.trim().contains("[CQ:at"))) {
+        } else if (botExit) {
             new Bot(entityTypeMessages).exit();
+        } else if (botInfo) {
+            new Bot(entityTypeMessages).info();
         }
     }
 
-    private void flushData(EntityTypeMessages entityTypeMessages){
-        if (entityLoginQQInfo.getLoginQQ()!=0){
+    private void flushData(EntityTypeMessages entityTypeMessages) {
+        if (entityLoginQQInfo.getLoginQQ() != 0) {
             return;
         }
         entityLoginQQInfo.setLoginQQ(Long.parseLong(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ()));

@@ -17,6 +17,7 @@ import dice.sinanya.exceptions.SanCheckSetException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.makedata.Sender.sender;
@@ -125,8 +126,6 @@ class Flow{
 
     private boolean isJRRP = false;
 
-    private boolean isBot = false;
-
     public Flow(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
         String messages = entityTypeMessages.getMsgGet().getMsg().trim();
@@ -189,8 +188,6 @@ class Flow{
 
         isKp = messages.matches(TAG_KP);
         isHiy = messages.matches(TAG_HIY);
-
-        isBot = messages.equals(".bot");
 
         isJRRP = messages.matches(TAG_JRRP);
 
@@ -368,10 +365,6 @@ class Flow{
 
         if (isJRRP) {
             jrrp.get();
-        }
-
-        if (isBot) {
-            new Bot(entityTypeMessages).info();
         }
 
     }

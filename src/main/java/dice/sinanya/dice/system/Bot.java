@@ -69,6 +69,10 @@ public class Bot implements AtQq {
 
         ArrayList<String> qqList = getAtQqList(msg);
 
+        if (qqList.size() == 0) {
+            qqList.add(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ());
+        }
+
         for (String qq : qqList) {
             if (qq.equals(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ())) {
                 long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
