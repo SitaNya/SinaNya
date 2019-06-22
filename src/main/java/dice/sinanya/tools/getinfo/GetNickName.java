@@ -1,8 +1,10 @@
 package dice.sinanya.tools.getinfo;
 
 import com.forte.qqrobot.beans.messages.RootBean;
+import com.forte.qqrobot.beans.messages.result.StrangerInfo;
 import dice.sinanya.entity.EntityTypeMessages;
 
+import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByFromQQ;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
 
@@ -26,7 +28,7 @@ public class GetNickName implements RootBean {
         if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
             return getRoleChooseByFromQQ(entityTypeMessages);
         }
-        return entityTypeMessages.getMsgSender().getPersonInfoByCode(entityTypeMessages.getFromQq()).getOtherParam("result").toString();
+        return entityTypeMessages.getMsgSender().getPersonInfoByCode(entityTypeMessages.getFromQq()).getOtherParam("name").toString();
     }
 
     /**
@@ -38,12 +40,22 @@ public class GetNickName implements RootBean {
     public static String getGroupName(EntityTypeMessages entityTypeMessages) {
         switch (entityTypeMessages.getMsgGetTypes()) {
             case groupMsg:
-                return entityTypeMessages.getMsgGroup().getOtherParam("result.name").toString();
+                return entityTypeMessages.getMsgSender().getGroupInfoByCode(entityTypeMessages.getMsgGroup().getGroupCode()).getName();
             case discussMsg:
-//                return entityTypeMessages.getMsgDisGroup().getNick();
+                return entityTypeMessages.getMsgSender().getGroupInfoByCode(entityTypeMessages.getMsgDisGroup().getGroupCode()).getName();
             default:
                 entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg("450609203", entityTypeMessages.toString());
                 return entityTypeMessages.toString();
         }
+    }
+
+    /**
+     * 返回群或讨论组名
+     *
+     * @param entityTypeMessages 消息包装类
+     * @return 昵称
+     */
+    public static String getGroupName(EntityTypeMessages entityTypeMessages,String groupId) {
+                return entityTypeMessages.getMsgSender().getGroupInfoByCode(groupId).getName();
     }
 }

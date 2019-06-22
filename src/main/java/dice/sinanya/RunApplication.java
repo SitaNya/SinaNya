@@ -9,6 +9,7 @@ import com.forte.qqrobot.sender.MsgSender;
 import com.forte.qqrobot.utils.CQCodeUtil;
 
 import static dice.sinanya.db.system.SelectBot.flushBot;
+import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
 import static dice.sinanya.tools.getinfo.DefaultMaxRolls.flushMaxRolls;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.initMessagesSystem;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
@@ -38,22 +39,27 @@ public class RunApplication implements HttpApp {
 //        读取配置文件
         try {
             new HttpApplication().run(new RunApplication());
-            flushTeamEn();
+            while (true) {
+                if (entityLoginQQInfo.getLoginQQ() != 0) {
+                    flushTeamEn();
 //        从数据库中读取幕间成长到缓存
-            flushMaxRolls();
+                    flushMaxRolls();
 //        从数据库中读取最大默认骰到缓存
-            flushBot();
+                    flushBot();
 //        从数据库中读取机器人开关到缓存
-            flushRoleChoose();
+                    flushRoleChoose();
 //        从数据库中读取当前已选角色到缓存
-            flushRoleInfoCache();
+                    flushRoleInfoCache();
 //        从数据库中读取角色信息到缓存
-            flushLogTag();
+                    flushLogTag();
 //        从数据库中读取日志开关到缓存
-            flushKp();
+                    flushKp();
 //        从数据库中读取kp主群设定到缓存
-            flushHistory();
+                    flushHistory();
 //        从数据库中读取骰点历史信息到缓存
+                    break;
+                }
+            }
         } catch (RobotRuntionException e) {
             sendMail(e.getMessage());
         }

@@ -92,7 +92,7 @@ public class RollAndCheck implements En {
         if (entityTypeMessages.getFromGroup().equals(defaultGroupId)) {
             try {
                 groupId = getKpGroup(entityTypeMessages);
-                sender(entityTypeMessages, "本次对抗将用于群"  +getGroupName(entityTypeMessages)+"("+ entityTypeMessages.getFromGroup() + ")");
+                sender(entityTypeMessages, "本次对抗将用于群"  +getGroupName(entityTypeMessages,groupId)+"("+ groupId + ")");
             } catch (NotSetKpGroupException e) {
                 Log.error(e.getMessage(), e);
                 groupId = "0";
@@ -138,7 +138,7 @@ public class RollAndCheck implements En {
         if (entityTypeMessages.getFromGroup().equals(defaultGroupId)) {
             try {
                 groupId = getKpGroup(entityTypeMessages);
-                sender(entityTypeMessages, "本次对抗将用于群"  +getGroupName(entityTypeMessages)+"("+ entityTypeMessages.getFromGroup() + ")");
+                sender(entityTypeMessages, "本次对抗将用于群"  +getGroupName(entityTypeMessages,groupId)+"("+ groupId + ")");
             } catch (NotSetKpGroupException e) {
                 Log.error(e.getMessage(), e);
                 groupId = "0";

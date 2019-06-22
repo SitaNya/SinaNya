@@ -1,4 +1,4 @@
-package dice.sinanya.flow;
+package dice.sinanya.listener;
 
 import com.forte.qqrobot.anno.timetask.CronTask;
 import com.forte.qqrobot.exception.TimeTaskException;
@@ -22,8 +22,12 @@ import static dice.sinanya.tools.getinfo.Team.saveTeamEn;
  * 这里的“0 * * * * ? *”表示每分钟执行一次，具体怎么写请去查crontab的使用
  * 前5位应该是:分 时 日 月 周
  */
-@CronTask("0 * * * * ? *")
+@CronTask("*/0 * * * * ? *")
 public class InputHistoryToDataBase implements TimeJob {
+
+    public InputHistoryToDataBase(){
+
+    }
     /**
      * 这是一个每5秒给qq：1234567890发送一句 'hi!'的定时任务
      */

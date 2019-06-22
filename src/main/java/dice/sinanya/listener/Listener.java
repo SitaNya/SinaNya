@@ -17,11 +17,17 @@ import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.flow.Flow;
 
+import static dice.sinanya.db.system.SelectBot.flushBot;
 import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
-import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
-import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
+import static dice.sinanya.tools.getinfo.DefaultMaxRolls.flushMaxRolls;
+import static dice.sinanya.tools.getinfo.History.flushHistory;
+import static dice.sinanya.tools.getinfo.Kp.flushKp;
+import static dice.sinanya.tools.getinfo.LogTag.*;
 import static dice.sinanya.tools.getinfo.LogText.setLogText;
+import static dice.sinanya.tools.getinfo.RoleChoose.flushRoleChoose;
+import static dice.sinanya.tools.getinfo.RoleInfo.flushRoleInfoCache;
 import static dice.sinanya.tools.getinfo.SwitchBot.getBot;
+import static dice.sinanya.tools.getinfo.Team.flushTeamEn;
 
 /**
  * @author SitaNya
@@ -56,9 +62,8 @@ public class Listener {
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, PrivateMsg msgPrivate) {
         EntityTypeMessages entityTypeMessages=new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgPrivate);
+        flushData(entityTypeMessages);
         new Flow(entityTypeMessages).toPrivate();
-        entityLoginQQInfo.setLoginQQ(Long.parseLong(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ()));
-        entityLoginQQInfo.setLoginQQNick(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getName());
         return true;
     }
 
@@ -76,8 +81,7 @@ public class Listener {
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
-        entityLoginQQInfo.setLoginQQ(Long.parseLong(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ()));
-        entityLoginQQInfo.setLoginQQNick(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getName());
+        flushData(entityTypeMessages);
         changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
         if (getBot(Long.parseLong(msgGroup.getGroupCode()))) {
             new Flow(entityTypeMessages).toGroup();
@@ -101,8 +105,7 @@ public class Listener {
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
-        entityLoginQQInfo.setLoginQQ(Long.parseLong(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ()));
-        entityLoginQQInfo.setLoginQQNick(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getName());
+        flushData(entityTypeMessages);
         changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
         if (getBot(Long.parseLong(msgDisGroup.getGroupCode()))) {
             new Flow(entityTypeMessages).toDisGroup();
@@ -123,10 +126,10 @@ public class Listener {
      * @return 返回值固定为true
      */
     @Listen(MsgGetTypes.groupMsg)
+    @Filter(value = "[^.]")
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
-        entityLoginQQInfo.setLoginQQ(Long.parseLong(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ()));
-        entityLoginQQInfo.setLoginQQNick(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getName());
+        flushData(entityTypeMessages);
          String tagMe = "[CQ:at,qq=" + entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ() + "]";
         if (msgGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
@@ -152,10 +155,10 @@ public class Listener {
      * @return 返回值固定为true
      */
     @Listen(MsgGetTypes.discussMsg)
+    @Filter(value = "[^.]")
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
-        entityLoginQQInfo.setLoginQQ(Long.parseLong(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ()));
-        entityLoginQQInfo.setLoginQQNick(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getName());
+        flushData(entityTypeMessages);
         String tagMe = "[CQ:at,qq=" + entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ() + "]";
         if (msgDisGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
@@ -194,8 +197,6 @@ public class Listener {
         String tagBotInfo = ".bot";
         String tagBotExit = ".bot exit";
         String tagMe = "[CQ:at,qq=" + entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ() + "]";
-        entityLoginQQInfo.setLoginQQ(Long.parseLong(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ()));
-        entityLoginQQInfo.setLoginQQNick(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getName());
         if ((messages.trim().contains(tagBotOn) && messages.trim().contains(tagMe)) || (messages.trim().contains(tagBotOn) && !messages.trim().contains("[CQ:at"))) {
             new Bot(entityTypeMessages).on();
         } else if (messages.trim().contains(tagBotOff) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotOff) && !messages.trim().contains("[CQ:at")))
@@ -204,5 +205,29 @@ public class Listener {
         } else if (messages.trim().contains(tagBotExit) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotInfo) && !messages.trim().contains("[CQ:at"))) {
             new Bot(entityTypeMessages).exit();
         }
+    }
+
+    private void flushData(EntityTypeMessages entityTypeMessages){
+        if (entityLoginQQInfo.getLoginQQ()!=0){
+            return;
+        }
+        entityLoginQQInfo.setLoginQQ(Long.parseLong(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getQQ()));
+        entityLoginQQInfo.setLoginQQNick(entityTypeMessages.getMsgSender().GETTER.getLoginQQInfo().getName());
+        flushTeamEn();
+//        从数据库中读取幕间成长到缓存
+        flushMaxRolls();
+//        从数据库中读取最大默认骰到缓存
+        flushBot();
+//        从数据库中读取机器人开关到缓存
+        flushRoleChoose();
+//        从数据库中读取当前已选角色到缓存
+        flushRoleInfoCache();
+//        从数据库中读取角色信息到缓存
+        flushLogTag();
+//        从数据库中读取日志开关到缓存
+        flushKp();
+//        从数据库中读取kp主群设定到缓存
+        flushHistory();
+//        从数据库中读取骰点历史信息到缓存
     }
 }
