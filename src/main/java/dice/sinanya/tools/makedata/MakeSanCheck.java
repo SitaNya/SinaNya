@@ -85,9 +85,9 @@ public class MakeSanCheck {
         }
 //        如果表达式是数字，那么直接恢复即可。如果不是则需要过一下GetRollResultAndStr方法计算最终的值
 
-        HashMap<String, Integer> prop = getRoleInfoFromChooseByFromQQ(entityTypeMessages);
+        HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);
         if (san == 0 && prop != null) {
-            role = getRoleChooseByFromQQ(entityTypeMessages);
+            role = getRoleChooseByQQ(qq);
             san = prop.get("san");
             cthulhuMythos = prop.get("cthulhuMythos");
             prop.put("san", san + changeValue);
