@@ -141,20 +141,20 @@ public class Roll {
             }
 //            如果数学表达式和符号表达式相等，那么只能是因为一开始输入的就是纯数字表达式，因此把可能的技能名表达式重新复制给符号表达式
 
-            String tmp=entityTypeMessages.getFromQq();
+            String tmp = entityTypeMessages.getFromQq();
             if (skill != 0) {
 //                如果技能值取到了，那就不管表达式直接进行判定
                 String resLevel = new CheckResultLevel(intHidden, skill, true).getLevelResultStr();
-                entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" +getGroupName(entityTypeMessages)+"("+ entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n1D" + skill + "=" + intHidden + "/" + skill + "\n" + resLevel);
+                entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + getGroupName(entityTypeMessages) + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n1D" + skill + "=" + intHidden + "/" + skill + "\n" + resLevel);
             } else {
 //                如果技能值没取到，则使用表达式进行判定
                 if (isNumeric(entityStrManyRolls.getStrFunction())) {
-                    entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群"  +getGroupName(entityTypeMessages)+"("+ entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n1D" + maxRolls + "=" + entityStrManyRolls.getResult());
+                    entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + getGroupName(entityTypeMessages) + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n1D" + maxRolls + "=" + entityStrManyRolls.getResult());
                 } else {
                     if (isNumeric(entityStrManyRolls.getStrResult())) {
-                        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" +getGroupName(entityTypeMessages)+"("+ entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n" + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getResult());
+                        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + getGroupName(entityTypeMessages) + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n" + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getResult());
                     } else {
-                        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群"  +getGroupName(entityTypeMessages)+"("+ entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n" + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getStrResult() + "=" + entityStrManyRolls.getResult());
+                        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + getGroupName(entityTypeMessages) + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n" + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getStrResult() + "=" + entityStrManyRolls.getResult());
                     }
                 }
             }

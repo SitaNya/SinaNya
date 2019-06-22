@@ -5,7 +5,7 @@
  * 维护群(QQ): 162279609
  * 有任何问题欢迎咨询
  * 包说明: 所有对象的集合包，这里包装成对象后传递，可以有效降低Map套Map的现象
- *
+ * <p>
  * EntityAntagonize 对抗对象
  * EntityClue 线索集对象
  * EntityCoc6CardInfo 6版细化对象

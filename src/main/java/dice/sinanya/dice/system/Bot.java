@@ -1,6 +1,5 @@
 package dice.sinanya.dice.system;
 
-import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
 import dice.sinanya.dice.manager.imal.AtQq;
 import dice.sinanya.entity.EntityGroupCensus;
 import dice.sinanya.entity.EntityTypeMessages;

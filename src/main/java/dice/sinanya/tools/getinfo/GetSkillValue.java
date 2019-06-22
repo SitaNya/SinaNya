@@ -50,15 +50,11 @@ public class GetSkillValue {
         replaceSkill(qq);
     }
 
-    public String getResStr() {
-        return msg;
-    }
-
     /**
      * 尝试用一个字符串匹配是否是技能，是的话取出技能值，不是的话返回0
      *
      * @param entityTypeMessages 消息封装类
-     * @param tmpSkillName 可能的技能值字符串
+     * @param tmpSkillName       可能的技能值字符串
      * @return 技能值
      */
     public static int getSkillValue(EntityTypeMessages entityTypeMessages, String tmpSkillName) {
@@ -74,7 +70,7 @@ public class GetSkillValue {
      * 尝试用一个字符串匹配是否是技能，是的话取出技能值，不是的话返回0
      * 这个方法用于取指定某个人的技能值
      *
-     * @param qq 某人的QQ
+     * @param qq           某人的QQ
      * @param tmpSkillName 可能的技能值字符串
      * @return 技能值
      */
@@ -91,7 +87,7 @@ public class GetSkillValue {
      * 尝试用一个字符串匹配是否是技能，是的话取出技能值，不是的话返回0
      * 这个方法用于取指定某个人的技能值
      *
-     * @param qq 某人的QQ
+     * @param qq           某人的QQ
      * @param tmpSkillName 可能的技能值字符串
      * @return 技能值
      */
@@ -102,6 +98,10 @@ public class GetSkillValue {
         } else {
             return 0;
         }
+    }
+
+    public String getResStr() {
+        return msg;
     }
 
     /**

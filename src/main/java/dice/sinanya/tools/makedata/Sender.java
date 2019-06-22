@@ -14,7 +14,7 @@ import static dice.sinanya.tools.getinfo.LogText.setLogText;
  * 维护群(QQ): 162279609
  * 有任何问题欢迎咨询
  * 类说明: 很重要的消息发送包装类
- *
+ * <p>
  * 用这个静态方法可以直接发出消息而不用在乎消息来源
  */
 public class Sender {

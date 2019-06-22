@@ -18,7 +18,7 @@ import static dice.sinanya.system.MessagesRollMaxValue.ROLL_MAX_VALUE;
  * 维护群(QQ): 162279609
  * 有任何问题欢迎咨询
  * 类说明: 默认骰点上限查询类
- *
+ * <p>
  * 直接刷新到静态变量
  */
 public class SelectDefaultMaxRolls {

@@ -6,7 +6,7 @@ import static dice.sinanya.system.MessagesName.*;
 import static dice.sinanya.tools.makedata.RandomInt.random;
 
 /**
- * @author  SitaNya
+ * @author SitaNya
  * 日期: 2019-06-14
  * 电子邮箱: sitanya@qq.com
  * 维护群(QQ): 162279609

@@ -49,8 +49,8 @@ public class GetRollResultAndStr {
      * 使用分隔符分割后的分段表达式和整体信息进行替换，最终得出字符表达式和数字表达式并返回
      *
      * @param entityTypeMessages 消息封装类
-     * @param inputMsg 输入的整体值
-     * @param everyFunction 通过运算符分割后的分段值
+     * @param inputMsg           输入的整体值
+     * @param everyFunction      通过运算符分割后的分段值
      * @return 最终得出的字符、数字表达式
      */
     public static EntityStrManyRolls getResFunctionAndResultInt(EntityTypeMessages entityTypeMessages, String inputMsg, String[] everyFunction) {
@@ -83,7 +83,7 @@ public class GetRollResultAndStr {
 
     /**
      * 自动处理信息，从里面使用正则function进行查找(\d*)[dD](\d*)[kK]?(\d*)
-     *
+     * <p>
      * 可以分别取出XdXkX中的3个X
      */
     private void makeResult() {

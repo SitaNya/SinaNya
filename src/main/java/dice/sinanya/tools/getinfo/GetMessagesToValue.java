@@ -24,7 +24,7 @@ class GetMessagesToValue {
      * 将输入的属性值字符串转变为HashMap形式
      *
      * @param properties 属性值的HashMap列表，包含了所有技能和技能值。如果是新卡则所有技能都是默认值
-     * @param msg 属性值字符串
+     * @param msg        属性值字符串
      * @return 新生成的HashMap属性值列表
      */
     static HashMap<String, Integer> getMessagesToValue(HashMap<String, Integer> properties, String msg) {

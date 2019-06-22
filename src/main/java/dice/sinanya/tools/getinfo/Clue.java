@@ -13,7 +13,7 @@ import static dice.sinanya.system.MessagesSystem.NONE;
  * 维护群(QQ): 162279609
  * 有任何问题欢迎咨询
  * 类说明: 获取线索方法
- *
+ * <p>
  * 包装了和数据库交互的方法
  */
 public class Clue {
@@ -25,7 +25,7 @@ public class Clue {
      * 插入一条新线索
      *
      * @param entityClue 线索对象，包含qqId、时间戳、群号
-     * @param info 线索内容
+     * @param info       线索内容
      */
     public static void setClue(EntityClue entityClue, String info) {
         insertClue.insertClue(entityClue, info);

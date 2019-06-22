@@ -28,7 +28,7 @@ public class Kp {
      */
     public void set() {
         setKpGroup(entityTypeMessages, entityTypeMessages.getFromGroup());
-        KP_GROUP.put(entityTypeMessages.getFromQq(),entityTypeMessages.getFromGroup());
+        KP_GROUP.put(entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup());
         sender(entityTypeMessages, "已设置此群为您的带团群");
     }
 

@@ -5,10 +5,10 @@
  * 维护群(QQ): 162279609
  * 有任何问题欢迎咨询
  * 包说明: 所有报错的报出方法
- *
+ * <p>
  * 通过throw这些方法，可以在返回回复语的同时也打印出很详细的日志
  * 回复语大多在GetMessagesSystem中定义了，也可以读取配置文件
- *
+ * <p>
  * ManyRollsFormatException 多重骰点格式错误
  * ManyRollsTimesTooMoreException 多重骰点次数过多报错
  * NotFoundSkillException 未找到技能报错

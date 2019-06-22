@@ -2,7 +2,6 @@ package dice.sinanya.db.system;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityGroupCensus;
-import dice.sinanya.entity.EntityTypeMessages;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -54,7 +53,7 @@ public class SelectBot {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select groupId,switchBot from switchBot where botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1,String.valueOf(entityLoginQQInfo.getLoginQQ()));
+                ps.setString(1, String.valueOf(entityLoginQQInfo.getLoginQQ()));
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         groupNum++;

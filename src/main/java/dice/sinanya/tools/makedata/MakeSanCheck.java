@@ -280,8 +280,8 @@ public class MakeSanCheck {
      * 更新人物卡信息，不过这里必须注意，人工输入san值是不会更新任务卡信息
      *
      * @param newSan 新的san值
-     * @param prop 包含所有属性值的HashMap列表
-     * @param role 角色名
+     * @param prop   包含所有属性值的HashMap列表
+     * @param role   角色名
      */
     private void setCard(int newSan, HashMap<String, Integer> prop, String role) {
         prop.put("san", newSan);
@@ -293,8 +293,8 @@ public class MakeSanCheck {
      * 根据san值变化判断是否疯狂
      *
      * @param strResult StringBuilder对象，用于整合回复字符串
-     * @param newSan 新的san值
-     * @param san 原本的san值
+     * @param newSan    新的san值
+     * @param san       原本的san值
      */
     private void makeInsane(StringBuilder strResult, int newSan, int san) {
         if (newSan == 0) {

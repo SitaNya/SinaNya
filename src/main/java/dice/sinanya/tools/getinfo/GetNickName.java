@@ -2,10 +2,8 @@ package dice.sinanya.tools.getinfo;
 
 import com.forte.qqrobot.beans.messages.RootBean;
 import com.forte.qqrobot.beans.messages.result.GroupInfo;
-import com.forte.qqrobot.beans.messages.result.StrangerInfo;
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByFromQQ;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
 

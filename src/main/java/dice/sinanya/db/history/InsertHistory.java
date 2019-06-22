@@ -2,7 +2,6 @@ package dice.sinanya.db.history;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityHistory;
-import dice.sinanya.entity.EntityTypeMessages;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -55,7 +54,7 @@ public class InsertHistory {
             try (Connection conn = DbUtil.getConnection()) {
                 String sql = "INSERT INTO history(botId,qqId,Fumble,CriticalSuccess,ExtremeSuccess,HardSuccess,Success,Failure,times,mean) VALUES(?,?,?,?,?,?,?,?,?,?)";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    ps.setString(1,String.valueOf(entityLoginQQInfo.getLoginQQ()));
+                    ps.setString(1, String.valueOf(entityLoginQQInfo.getLoginQQ()));
                     ps.setString(2, entityHistory.getQqId());
                     ps.setInt(3, entityHistory.getFumble());
                     ps.setInt(4, entityHistory.getCriticalSuccess());

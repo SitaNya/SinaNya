@@ -48,11 +48,9 @@ public class EntityRoleTag {
         if (this == o) {
             return true;
         }
-        ;
         if (!(o instanceof EntityRoleTag)) {
             return false;
         }
-        ;
         EntityRoleTag that = (EntityRoleTag) o;
         return getQq() == that.getQq() &&
                 getRole().equals(that.getRole());

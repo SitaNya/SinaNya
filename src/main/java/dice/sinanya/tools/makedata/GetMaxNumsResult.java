@@ -16,7 +16,7 @@ class GetMaxNumsResult {
     /**
      * 给K参数的方法，取一系列骰点结果中的最大值
      *
-     * @param input 所有骰点结果，如4d6可以投出1，2，5，4
+     * @param input   所有骰点结果，如4d6可以投出1，2，5，4
      * @param maxNums 取其中最大几个值
      * @return 最终取出来的最大值列表
      */

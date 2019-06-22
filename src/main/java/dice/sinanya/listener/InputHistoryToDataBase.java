@@ -25,9 +25,10 @@ import static dice.sinanya.tools.getinfo.Team.saveTeamEn;
 @CronTask("*/0 * * * * ? *")
 public class InputHistoryToDataBase implements TimeJob {
 
-    public InputHistoryToDataBase(){
+    public InputHistoryToDataBase() {
 
     }
+
     /**
      * 这是一个每5秒给qq：1234567890发送一句 'hi!'的定时任务
      */

@@ -24,6 +24,19 @@ public class Jrrp {
     }
 
     /**
+     * 将系统信息Date转化为毫秒时间戳字符串
+     *
+     * @param date 系统日期
+     * @return 系统日期的毫秒时间戳
+     */
+    private static String toTimestamp(Date date) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String result;
+        result = df.format(date);
+        return result;
+    }
+
+    /**
      * 将结果发送出去，里面使用了对方的QQ号和时间戳作为种子
      */
     public void get() {
@@ -35,19 +48,5 @@ public class Jrrp {
             tmp += (int) c;
         }
         sender(entityTypeMessages, getNickName(entityTypeMessages) + "的今日人品为: " + (tmp % 100));
-    }
-
-
-    /**
-     * 将系统信息Date转化为毫秒时间戳字符串
-     *
-     * @param date 系统日期
-     * @return 系统日期的毫秒时间戳
-     */
-    private static String toTimestamp(Date date) {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String result;
-        result = df.format(date);
-        return result;
     }
 }

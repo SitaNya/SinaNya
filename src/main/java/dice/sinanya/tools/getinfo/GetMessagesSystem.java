@@ -17,8 +17,6 @@ import java.util.Properties;
  * 类说明: 设定默认回复语，并读取配置文件中的回复语
  */
 public class GetMessagesSystem {
-    private static Logger log = LogManager.getLogger(GetMessagesSystem.class.getName());
-
     /**
      * 各种回复的默认值，保证配置文件里写错或者删掉了，也不会报错
      */
@@ -98,6 +96,7 @@ public class GetMessagesSystem {
         put("FAILURE", "");
         put("FUMBLE", "");
     }};
+    private static Logger log = LogManager.getLogger(GetMessagesSystem.class.getName());
 
     /**
      * 读取配置文件，默认从bin目录的上一层找conf目录，然后找sinanya.properties文件，也就是说如果启动时不在bin目录，可能会找不到文件

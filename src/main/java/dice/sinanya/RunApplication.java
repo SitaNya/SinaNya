@@ -18,7 +18,6 @@ import static dice.sinanya.tools.getinfo.Kp.flushKp;
 import static dice.sinanya.tools.getinfo.LogTag.flushLogTag;
 import static dice.sinanya.tools.getinfo.RoleChoose.flushRoleChoose;
 import static dice.sinanya.tools.getinfo.RoleInfo.flushRoleInfoCache;
-import static dice.sinanya.tools.getinfo.Team.flushTeamEn;
 import static dice.sinanya.tools.log.SendMail.sendMail;
 
 /**

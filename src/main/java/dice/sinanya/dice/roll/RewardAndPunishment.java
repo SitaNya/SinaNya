@@ -29,12 +29,11 @@ public class RewardAndPunishment implements En {
     private EntityTypeMessages entityTypeMessages;
 
 //    过滤一个字符串的首字母是不是加减乘除
+    private int multiple = 10;
 
     public RewardAndPunishment(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
     }
-
-    private int multiple = 10;
 //    奖励惩罚都是取10位数
 
     /**
@@ -56,13 +55,12 @@ public class RewardAndPunishment implements En {
         for (int result : listDice) {
             stringBuilder.append(result).append(",");
             if (result < min) {
-                if (random%10!=0 || result!=0){
+                if (random % 10 != 0 || result != 0) {
                     min = result;
                 }
             }
         }
 //        取最小值
-
 
 
         if (random / multiple < min) {

@@ -17,7 +17,6 @@ import dice.sinanya.exceptions.SanCheckSetException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.makedata.Sender.sender;
@@ -37,7 +36,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  */
 @SuppressWarnings("AlibabaLowerCamelCaseVariableNaming")
 public
-class Flow{
+class Flow {
     private static final Logger Log = LogManager.getLogger(Flow.class);
 
     private EntityTypeMessages entityTypeMessages;

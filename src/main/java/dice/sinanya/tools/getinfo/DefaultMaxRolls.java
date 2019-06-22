@@ -10,7 +10,7 @@ import dice.sinanya.db.setdefaultrolls.SelectDefaultMaxRolls;
  * 维护群(QQ): 162279609
  * 有任何问题欢迎咨询
  * 类说明: 默认骰数据库交互类
- *
+ * <p>
  * 包装了数据到数据库的过程
  */
 public class DefaultMaxRolls {
@@ -28,7 +28,7 @@ public class DefaultMaxRolls {
     /**
      * 更新库中某个群的默认骰最大值设定，若库中不存在则新增
      *
-     * @param groupId 群号
+     * @param groupId  群号
      * @param maxRolls 新的默认骰最大值
      */
     public static void setMaxRolls(String groupId, int maxRolls) {

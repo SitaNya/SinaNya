@@ -36,7 +36,7 @@ public class LogTag {
      * 不存在返回false
      *
      * @param entityTypeMessages 消息封装类
-     * @param logName 日志名
+     * @param logName            日志名
      * @return 是否存在
      */
     public static boolean checkLogTagExist(EntityTypeMessages entityTypeMessages, String logName) {
@@ -90,7 +90,7 @@ public class LogTag {
      * 关闭返回false
      *
      * @param entityTypeMessages 消息封装类
-     * @param logName 日志名
+     * @param logName            日志名
      * @return 是否开启
      */
     public static boolean checkLogTagSwitch(EntityTypeMessages entityTypeMessages, String logName) {
@@ -106,8 +106,8 @@ public class LogTag {
      * 更改群中某个日志的开关状态
      *
      * @param entityTypeMessages 消息封装类
-     * @param logName 日志名
-     * @param logSwitch 开关值
+     * @param logName            日志名
+     * @param logSwitch          开关值
      */
     public static void setLogTagSwitch(EntityTypeMessages entityTypeMessages, String logName, boolean logSwitch) {
         EntityLogTag entityLogTag = new EntityLogTag(entityTypeMessages.getFromGroup(), logName);

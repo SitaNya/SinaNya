@@ -96,6 +96,10 @@ public class MailBean {
         return filename;
     }
 
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
     public Vector<String> getFile() {
         return file;
     }
@@ -105,9 +109,5 @@ public class MailBean {
             file = new Vector<>();
         }
         file.addElement(fileName);
-    }
-
-    public void setFilename(String filename) {
-        this.filename = filename;
     }
 }

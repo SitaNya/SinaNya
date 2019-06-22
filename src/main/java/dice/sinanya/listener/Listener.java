@@ -3,31 +3,23 @@ package dice.sinanya.listener;
 import com.forte.qqrobot.anno.Constr;
 import com.forte.qqrobot.anno.Filter;
 import com.forte.qqrobot.anno.Listen;
-import com.forte.qqrobot.anno.depend.Beans;
 import com.forte.qqrobot.beans.messages.msgget.DiscussMsg;
 import com.forte.qqrobot.beans.messages.msgget.GroupMsg;
 import com.forte.qqrobot.beans.messages.msgget.MsgGet;
 import com.forte.qqrobot.beans.messages.msgget.PrivateMsg;
 import com.forte.qqrobot.beans.messages.types.MsgGetTypes;
 import com.forte.qqrobot.beans.types.KeywordMatchType;
-import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
 import com.forte.qqrobot.sender.MsgSender;
 import dice.sinanya.dice.system.Bot;
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.flow.Flow;
 
-import static dice.sinanya.db.system.SelectBot.flushBot;
 import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
-import static dice.sinanya.tools.getinfo.DefaultMaxRolls.flushMaxRolls;
-import static dice.sinanya.tools.getinfo.History.flushHistory;
-import static dice.sinanya.tools.getinfo.Kp.flushKp;
-import static dice.sinanya.tools.getinfo.LogTag.*;
+import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
+import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
 import static dice.sinanya.tools.getinfo.LogText.setLogText;
-import static dice.sinanya.tools.getinfo.RoleChoose.flushRoleChoose;
-import static dice.sinanya.tools.getinfo.RoleInfo.flushRoleInfoCache;
 import static dice.sinanya.tools.getinfo.SwitchBot.getBot;
-import static dice.sinanya.tools.getinfo.Team.flushTeamEn;
 
 /**
  * @author SitaNya

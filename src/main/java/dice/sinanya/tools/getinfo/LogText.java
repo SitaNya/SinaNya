@@ -35,7 +35,7 @@ public class LogText {
      * 将骰娘回复的骰点结果信息插入数据库
      *
      * @param entityLogTag 日志标志对象
-     * @param info 具体信息
+     * @param info         具体信息
      */
     public static void setLogText(EntityLogTag entityLogTag, String info) {
         info = MakeLogInfo.makeLogInfo(info);

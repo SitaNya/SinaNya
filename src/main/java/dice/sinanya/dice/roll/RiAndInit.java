@@ -42,6 +42,33 @@ public class RiAndInit {
     }
 
     /**
+     * 根据value从大到小排序先攻列表
+     *
+     * @param map 先攻列表，key为骰点人+骰点过程，value为骰点结果
+     * @return 排序后的map
+     */
+    private static HashMap<String, String> sortHashMap(HashMap<String, String> map) {
+        //從HashMap中恢復entry集合，得到全部的鍵值對集合
+        Set<Map.Entry<String, String>> entey = map.entrySet();
+        //將Set集合轉為List集合，為了實用工具類的排序方法
+        List<Map.Entry<String, String>> list = new ArrayList<>(entey);
+        //使用Collections工具類對list進行排序
+        list.sort((o1, o2) -> {
+            //按照age倒敘排列
+            String[] o1Value = o1.getValue().split("=");
+            String[] o2Value = o2.getValue().split("=");
+            return Integer.parseInt(o2Value[o2Value.length - 1]) - Integer.parseInt(o1Value[o1Value.length - 1]);
+        });
+        //創建一個HashMap的子類LinkedHashMap集合
+        LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<>();
+        //將list中的數據存入LinkedHashMap中
+        for (Map.Entry<String, String> entry : list) {
+            linkedHashMap.put(entry.getKey(), entry.getValue());
+        }
+        return linkedHashMap;
+    }
+
+    /**
      * 先攻骰掷，这里支持加值和减值计算，并且如果信息中包含汉字，则和对方昵称放在一起（通常kp使用）
      * 返回结果后还会把结果插入先攻列表记录，用于打印先攻列表
      */
@@ -94,10 +121,10 @@ public class RiAndInit {
         } else {
             if (add) {
                 sender(entityTypeMessages, nick + "的先攻骰掷,掷出了: D20=" + random + "+" + msg.replace("+", "") + "=" + result);
-                msgBefore = random + "+" + msg.replace("+", "").replace("-","") + "=";
+                msgBefore = random + "+" + msg.replace("+", "").replace("-", "") + "=";
             } else {
                 sender(entityTypeMessages, nick + "的先攻骰掷,掷出了: D20=" + random + msg + "=" + result);
-                msgBefore = random + "-" + msg.replace("+", "").replace("-","") + "=";
+                msgBefore = random + "-" + msg.replace("+", "").replace("-", "") + "=";
             }
         }
         Matcher mMsgBefore = nickNameRegex.matcher(msgBefore);
@@ -106,7 +133,7 @@ public class RiAndInit {
             if (mMsgBefore.find()) {
                 riList.put(nick, ": D20=" + result);
             } else {
-                riList.put(nick, ": D20=" + msgBefore  + result);
+                riList.put(nick, ": D20=" + msgBefore + result);
             }
             INIT_LIST.put(entityTypeMessages.getFromGroup(), riList);
         } else {
@@ -151,32 +178,5 @@ public class RiAndInit {
     public void clr() {
         INIT_LIST.remove(entityTypeMessages.getFromGroup());
         sender(entityTypeMessages, messagesSystem.get("clrDndInit"));
-    }
-
-    /**
-     * 根据value从大到小排序先攻列表
-     *
-     * @param map 先攻列表，key为骰点人+骰点过程，value为骰点结果
-     * @return 排序后的map
-     */
-    private static HashMap<String, String> sortHashMap(HashMap<String, String> map) {
-        //從HashMap中恢復entry集合，得到全部的鍵值對集合
-        Set<Map.Entry<String, String>> entey = map.entrySet();
-        //將Set集合轉為List集合，為了實用工具類的排序方法
-        List<Map.Entry<String, String>> list = new ArrayList<>(entey);
-        //使用Collections工具類對list進行排序
-        list.sort((o1, o2) -> {
-            //按照age倒敘排列
-            String[] o1Value = o1.getValue().split("=");
-            String[] o2Value = o2.getValue().split("=");
-            return Integer.parseInt(o2Value[o2Value.length - 1]) - Integer.parseInt(o1Value[o1Value.length - 1]);
-        });
-        //創建一個HashMap的子類LinkedHashMap集合
-        LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<>();
-        //將list中的數據存入LinkedHashMap中
-        for (Map.Entry<String, String> entry : list) {
-            linkedHashMap.put(entry.getKey(), entry.getValue());
-        }
-        return linkedHashMap;
     }
 }

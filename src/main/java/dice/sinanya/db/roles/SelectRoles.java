@@ -59,7 +59,7 @@ public class SelectRoles {
                     while (set.next()) {
                         HashMap<String, Integer> propertiesForRole = new MakeRolesInfo().getPropertiesForRole();
                         String role = set.getString("userName");
-                        long qqId=Long.parseLong(set.getString("qqId"));
+                        long qqId = Long.parseLong(set.getString("qqId"));
                         propertiesForRole.put("str", set.getInt("str"));
                         propertiesForRole.put("dex", set.getInt("dex"));
                         propertiesForRole.put("pow", set.getInt("pow"));

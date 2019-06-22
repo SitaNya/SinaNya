@@ -121,6 +121,6 @@ public class Team {
      * @param groupId 群号
      */
     public static void rmTeamEn(String qqId, String groupId) {
-        insertTeam.deleteTeamEnToDatabase(qqId,groupId);
+        insertTeam.deleteTeamEnToDatabase(qqId, groupId);
     }
 }

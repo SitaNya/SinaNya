@@ -14,7 +14,7 @@ import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByFromQQ;
  * 维护群(QQ): 162279609
  * 有任何问题欢迎咨询
  * 类说明: 角色信息的具体包装生成处理类
- *
+ * <p>
  * 这里完成了从属性字符串到HashMap的过程
  * 定义了所有技能的初始值
  */
