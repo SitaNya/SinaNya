@@ -3,8 +3,8 @@ package dice.sinanya.dice.system;
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.tools.log.SaveDocx;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 
 import static dice.sinanya.system.MessagesLog.LOG_NAME_FOR_GROUP;

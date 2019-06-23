@@ -12,8 +12,8 @@ import dice.sinanya.exceptions.SanCheckSetException;
 import dice.sinanya.exceptions.TeamIsEmptyException;
 import dice.sinanya.tools.makedata.GetRollResultAndStr;
 import dice.sinanya.tools.makedata.MakeSanCheck;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;

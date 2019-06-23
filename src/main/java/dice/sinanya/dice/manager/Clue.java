@@ -2,8 +2,8 @@ package dice.sinanya.dice.manager;
 
 import dice.sinanya.entity.EntityClue;
 import dice.sinanya.entity.EntityTypeMessages;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
