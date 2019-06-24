@@ -40,6 +40,8 @@ public class MakeLogInfo {
         } else {
 //            将所有中英文引号全部置为英文引号
             info = info.replaceAll("([\"“”])", "\"");
+            //                将信息中所有中文括号重置为英文括号
+            info = info.replace("（", "(").replace("）", ")");
 //            如果一个信息的开头是引号
             boolean fristIsTalk = info.charAt(0) == '"';
 //            如果一个信息的结尾是引号
@@ -50,8 +52,6 @@ public class MakeLogInfo {
                         .append(":\t")
                         .append(info);
                 result.append(info);
-//                将信息中所有中文括号重置为英文括号
-                info = info.replace("（", "(").replace("）", ")");
 //                如果一个信息开头是括号但没有任何结尾，或者一个信息开头是括号结尾也是括号，则认为整体都被括号扩住
             } else if ((info.charAt(0) == '(' && !info.contains(")")) || (info.charAt(0) == '(' && info.charAt(info.length() - 1) == ')')) {
                 info = info.replaceAll("([(（])", "").replaceAll("([)）])", "");
