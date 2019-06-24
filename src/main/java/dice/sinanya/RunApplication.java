@@ -48,8 +48,9 @@ public class RunApplication implements HttpApp {
         configuration.setScannerPackage("dice.sinanya.listener");
         configuration.setIp(messagesSystem.get("hostIp"));
         configuration.setServerPath("/coolq/demo.php");
-        configuration.setServerPort(Integer.parseInt(messagesSystem.get("serverPort")));
         configuration.setJavaPort(Integer.parseInt(messagesSystem.get("javaPort")));
+        configuration.setServerPort(Integer.parseInt(messagesSystem.get("serverPort")));
+
     }
 
     @Override

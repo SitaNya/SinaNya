@@ -27,7 +27,7 @@ public class GetNickName implements RootBean {
         if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
             return getRoleChooseByFromQQ(entityTypeMessages);
         }
-        return entityTypeMessages.getMsgSender().getPersonInfoByCode(entityTypeMessages.getFromQq()).getOtherParam("name").toString();
+        return entityTypeMessages.getMsgSender().getPersonInfoByCode(entityTypeMessages.getFromQq()).getName();
     }
 
     /**
