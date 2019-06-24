@@ -132,7 +132,7 @@ public interface MakeCard {
                 "/" +
                 coc7CardInfo.getHasLuck() +
                 " " +
-                "占总点数的:" + String.valueOf((coc7CardInfo.getHasLuck() * 1.0 / 630) * 100).substring(0, 5) + "%";
+                "占总点数的:" + String.valueOf((coc7CardInfo.getHasLuck() * 1.0 / 810) * 100).substring(0, 5) + "%";
     }
 
 }
