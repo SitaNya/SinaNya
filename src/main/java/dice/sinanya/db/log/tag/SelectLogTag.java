@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static dice.sinanya.system.MessagesLog.LOG_NAME_SWITCH;
+import static dice.sinanya.system.MessagesLog.LOG_SWITCH_FOR_GROUP;
 
 /**
  * @author SitaNya
@@ -38,6 +39,9 @@ public class SelectLogTag {
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         LOG_NAME_SWITCH.put(new EntityLogTag(set.getString("groupId"), set.getString("logName")), set.getBoolean("logSwitch"));
+                        if (set.getBoolean("logSwitch")){
+                            LOG_SWITCH_FOR_GROUP.put(set.getString("groupId"),set.getBoolean("logSwitch"));
+                        }
                     }
                 }
             }
@@ -68,31 +72,6 @@ public class SelectLogTag {
             Log.error(e.getMessage(), e);
         }
         return tagList;
-    }
-
-    /**
-     * 检查某个群中是否有日志已被开启，注意这里的返回值不是“是否有开启的”，而是“是否全部日志都是关闭的”，返回true则意味着可以开启新日志
-     *
-     * @param groupId 群号
-     * @return 是否全部为关闭的
-     */
-    public boolean checkOthorLogTrue(String groupId) {
-        try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select logSwitch from tagLog where groupId=?";
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, groupId);
-                try (ResultSet set = ps.executeQuery()) {
-                    while (set.next()) {
-                        if (set.getBoolean("logSwitch")) {
-                            return false;
-                        }
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
-        }
-        return true;
     }
 
     /**
