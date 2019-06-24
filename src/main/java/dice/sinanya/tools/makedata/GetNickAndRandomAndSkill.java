@@ -65,11 +65,11 @@ public class GetNickAndRandomAndSkill {
             }
         }
 
-//        如果正段消息包含运算符，则将传入消息中的技能明天喜欢为技能值返回
+//        如果正段消息包含运算符，则将传入消息中的技能计算为技能值返回
         Matcher m = p.matcher(msg);
         if (m.find()) {
             msg = msg.replaceAll(skillName, String.valueOf(skill));
-            skill = (int) ceil(Calculator.conversion(msg));
+            skill = (int) ceil(Calculator.conversion(skill+msg));
         }
 
 

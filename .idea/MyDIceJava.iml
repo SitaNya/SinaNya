@@ -12,6 +12,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: io.github.ForteScarlet.simple-robot-core:component-forhttpapi:0.6-DEMO-1.1.1-BETA" level="project" />
     <orderEntry type="library" name="Maven: io.github.ForteScarlet:simple-robot-core:1.1.1-BETA" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.54" level="project" />
     <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.9.3" level="project" />

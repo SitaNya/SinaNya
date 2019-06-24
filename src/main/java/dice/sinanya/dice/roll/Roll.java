@@ -55,7 +55,7 @@ public class Roll {
      */
     public void r() {
         String tag = TAGR;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +","");
 
         String nick = getNickName(entityTypeMessages);
 

@@ -11,6 +11,7 @@ import com.forte.qqrobot.utils.CQCodeUtil;
 import static dice.sinanya.db.system.SelectBot.flushBot;
 import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
 import static dice.sinanya.tools.getinfo.DefaultMaxRolls.flushMaxRolls;
+import static dice.sinanya.tools.getinfo.GetLoginInfo.getLoginInfo;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.initMessagesSystem;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.History.flushHistory;
@@ -55,8 +56,9 @@ public class RunApplication implements HttpApp {
 
     @Override
     public void after(CQCodeUtil cqCodeUtil, MsgSender sender) {
-        entityLoginQQInfo.setLoginQQ(Long.parseLong(sender.GETTER.getLoginQQInfo().getQQ()));
-        entityLoginQQInfo.setLoginQQNick(sender.GETTER.getLoginQQInfo().getName());
+        while (entityLoginQQInfo.getLoginQQ()==0) {
+            getLoginInfo(sender);
+        }
         //        从数据库中读取幕间成长到缓存
         flushMaxRolls();
 //        从数据库中读取最大默认骰到缓存
