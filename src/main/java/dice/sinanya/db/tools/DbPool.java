@@ -79,7 +79,10 @@ class DbPool {
             Log.error("get Connection error: \n" + dataSource.toString() + e.getMessage(), e);
         }
         try {
-            Log.info("当前线程池中链接数为: " + dataSource.getNumConnections());
+            Exception e = new Exception("this is a log");
+
+            Log.info("当前线程池中链接数为: " + dataSource.getNumConnections() + " 调用信息为: \n");
+            e.printStackTrace();
         } catch (SQLException e) {
             Log.error(e.getMessage(), e);
         }
