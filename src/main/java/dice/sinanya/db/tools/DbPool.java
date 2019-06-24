@@ -41,7 +41,17 @@ class DbPool {
             dataSource.setJdbcUrl("jdbc:mysql://123.207.150.160:3306/roles?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull");
             dataSource.setUser("root");
             dataSource.setPassword(messagesSystem.get("dbPassword"));
-            dataSource.setIdleConnectionTestPeriod(3600);
+
+            connPoolConfig(dataSource);
+            connAgeConfig(dataSource);
+            connTestConfig(dataSource);
+            reconnConfig(dataSource);
+            statementConfig(dataSource);
+            threadConfig(dataSource);
+            tranConfig(dataSource);
+            connListenerConfig(dataSource);
+
+
             Log.info("create DbPool");
         } catch (PropertyVetoException e) {
             Log.error(e.getMessage(), e);
@@ -70,6 +80,144 @@ class DbPool {
         }
 
         return conn;
+    }
+
+
+    /**
+     * 连接池的配置 initialPoolSize:连接池的初始值 maxPoolSize:连接池的最大值 minPoolSize:连接池的最小值
+     *
+     * @param dataSource
+     */
+    private static void connPoolConfig(ComboPooledDataSource dataSource) {
+        // 连接池的初始值，默认值为3
+        dataSource.setInitialPoolSize(10);
+        // 连接池的最大值,默认值为0
+        dataSource.setMaxPoolSize(20);
+        // 连接池的最小值，最小值为3
+        dataSource.setMinPoolSize(1);
+        // 连接池的递增值,默认值为3
+        dataSource.setAcquireIncrement(5);
+    }
+
+    /**
+     * 连接池生命周期配置,连接池首先从数据库中获取连接，用户请求时从连接池中获取连接。默认值为0，表示永不过期。 maxConnectionAge:
+     * 连接对象生命的最大值，超过此时间，连接池会销毁连接对象，连接池变小。单位为秒，建议设置1800或更多 maxIdleTime:
+     * 空闲连接在连接池中的超时时间，超过此时间，连接池将会销毁连接对象。单位为秒，建议设置1800或更多
+     * maxIdleTimeExcessConnections：当连接池不处于过载状态时，空闲连接对象生命的最大值。
+     * unreturnedConnectionTimeout:当连接对象在一定时间内无法回收，则创建新连接对象，销毁旧连接对象
+     *
+     * @param dataSource
+     */
+    private static void connAgeConfig(ComboPooledDataSource dataSource) {
+        // 连接对象生命的最大值,它指绝对时间。从创建开始时计算,默认值为0
+        dataSource.setMaxConnectionAge(10 * 60 * 60);
+        // 空闲连接的超时时间，从连接池变为空闲状态开始计算
+        dataSource.setMaxIdleTime(1800);
+        // 空闲连接对象生命的最大值
+        dataSource.setMaxIdleTimeExcessConnections(60);
+        // 连接对象的最大使用时间,设置为2小时
+        dataSource.setUnreturnedConnectionTimeout(2 * 60 * 60);
+    }
+
+    /**
+     * 连接测试配置。 automaticTestTable:测试连接时使用的数据库表 ,默认值为null。connectionTesterClassName:测试连接时使用的类名称
+     * idleConnectionTestPeriod:测试连接间隔时间。在此段时间内不进行连接测试。 preferredTestQuery:连接测试使用的SQL语句。默认语句为select
+     * 1 from dual。 testConnectionOnCheckin:从连接池回收连接对象时测试连接。默认值为false
+     * testConnectionOnCheckOut:从连接池取出连接对象时测试连接。默认值为false。
+     * forceSynchronousCheckins:连接池回收连接对象时是同步，还是异步，默认是异步。默认值为false
+     *
+     * @param dataSource
+     * @throws PropertyVetoException
+     */
+    private static void connTestConfig(ComboPooledDataSource dataSource)
+            throws PropertyVetoException {
+        // 连接测试使用的数据库表,默认值为Null
+        dataSource.setAutomaticTestTable("dual");
+        // 连接测试使用的SQL语句，默认使用Connection对象的isAlive方法，所以一般不设置此值，默认值为null
+        dataSource.setPreferredTestQuery("select 1");
+        // 从连接池取出连接时测试连接，默认值为false
+        dataSource.setTestConnectionOnCheckout(true);
+        // 从连接池回收连接时测试连接，默认值为false。
+        dataSource.setTestConnectionOnCheckin(true);
+        // 测试连接的间隔时间，默认值为0
+        dataSource.setIdleConnectionTestPeriod(60);
+        // 测试连接使用的类名称
+        dataSource.setConnectionTesterClassName("com.mchange.v2.c3p0.impl.DefaultConnectionTester");
+    }
+
+    /**
+     * 当连接失败后，重新连接的配置。 acquireRetryAttempts:重连的次数。 acquireRetryDelay:重连的时间间隔。单位为毫秒
+     * breakAfterAcquireFailure:重连失败后，如果此值设置为false,数据源对象不会销毁，设置为false。数据源被销毁。
+     * checkoutTimeout:等待连接响应的时间。
+     */
+    private static void reconnConfig(ComboPooledDataSource dataSource) {
+        // 设置重连次数为3，默认值为30
+        dataSource.setAcquireRetryAttempts(3);
+        // 设置重连的时间间隔为2秒，默认值为1000
+        dataSource.setAcquireRetryDelay(2000);
+        // 等待连接响应的超时时间。默认值为0表示永远不超时
+        dataSource.setCheckoutTimeout(4);
+        // 重连失败后，销毁数据源。默认值为false
+        dataSource.setBreakAfterAcquireFailure(true);
+    }
+
+    /**
+     * 连接池中PreparedStatement对象的配置 PreparedStatement对象的配置。 maxStatements:连接池拥有PreparedStatement对象的总数。
+     * maxStatementsPerConnections:每个连接拥有PreparedStatement对象的数目。
+     *
+     * @param dataSource
+     */
+    private static void statementConfig(ComboPooledDataSource dataSource) {
+        // 设置PreparedStatement对象的总数，默认值为0，表示关闭
+        dataSource.setMaxStatements(100);
+        // 设置每个连接拥有Statement对象的数目，默认值为0，表示关闭。
+        dataSource.setMaxStatementsPerConnection(15);
+    }
+
+    /**
+     * 连接池的线程设置 numHelperThread:连接池拥有的线程数量 maxAdministrativeTaskTime:线程执行的超时时间。
+     *
+     * @param dataSource
+     */
+    private static void threadConfig(ComboPooledDataSource dataSource) {
+        // 设置线程数量为10，默认值为3
+        dataSource.setNumHelperThreads(10);
+        // 设置线程的超时时间，默认值为0，设置为5分钟
+        dataSource.setMaxAdministrativeTaskTime(5 * 60);
+    }
+
+    /**
+     * 连接对象的事务配置 autoCommitOnClose：是否自动提交事务，true为是，false为否，默认为否 forceIgnoreUnresolvedTransactions
+     * 回收连接时，是否强制回滚或提交事务，默认为false。一般不设置此值， 例如由Spring来管理事务
+     *
+     * @param dataSource
+     */
+    private static void tranConfig(ComboPooledDataSource dataSource) {
+        // 关闭自动提交事务，默认值为false
+        dataSource.setAutoCommitOnClose(false);
+        // 回收连接时，是否强制回滚或提交事务，设置为false。
+        dataSource.setForceIgnoreUnresolvedTransactions(false);
+
+    }
+
+    /**
+     * 调试模式的设置 debugUnreturnedConnectionStackTraces:从连接池获取连接对象时，打印所有信息
+
+     *
+     * @param dataSource
+     */
+    private static void debugMode(ComboPooledDataSource dataSource) {
+        // 从连接池获取连接对象时，打印所有信息
+        dataSource.setDebugUnreturnedConnectionStackTraces(true);
+    }
+
+    /**
+     * 设置连接对象的监听类,该类有四个方法 onAcquire:表示当连接池从数据库中获得连接时 onDestory:表示当连接池销毁连接对象时 onCheckOut:从连接池中获取连接对象时
+     * onCheckIn:连接池回收连接对象时。
+     */
+    private static void connListenerConfig(ComboPooledDataSource dataSource) {
+        // 设置连接对象的监听类
+        dataSource.setConnectionCustomizerClassName("com.mchange.v2.c3p0.impl.DefaultConnectionTester");
     }
 }
 
