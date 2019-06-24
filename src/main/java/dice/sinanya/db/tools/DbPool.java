@@ -24,7 +24,7 @@ class DbPool {
     private static DbPool instance;
 
     static {
-        if (instance != null) {
+        if (instance == null) {
             instance = new DbPool();
         }
     }
