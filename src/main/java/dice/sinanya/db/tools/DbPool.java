@@ -157,7 +157,7 @@ class DbPool {
         // 设置重连的时间间隔为2秒，默认值为1000
         dataSource.setAcquireRetryDelay(2000);
         // 等待连接响应的超时时间。默认值为0表示永远不超时
-        dataSource.setCheckoutTimeout(4);
+        dataSource.setCheckoutTimeout(60*1000);
         // 重连失败后，销毁数据源。默认值为false
         dataSource.setBreakAfterAcquireFailure(true);
     }
