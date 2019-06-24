@@ -139,7 +139,7 @@ class DbPool {
     private static void connTestConfig(ComboPooledDataSource dataSource)
             throws PropertyVetoException {
         // 连接测试使用的数据库表,默认值为Null
-        dataSource.setAutomaticTestTable("SELECT * FROM `dual`");
+        dataSource.setAutomaticTestTable("dual");
         // 从连接池取出连接时测试连接，默认值为false
         dataSource.setTestConnectionOnCheckout(true);
         // 从连接池回收连接时测试连接，默认值为false。
