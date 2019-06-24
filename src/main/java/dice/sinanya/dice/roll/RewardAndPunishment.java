@@ -103,6 +103,9 @@ public class RewardAndPunishment implements En {
 
         int max = 0;
         for (int result : listDice) {
+            if (result == 0) {
+                result = 10;
+            }
             stringBuilder.append(result).append(",");
             if (result > max) {
                 max = result;
