@@ -80,7 +80,6 @@ class DbPool {
         }
         try {
             Exception e = new Exception("this is a log");
-
             Log.info("当前线程池中链接数为: " + dataSource.getNumConnections() + " 调用信息为: \n");
             e.printStackTrace();
         } catch (SQLException e) {

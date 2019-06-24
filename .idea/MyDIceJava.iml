@@ -20,7 +20,7 @@
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpmime:4.5" level="project" />
     <orderEntry type="library" name="Maven: io.gitee.ForteScarlet.plusutils:console-plus:1.2" level="project" />
-    <orderEntry type="library" name="Maven: io.github.ForteScarlet.simple-robot-core:component-forhttpapi:0.6-DEMO-1.1-BETA" level="project" />
+    <orderEntry type="library" name="Maven: io.github.ForteScarlet.simple-robot-core:component-forhttpapi:0.6-DEMO-1.1.1-BETA" level="project" />
     <orderEntry type="library" name="Maven: net.sf.json-lib:json-lib:jdk15:2.4" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.1" level="project" />
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.5" level="project" />

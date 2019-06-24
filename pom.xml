@@ -50,11 +50,11 @@
             <version>1.1.1-BETA</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.github.ForteScarlet/simple-robot-core -->
+        <!-- https://mvnrepository.com/artifact/io.github.ForteScarlet.simple-robot-core/component-forhttpapi -->
         <dependency>
             <groupId>io.github.ForteScarlet.simple-robot-core</groupId>
             <artifactId>component-forhttpapi</artifactId>
-            <version>0.6-DEMO-1.1-BETA</version>
+            <version>0.6-DEMO-1.1.1-BETA</version>
         </dependency>
 
 <!--        &lt;!&ndash; https://mvnrepository.com/artifact/io.gitee.ForteScarlet.plusutils/console-plus &ndash;&gt;-->
