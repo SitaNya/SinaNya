@@ -91,11 +91,11 @@ class DbPool {
         // 连接池的初始值，默认值为3
         dataSource.setInitialPoolSize(10);
         // 连接池的最大值,默认值为0
-        dataSource.setMaxPoolSize(20);
+        dataSource.setMaxPoolSize(200);
         // 连接池的最小值，最小值为3
         dataSource.setMinPoolSize(1);
         // 连接池的递增值,默认值为3
-        dataSource.setAcquireIncrement(5);
+        dataSource.setAcquireIncrement(20);
     }
 
     /**
