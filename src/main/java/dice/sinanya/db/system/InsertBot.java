@@ -53,6 +53,7 @@ public class InsertBot {
                     ps.setLong(2, groupId);
                     ps.setBoolean(3, switchBot);
                     ps.executeUpdate();
+                    Log.info("插入新的群开关，" + String.valueOf(entityLoginQQInfo.getLoginQQ()) + "groupId: " + groupId + "switchBot: " + switchBot);
                 }
             } else {
                 sql = "update switchBot set " +
