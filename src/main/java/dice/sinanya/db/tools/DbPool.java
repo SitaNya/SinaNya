@@ -24,7 +24,9 @@ class DbPool {
     private static DbPool instance;
 
     static {
-        instance = new DbPool();
+        if (instance != null) {
+            instance = new DbPool();
+        }
     }
 
     private ComboPooledDataSource dataSource;
