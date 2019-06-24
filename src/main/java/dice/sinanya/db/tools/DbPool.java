@@ -40,7 +40,7 @@ class DbPool {
             dataSource = new ComboPooledDataSource();
 
             dataSource.setDriverClass("com.mysql.jdbc.Driver");
-            dataSource.setJdbcUrl("jdbc:mysql://123.207.150.160:3306/roles?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull");
+            dataSource.setJdbcUrl("jdbc:mysql://123.207.150.160:3306/roles?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull&useSSL=false");
             dataSource.setUser("root");
             dataSource.setPassword(messagesSystem.get("dbPassword"));
 
