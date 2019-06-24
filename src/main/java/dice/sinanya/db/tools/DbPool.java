@@ -139,9 +139,7 @@ class DbPool {
     private static void connTestConfig(ComboPooledDataSource dataSource)
             throws PropertyVetoException {
         // 连接测试使用的数据库表,默认值为Null
-        dataSource.setAutomaticTestTable("dual");
-        // 连接测试使用的SQL语句，默认使用Connection对象的isAlive方法，所以一般不设置此值，默认值为null
-        dataSource.setPreferredTestQuery("select 1");
+        dataSource.setAutomaticTestTable("SELECT * FROM `dual`");
         // 从连接池取出连接时测试连接，默认值为false
         dataSource.setTestConnectionOnCheckout(true);
         // 从连接池回收连接时测试连接，默认值为false。
