@@ -53,7 +53,7 @@ public class CheckResultLevel {
                 return checkNotNeedRules();
             }
         } else {
-            ruleFumble = 95;
+            ruleFumble = 96;
             ruleCriticalSuccess = 5;
             if (random >= ruleFumble && random >= skill) {
                 level = 0;
