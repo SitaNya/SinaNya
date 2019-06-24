@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
+import static dice.sinanya.system.MessagesHistory.HISTORY_LIST;
 import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
 
 
@@ -31,65 +33,58 @@ public class InsertHistory {
      * 如果觉得卡的话可以去调整dice.sinanya.listener.InputHistoryToDatabase里的间隔时间
      * 先查询是否存在条目，不存在则插入，存在则更新
      *
-     * @param entityHistory 历史对象
      */
-    public void insertHistory(EntityHistory entityHistory) {
+    public void insertHistory() {
         int num = 0;
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from history where qqId=? and botId=?";
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, entityHistory.getQqId());
-                ps.setString(2, String.valueOf(entityLoginQQInfo.getLoginQQ()));
-                try (ResultSet set = ps.executeQuery()) {
-                    while (set.next()) {
-                        num++;
+            for (Map.Entry<String, EntityHistory> mapEntry : HISTORY_LIST.entrySet()) {
+                EntityHistory entityHistory=mapEntry.getValue();
+                String sql = "select * from history where qqId=? and botId=?";
+                try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                    ps.setString(1, entityHistory.getQqId());
+                    ps.setString(2, String.valueOf(entityLoginQQInfo.getLoginQQ()));
+                    try (ResultSet set = ps.executeQuery()) {
+                        while (set.next()) {
+                            num++;
+                        }
+                    }
+                }
+                if (num == 0) {
+                    sql = "INSERT INTO history(botId,qqId,Fumble,CriticalSuccess,ExtremeSuccess,HardSuccess,Success,Failure,times,mean) VALUES(?,?,?,?,?,?,?,?,?,?)";
+                    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                        ps.setString(1, String.valueOf(entityLoginQQInfo.getLoginQQ()));
+                        ps.setString(2, entityHistory.getQqId());
+                        ps.setInt(3, entityHistory.getFumble());
+                        ps.setInt(4, entityHistory.getCriticalSuccess());
+                        ps.setInt(5, entityHistory.getExtremeSuccess());
+                        ps.setInt(6, entityHistory.getHardSuccess());
+                        ps.setInt(7, entityHistory.getSuccess());
+                        ps.setInt(8, entityHistory.getFailure());
+                        ps.setInt(9, entityHistory.getTimes());
+                        ps.setInt(10, entityHistory.getMean());
+
+                        ps.executeUpdate();
+                    }
+                } else {
+                    sql = "update history set Fumble=?,CriticalSuccess=?,ExtremeSuccess=?,HardSuccess=?,Success=?,Failure=?,times=?,mean=? where qqId=? and botId=?";
+                    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                        ps.setInt(1, entityHistory.getFumble());
+                        ps.setInt(2, entityHistory.getCriticalSuccess());
+                        ps.setInt(3, entityHistory.getExtremeSuccess());
+                        ps.setInt(4, entityHistory.getHardSuccess());
+                        ps.setInt(5, entityHistory.getSuccess());
+                        ps.setInt(6, entityHistory.getFailure());
+                        ps.setInt(7, entityHistory.getTimes());
+                        ps.setInt(8, entityHistory.getMean());
+                        ps.setString(9, entityHistory.getQqId());
+                        ps.setString(10, String.valueOf(entityLoginQQInfo.getLoginQQ()));
+
+                        ps.executeUpdate();
                     }
                 }
             }
         } catch (SQLException e) {
             Log.error(e.getMessage(), e);
-        }
-
-        if (num == 0) {
-            try (Connection conn = DbUtil.getConnection()) {
-                String sql = "INSERT INTO history(botId,qqId,Fumble,CriticalSuccess,ExtremeSuccess,HardSuccess,Success,Failure,times,mean) VALUES(?,?,?,?,?,?,?,?,?,?)";
-                try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    ps.setString(1, String.valueOf(entityLoginQQInfo.getLoginQQ()));
-                    ps.setString(2, entityHistory.getQqId());
-                    ps.setInt(3, entityHistory.getFumble());
-                    ps.setInt(4, entityHistory.getCriticalSuccess());
-                    ps.setInt(5, entityHistory.getExtremeSuccess());
-                    ps.setInt(6, entityHistory.getHardSuccess());
-                    ps.setInt(7, entityHistory.getSuccess());
-                    ps.setInt(8, entityHistory.getFailure());
-                    ps.setInt(9, entityHistory.getTimes());
-                    ps.setInt(10, entityHistory.getMean());
-
-                    ps.executeUpdate();
-                }
-            } catch (SQLException e) {
-                Log.error(e.getMessage(), e);
-            }
-        } else {
-            try (Connection conn = DbUtil.getConnection()) {
-                String sql = "update history set Fumble=?,CriticalSuccess=?,ExtremeSuccess=?,HardSuccess=?,Success=?,Failure=?,times=?,mean=? where qqId=? and botId=?";
-                try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    ps.setInt(1, entityHistory.getFumble());
-                    ps.setInt(2, entityHistory.getCriticalSuccess());
-                    ps.setInt(3, entityHistory.getExtremeSuccess());
-                    ps.setInt(4, entityHistory.getHardSuccess());
-                    ps.setInt(5, entityHistory.getSuccess());
-                    ps.setInt(6, entityHistory.getFailure());
-                    ps.setInt(7, entityHistory.getTimes());
-                    ps.setInt(8, entityHistory.getMean());
-                    ps.setString(9, entityHistory.getQqId());
-                    ps.setString(10, String.valueOf(entityLoginQQInfo.getLoginQQ()));
-
-                    ps.executeUpdate();
-                }
-            } catch (SQLException e) {
-                Log.error(e.getMessage(), e);
-            }
         }
     }
 }

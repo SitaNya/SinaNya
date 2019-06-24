@@ -44,13 +44,9 @@ public class InsertRoles {
                     }
                 }
             }
-        } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
-        }
 
-        if (num == 0) {
-            try (Connection conn = DbUtil.getConnection()) {
-                String sql = "INSERT INTO CHOOSE_ROLE(" +
+            if (num == 0) {
+                sql = "INSERT INTO CHOOSE_ROLE(" +
                         "qq," +
                         "role" +
                         ") VALUES(?,?)";
@@ -59,21 +55,17 @@ public class InsertRoles {
                     ps.setString(2, role);
                     ps.executeUpdate();
                 }
-            } catch (SQLException e) {
-                Log.error(e.getMessage(), e);
-            }
-        } else {
-            try (Connection conn = DbUtil.getConnection()) {
-                String sql = "update CHOOSE_ROLE set " +
+            } else {
+                sql = "update CHOOSE_ROLE set " +
                         "role=? where qq=?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     ps.setString(1, role);
                     ps.setLong(2, qqId);
                     ps.executeUpdate();
                 }
-            } catch (SQLException e) {
-                Log.error(e.getMessage(), e);
             }
+        } catch (SQLException e) {
+            Log.error(e.getMessage(), e);
         }
     }
 

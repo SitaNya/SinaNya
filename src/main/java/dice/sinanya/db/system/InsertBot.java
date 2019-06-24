@@ -41,13 +41,9 @@ public class InsertBot {
                     }
                 }
             }
-        } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
-        }
 
-        if (num == 0) {
-            try (Connection conn = DbUtil.getConnection()) {
-                String sql = "INSERT INTO switchBot(" +
+            if (num == 0) {
+                sql = "INSERT INTO switchBot(" +
                         "botId," +
                         "groupId," +
                         "switchBot" +
@@ -58,12 +54,8 @@ public class InsertBot {
                     ps.setBoolean(3, switchBot);
                     ps.executeUpdate();
                 }
-            } catch (SQLException e) {
-                Log.error(e.getMessage(), e);
-            }
-        } else {
-            try (Connection conn = DbUtil.getConnection()) {
-                String sql = "update switchBot set " +
+            } else {
+                sql = "update switchBot set " +
                         "switchBot=? where groupId=? and botId=?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     ps.setBoolean(1, switchBot);
@@ -71,9 +63,9 @@ public class InsertBot {
                     ps.setString(3, String.valueOf(entityLoginQQInfo.getLoginQQ()));
                     ps.executeUpdate();
                 }
-            } catch (SQLException e) {
-                Log.error(e.getMessage(), e);
             }
+        } catch (SQLException e) {
+            Log.error(e.getMessage(), e);
         }
     }
 }

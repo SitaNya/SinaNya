@@ -150,13 +150,9 @@ public class InsertTeam {
                     }
                 }
             }
-        } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
-        }
 
-        if (num == 0) {
-            try (Connection conn = DbUtil.getConnection()) {
-                String sql = "INSERT INTO team(" +
+            if (num == 0) {
+                sql = "INSERT INTO team(" +
                         "groupId," +
                         "qqList" +
                         ") VALUES(?,?)";
@@ -165,12 +161,8 @@ public class InsertTeam {
                     ps.setString(2, StringUtils.join(entityTeamInfo.getQqList(), ","));
                     ps.executeUpdate();
                 }
-            } catch (SQLException e) {
-                Log.error(e.getMessage(), e);
-            }
-        } else {
-            try (Connection conn = DbUtil.getConnection()) {
-                String sql = "update team set " +
+            } else {
+                sql = "update team set " +
                         "qqList=? where groupId=?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     Set<String> middleHashSet = new HashSet<>(qqList);
@@ -180,9 +172,10 @@ public class InsertTeam {
                     ps.setString(2, entityTeamInfo.getGroup());
                     ps.executeUpdate();
                 }
-            } catch (SQLException e) {
-                Log.error(e.getMessage(), e);
+
             }
+        } catch (SQLException e) {
+            Log.error(e.getMessage(), e);
         }
     }
 }

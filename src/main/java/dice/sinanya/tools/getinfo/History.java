@@ -4,8 +4,6 @@ import dice.sinanya.db.history.InsertHistory;
 import dice.sinanya.db.history.SelectHistory;
 import dice.sinanya.entity.EntityHistory;
 
-import java.util.Map;
-
 import static dice.sinanya.system.MessagesHistory.HISTORY_LIST;
 
 
@@ -33,9 +31,7 @@ public class History {
      * 将当前静态变量中的骰点历史入库，这个方法被dice.sinanya.listener.InputHistoryToDataBase定时器调用
      */
     public static void setHistory() {
-        for (Map.Entry<String, EntityHistory> mapEntry : HISTORY_LIST.entrySet()) {
-            insertHistory.insertHistory(mapEntry.getValue());
-        }
+        insertHistory.insertHistory();
     }
 
     /**

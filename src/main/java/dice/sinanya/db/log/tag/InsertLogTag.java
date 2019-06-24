@@ -44,13 +44,8 @@ public class InsertLogTag {
                     }
                 }
             }
-        } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
-        }
-
-        if (num == 0) {
-            try (Connection conn = DbUtil.getConnection()) {
-                String sql = "INSERT INTO tagLog(" +
+            if (num == 0) {
+                sql = "INSERT INTO tagLog(" +
                         "groupId, logName,logSwitch) VALUES(?,?,?)";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     ps.setString(1, entityLogTag.getGroupId());
@@ -58,23 +53,18 @@ public class InsertLogTag {
                     ps.setBoolean(3, logSwitch);
                     ps.executeUpdate();
                 }
-            } catch (SQLException e) {
-                Log.error(e.getMessage(), e);
-            }
-        } else {
-            try (Connection conn = DbUtil.getConnection()) {
-                String sql = "update tagLog set logSwitch=? where groupId=? and logName=?";
+            } else {
+                sql = "update tagLog set logSwitch=? where groupId=? and logName=?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     ps.setBoolean(1, logSwitch);
                     ps.setString(2, entityLogTag.getGroupId());
                     ps.setString(3, entityLogTag.getLogName());
                     ps.executeUpdate();
                 }
-            } catch (SQLException e) {
-                Log.error(e.getMessage(), e);
             }
+        } catch (SQLException e) {
+            Log.error(e.getMessage(), e);
         }
-
     }
 
     /**

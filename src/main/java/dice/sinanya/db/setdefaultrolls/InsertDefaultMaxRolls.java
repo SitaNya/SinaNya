@@ -40,13 +40,9 @@ public class InsertDefaultMaxRolls {
                     }
                 }
             }
-        } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
-        }
 
-        if (num == 0) {
-            try (Connection conn = DbUtil.getConnection()) {
-                String sql = "INSERT INTO maxRolls(" +
+            if (num == 0) {
+                sql = "INSERT INTO maxRolls(" +
                         "groupId," +
                         "maxRolls" +
                         ") VALUES(?,?)";
@@ -55,21 +51,17 @@ public class InsertDefaultMaxRolls {
                     ps.setInt(2, maxRolls);
                     ps.executeUpdate();
                 }
-            } catch (SQLException e) {
-                Log.error(e.getMessage(), e);
-            }
-        } else {
-            try (Connection conn = DbUtil.getConnection()) {
-                String sql = "update maxRolls set " +
+            } else {
+                sql = "update maxRolls set " +
                         "maxRolls=? where groupId=?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     ps.setInt(1, maxRolls);
                     ps.setString(2, groupId);
                     ps.executeUpdate();
                 }
-            } catch (SQLException e) {
-                Log.error(e.getMessage(), e);
             }
+        } catch (SQLException e) {
+            Log.error(e.getMessage(), e);
         }
     }
 }

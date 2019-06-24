@@ -39,25 +39,18 @@ public class InsertKp {
                     }
                 }
             }
-        } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
-        }
 
-        if (num == 0) {
-            try (Connection conn = DbUtil.getConnection()) {
-                String sql = "INSERT INTO kp(qqId,groupId) VALUES(?,?)";
+
+            if (num == 0) {
+                sql = "INSERT INTO kp(qqId,groupId) VALUES(?,?)";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     ps.setString(1, qqId);
                     ps.setString(2, groupId);
 
                     ps.executeUpdate();
                 }
-            } catch (SQLException e) {
-                Log.error(e.getMessage(), e);
-            }
-        } else {
-            try (Connection conn = DbUtil.getConnection()) {
-                String sql = "update kp set groupId=? where qqId=?";
+            } else {
+                sql = "update kp set groupId=? where qqId=?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
                     ps.setString(1, groupId);
@@ -65,9 +58,9 @@ public class InsertKp {
 
                     ps.executeUpdate();
                 }
-            } catch (SQLException e) {
-                Log.error(e.getMessage(), e);
             }
+        } catch (SQLException e) {
+            Log.error(e.getMessage(), e);
         }
     }
 }
