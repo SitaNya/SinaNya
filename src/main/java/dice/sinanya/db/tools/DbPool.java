@@ -70,14 +70,17 @@ class DbPool {
      */
     Connection getConnection() {
         Connection conn = null;
-
         try {
             conn = dataSource.getConnection();
             Log.debug("get Connection");
         } catch (SQLException e) {
             Log.error("get Connection error: \n" + dataSource.toString() + e.getMessage(), e);
         }
-
+        try {
+            Log.info("当前线程池中链接数为: " + dataSource.getNumConnections());
+        } catch (SQLException e) {
+            Log.error(e.getMessage(), e);
+        }
         return conn;
     }
 
@@ -91,11 +94,12 @@ class DbPool {
         // 连接池的初始值，默认值为3
         dataSource.setInitialPoolSize(10);
         // 连接池的最大值,默认值为0
-        dataSource.setMaxPoolSize(200);
+        dataSource.setMaxPoolSize(5000);
         // 连接池的最小值，最小值为3
         dataSource.setMinPoolSize(1);
         // 连接池的递增值,默认值为3
-        dataSource.setAcquireIncrement(20);
+        dataSource.setAcquireIncrement(100);
+        dataSource.setCheckoutTimeout(60 * 1000);
     }
 
     /**
