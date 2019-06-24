@@ -182,9 +182,9 @@ public class Listener {
      * @param messages           消息字符串
      */
     private void changeBotSwitch(EntityTypeMessages entityTypeMessages, String messages) {
-        String tagBotOff = ".bot off";
-        String tagBotInfo = ".bot";
-        String tagBotExit = ".bot exit";
+        String tagBotOff = "bot off";
+        String tagBotInfo = "bot";
+        String tagBotExit = "bot exit";
         String tagMe = "[CQ:at,qq=" + entityLoginQQInfo.getLoginQQ() + "]";
 
         boolean botOn = messages.trim().contains(tagBotOn) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotOn) && !messages.trim().contains("[CQ:at"));
