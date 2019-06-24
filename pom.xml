@@ -57,12 +57,12 @@
             <version>0.6-DEMO-1.1.1-BETA</version>
         </dependency>
 
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/io.gitee.ForteScarlet.plusutils/console-plus &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>io.gitee.ForteScarlet.plusutils</groupId>-->
-<!--            <artifactId>console-plus</artifactId>-->
-<!--            <version>1.2</version>-->
-<!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/io.gitee.ForteScarlet.plusutils/console-plus -->
+        <dependency>
+            <groupId>io.gitee.ForteScarlet.plusutils</groupId>
+            <artifactId>console-plus</artifactId>
+            <version>1.2</version>
+        </dependency>
 
         <dependency>
             <groupId>net.sf.json-lib</groupId>
