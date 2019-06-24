@@ -1,5 +1,8 @@
 package dice.sinanya.dice.get.imal;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,7 +18,7 @@ import static java.lang.Math.min;
  * 接口说明: 随机取列表的接口，实现此接口便可以随机从一个静态的字符串列表中取出一个字符串元素
  */
 public interface GetRandomList {
-
+    Logger log = LogManager.getLogger(GetRandomList.class.getName());
     /**
      * 随机取字符串列表中的某一个字符串元素返回
      *
@@ -23,7 +26,17 @@ public interface GetRandomList {
      * @return 字符串中的某一个字符串元素
      */
     default String randomFromList(ArrayList<String> infoList) {
-        return infoList.get(random(0, infoList.size() - 1));
+        String tmp = "";
+        int index = random(0, infoList.size() - 1);
+        try {
+            tmp = infoList.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            log.error(e.getMessage(), e);
+            log.error("size: " + (infoList.size() - 1));
+            log.error("index: " + index);
+        }
+
+        return tmp;
     }
 
     /**
