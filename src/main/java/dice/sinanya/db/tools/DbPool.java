@@ -49,7 +49,6 @@ class DbPool {
             statementConfig(dataSource);
             threadConfig(dataSource);
             tranConfig(dataSource);
-            connListenerConfig(dataSource);
 
 
             Log.info("create DbPool");
@@ -141,8 +140,6 @@ class DbPool {
         dataSource.setTestConnectionOnCheckin(true);
         // 测试连接的间隔时间，默认值为0
         dataSource.setIdleConnectionTestPeriod(60);
-        // 测试连接使用的类名称
-        dataSource.setConnectionTesterClassName("com.mchange.v2.c3p0.impl.DefaultConnectionTester");
     }
 
     /**
@@ -209,15 +206,6 @@ class DbPool {
     private static void debugMode(ComboPooledDataSource dataSource) {
         // 从连接池获取连接对象时，打印所有信息
         dataSource.setDebugUnreturnedConnectionStackTraces(true);
-    }
-
-    /**
-     * 设置连接对象的监听类,该类有四个方法 onAcquire:表示当连接池从数据库中获得连接时 onDestory:表示当连接池销毁连接对象时 onCheckOut:从连接池中获取连接对象时
-     * onCheckIn:连接池回收连接对象时。
-     */
-    private static void connListenerConfig(ComboPooledDataSource dataSource) {
-        // 设置连接对象的监听类
-        dataSource.setConnectionCustomizerClassName("com.mchange.v2.c3p0.impl.DefaultConnectionTester");
     }
 }
 
