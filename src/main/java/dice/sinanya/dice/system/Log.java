@@ -12,6 +12,7 @@ import static dice.sinanya.system.MessagesLog.LOG_SWITCH_FOR_GROUP;
 import static dice.sinanya.system.MessagesLogGetLock.LOG_GET_LOCK;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.LogTag.*;
 import static dice.sinanya.tools.getinfo.LogText.getLogText;
 import static dice.sinanya.tools.log.LogSave.logSave;
@@ -100,7 +101,7 @@ public class Log {
                 log.error(e.getMessage(), e);
             }
             sender(entityTypeMessages, msg + "正在发送到您的邮箱" + entityTypeMessages.getFromQq() + "@qq.com");
-            sendMail(entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup(), msg);
+            sendMail(entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup(), getGroupName(entityTypeMessages), msg);
             sender(entityTypeMessages, "[CQ:at,qq=" + entityTypeMessages.getFromQq() + "] 已发送到您的QQ邮箱，注意查收");
             LOG_GET_LOCK.remove(msg);
         } else {

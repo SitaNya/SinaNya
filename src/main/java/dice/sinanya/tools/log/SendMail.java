@@ -51,7 +51,7 @@ public class SendMail {
      * @param groupId 日志所在群号
      * @param logName 日志名
      */
-    public static void sendMail(String to, String groupId, String logName) {
+    public static void sendMail(String to, String groupId, String groupName, String logName) {
         MailBean mb = new MailBean();
         mb.setHost("smtp.qq.com");
         // 设置SMTP主机(163)，若用126，则设为：smtp.126.com
@@ -65,7 +65,7 @@ public class SendMail {
         // 设置收件人的邮箱
         mb.setSubject(logName);
         // 设置邮件的主题
-        mb.setContent("在群: " + groupId + " 中的log日志: " + logName + "\n其中docx为染色文件用word打开，无后缀为文本文件用txt打开，收到邮件烦请回复\n遇到问题请加群162279609进行反馈\n");
+        mb.setContent("在群: " + groupName + "(" + groupId + ") 中的log日志: " + logName + "\n其中docx为染色文件用word打开，无后缀为文本文件用txt打开，收到邮件烦请回复\n遇到问题请加群162279609进行反馈\n");
         // 设置邮件的正文
 
 //        这里取相对路径"bin/../saveLogs/${groupId}/${logName}"

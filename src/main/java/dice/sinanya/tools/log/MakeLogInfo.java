@@ -22,7 +22,11 @@ public class MakeLogInfo {
      * @return 规整后的单条日志信息
      */
     public static String makeLogInfo(EntityTypeMessages entityTypeMessages, String info) {
-        info = info.trim().replaceAll("([\"“”])", "\"").replace("（", "(").replace("）", ")");
+        info = info.trim()
+                .replaceAll("([\"“”])", "\"")
+                .replace("（", "(")
+                .replace("）", ")")
+                .replace("\\\"", "");
         StringBuilder result = new StringBuilder();
 
 //        如果一个信息开头是括号且不存在括号完，或最后是括号且不存在括号开始，则是注释的一种
