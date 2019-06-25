@@ -9,7 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static dice.sinanya.system.MessagesSystem.ENTITY_LOGINQQ_INFO;
+import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
+
 
 /**
  * @author SitaNya

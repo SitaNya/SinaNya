@@ -9,7 +9,7 @@ import com.forte.qqrobot.sender.MsgSender;
 import com.forte.qqrobot.utils.CQCodeUtil;
 
 import static dice.sinanya.db.system.SelectBot.flushBot;
-import static dice.sinanya.system.MessagesSystem.ENTITY_LOGINQQ_INFO;
+import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.DefaultMaxRolls.flushMaxRolls;
 import static dice.sinanya.tools.getinfo.GetLoginInfo.getLoginInfo;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
@@ -56,7 +56,7 @@ public class RunApplication implements HttpApp {
 
     @Override
     public void after(CQCodeUtil cqCodeUtil, MsgSender sender) {
-        while (ENTITY_LOGINQQ_INFO.getLoginQQ() == 0) {
+        while (ENTITY_LOGINQQ_INFO.getLoginQQNick() == null) {
             getLoginInfo(sender);
         }
         //        从数据库中读取幕间成长到缓存

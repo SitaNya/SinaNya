@@ -7,7 +7,7 @@ import dice.sinanya.entity.EntityTypeMessages;
 import java.util.ArrayList;
 
 import static dice.sinanya.db.system.SelectBot.selectBot;
-import static dice.sinanya.system.MessagesSystem.ENTITY_LOGINQQ_INFO;
+import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.system.MessagesSystem.STR_BOT_VERSIONS;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
