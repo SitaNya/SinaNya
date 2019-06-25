@@ -4,9 +4,7 @@ public class EntityLoginQQInfo {
     String loginQQNick;
     long loginQQ;
 
-    public EntityLoginQQInfo(String loginQQNick, long loginQQ) {
-        this.loginQQNick = loginQQNick;
-        this.loginQQ = loginQQ;
+    public EntityLoginQQInfo() {
     }
 
     public String getLoginQQNick() {
