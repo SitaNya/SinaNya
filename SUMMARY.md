@@ -6,6 +6,7 @@
   * [我是一名新手](da-jian-shuo-ming/wo-shi-yi-ming-xin-shou/README.md)
     * [我是一名新手，我使用Windows服务器或个人电脑](da-jian-shuo-ming/wo-shi-yi-ming-xin-shou/wo-shi-yi-ming-xin-shou-wo-shi-yong-windows-fu-wu-qi-huo-ge-ren-dian-nao.md)
     * [我是一名新手，我使用Linux服务器](da-jian-shuo-ming/wo-shi-yi-ming-xin-shou/wo-shi-yi-ming-xin-shou-wo-shi-yong-linux-fu-wu-qi.md)
+  * [我遇到了一些问题！](da-jian-shuo-ming/wo-yu-dao-le-yi-xie-wen-ti.md)
 * [SinaNya命令](sinanya-ming-ling/README.md)
   * [骰点命令](sinanya-ming-ling/dian-ming-ling/README.md)
     * [常用命令](sinanya-ming-ling/dian-ming-ling/chang-yong-ming-ling.md)
