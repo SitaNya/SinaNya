@@ -32,11 +32,6 @@ public class MakeLogInfo {
 
         boolean isNote2 = info.charAt(0) == '(' && info.charAt(info.length() - 1) == ')';
 
-//        如果一个信息的开头是引号
-        boolean fristIsTalk = info.charAt(0) == '"';
-//        如果一个信息的结尾是引号
-        boolean lastIsTalk = info.charAt(info.length() - 1) == '"';
-
 //        如果包含.log，则是.log系列命令，不予以记录
         if (info.contains(".log")) {
             return "";
@@ -50,7 +45,7 @@ public class MakeLogInfo {
             return result.toString();
         } else {
 //            如果一个信息的开头结尾都是引号，则前面加昵称，冒号进行原样输出
-            if (fristIsTalk && lastIsTalk) {
+            if (info.contains("\"")) {
                 result.append(getNickName(entityTypeMessages))
                         .append(":\t")
                         .append(info);
