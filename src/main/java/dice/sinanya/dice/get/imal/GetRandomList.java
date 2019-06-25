@@ -19,6 +19,7 @@ import static java.lang.Math.min;
  */
 public interface GetRandomList {
     Logger log = LogManager.getLogger(GetRandomList.class.getName());
+
     /**
      * 随机取字符串列表中的某一个字符串元素返回
      *

@@ -1,7 +1,5 @@
 package dice.sinanya.tools.makedata;
 
-import java.util.regex.Pattern;
-
 /**
  * @author SitaNya
  * 日期: 2019-06-15

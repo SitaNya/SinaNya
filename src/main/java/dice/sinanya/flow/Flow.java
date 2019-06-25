@@ -209,21 +209,21 @@ class Flow {
     }
 
     private void checkMessages() {
-        if (checkTagRegex(HEADER_TEAM+".*")) {
+        if (checkTagRegex(HEADER_TEAM + ".*")) {
             initTeamTag();
-        } else if (checkTagRegex(HEADER_ST+".*")) {
+        } else if (checkTagRegex(HEADER_ST + ".*")) {
             initStTag();
-        } else if (checkTagRegex(HEADER_HELP+".*")) {
+        } else if (checkTagRegex(HEADER_HELP + ".*")) {
             initHelpTag();
-        } else if (checkTagRegex(HEADER_COC+".*")) {
+        } else if (checkTagRegex(HEADER_COC + ".*")) {
             initCocCardTag();
-        } else if (checkTagRegex(HEADER_DND+".*") || checkTagRegex(TAG_INIT)) {
+        } else if (checkTagRegex(HEADER_DND + ".*") || checkTagRegex(TAG_INIT)) {
             initDndTag();
-        } else if (checkTagRegex(HEADER_BOOK+".*")) {
+        } else if (checkTagRegex(HEADER_BOOK + ".*")) {
             initBookTag();
-        } else if (checkTagRegex(HEADER_LOG+".*")) {
+        } else if (checkTagRegex(HEADER_LOG + ".*")) {
             initLogTag();
-        } else if (checkTagRegex(HEADER_CLUE+".*")) {
+        } else if (checkTagRegex(HEADER_CLUE + ".*")) {
             initClueTag();
         } else if (checkTagRegex(TAGR)) {
             initDiceTag();

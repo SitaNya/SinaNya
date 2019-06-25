@@ -39,8 +39,8 @@ public class SelectLogTag {
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         LOG_NAME_SWITCH.put(new EntityLogTag(set.getString("groupId"), set.getString("logName")), set.getBoolean("logSwitch"));
-                        if (set.getBoolean("logSwitch")){
-                            LOG_SWITCH_FOR_GROUP.put(set.getString("groupId"),set.getBoolean("logSwitch"));
+                        if (set.getBoolean("logSwitch")) {
+                            LOG_SWITCH_FOR_GROUP.put(set.getString("groupId"), set.getBoolean("logSwitch"));
                         }
                     }
                 }

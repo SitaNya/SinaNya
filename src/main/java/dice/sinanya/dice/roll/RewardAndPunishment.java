@@ -28,7 +28,7 @@ public class RewardAndPunishment implements En {
 
     private EntityTypeMessages entityTypeMessages;
 
-//    过滤一个字符串的首字母是不是加减乘除
+    //    过滤一个字符串的首字母是不是加减乘除
     private int multiple = 10;
 
     public RewardAndPunishment(EntityTypeMessages entityTypeMessages) {

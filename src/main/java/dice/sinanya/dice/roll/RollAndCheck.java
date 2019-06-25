@@ -56,7 +56,7 @@ public class RollAndCheck implements En {
      */
     public void ra() {
         String tag = TAG_RA;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +","");
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +", "");
         String result = check(msg, false);
         sender(entityTypeMessages, result);
     }
@@ -66,7 +66,7 @@ public class RollAndCheck implements En {
      */
     public void rc() {
         String tag = TAG_RC;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +","").replaceAll(" +","");
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +", "").replaceAll(" +", "");
         String result = check(msg, true);
         sender(entityTypeMessages, result);
     }
@@ -79,9 +79,9 @@ public class RollAndCheck implements En {
      */
     public void rav() throws NotSetKpGroupException {
         String tag = TAG_RAV;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +","");
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +", "");
         EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
-        if (entityNickAndRandomAndSkill.getSkill()==0){
+        if (entityNickAndRandomAndSkill.getSkill() == 0) {
             sender(entityTypeMessages, "请输入技能名或技能值");
             return;
         }
@@ -129,9 +129,9 @@ public class RollAndCheck implements En {
      */
     public void rcv() throws NotSetKpGroupException {
         String tag = TAG_RCV;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +","");
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +", "");
         EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
-        if (entityNickAndRandomAndSkill.getSkill()==0){
+        if (entityNickAndRandomAndSkill.getSkill() == 0) {
             sender(entityTypeMessages, "请输入技能名或技能值");
             return;
         }

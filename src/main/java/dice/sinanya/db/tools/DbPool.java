@@ -66,29 +66,6 @@ class DbPool {
         return instance;
     }
 
-
-    /**
-     * @return 返回连接
-     */
-    Connection getConnection() {
-        Connection conn = null;
-        try {
-            conn = dataSource.getConnection();
-            Log.debug("get Connection");
-        } catch (SQLException e) {
-            Log.error("get Connection error: \n" + dataSource.toString() + e.getMessage(), e);
-        }
-        try {
-//            Exception e = new Exception("this is a log");
-            Log.info("当前线程池中链接数为: " + dataSource.getNumConnections());
-//            e.printStackTrace();
-        } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
-        }
-        return conn;
-    }
-
-
     /**
      * 连接池的配置 initialPoolSize:连接池的初始值 maxPoolSize:连接池的最大值 minPoolSize:连接池的最小值
      *
@@ -159,7 +136,7 @@ class DbPool {
         // 设置重连的时间间隔为2秒，默认值为1000
         dataSource.setAcquireRetryDelay(2000);
         // 等待连接响应的超时时间。默认值为0表示永远不超时
-        dataSource.setCheckoutTimeout(60*1000);
+        dataSource.setCheckoutTimeout(60 * 1000);
         // 重连失败后，销毁数据源。默认值为false
         dataSource.setBreakAfterAcquireFailure(true);
     }
@@ -205,13 +182,33 @@ class DbPool {
 
     /**
      * 调试模式的设置 debugUnreturnedConnectionStackTraces:从连接池获取连接对象时，打印所有信息
-
      *
      * @param dataSource
      */
     private static void debugMode(ComboPooledDataSource dataSource) {
         // 从连接池获取连接对象时，打印所有信息
         dataSource.setDebugUnreturnedConnectionStackTraces(true);
+    }
+
+    /**
+     * @return 返回连接
+     */
+    Connection getConnection() {
+        Connection conn = null;
+        try {
+            conn = dataSource.getConnection();
+            Log.debug("get Connection");
+        } catch (SQLException e) {
+            Log.error("get Connection error: \n" + dataSource.toString() + e.getMessage(), e);
+        }
+        try {
+//            Exception e = new Exception("this is a log");
+            Log.info("当前线程池中链接数为: " + dataSource.getNumConnections());
+//            e.printStackTrace();
+        } catch (SQLException e) {
+            Log.error(e.getMessage(), e);
+        }
+        return conn;
     }
 }
 

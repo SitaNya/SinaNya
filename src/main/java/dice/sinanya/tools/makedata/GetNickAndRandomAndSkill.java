@@ -69,7 +69,7 @@ public class GetNickAndRandomAndSkill {
         Matcher m = p.matcher(msg);
         if (m.find()) {
             msg = msg.replaceAll(skillName, String.valueOf(skill));
-            skill = (int) ceil(Calculator.conversion(skill+msg));
+            skill = (int) ceil(Calculator.conversion(skill + msg));
         }
 
 

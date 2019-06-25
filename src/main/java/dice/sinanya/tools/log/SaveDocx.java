@@ -60,7 +60,7 @@ public class SaveDocx {
                 }
                 colorTag = LOG_COLOR_TAG.get(groupId).get(line.split(":")[0]);
                 fromName = line.split(":")[0];
-            } else if (line.contains("=========================================================================================")||line.contains("(")) {
+            } else if (line.contains("=========================================================================================") || line.contains("(")) {
                 colorTag = 11;
             } else if (line.contains("发起骰掷") || line.contains("骰娘:")) {
                 colorTag = 10;
