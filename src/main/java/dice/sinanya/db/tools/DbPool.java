@@ -196,7 +196,13 @@ class DbPool {
     Connection getConnection() {
         Connection conn = null;
         try {
-            conn = dataSource.getConnection();
+            do {
+                conn = dataSource.getConnection();
+                if (dataSource.getNumConnections() == 0) {
+                    instance = new DbPool();
+                }
+            } while (dataSource.getNumConnections() == 0);
+
             Log.debug("get Connection");
         } catch (SQLException e) {
             Log.error("get Connection error: \n" + dataSource.toString() + e.getMessage(), e);
