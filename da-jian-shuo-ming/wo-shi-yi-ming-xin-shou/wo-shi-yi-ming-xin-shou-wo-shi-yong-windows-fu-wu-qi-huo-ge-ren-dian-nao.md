@@ -38,11 +38,11 @@ description: Windows服务器搭建说明
 
 将其上传到服务器上即可
 
-### Lemoc
+### HttpApi
 
 下载的服务本体解压后，可以看到SinaNya文件夹，进去后可以找到bin目录
 
-bin目录下存在一个文件名为`org.ruiko.lemoc.cpk`的文件，将它放到酷Q的app目录下即可
+bin目录下存在一个文件名为`org.inlinc.inhttp.cpk`的文件，将它放到酷Q的app目录下即可
 
 ### 启动酷Q
 
@@ -77,7 +77,7 @@ http://localhost:50070/coolq/demo.php
 
 ## 修改配置文件
 
-打开SinaNya/conf目录，下面有个文件叫sinanya.properties，使用记事本或者其它文本工具打开它
+打开`SinaNya/conf`目录，下面有个文件叫`sinanya.properties`，使用记事本或者其它文本工具打开它
 
 可以看到里面有很多配置信息，如下
 
@@ -192,17 +192,17 @@ mailPassword=kktjwuakdafbdcej
 masterMail=450609203@qq.com
 ```
 
-本机IP可以从网页或者云服务网页处查询到，大部分windows搭建骰娘的人都可以使用127.0.0.1
+本机IP可以从网页或者云服务网页处查询到，大部分windows搭建骰娘的人都可以使用`127.0.0.1`
 
 ## 启动
 
-进入bin目录，可以看到有个文件叫start.bat，双击它会出现一个窗口，这就是启动了
+进入bin目录，可以看到有个文件叫`start.bat`，双击它会出现一个窗口，这就是启动了
 
 **注意不要关闭它，关闭它服务就停止了**
 
 ## 如何重启、更新
 
-下载新版的SinaNya.tar.gz，按照刚才提到的上述方式重新布置即可（通常配置文件可以沿用）
+下载新版的`SinaNya.tar.gz`，按照刚才提到的上述方式重新布置即可（通常配置文件可以沿用）
 
 无需重启酷Q
 
