@@ -15,9 +15,6 @@ public interface MessagesSystem {
     String NONE = "";
     String SPACE = " ";
 
-    EntityLoginQQInfo ENTITY_LOGINQQ_INFO = new EntityLoginQQInfo("未找到昵称", 0);
-
-
     String VERSIONS = "0.97.0.0 beta";
 
     StringBuilder STR_BOT_VERSIONS = new StringBuilder()

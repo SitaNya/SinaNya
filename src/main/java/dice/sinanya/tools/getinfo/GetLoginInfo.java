@@ -2,7 +2,7 @@ package dice.sinanya.tools.getinfo;
 
 import com.forte.qqrobot.sender.MsgSender;
 
-import static dice.sinanya.system.MessagesSystem.ENTITY_LOGINQQ_INFO;
+import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 
 public class GetLoginInfo {
 

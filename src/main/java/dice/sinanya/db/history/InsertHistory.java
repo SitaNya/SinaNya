@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 import static dice.sinanya.system.MessagesHistory.HISTORY_LIST;
-import static dice.sinanya.system.MessagesSystem.ENTITY_LOGINQQ_INFO;
+import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 
 
 /**
