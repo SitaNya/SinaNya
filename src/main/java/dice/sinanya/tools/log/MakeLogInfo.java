@@ -44,19 +44,16 @@ public class MakeLogInfo {
 
 //        如果开头是。或.，则是跑团命令信息，规整化为=====分割的区块，并添加XXX发起投掷
         if (info.charAt(0) == '.' || info.trim().charAt(0) == '。') {
-            result
-                    .append("\n=========================================================================================\n")
+            result.append("\n=========================================================================================\n")
                     .append(getNickName(entityTypeMessages))
                     .append("发起骰掷");
             return result.toString();
         } else {
-
 //            如果一个信息的开头结尾都是引号，则前面加昵称，冒号进行原样输出
             if (fristIsTalk && lastIsTalk) {
                 result.append(getNickName(entityTypeMessages))
                         .append(":\t")
                         .append(info);
-                result.append(info);
 //                如果一个信息开头是括号但不包含结尾括号，或者一个信息开头是括号结尾也是括号，则认为整体都被括号扩住
             } else if (isNote1 || isNote2) {
                 info = info.replaceAll("([(（])", "").replaceAll("([)）])", "");
