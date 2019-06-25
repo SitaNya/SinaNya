@@ -8,7 +8,7 @@ import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 
 
 /**
@@ -42,7 +42,7 @@ class DbPool {
             dataSource.setDriverClass("com.mysql.jdbc.Driver");
             dataSource.setJdbcUrl("jdbc:mysql://123.207.150.160:3306/roles?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull&useSSL=false");
             dataSource.setUser("root");
-            dataSource.setPassword(messagesSystem.get("dbPassword"));
+            dataSource.setPassword(MESSAGES_SYSTEM.get("dbPassword"));
 
             connPoolConfig(dataSource);
             connAgeConfig(dataSource);

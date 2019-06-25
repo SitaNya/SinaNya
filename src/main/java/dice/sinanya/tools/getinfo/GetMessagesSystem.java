@@ -1,8 +1,5 @@
 package dice.sinanya.tools.getinfo;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -20,7 +17,7 @@ public class GetMessagesSystem {
     /**
      * 各种回复的默认值，保证配置文件里写错或者删掉了，也不会报错
      */
-    public static HashMap<String, String> messagesSystem = new HashMap<String, String>() {{
+    public final static HashMap<String, String> MESSAGES_SYSTEM = new HashMap<String, String>() {{
         put("botStart", "机器人已开启");
         put("botAlreadyStart", "机器人当前处于开启状态");
         put("botStop", "机器人已关闭");
@@ -96,7 +93,7 @@ public class GetMessagesSystem {
         put("FAILURE", "");
         put("FUMBLE", "");
     }};
-    private static Logger log = LogManager.getLogger(GetMessagesSystem.class.getName());
+    private static org.apache.log4j.Logger log = org.apache.log4j.LogManager.getLogger(GetMessagesSystem.class.getName());
 
     /**
      * 读取配置文件，默认从bin目录的上一层找conf目录，然后找sinanya.properties文件，也就是说如果启动时不在bin目录，可能会找不到文件
@@ -104,22 +101,30 @@ public class GetMessagesSystem {
     public static void initMessagesSystem() {
         Properties prop = new Properties();
         File file = null;
+        BufferedReader bufferedReader = null;
         try {
             file = new File("../conf/sinanya.properties");
             if (!file.exists()) {
                 file = new File("src/main/resources/sinanya.properties");
             }
             InputStreamReader isr = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
-            BufferedReader bufferedReader = new BufferedReader(isr);
+            bufferedReader = new BufferedReader(isr);
             prop.load(bufferedReader);
         } catch (IOException e) {
             log.error(file.getAbsolutePath());
             log.error(e.getMessage(), e);
+        } finally {
+            try {
+                assert bufferedReader != null;
+                bufferedReader.close();
+            } catch (IOException e) {
+                log.error(e.getMessage(), e);
+            }
         }
 
         for (String propertyNames : prop.stringPropertyNames()) {
             if (prop.containsKey(propertyNames)) {
-                messagesSystem.put(propertyNames, prop.getProperty(propertyNames));
+                MESSAGES_SYSTEM.put(propertyNames, prop.getProperty(propertyNames));
             }
         }
     }

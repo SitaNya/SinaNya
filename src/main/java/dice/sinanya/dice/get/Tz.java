@@ -3,7 +3,7 @@ package dice.sinanya.dice.get;
 import dice.sinanya.dice.get.imal.GetRandomList;
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.system.MessagesTZ.TZ_LIST;
+import static dice.sinanya.system.MessagesTz.TZ_LIST;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**

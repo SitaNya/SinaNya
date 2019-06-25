@@ -21,7 +21,7 @@ import static dice.sinanya.system.MessagesAntagonize.ANTAGONIZE;
 import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.History.changeHistory;
@@ -112,7 +112,7 @@ public class RollAndCheck implements En {
             sender(entityTypeMessages, stringBuilder);
             checkAntagonize(entityTypeMessages, thisEntityAntagonize, entityAntagonize, groupId);
             ANTAGONIZE.remove(groupId);
-            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeOver"));
+            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeOver"));
         } else if (!groupId.equals(defaultGroupId)) {
             sender(entityTypeMessages, stringBuilder);
             ANTAGONIZE.put(groupId, checkResultLevel.getAntagonize());
@@ -161,7 +161,7 @@ public class RollAndCheck implements En {
             sender(entityTypeMessages, stringBuilder);
             checkAntagonize(entityTypeMessages, thisEntityAntagonize, entityAntagonize, groupId);
             ANTAGONIZE.remove(groupId);
-            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeOver"));
+            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeOver"));
         } else if (!groupId.equals(defaultGroupId)) {
 //            静态对象Antagonize中包含了以群号为key的EntityAntagonize对象，如果不包含的话，那么就说明这次是发起对抗，直接插入进去
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, getNickName(entityTypeMessages) + "发起一次对抗");
@@ -262,19 +262,19 @@ public class RollAndCheck implements En {
     private void checkAntagonize(EntityTypeMessages entityTypeMessages, EntityAntagonize thisAntagonize, EntityAntagonize lastAntagonize, String groupId) {
         int successMinLevel = 2;
         if (lastAntagonize.getLevel() > thisAntagonize.getLevel()) {
-            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeFirstSuccess"));
+            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeFirstSuccess"));
         } else if (lastAntagonize.getLevel() == thisAntagonize.getLevel()) {
             if (lastAntagonize.getLevel() < successMinLevel && thisAntagonize.getLevel() < successMinLevel) {
-                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeAllFailed"));
+                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeAllFailed"));
             } else if (lastAntagonize.getRandom() < thisAntagonize.getRandom()) {
-                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeFirstSuccess"));
+                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeFirstSuccess"));
             } else if (lastAntagonize.getSkill() > thisAntagonize.getSkill()) {
-                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeFirstSuccess"));
+                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeFirstSuccess"));
             } else if (lastAntagonize.getSkill() == thisAntagonize.getSkill()) {
-                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, messagesSystem.get("antagonizeDraw"));
+                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeDraw"));
             }
         } else {
-            sender(entityTypeMessages, messagesSystem.get("antagonizeSecondSuccess"));
+            sender(entityTypeMessages, MESSAGES_SYSTEM.get("antagonizeSecondSuccess"));
         }
     }
 

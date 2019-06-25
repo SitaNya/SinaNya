@@ -2,7 +2,7 @@ package dice.sinanya.exceptions;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
@@ -16,7 +16,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  */
 public class TeamIsEmptyException extends Exception {
     public TeamIsEmptyException(EntityTypeMessages entityTypeMessages) {
-        super(messagesSystem.get("teamIsEmpty"));
-        sender(entityTypeMessages, messagesSystem.get("teamIsEmpty"));
+        super(MESSAGES_SYSTEM.get("teamIsEmpty"));
+        sender(entityTypeMessages, MESSAGES_SYSTEM.get("teamIsEmpty"));
     }
 }

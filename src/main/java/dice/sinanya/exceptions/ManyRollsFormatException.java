@@ -2,7 +2,7 @@ package dice.sinanya.exceptions;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
@@ -16,7 +16,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  */
 public class ManyRollsFormatException extends Exception {
     public ManyRollsFormatException(EntityTypeMessages entityTypeMessages) {
-        super(messagesSystem.get("manyRollsFormat"));
-        sender(entityTypeMessages, messagesSystem.get("manyRollsFormat"));
+        super(MESSAGES_SYSTEM.get("manyRollsFormat"));
+        sender(entityTypeMessages, MESSAGES_SYSTEM.get("manyRollsFormat"));
     }
 }

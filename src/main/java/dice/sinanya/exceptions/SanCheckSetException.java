@@ -2,7 +2,7 @@ package dice.sinanya.exceptions;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
@@ -17,8 +17,8 @@ import static dice.sinanya.tools.makedata.Sender.sender;
 public class SanCheckSetException extends Exception {
 
     public SanCheckSetException(EntityTypeMessages entityTypeMessages) {
-        super(messagesSystem.get("sanCheck"));
-        sender(entityTypeMessages, messagesSystem.get("sanCheck"));
+        super(MESSAGES_SYSTEM.get("sanCheck"));
+        sender(entityTypeMessages, MESSAGES_SYSTEM.get("sanCheck"));
     }
 
 }

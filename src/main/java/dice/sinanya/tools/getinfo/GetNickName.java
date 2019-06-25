@@ -1,7 +1,6 @@
 package dice.sinanya.tools.getinfo;
 
 import com.forte.qqrobot.beans.messages.RootBean;
-import com.forte.qqrobot.beans.messages.result.GroupInfo;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByFromQQ;
@@ -39,8 +38,6 @@ public class GetNickName implements RootBean {
     public static String getGroupName(EntityTypeMessages entityTypeMessages) {
         switch (entityTypeMessages.getMsgGetTypes()) {
             case groupMsg:
-                GroupInfo tmp = entityTypeMessages.getMsgSender().getGroupInfoByCode(entityTypeMessages.getMsgGroup().getGroupCode());
-                String tmp2 = entityTypeMessages.getMsgSender().getGroupInfoByCode(entityTypeMessages.getMsgGroup().getGroupCode()).getName();
                 return entityTypeMessages.getMsgSender().getGroupInfoByCode(entityTypeMessages.getMsgGroup().getGroupCode()).getName();
             case discussMsg:
                 return entityTypeMessages.getMsgSender().getGroupInfoByCode(entityTypeMessages.getMsgDisGroup().getGroupCode()).getName();
@@ -57,7 +54,6 @@ public class GetNickName implements RootBean {
      * @return 昵称
      */
     public static String getGroupName(EntityTypeMessages entityTypeMessages, String groupId) {
-        GroupInfo tmp = entityTypeMessages.getMsgSender().getGroupInfoByCode(groupId);
         return entityTypeMessages.getMsgSender().getGroupInfoByCode(groupId).getName();
     }
 }

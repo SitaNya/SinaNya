@@ -10,6 +10,6 @@ import java.util.HashMap;
  * 有任何问题欢迎咨询
  * 接口说明:
  */
-public interface MessagesRollMaxValue {
-    HashMap<String, Integer> ROLL_MAX_VALUE = new HashMap<>();
+public class MessagesRollMaxValue {
+    public static final HashMap<String, Integer> ROLL_MAX_VALUE = new HashMap<>();
 }

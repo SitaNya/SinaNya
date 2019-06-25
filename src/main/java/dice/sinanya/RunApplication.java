@@ -9,11 +9,11 @@ import com.forte.qqrobot.sender.MsgSender;
 import com.forte.qqrobot.utils.CQCodeUtil;
 
 import static dice.sinanya.db.system.SelectBot.flushBot;
-import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
+import static dice.sinanya.system.MessagesSystem.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.DefaultMaxRolls.flushMaxRolls;
 import static dice.sinanya.tools.getinfo.GetLoginInfo.getLoginInfo;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.initMessagesSystem;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
 import static dice.sinanya.tools.getinfo.History.flushHistory;
 import static dice.sinanya.tools.getinfo.Kp.flushKp;
 import static dice.sinanya.tools.getinfo.LogTag.flushLogTag;
@@ -47,16 +47,16 @@ public class RunApplication implements HttpApp {
     @Override
     public void before(HttpConfiguration configuration) {
         configuration.setScannerPackage("dice.sinanya.listener");
-        configuration.setIp(messagesSystem.get("hostIp"));
+        configuration.setIp(MESSAGES_SYSTEM.get("hostIp"));
         configuration.setServerPath("/coolq/demo.php");
-        configuration.setJavaPort(Integer.parseInt(messagesSystem.get("javaPort")));
-        configuration.setServerPort(Integer.parseInt(messagesSystem.get("serverPort")));
+        configuration.setJavaPort(Integer.parseInt(MESSAGES_SYSTEM.get("javaPort")));
+        configuration.setServerPort(Integer.parseInt(MESSAGES_SYSTEM.get("serverPort")));
 
     }
 
     @Override
     public void after(CQCodeUtil cqCodeUtil, MsgSender sender) {
-        while (entityLoginQQInfo.getLoginQQ()==0) {
+        while (ENTITY_LOGINQQ_INFO.getLoginQQ() == 0) {
             getLoginInfo(sender);
         }
         //        从数据库中读取幕间成长到缓存

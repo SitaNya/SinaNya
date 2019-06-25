@@ -7,10 +7,10 @@ import dice.sinanya.entity.EntityTypeMessages;
 import java.util.ArrayList;
 
 import static dice.sinanya.db.system.SelectBot.selectBot;
+import static dice.sinanya.system.MessagesSystem.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.system.MessagesSystem.STR_BOT_VERSIONS;
-import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
 import static dice.sinanya.system.MessagesTag.*;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.getinfo.SwitchBot.*;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.makedata.Sender.sender;
@@ -41,20 +41,20 @@ public class Bot implements AtQq {
         ArrayList<String> qqList = getAtQqList(msg);
 
         if (qqList.size() == 0) {
-            qqList.add(String.valueOf(entityLoginQQInfo.getLoginQQ()));
+            qqList.add(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
         }
         for (String qq : qqList) {
-            if (qq.equals(String.valueOf(entityLoginQQInfo.getLoginQQ()))) {
+            if (qq.equals(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()))) {
                 long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
                 if (groupId == 0) {
-                    sender(entityTypeMessages, messagesSystem.get("can'tInPrivate"));
+                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("can'tInPrivate"));
                     return;
                 }
                 if (getBot(groupId)) {
-                    sender(entityTypeMessages, messagesSystem.get("botAlreadyStart"));
+                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("botAlreadyStart"));
                 } else {
                     botOn(groupId);
-                    sender(entityTypeMessages, messagesSystem.get("botStart"));
+                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("botStart"));
                 }
             }
         }
@@ -70,21 +70,21 @@ public class Bot implements AtQq {
         ArrayList<String> qqList = getAtQqList(msg);
 
         if (qqList.size() == 0) {
-            qqList.add(String.valueOf(entityLoginQQInfo.getLoginQQ()));
+            qqList.add(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
         }
 
         for (String qq : qqList) {
-            if (qq.equals(String.valueOf(entityLoginQQInfo.getLoginQQ()))) {
+            if (qq.equals(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()))) {
                 long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
                 if (groupId == 0) {
-                    sender(entityTypeMessages, messagesSystem.get("can'tInPrivate"));
+                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("can'tInPrivate"));
                     return;
                 }
                 if (!getBot(groupId)) {
-                    sender(entityTypeMessages, messagesSystem.get("botAlreadyStop"));
+                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("botAlreadyStop"));
                 } else {
                     botOff(groupId);
-                    sender(entityTypeMessages, messagesSystem.get("botStop"));
+                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("botStop"));
                 }
             }
         }
@@ -100,8 +100,8 @@ public class Bot implements AtQq {
         ArrayList<String> qqList = getAtQqList(msg);
 
         for (String qq : qqList) {
-            if (qq.equals(String.valueOf(entityLoginQQInfo.getLoginQQ()))) {
-                sender(entityTypeMessages, messagesSystem.get("botExit"));
+            if (qq.equals(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()))) {
+                sender(entityTypeMessages, MESSAGES_SYSTEM.get("botExit"));
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {

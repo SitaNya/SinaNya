@@ -13,7 +13,7 @@ import java.math.BigInteger;
 import java.util.HashMap;
 
 import static dice.sinanya.system.MessagesLogColorTag.LOG_COLOR_TAG;
-import static dice.sinanya.system.MessagesRGB.RGB;
+import static dice.sinanya.system.MessagesRgb.RGB;
 import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 

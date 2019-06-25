@@ -22,8 +22,20 @@ public class MakeLogInfo {
      * @return 规整后的单条日志信息
      */
     public static String makeLogInfo(EntityTypeMessages entityTypeMessages, String info) {
-        info = info.trim();
+        info = info.trim().replaceAll("([\"“”])", "\"").replace("（", "(").replace("）", ")");
         StringBuilder result = new StringBuilder();
+
+//        如果一个信息开头是括号且不存在括号完，或最后是括号且不存在括号开始，则是注释的一种
+        boolean isNote1for1 = info.charAt(0) == '(' && !info.contains(")");
+        boolean isNote1for2 = info.charAt(info.length() - 1) == ')' && !info.contains("(");
+        boolean isNote1 = isNote1for1 || isNote1for2;
+
+        boolean isNote2 = info.charAt(0) == '(' && info.charAt(info.length() - 1) == ')';
+
+//        如果一个信息的开头是引号
+        boolean fristIsTalk = info.charAt(0) == '"';
+//        如果一个信息的结尾是引号
+        boolean lastIsTalk = info.charAt(info.length() - 1) == '"';
 
 //        如果包含.log，则是.log系列命令，不予以记录
         if (info.contains(".log")) {
@@ -38,22 +50,15 @@ public class MakeLogInfo {
                     .append("发起骰掷");
             return result.toString();
         } else {
-//            将所有中英文引号全部置为英文引号
-            info = info.replaceAll("([\"“”])", "\"");
-            //                将信息中所有中文括号重置为英文括号
-            info = info.replace("（", "(").replace("）", ")");
-//            如果一个信息的开头是引号
-            boolean fristIsTalk = info.charAt(0) == '"';
-//            如果一个信息的结尾是引号
-            boolean lastIsTalk = info.charAt(info.length() - 1) == '"';
+
 //            如果一个信息的开头结尾都是引号，则前面加昵称，冒号进行原样输出
             if (fristIsTalk && lastIsTalk) {
                 result.append(getNickName(entityTypeMessages))
                         .append(":\t")
                         .append(info);
                 result.append(info);
-//                如果一个信息开头是括号但没有任何结尾，或者一个信息开头是括号结尾也是括号，则认为整体都被括号扩住
-            } else if ((info.charAt(0) == '(' && !info.contains(")")) || (info.charAt(0) == '(' && info.charAt(info.length() - 1) == ')')) {
+//                如果一个信息开头是括号但不包含结尾括号，或者一个信息开头是括号结尾也是括号，则认为整体都被括号扩住
+            } else if (isNote1 || isNote2) {
                 info = info.replaceAll("([(（])", "").replaceAll("([)）])", "");
                 result.append("(")
                         .append(getNickName(entityTypeMessages))

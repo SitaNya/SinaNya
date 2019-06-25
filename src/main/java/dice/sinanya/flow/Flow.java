@@ -5,7 +5,6 @@ import dice.sinanya.dice.get.*;
 import dice.sinanya.dice.getbook.Book;
 import dice.sinanya.dice.manager.*;
 import dice.sinanya.dice.roll.*;
-import dice.sinanya.dice.system.Bot;
 import dice.sinanya.dice.system.Help;
 import dice.sinanya.dice.system.History;
 import dice.sinanya.dice.system.Log;
@@ -18,7 +17,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static dice.sinanya.system.MessagesTag.*;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
@@ -41,21 +40,21 @@ class Flow {
 
     private EntityTypeMessages entityTypeMessages;
 
-    private boolean isR = false;
-    private boolean isRH = false;
-    private boolean isRA = false;
-    private boolean isRC = false;
-    private boolean isRAL = false;
-    private boolean isRCL = false;
-    private boolean isRAV = false;
-    private boolean isRCV = false;
+    private boolean isr = false;
+    private boolean isRh = false;
+    private boolean isRa = false;
+    private boolean isRc = false;
+    private boolean isRal = false;
+    private boolean isRcl = false;
+    private boolean isRav = false;
+    private boolean isRcv = false;
 
-    private boolean isRB = false;
-    private boolean isRP = false;
+    private boolean isRb = false;
+    private boolean isRp = false;
 
-    private boolean isSC = false;
+    private boolean isSc = false;
 
-    private boolean isEN = false;
+    private boolean isEn = false;
 
     private boolean isSetRollMaxValue = false;
 
@@ -83,15 +82,15 @@ class Flow {
 
 
     private boolean isBookCard = false;
-    private boolean isBookRP = false;
-    private boolean isBookKP = false;
-    private boolean isBookMAKE = false;
+    private boolean isBookRp = false;
+    private boolean isBookKp = false;
+    private boolean isBookMake = false;
 
-    private boolean isNPC = false;
+    private boolean isNpc = false;
 
-    private boolean isBG = false;
+    private boolean isBg = false;
 
-    private boolean isTZ = false;
+    private boolean isTz = false;
 
     private boolean isGas = false;
 
@@ -123,101 +122,128 @@ class Flow {
 
     private boolean isHiy = false;
 
-    private boolean isJRRP = false;
+    private boolean isJrrp = false;
 
     public Flow(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
-        String messages = entityTypeMessages.getMsgGet().getMsg().trim();
-        checkMessages(messages);
+        checkMessages();
     }
 
-    private void checkMessages(String messages) {
-        messages = messages.toLowerCase();
+    private void initTeamTag() {
+        isTeamSet = checkTagRegex(TAG_TEAM_SET);
+        isTeamClr = checkTagRegex(TAG_TEAM_CLR);
+        isTeamMove = checkTagRegex(TAG_TEAM_RM);
+        isTeamCall = checkTagRegex(TAG_TEAM_CALL);
+        isTeamHp = checkTagRegex(TAG_TEAM_HP);
+        isTeamSan = checkTagRegex(TAG_TEAM_SAN);
+        isTeamDesc = checkTagRegex(TAG_TEAM_DESC);
+        isTeamEn = checkTagRegex(TAG_TEAM_EN);
+        isTeamShow = checkTagRegex(TAG_TEAM_SHOW) && !isTeamSet && !isTeamClr && !isTeamMove && !isTeamCall && !isTeamHp && !isTeamSan && !isTeamDesc && !isTeamEn;
+    }
 
-        isTeamSet = messages.matches(TAG_TEAM_SET);
-        isTeamClr = messages.matches(TAG_TEAM_CLR);
-        isTeamMove = messages.matches(TAG_TEAM_RM);
-        isTeamCall = messages.matches(TAG_TEAM_CALL);
-        isTeamHp = messages.matches(TAG_TEAM_HP);
-        isTeamSan = messages.matches(TAG_TEAM_SAN);
-        isTeamDesc = messages.matches(TAG_TEAM_DESC);
-        isTeamEn = messages.matches(TAG_TEAM_EN);
-        isTeamShow = messages.matches(TAG_TEAM_SHOW) && !isTeamSet && !isTeamClr && !isTeamMove && !isTeamCall && !isTeamHp && !isTeamSan && !isTeamDesc && !isTeamEn;
-//        小队正则匹配逻辑
+    private void initStTag() {
+        isStShow = checkTagRegex(TAG_ST_SHOW);
+        isStList = checkTagRegex(TAG_ST_LIST);
+        isStMove = checkTagRegex(TAG_ST_RM);
+        isStSet = checkTagRegex(TAG_ST_SET) && !isStShow && !isStList && !isStMove;
+    }
 
-        isStShow = messages.matches(TAG_ST_SHOW);
-        isStList = messages.matches(TAG_ST_LIST);
-        isStMove = messages.matches(TAG_ST_RM);
-        isStSet = messages.matches(TAG_ST_SET) && !isStShow && !isStList && !isStMove;
-//        人物卡角色正则匹配逻辑
+    private void initHelpTag() {
+        isHelpNormal = checkTagRegex(TAG_HELP_NORMAL);
+        isHelpMake = checkTagRegex(TAG_HELP_MAKE);
+        isHelpGroup = checkTagRegex(TAG_HELP_GROUP);
+        isHelpBook = checkTagRegex(TAG_HELP_BOOK);
+        isHelpDnd = checkTagRegex(TAG_HELP_DND);
+        isHelpInfo = checkTagRegex(TAG_HELP_INFO) && !isHelpNormal && !isHelpMake && !isHelpGroup && !isHelpBook && !isHelpDnd;
+    }
 
-        isHelpNormal = messages.matches(TAG_HELP_NORMAL);
-        isHelpMake = messages.matches(TAG_HELP_MAKE);
-        isHelpGroup = messages.matches(TAG_HELP_GROUP);
-        isHelpBook = messages.matches(TAG_HELP_BOOK);
-        isHelpDnd = messages.matches(TAG_HELP_DND);
-        isHelpInfo = messages.matches(TAG_HELP_INFO) && !isHelpNormal && !isHelpMake && !isHelpGroup && !isHelpBook && !isHelpDnd;
+    private void initCocCardTag() {
+        isCoc7d = checkTagRegex(TAG_COC7D);
+        isCoc6d = checkTagRegex(TAG_COC6D);
+        isCoc6 = checkTagRegex(TAG_COC6);
+        isCoc7 = checkTagRegex(TAG_COC7) && !isCoc7d && !isCoc6d && !isCoc6;
+    }
 
-        isCoc7d = messages.matches(TAG_COC7D);
-        isCoc6d = messages.matches(TAG_COC6D);
-        isCoc6 = messages.matches(TAG_COC6);
-        isCoc7 = messages.matches(TAG_COC7) && !isCoc7d && !isCoc6d && !isCoc6;
+    private void initDndTag() {
+        isDnd = checkTagRegex(TAG_DND);
+        isInitClr = checkTagRegex(TAG_INIT_CLR);
+        isInit = checkTagRegex(TAG_INIT) && !isInitClr;
+    }
 
-        isDnd = messages.matches(TAG_DND);
-        isRi = messages.matches(TAG_RI);
-        isInitClr = messages.matches(TAG_INIT_CLR);
-        isInit = messages.matches(TAG_INIT) && !isInitClr;
+    private void initBookTag() {
+        isBookCard = checkTagRegex(TAG_BOOK_CARD);
+        isBookMake = checkTagRegex(TAG_BOOK_MAKE);
+        isBookRp = checkTagRegex(TAG_BOOK_RP);
+        isBookKp = checkTagRegex(TAG_BOOK_KP);
+    }
 
-        isBookCard = messages.matches(TAG_BOOK_CARD);
-        isBookMAKE = messages.matches(TAG_BOOK_MAKE);
-        isBookRP = messages.matches(TAG_BOOK_RP);
-        isBookKP = messages.matches(TAG_BOOK_KP);
+    private void initLogTag() {
+        isLogOn = checkTagRegex(TAG_LOG_ON);
+        isLogOff = checkTagRegex(TAG_LOG_OFF);
+        isLogGet = checkTagRegex(TAG_LOG_GET);
+        isLogList = checkTagRegex(TAG_LOG_LIST);
+        isLogDel = checkTagRegex(TAG_LOG_RM);
+    }
 
-        isLogOn = messages.matches(TAG_LOG_ON);
-        isLogOff = messages.matches(TAG_LOG_OFF);
-        isLogGet = messages.matches(TAG_LOG_GET);
-        isLogList = messages.matches(TAG_LOG_LIST);
-        isLogDel = messages.matches(TAG_LOG_RM);
+    private void initClueTag() {
+        isClueClr = checkTagRegex(TAG_CLUE_CLR);
+        isClueShow = checkTagRegex(TAG_CLUE_SHOW);
+        isClueRm = checkTagRegex(TAG_CLUE_RM);
+        isClueSet = checkTagRegex(TAG_CLUE_SET) && !isClueClr && !isClueShow && !isClueRm;
+    }
 
+    private void initDiceTag() {
+        isRi = checkTagRegex(TAG_RI);
 
-        isClueClr = messages.matches(TAG_CLUE_CLR);
-        isClueShow = messages.matches(TAG_CLUE_SHOW);
-        isClueRm = messages.matches(TAG_CLUE_RM);
-        isClueSet = messages.matches(TAG_CLUE_SET) && !isClueClr && !isClueShow && !isClueRm;
+        isRb = checkTagRegex(TAG_RB);
+        isRp = checkTagRegex(TAG_RP);
 
-        isKp = messages.matches(TAG_KP);
-        isHiy = messages.matches(TAG_HIY);
+        isRal = checkTagRegex(TAG_RAL);
+        isRcl = checkTagRegex(TAG_RCL);
+        isRav = checkTagRegex(TAG_RAV);
+        isRcv = checkTagRegex(TAG_RCV);
+        isRh = checkTagRegex(TAG_RH);
+        isRa = checkTagRegex(TAG_RA) && !isRal && !isRav;
+        isRc = checkTagRegex(TAG_RC) && !isRcl && !isRcv;
+        isr = checkTagRegex(TAGR) && !isRh && !isRa && !isRc && !isRb && !isRp && !isRi && !isRal && !isRcl && !isRav && !isRcv;
+    }
 
-        isJRRP = messages.matches(TAG_JRRP);
+    private void checkMessages() {
+        if (checkTagRegex(HEADER_TEAM)) {
+            initTeamTag();
+        } else if (checkTagRegex(HEADER_ST)) {
+            initStTag();
+        } else if (checkTagRegex(HEADER_HELP)) {
+            initHelpTag();
+        } else if (checkTagRegex(HEADER_COC)) {
+            initCocCardTag();
+        } else if (checkTagRegex(HEADER_DND) || checkTagRegex(TAG_INIT)) {
+            initDndTag();
+        } else if (checkTagRegex(HEADER_BOOK)) {
+            initBookTag();
+        } else if (checkTagRegex(HEADER_LOG)) {
+            initLogTag();
+        } else if (checkTagRegex(HEADER_CLUE)) {
+            initClueTag();
+        } else if (checkTagRegex(TAGR)) {
+            initDiceTag();
+        } else {
+            isKp = checkTagRegex(TAG_KP);
+            isHiy = checkTagRegex(TAG_HIY);
 
-        isNPC = messages.matches(TAG_NPC);
+            isJrrp = checkTagRegex(TAG_JRRP);
 
-        isBG = messages.matches(TAG_BG);
+            isSc = checkTagRegex(TAG_SC);
+            isEn = checkTagRegex(TAG_EN);
+            isSetRollMaxValue = checkTagRegex(TAG_SET_ROLL_MAX_VALUE);
 
-        isTZ = messages.matches(TAG_TZ);
-
-        isGas = messages.matches(TAG_GAS);
-
-        isTi = messages.matches(TAG_TI);
-        isLi = messages.matches(TAG_LI);
-
-        isRB = messages.matches(TAG_RB);
-        isRP = messages.matches(TAG_RP);
-
-        isSC = messages.matches(TAG_SC);
-
-        isEN = messages.matches(TAG_EN);
-
-        isSetRollMaxValue = messages.matches(TAG_SET_ROLL_MAX_VALUE);
-
-        isRAL = messages.matches(TAG_RAL);
-        isRCL = messages.matches(TAG_RCL);
-        isRAV = messages.matches(TAG_RAV);
-        isRCV = messages.matches(TAG_RCV);
-        isRH = messages.matches(TAG_RH);
-        isRA = messages.matches(TAG_RA) && !isRAL && !isRAV;
-        isRC = messages.matches(TAG_RC) && !isRCL && !isRCV;
-        isR = messages.matches(TAGR) && !isRH && !isRA && !isRC && !isRB && !isRP && !isRi && !isRAL && !isRCL && !isRAV && !isRCV;
+            isNpc = checkTagRegex(TAG_NPC);
+            isBg = checkTagRegex(TAG_BG);
+            isTz = checkTagRegex(TAG_TZ);
+            isGas = checkTagRegex(TAG_GAS);
+            isTi = checkTagRegex(TAG_TI);
+            isLi = checkTagRegex(TAG_LI);
+        }
     }
 
     /**
@@ -231,7 +257,6 @@ class Flow {
         RewardAndPunishment rewardAndPunishment = new RewardAndPunishment(entityTypeMessages);
         MakeCocCard makeCocCard = new MakeCocCard(entityTypeMessages);
         MakeDndCard makeDndCard = new MakeDndCard(entityTypeMessages);
-        Bot bot = new Bot(entityTypeMessages);
         TiAndLi tiAndLi = new TiAndLi(entityTypeMessages);
         Help help = new Help(entityTypeMessages);
         Book book = new Book(entityTypeMessages);
@@ -242,23 +267,23 @@ class Flow {
         History history = new History(entityTypeMessages);
         Jrrp jrrp = new Jrrp(entityTypeMessages);
 
-        if (isR) {
+        if (isr) {
             roll.r();
-        } else if (isRA) {
+        } else if (isRa) {
             rollAndCheck.ra();
-        } else if (isRC) {
+        } else if (isRc) {
             rollAndCheck.rc();
-        } else if (isRAL) {
+        } else if (isRal) {
             rollAndCheck.ral();
-        } else if (isRCL) {
+        } else if (isRcl) {
             rollAndCheck.rcl();
-        } else if (isRAV) {
+        } else if (isRav) {
             try {
                 rollAndCheck.rav();
             } catch (NotSetKpGroupException e) {
                 Log.error(e.getMessage(), e);
             }
-        } else if (isRCV) {
+        } else if (isRcv) {
             try {
                 rollAndCheck.rcv();
             } catch (NotSetKpGroupException e) {
@@ -269,9 +294,9 @@ class Flow {
         if (isStSet) {
             try {
                 if (roles.set()) {
-                    sender(entityTypeMessages, messagesSystem.get("setPropSuccess"));
+                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("setPropSuccess"));
                 } else {
-                    sender(entityTypeMessages, messagesSystem.get("setHelp"));
+                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("setHelp"));
                 }
             } catch (PlayerSetException e) {
                 Log.error(e.getMessage(), e);
@@ -284,7 +309,7 @@ class Flow {
             roles.move();
         }
 
-        if (isSC) {
+        if (isSc) {
             try {
                 sanCheck.sc();
             } catch (PlayerSetException | SanCheckSetException e) {
@@ -292,9 +317,9 @@ class Flow {
             }
         }
 
-        if (isRB) {
+        if (isRb) {
             rewardAndPunishment.rb();
-        } else if (isRP) {
+        } else if (isRp) {
             rewardAndPunishment.rp();
         }
 
@@ -328,25 +353,25 @@ class Flow {
             help.info();
         }
 
-        if (isBookKP) {
+        if (isBookKp) {
             book.kp();
         } else if (isBookCard) {
             book.card();
-        } else if (isBookRP) {
+        } else if (isBookRp) {
             book.rp();
-        } else if (isBookMAKE) {
+        } else if (isBookMake) {
             book.make();
         }
 
-        if (isNPC) {
+        if (isNpc) {
             npc.npc();
         }
 
-        if (isBG) {
+        if (isBg) {
             bj.bg();
         }
 
-        if (isTZ) {
+        if (isTz) {
             tz.get();
         }
 
@@ -362,7 +387,7 @@ class Flow {
             history.hiy();
         }
 
-        if (isJRRP) {
+        if (isJrrp) {
             jrrp.get();
         }
 
@@ -376,7 +401,6 @@ class Flow {
         Roll roll = new Roll(entityTypeMessages);
         Team team = new Team(entityTypeMessages);
         SkillUp skillUp = new SkillUp(entityTypeMessages);
-        Bot bot = new Bot(entityTypeMessages);
         Log log = new Log(entityTypeMessages);
         RiAndInit riAndInit = new RiAndInit(entityTypeMessages);
         SetRollMaxValue setRollMaxValue = new SetRollMaxValue(entityTypeMessages);
@@ -384,8 +408,7 @@ class Flow {
         Clue clue = new Clue(entityTypeMessages);
         Kp kp = new Kp(entityTypeMessages);
 
-
-        if (isRH) {
+        if (isRh) {
             roll.rh();
         }
 
@@ -409,7 +432,7 @@ class Flow {
             team.en();
         }
 
-        if (isEN) {
+        if (isEn) {
             try {
                 skillUp.en();
             } catch (NotFoundSkillException e) {
@@ -470,5 +493,9 @@ class Flow {
      */
     public void toDisGroup() {
         toPrivateAndGroup();
+    }
+
+    private boolean checkTagRegex(String tag) {
+        return entityTypeMessages.getMsgGet().getMsg().trim().toLowerCase().matches(tag);
     }
 }

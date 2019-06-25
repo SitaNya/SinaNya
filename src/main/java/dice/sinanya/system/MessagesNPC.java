@@ -10,18 +10,50 @@ import java.util.ArrayList;
  * 有任何问题欢迎咨询
  * 接口说明: NPC信息的静态信息
  */
-public interface MessagesNPC {
-    ArrayList<String> Gender = new ArrayList<String>() {{
+public class MessagesNPC {
+    public static final ArrayList<String> SpeTag = new ArrayList<String>() {{
+        add("聆听，可以轻松地察觉到周围环境中的微弱声音，可以轻松察觉到他人的偷袭。");
+        add("潜行，可以轻易地隐藏在黑暗中，面对危险时更容易规避掉。");
+        add("机械维修，可以轻松地维修小型机械，并且组装某些大型的简单机械。如果给予较长时间，甚至可以拼接出非常大型的设备。");
+        add("会计，对金钱之事特别敏感，可以轻松地查出账目漏洞和金融情况。对当前世界的经济状况和未来发展有着深刻的理解。");
+        add("估价，可以在很短的时间用很少的情报准确的估计出某种物品的价值。经常在拍卖场上和古玩市场展现自己的才华。");
+        add("闪避，身姿轻盈，可以轻松躲开大部分的攻击。甚至可以根据子弹的击发方向，以极快的反应躲避。");
+        add("剑术，可以熟练地操控各种类型剑，对刀法也有很深的了解。");
+        add("炮术，不同寻常的经历使得对炮术有着颇为深刻的了解，可以轻松驾驭各种类型的炮。");
+        add("电器维修，对电子器械的充分了解使得可以迅速的查找出电子器件中出现的错误并且加以一定程度的修复。");
+        add("电子学，非常了解电子学，可以准确的判别集成电路板某部分的具体作用，并且加以简单维修。");
+        add("科学，他在某一个科学领域非常精通，具有着超乎寻常人的科学精神。");
+        add("人类学，对于人类形态的充分了解使得可以轻松的辨别人类的生物特征和社会形态特点。");
+        add("历史，对于世界史的了解可以轻松察觉到周围的存留的历史痕迹，并且与脑中的信息匹配得到进一步的信息。");
+        add("神秘学，对于神秘学的研究使得可以轻松地看出周围举行的神秘学仪式痕迹，或者是其他的神秘学有关的物体的迹象。");
+        add("博物学，可以轻松地识别周围的物种和周围的地貌特征。对于很多事情都有所涉猎——虽然不是非常的精通。");
+        add("图书馆使用，可以在浩如烟海的资料中迅速找到自己需要的信息并且加以利用。");
+        add("计算机使用，可以熟练地黑入他人网络窃取信息，以及过载周围的电子设备引发爆炸。");
+        add("驾驶，可以在各种街道中如游鱼般穿行，轻松地跨过各种各样的障碍。无论多么复杂的路况都可以轻松跨越。");
+        add("领航，在极端复杂的和环境下也可以找到自己的道路并且不迷失。");
+        add("烹饪，对于各种料理都有所了解，并且有着丰富的掂大勺经验，可以轻松做出令人垂涎三尺的美食。");
+        add("射击，常年把玩枪械，对射击有着非常丰富的经验，能够发挥枪械最高的水平。");
+        add("锁匠，对于开锁似乎有着独特的热爱，能够在没有专业工具的情况下打开一部分锁——如果有专业工具的辅助，则可以打开大部分的锁。");
+        add("考古学，可以轻松的对周围的遗迹进行调查，并对古物的年代和历史进行确定分析。");
+        add("医学，可以熟练地包扎伤口，缓解他人的病痛。在有专业设备的情况下则可以进行手术治疗。");
+        add("话术，可以迅速的从他人口中获得自己想要的情报，并且不会引起他人的怀疑。");
+        add("说服，可以用极其简单的话使他人信服并且依赖。");
+        add("魅惑，轻松魅惑他人，使他人在精神和肉体上暂时屈服。");
+        add("恐吓，可以以体型和力量或者是武器优势使他人被迫听从。");
+        add("语言，对于某方面的语言极其的精通，并且对该语言的文化了解甚广。");
+        add("精神分析，可以了解他人的精神状态，并且加以引导和治疗。");
+    }};
+    public static ArrayList<String> Gender = new ArrayList<String>() {{
         add("男");
         add("女");
     }};
-    ArrayList<String> HairColor = new ArrayList<String>() {{
+    public static ArrayList<String> HairColor = new ArrayList<String>() {{
         add("黑色");
         add("白金色");
         add("金色");
         add("棕色");
     }};
-    ArrayList<String> HairLengthWomen = new ArrayList<String>() {{
+    public static ArrayList<String> HairLengthWomen = new ArrayList<String>() {{
         add("齐肩短发");
         add("波浪双马尾");
         add("普通双马尾");
@@ -55,7 +87,7 @@ public interface MessagesNPC {
         add("齐肩内扣");
         add("偏分发");
     }};
-    ArrayList<String> HairLengthMan = new ArrayList<String>() {{
+    public static ArrayList<String> HairLengthMan = new ArrayList<String>() {{
         add("秃头");
         add("地中海");
         add("中分");
@@ -75,7 +107,7 @@ public interface MessagesNPC {
         add("朋克");
         add("定位烫");
     }};
-    ArrayList<String> EyeShape = new ArrayList<String>() {{
+    public static ArrayList<String> EyeShape = new ArrayList<String>() {{
         add("桃花眼");
         add("瑞凤眼");
         add("睡凤眼");
@@ -87,7 +119,7 @@ public interface MessagesNPC {
         add("丹凤眼");
 
     }};
-    ArrayList<String> EyeColor = new ArrayList<String>() {{
+    public static ArrayList<String> EyeColor = new ArrayList<String>() {{
         add("灰色");
         add("紫色");
         add("绿色");
@@ -177,14 +209,14 @@ public interface MessagesNPC {
         add("深石板蓝色");
         add("深绿松石色");
     }};
-    ArrayList<String> SkinColor = new ArrayList<String>() {{
+    public static ArrayList<String> SkinColor = new ArrayList<String>() {{
         add("非常白皙");
         add("是健康的小麦色");
         add("似乎刚运动完有些发红");
         add("有些暗黄");
         add("很是黝黑");
     }};
-    ArrayList<String> Shape = new ArrayList<String>() {{
+    public static ArrayList<String> Shape = new ArrayList<String>() {{
         add("普通");
         add("高挑");
         add("纤细");
@@ -196,7 +228,7 @@ public interface MessagesNPC {
         add("矮");
 
     }};
-    ArrayList<String> Temperament = new ArrayList<String>() {{
+    public static ArrayList<String> Temperament = new ArrayList<String>() {{
         add("很有正义感");
         add("值得信任");
         add("和最常见的普通人一样");
@@ -205,7 +237,7 @@ public interface MessagesNPC {
         add("有点阴郁");
         add("非常暴躁");
     }};
-    ArrayList<String> Character = new ArrayList<String>() {{
+    public static ArrayList<String> Character = new ArrayList<String>() {{
         add("正直:友善和正义条件下,会知无不言并主动协助。当对立和邪恶情况下,会无视生命危险拒绝提供帮助");
         add("警惕:会要求别人证明自己的身份,在确认之前不会暴露太多信息");
         add("阴谋论者:在调查员表现出对此人物生活的兴趣后表现出强烈的敌意,并有1D10=1的几率报警");
@@ -221,7 +253,7 @@ public interface MessagesNPC {
         add("锱铢:你先回答他一个问题,他才会回答你一个问题,而且回答得总是很模糊,但可信度毫无问题");
         add("热血：豪不吝啬给予你帮助,但当会将你引向危险时也不会当回事");
     }};
-    ArrayList<String> Manner = new ArrayList<String>() {{
+    public static ArrayList<String> Manner = new ArrayList<String>() {{
         add("着急:会在1D5个问题后强行离开");
         add("悠闲:一直回答问题,并会在调查员不知道问什么事主动谈起见闻");
         add("玩味:旁敲侧击的反问调查员的情况,注意这种出发点是恶意的");
@@ -229,13 +261,13 @@ public interface MessagesNPC {
         add("需要帮助:可能会提前强制将PC导入一条支线");
         add("烦躁:故意给出错误答案,这会被心理学检测出");
     }};
-    ArrayList<String> Clothing = new ArrayList<String>() {{
+    public static ArrayList<String> Clothing = new ArrayList<String>() {{
         add("休闲");
         add("正式");
         add("严肃");
         add("邋遢");
     }};
-    ArrayList<String> strNational = new ArrayList<String>() {{
+    public static ArrayList<String> strNational = new ArrayList<String>() {{
         add("中国");
         add("朝鲜");
         add("韩国");
@@ -316,7 +348,7 @@ public interface MessagesNPC {
         add("智利");
         add("阿根廷");
     }};
-    ArrayList<String> job = new ArrayList<String>() {{
+    public static ArrayList<String> job = new ArrayList<String>() {{
         add("保鏢");
         add("保姆");
         add("保安");
@@ -607,7 +639,7 @@ public interface MessagesNPC {
         add("办公室助理");
         add("杂工");
     }};
-    ArrayList<String> TZ = new ArrayList<String>() {{
+    public static ArrayList<String> TZ = new ArrayList<String>() {{
         add("喜欢童话世界并希望童话会成真");
         add("死板");
         add("抱有很深的戒心");
@@ -744,38 +776,6 @@ public interface MessagesNPC {
         add("喜欢说谎，但是会因此而感到内疚");
         add("看不起身体残疾和精神残疾的人");
         add("对待残疾人彬彬有礼");
-    }};
-    ArrayList<String> SpeTag = new ArrayList<String>() {{
-        add("聆听，可以轻松地察觉到周围环境中的微弱声音，可以轻松察觉到他人的偷袭。");
-        add("潜行，可以轻易地隐藏在黑暗中，面对危险时更容易规避掉。");
-        add("机械维修，可以轻松地维修小型机械，并且组装某些大型的简单机械。如果给予较长时间，甚至可以拼接出非常大型的设备。");
-        add("会计，对金钱之事特别敏感，可以轻松地查出账目漏洞和金融情况。对当前世界的经济状况和未来发展有着深刻的理解。");
-        add("估价，可以在很短的时间用很少的情报准确的估计出某种物品的价值。经常在拍卖场上和古玩市场展现自己的才华。");
-        add("闪避，身姿轻盈，可以轻松躲开大部分的攻击。甚至可以根据子弹的击发方向，以极快的反应躲避。");
-        add("剑术，可以熟练地操控各种类型剑，对刀法也有很深的了解。");
-        add("炮术，不同寻常的经历使得对炮术有着颇为深刻的了解，可以轻松驾驭各种类型的炮。");
-        add("电器维修，对电子器械的充分了解使得可以迅速的查找出电子器件中出现的错误并且加以一定程度的修复。");
-        add("电子学，非常了解电子学，可以准确的判别集成电路板某部分的具体作用，并且加以简单维修。");
-        add("科学，他在某一个科学领域非常精通，具有着超乎寻常人的科学精神。");
-        add("人类学，对于人类形态的充分了解使得可以轻松的辨别人类的生物特征和社会形态特点。");
-        add("历史，对于世界史的了解可以轻松察觉到周围的存留的历史痕迹，并且与脑中的信息匹配得到进一步的信息。");
-        add("神秘学，对于神秘学的研究使得可以轻松地看出周围举行的神秘学仪式痕迹，或者是其他的神秘学有关的物体的迹象。");
-        add("博物学，可以轻松地识别周围的物种和周围的地貌特征。对于很多事情都有所涉猎——虽然不是非常的精通。");
-        add("图书馆使用，可以在浩如烟海的资料中迅速找到自己需要的信息并且加以利用。");
-        add("计算机使用，可以熟练地黑入他人网络窃取信息，以及过载周围的电子设备引发爆炸。");
-        add("驾驶，可以在各种街道中如游鱼般穿行，轻松地跨过各种各样的障碍。无论多么复杂的路况都可以轻松跨越。");
-        add("领航，在极端复杂的和环境下也可以找到自己的道路并且不迷失。");
-        add("烹饪，对于各种料理都有所了解，并且有着丰富的掂大勺经验，可以轻松做出令人垂涎三尺的美食。");
-        add("射击，常年把玩枪械，对射击有着非常丰富的经验，能够发挥枪械最高的水平。");
-        add("锁匠，对于开锁似乎有着独特的热爱，能够在没有专业工具的情况下打开一部分锁——如果有专业工具的辅助，则可以打开大部分的锁。");
-        add("考古学，可以轻松的对周围的遗迹进行调查，并对古物的年代和历史进行确定分析。");
-        add("医学，可以熟练地包扎伤口，缓解他人的病痛。在有专业设备的情况下则可以进行手术治疗。");
-        add("话术，可以迅速的从他人口中获得自己想要的情报，并且不会引起他人的怀疑。");
-        add("说服，可以用极其简单的话使他人信服并且依赖。");
-        add("魅惑，轻松魅惑他人，使他人在精神和肉体上暂时屈服。");
-        add("恐吓，可以以体型和力量或者是武器优势使他人被迫听从。");
-        add("语言，对于某方面的语言极其的精通，并且对该语言的文化了解甚广。");
-        add("精神分析，可以了解他人的精神状态，并且加以引导和治疗。");
     }};
 
 }

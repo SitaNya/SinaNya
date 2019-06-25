@@ -15,8 +15,8 @@ import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
 
-import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.system.MessagesSystem.ENTITY_LOGINQQ_INFO;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 
 /**
  * @author SitaNya
@@ -55,15 +55,15 @@ public class SendMail {
         MailBean mb = new MailBean();
         mb.setHost("smtp.qq.com");
         // 设置SMTP主机(163)，若用126，则设为：smtp.126.com
-        mb.setUsername(messagesSystem.get("mailUserName"));
+        mb.setUsername(MESSAGES_SYSTEM.get("mailUserName"));
         // 设置发件人邮箱的用户名
-        mb.setPassword(messagesSystem.get("mailPassword"));
+        mb.setPassword(MESSAGES_SYSTEM.get("mailPassword"));
         // 设置发件人邮箱的密码，需将*号改成正确的密码
-        mb.setFrom(messagesSystem.get("mailUserName"));
+        mb.setFrom(MESSAGES_SYSTEM.get("mailUserName"));
         // 设置发件人的邮箱
         mb.setTo(to + "@qq.com");
         // 设置收件人的邮箱
-        mb.setSubject(toChinese(logName));
+        mb.setSubject(logName);
         // 设置邮件的主题
         mb.setContent("在群: " + groupId + " 中的log日志: " + logName + "\n其中docx为染色文件用word打开，无后缀为文本文件用txt打开，收到邮件烦请回复\n遇到问题请加群162279609进行反馈");
         // 设置邮件的正文
@@ -89,17 +89,17 @@ public class SendMail {
         MailBean mb = new MailBean();
         mb.setHost("smtp.qq.com");
         // 设置SMTP主机(163)，若用126，则设为：smtp.126.com
-        mb.setUsername(messagesSystem.get("mailUserName"));
+        mb.setUsername(MESSAGES_SYSTEM.get("mailUserName"));
         // 设置发件人邮箱的用户名
-        mb.setPassword(messagesSystem.get("mailPassword"));
+        mb.setPassword(MESSAGES_SYSTEM.get("mailPassword"));
         // 设置发件人邮箱的密码，需将*号改成正确的密码
-        mb.setFrom(messagesSystem.get("mailUserName"));
+        mb.setFrom(MESSAGES_SYSTEM.get("mailUserName"));
         // 设置发件人的邮箱
-        mb.setTo(messagesSystem.get("masterMail"));
+        mb.setTo(MESSAGES_SYSTEM.get("masterMail"));
         // 设置收件人的邮箱
         mb.setSubject("骰娘宕机");
         // 设置邮件的主题
-        mb.setContent("您的骰娘:" + entityLoginQQInfo.getLoginQQNick() + "(" + entityLoginQQInfo.getLoginQQ() + ")失去响应，请查看\n" + messages);
+        mb.setContent("您的骰娘:" + ENTITY_LOGINQQ_INFO.getLoginQQNick() + "(" + ENTITY_LOGINQQ_INFO.getLoginQQ() + ")失去响应，请查看\n" + messages);
         // 设置邮件的正文
 
         SendMail sm = new SendMail();

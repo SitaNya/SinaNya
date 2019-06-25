@@ -13,6 +13,6 @@ import java.util.HashMap;
  * 接口说明: 骰点历史的静态对象
  * 所有数据优先从静态对象取，取不到再去找数据库，这样可以提高效率
  */
-public interface MessagesHistory {
-    HashMap<String, EntityHistory> HISTORY_LIST = new HashMap<>();
+public class MessagesHistory {
+    public static final HashMap<String, EntityHistory> HISTORY_LIST = new HashMap<>();
 }

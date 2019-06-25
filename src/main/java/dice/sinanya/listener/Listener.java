@@ -15,7 +15,7 @@ import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.flow.Flow;
 
-import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
+import static dice.sinanya.system.MessagesSystem.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
 import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
 import static dice.sinanya.tools.getinfo.LogText.setLogText;
@@ -121,7 +121,7 @@ public class Listener {
     @Listen(MsgGetTypes.groupMsg)
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
-        String tagMe = "[CQ:at,qq=" + entityLoginQQInfo.getLoginQQ() + "]";
+        String tagMe = "[CQ:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
         if (msgGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
         }
@@ -148,7 +148,7 @@ public class Listener {
     @Listen(MsgGetTypes.discussMsg)
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
-        String tagMe = "[CQ:at,qq=" + entityLoginQQInfo.getLoginQQ() + "]";
+        String tagMe = "[CQ:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
         if (msgDisGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
         }
@@ -185,7 +185,7 @@ public class Listener {
         String tagBotOff = "bot off";
         String tagBotInfo = "bot";
         String tagBotExit = "bot exit";
-        String tagMe = "[CQ:at,qq=" + entityLoginQQInfo.getLoginQQ() + "]";
+        String tagMe = "[CQ:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
 
         boolean botOn = messages.trim().contains(tagBotOn) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotOn) && !messages.trim().contains("[CQ:at"));
         boolean botOff = messages.trim().contains(tagBotOff) && messages.trim().contains(tagMe) || (messages.trim().contains(tagBotOff) && !messages.trim().contains("[CQ:at"));

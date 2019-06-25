@@ -27,7 +27,7 @@ public class EntityClue {
 
     public EntityClue(String groupId, Timestamp date, String qqId) {
         this.groupId = groupId;
-        this.date = date;
+        this.date = (Timestamp) date.clone();
         this.qqId = qqId;
     }
 
@@ -40,7 +40,7 @@ public class EntityClue {
     }
 
     public Timestamp getDate() {
-        return this.date;
+        return (Timestamp) this.date.clone();
     }
 
     public String getQqId() {

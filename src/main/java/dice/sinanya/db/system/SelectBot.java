@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
+import static dice.sinanya.system.MessagesSystem.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.system.SystemInfo.SWITCH_BOT;
 
 /**
@@ -32,7 +32,7 @@ public class SelectBot {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select groupId,switchBot from switchBot where botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, String.valueOf(entityLoginQQInfo.getLoginQQ()));
+                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         SWITCH_BOT.put(set.getLong("groupId"), set.getBoolean("switchBot"));
@@ -53,7 +53,7 @@ public class SelectBot {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select groupId,switchBot from switchBot where botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, String.valueOf(entityLoginQQInfo.getLoginQQ()));
+                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         groupNum++;

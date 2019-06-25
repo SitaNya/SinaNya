@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static dice.sinanya.system.MessagesKP.KP_GROUP;
+import static dice.sinanya.system.MessagesKp.KP_GROUP;
 
 
 /**

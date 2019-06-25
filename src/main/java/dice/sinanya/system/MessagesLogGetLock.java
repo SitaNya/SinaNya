@@ -12,6 +12,6 @@ import java.util.ArrayList;
  * <p>
  * 这个无需入库了
  */
-public interface MessagesLogGetLock {
-    ArrayList<String> LOG_GET_LOCK = new ArrayList<>();
+public class MessagesLogGetLock {
+    public static final ArrayList<String> LOG_GET_LOCK = new ArrayList<>();
 }

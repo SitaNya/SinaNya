@@ -1,7 +1,6 @@
 package dice.sinanya.db.system;
 
 import dice.sinanya.db.tools.DbUtil;
-import dice.sinanya.entity.EntityLoginQQInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
+import static dice.sinanya.system.MessagesSystem.ENTITY_LOGINQQ_INFO;
 
 /**
  * @author SitaNya
@@ -35,7 +34,7 @@ public class InsertBot {
             String sql = "select * from switchBot where groupId=? and botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setLong(1, groupId);
-                ps.setString(2, String.valueOf(entityLoginQQInfo.getLoginQQ()));
+                ps.setString(2, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         num++;
@@ -50,11 +49,11 @@ public class InsertBot {
                         "switchBot" +
                         ") VALUES(?,?,?)";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    ps.setString(1, String.valueOf(entityLoginQQInfo.getLoginQQ()));
+                    ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
                     ps.setLong(2, groupId);
                     ps.setBoolean(3, switchBot);
                     ps.executeUpdate();
-                    Log.info("插入新的群开关，" + entityLoginQQInfo.getLoginQQ() + "groupId: " + groupId + "switchBot: " + switchBot);
+                    Log.info("插入新的群开关，" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "groupId: " + groupId + "switchBot: " + switchBot);
                 }
             } else {
                 sql = "update switchBot set " +
@@ -62,7 +61,7 @@ public class InsertBot {
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     ps.setBoolean(1, switchBot);
                     ps.setLong(2, groupId);
-                    ps.setString(3, String.valueOf(entityLoginQQInfo.getLoginQQ()));
+                    ps.setString(3, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
                     ps.executeUpdate();
                 }
             }

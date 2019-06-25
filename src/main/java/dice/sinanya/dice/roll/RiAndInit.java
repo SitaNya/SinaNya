@@ -11,7 +11,7 @@ import static dice.sinanya.system.MessagesInit.INIT_LIST;
 import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.system.MessagesTag.TAG_RI;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByFromQQ;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
@@ -153,7 +153,7 @@ public class RiAndInit {
     public void init() {
         StringBuilder stringBuffer = new StringBuilder();
         if (!INIT_LIST.containsKey(entityTypeMessages.getFromGroup())) {
-            sender(entityTypeMessages, messagesSystem.get("dndInitIsEmtpy"));
+            sender(entityTypeMessages, MESSAGES_SYSTEM.get("dndInitIsEmtpy"));
             return;
         }
         stringBuffer.append("先攻列表为:\n");
@@ -177,6 +177,6 @@ public class RiAndInit {
      */
     public void clr() {
         INIT_LIST.remove(entityTypeMessages.getFromGroup());
-        sender(entityTypeMessages, messagesSystem.get("clrDndInit"));
+        sender(entityTypeMessages, MESSAGES_SYSTEM.get("clrDndInit"));
     }
 }

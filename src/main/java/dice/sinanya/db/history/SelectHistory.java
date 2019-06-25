@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static dice.sinanya.system.MessagesHistory.HISTORY_LIST;
-import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
+import static dice.sinanya.system.MessagesSystem.ENTITY_LOGINQQ_INFO;
 
 
 /**
@@ -35,7 +35,7 @@ public class SelectHistory {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from history where botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, String.valueOf(entityLoginQQInfo.getLoginQQ()));
+                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         HISTORY_LIST.put(set.getString("qqId"), new EntityHistory(set.getString("qqId"), set.getInt("Fumble"), set.getInt("CriticalSuccess"), set.getInt("ExtremeSuccess"), set.getInt("HardSuccess"), set.getInt("Success"), set.getInt("Failure"), set.getInt("times"), set.getInt("mean")));

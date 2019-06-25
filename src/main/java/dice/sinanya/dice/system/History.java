@@ -3,7 +3,7 @@ package dice.sinanya.dice.system;
 import dice.sinanya.entity.EntityHistory;
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.system.MessagesSystem.entityLoginQQInfo;
+import static dice.sinanya.system.MessagesSystem.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.History.changeHistory;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
@@ -30,7 +30,7 @@ public class History {
         StringBuilder stringBuilder = new StringBuilder();
         EntityHistory entityHistory = changeHistory(entityTypeMessages.getFromQq());
 
-        stringBuilder.append("您使用").append(entityLoginQQInfo.getLoginQQNick()).append("以来，共计产生以下历史数据:\n")
+        stringBuilder.append("您使用").append(ENTITY_LOGINQQ_INFO.getLoginQQNick()).append("以来，共计产生以下历史数据:\n")
                 .append("骰点:\t")
                 .append(entityHistory.getTimes())
                 .append("次")

@@ -6,7 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 
 import static dice.sinanya.system.MessagesTag.TAG_CLUE_RM;
 import static dice.sinanya.system.MessagesTag.TAG_CLUE_SET;
@@ -56,7 +55,6 @@ public class Clue {
     public void rm() {
         String tag = TAG_CLUE_RM;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         delClue(new EntityClue(entityTypeMessages.getFromGroup(), getTime(msg), entityTypeMessages.getFromQq()));
         sender(entityTypeMessages, "已删除线索");

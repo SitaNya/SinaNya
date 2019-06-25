@@ -2,7 +2,7 @@ package dice.sinanya.exceptions;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
@@ -17,8 +17,8 @@ import static dice.sinanya.tools.makedata.Sender.sender;
 public class NotSetKpGroupException extends Exception {
 
     public NotSetKpGroupException(EntityTypeMessages entityTypeMessages) {
-        super(messagesSystem.get("needKpGroup"));
-        sender(entityTypeMessages, messagesSystem.get("needKpGroup"));
+        super(MESSAGES_SYSTEM.get("needKpGroup"));
+        sender(entityTypeMessages, MESSAGES_SYSTEM.get("needKpGroup"));
     }
 
 }

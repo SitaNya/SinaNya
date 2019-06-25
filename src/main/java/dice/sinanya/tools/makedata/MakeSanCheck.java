@@ -11,11 +11,11 @@ import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
-import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
-import static dice.sinanya.tools.getinfo.RoleInfo.*;
+import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByQQ;
+import static dice.sinanya.tools.getinfo.RoleInfo.setRoleInfoFromChooseByQQ;
 import static dice.sinanya.tools.makedata.RandomInt.random;
 import static dice.sinanya.tools.makedata.Sender.sender;
 import static java.lang.Math.max;
@@ -188,7 +188,7 @@ public class MakeSanCheck {
                     .append(",当前剩余")
                     .append(newSan)
                     .append("点")
-                    .append(messagesSystem.get("sanCheckFumble"));
+                    .append(MESSAGES_SYSTEM.get("sanCheckFumble"));
             if (useCard) {
                 setCard(newSan, prop, role);
             }
@@ -224,7 +224,7 @@ public class MakeSanCheck {
                     .append(",当前剩余")
                     .append(newSan)
                     .append("点")
-                    .append(messagesSystem.get("sanCheckCriticalSuccess"));
+                    .append(MESSAGES_SYSTEM.get("sanCheckCriticalSuccess"));
 
             if (useCard) {
                 setCard(newSan, prop, role);
@@ -246,7 +246,7 @@ public class MakeSanCheck {
                     .append(",当前剩余")
                     .append(newSan)
                     .append("点")
-                    .append(messagesSystem.get("sanCheckSuccess"));
+                    .append(MESSAGES_SYSTEM.get("sanCheckSuccess"));
             if (useCard) {
                 setCard(newSan, prop, role);
             }
@@ -267,7 +267,7 @@ public class MakeSanCheck {
                     .append(",当前剩余")
                     .append(newSan)
                     .append("点")
-                    .append(messagesSystem.get("sanCheckFailure"));
+                    .append(MESSAGES_SYSTEM.get("sanCheckFailure"));
             if (useCard) {
                 setCard(newSan, prop, role);
             }
@@ -299,13 +299,13 @@ public class MakeSanCheck {
     private void makeInsane(StringBuilder strResult, int newSan, int san) {
         if (newSan == 0) {
             strResult.append("\n已永久疯狂")
-                    .append(messagesSystem.get("symptom"));
+                    .append(MESSAGES_SYSTEM.get("symptom"));
         } else if (san - newSan >= 5) {
             strResult.append("\n已进入临时性疯狂")
-                    .append(messagesSystem.get("symptom"));
+                    .append(MESSAGES_SYSTEM.get("symptom"));
         } else if (san - newSan >= san / 5) {
             strResult.append("\n已因单次损失值进入不定性疯狂")
-                    .append(messagesSystem.get("symptom"));
+                    .append(MESSAGES_SYSTEM.get("symptom"));
         }
     }
 

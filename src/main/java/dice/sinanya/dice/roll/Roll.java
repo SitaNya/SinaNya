@@ -12,7 +12,7 @@ import static dice.sinanya.system.MessagesRollMaxValue.ROLL_MAX_VALUE;
 import static dice.sinanya.system.MessagesTag.TAGR;
 import static dice.sinanya.system.MessagesTag.TAG_RH;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.makedata.GetRollResultAndStr.getResFunctionAndResultInt;
@@ -128,7 +128,7 @@ public class Roll {
 //            strFunction符号表达式:3d6k2+4d6*3+d4/2-6d
 //            strResult结果表达式: (1+2)+(1+3+4+6)*3+(2)/2-(32+35+12+54)
 //            Result实际结果:-87
-            sender(entityTypeMessages, messagesSystem.get("hiddenDice"));
+            sender(entityTypeMessages, MESSAGES_SYSTEM.get("hiddenDice"));
 //            在群中发出暗骰提示
 
             int maxRolls = ROLL_MAX_VALUE.getOrDefault(entityTypeMessages.getFromGroup(), 100);

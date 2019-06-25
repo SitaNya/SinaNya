@@ -2,7 +2,7 @@ package dice.sinanya.dice.getbook;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
@@ -25,28 +25,28 @@ public class Book {
      * 车卡指南
      */
     public void make() {
-        sender(entityTypeMessages, messagesSystem.get("bookMake"));
+        sender(entityTypeMessages, MESSAGES_SYSTEM.get("bookMake"));
     }
 
     /**
      * 人物卡Excel
      */
     public void card() {
-        sender(entityTypeMessages, messagesSystem.get("bookCard"));
+        sender(entityTypeMessages, MESSAGES_SYSTEM.get("bookCard"));
     }
 
     /**
      * 规则书
      */
     public void kp() {
-        sender(entityTypeMessages, messagesSystem.get("bookKp"));
+        sender(entityTypeMessages, MESSAGES_SYSTEM.get("bookKp"));
     }
 
     /**
      * 人物扮演自问
      */
     public void rp() {
-        sender(entityTypeMessages, messagesSystem.get("bookRP"));
+        sender(entityTypeMessages, MESSAGES_SYSTEM.get("bookRP"));
     }
 
 }

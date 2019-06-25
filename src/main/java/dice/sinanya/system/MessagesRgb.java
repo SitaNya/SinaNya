@@ -12,8 +12,8 @@ import java.util.HashMap;
  * <p>
  * 这里我挑了一些比较方便看的颜色，括号内颜色是灰色，骰子颜色是橘红色，kp颜色是鲜红色
  */
-public interface MessagesRGB {
-    HashMap<Integer, String> RGB = new HashMap<Integer, String>() {{
+public class MessagesRgb {
+    public static final HashMap<Integer, String> RGB = new HashMap<Integer, String>() {{
         put(0, "FF7F24");
         put(1, "8B4513");
         put(2, "483D8B");

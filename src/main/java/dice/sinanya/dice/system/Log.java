@@ -11,7 +11,7 @@ import static dice.sinanya.system.MessagesLog.LOG_NAME_FOR_GROUP;
 import static dice.sinanya.system.MessagesLog.LOG_SWITCH_FOR_GROUP;
 import static dice.sinanya.system.MessagesLogGetLock.LOG_GET_LOCK;
 import static dice.sinanya.system.MessagesTag.*;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.messagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.getinfo.LogTag.*;
 import static dice.sinanya.tools.getinfo.LogText.getLogText;
 import static dice.sinanya.tools.log.LogSave.logSave;
@@ -45,12 +45,12 @@ public class Log {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
 
-            sender(entityTypeMessages, getOtherLogTrue(entityTypeMessages.getFromGroup()) + messagesSystem.get("alreadyOpen"));
+            sender(entityTypeMessages, getOtherLogTrue(entityTypeMessages.getFromGroup()) + MESSAGES_SYSTEM.get("alreadyOpen"));
         } else {
             if (checkLogTagExist(entityTypeMessages, msg)) {
-                sender(entityTypeMessages, msg + messagesSystem.get("appendLog"));
+                sender(entityTypeMessages, msg + MESSAGES_SYSTEM.get("appendLog"));
             } else {
-                sender(entityTypeMessages, msg + messagesSystem.get("createLog"));
+                sender(entityTypeMessages, msg + MESSAGES_SYSTEM.get("createLog"));
             }
             LOG_NAME_FOR_GROUP.put(entityTypeMessages.getFromGroup(), msg);
             LOG_SWITCH_FOR_GROUP.put(entityTypeMessages.getFromGroup(), true);
@@ -71,10 +71,10 @@ public class Log {
                 LOG_SWITCH_FOR_GROUP.put(entityTypeMessages.getFromGroup(), false);
                 sender(entityTypeMessages, msg + "已关闭，现在可以使用\".log get " + msg + "\"进行获取");
             } else {
-                sender(entityTypeMessages, msg + messagesSystem.get("alreadyClose"));
+                sender(entityTypeMessages, msg + MESSAGES_SYSTEM.get("alreadyClose"));
             }
         } else {
-            sender(entityTypeMessages, messagesSystem.get("notFoundLog"));
+            sender(entityTypeMessages, MESSAGES_SYSTEM.get("notFoundLog"));
         }
     }
 
@@ -86,7 +86,7 @@ public class Log {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         if (!checkLogTagSwitch(entityTypeMessages, msg)) {
             if (LOG_GET_LOCK.contains(msg)) {
-                sender(entityTypeMessages, messagesSystem.get("readLock"));
+                sender(entityTypeMessages, MESSAGES_SYSTEM.get("readLock"));
             } else {
                 LOG_GET_LOCK.add(msg);
             }
@@ -123,7 +123,7 @@ public class Log {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         if (checkLogTagExist(entityTypeMessages, msg)) {
             if (checkLogTagSwitch(entityTypeMessages, msg)) {
-                sender(entityTypeMessages, messagesSystem.get("deleteOpenLog"));
+                sender(entityTypeMessages, MESSAGES_SYSTEM.get("deleteOpenLog"));
             } else {
                 delLog(new EntityLogTag(entityTypeMessages.getFromGroup(), msg));
                 sender(entityTypeMessages, "已删除日志: " + msg);

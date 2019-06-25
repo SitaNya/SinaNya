@@ -10,7 +10,6 @@ import java.util.HashMap;
  * 有任何问题欢迎咨询
  * 接口说明: 先攻列表的静态信息，目前此值不入库
  */
-public interface MessagesInit {
-
-    HashMap<String, HashMap<String, String>> INIT_LIST = new HashMap<>();
+public class MessagesInit {
+    public static final HashMap<String, HashMap<String, String>> INIT_LIST = new HashMap<>();
 }

@@ -3,7 +3,7 @@ package dice.sinanya.dice.manager;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.NotSetKpGroupException;
 
-import static dice.sinanya.system.MessagesKP.KP_GROUP;
+import static dice.sinanya.system.MessagesKp.KP_GROUP;
 import static dice.sinanya.tools.getinfo.Kp.getKpGroup;
 import static dice.sinanya.tools.getinfo.Kp.setKpGroup;
 import static dice.sinanya.tools.makedata.Sender.sender;

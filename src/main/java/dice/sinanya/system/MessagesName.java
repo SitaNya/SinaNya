@@ -11,8 +11,8 @@ import java.util.ArrayList;
  * <p>
  * 类说明: 姓名静态信息
  */
-public interface MessagesName {
-    ArrayList<String> ChineseSurname = new ArrayList<String>() {{
+public class MessagesName {
+    public static final ArrayList<String> ChineseSurname = new ArrayList<String>() {{
         add("赵");
         add("钱");
         add("孙");
@@ -505,7 +505,7 @@ public interface MessagesName {
         add("微生");
         add("羊舌");
     }};
-    ArrayList<String> ChineseFirstName = new ArrayList<String>() {{
+    public static final ArrayList<String> ChineseFirstName = new ArrayList<String>() {{
         add("夫秀");
         add("夫琴");
         add("夫艳");
@@ -6767,7 +6767,7 @@ public interface MessagesName {
         add("皓轩");
         add("鑫鹏");
     }};
-    ArrayList<String> EnglishFirstName = new ArrayList<String>() {{
+    public static final ArrayList<String> EnglishFirstName = new ArrayList<String>() {{
         add("Aaron");
         add("Abel");
         add("Abraham");
@@ -7346,7 +7346,7 @@ public interface MessagesName {
         add("Zoey");
         add("Zora");
     }};
-    ArrayList<String> EnglishLastName = new ArrayList<String>() {{
+    public static final ArrayList<String> EnglishLastName = new ArrayList<String>() {{
         add("Admirind");
         add("Aerum");
         add("Akvum");
@@ -7588,7 +7588,7 @@ public interface MessagesName {
         add("Diaz");
         add("Hayes");
     }};
-    ArrayList<String> EnglishFirstNameChineseTranslation = new ArrayList<String>() {{
+    public static final ArrayList<String> EnglishFirstNameChineseTranslation = new ArrayList<String>() {{
         add("亚伦");
         add("亚伯");
         add("亚伯拉罕");
@@ -8167,7 +8167,7 @@ public interface MessagesName {
         add("佐伊");
         add("卓拉");
     }};
-    ArrayList<String> EnglishLastNameChineseTranslation = new ArrayList<String>() {{
+    public static final ArrayList<String> EnglishLastNameChineseTranslation = new ArrayList<String>() {{
         add("阿德米林德");
         add("阿埃鲁姆");
         add("阿克乌姆");
@@ -8409,7 +8409,7 @@ public interface MessagesName {
         add("亚兹");
         add("海斯");
     }};
-    ArrayList<String> JapaneseSurname = new ArrayList<String>() {{
+    public static final ArrayList<String> JapaneseSurname = new ArrayList<String>() {{
         add("鹤田");
         add("香取");
         add("野泽");
@@ -8996,7 +8996,7 @@ public interface MessagesName {
         add("大泽");
         add("田山");
     }};
-    ArrayList<String> JapaneseFirstName = new ArrayList<String>() {{
+    public static ArrayList<String> JapaneseFirstName = new ArrayList<String>() {{
         add("鮎美");
         add("真纪");
         add("美沙");
