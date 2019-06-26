@@ -9,8 +9,6 @@ import com.forte.qqrobot.utils.CQCodeUtil;
 import org.quartz.JobExecutionContext;
 
 import static dice.sinanya.tools.getinfo.GetTime.getNowString;
-import static dice.sinanya.tools.getinfo.History.setHistory;
-import static dice.sinanya.tools.getinfo.Team.saveTeamEn;
 
 /**
  * @author SitaNya
@@ -32,7 +30,7 @@ public class TestRunningTime implements TimeJob {
 
     @Override
     public void execute(MsgSender msgSender, CQCodeUtil cqCodeUtil) {
-        msgSender.SENDER.sendPrivateMsg("450609203",getNowString());
+        msgSender.SENDER.sendPrivateMsg("450609203", getNowString());
     }
 
     @Override

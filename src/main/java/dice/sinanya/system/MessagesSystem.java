@@ -1,8 +1,6 @@
 package dice.sinanya.system;
 
 
-import dice.sinanya.entity.EntityLoginQQInfo;
-
 /**
  * @author SitaNya
  * 日期: 2019-06-15
