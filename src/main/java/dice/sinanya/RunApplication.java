@@ -61,8 +61,8 @@ public class RunApplication implements HttpApp {
             getLoginInfo(sender);
             times++;
         } while (ENTITY_LOGINQQ_INFO.getLoginQQNick() == null && times < 20);
-        if (times>=20){
-            sender.SENDER.sendPrivateMsg("450609203","获取昵称超过20次失败");
+        if (times >= 20) {
+            sender.SENDER.sendPrivateMsg("450609203", "获取昵称超过20次失败");
         }
 //        从数据库中读取幕间成长到缓存
         flushMaxRolls();

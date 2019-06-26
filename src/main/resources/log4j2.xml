@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO">
+<Configuration status="DEBUG">
 
     <Properties>
         <Property name="pattern_layout">%d %-5p (%F:%L) - %m%n</Property>
@@ -30,7 +30,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="dice.sinanya" level="INFO">
+        <Logger name="dice.sinanya" level="DEBUG">
             <AppenderRef ref="sinanya"/>
         </Logger>
 
