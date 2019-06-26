@@ -36,11 +36,24 @@ public class RandomInt {
      */
     public static int random(int lowest, int highest) {
         int result;
+        int times = 0;
         do {
             Random r = new Random();
             int mean = max((int) ceil((highest - lowest) / 2.0), 1);
             result = (int) ((mean + 2) * r.nextGaussian() + mean);
-        } while (result > highest || result < lowest);
+            times++;
+        } while ((result > highest || result < lowest) && times < 20);
+        if (times >= 20) {
+            result = overRandom(lowest, highest);
+        }
+        return result;
+    }
+
+    private static int overRandom(int lowest, int highest) {
+        int result = 0;
+        while (result == 0) {
+            result = new Random().nextInt(highest + 1 - lowest) + lowest;
+        }
         return result;
     }
 }
