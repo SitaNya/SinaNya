@@ -1,5 +1,8 @@
 package dice.sinanya.tools.makedata;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.util.Random;
 
 import static java.lang.Math.ceil;
@@ -19,6 +22,7 @@ import static java.lang.Math.max;
  * 而是以千次骰点成功率符合跑团预期为准
  */
 public class RandomInt {
+    private static Logger log = LogManager.getLogger(RandomInt.class.getName());
     /**
      * 尝试了系统随机数和梅森旋转
      * 梅森旋转就他娘的是个憨憨！
@@ -50,6 +54,7 @@ public class RandomInt {
     }
 
     private static int overRandom(int lowest, int highest) {
+        log.info("使用原始骰点逻辑");
         int result = 0;
         while (result == 0) {
             result = new Random().nextInt(highest + 1 - lowest) + lowest;
