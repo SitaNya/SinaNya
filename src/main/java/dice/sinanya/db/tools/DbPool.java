@@ -44,13 +44,13 @@ class DbPool {
             dataSource.setUser("root");
             dataSource.setPassword(MESSAGES_SYSTEM.get("dbPassword"));
 
-            connPoolConfig(dataSource);
-            connAgeConfig(dataSource);
-            connTestConfig(dataSource);
-            reconnConfig(dataSource);
-            statementConfig(dataSource);
-            threadConfig(dataSource);
-            tranConfig(dataSource);
+//            connPoolConfig(dataSource);
+//            connAgeConfig(dataSource);
+//            connTestConfig(dataSource);
+//            reconnConfig(dataSource);
+//            statementConfig(dataSource);
+//            threadConfig(dataSource);
+//            tranConfig(dataSource);
 
 
             Log.info("create DbPool");
@@ -196,21 +196,15 @@ class DbPool {
     Connection getConnection() {
         Connection conn = null;
         try {
-            do {
-                conn = dataSource.getConnection();
-                if (dataSource.getNumConnections() == 0) {
-                    instance = new DbPool();
-                }
-            } while (dataSource.getNumConnections() == 0);
-
+            conn = dataSource.getConnection();
             Log.debug("get Connection");
         } catch (SQLException e) {
             Log.error("get Connection error: \n" + dataSource.toString() + e.getMessage(), e);
         }
         try {
-//            Exception e = new Exception("this is a log");
+            Exception e = new Exception("线程池调用流程为");
             Log.info("当前线程池中链接数为: " + dataSource.getNumConnections());
-//            e.printStackTrace();
+            Log.info(e.getMessage(), e);
         } catch (SQLException e) {
             Log.error(e.getMessage(), e);
         }
