@@ -56,10 +56,15 @@ public class RunApplication implements HttpApp {
 
     @Override
     public void after(CQCodeUtil cqCodeUtil, MsgSender sender) {
-        while (ENTITY_LOGINQQ_INFO.getLoginQQNick() == null) {
+        int times = 0;
+        do {
             getLoginInfo(sender);
+            times++;
+        } while (ENTITY_LOGINQQ_INFO.getLoginQQNick() == null && times < 20);
+        if (times>=20){
+            sender.SENDER.sendPrivateMsg("450609203","获取昵称超过20次失败");
         }
-        //        从数据库中读取幕间成长到缓存
+//        从数据库中读取幕间成长到缓存
         flushMaxRolls();
 //        从数据库中读取最大默认骰到缓存
         flushBot();
