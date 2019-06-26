@@ -33,9 +33,15 @@ public class GetFutureToString {
      */
     public static String getFutureToString(StringBuilder stringBuilder, ArrayList<Future<String>> results) {
         for (Future future : results) {
+            int times = 0;
             while (!future.isDone()) {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(500);
+                    if (times > 20) {
+                        return "多线程运行异常";
+                    } else {
+                        times++;
+                    }
                 } catch (InterruptedException e) {
                     log.error(e.getMessage(), e);
                 }

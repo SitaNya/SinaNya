@@ -52,9 +52,15 @@ public class ManyRolls {
             }
             ArrayList<Integer> tmp = new ArrayList<>();
             for (Future future : results) {
+                int sleepTimes = 0;
                 while (!future.isDone()) {
                     try {
                         Thread.sleep(100);
+                        if (sleepTimes>20){
+                            return "多线程运行异常";
+                        }else {
+                            sleepTimes++;
+                        }
                     } catch (InterruptedException e) {
                         log.error(e.getMessage(), e);
                     }

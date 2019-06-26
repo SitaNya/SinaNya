@@ -7,6 +7,8 @@ import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
 import com.forte.qqrobot.exception.RobotRuntionException;
 import com.forte.qqrobot.sender.MsgSender;
 import com.forte.qqrobot.utils.CQCodeUtil;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import static dice.sinanya.db.system.SelectBot.flushBot;
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
@@ -34,6 +36,7 @@ import static dice.sinanya.tools.log.SendMail.sendMail;
  */
 @AllBeans(value = "dice.sinanya.listener")
 public class RunApplication implements HttpApp {
+    private static Logger log = LogManager.getRootLogger();
     public static void main(String[] args) {
         initMessagesSystem();
 //        读取配置文件
@@ -41,6 +44,7 @@ public class RunApplication implements HttpApp {
             new HttpApplication().run(new RunApplication());
         } catch (RobotRuntionException e) {
             sendMail(e.getMessage());
+            log.error(e.getMessage(), e);
         }
     }
 

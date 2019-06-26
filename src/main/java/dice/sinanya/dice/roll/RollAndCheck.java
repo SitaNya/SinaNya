@@ -305,8 +305,14 @@ public class RollAndCheck implements En {
      */
     private void updateHistory(EntityHistory entityHistory, ArrayList<Future<Integer>> results) throws InterruptedException, ExecutionException {
         for (Future future : results) {
+            int times = 0;
             while (!future.isDone()) {
-                Thread.sleep(100);
+                Thread.sleep(500);
+                if (times > 20) {
+                    return;
+                } else {
+                    times++;
+                }
             }
             entityHistory.update((int) future.get());
         }
