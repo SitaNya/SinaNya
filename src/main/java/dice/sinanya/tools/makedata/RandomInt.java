@@ -42,8 +42,8 @@ public class RandomInt {
             int mean = max((int) ceil((highest - lowest) / 2.0), 1);
             result = (int) ((mean + 2) * r.nextGaussian() + mean);
             times++;
-        } while ((result > highest || result < lowest) && times < 20);
-        if (times >= 20) {
+        } while ((result > highest || result < lowest) && times < 50);
+        if (times >= 50) {
             result = overRandom(lowest, highest);
         }
         return result;
