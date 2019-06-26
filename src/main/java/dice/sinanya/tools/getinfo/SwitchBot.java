@@ -45,6 +45,7 @@ public class SwitchBot {
             return SWITCH_BOT.get(groupId);
         } else {
             insertBot.insertBot(groupId, true);
+            SWITCH_BOT.put(groupId, true);
             return true;
         }
     }
