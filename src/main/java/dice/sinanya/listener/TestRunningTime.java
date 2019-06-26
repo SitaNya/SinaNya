@@ -8,6 +8,7 @@ import com.forte.qqrobot.timetask.TimeTaskContext;
 import com.forte.qqrobot.utils.CQCodeUtil;
 import org.quartz.JobExecutionContext;
 
+import static dice.sinanya.tools.getinfo.GetTime.getNowString;
 import static dice.sinanya.tools.getinfo.History.setHistory;
 import static dice.sinanya.tools.getinfo.Team.saveTeamEn;
 
@@ -22,17 +23,16 @@ import static dice.sinanya.tools.getinfo.Team.saveTeamEn;
  * 这里的“0 * * * * ? *”表示每分钟执行一次，具体怎么写请去查crontab的使用
  * 前5位应该是:分 时 日 月 周
  */
-@CronTask("0 */15 * * * ? *")
-public class InputHistoryToDataBase implements TimeJob {
+@CronTask("0 0 * * * ? *")
+public class TestRunningTime implements TimeJob {
 
-    public InputHistoryToDataBase() {
+    public TestRunningTime() {
 
     }
 
     @Override
     public void execute(MsgSender msgSender, CQCodeUtil cqCodeUtil) {
-        setHistory();
-        saveTeamEn();
+        msgSender.SENDER.sendPrivateMsg("450609203",getNowString());
     }
 
     @Override
