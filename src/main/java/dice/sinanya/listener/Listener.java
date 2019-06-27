@@ -183,9 +183,9 @@ public class Listener {
      */
     private void changeBotSwitch(EntityTypeMessages entityTypeMessages, String messages) {
         messages = messages.toLowerCase();
-        String tagBotOff = "bot[ ]*off";
-        String tagBotInfo = "bot";
-        String tagBotExit = "bot[ ]*exit";
+        String tagBotOff = "[.。][ ]*bot[ ]*off.*";
+        String tagBotInfo = "[.。][ ]*bot.*";
+        String tagBotExit = "[.。][ ]*bot[ ]*exit.*";
         String tagMe = "[CQ:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
 
         boolean botOn = messagesContainsAtMe(messages, tagBotOn, tagMe) || messagesBotForAll(messages, tagBotOn) || messagesContaninsQqId(messages, tagBotOn);
