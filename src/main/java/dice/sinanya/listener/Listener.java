@@ -15,8 +15,6 @@ import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.flow.Flow;
 
-import java.util.regex.Pattern;
-
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
 import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
@@ -184,9 +182,10 @@ public class Listener {
      * @param messages           消息字符串
      */
     private void changeBotSwitch(EntityTypeMessages entityTypeMessages, String messages) {
-        String tagBotOff = "bot off";
+        messages = messages.toLowerCase();
+        String tagBotOff = "bot[ ]*off";
         String tagBotInfo = "bot";
-        String tagBotExit = "bot exit";
+        String tagBotExit = "bot[ ]*exit";
         String tagMe = "[CQ:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
 
         boolean botOn = messagesContainsAtMe(messages, tagBotOn, tagMe) || messagesBotForAll(messages, tagBotOn) || messagesContaninsQqId(messages, tagBotOn);
@@ -206,15 +205,15 @@ public class Listener {
     }
 
     private boolean messagesContainsAtMe(String messages, String tagBotSwitch, String tagMe) {
-        return messages.trim().contains(tagBotSwitch) && messages.trim().contains(tagMe);
+        return messages.trim().matches(tagBotSwitch) && messages.trim().contains(tagMe);
     }
 
     private boolean messagesBotForAll(String messages, String tagBotSwitch) {
-        return messages.trim().contains(tagBotSwitch) && !messages.trim().contains("[CQ:at") && !messages.matches("[0-9]");
+        return messages.trim().matches(tagBotSwitch) && !messages.trim().contains("[CQ:at") && !messages.matches("[0-9]");
     }
 
     private boolean messagesContaninsQqId(String messages, String tagBotSwitch) {
         String qqId = String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ());
-        return messages.trim().contains(tagBotSwitch) && (messages.trim().contains(qqId) || messages.trim().contains(qqId.substring(qqId.length() - 5)));
+        return messages.trim().matches(tagBotSwitch) && (messages.trim().contains(qqId) || messages.trim().contains(qqId.substring(qqId.length() - 5)));
     }
 }
