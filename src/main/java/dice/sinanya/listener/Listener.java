@@ -20,6 +20,7 @@ import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
 import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
 import static dice.sinanya.tools.getinfo.LogText.setLogText;
 import static dice.sinanya.tools.getinfo.SwitchBot.getBot;
+import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
  * @author SitaNya
@@ -194,10 +195,22 @@ public class Listener {
         boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo) || messagesContaninsQqId(messages, tagBotInfo)) && !botOn && !botOff && !botExit;
 
         if (botOn) {
+            if (entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getPowerType().isMember()) {
+                sender(entityTypeMessages, "只有管理员可以调用此信息哦~");
+                return;
+            }
             new Bot(entityTypeMessages).on();
         } else if (botOff) {
+            if (entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getPowerType().isMember()) {
+                sender(entityTypeMessages, "只有管理员可以调用此信息哦~");
+                return;
+            }
             new Bot(entityTypeMessages).off();
         } else if (botExit) {
+            if (entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getPowerType().isMember()) {
+                sender(entityTypeMessages, "只有管理员可以调用此信息哦~");
+                return;
+            }
             new Bot(entityTypeMessages).exit();
         } else if (botInfo) {
             new Bot(entityTypeMessages).info();
