@@ -15,6 +15,8 @@ import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.flow.Flow;
 
+import java.util.regex.Pattern;
+
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
 import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
@@ -187,10 +189,10 @@ public class Listener {
         String tagBotExit = "bot exit";
         String tagMe = "[CQ:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
 
-        boolean botOn = messagesContainsAtMe(messages, tagBotOn, tagMe) || messagesBotForAll(messages, tagBotOn) || messagesContaninsQQId(messages, tagBotOn);
-        boolean botOff = messagesContainsAtMe(messages, tagBotOff, tagMe) || messagesBotForAll(messages, tagBotOff) || messagesContaninsQQId(messages, tagBotOn);
-        boolean botExit = messagesContainsAtMe(messages, tagBotExit, tagMe) || messagesBotForAll(messages, tagBotExit) || messagesContaninsQQId(messages, tagBotOn);
-        boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo) || messagesContaninsQQId(messages, tagBotOn)) && !botOn && !botOff && !botExit;
+        boolean botOn = messagesContainsAtMe(messages, tagBotOn, tagMe) || messagesBotForAll(messages, tagBotOn) || messagesContaninsQqId(messages, tagBotOn);
+        boolean botOff = messagesContainsAtMe(messages, tagBotOff, tagMe) || messagesBotForAll(messages, tagBotOff) || messagesContaninsQqId(messages, tagBotOff);
+        boolean botExit = messagesContainsAtMe(messages, tagBotExit, tagMe) || messagesBotForAll(messages, tagBotExit) || messagesContaninsQqId(messages, tagBotExit);
+        boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo) || messagesContaninsQqId(messages, tagBotInfo)) && !botOn && !botOff && !botExit;
 
         if (botOn) {
             new Bot(entityTypeMessages).on();
@@ -208,10 +210,10 @@ public class Listener {
     }
 
     private boolean messagesBotForAll(String messages, String tagBotSwitch) {
-        return messages.trim().contains(tagBotSwitch) && !messages.trim().contains("[CQ:at");
+        return messages.trim().contains(tagBotSwitch) && !messages.trim().contains("[CQ:at") && !messages.matches("[0-9]");
     }
 
-    private boolean messagesContaninsQQId(String messages, String tagBotSwitch) {
+    private boolean messagesContaninsQqId(String messages, String tagBotSwitch) {
         String qqId = String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ());
         return messages.trim().contains(tagBotSwitch) && (messages.trim().contains(qqId) || messages.trim().contains(qqId.substring(qqId.length() - 5)));
     }
