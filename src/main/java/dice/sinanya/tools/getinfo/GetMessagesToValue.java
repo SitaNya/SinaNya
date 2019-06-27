@@ -32,9 +32,7 @@ class GetMessagesToValue {
         StringBuilder strSkillName = new StringBuilder();
         for (int i = 0; i < msg.length(); ) {
             while (i < msg.length() && !Character.isSpaceChar(msg.charAt(i)) &&
-                    !Character.isDigit(msg.charAt(i)) &&
-                    msg.charAt(i) != ':' &&
-                    msg.charAt(i) != '=') {
+                    !Character.isDigit(msg.charAt(i))) {
                 strSkillName.append(msg.charAt(i));
                 i++;
             }
@@ -46,7 +44,15 @@ class GetMessagesToValue {
 
             try {
                 if (!strSkillValue.toString().equals(NONE)) {
-                    properties.put(makeSkillName(strSkillName.toString()), Integer.parseInt(strSkillValue.toString()));
+                    String skillName = "";
+                    if (strSkillName.toString().contains(":")) {
+                        skillName = strSkillName.toString().split(":")[strSkillName.toString().split(":").length - 1];
+                    } else if (strSkillName.toString().contains("=")) {
+                        skillName = strSkillName.toString().split("=")[strSkillName.toString().split("=").length - 1];
+                    } else {
+                        skillName = strSkillName.toString();
+                    }
+                    properties.put(makeSkillName(skillName), Integer.parseInt(strSkillValue.toString()));
                     strSkillName = new StringBuilder();
                     strSkillValue = new StringBuilder();
                 }
