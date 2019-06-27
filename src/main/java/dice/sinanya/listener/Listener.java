@@ -209,7 +209,7 @@ public class Listener {
     }
 
     private boolean messagesBotForAll(String messages, String tagBotSwitch) {
-        return messages.trim().matches(tagBotSwitch) && !messages.trim().contains("[CQ:at") && !messages.matches("[0-9]");
+        return messages.trim().matches(tagBotSwitch) && !messages.trim().contains("[CQ:at") && !messages.matches(".*[0-9]+.*");
     }
 
     private boolean messagesContaninsQqId(String messages, String tagBotSwitch) {
