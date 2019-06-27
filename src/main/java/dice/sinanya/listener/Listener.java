@@ -30,7 +30,7 @@ import static dice.sinanya.tools.getinfo.SwitchBot.getBot;
  * 类说明: 总监听入口类，这里是实际上接收到消息的第一个类
  */
 public class Listener {
-    private String tagBotOn = ".bot on";
+    private String tagBotOn = "[.。][ ]*bot[ ]*on.*";
 
     private Listener() {
     }
