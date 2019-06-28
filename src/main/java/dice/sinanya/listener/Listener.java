@@ -194,20 +194,22 @@ public class Listener {
         boolean botExit = messagesContainsAtMe(messages, tagBotExit, tagMe) || messagesBotForAll(messages, tagBotExit) || messagesContaninsQqId(messages, tagBotExit);
         boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo) || messagesContaninsQqId(messages, tagBotInfo)) && !botOn && !botOff && !botExit;
 
+        boolean isAdmin = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getPowerType().isAdmin();
+        boolean isOwn = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getPowerType().isOwner();
         if (botOn) {
-            if (entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getPowerType().isMember()) {
+            if (!isAdmin && !isOwn) {
                 sender(entityTypeMessages, "只有管理员可以调用此信息哦~");
                 return;
             }
             new Bot(entityTypeMessages).on();
         } else if (botOff) {
-            if (entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getPowerType().isMember()) {
+            if (!isAdmin && !isOwn) {
                 sender(entityTypeMessages, "只有管理员可以调用此信息哦~");
                 return;
             }
             new Bot(entityTypeMessages).off();
         } else if (botExit) {
-            if (entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getPowerType().isMember()) {
+            if (!isAdmin && !isOwn) {
                 sender(entityTypeMessages, "只有管理员可以调用此信息哦~");
                 return;
             }
