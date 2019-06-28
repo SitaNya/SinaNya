@@ -54,7 +54,7 @@ public class LogTag {
      * @return 是否不存在其他日志开启
      */
     public static boolean checkOthorLogTrue(String groupId) {
-        return LOG_SWITCH_FOR_GROUP.getOrDefault(groupId, false);
+        return !LOG_SWITCH_FOR_GROUP.getOrDefault(groupId, false);
     }
 
     /**
