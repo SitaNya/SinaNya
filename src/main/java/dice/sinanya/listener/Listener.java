@@ -65,6 +65,7 @@ public class Listener {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgPrivate);
         if (entityTypeMessages.getMsgGet().getMsg().contains("bot")) {
             new Bot(entityTypeMessages).info();
+            setLogs(entityTypeMessages, msgGet);
         } else {
             new Flow(entityTypeMessages).toPrivate();
         }
@@ -88,6 +89,7 @@ public class Listener {
         changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
         if (getBot(Long.parseLong(msgGroup.getGroupCode()))) {
             new Flow(entityTypeMessages).toGroup();
+            setLogs(entityTypeMessages, msgGet);
             return true;
         } else {
             return true;
@@ -111,6 +113,7 @@ public class Listener {
         changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
         if (getBot(Long.parseLong(msgDisGroup.getGroupCode()))) {
             new Flow(entityTypeMessages).toDisGroup();
+            setLogs(entityTypeMessages, msgGet);
             return true;
         } else {
             return true;
@@ -128,6 +131,7 @@ public class Listener {
      * @return 返回值固定为true
      */
     @Listen(MsgGetTypes.groupMsg)
+    @Filter(value = "^[^.。].*")
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
         String tagMe = "[CQ:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
@@ -155,6 +159,7 @@ public class Listener {
      * @return 返回值固定为true
      */
     @Listen(MsgGetTypes.discussMsg)
+    @Filter(value = "^[^.。].*")
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
         String tagMe = "[CQ:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
