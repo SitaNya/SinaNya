@@ -3,17 +3,25 @@ package dice.sinanya.listener;
 import com.forte.qqrobot.anno.Constr;
 import com.forte.qqrobot.anno.Filter;
 import com.forte.qqrobot.anno.Listen;
+import com.forte.qqrobot.beans.messages.RootBean;
 import com.forte.qqrobot.beans.messages.msgget.DiscussMsg;
 import com.forte.qqrobot.beans.messages.msgget.GroupMsg;
 import com.forte.qqrobot.beans.messages.msgget.MsgGet;
 import com.forte.qqrobot.beans.messages.msgget.PrivateMsg;
+import com.forte.qqrobot.beans.messages.result.GroupMemberInfo;
+import com.forte.qqrobot.beans.messages.result.GroupMemberList;
+import com.forte.qqrobot.beans.messages.result.inner.GroupMember;
 import com.forte.qqrobot.beans.messages.types.MsgGetTypes;
+import com.forte.qqrobot.beans.messages.types.PowerType;
 import com.forte.qqrobot.beans.types.KeywordMatchType;
+import com.forte.qqrobot.component.forhttpapi.beans.response.Resp_getGroupMemberInfo;
 import com.forte.qqrobot.sender.MsgSender;
 import dice.sinanya.dice.system.Bot;
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.flow.Flow;
+
+import java.util.ArrayList;
 
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
@@ -194,23 +202,25 @@ public class Listener {
         boolean botExit = messagesContainsAtMe(messages, tagBotExit, tagMe) || messagesBotForAll(messages, tagBotExit) || messagesContaninsQqId(messages, tagBotExit);
         boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo) || messagesContaninsQqId(messages, tagBotInfo)) && !botOn && !botOff && !botExit;
 
-        boolean isAdmin = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getPowerType().isAdmin();
-        boolean isOwn = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getPowerType().isOwner();
+        if (!messages.contains("bot")){
+            return;
+        }
+        Resp_getGroupMemberInfo.GroupMemberInfo isAdmin = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getOtherParam("result", Resp_getGroupMemberInfo.GroupMemberInfo.class);
         if (botOn) {
-            if (!isAdmin && !isOwn) {
-                sender(entityTypeMessages, "只有管理员可以调用此信息哦~");
+            if (isAdmin.getPower()==1) {
+                sender(entityTypeMessages, "由于底层javaApi问题，只允许群主开关骰子~");
                 return;
             }
             new Bot(entityTypeMessages).on();
         } else if (botOff) {
-            if (!isAdmin && !isOwn) {
-                sender(entityTypeMessages, "只有管理员可以调用此信息哦~");
+            if (isAdmin.getPower()==1) {
+                sender(entityTypeMessages, "由于底层javaApi问题，只允许群主开关骰子~");
                 return;
             }
             new Bot(entityTypeMessages).off();
         } else if (botExit) {
-            if (!isAdmin && !isOwn) {
-                sender(entityTypeMessages, "只有管理员可以调用此信息哦~");
+            if (isAdmin.getPower()==1) {
+                sender(entityTypeMessages, "由于底层javaApi问题，只允许群主开关骰子~");
                 return;
             }
             new Bot(entityTypeMessages).exit();
