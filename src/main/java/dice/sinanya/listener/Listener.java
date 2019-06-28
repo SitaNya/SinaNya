@@ -208,19 +208,19 @@ public class Listener {
         Resp_getGroupMemberInfo.GroupMemberInfo isAdmin = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getOtherParam("result", Resp_getGroupMemberInfo.GroupMemberInfo.class);
         if (botOn) {
             if (isAdmin.getPower()==1) {
-                sender(entityTypeMessages, "由于底层javaApi问题，只允许群主开关骰子~");
+                sender(entityTypeMessages, "只有群主和管理员可以这样做哦~");
                 return;
             }
             new Bot(entityTypeMessages).on();
         } else if (botOff) {
             if (isAdmin.getPower()==1) {
-                sender(entityTypeMessages, "由于底层javaApi问题，只允许群主开关骰子~");
+                sender(entityTypeMessages, "只有群主和管理员可以这样做哦~");
                 return;
             }
             new Bot(entityTypeMessages).off();
         } else if (botExit) {
             if (isAdmin.getPower()==1) {
-                sender(entityTypeMessages, "由于底层javaApi问题，只允许群主开关骰子~");
+                sender(entityTypeMessages, "只有群主和管理员可以这样做哦~");
                 return;
             }
             new Bot(entityTypeMessages).exit();
