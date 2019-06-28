@@ -65,7 +65,6 @@ public class Listener {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgPrivate);
         if (entityTypeMessages.getMsgGet().getMsg().contains("bot")) {
             new Bot(entityTypeMessages).info();
-            setLogs(entityTypeMessages, msgGet);
         } else {
             new Flow(entityTypeMessages).toPrivate();
         }
