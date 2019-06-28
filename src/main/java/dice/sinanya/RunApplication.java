@@ -35,7 +35,7 @@ import static dice.sinanya.tools.log.SendMail.sendMail;
  * 这里可以修改的是before方法(但我已经改造为配置文件了，因此可以不动这个方法）
  * 此外这里声明了大量服务启动时需要从服务器中获取的缓存数据
  */
-@AllBeans(value = "dice.sinanya.listener",beans = @Beans(single = false))
+@AllBeans(value = "dice.sinanya.listener", beans = @Beans(allDepend = true, single = false))
 public class RunApplication implements HttpApp {
     private static Logger log = LogManager.getRootLogger();
     public static void main(String[] args) {
