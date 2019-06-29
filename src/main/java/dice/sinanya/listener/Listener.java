@@ -27,6 +27,7 @@ import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
 import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
 import static dice.sinanya.tools.getinfo.LogText.setLogText;
+import static dice.sinanya.tools.getinfo.SwitchBot.botOff;
 import static dice.sinanya.tools.getinfo.SwitchBot.getBot;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
@@ -39,7 +40,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 类说明: 总监听入口类，这里是实际上接收到消息的第一个类
  */
 public class Listener {
-    private String tagBotOn = "[.。][ ]*bot[ ]*on.*";
+    private String tagBotOn = ".*[.。][ ]*bot[ ]*on.*";
 
     private Listener() {
     }
@@ -133,7 +134,7 @@ public class Listener {
     @Filter(value = "^[^.。].*")
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
-        String tagMe = "[CQ:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
+        String tagMe = "[cq:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
         if (msgGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
         }
@@ -161,7 +162,7 @@ public class Listener {
     @Filter(value = "^[^.。].*")
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
-        String tagMe = "[CQ:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
+        String tagMe = "[cq:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
         if (msgDisGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
         }
@@ -196,10 +197,10 @@ public class Listener {
      */
     private void changeBotSwitch(EntityTypeMessages entityTypeMessages, String messages) {
         messages = messages.toLowerCase();
-        String tagBotOff = "[.。][ ]*bot[ ]*off.*";
-        String tagBotInfo = "[.。][ ]*bot.*";
-        String tagBotExit = "[.。][ ]*bot[ ]*exit.*";
-        String tagMe = "[CQ:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
+        String tagBotOff = ".*[.。][ ]*bot[ ]*off.*";
+        String tagBotInfo = ".*[.。][ ]*bot.*";
+        String tagBotExit = ".*[.。][ ]*bot[ ]*exit.*";
+        String tagMe = "[cq:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
 
         boolean botOn = messagesContainsAtMe(messages, tagBotOn, tagMe) || messagesBotForAll(messages, tagBotOn) || messagesContaninsQqId(messages, tagBotOn);
         boolean botOff = messagesContainsAtMe(messages, tagBotOff, tagMe) || messagesBotForAll(messages, tagBotOff) || messagesContaninsQqId(messages, tagBotOff);
@@ -238,7 +239,7 @@ public class Listener {
     }
 
     private boolean messagesBotForAll(String messages, String tagBotSwitch) {
-        return messages.trim().matches(tagBotSwitch) && !messages.trim().contains("[CQ:at") && !messages.matches(".*[0-9]+.*");
+        return messages.trim().matches(tagBotSwitch) && !messages.trim().contains("[cq:at") && !messages.matches(".*[0-9]+.*");
     }
 
     private boolean messagesContaninsQqId(String messages, String tagBotSwitch) {
