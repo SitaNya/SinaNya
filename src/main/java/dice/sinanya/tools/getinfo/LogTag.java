@@ -45,10 +45,10 @@ public class LogTag {
     }
 
     /**
-     * 检查某个群中是否存在其它日志已经开启
+     * 检查某个群中是否存在其它日志已经开启，由于LOG_SWITCH_FOR_GROUP在刷写时，就只录入了已打开的日志。所以这里找到群号就一定是日志已打开，未找到群号就一定是日志已关闭返回false
      * 注意：
-     * 不存在返回true
-     * 存在返回false
+     * 存在返回true
+     * 不存在返回false
      *
      * @param groupId 群号
      * @return 是否不存在其他日志开启

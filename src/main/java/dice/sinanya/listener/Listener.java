@@ -3,22 +3,31 @@ package dice.sinanya.listener;
 import com.forte.qqrobot.anno.Constr;
 import com.forte.qqrobot.anno.Filter;
 import com.forte.qqrobot.anno.Listen;
+import com.forte.qqrobot.beans.messages.RootBean;
 import com.forte.qqrobot.beans.messages.msgget.DiscussMsg;
 import com.forte.qqrobot.beans.messages.msgget.GroupMsg;
 import com.forte.qqrobot.beans.messages.msgget.MsgGet;
 import com.forte.qqrobot.beans.messages.msgget.PrivateMsg;
+import com.forte.qqrobot.beans.messages.result.GroupMemberInfo;
+import com.forte.qqrobot.beans.messages.result.GroupMemberList;
+import com.forte.qqrobot.beans.messages.result.inner.GroupMember;
 import com.forte.qqrobot.beans.messages.types.MsgGetTypes;
+import com.forte.qqrobot.beans.messages.types.PowerType;
 import com.forte.qqrobot.beans.types.KeywordMatchType;
+import com.forte.qqrobot.component.forhttpapi.beans.response.Resp_getGroupMemberInfo;
 import com.forte.qqrobot.sender.MsgSender;
 import dice.sinanya.dice.system.Bot;
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.flow.Flow;
 
+import java.util.ArrayList;
+
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
 import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
 import static dice.sinanya.tools.getinfo.LogText.setLogText;
+import static dice.sinanya.tools.getinfo.SwitchBot.botOff;
 import static dice.sinanya.tools.getinfo.SwitchBot.getBot;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
@@ -31,7 +40,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 类说明: 总监听入口类，这里是实际上接收到消息的第一个类
  */
 public class Listener {
-    private String tagBotOn = "[.。][ ]*bot[ ]*on.*";
+    private String tagBotOn = ".*[.。][ ]*bot[ ]*on.*";
 
     private Listener() {
     }
@@ -80,6 +89,7 @@ public class Listener {
         changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
         if (getBot(Long.parseLong(msgGroup.getGroupCode()))) {
             new Flow(entityTypeMessages).toGroup();
+            setLogs(entityTypeMessages, msgGet);
             return true;
         } else {
             return true;
@@ -103,6 +113,7 @@ public class Listener {
         changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
         if (getBot(Long.parseLong(msgDisGroup.getGroupCode()))) {
             new Flow(entityTypeMessages).toDisGroup();
+            setLogs(entityTypeMessages, msgGet);
             return true;
         } else {
             return true;
@@ -120,9 +131,10 @@ public class Listener {
      * @return 返回值固定为true
      */
     @Listen(MsgGetTypes.groupMsg)
+    @Filter(value = "^[^.。].*")
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
-        String tagMe = "[CQ:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
+        String tagMe = "[cq:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
         if (msgGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
         }
@@ -147,9 +159,10 @@ public class Listener {
      * @return 返回值固定为true
      */
     @Listen(MsgGetTypes.discussMsg)
+    @Filter(value = "^[^.。].*")
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
-        String tagMe = "[CQ:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
+        String tagMe = "[cq:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
         if (msgDisGroup.getMsg().charAt(0) != '.') {
             changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
         }
@@ -184,33 +197,35 @@ public class Listener {
      */
     private void changeBotSwitch(EntityTypeMessages entityTypeMessages, String messages) {
         messages = messages.toLowerCase();
-        String tagBotOff = "[.。][ ]*bot[ ]*off.*";
-        String tagBotInfo = "[.。][ ]*bot.*";
-        String tagBotExit = "[.。][ ]*bot[ ]*exit.*";
-        String tagMe = "[CQ:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
+        String tagBotOff = ".*[.。][ ]*bot[ ]*off.*";
+        String tagBotInfo = ".*[.。][ ]*bot.*";
+        String tagBotExit = ".*[.。][ ]*bot[ ]*exit.*";
+        String tagMe = "[cq:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
 
         boolean botOn = messagesContainsAtMe(messages, tagBotOn, tagMe) || messagesBotForAll(messages, tagBotOn) || messagesContainsQqId(messages, tagBotOn);
         boolean botOff = messagesContainsAtMe(messages, tagBotOff, tagMe) || messagesBotForAll(messages, tagBotOff) || messagesContainsQqId(messages, tagBotOff);
         boolean botExit = messagesContainsAtMe(messages, tagBotExit, tagMe) || messagesBotForAll(messages, tagBotExit) || messagesContainsQqId(messages, tagBotExit);
         boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo) || messagesContainsQqId(messages, tagBotInfo)) && !botOn && !botOff && !botExit;
 
-        boolean isAdmin = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getPowerType().isAdmin();
-        boolean isOwn = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getPowerType().isOwner();
+        if (!messages.contains("bot")){
+            return;
+        }
+        Resp_getGroupMemberInfo.GroupMemberInfo isAdmin = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getOtherParam("result", Resp_getGroupMemberInfo.GroupMemberInfo.class);
         if (botOn) {
-            if (!isAdmin && !isOwn) {
-                sender(entityTypeMessages, "只有管理员可以调用此信息哦~");
+            if (isAdmin.getPower()==1) {
+                sender(entityTypeMessages, "只有群主和管理员可以这样做哦~");
                 return;
             }
             new Bot(entityTypeMessages).on();
         } else if (botOff) {
-            if (!isAdmin && !isOwn) {
-                sender(entityTypeMessages, "只有管理员可以调用此信息哦~");
+            if (isAdmin.getPower()==1) {
+                sender(entityTypeMessages, "只有群主和管理员可以这样做哦~");
                 return;
             }
             new Bot(entityTypeMessages).off();
         } else if (botExit) {
-            if (!isAdmin && !isOwn) {
-                sender(entityTypeMessages, "只有管理员可以调用此信息哦~");
+            if (isAdmin.getPower()==1) {
+                sender(entityTypeMessages, "只有群主和管理员可以这样做哦~");
                 return;
             }
             new Bot(entityTypeMessages).exit();
@@ -224,7 +239,7 @@ public class Listener {
     }
 
     private boolean messagesBotForAll(String messages, String tagBotSwitch) {
-        return messages.trim().matches(tagBotSwitch) && !messages.trim().contains("[CQ:at") && !messages.matches(".*[0-9]+.*");
+        return messages.trim().matches(tagBotSwitch) && !messages.trim().contains("[cq:at") && !messages.matches(".*[0-9]+.*");
     }
 
     private boolean messagesContainsQqId(String messages, String tagBotSwitch) {
