@@ -189,10 +189,10 @@ public class Listener {
         String tagBotExit = "[.。][ ]*bot[ ]*exit.*";
         String tagMe = "[CQ:at,qq=" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "]";
 
-        boolean botOn = messagesContainsAtMe(messages, tagBotOn, tagMe) || messagesBotForAll(messages, tagBotOn) || messagesContaninsQqId(messages, tagBotOn);
-        boolean botOff = messagesContainsAtMe(messages, tagBotOff, tagMe) || messagesBotForAll(messages, tagBotOff) || messagesContaninsQqId(messages, tagBotOff);
-        boolean botExit = messagesContainsAtMe(messages, tagBotExit, tagMe) || messagesBotForAll(messages, tagBotExit) || messagesContaninsQqId(messages, tagBotExit);
-        boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo) || messagesContaninsQqId(messages, tagBotInfo)) && !botOn && !botOff && !botExit;
+        boolean botOn = messagesContainsAtMe(messages, tagBotOn, tagMe) || messagesBotForAll(messages, tagBotOn) || messagesContainsQqId(messages, tagBotOn);
+        boolean botOff = messagesContainsAtMe(messages, tagBotOff, tagMe) || messagesBotForAll(messages, tagBotOff) || messagesContainsQqId(messages, tagBotOff);
+        boolean botExit = messagesContainsAtMe(messages, tagBotExit, tagMe) || messagesBotForAll(messages, tagBotExit) || messagesContainsQqId(messages, tagBotExit);
+        boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo) || messagesContainsQqId(messages, tagBotInfo)) && !botOn && !botOff && !botExit;
 
         boolean isAdmin = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getPowerType().isAdmin();
         boolean isOwn = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getPowerType().isOwner();
@@ -227,7 +227,7 @@ public class Listener {
         return messages.trim().matches(tagBotSwitch) && !messages.trim().contains("[CQ:at") && !messages.matches(".*[0-9]+.*");
     }
 
-    private boolean messagesContaninsQqId(String messages, String tagBotSwitch) {
+    private boolean messagesContainsQqId(String messages, String tagBotSwitch) {
         String qqId = String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ());
         return messages.trim().matches(tagBotSwitch) && (messages.trim().contains(qqId) || messages.trim().contains(qqId.substring(qqId.length() - 5)));
     }
