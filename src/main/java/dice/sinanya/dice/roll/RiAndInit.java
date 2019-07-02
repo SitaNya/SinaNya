@@ -159,14 +159,16 @@ public class RiAndInit {
         stringBuffer.append("先攻列表为:\n");
         int i = 1;
         for (Map.Entry<String, HashMap<String, String>> mapEntry : INIT_LIST.entrySet()) {
-            HashMap<String, String> sort = sortHashMap(mapEntry.getValue());
-            for (Map.Entry<String, String> mapEntry2 : sort.entrySet()) {
-                stringBuffer.append(i)
-                        .append(".\t")
-                        .append(mapEntry2.getKey())
-                        .append(mapEntry2.getValue())
-                        .append("\n");
-                i++;
+            if (mapEntry.getKey().equals(entityTypeMessages.getFromGroup())) {
+                HashMap<String, String> sort = sortHashMap(mapEntry.getValue());
+                for (Map.Entry<String, String> mapEntry2 : sort.entrySet()) {
+                    stringBuffer.append(i)
+                            .append(".\t")
+                            .append(mapEntry2.getKey())
+                            .append(mapEntry2.getValue())
+                            .append("\n");
+                    i++;
+                }
             }
         }
         sender(entityTypeMessages, stringBuffer.substring(0, stringBuffer.length() - 1));
