@@ -17,6 +17,6 @@ public class MakeMessages {
      * @return 删除标签并删除两端空格的结果，如50
      */
     public static String deleteTag(String message, String tag) {
-        return message.trim().replaceFirst(tag, "").trim();
+        return message.toLowerCase().trim().replaceFirst(tag, "").trim();
     }
 }
