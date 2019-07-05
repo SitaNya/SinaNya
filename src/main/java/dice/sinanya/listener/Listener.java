@@ -3,16 +3,11 @@ package dice.sinanya.listener;
 import com.forte.qqrobot.anno.Constr;
 import com.forte.qqrobot.anno.Filter;
 import com.forte.qqrobot.anno.Listen;
-import com.forte.qqrobot.beans.messages.RootBean;
 import com.forte.qqrobot.beans.messages.msgget.DiscussMsg;
 import com.forte.qqrobot.beans.messages.msgget.GroupMsg;
 import com.forte.qqrobot.beans.messages.msgget.MsgGet;
 import com.forte.qqrobot.beans.messages.msgget.PrivateMsg;
-import com.forte.qqrobot.beans.messages.result.GroupMemberInfo;
-import com.forte.qqrobot.beans.messages.result.GroupMemberList;
-import com.forte.qqrobot.beans.messages.result.inner.GroupMember;
 import com.forte.qqrobot.beans.messages.types.MsgGetTypes;
-import com.forte.qqrobot.beans.messages.types.PowerType;
 import com.forte.qqrobot.beans.types.KeywordMatchType;
 import com.forte.qqrobot.component.forhttpapi.beans.response.Resp_getGroupMemberInfo;
 import com.forte.qqrobot.sender.MsgSender;
@@ -21,13 +16,11 @@ import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.flow.Flow;
 
-import java.util.ArrayList;
-
+import static com.forte.qqrobot.beans.messages.types.MsgGetTypes.discussMsg;
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
 import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
 import static dice.sinanya.tools.getinfo.LogText.setLogText;
-import static dice.sinanya.tools.getinfo.SwitchBot.botOff;
 import static dice.sinanya.tools.getinfo.SwitchBot.getBot;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
@@ -106,7 +99,7 @@ public class Listener {
      * @param msgDisGroup 讨论组消息对象
      * @return 返回值固定为true
      */
-    @Listen(MsgGetTypes.discussMsg)
+    @Listen(discussMsg)
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
@@ -158,7 +151,7 @@ public class Listener {
      * @param msgDisGroup 讨论组消息对象
      * @return 返回值固定为true
      */
-    @Listen(MsgGetTypes.discussMsg)
+    @Listen(discussMsg)
     @Filter(value = "^[^.。].*")
     public boolean listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
@@ -224,7 +217,7 @@ public class Listener {
             }
             new Bot(entityTypeMessages).off();
         } else if (botExit) {
-            if (isAdmin.getPower()==1) {
+            if (isAdmin.getPower() == 1 || entityTypeMessages.getMsgGetTypes() == discussMsg) {
                 sender(entityTypeMessages, "只有群主和管理员可以这样做哦~");
                 return;
             }
