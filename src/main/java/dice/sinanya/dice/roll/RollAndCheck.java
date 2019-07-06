@@ -199,7 +199,7 @@ public class RollAndCheck implements En {
             Log.error(e.getMessage(), e);
         }
 
-        exec.shutdown();
+        exec.shutdownNow();
         formatRxlAndSend(entityHistory);
     }
 
@@ -231,7 +231,7 @@ public class RollAndCheck implements En {
         } catch (InterruptedException | ExecutionException e) {
             Log.error(e.getMessage(), e);
         }
-        exec.shutdown();
+        exec.shutdownNow();
         formatRxlAndSend(entityHistory);
     }
 

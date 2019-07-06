@@ -200,7 +200,7 @@ public class MakeCocCard implements MakeCard {
         }
 
         String resCoc7 = getFutureToString(stringBuilder, results);
-        exec.shutdown();
+        exec.shutdownNow();
         sender(entityTypeMessages, resCoc7.substring(0, resCoc7.length() - 1));
     }
 
@@ -227,7 +227,7 @@ public class MakeCocCard implements MakeCard {
         }
 
         String resCoc6 = getFutureToString(stringBuilder, results);
-        exec.shutdown();
+        exec.shutdownNow();
         sender(entityTypeMessages, resCoc6.substring(0, resCoc6.length() - 1));
     }
 }

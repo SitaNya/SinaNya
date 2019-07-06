@@ -41,8 +41,8 @@ public class RandomInt {
     public static int random(int lowest, int highest) {
         int result;
         int times = 0;
+        Random r = new Random();
         do {
-            Random r = new Random();
             int mean = max((int) ceil((highest - lowest) / 2.0), 1);
             result = (int) ((mean + 2) * r.nextGaussian() + mean);
             times++;
@@ -56,8 +56,9 @@ public class RandomInt {
     private static int overRandom(int lowest, int highest) {
         log.info("使用原始骰点逻辑");
         int result = 0;
+        Random r = new Random();
         while (result == 0) {
-            result = new Random().nextInt(highest + 1 - lowest) + lowest;
+            result = r.nextInt(highest + 1 - lowest) + lowest;
         }
         return result;
     }

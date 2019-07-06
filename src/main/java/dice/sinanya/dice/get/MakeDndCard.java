@@ -52,7 +52,7 @@ public class MakeDndCard implements MakeCard {
         }
 
         String resDnd = getFutureToString(stringBuilder, results);
-        exec.shutdown();
+        exec.shutdownNow();
         sender(entityTypeMessages, resDnd.substring(0, resDnd.length() - 1));
 
 
