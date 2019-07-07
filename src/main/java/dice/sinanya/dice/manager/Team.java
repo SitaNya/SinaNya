@@ -62,7 +62,7 @@ public class Team implements GetDb, Role, AtQq {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
         for (String qq : qqList) {
-            sender(entityTypeMessages, "已将玩家: [cq:at,qq=" + qq + "]加入小队。可以使用.team查看队伍信息,.team hp/san对成员状态进行强制调整\n其余使用方式请查看.help命令");
+            sender(entityTypeMessages, "已将玩家: [CQ:at,qq=" + qq + "]加入小队。可以使用.team查看队伍信息,.team hp/san对成员状态进行强制调整\n其余使用方式请查看.help命令");
         }
         EntityTeamInfo entityTeamInfo = new EntityTeamInfo(entityTypeMessages.getFromGroup(), qqList);
         addIntoTeam(entityTeamInfo);
@@ -79,7 +79,7 @@ public class Team implements GetDb, Role, AtQq {
         removeFromTeam(entityTeamInfo);
         for (String qq : qqList) {
             rmTeamEn(qq, entityTypeMessages.getFromGroup());
-            sender(entityTypeMessages, "已将玩家: [cq:at,qq=" + qq + "]移出小队,其在这期间损失的血量和san值不会还原。");
+            sender(entityTypeMessages, "已将玩家: [CQ:at,qq=" + qq + "]移出小队,其在这期间损失的血量和san值不会还原。");
         }
     }
 
@@ -100,7 +100,7 @@ public class Team implements GetDb, Role, AtQq {
         stringBuilder.append("kp正在呼叫以下成员:");
         for (String qq : queryTeam(entityTypeMessages.getFromGroup())
         ) {
-            stringBuilder.append("\n[cq:at,qq=")
+            stringBuilder.append("\n[CQ:at,qq=")
                     .append(qq)
                     .append("]");
         }
@@ -158,7 +158,7 @@ public class Team implements GetDb, Role, AtQq {
                     }
                 }
             } else {
-                sender(entityTypeMessages, "[cq:at,qq=" + qq + "] 未选择人物卡");
+                sender(entityTypeMessages, "[CQ:at,qq=" + qq + "] 未选择人物卡");
             }
         }
     }
@@ -218,7 +218,7 @@ public class Team implements GetDb, Role, AtQq {
                             ROLE_INFO_CACHE.put(new EntityRoleTag(Long.parseLong(qq), role), prop);
                             sender(entityTypeMessages, strResult.toString());
                         } else {
-                            sender(entityTypeMessages, "未找到[cq:at,qq=" + qq + "]的人物卡");
+                            sender(entityTypeMessages, "未找到[CQ:at,qq=" + qq + "]的人物卡");
                         }
                     }
 
@@ -278,7 +278,7 @@ public class Team implements GetDb, Role, AtQq {
                         .append("DB:")
                         .append(dbGetter(siz + str));
             } else {
-                stringBuilder.append("\n[cq:at,qq=").append(qq).append("] 未选择人物卡");
+                stringBuilder.append("\n[CQ:at,qq=").append(qq).append("] 未选择人物卡");
             }
         }
         sender(entityTypeMessages, stringBuilder.toString());
