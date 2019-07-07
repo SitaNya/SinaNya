@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public interface AtQq {
 
     default ArrayList<String> getAtQqList(String msg) {
-        String regex = "\\[CQ:at,qq=([0-9]+)]";
+        String regex = "\\[cq:at,qq=([0-9]+)]";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(msg);
 

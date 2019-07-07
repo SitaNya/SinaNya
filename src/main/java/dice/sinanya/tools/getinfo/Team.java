@@ -97,11 +97,11 @@ public class Team {
             if (checkRoleChooseExistByQQ(qqId)) {
                 role = getRoleChooseByQQ(qqId) + ": ";
             } else {
-                role = "[CQ:at,qq=" + qqId + "]: ";
+                role = "[cq:at,qq=" + qqId + "]: ";
             }
             return role + StringUtils.join(TEAM_EN.get(entityQqAndGroup), ",");
         } else {
-            return "[CQ:at,qq=" + qqId + "]" + MESSAGES_SYSTEM.get("teamMemberEnIsEmpty");
+            return "[cq:at,qq=" + qqId + "]" + MESSAGES_SYSTEM.get("teamMemberEnIsEmpty");
         }
     }
 
