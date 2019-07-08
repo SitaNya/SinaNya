@@ -1,6 +1,5 @@
 package dice.sinanya.dice.roll;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import dice.sinanya.entity.EntityAntagonize;
 import dice.sinanya.entity.EntityHistory;
 import dice.sinanya.entity.EntityNickAndRandomAndSkill;
@@ -15,10 +14,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 import static dice.sinanya.system.MessagesAntagonize.ANTAGONIZE;
-import static dice.sinanya.system.MessagesSystem.EXEC;
 import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
@@ -45,8 +45,6 @@ public class RollAndCheck implements En {
     private String defaultGroupId = "0";
 
     private EntityTypeMessages entityTypeMessages;
-
-    private ArrayList<Future<Integer>> results = new ArrayList<>();
 
     public RollAndCheck(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
@@ -186,19 +184,18 @@ public class RollAndCheck implements En {
         } catch (ManyRollsTimesTooMoreException | ManyRollsFormatException manyRollsTimesTooMoreException) {
             Log.error(manyRollsTimesTooMoreException.getMessage(), manyRollsTimesTooMoreException);
         }
-//        声明一个多线程池coc-ral用于包装多次骰掷
+
+        ArrayList<Integer> rollsList = new ArrayList<>();
         for (int i = 0; i < Integer.parseInt(msg.split(SPACE)[1]); i++) {
-            results.add(EXEC.submit(new MakeRal(entityTypeMessages, msg.split(" ")[0])));
-            //将MakeRal类加入多线程池以保证速度
+            rollsList = (ArrayList<Integer>) rollsList.stream().parallel().map(s -> new MakeRal(entityTypeMessages, msg.split(" ")[0]).call()).collect(Collectors.toList());
         }
 
         try {
-            updateHistory(entityHistory, results);
+            updateHistory(entityHistory, rollsList);
         } catch (InterruptedException | ExecutionException e) {
             Log.error(e.getMessage(), e);
         }
 
-//        EXEC.shutdownNow();
         formatRxlAndSend(entityHistory);
     }
 
@@ -216,17 +213,16 @@ public class RollAndCheck implements En {
             Log.error(manyRollsTimesTooMoreException.getMessage(), manyRollsTimesTooMoreException);
         }
 
+        ArrayList<Integer> rollsList = new ArrayList<>();
         for (int i = 0; i < Integer.parseInt(msg.split(SPACE)[1]); i++) {
-            results.add(EXEC.submit(new MakeRcl(entityTypeMessages, msg.split(" ")[0])));
-            //submit返回一个Future，代表了即将要返回的结果
+            rollsList = (ArrayList<Integer>) rollsList.stream().parallel().map(s -> new MakeRcl(entityTypeMessages, msg.split(" ")[0]).call()).collect(Collectors.toList());
         }
 
         try {
-            updateHistory(entityHistory, results);
+            updateHistory(entityHistory, rollsList);
         } catch (InterruptedException | ExecutionException e) {
             Log.error(e.getMessage(), e);
         }
-//        EXEC.shutdownNow();
         formatRxlAndSend(entityHistory);
     }
 
@@ -298,18 +294,9 @@ public class RollAndCheck implements En {
      * @throws InterruptedException 如果没有isDone，则休眠，其间发生问题可能引发InterruptedException
      * @throws ExecutionException   多线程执行故障
      */
-    private void updateHistory(EntityHistory entityHistory, ArrayList<Future<Integer>> results) throws InterruptedException, ExecutionException {
-        for (Future future : results) {
-            int times = 0;
-            while (!future.isDone()) {
-                Thread.sleep(500);
-                if (times > 20) {
-                    return;
-                } else {
-                    times++;
-                }
-            }
-            entityHistory.update((int) future.get());
+    private void updateHistory(EntityHistory entityHistory, ArrayList<Integer> results) throws InterruptedException, ExecutionException {
+        for (int result : results) {
+            entityHistory.update(result);
         }
     }
 

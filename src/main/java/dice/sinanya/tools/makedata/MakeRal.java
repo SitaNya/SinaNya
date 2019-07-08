@@ -16,7 +16,7 @@ import static dice.sinanya.tools.makedata.GetNickAndRandomAndSkill.getNickAndRan
  * 有任何问题欢迎咨询
  * 类说明: ral的多线程判断成功等级类
  */
-public class MakeRal implements Callable<Integer> {
+public class MakeRal {
 
     private EntityTypeMessages entityTypeMessages;
     private String rolls;
@@ -26,7 +26,6 @@ public class MakeRal implements Callable<Integer> {
         this.rolls = rolls;
     }
 
-    @Override
     public Integer call() {
         EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, rolls);
         CheckResultLevel checkResultLevel = new CheckResultLevel(entityNickAndRandomAndSkill.getRandom(), entityNickAndRandomAndSkill.getSkill(), false);

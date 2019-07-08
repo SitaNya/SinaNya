@@ -5,17 +5,15 @@ import dice.sinanya.dice.get.imal.MakeCard;
 import dice.sinanya.entity.EntityCoc6CardInfo;
 import dice.sinanya.entity.EntityCoc7CardInfo;
 import dice.sinanya.entity.EntityTypeMessages;
-import dice.sinanya.tools.makedata.ThreadCoc6;
-import dice.sinanya.tools.makedata.ThreadCoc7;
+
 
 import java.util.ArrayList;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
-import static dice.sinanya.system.MessagesSystem.EXEC;
 import static dice.sinanya.system.MessagesTag.TAG_COC6;
 import static dice.sinanya.system.MessagesTag.TAG_COC7;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
-import static dice.sinanya.tools.makedata.GetFutureToString.getFutureToString;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
@@ -190,17 +188,19 @@ public class MakeCocCard implements MakeCard {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(nick)
-                .append("的7版人物做成:")
-                .append("\n");
+                .append("的7版人物做成:");
 
-        ArrayList<Future<String>> results = new ArrayList<>();
+        ArrayList<String> results = new ArrayList<>();
         for (int i = 0; i < times; i++) {
-            results.add(EXEC.submit(new ThreadCoc7()));
+            results.add("");
         }
 
-        String resCoc7 = getFutureToString(stringBuilder, results);
-//        EXEC.shutdownNow();
-        sender(entityTypeMessages, resCoc7.substring(0, resCoc7.length() - 1));
+        results = (ArrayList<String>) results.stream().parallel().map(s -> getCoc7CardInfo()).collect(Collectors.toList());
+        for (String cocText:results){
+            stringBuilder.append("\n")
+                    .append(cocText);
+        }
+        sender(entityTypeMessages, stringBuilder.substring(0, stringBuilder.length() - 1));
     }
 
     /**
@@ -215,16 +215,18 @@ public class MakeCocCard implements MakeCard {
         String nick = getNickName(entityTypeMessages);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(nick)
-                .append("的6版人物做成:")
-                .append("\n");
+                .append("的6版人物做成:");
 
-        ArrayList<Future<String>> results = new ArrayList<>();
+        ArrayList<String> results = new ArrayList<>();
         for (int i = 0; i < times; i++) {
-            results.add(EXEC.submit(new ThreadCoc6()));
+            results.add("");
         }
 
-        String resCoc6 = getFutureToString(stringBuilder, results);
-//        EXEC.shutdownNow();
-        sender(entityTypeMessages, resCoc6.substring(0, resCoc6.length() - 1));
+        results = (ArrayList<String>) results.stream().parallel().map(s -> getCoc6CardInfo()).collect(Collectors.toList());
+        for (String cocText:results){
+            stringBuilder.append("\n")
+                    .append(cocText);
+        }
+        sender(entityTypeMessages, stringBuilder.substring(0, stringBuilder.length() - 1));
     }
 }

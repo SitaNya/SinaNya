@@ -13,9 +13,9 @@ import static dice.sinanya.tools.makedata.RandomInt.random;
  * 有任何问题欢迎咨询
  * 类说明: DND多线程车卡中的信息生成类
  */
-class MakeDndCardInfo {
+public class MakeDndCardInfo {
 
-    static String makeDndCardInfo() {
+    public static String makeDndCardInfo() {
         StringBuilder stringBuffer = new StringBuilder();
         int str = get4d6k3multiply();
         int con = get4d6k3multiply();

@@ -9,7 +9,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
-import static dice.sinanya.system.MessagesSystem.EXEC;
 import static dice.sinanya.tools.makedata.GetMaxNumsResult.getMaxNumsResult;
 import static dice.sinanya.tools.makedata.RandomInt.random;
 

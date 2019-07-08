@@ -16,8 +16,6 @@ import java.util.concurrent.ExecutorService;
  */
 public interface MessagesSystem {
 
-    ExecutorService EXEC = (ExecutorService) ResourceDispatchCenter.getThreadPool("EXEC");
-
     String NONE = "";
     String SPACE = " ";
 

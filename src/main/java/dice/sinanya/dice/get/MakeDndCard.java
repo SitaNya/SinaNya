@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import static dice.sinanya.system.MessagesTag.TAG_DND;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
+import static dice.sinanya.tools.makedata.MakeDndCardInfo.makeDndCardInfo;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
@@ -39,15 +40,14 @@ public class MakeDndCard implements MakeCard {
         String nick = getNickName(entityTypeMessages);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(nick)
-                .append("的DND英雄做成:")
-                .append("\n");
+                .append("的DND英雄做成:");
 
         ArrayList<String> results = new ArrayList<>();
         for (int i = 0; i < times; i++) {
             results.add("");
         }
 
-        results = (ArrayList<String>) results.stream().parallel().map(s -> "\n" + new dice.sinanya.tools.makedata.MakeDndCard().call()).collect(Collectors.toList());
+        results = (ArrayList<String>) results.stream().parallel().map(s -> makeDndCardInfo()).collect(Collectors.toList());
         for (String dndText:results){
             stringBuilder.append("\n")
                     .append(dndText);
