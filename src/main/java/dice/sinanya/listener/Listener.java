@@ -200,18 +200,18 @@ public class Listener {
         boolean botExit = messagesContainsAtMe(messages, tagBotExit, tagMe) || messagesBotForAll(messages, tagBotExit) || messagesContainsQqId(messages, tagBotExit);
         boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo) || messagesContainsQqId(messages, tagBotInfo)) && !botOn && !botOff && !botExit;
 
-        if (!messages.contains("bot")){
+        if (!messages.contains("bot")) {
             return;
         }
         Resp_getGroupMemberInfo.GroupMemberInfo isAdmin = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getOtherParam("result", Resp_getGroupMemberInfo.GroupMemberInfo.class);
         if (botOn) {
-            if (isAdmin.getPower()==1) {
+            if (isAdmin.getPower() == 1) {
                 sender(entityTypeMessages, "只有群主和管理员可以这样做哦~");
                 return;
             }
             new Bot(entityTypeMessages).on();
         } else if (botOff) {
-            if (isAdmin.getPower()==1) {
+            if (isAdmin.getPower() == 1) {
                 sender(entityTypeMessages, "只有群主和管理员可以这样做哦~");
                 return;
             }

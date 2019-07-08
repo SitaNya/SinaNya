@@ -38,6 +38,7 @@ import static dice.sinanya.tools.log.SendMail.sendMail;
 @AllBeans(value = "dice.sinanya.listener", beans = @Beans(allDepend = true, single = false))
 public class RunApplication implements HttpApp {
     private static Logger log = LogManager.getRootLogger();
+
     public static void main(String[] args) {
         initMessagesSystem();
 //        读取配置文件

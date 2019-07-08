@@ -48,7 +48,7 @@ public class MakeDndCard implements MakeCard {
         }
 
         results = (ArrayList<String>) results.stream().parallel().map(s -> makeDndCardInfo()).collect(Collectors.toList());
-        for (String dndText:results){
+        for (String dndText : results) {
             stringBuilder.append("\n")
                     .append(dndText);
         }

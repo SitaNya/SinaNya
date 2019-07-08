@@ -120,7 +120,7 @@ public class RewardAndPunishment implements En {
             max = random / multiple;
         }
 
-        int resultRandom = min(100,max * multiple + random % multiple);
+        int resultRandom = min(100, max * multiple + random % multiple);
 //        进行替换，高位替换为整个列表中最大值
 
         String strRes;

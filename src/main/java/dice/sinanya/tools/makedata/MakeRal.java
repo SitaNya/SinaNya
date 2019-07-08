@@ -4,8 +4,6 @@ import dice.sinanya.entity.EntityNickAndRandomAndSkill;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.tools.checkdata.CheckResultLevel;
 
-import java.util.concurrent.Callable;
-
 import static dice.sinanya.tools.makedata.GetNickAndRandomAndSkill.getNickAndRandomAndSkill;
 
 /**

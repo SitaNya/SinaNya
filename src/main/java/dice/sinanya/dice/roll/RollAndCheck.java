@@ -15,7 +15,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 import static dice.sinanya.system.MessagesAntagonize.ANTAGONIZE;

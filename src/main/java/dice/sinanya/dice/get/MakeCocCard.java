@@ -1,14 +1,11 @@
 package dice.sinanya.dice.get;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import dice.sinanya.dice.get.imal.MakeCard;
 import dice.sinanya.entity.EntityCoc6CardInfo;
 import dice.sinanya.entity.EntityCoc7CardInfo;
 import dice.sinanya.entity.EntityTypeMessages;
 
-
 import java.util.ArrayList;
-import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 import static dice.sinanya.system.MessagesTag.TAG_COC6;
@@ -196,7 +193,7 @@ public class MakeCocCard implements MakeCard {
         }
 
         results = (ArrayList<String>) results.stream().parallel().map(s -> getCoc7CardInfo()).collect(Collectors.toList());
-        for (String cocText:results){
+        for (String cocText : results) {
             stringBuilder.append("\n")
                     .append(cocText);
         }
@@ -223,7 +220,7 @@ public class MakeCocCard implements MakeCard {
         }
 
         results = (ArrayList<String>) results.stream().parallel().map(s -> getCoc6CardInfo()).collect(Collectors.toList());
-        for (String cocText:results){
+        for (String cocText : results) {
             stringBuilder.append("\n")
                     .append(cocText);
         }

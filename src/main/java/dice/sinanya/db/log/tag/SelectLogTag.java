@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static dice.sinanya.system.MessagesLog.LOG_NAME_SWITCH;
 import static dice.sinanya.system.MessagesLog.LOG_SWITCH_FOR_GROUP;

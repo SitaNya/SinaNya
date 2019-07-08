@@ -23,6 +23,7 @@ import static java.lang.Math.max;
  */
 public class RandomInt {
     private static Logger log = LogManager.getLogger(RandomInt.class.getName());
+
     /**
      * 尝试了系统随机数和梅森旋转
      * 梅森旋转就他娘的是个憨憨！
