@@ -73,7 +73,7 @@ public class ManyRolls {
             for (int intTmp : getMaxNumsResult(tmp, maxNums)) {
                 intResult += intTmp;
             }
-            EXEC.shutdownNow();
+//            EXEC.shutdownNow();
             stringBuilder.append(intResult);
         } else if (times > 1) {
             stringBuilder.append("(");
