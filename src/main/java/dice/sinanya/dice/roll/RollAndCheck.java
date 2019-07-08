@@ -295,6 +295,7 @@ public class RollAndCheck implements En {
      */
     private void updateHistory(EntityHistory entityHistory, ArrayList<Integer> results) throws InterruptedException, ExecutionException {
         for (int result : results) {
+            Log.error("result is: " + result);
             entityHistory.update(result);
         }
     }
