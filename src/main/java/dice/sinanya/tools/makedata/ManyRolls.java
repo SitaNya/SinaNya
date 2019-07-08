@@ -1,11 +1,13 @@
 package dice.sinanya.tools.makedata;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.concurrent.*;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 import static dice.sinanya.system.MessagesSystem.EXEC;
 import static dice.sinanya.tools.makedata.GetMaxNumsResult.getMaxNumsResult;
@@ -43,37 +45,15 @@ public class ManyRolls {
             int tmpResult = random(1, rolls);
             return String.valueOf(tmpResult);
         } else if (times > maxTimesRolls) {
-            ArrayList<Future<Integer>> results = new ArrayList<>();
-
+            ArrayList<Integer> list = new ArrayList<>();
             for (int i = 0; i < times; i++) {
-                results.add(EXEC.submit(new MakeManyRollsInThread(rolls)));
-                //submit返回一个Future，代表了即将要返回的结果
+                list.add(rolls);
             }
-            ArrayList<Integer> tmp = new ArrayList<>();
-            for (Future future : results) {
-                int sleepTimes = 0;
-                while (!future.isDone()) {
-                    try {
-                        Thread.sleep(100);
-                        if (sleepTimes>20){
-                            return "多线程运行异常";
-                        }else {
-                            sleepTimes++;
-                        }
-                    } catch (InterruptedException e) {
-                        log.error(e.getMessage(), e);
-                    }
-                }
-                try {
-                    tmp.add((int) future.get());
-                } catch (InterruptedException | ExecutionException e) {
-                    log.error(e.getMessage(), e);
-                }
-            }
-            for (int intTmp : getMaxNumsResult(tmp, maxNums)) {
+            ArrayList<Integer> collect = (ArrayList<Integer>) list.stream().parallel().map(s -> new MakeManyRollsInThread(s).call()).collect(Collectors.toList());
+
+            for (int intTmp : getMaxNumsResult(collect, maxNums)) {
                 intResult += intTmp;
             }
-//            EXEC.shutdownNow();
             stringBuilder.append(intResult);
         } else if (times > 1) {
             stringBuilder.append("(");

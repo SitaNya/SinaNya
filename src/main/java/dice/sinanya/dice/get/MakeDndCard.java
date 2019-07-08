@@ -1,16 +1,13 @@
 package dice.sinanya.dice.get;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import dice.sinanya.dice.get.imal.MakeCard;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.ArrayList;
-import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
-import static dice.sinanya.system.MessagesSystem.EXEC;
 import static dice.sinanya.system.MessagesTag.TAG_DND;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
-import static dice.sinanya.tools.makedata.GetFutureToString.getFutureToString;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
@@ -45,14 +42,17 @@ public class MakeDndCard implements MakeCard {
                 .append("的DND英雄做成:")
                 .append("\n");
 
-        ArrayList<Future<String>> results = new ArrayList<>();
+        ArrayList<String> results = new ArrayList<>();
         for (int i = 0; i < times; i++) {
-            results.add(EXEC.submit(new dice.sinanya.tools.makedata.MakeDndCard()));
+            results.add("");
         }
 
-        String resDnd = getFutureToString(stringBuilder, results);
-//        EXEC.shutdownNow();
-        sender(entityTypeMessages, resDnd.substring(0, resDnd.length() - 1));
+        results = (ArrayList<String>) results.stream().parallel().map(s -> "\n" + new dice.sinanya.tools.makedata.MakeDndCard().call()).collect(Collectors.toList());
+        for (String dndText:results){
+            stringBuilder.append("\n")
+                    .append(dndText);
+        }
+        sender(entityTypeMessages, stringBuilder.substring(0, stringBuilder.length() - 1));
 
 
     }
