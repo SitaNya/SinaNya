@@ -186,8 +186,10 @@ public class RollAndCheck implements En {
 
         ArrayList<Integer> rollsList = new ArrayList<>();
         for (int i = 0; i < Integer.parseInt(msg.split(SPACE)[1]); i++) {
-            rollsList = (ArrayList<Integer>) rollsList.stream().parallel().map(s -> new MakeRal(entityTypeMessages, msg.split(" ")[0]).call()).collect(Collectors.toList());
+            rollsList.add(0);
         }
+
+        rollsList = (ArrayList<Integer>) rollsList.stream().parallel().map(s -> new MakeRal(entityTypeMessages, msg.split(" ")[0]).call()).collect(Collectors.toList());
 
         try {
             updateHistory(entityHistory, rollsList);
@@ -214,9 +216,10 @@ public class RollAndCheck implements En {
 
         ArrayList<Integer> rollsList = new ArrayList<>();
         for (int i = 0; i < Integer.parseInt(msg.split(SPACE)[1]); i++) {
-            rollsList = (ArrayList<Integer>) rollsList.stream().parallel().map(s -> new MakeRcl(entityTypeMessages, msg.split(" ")[0]).call()).collect(Collectors.toList());
+            rollsList.add(0);
         }
-        Log.error("rollsList size: "+rollsList.size());
+
+        rollsList = (ArrayList<Integer>) rollsList.stream().parallel().map(s -> new MakeRcl(entityTypeMessages, msg.split(" ")[0]).call()).collect(Collectors.toList());
         try {
             updateHistory(entityHistory, rollsList);
         } catch (InterruptedException | ExecutionException e) {
