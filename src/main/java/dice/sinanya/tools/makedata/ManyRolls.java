@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.concurrent.*;
 
+import static dice.sinanya.system.MessagesSystem.EXEC;
 import static dice.sinanya.tools.makedata.GetMaxNumsResult.getMaxNumsResult;
 import static dice.sinanya.tools.makedata.RandomInt.random;
 
@@ -44,10 +45,8 @@ public class ManyRolls {
         } else if (times > maxTimesRolls) {
             ArrayList<Future<Integer>> results = new ArrayList<>();
 
-            ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("manyRolls-%d").build();
-            ExecutorService exec = new ThreadPoolExecutor(times, times, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), namedThreadFactory);
             for (int i = 0; i < times; i++) {
-                results.add(exec.submit(new MakeManyRollsInThread(rolls)));
+                results.add(EXEC.submit(new MakeManyRollsInThread(rolls)));
                 //submit返回一个Future，代表了即将要返回的结果
             }
             ArrayList<Integer> tmp = new ArrayList<>();
@@ -74,7 +73,7 @@ public class ManyRolls {
             for (int intTmp : getMaxNumsResult(tmp, maxNums)) {
                 intResult += intTmp;
             }
-            exec.shutdownNow();
+            EXEC.shutdownNow();
             stringBuilder.append(intResult);
         } else if (times > 1) {
             stringBuilder.append("(");

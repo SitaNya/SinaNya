@@ -1,6 +1,11 @@
 package dice.sinanya.system;
 
 
+import com.forte.qqrobot.ResourceDispatchCenter;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+
 /**
  * @author SitaNya
  * 日期: 2019-06-15
@@ -10,6 +15,9 @@ package dice.sinanya.system;
  * 接口说明: .bot回复静态信息
  */
 public interface MessagesSystem {
+
+    ExecutorService EXEC = (ExecutorService) ResourceDispatchCenter.getThreadPool("EXEC");
+
     String NONE = "";
     String SPACE = " ";
 

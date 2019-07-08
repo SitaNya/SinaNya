@@ -7,6 +7,7 @@ import dice.sinanya.entity.EntityTypeMessages;
 import java.util.ArrayList;
 import java.util.concurrent.*;
 
+import static dice.sinanya.system.MessagesSystem.EXEC;
 import static dice.sinanya.system.MessagesTag.TAG_DND;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.makedata.GetFutureToString.getFutureToString;
@@ -44,15 +45,13 @@ public class MakeDndCard implements MakeCard {
                 .append("的DND英雄做成:")
                 .append("\n");
 
-        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("dnd-make-card-%d").build();
-        ExecutorService exec = new ThreadPoolExecutor(times, times, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), namedThreadFactory);
         ArrayList<Future<String>> results = new ArrayList<>();
         for (int i = 0; i < times; i++) {
-            results.add(exec.submit(new dice.sinanya.tools.makedata.MakeDndCard()));
+            results.add(EXEC.submit(new dice.sinanya.tools.makedata.MakeDndCard()));
         }
 
         String resDnd = getFutureToString(stringBuilder, results);
-        exec.shutdownNow();
+        EXEC.shutdownNow();
         sender(entityTypeMessages, resDnd.substring(0, resDnd.length() - 1));
 
 

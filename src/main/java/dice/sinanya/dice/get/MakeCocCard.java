@@ -11,6 +11,7 @@ import dice.sinanya.tools.makedata.ThreadCoc7;
 import java.util.ArrayList;
 import java.util.concurrent.*;
 
+import static dice.sinanya.system.MessagesSystem.EXEC;
 import static dice.sinanya.system.MessagesTag.TAG_COC6;
 import static dice.sinanya.system.MessagesTag.TAG_COC7;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
@@ -192,15 +193,13 @@ public class MakeCocCard implements MakeCard {
                 .append("的7版人物做成:")
                 .append("\n");
 
-        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("coc-7-make-card-%d").build();
-        ExecutorService exec = new ThreadPoolExecutor(times, times, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), namedThreadFactory);
         ArrayList<Future<String>> results = new ArrayList<>();
         for (int i = 0; i < times; i++) {
-            results.add(exec.submit(new ThreadCoc7()));
+            results.add(EXEC.submit(new ThreadCoc7()));
         }
 
         String resCoc7 = getFutureToString(stringBuilder, results);
-        exec.shutdownNow();
+        EXEC.shutdownNow();
         sender(entityTypeMessages, resCoc7.substring(0, resCoc7.length() - 1));
     }
 
@@ -219,15 +218,13 @@ public class MakeCocCard implements MakeCard {
                 .append("的6版人物做成:")
                 .append("\n");
 
-        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("coc-6-make-card-%d").build();
-        ExecutorService exec = new ThreadPoolExecutor(times, times, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), namedThreadFactory);
         ArrayList<Future<String>> results = new ArrayList<>();
         for (int i = 0; i < times; i++) {
-            results.add(exec.submit(new ThreadCoc6()));
+            results.add(EXEC.submit(new ThreadCoc6()));
         }
 
         String resCoc6 = getFutureToString(stringBuilder, results);
-        exec.shutdownNow();
+        EXEC.shutdownNow();
         sender(entityTypeMessages, resCoc6.substring(0, resCoc6.length() - 1));
     }
 }

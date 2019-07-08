@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.concurrent.*;
 
 import static dice.sinanya.system.MessagesAntagonize.ANTAGONIZE;
+import static dice.sinanya.system.MessagesSystem.EXEC;
 import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
@@ -185,11 +186,9 @@ public class RollAndCheck implements En {
         } catch (ManyRollsTimesTooMoreException | ManyRollsFormatException manyRollsTimesTooMoreException) {
             Log.error(manyRollsTimesTooMoreException.getMessage(), manyRollsTimesTooMoreException);
         }
-        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("coc-ral-%d").build();
-        ExecutorService exec = new ThreadPoolExecutor(Integer.parseInt(msg.split(" ")[1]), Integer.parseInt(msg.split(" ")[1]), 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), namedThreadFactory);
 //        声明一个多线程池coc-ral用于包装多次骰掷
         for (int i = 0; i < Integer.parseInt(msg.split(SPACE)[1]); i++) {
-            results.add(exec.submit(new MakeRal(entityTypeMessages, msg.split(" ")[0])));
+            results.add(EXEC.submit(new MakeRal(entityTypeMessages, msg.split(" ")[0])));
             //将MakeRal类加入多线程池以保证速度
         }
 
@@ -199,7 +198,7 @@ public class RollAndCheck implements En {
             Log.error(e.getMessage(), e);
         }
 
-        exec.shutdownNow();
+        EXEC.shutdownNow();
         formatRxlAndSend(entityHistory);
     }
 
@@ -217,12 +216,8 @@ public class RollAndCheck implements En {
             Log.error(manyRollsTimesTooMoreException.getMessage(), manyRollsTimesTooMoreException);
         }
 
-        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("coc-rcl-%d").build();
-        ExecutorService exec = new ThreadPoolExecutor(Integer.parseInt(msg.split(" ")[1]), Integer.parseInt(msg.split(" ")[1]), 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), namedThreadFactory);
-        //        声明一个多线程池coc-rcl用于包装多次骰掷
-
         for (int i = 0; i < Integer.parseInt(msg.split(SPACE)[1]); i++) {
-            results.add(exec.submit(new MakeRcl(entityTypeMessages, msg.split(" ")[0])));
+            results.add(EXEC.submit(new MakeRcl(entityTypeMessages, msg.split(" ")[0])));
             //submit返回一个Future，代表了即将要返回的结果
         }
 
@@ -231,7 +226,7 @@ public class RollAndCheck implements En {
         } catch (InterruptedException | ExecutionException e) {
             Log.error(e.getMessage(), e);
         }
-        exec.shutdownNow();
+        EXEC.shutdownNow();
         formatRxlAndSend(entityHistory);
     }
 
