@@ -30,7 +30,7 @@ class GetMessagesToValue {
     static HashMap<String, Integer> getMessagesToValue(HashMap<String, Integer> properties, String msg) {
         StringBuilder strSkillValue = new StringBuilder();
         StringBuilder strSkillName = new StringBuilder();
-        for (int i = 0; i < msg.length(); ) {
+        for (int i = 0; i < msg.length(); i++) {
             while (i < msg.length() && !Character.isSpaceChar(msg.charAt(i)) &&
                     !Character.isDigit(msg.charAt(i))) {
                 strSkillName.append(msg.charAt(i));
