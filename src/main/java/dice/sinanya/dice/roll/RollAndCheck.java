@@ -216,7 +216,7 @@ public class RollAndCheck implements En {
         for (int i = 0; i < Integer.parseInt(msg.split(SPACE)[1]); i++) {
             rollsList = (ArrayList<Integer>) rollsList.stream().parallel().map(s -> new MakeRcl(entityTypeMessages, msg.split(" ")[0]).call()).collect(Collectors.toList());
         }
-
+        Log.error("rollsList size: "+rollsList.size());
         try {
             updateHistory(entityHistory, rollsList);
         } catch (InterruptedException | ExecutionException e) {
@@ -295,7 +295,6 @@ public class RollAndCheck implements En {
      */
     private void updateHistory(EntityHistory entityHistory, ArrayList<Integer> results) throws InterruptedException, ExecutionException {
         for (int result : results) {
-            Log.error("result is: " + result);
             entityHistory.update(result);
         }
     }
