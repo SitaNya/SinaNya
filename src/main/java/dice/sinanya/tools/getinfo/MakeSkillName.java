@@ -17,6 +17,7 @@ class MakeSkillName {
     static HashMap<String, String> skillTable = new HashMap<String, String>(100) {{
         put("力量", "str");
         put("敏捷", "dex");
+        put("pow", "pow");
         put("意志", "pow");
         put("体质", "con");
         put("外貌", "app");
@@ -116,7 +117,9 @@ class MakeSkillName {
         put("重型", "operatingHeavyMachinery");
         put("说服", "persuade");
         put("精神分析", "psychoanalysis");
+        put("精分", "psychoanalysis");
         put("心理学", "psychology");
+        put("心理", "psychology");
         put("骑术", "horsemanship");
         put("妙手", "aWonderfulHand");
         put("侦察", "investigationOfCrimes");
