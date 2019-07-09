@@ -24,7 +24,7 @@ public class GetNickName implements RootBean {
      */
     public static String getNickName(EntityTypeMessages entityTypeMessages) {
         if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
-            return "[" + getRoleChooseByFromQQ(entityTypeMessages) + "]";
+            return getRoleChooseByFromQQ(entityTypeMessages);
         }
         switch (entityTypeMessages.getMsgGetTypes()) {
             case groupMsg:
