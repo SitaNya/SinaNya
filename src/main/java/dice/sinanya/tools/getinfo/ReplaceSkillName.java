@@ -24,6 +24,6 @@ public class ReplaceSkillName {
                 return mapEntry.getKey();
             }
         }
-        return "未找到" + skillId;
+        return skillId+"(无法识别，不会缓存)";
     }
 }
