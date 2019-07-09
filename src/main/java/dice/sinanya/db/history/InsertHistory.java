@@ -34,9 +34,10 @@ public class InsertHistory {
      * 先查询是否存在条目，不存在则插入，存在则更新
      */
     public void insertHistory() {
-        int num = 0;
         try (Connection conn = DbUtil.getConnection()) {
             for (Map.Entry<String, EntityHistory> mapEntry : HISTORY_LIST.entrySet()) {
+                int num = 0;
+                Log.info("");
                 EntityHistory entityHistory = mapEntry.getValue();
                 String sql = "select * from history where qqId=? and botId=?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
