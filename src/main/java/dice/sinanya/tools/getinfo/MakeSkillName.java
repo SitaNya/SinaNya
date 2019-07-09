@@ -86,6 +86,7 @@ class MakeSkillName {
         put("机关枪", "machineGun");
         put("电气维修", "electricalMaintenance");
         put("电子学", "electronics");
+        put("快速交谈", "talkingSkill");
         put("话术", "talkingSkill");
         put("斗殴", "aFistFight");
         put("绞具", "wrangle");
