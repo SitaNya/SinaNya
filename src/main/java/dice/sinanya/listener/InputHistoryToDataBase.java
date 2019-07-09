@@ -22,7 +22,7 @@ import static dice.sinanya.tools.getinfo.Team.saveTeamEn;
  * 这里的“0 * * * * ? *”表示每分钟执行一次，具体怎么写请去查crontab的使用
  * 前5位应该是:分 时 日 月 周
  */
-@CronTask("0 */15 * * * ? *")
+@CronTask("*/5 * * * * ? *")
 public class InputHistoryToDataBase implements TimeJob {
 
     public InputHistoryToDataBase() {
