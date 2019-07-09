@@ -69,7 +69,7 @@ public class SendMail {
         // 设置邮件的正文
 
 //        这里取相对路径"bin/../saveLogs/${groupId}/${logName}"
-        mb.attachFile("../saveLogs/" + groupId + "/" + logName);
+        mb.attachFile("../saveLogs/" + groupId + "/" + logName+".txt");
         mb.attachFile("../saveLogs/" + groupId + "/" + logName + ".docx");
 
         SendMail sm = new SendMail();
