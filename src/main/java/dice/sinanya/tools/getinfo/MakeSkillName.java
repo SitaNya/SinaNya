@@ -1,6 +1,8 @@
 package dice.sinanya.tools.getinfo;
 
-import java.util.HashMap;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author SitaNya
@@ -11,14 +13,16 @@ import java.util.HashMap;
  * 类说明: 技能名对照表
  */
 class MakeSkillName {
+
     /**
      * @param skillTable 标记了所有技能名的不同叫法，如生命和hp都会被这个对象重置为hp
      */
-    static HashMap<String, String> skillTable = new HashMap<String, String>(100) {{
+    static Map<String, String> skillTable = new TreeMap<String, String>(
+            Comparator.reverseOrder()) {{
         put("力量", "str");
         put("敏捷", "dex");
-        put("pow", "pow");
         put("意志", "pow");
+        put("pow", "pow");
         put("体质", "con");
         put("外貌", "app");
         put("教育", "edu");
@@ -87,8 +91,8 @@ class MakeSkillName {
         put("机关枪", "machineGun");
         put("电气维修", "electricalMaintenance");
         put("电子学", "electronics");
-        put("话术", "talkingSkill");
         put("快速交谈", "talkingSkill");
+        put("话术", "talkingSkill");
         put("斗殴", "aFistFight");
         put("绞具", "wrangle");
         put("手枪", "pistol");
@@ -116,10 +120,10 @@ class MakeSkillName {
         put("操作重型机械", "operatingHeavyMachinery");
         put("重型", "operatingHeavyMachinery");
         put("说服", "persuade");
-        put("精神分析", "psychoanalysis");
         put("精分", "psychoanalysis");
-        put("心理学", "psychology");
+        put("精神分析", "psychoanalysis");
         put("心理", "psychology");
+        put("心理学", "psychology");
         put("骑术", "horsemanship");
         put("妙手", "aWonderfulHand");
         put("侦察", "investigationOfCrimes");
@@ -188,6 +192,7 @@ class MakeSkillName {
         put("气象学", "meteorology");
         put("司法科学", "judicialScience");
     }};
+
 
     /**
      * 如果skillTable中存在这个技能名的key，则返回规整后的value，如“司法科学”将返回“judicialScience”
