@@ -2,8 +2,6 @@ package dice.sinanya.dice.manager;
 
 import dice.sinanya.entity.EntityClue;
 import dice.sinanya.entity.EntityTypeMessages;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.sql.Timestamp;
 
@@ -23,7 +21,6 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 类说明: 线索集
  */
 public class Clue {
-    private static Logger log = LogManager.getLogger(Clue.class.getName());
 
     private EntityTypeMessages entityTypeMessages;
 

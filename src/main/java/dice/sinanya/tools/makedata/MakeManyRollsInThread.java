@@ -10,7 +10,7 @@ import static dice.sinanya.tools.makedata.RandomInt.random;
  * 有任何问题欢迎咨询
  * 类说明: ral、rcl使用的多次骰点多线程类
  */
-public class MakeManyRollsInThread {
+class MakeManyRollsInThread {
 
     private int maxValue;
 
@@ -18,7 +18,7 @@ public class MakeManyRollsInThread {
         this.maxValue = maxValue;
     }
 
-    public Integer call() {
+    Integer call() {
         return random(1, maxValue);
     }
 }

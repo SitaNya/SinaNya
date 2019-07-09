@@ -1,8 +1,5 @@
 package dice.sinanya.tools.makedata;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -20,7 +17,6 @@ import static dice.sinanya.tools.makedata.RandomInt.random;
  * 比如3d6k2时，如何计算具体的结果，这里会返回字符串式的Process:(5+3+4)结果与Int:12两个值，分别作为
  */
 public class ManyRolls {
-    private static Logger log = LogManager.getLogger(ManyRolls.class.getName());
 
     /**
      * 根据骰点次数，最大值，取最大值个数，返回数字字符串

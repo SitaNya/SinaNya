@@ -14,7 +14,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 import static dice.sinanya.system.MessagesAntagonize.ANTAGONIZE;
@@ -85,34 +84,24 @@ public class RollAndCheck implements En {
         }
         CheckResultLevel checkResultLevel = new CheckResultLevel(entityNickAndRandomAndSkill.getRandom(), entityNickAndRandomAndSkill.getSkill(), false);
         //        使用房规进行判定结果
-        String stringBuilder = entityNickAndRandomAndSkill.getNick() +
-                "进行鉴定: D100=" + entityNickAndRandomAndSkill.getRandom() + "/" + entityNickAndRandomAndSkill.getSkill() +
-                checkResultLevel.getLevelResultStr();
-        checkEn(checkResultLevel.getLevel(), msg, entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup());
-        changeHistory(entityTypeMessages.getFromQq()).update(checkResultLevel.getLevelAndRandom());
-        String groupId;
-        if (entityTypeMessages.getFromGroup().equals(defaultGroupId)) {
-            try {
-                groupId = getKpGroup(entityTypeMessages);
-                sender(entityTypeMessages, "本次对抗将用于群" + getGroupName(entityTypeMessages, groupId) + "(" + groupId + ")");
-            } catch (NotSetKpGroupException e) {
-                Log.error(e.getMessage(), e);
-                groupId = "0";
-            }
-        } else {
-            groupId = entityTypeMessages.getFromGroup();
-
-        }
+        StringBuilder stringBuilder = new StringBuilder()
+                .append(entityNickAndRandomAndSkill.getNick())
+                .append("进行鉴定: D100=")
+                .append(entityNickAndRandomAndSkill.getRandom())
+                .append("/")
+                .append(entityNickAndRandomAndSkill.getSkill())
+                .append(checkResultLevel.getLevelResultStr());
+        String groupId = makeVforGroupId(msg, checkResultLevel);
         if (ANTAGONIZE.containsKey(groupId) && !groupId.equals(defaultGroupId)) {
             EntityAntagonize entityAntagonize = ANTAGONIZE.get(groupId);
             EntityAntagonize thisEntityAntagonize = checkResultLevel.getAntagonize();
 
-            sender(entityTypeMessages, stringBuilder);
+            sender(entityTypeMessages, stringBuilder.toString());
             checkAntagonize(entityTypeMessages, thisEntityAntagonize, entityAntagonize, groupId);
             ANTAGONIZE.remove(groupId);
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeOver"));
         } else if (!groupId.equals(defaultGroupId)) {
-            sender(entityTypeMessages, stringBuilder);
+            sender(entityTypeMessages, stringBuilder.toString());
             ANTAGONIZE.put(groupId, checkResultLevel.getAntagonize());
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, getNickName(entityTypeMessages) + "发起一次对抗");
         } else {
@@ -135,35 +124,26 @@ public class RollAndCheck implements En {
         }
         CheckResultLevel checkResultLevel = new CheckResultLevel(entityNickAndRandomAndSkill.getRandom(), entityNickAndRandomAndSkill.getSkill(), true);
 //                使用规则书进行判定结果
-        String stringBuilder = entityNickAndRandomAndSkill.getNick() +
-                "进行鉴定: D100=" + entityNickAndRandomAndSkill.getRandom() + "/" + entityNickAndRandomAndSkill.getSkill() +
-                checkResultLevel.getLevelResultStr();
-        checkEn(checkResultLevel.getLevel(), msg, entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup());
-        changeHistory(entityTypeMessages.getFromQq()).update(checkResultLevel.getLevelAndRandom());
-        String groupId;
-        if (entityTypeMessages.getFromGroup().equals(defaultGroupId)) {
-            try {
-                groupId = getKpGroup(entityTypeMessages);
-                sender(entityTypeMessages, "本次对抗将用于群" + getGroupName(entityTypeMessages, groupId) + "(" + groupId + ")");
-            } catch (NotSetKpGroupException e) {
-                Log.error(e.getMessage(), e);
-                groupId = "0";
-            }
-        } else {
-            groupId = entityTypeMessages.getFromGroup();
-        }
+        StringBuilder stringBuilder = new StringBuilder()
+                .append(entityNickAndRandomAndSkill.getNick())
+                .append("进行鉴定: D100=")
+                .append(entityNickAndRandomAndSkill.getRandom())
+                .append("/")
+                .append(entityNickAndRandomAndSkill.getSkill())
+                .append(checkResultLevel.getLevelResultStr());
+        String groupId = makeVforGroupId(msg, checkResultLevel);
         if (ANTAGONIZE.containsKey(groupId) && !groupId.equals(defaultGroupId)) {
 //            静态对象Antagonize中包含了以群号为key的EntityAntagonize对象，如果包含的话，那么就说明上一次对抗已经发起了，这次直接给结果
             EntityAntagonize entityAntagonize = ANTAGONIZE.get(groupId);
             EntityAntagonize thisEntityAntagonize = checkResultLevel.getAntagonize();
-            sender(entityTypeMessages, stringBuilder);
+            sender(entityTypeMessages, stringBuilder.toString());
             checkAntagonize(entityTypeMessages, thisEntityAntagonize, entityAntagonize, groupId);
             ANTAGONIZE.remove(groupId);
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeOver"));
         } else if (!groupId.equals(defaultGroupId)) {
 //            静态对象Antagonize中包含了以群号为key的EntityAntagonize对象，如果不包含的话，那么就说明这次是发起对抗，直接插入进去
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, getNickName(entityTypeMessages) + "发起一次对抗");
-            sender(entityTypeMessages, stringBuilder);
+            sender(entityTypeMessages, stringBuilder.toString());
             ANTAGONIZE.put(groupId, checkResultLevel.getAntagonize());
         } else {
             throw new NotSetKpGroupException(entityTypeMessages);
@@ -176,27 +156,11 @@ public class RollAndCheck implements En {
      */
     public void ral() {
         String tag = TAG_RAL;
-        EntityHistory entityHistory = new EntityHistory("0");
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        try {
-            checkManyRollsError(msg);
-        } catch (ManyRollsTimesTooMoreException | ManyRollsFormatException manyRollsTimesTooMoreException) {
-            Log.error(manyRollsTimesTooMoreException.getMessage(), manyRollsTimesTooMoreException);
-        }
-
-        ArrayList<Integer> rollsList = new ArrayList<>();
-        for (int i = 0; i < Integer.parseInt(msg.split(SPACE)[1]); i++) {
-            rollsList.add(0);
-        }
-
+        ArrayList<Integer> rollsList = initRalandRcl(msg);
+        EntityHistory entityHistory = new EntityHistory("0");
         rollsList = (ArrayList<Integer>) rollsList.stream().parallel().map(s -> new MakeRal(entityTypeMessages, msg.split(" ")[0]).call()).collect(Collectors.toList());
-
-        try {
-            updateHistory(entityHistory, rollsList);
-        } catch (InterruptedException | ExecutionException e) {
-            Log.error(e.getMessage(), e);
-        }
-
+        updateHistory(entityHistory, rollsList);
         formatRxlAndSend(entityHistory);
     }
 
@@ -205,26 +169,12 @@ public class RollAndCheck implements En {
      */
     public void rcl() {
         String tag = TAG_RCL;
-        EntityHistory entityHistory = new EntityHistory("0");
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-
-        try {
-            checkManyRollsError(msg);
-        } catch (ManyRollsTimesTooMoreException | ManyRollsFormatException manyRollsTimesTooMoreException) {
-            Log.error(manyRollsTimesTooMoreException.getMessage(), manyRollsTimesTooMoreException);
-        }
-
-        ArrayList<Integer> rollsList = new ArrayList<>();
-        for (int i = 0; i < Integer.parseInt(msg.split(SPACE)[1]); i++) {
-            rollsList.add(0);
-        }
+        ArrayList<Integer> rollsList = initRalandRcl(msg);
+        EntityHistory entityHistory = new EntityHistory("0");
 
         rollsList = (ArrayList<Integer>) rollsList.stream().parallel().map(s -> new MakeRcl(entityTypeMessages, msg.split(" ")[0]).call()).collect(Collectors.toList());
-        try {
             updateHistory(entityHistory, rollsList);
-        } catch (InterruptedException | ExecutionException e) {
-            Log.error(e.getMessage(), e);
-        }
         formatRxlAndSend(entityHistory);
     }
 
@@ -293,10 +243,8 @@ public class RollAndCheck implements En {
      *
      * @param entityHistory 临时的骰点信息，用于计算本次的各种成功次数
      * @param results       多线程骰点的对象列表
-     * @throws InterruptedException 如果没有isDone，则休眠，其间发生问题可能引发InterruptedException
-     * @throws ExecutionException   多线程执行故障
      */
-    private void updateHistory(EntityHistory entityHistory, ArrayList<Integer> results) throws InterruptedException, ExecutionException {
+    private void updateHistory(EntityHistory entityHistory, ArrayList<Integer> results) {
         for (int result : results) {
             entityHistory.update(result);
         }
@@ -332,6 +280,39 @@ public class RollAndCheck implements En {
                 entityHistory.getFumble() +
                 "次";
         sender(entityTypeMessages, stringBuilder);
+    }
+
+    private String makeVforGroupId(String msg, CheckResultLevel checkResultLevel) {
+        checkEn(checkResultLevel.getLevel(), msg, entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup());
+        changeHistory(entityTypeMessages.getFromQq()).update(checkResultLevel.getLevelAndRandom());
+        String groupId;
+        if (entityTypeMessages.getFromGroup().equals(defaultGroupId)) {
+            try {
+                groupId = getKpGroup(entityTypeMessages);
+                sender(entityTypeMessages, "本次对抗将用于群" + getGroupName(entityTypeMessages, groupId) + "(" + groupId + ")");
+            } catch (NotSetKpGroupException e) {
+                Log.error(e.getMessage(), e);
+                groupId = "0";
+            }
+        } else {
+            groupId = entityTypeMessages.getFromGroup();
+
+        }
+        return groupId;
+    }
+
+    private ArrayList<Integer> initRalandRcl(String msg) {
+        try {
+            checkManyRollsError(msg);
+        } catch (ManyRollsTimesTooMoreException | ManyRollsFormatException manyRollsTimesTooMoreException) {
+            Log.error(manyRollsTimesTooMoreException.getMessage(), manyRollsTimesTooMoreException);
+        }
+
+        ArrayList<Integer> rollsList = new ArrayList<>();
+        for (int i = 0; i < Integer.parseInt(msg.split(SPACE)[1]); i++) {
+            rollsList.add(0);
+        }
+        return rollsList;
     }
 
 }

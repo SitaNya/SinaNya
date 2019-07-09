@@ -29,7 +29,6 @@ public class RewardAndPunishment implements En {
 
     private EntityTypeMessages entityTypeMessages;
 
-    //    过滤一个字符串的首字母是不是加减乘除
     private int multiple = 10;
 
     public RewardAndPunishment(EntityTypeMessages entityTypeMessages) {
@@ -49,7 +48,7 @@ public class RewardAndPunishment implements En {
 
         int random = entityNickAndRandomAndSkill.getRandom();
 
-        ArrayList<Integer> listDice = makeBAndPRoll(getTimesAndSkill(msg).getTimes());
+        ArrayList<Integer> listDice = makeBandProll(getTimesAndSkill(msg).getTimes());
 //        得到奖励投列表
 
         int min = 10;
@@ -99,7 +98,7 @@ public class RewardAndPunishment implements En {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        ArrayList<Integer> listDice = makeBAndPRoll(getTimesAndSkill(msg).getTimes());
+        ArrayList<Integer> listDice = makeBandProll(getTimesAndSkill(msg).getTimes());
 //        得到惩罚投列表
 
         int max = 0;
@@ -145,7 +144,7 @@ public class RewardAndPunishment implements En {
      * @param times 个数
      * @return 随机数列表
      */
-    private ArrayList<Integer> makeBAndPRoll(int times) {
+    private ArrayList<Integer> makeBandProll(int times) {
         ArrayList<Integer> result = new ArrayList<>();
         for (int i = 0; i < times; i++) {
             result.add(random(0, 9));

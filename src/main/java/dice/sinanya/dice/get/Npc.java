@@ -31,7 +31,7 @@ public class Npc implements MakeCard, GetRandomList {
      * 生成NPC入口类，分别生成3批数据
      */
     public void npc() {
-        forPC();
+        forPc();
         state();
         prop();
     }
@@ -39,7 +39,7 @@ public class Npc implements MakeCard, GetRandomList {
     /**
      * 生成外貌数据，发送到来源群中
      */
-    private void forPC() {
+    private void forPc() {
         int ageLevel1 = 95;
         int ageLevel2 = 90;
         int ageLevel3 = 70;

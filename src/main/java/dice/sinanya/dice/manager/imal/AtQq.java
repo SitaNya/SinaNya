@@ -14,6 +14,12 @@ import java.util.regex.Pattern;
  */
 public interface AtQq {
 
+    /**
+     * 从一个传入信息中匹配得到所有被at的人的QQ号
+     *
+     * @param msg 传入信息
+     * @return 传入信息中at人员的列表
+     */
     default ArrayList<String> getAtQqList(String msg) {
         String regex = "\\[cq:at,qq=([0-9]+)]";
         Pattern pattern = Pattern.compile(regex);
