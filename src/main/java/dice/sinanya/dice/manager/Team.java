@@ -175,7 +175,7 @@ public class Team implements GetDb, Role, AtQq {
         msg = msg.replaceAll(regex, "").trim();
         for (String qq : qqList) {
             boolean add = false;
-            if (msg.contains("+")) {
+            if (msg.matches("^\\+")&& !msg.contains("/")) {
                 msg = msg.replaceAll("\\+", "");
                 add = true;
             }
@@ -198,7 +198,8 @@ public class Team implements GetDb, Role, AtQq {
                         if (isNumeric(msg)) {
                             changeValue = Integer.parseInt(msg);
                         } else {
-                            changeValue = new GetRollResultAndStr(entityTypeMessages, msg).getResInt();
+                            String[] everFunctions=msg.split(plus.toString());
+                            changeValue =  getResFunctionAndResultInt(entityTypeMessages,msg, everFunctions).getResult();
                         }
                         HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);
                         if (prop != null) {

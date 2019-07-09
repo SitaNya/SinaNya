@@ -1,5 +1,8 @@
 package dice.sinanya.tools.checkdata;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author SitaNya
  * 日期: 2019-06-15
@@ -16,19 +19,10 @@ public class CheckIsNumbers {
      * @param str 字符串
      * @return 布尔值
      */
-    public static boolean isNumeric(String str) {
-        String strInputNone = "";
-        if (str != null && !str.equals(strInputNone)) {
-            for (int i = 0; i < str.length(); i++) {
-                if (!Character.isDigit(str.charAt(i))) {
-                    return false;
-                }
-            }
-        } else {
-            return false;
-        }
-
-        return true;
+    public static boolean isNumeric(String str){
+        Pattern pattern = Pattern.compile("[-]{0,1}[0-9]+");
+        Matcher isNum = pattern.matcher(str);
+        return isNum.matches();
     }
 
 }

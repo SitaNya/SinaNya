@@ -56,6 +56,9 @@ public class GetRollResultAndStr {
     public static EntityStrManyRolls getResFunctionAndResultInt(EntityTypeMessages entityTypeMessages, String inputMsg, String[] everyFunction) {
         String strFunction = inputMsg;
         String strResult = inputMsg;
+        if (isNumeric(inputMsg)){
+            return new EntityStrManyRolls(inputMsg, inputMsg, Integer.parseInt(inputMsg));
+        }
         for (String function : everyFunction) {
             if (!isNumeric(function)) {
                 GetRollResultAndStr resRollResultAndStr = new GetRollResultAndStr(entityTypeMessages, function);
