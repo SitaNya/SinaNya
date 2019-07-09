@@ -30,8 +30,8 @@ class GetMessagesToValue {
     static HashMap<String, Integer> getMessagesToValue(HashMap<String, Integer> properties, String msg) {
         StringBuilder strSkillValue = new StringBuilder();
         StringBuilder strSkillName = new StringBuilder();
-        int tmp=0;
         for (int i = 0; i < msg.length();) {
+            int tmp=i;
             while (i < msg.length() && !Character.isSpaceChar(msg.charAt(i)) &&
                     !Character.isDigit(msg.charAt(i))) {
                 strSkillName.append(msg.charAt(i));
@@ -60,10 +60,8 @@ class GetMessagesToValue {
             } catch (NumberFormatException e) {
                 Log.error(e.getMessage(), e);
             }
-            if (tmp<=1000){
-                tmp++;
-            }else{
-                break;
+            if (tmp==i){
+                i++;
             }
         }
         return properties;
