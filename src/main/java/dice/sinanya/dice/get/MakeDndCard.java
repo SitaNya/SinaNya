@@ -1,5 +1,6 @@
 package dice.sinanya.dice.get;
 
+import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.dice.get.imal.MakeCard;
 import dice.sinanya.entity.EntityTypeMessages;
 
@@ -20,7 +21,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 有任何问题欢迎咨询
  * 类说明: DND车卡
  */
-public class MakeDndCard implements MakeCard {
+public class MakeDndCard implements MakeCard, MakeNickToSender {
 
     private EntityTypeMessages entityTypeMessages;
 
@@ -39,7 +40,7 @@ public class MakeDndCard implements MakeCard {
 
         String nick = getNickName(entityTypeMessages);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(nick)
+        stringBuilder.append(makeNickToSender(nick))
                 .append("的DND英雄做成:");
 
         ArrayList<String> results = new ArrayList<>();

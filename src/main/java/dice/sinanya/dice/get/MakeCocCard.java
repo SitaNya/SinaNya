@@ -1,5 +1,6 @@
 package dice.sinanya.dice.get;
 
+import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.dice.get.imal.MakeCard;
 import dice.sinanya.entity.EntityCoc6CardInfo;
 import dice.sinanya.entity.EntityCoc7CardInfo;
@@ -22,7 +23,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 有任何问题欢迎咨询
  * 类说明: COC车卡
  */
-public class MakeCocCard implements MakeCard {
+public class MakeCocCard implements MakeCard, MakeNickToSender {
 
     private EntityTypeMessages entityTypeMessages;
 
@@ -39,7 +40,7 @@ public class MakeCocCard implements MakeCard {
 
         EntityCoc7CardInfo cocCardInfo = new EntityCoc7CardInfo();
 
-        String stringBuilder = nick +
+        String stringBuilder = makeNickToSender(nick) +
                 "的人物作成:" +
                 "\n" +
                 "力量STR=3D6*5=" +
@@ -113,7 +114,7 @@ public class MakeCocCard implements MakeCard {
 
         EntityCoc6CardInfo cocCardInfo = new EntityCoc6CardInfo();
 
-        String stringBuilder = nick +
+        String stringBuilder = makeNickToSender(nick) +
                 "的人物作成:" +
                 "\n" +
                 "力量STR=3D6=" +
@@ -184,7 +185,7 @@ public class MakeCocCard implements MakeCard {
         String nick = getNickName(entityTypeMessages);
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(nick)
+        stringBuilder.append(makeNickToSender(nick))
                 .append("的7版人物做成:");
 
         ArrayList<String> results = new ArrayList<>();
@@ -211,7 +212,7 @@ public class MakeCocCard implements MakeCard {
 
         String nick = getNickName(entityTypeMessages);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(nick)
+        stringBuilder.append(makeNickToSender(nick))
                 .append("的6版人物做成:");
 
         ArrayList<String> results = new ArrayList<>();

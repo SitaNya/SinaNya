@@ -1,5 +1,6 @@
 package dice.sinanya.dice.manager.imal;
 
+import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByFromQQ;
  * 有任何问题欢迎咨询
  * 接口说明: 角色接口，实现此接口则可以通过其下的方法调用或修改人物卡中的信息
  */
-public interface Role {
+public interface Role extends MakeNickToSender {
 
     ArrayList<String> PROP_MAIN = new ArrayList<String>() {{
         add("hp");
@@ -164,7 +165,7 @@ public interface Role {
                     .append("\n")
                     .append("======================================================")
                     .append("\n")
-                    .append(getRoleChooseByQQ(qq))
+                    .append(makeNickToSender(getRoleChooseByQQ(qq)))
                     .append("的角色: ")
                     .append("包含有以下数据\n");
 
