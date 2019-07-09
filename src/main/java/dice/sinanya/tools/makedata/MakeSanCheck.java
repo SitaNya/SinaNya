@@ -1,11 +1,13 @@
 package dice.sinanya.tools.makedata;
 
 import dice.sinanya.entity.EntityRoleTag;
+import dice.sinanya.entity.EntityStrManyRolls;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
 
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.system.MessagesSystem.SPACE;
@@ -16,6 +18,7 @@ import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByQQ;
 import static dice.sinanya.tools.getinfo.RoleInfo.setRoleInfoFromChooseByQQ;
+import static dice.sinanya.tools.makedata.GetRollResultAndStr.getResFunctionAndResultInt;
 import static dice.sinanya.tools.makedata.RandomInt.random;
 import static dice.sinanya.tools.makedata.Sender.sender;
 import static java.lang.Math.max;
@@ -32,6 +35,8 @@ import static java.lang.Math.min;
 public class MakeSanCheck {
     private EntityTypeMessages entityTypeMessages;
     private long qq;
+
+    private static Pattern plus = Pattern.compile("[+*/\\-]");
 
     public MakeSanCheck(EntityTypeMessages entityTypeMessages) {
         qq = Long.parseLong(entityTypeMessages.getFromQq());
@@ -129,8 +134,11 @@ public class MakeSanCheck {
         String strFail = strCheckValue.split(sanFunctionSeq)[1];
 //        分别取得成功与失败的表达式
 
-        GetRollResultAndStr mSuccess = new GetRollResultAndStr(entityTypeMessages, strSuccess);
-        GetRollResultAndStr mFail = new GetRollResultAndStr(entityTypeMessages, strFail);
+        String[] everyFunctionSuccess = strSuccess.split(plus.toString());
+        String[] everyFunctionFail = strFail.split(plus.toString());
+
+        EntityStrManyRolls mSuccess = getResFunctionAndResultInt(entityTypeMessages, strSuccess, everyFunctionSuccess);
+        EntityStrManyRolls mFail = getResFunctionAndResultInt(entityTypeMessages, strFail, everyFunctionFail);
 //        分别计算成功与失败的表达式
 
         boolean useCard = false;
@@ -231,7 +239,7 @@ public class MakeSanCheck {
             }
             makeInsane(strResult, newSan, san);
         } else if (random <= san) {
-            int newSan = max(0, san - mSuccess.getResInt());
+            int newSan = max(0, san - mSuccess.getResult());
             strResult
                     .append(random)
                     .append("/")
@@ -241,7 +249,7 @@ public class MakeSanCheck {
                     .append("你的理智值减少")
                     .append(strSuccess)
                     .append("=")
-                    .append(mSuccess.getResInt())
+                    .append(mSuccess.getResult())
                     .append("点")
                     .append(",当前剩余")
                     .append(newSan)
@@ -252,7 +260,7 @@ public class MakeSanCheck {
             }
             makeInsane(strResult, newSan, san);
         } else {
-            int newSan = max(0, san - mFail.getResInt());
+            int newSan = max(0, san - mFail.getResult());
             strResult
                     .append(random)
                     .append("/")
@@ -262,7 +270,7 @@ public class MakeSanCheck {
                     .append("你的理智值减少")
                     .append(strFail)
                     .append("=")
-                    .append(mFail.getResInt())
+                    .append(mFail.getResult())
                     .append("点")
                     .append(",当前剩余")
                     .append(newSan)
