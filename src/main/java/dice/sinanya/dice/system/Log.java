@@ -102,7 +102,7 @@ public class Log {
             }
             sender(entityTypeMessages, msg + "正在发送到您的邮箱" + entityTypeMessages.getFromQq() + "@qq.com");
             sendMail(entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup(), getGroupName(entityTypeMessages), msg);
-            sender(entityTypeMessages, "[cq:at,qq=" + entityTypeMessages.getFromQq() + "] 已发送到您的QQ邮箱，注意查收");
+            sender(entityTypeMessages, "[CQ:at,qq=" + entityTypeMessages.getFromQq() + "] 已发送到您的QQ邮箱，注意查收");
             LOG_GET_LOCK.remove(msg);
         } else {
             sender(entityTypeMessages, "{"+msg + "}仍处于打开状态，请关闭后再试");

@@ -37,7 +37,7 @@ public class SendMail {
      */
     private static String toChinese(String text) {
         try {
-            text = MimeUtility.encodeText(new String(text.getBytes(StandardCharsets.UTF_8), "GB2312"), "GB2312", "B");
+            text = MimeUtility.encodeText(new String(text.getBytes(StandardCharsets.UTF_8), "GBK"), "GB2312", "B");
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
@@ -63,7 +63,7 @@ public class SendMail {
         // 设置发件人的邮箱
         mb.setTo(to + "@qq.com");
         // 设置收件人的邮箱
-        mb.setSubject(logName);
+        mb.setSubject(toChinese(logName));
         // 设置邮件的主题
         mb.setContent("在群: " + groupName + "(" + groupId + ") 中的log日志: " + logName + "\n其中docx为染色文件用word打开，无后缀为文本文件用txt打开，收到邮件烦请回复\n遇到问题请加群162279609进行反馈\n");
         // 设置邮件的正文
