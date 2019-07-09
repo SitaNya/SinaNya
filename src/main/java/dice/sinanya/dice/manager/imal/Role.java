@@ -165,8 +165,9 @@ public interface Role extends MakeNickToSender {
                     .append("\n")
                     .append("======================================================")
                     .append("\n")
-                    .append(makeNickToSender(getRoleChooseByQQ(qq)))
+                    .append(qq)
                     .append("的角色: ")
+                    .append(makeNickToSender(getRoleChooseByQQ(qq)))
                     .append("包含有以下数据\n");
 
             stringBuilder.append("主属性为:\n");
