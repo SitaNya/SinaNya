@@ -64,7 +64,6 @@ class MakeSkillName {
         put("驾驶汽车", "drive");
         put("驾驶(汽车)", "drive");
         put("驾驶:汽车", "drive");
-        put("快速交谈", "electronics");
         put("步枪/霰弹枪", "rifle");
         put("步枪", "rifle");
         put("霰弹枪", "rifle");
@@ -87,8 +86,8 @@ class MakeSkillName {
         put("机关枪", "machineGun");
         put("电气维修", "electricalMaintenance");
         put("电子学", "electronics");
-        put("快速交谈", "talkingSkill");
         put("话术", "talkingSkill");
+        put("快速交谈", "talkingSkill");
         put("斗殴", "aFistFight");
         put("绞具", "wrangle");
         put("手枪", "pistol");
@@ -127,6 +126,7 @@ class MakeSkillName {
         put("游泳", "swimming");
         put("投掷", "throwValue");
         put("追踪", "trackValue");
+        put("跟踪", "trackValue");
         put("驯兽", "domesticatedAnimal");
         put("潜水", "diving");
         put("爆破", "blast");
