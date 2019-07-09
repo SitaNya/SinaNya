@@ -32,7 +32,7 @@ class GetMessagesToValue {
         StringBuilder strSkillName = new StringBuilder();
         int i = 0;
         while (i < msg.length()) {
-            int tmp=i;
+            int tmp = i;
             while (i < msg.length() && !Character.isSpaceChar(msg.charAt(i)) &&
                     !Character.isDigit(msg.charAt(i))) {
                 strSkillName.append(msg.charAt(i));
@@ -61,7 +61,7 @@ class GetMessagesToValue {
             } catch (NumberFormatException e) {
                 Log.error(e.getMessage(), e);
             }
-            if (tmp==i){
+            if (tmp == i) {
                 i++;
             }
         }

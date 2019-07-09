@@ -174,7 +174,7 @@ public class RollAndCheck implements En {
         EntityHistory entityHistory = new EntityHistory("0");
 
         rollsList = (ArrayList<Integer>) rollsList.stream().parallel().map(s -> new MakeRcl(entityTypeMessages, msg.split(" ")[0]).call()).collect(Collectors.toList());
-            updateHistory(entityHistory, rollsList);
+        updateHistory(entityHistory, rollsList);
         formatRxlAndSend(entityHistory);
     }
 
