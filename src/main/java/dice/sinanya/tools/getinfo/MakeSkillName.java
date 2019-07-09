@@ -23,6 +23,7 @@ class MakeSkillName {
         put("教育", "edu");
         put("体型", "siz");
         put("智力", "intValue");
+        put("智力/灵感", "intValue");
         put("int", "intValue");
         put("idea", "intValue");
         put("灵感", "intValue");
