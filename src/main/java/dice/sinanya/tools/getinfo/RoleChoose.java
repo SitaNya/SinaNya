@@ -66,7 +66,7 @@ public class RoleChoose {
     public static String getRoleChooseByQQ(String qqId) {
         long qq = Long.parseLong(qqId);
         if (checkRoleChooseExistByQQ(qq)) {
-            return "[" + ROLE_CHOOSE.get(qq) + "]";
+            return  ROLE_CHOOSE.get(qq) ;
         } else {
             return "未找到当前角色";
         }
@@ -80,7 +80,7 @@ public class RoleChoose {
      */
     public static String getRoleChooseByQQ(long qq) {
         if (checkRoleChooseExistByQQ(qq)) {
-            return "[" + ROLE_CHOOSE.get(qq) + "]";
+            return  ROLE_CHOOSE.get(qq) ;
         } else {
             return "未找到当前角色";
         }
@@ -94,7 +94,7 @@ public class RoleChoose {
      */
     public static String getRoleChooseByFromQQ(EntityTypeMessages entityTypeMessages) {
         if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
-            return "[" + ROLE_CHOOSE.get(Long.parseLong(entityTypeMessages.getFromQq())) + "]";
+            return ROLE_CHOOSE.get(Long.parseLong(entityTypeMessages.getFromQq()));
         } else {
             return "未找到当前角色";
         }

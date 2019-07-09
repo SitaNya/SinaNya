@@ -97,7 +97,7 @@ public class MakeSanCheck {
             throw new PlayerSetException(entityTypeMessages);
         }
 //        如果san为0，也就是玩家没有输入san值的同时，人物卡还没取到的话就报错。否则优先用玩家输入的san，然后用人物卡。
-        sender(entityTypeMessages, "已为" + role + "恢复" + changeFunction + "=" + changeValue + "点理智值，剩余" + min((san + changeValue), 99 - cthulhuMythos) + "点");
+        sender(entityTypeMessages, "已为[" + role + "]恢复" + changeFunction + "=" + changeValue + "点理智值，剩余" + min((san + changeValue), 99 - cthulhuMythos) + "点");
     }
 
     @SuppressWarnings("AlibabaMethodTooLong")
@@ -149,7 +149,7 @@ public class MakeSanCheck {
 //        如果san为0，也就是玩家没有输入san值的同时，人物卡还没取到的话就报错。否则优先用玩家输入的san，然后用人物卡。
 
         StringBuilder strResult = new StringBuilder();
-        strResult.append(role)
+        strResult.append("[").append(role).append("]")
                 .append("的理智检定结果:")
                 .append("\n");
 //        初始化回复字符串

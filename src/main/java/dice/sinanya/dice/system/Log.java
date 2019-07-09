@@ -49,9 +49,9 @@ public class Log {
             sender(entityTypeMessages, getOtherLogTrue(entityTypeMessages.getFromGroup()) + MESSAGES_SYSTEM.get("alreadyOpen"));
         } else {
             if (checkLogTagExist(entityTypeMessages, msg)) {
-                sender(entityTypeMessages, msg + MESSAGES_SYSTEM.get("appendLog"));
+                sender(entityTypeMessages, "{"+msg+"}" + MESSAGES_SYSTEM.get("appendLog"));
             } else {
-                sender(entityTypeMessages, msg + MESSAGES_SYSTEM.get("createLog"));
+                sender(entityTypeMessages, "{"+msg+"}" + MESSAGES_SYSTEM.get("createLog"));
             }
             LOG_NAME_FOR_GROUP.put(entityTypeMessages.getFromGroup(), msg);
             LOG_SWITCH_FOR_GROUP.put(entityTypeMessages.getFromGroup(), true);
@@ -70,9 +70,9 @@ public class Log {
                 setLogTagSwitch(entityTypeMessages, msg, false);
                 LOG_NAME_FOR_GROUP.remove(entityTypeMessages.getFromGroup());
                 LOG_SWITCH_FOR_GROUP.put(entityTypeMessages.getFromGroup(), false);
-                sender(entityTypeMessages, msg + "已关闭，现在可以使用\".log get " + msg + "\"进行获取");
+                sender(entityTypeMessages, "{"+msg + "}已关闭，现在可以使用\".log get " + msg + "\"进行获取");
             } else {
-                sender(entityTypeMessages, msg + MESSAGES_SYSTEM.get("alreadyClose"));
+                sender(entityTypeMessages, "{"+msg+"}" + MESSAGES_SYSTEM.get("alreadyClose"));
             }
         } else {
             sender(entityTypeMessages, MESSAGES_SYSTEM.get("notFoundLog"));
@@ -92,9 +92,9 @@ public class Log {
                 LOG_GET_LOCK.add(msg);
             }
             String bigResult = getLogText(new EntityLogTag(entityTypeMessages.getFromGroup(), msg));
-            sender(entityTypeMessages, "正在抽取数据库为" + msg + "生成文件");
+            sender(entityTypeMessages, "正在抽取数据库为{" + msg + "}生成文件");
             logSave(entityTypeMessages.getFromGroup(), msg, bigResult);
-            sender(entityTypeMessages, "正在抽取数据库为" + msg + "生成染色文件");
+            sender(entityTypeMessages, "正在抽取数据库为{" + msg + "}生成染色文件");
             try {
                 new SaveDocx(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq(), msg, bigResult);
             } catch (Docx4JException e) {
@@ -105,7 +105,7 @@ public class Log {
             sender(entityTypeMessages, "[cq:at,qq=" + entityTypeMessages.getFromQq() + "] 已发送到您的QQ邮箱，注意查收");
             LOG_GET_LOCK.remove(msg);
         } else {
-            sender(entityTypeMessages, msg + "仍处于打开状态，请关闭后再试");
+            sender(entityTypeMessages, "{"+msg + "}仍处于打开状态，请关闭后再试");
         }
     }
 

@@ -1,5 +1,6 @@
 package dice.sinanya.tools.makedata;
 
+import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityNickAndRandomAndSkill;
 import dice.sinanya.entity.EntityTypeMessages;
 
@@ -23,7 +24,7 @@ import static java.lang.Math.ceil;
  * 有任何问题欢迎咨询
  * 类说明: 获取昵称、随机值、技能值
  */
-public class GetNickAndRandomAndSkill {
+public class GetNickAndRandomAndSkill{
     private static Pattern p = Pattern.compile("[+*/\\-]");
     private static Pattern skillNamePatten = Pattern.compile("([^\\d+*\\-/]+)");
 

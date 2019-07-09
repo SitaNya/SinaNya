@@ -1,5 +1,6 @@
 package dice.sinanya.dice.roll;
 
+import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityAntagonize;
 import dice.sinanya.entity.EntityHistory;
 import dice.sinanya.entity.EntityNickAndRandomAndSkill;
@@ -37,7 +38,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 有任何问题欢迎咨询
  * 类说明: ra、rc判定，ral、rcl多次骰点，rav、rcv对抗
  */
-public class RollAndCheck implements En {
+public class RollAndCheck implements En, MakeNickToSender {
     private static final Logger Log = LogManager.getLogger(RollAndCheck.class);
 
     private String defaultGroupId = "0";
@@ -85,7 +86,7 @@ public class RollAndCheck implements En {
         CheckResultLevel checkResultLevel = new CheckResultLevel(entityNickAndRandomAndSkill.getRandom(), entityNickAndRandomAndSkill.getSkill(), false);
         //        使用房规进行判定结果
         StringBuilder stringBuilder = new StringBuilder()
-                .append(entityNickAndRandomAndSkill.getNick())
+                .append(makeNickToSender(entityNickAndRandomAndSkill.getNick()))
                 .append("进行鉴定: D100=")
                 .append(entityNickAndRandomAndSkill.getRandom())
                 .append("/")
@@ -103,7 +104,7 @@ public class RollAndCheck implements En {
         } else if (!groupId.equals(defaultGroupId)) {
             sender(entityTypeMessages, stringBuilder.toString());
             ANTAGONIZE.put(groupId, checkResultLevel.getAntagonize());
-            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, getNickName(entityTypeMessages) + "发起一次对抗");
+            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, makeNickToSender(getNickName(entityTypeMessages)) + "发起一次对抗");
         } else {
             throw new NotSetKpGroupException(entityTypeMessages);
         }
@@ -125,7 +126,7 @@ public class RollAndCheck implements En {
         CheckResultLevel checkResultLevel = new CheckResultLevel(entityNickAndRandomAndSkill.getRandom(), entityNickAndRandomAndSkill.getSkill(), true);
 //                使用规则书进行判定结果
         StringBuilder stringBuilder = new StringBuilder()
-                .append(entityNickAndRandomAndSkill.getNick())
+                .append(makeNickToSender(entityNickAndRandomAndSkill.getNick()))
                 .append("进行鉴定: D100=")
                 .append(entityNickAndRandomAndSkill.getRandom())
                 .append("/")
@@ -142,7 +143,7 @@ public class RollAndCheck implements En {
             entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeOver"));
         } else if (!groupId.equals(defaultGroupId)) {
 //            静态对象Antagonize中包含了以群号为key的EntityAntagonize对象，如果不包含的话，那么就说明这次是发起对抗，直接插入进去
-            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, getNickName(entityTypeMessages) + "发起一次对抗");
+            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, makeNickToSender(getNickName(entityTypeMessages)) + "发起一次对抗");
             sender(entityTypeMessages, stringBuilder.toString());
             ANTAGONIZE.put(groupId, checkResultLevel.getAntagonize());
         } else {
@@ -186,7 +187,7 @@ public class RollAndCheck implements En {
     private String check(String msg, Boolean ruleBook) {
         EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
         CheckResultLevel checkResultLevel = new CheckResultLevel(entityNickAndRandomAndSkill.getRandom(), entityNickAndRandomAndSkill.getSkill(), ruleBook);
-        String result = entityNickAndRandomAndSkill.getNick() +
+        String result = makeNickToSender(entityNickAndRandomAndSkill.getNick()) +
                 "进行" + msg + "鉴定: D100=" + entityNickAndRandomAndSkill.getRandom() + "/" + entityNickAndRandomAndSkill.getSkill() +
                 checkResultLevel.getLevelResultStr();
         checkEn(checkResultLevel.getLevel(), msg, entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup());
@@ -289,7 +290,7 @@ public class RollAndCheck implements En {
         if (entityTypeMessages.getFromGroup().equals(defaultGroupId)) {
             try {
                 groupId = getKpGroup(entityTypeMessages);
-                sender(entityTypeMessages, "本次对抗将用于群" + getGroupName(entityTypeMessages, groupId) + "(" + groupId + ")");
+                sender(entityTypeMessages, "本次对抗将用于群" + makeGroupNickToSender(getGroupName(entityTypeMessages, groupId)) + "(" + groupId + ")");
             } catch (NotSetKpGroupException e) {
                 Log.error(e.getMessage(), e);
                 groupId = "0";

@@ -1,5 +1,6 @@
 package dice.sinanya.dice.game;
 
+import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import java.text.SimpleDateFormat;
@@ -16,7 +17,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 有任何问题欢迎咨询
  * 类说明: 今日人品类，其实不是很想做……
  */
-public class Jrrp {
+public class Jrrp implements MakeNickToSender {
     private EntityTypeMessages entityTypeMessages;
 
     public Jrrp(EntityTypeMessages entityTypeMessages) {
@@ -47,6 +48,6 @@ public class Jrrp {
         for (char c : b) {
             tmp += (int) c;
         }
-        sender(entityTypeMessages, getNickName(entityTypeMessages) + "的今日人品为: " + (tmp % 100));
+        sender(entityTypeMessages, makeGroupNickToSender(getNickName(entityTypeMessages)) + "的今日人品为: " + (tmp % 100));
     }
 }

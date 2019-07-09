@@ -1,5 +1,6 @@
 package dice.sinanya.dice.roll;
 
+import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.tools.makedata.Calculator;
 
@@ -28,7 +29,7 @@ import static java.lang.Math.ceil;
  * 有任何问题欢迎咨询
  * 类说明: DND先攻骰掷及列表
  */
-public class RiAndInit {
+public class RiAndInit implements MakeNickToSender {
 
     private static Pattern numAndName = Pattern.compile("([+*/-]?\\d+)([^\\d]+)");
     private static Pattern plus = Pattern.compile("([+*/\\-]\\d)");
@@ -116,6 +117,7 @@ public class RiAndInit {
             }
         }
 
+        nick = makeNickToSender(nick);
         if (msg.equals(NONE)) {
             sender(entityTypeMessages, nick + "的先攻骰掷,掷出了: D20=" + result);
         } else {

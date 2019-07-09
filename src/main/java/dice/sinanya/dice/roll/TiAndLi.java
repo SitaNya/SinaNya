@@ -32,7 +32,9 @@ public class TiAndLi {
         int indexTi = random(0, TI.size() - 1);
         String strTi = TI.get(indexTi);
         stringBuilder
+                .append("[")
                 .append(getRoleChooseByFromQQ(entityTypeMessages))
+                .append("]")
                 .append("的疯狂发作-临时症状:\n")
                 .append("1D10=")
                 .append(indexTi + 1)
@@ -49,7 +51,9 @@ public class TiAndLi {
         int indexLi = random(0, LI.size() - 1);
         String strLi = LI.get(indexLi);
         stringBuilder
+                .append("[")
                 .append(getRoleChooseByFromQQ(entityTypeMessages))
+                .append("]")
                 .append("的疯狂发作-总结症状:\n")
                 .append("1D10=")
                 .append(indexLi + 1)

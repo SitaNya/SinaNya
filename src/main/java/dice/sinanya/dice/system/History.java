@@ -1,9 +1,11 @@
 package dice.sinanya.dice.system;
 
+import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityHistory;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
+import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.History.changeHistory;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
@@ -15,7 +17,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 有任何问题欢迎咨询
  * 类说明: 骰点历史信息类
  */
-public class History {
+public class History implements MakeNickToSender {
 
     private EntityTypeMessages entityTypeMessages;
 
@@ -30,7 +32,7 @@ public class History {
         StringBuilder stringBuilder = new StringBuilder();
         EntityHistory entityHistory = changeHistory(entityTypeMessages.getFromQq());
 
-        stringBuilder.append("您使用").append(ENTITY_LOGINQQ_INFO.getLoginQQNick()).append("以来，共计产生以下历史数据:\n")
+        stringBuilder.append(makeNickToSender(getNickName(entityTypeMessages))).append("\t").append("您使用").append(ENTITY_LOGINQQ_INFO.getLoginQQNick()).append("以来，共计产生以下历史数据:\n")
                 .append("骰点:\t")
                 .append(entityHistory.getTimes())
                 .append("次")

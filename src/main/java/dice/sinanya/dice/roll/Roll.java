@@ -1,5 +1,6 @@
 package dice.sinanya.dice.roll;
 
+import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityStrManyRolls;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.tools.checkdata.CheckResultLevel;
@@ -28,7 +29,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 有任何问题欢迎咨询
  * 类说明: 默认骰掷，最基础也是最繁复的一个方法，里面包含很多种逻辑
  */
-public class Roll {
+public class Roll implements MakeNickToSender {
 
     private static Pattern plus = Pattern.compile("[+*/\\-]");
 
@@ -57,7 +58,7 @@ public class Roll {
         String tag = TAGR;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +", "");
 
-        String nick = getNickName(entityTypeMessages);
+        String nick = makeNickToSender(getNickName(entityTypeMessages));
 
 
         StringBuilder stringBuilderFunction = new StringBuilder();
@@ -141,19 +142,20 @@ public class Roll {
             }
 //            如果数学表达式和符号表达式相等，那么只能是因为一开始输入的就是纯数字表达式，因此把可能的技能名表达式重新复制给符号表达式
 
+            String groupName=makeGroupNickToSender(getGroupName(entityTypeMessages));
             if (skill != 0) {
 //                如果技能值取到了，那就不管表达式直接进行判定
                 String resLevel = new CheckResultLevel(intHidden, skill, true).getLevelResultStr();
-                entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + getGroupName(entityTypeMessages) + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n1D" + skill + "=" + intHidden + "/" + skill + "\n" + resLevel);
+                entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + groupName + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n1D" + skill + "=" + intHidden + "/" + skill + "\n" + resLevel);
             } else {
 //                如果技能值没取到，则使用表达式进行判定
                 if (isNumeric(entityStrManyRolls.getStrFunction())) {
-                    entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + getGroupName(entityTypeMessages) + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n1D" + maxRolls + "=" + entityStrManyRolls.getResult());
+                    entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + groupName + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n1D" + maxRolls + "=" + entityStrManyRolls.getResult());
                 } else {
                     if (isNumeric(entityStrManyRolls.getStrResult())) {
-                        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + getGroupName(entityTypeMessages) + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n" + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getResult());
+                        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + groupName + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n" + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getResult());
                     } else {
-                        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + getGroupName(entityTypeMessages) + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n" + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getStrResult() + "=" + entityStrManyRolls.getResult());
+                        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + groupName + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n" + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getStrResult() + "=" + entityStrManyRolls.getResult());
                     }
                 }
             }

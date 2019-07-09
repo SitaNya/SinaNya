@@ -47,7 +47,9 @@ public class SkillUp {
         if (random > skill || random == strFumbleLevel) {
             int skillUp = random(1, 10);
             stringBuilder
+                    .append("[")
                     .append(getRoleChooseByFromQQ(entityTypeMessages))
+                    .append("]")
                     .append("的技能成长检定:\n")
                     .append(random)
                     .append("/")
@@ -62,7 +64,9 @@ public class SkillUp {
             sender(entityTypeMessages, stringBuilder.toString());
         } else {
             stringBuilder
+                    .append("[")
                     .append(getRoleChooseByFromQQ(entityTypeMessages))
+                    .append("]")
                     .append("的技能成长检定:\n")
                     .append(random)
                     .append("/")
