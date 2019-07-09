@@ -24,6 +24,7 @@ class MakeSkillName {
         put("体型", "siz");
         put("智力", "intValue");
         put("int", "intValue");
+        put("idea", "intValue");
         put("灵感", "intValue");
         put("san", "san");
         put("san值", "san");
@@ -39,6 +40,7 @@ class MakeSkillName {
         put("人类学", "anthropology");
         put("估价", "evaluation");
         put("考古学", "archaeology");
+        put("取悦", "enchantment");
         put("魅惑", "enchantment");
         put("攀爬", "toClimb");
         put("计算机", "computerUsage");
