@@ -29,9 +29,9 @@ public class GetNickName implements RootBean {
         switch (entityTypeMessages.getMsgGetTypes()) {
             case groupMsg:
             case discussMsg:
-                return entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getCard();
+                return "[" + entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getCard() + "]";
             default:
-                return entityTypeMessages.getMsgSender().getPersonInfoByCode(entityTypeMessages.getFromQq()).getName();
+                return "[" + entityTypeMessages.getMsgSender().getPersonInfoByCode(entityTypeMessages.getFromQq()).getName() + "]";
         }
 
     }
@@ -45,12 +45,12 @@ public class GetNickName implements RootBean {
     public static String getGroupName(EntityTypeMessages entityTypeMessages) {
         switch (entityTypeMessages.getMsgGetTypes()) {
             case groupMsg:
-                return entityTypeMessages.getMsgSender().getGroupInfoByCode(entityTypeMessages.getMsgGroup().getGroupCode()).getName();
+                return "<" + entityTypeMessages.getMsgSender().getGroupInfoByCode(entityTypeMessages.getMsgGroup().getGroupCode()).getName() + ">";
             case discussMsg:
-                return entityTypeMessages.getMsgSender().getGroupInfoByCode(entityTypeMessages.getMsgDisGroup().getGroupCode()).getName();
+                return "<" + entityTypeMessages.getMsgSender().getGroupInfoByCode(entityTypeMessages.getMsgDisGroup().getGroupCode()).getName() + ">";
             default:
                 entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg("450609203", entityTypeMessages.toString());
-                return entityTypeMessages.toString();
+                return "<" + entityTypeMessages.toString() + ">";
         }
     }
 
@@ -61,6 +61,6 @@ public class GetNickName implements RootBean {
      * @return 昵称
      */
     public static String getGroupName(EntityTypeMessages entityTypeMessages, String groupId) {
-        return entityTypeMessages.getMsgSender().getGroupInfoByCode(groupId).getName();
+        return "<" + entityTypeMessages.getMsgSender().getGroupInfoByCode(groupId).getName() + ">";
     }
 }
