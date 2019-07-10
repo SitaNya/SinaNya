@@ -163,7 +163,7 @@ public class MessagesGas {
         }};
     }
 
-    public static final HashMap<Integer, ArrayList<String>> GAS_LIST = null;
+    public static final HashMap<Integer, ArrayList<String>> GAS_LIST;
 
     static {
         HashMap<Integer, ArrayList<String>> gasListTmp = new HashMap<Integer, ArrayList<String>>();
@@ -183,5 +183,7 @@ public class MessagesGas {
         gasListTmp.put(5,
 
                 initGas5());
+        GAS_LIST = gasListTmp;
     }
+
 }
