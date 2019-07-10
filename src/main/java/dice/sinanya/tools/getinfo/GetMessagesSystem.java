@@ -73,6 +73,7 @@ public class GetMessagesSystem {
 
         put("appendLog", "日志已重新开启，将在原基础上追加");
         put("createLog", "日志已创建");
+        put("CantEmptyLogName","不支持空日志名");
 
         put("sanCheckFumble", "");
         put("sanCheckCriticalSuccess", "");

@@ -10,6 +10,7 @@ import org.docx4j.openpackaging.exceptions.Docx4JException;
 import static dice.sinanya.system.MessagesLog.LOG_NAME_FOR_GROUP;
 import static dice.sinanya.system.MessagesLog.LOG_SWITCH_FOR_GROUP;
 import static dice.sinanya.system.MessagesLogGetLock.LOG_GET_LOCK;
+import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
@@ -44,6 +45,10 @@ public class Log {
     public void logOn() {
         String tag = TAG_LOG_ON;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        if (!msg.equals(NONE)) {
+            sender(entityTypeMessages, MESSAGES_SYSTEM.get("CantEmptyLogName"));
+            return;
+        }
         if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
 
             sender(entityTypeMessages, getOtherLogTrue(entityTypeMessages.getFromGroup()) + MESSAGES_SYSTEM.get("alreadyOpen"));
