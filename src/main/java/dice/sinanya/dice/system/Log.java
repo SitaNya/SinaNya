@@ -45,7 +45,7 @@ public class Log {
     public void logOn() {
         String tag = TAG_LOG_ON;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        if (!msg.equals(NONE)) {
+        if (msg.equals(NONE)) {
             sender(entityTypeMessages, MESSAGES_SYSTEM.get("CantEmptyLogName"));
             return;
         }
