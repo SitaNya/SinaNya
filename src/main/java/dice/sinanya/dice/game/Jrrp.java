@@ -48,6 +48,6 @@ public class Jrrp implements MakeNickToSender {
         for (char c : b) {
             tmp += (int) c;
         }
-        sender(entityTypeMessages, makeGroupNickToSender(getNickName(entityTypeMessages)) + "的今日人品为: " + (tmp % 100));
+        sender(entityTypeMessages, makeNickToSender(getNickName(entityTypeMessages)) + "的今日人品为: " + (tmp % 100));
     }
 }
