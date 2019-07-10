@@ -58,7 +58,7 @@ public class MessagesBg {
         infoTmp.add("魁梧的");
         infoTmp.add("迟钝的");
         infoTmp.add("虚弱的");
-        INFO = (ArrayList<String>) Collections.unmodifiableCollection(infoTmp);
+        INFO = new ArrayList<>(Collections.unmodifiableCollection(infoTmp));
     }
 
     static {
@@ -73,7 +73,7 @@ public class MessagesBg {
         persuasionTmp.add("８：诸君，我喜欢政治。（例如保守党，共产党，自由党）");
         persuasionTmp.add("９：“金钱就是力量，我的朋友，我将竭尽全力获取我能看到的一切。”（例如贪婪心，进取心，冷酷心）");
         persuasionTmp.add("１０：竞选者/激进主义者。（例如女权运动人，平等主义家，工会权柄）");
-        PERSUASION = (ArrayList<String>) Collections.unmodifiableCollection(persuasionTmp);
+        PERSUASION = new ArrayList<String>(Collections.unmodifiableCollection(persuasionTmp));
     }
 
     static {
@@ -88,7 +88,7 @@ public class MessagesBg {
         importantPersonsTmp.add("８：名人。偶像或者英雄。当然也许你从未见过他。（例如电影明星，政治家，音乐家。）");
         importantPersonsTmp.add("９：游戏中的另一位调查员伙伴。随机或自选。");
         importantPersonsTmp.add("１０：游戏中另一外ＮＰＣ。详情咨询你的守秘人");
-        IMPORTANT_PERSONS = (ArrayList<String>) Collections.unmodifiableCollection(importantPersonsTmp);
+        IMPORTANT_PERSONS = new ArrayList<String>(Collections.unmodifiableCollection(importantPersonsTmp));
     }
 
     static {
@@ -103,7 +103,7 @@ public class MessagesBg {
         importantPersonsInfoTmp.add("８：后悔的感觉。（例如，你本应死在他们面前，你背弃了你的誓言，你在可以助人之时驻足不前）");
         importantPersonsInfoTmp.add("９：你试图证明你比他们更出色。他们的缺点是？（例如，懒惰，酗酒，冷漠）");
         importantPersonsInfoTmp.add("１０：他们扰乱了你的人生，而你寻求复仇。发生了什么？（例如，射杀爱人之日，国破家亡之时，明镜两分之际）");
-        IMPORTANT_PERSONS_INFO = (ArrayList<String>) Collections.unmodifiableCollection(importantPersonsInfoTmp);
+        IMPORTANT_PERSONS_INFO = new ArrayList<String>(Collections.unmodifiableCollection(importantPersonsInfoTmp));
     }
 
     static {
@@ -118,7 +118,7 @@ public class MessagesBg {
         importantMapTmp.add("８：家族所在。（例如，乡下小屋，租屋，幼年的孤儿院）");
         importantMapTmp.add("９：生命中最高兴时的所在。（例如，初吻时坐着的公园长椅，你的大学）");
         importantMapTmp.add("１０：工作地点。（例如，办公室，图书馆，银行）");
-        IMPORTANT_MAP = (ArrayList<String>) Collections.unmodifiableCollection(importantMapTmp);
+        IMPORTANT_MAP = new ArrayList<String>(Collections.unmodifiableCollection(importantMapTmp));
     }
 
     static {
@@ -133,7 +133,7 @@ public class MessagesBg {
         preciousTmp.add("８：体育用品。（例如，球棒，签名棒球，鱼竿）");
         preciousTmp.add("９：武器。（例如，半自动左轮，老旧的猎用来福，靴刃）");
         preciousTmp.add("１０：宠物。（例如狗，猫，乌龟）");
-        PRECIOUS = (ArrayList<String>) Collections.unmodifiableCollection(preciousTmp);
+        PRECIOUS = new ArrayList<String>(Collections.unmodifiableCollection(preciousTmp));
     }
 
     static {
@@ -148,6 +148,6 @@ public class MessagesBg {
         specialityTmp.add("８：忠心在我。（例如，背负自己的朋友，从未破誓，为信念而死）");
         specialityTmp.add("９：好名头。（例如，村里最好的饭后聊天人士，虔信圣徒，不惧任何危险）");
         specialityTmp.add("１０：雄心壮志。（例如，梦想远大，目标是成为ＢＯＳＳ，渴求一切）");
-        SPECIALITY = (ArrayList<String>) Collections.unmodifiableCollection(specialityTmp);
+        SPECIALITY = new ArrayList<String>(Collections.unmodifiableCollection(specialityTmp));
     }
 }

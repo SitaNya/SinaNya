@@ -1,7 +1,6 @@
 package dice.sinanya.system;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 /**
@@ -13,19 +12,6 @@ import java.util.HashMap;
  * 接口说明: 煤气灯的静态信息
  */
 public class MessagesGas {
-
-    public static final HashMap<Integer, ArrayList<String>> GAS_LIST;
-
-    static {
-        HashMap<Integer, ArrayList<String>> gasListTmp = new HashMap<>();
-        gasListTmp.put(0, initGas0());
-        gasListTmp.put(1, initGas1());
-        gasListTmp.put(2, initGas2());
-        gasListTmp.put(3, initGas3());
-        gasListTmp.put(4, initGas4());
-        gasListTmp.put(5, initGas5());
-        GAS_LIST = (HashMap<Integer, ArrayList<String>>) Collections.unmodifiableMap(gasListTmp);
-    }
 
     private static ArrayList<String> initGas0() {
         return new ArrayList<String>() {{
@@ -175,5 +161,27 @@ public class MessagesGas {
             add("任意选择一项特征。");
             add("投掷两次,玩家任意选择其中一项特征。");
         }};
+    }
+
+    public static final HashMap<Integer, ArrayList<String>> GAS_LIST = null;
+
+    static {
+        HashMap<Integer, ArrayList<String>> gasListTmp = new HashMap<Integer, ArrayList<String>>();
+        gasListTmp.put(0, initGas0());
+        gasListTmp.put(1,
+
+                initGas1());
+        gasListTmp.put(2,
+
+                initGas2());
+        gasListTmp.put(3,
+
+                initGas3());
+        gasListTmp.put(4,
+
+                initGas4());
+        gasListTmp.put(5,
+
+                initGas5());
     }
 }
