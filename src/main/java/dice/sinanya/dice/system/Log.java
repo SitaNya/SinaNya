@@ -76,7 +76,7 @@ public class Log implements MakeNickToSender {
                 setLogTagSwitch(entityTypeMessages, msg, false);
                 LOG_NAME_FOR_GROUP.remove(entityTypeMessages.getFromGroup());
                 LOG_SWITCH_FOR_GROUP.put(entityTypeMessages.getFromGroup(), false);
-                sender(entityTypeMessages, makeLogNickToSender(msg) + "已关闭，现在可以使用\".logger get " + msg + "\"进行获取");
+                sender(entityTypeMessages, makeLogNickToSender(msg) + "已关闭，现在可以使用\".log get " + msg + "\"进行获取");
             } else {
                 sender(entityTypeMessages, makeLogNickToSender(msg) + MESSAGES_SYSTEM.get("alreadyClose"));
             }

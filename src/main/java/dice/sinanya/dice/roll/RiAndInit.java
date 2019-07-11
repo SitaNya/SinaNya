@@ -110,7 +110,7 @@ public class RiAndInit implements MakeNickToSender {
         }
 
         nick = makeNickToSender(nick);
-        String tagInitText = "的先攻骰掷,掷出了: D20=";
+        String tagInitText = "的先攻骰掷,掷出了: D20=\t";
         if (msg.equals(NONE)) {
             sender(entityTypeMessages, nick + tagInitText + result);
         } else {
@@ -170,9 +170,9 @@ public class RiAndInit implements MakeNickToSender {
     private Map<String, String> putInitList(String nick, Map<String, String> initList, Matcher mMsgBefore, String msgBefore, int result) {
         String tagD20 = ": D20=";
         if (mMsgBefore.find()) {
-            initList.put(nick, tagD20 + result);
+            initList.put(nick, tagD20 + "\t" + result);
         } else {
-            initList.put(nick, tagD20 + msgBefore + result);
+            initList.put(nick, tagD20 + msgBefore + "\t" + result);
         }
         return initList;
     }
