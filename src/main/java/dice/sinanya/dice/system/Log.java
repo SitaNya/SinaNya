@@ -1,5 +1,6 @@
 package dice.sinanya.dice.system;
 
+import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.tools.log.SaveDocx;
@@ -29,7 +30,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 有任何问题欢迎咨询
  * 类说明: 日志记录类
  */
-public class Log {
+public class Log implements MakeNickToSender {
 
     private static final Logger logger = LogManager.getLogger(Log.class.getName());
 
@@ -54,9 +55,9 @@ public class Log {
             sender(entityTypeMessages, getOtherLogTrue(entityTypeMessages.getFromGroup()) + MESSAGES_SYSTEM.get("alreadyOpen"));
         } else {
             if (checkLogTagExist(entityTypeMessages, msg)) {
-                sender(entityTypeMessages, "{"+msg+"}" + MESSAGES_SYSTEM.get("appendLog"));
+                sender(entityTypeMessages, makeLogNickToSender(msg) + MESSAGES_SYSTEM.get("appendLog"));
             } else {
-                sender(entityTypeMessages, "{"+msg+"}" + MESSAGES_SYSTEM.get("createLog"));
+                sender(entityTypeMessages, makeLogNickToSender(msg) + MESSAGES_SYSTEM.get("createLog"));
             }
             LOG_NAME_FOR_GROUP.put(entityTypeMessages.getFromGroup(), msg);
             LOG_SWITCH_FOR_GROUP.put(entityTypeMessages.getFromGroup(), true);
@@ -75,9 +76,9 @@ public class Log {
                 setLogTagSwitch(entityTypeMessages, msg, false);
                 LOG_NAME_FOR_GROUP.remove(entityTypeMessages.getFromGroup());
                 LOG_SWITCH_FOR_GROUP.put(entityTypeMessages.getFromGroup(), false);
-                sender(entityTypeMessages, "{" + msg + "}已关闭，现在可以使用\".logger get " + msg + "\"进行获取");
+                sender(entityTypeMessages, makeLogNickToSender(msg) + "已关闭，现在可以使用\".logger get " + msg + "\"进行获取");
             } else {
-                sender(entityTypeMessages, "{"+msg+"}" + MESSAGES_SYSTEM.get("alreadyClose"));
+                sender(entityTypeMessages, makeLogNickToSender(msg) + MESSAGES_SYSTEM.get("alreadyClose"));
             }
         } else {
             sender(entityTypeMessages, MESSAGES_SYSTEM.get("notFoundLog"));
@@ -97,9 +98,9 @@ public class Log {
                 LOG_GET_LOCK.add(msg);
             }
             String bigResult = getLogText(new EntityLogTag(entityTypeMessages.getFromGroup(), msg));
-            sender(entityTypeMessages, "正在抽取数据库为{" + msg + "}生成文件");
+            sender(entityTypeMessages, "正在抽取数据库为"+makeLogNickToSender(msg)+"生成文件");
             logSave(entityTypeMessages.getFromGroup(), msg, bigResult);
-            sender(entityTypeMessages, "正在抽取数据库为{" + msg + "}生成染色文件");
+            sender(entityTypeMessages, "正在抽取数据库为"+makeLogNickToSender(msg)+"生成染色文件");
             try {
                 new SaveDocx(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq(), msg, bigResult);
             } catch (Docx4JException e) {
@@ -110,7 +111,7 @@ public class Log {
             sender(entityTypeMessages, "[CQ:at,qq=" + entityTypeMessages.getFromQq() + "] 已发送到您的QQ邮箱，注意查收");
             LOG_GET_LOCK.remove(msg);
         } else {
-            sender(entityTypeMessages, "{"+msg + "}仍处于打开状态，请关闭后再试");
+            sender(entityTypeMessages, makeLogNickToSender(msg)+"仍处于打开状态，请关闭后再试");
         }
     }
 
@@ -132,10 +133,10 @@ public class Log {
                 sender(entityTypeMessages, MESSAGES_SYSTEM.get("deleteOpenLog"));
             } else {
                 delLog(new EntityLogTag(entityTypeMessages.getFromGroup(), msg));
-                sender(entityTypeMessages, "已删除日志: " + msg);
+                sender(entityTypeMessages, "已删除日志: " + makeLogNickToSender(msg));
             }
         } else {
-            sender(entityTypeMessages, "不存在日志: " + msg);
+            sender(entityTypeMessages, "不存在日志: " + makeLogNickToSender(msg));
         }
     }
 }

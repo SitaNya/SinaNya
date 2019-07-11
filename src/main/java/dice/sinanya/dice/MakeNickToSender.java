@@ -29,4 +29,14 @@ public interface MakeNickToSender {
     default String makeGroupNickToSender(String nick) {
         return "<" + nick + ">";
     }
+
+    /**
+     * 给日志包裹上《》
+     *
+     * @param logName 日志名
+     * @return 加工后返回
+     */
+    default String makeLogNickToSender(String logName) {
+        return "《" + logName + "》";
+    }
 }

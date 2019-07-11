@@ -176,7 +176,6 @@ public class Listener {
         String tagBotOff = ".*[.。][ ]*bot[ ]*off.*";
         String tagBotInfo = ".*[.。][ ]*bot.*";
         String tagBotExit = ".*[.。][ ]*bot[ ]*exit.*";
-        String onlyManagerError = "onlyManager";
 
         boolean botOn = messagesContainsAtMe(messages, tagBotOn, tagMe) || messagesBotForAll(messages, tagBotOn) || messagesContainsQqId(messages, tagBotOn);
         boolean botOff = messagesContainsAtMe(messages, tagBotOff, tagMe) || messagesBotForAll(messages, tagBotOff) || messagesContainsQqId(messages, tagBotOff);
@@ -188,18 +187,18 @@ public class Listener {
         }
         Resp_getGroupMemberInfo.GroupMemberInfo isAdmin = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getOtherParam("result", Resp_getGroupMemberInfo.GroupMemberInfo.class);
 
-        boolean notIsAdmin = isAdmin.getPower() != 1;
-        boolean notIsAdminInDiscuss = notIsAdmin || entityTypeMessages.getMsgGetTypes() == discussMsg;
-        if (botOn) {
+        boolean boolIsAdmin = isAdmin.getPower() != 1;
+        boolean boolIsAdminOrInDiscuss = boolIsAdmin || entityTypeMessages.getMsgGetTypes() == discussMsg;
+        if (botOn && boolIsAdminOrInDiscuss) {
             new Bot(entityTypeMessages).on();
-        } else if (botOff && notIsAdmin) {
+        } else if (botOff && boolIsAdminOrInDiscuss) {
             new Bot(entityTypeMessages).off();
-        } else if (botExit && notIsAdminInDiscuss) {
+        } else if (botExit && boolIsAdminOrInDiscuss) {
             new Bot(entityTypeMessages).exit();
         } else if (botInfo) {
             new Bot(entityTypeMessages).info();
         } else {
-            sender(entityTypeMessages, MESSAGES_SYSTEM.get(onlyManagerError));
+            sender(entityTypeMessages, MESSAGES_SYSTEM.get("onlyManager"));
         }
     }
 
