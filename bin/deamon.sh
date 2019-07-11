@@ -28,7 +28,7 @@ case ${startStop} in
     fi
 
     echo starting sinanya
-    sinanyaScript='java -cp '"$bin"'/../lib/*:'"$bin"'/../conf/log4j2.xml:'"$bin"'/../conf/*:'"$Jar_Dir"' -Dlog4j.configurationFile='"$bin"'/../conf/log4j2.xml -Xms1024m -Xmx2048m dice.sinanya.RunApplication'
+    sinanyaScript='java -cp '"$bin"'/../lib/*:'"$bin"'/../conf/log4j2.xml:'"$bin"'/../conf/*:'"$Jar_Dir"' -Dlog4j.configurationFile='"$bin"'/../conf/log4j2.xml -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:-CMSConcurrentMTEnabled -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled dice.sinanya.RunApplication'
     echo ${sinanyaScript}
     nohup ${sinanyaScript} 2>&1 >> ../logs/all.log &
 
@@ -97,7 +97,7 @@ case ${startStop} in
     fi
 
     echo starting sinanya
-    sinanyaScript='java -cp '"$bin"'/../lib/*:'"$bin"'/../conf/*:'"$Jar_Dir"' -Dlog4j.configurationFile='"$bin"'/../conf/log4j2.xml -Xms1024m -Xmx2048m vdian.hadoop.sinanya.HDFS_sinanya'
+    sinanyaScript='java -cp '"$bin"'/../lib/*:'"$bin"'/../conf/*:'"$Jar_Dir"' -Dlog4j.configurationFile='"$bin"'/../conf/log4j2.xml -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:-CMSConcurrentMTEnabled -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled vdian.hadoop.sinanya.HDFS_sinanya'
     echo ${sinanyaScript}
     nohup ${sinanyaScript} 2>&1 >> ../logs/all.log &
 
