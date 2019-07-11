@@ -14,7 +14,10 @@ import com.forte.qqrobot.sender.MsgSender;
 import dice.sinanya.dice.system.Bot;
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.exceptions.OnlyManagerException;
 import dice.sinanya.flow.Flow;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import static com.forte.qqrobot.beans.messages.types.MsgGetTypes.discussMsg;
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
@@ -37,6 +40,8 @@ public class Listener {
     private String tagBotOn = ".*[.。][ ]*bot[ ]*on.*";
     private String atTag = "[cq:at,qq=?]";
     private String tagMe = String.format(atTag, ENTITY_LOGINQQ_INFO.getLoginQQ());
+
+    private static Logger log = LogManager.getLogger(Listener.class.getName());
 
     private Listener() {
     }
@@ -79,10 +84,14 @@ public class Listener {
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public void listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
-        changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
+        try {
+            changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
+        } catch (OnlyManagerException e) {
+            log.error(e.getMessage(), e);
+        }
         if (getBot(Long.parseLong(msgGroup.getGroupCode()))) {
             new Flow(entityTypeMessages).toGroup();
-            setLogs(entityTypeMessages, msgGet);
+            setLogsForText(entityTypeMessages, msgGet.getMsg());
         }
     }
 
@@ -99,10 +108,14 @@ public class Listener {
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public void listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
-        changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
+        try {
+            changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
+        } catch (OnlyManagerException e) {
+            log.error(e.getMessage(), e);
+        }
         if (getBot(Long.parseLong(msgDisGroup.getGroupCode()))) {
             new Flow(entityTypeMessages).toDisGroup();
-            setLogs(entityTypeMessages, msgGet);
+            setLogsForText(entityTypeMessages, msgGet.getMsg());
         }
     }
 
@@ -119,14 +132,7 @@ public class Listener {
     @Filter(value = "^[^.。].*")
     public void listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
-        if (msgGroup.getMsg().charAt(0) != '.') {
-            changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
-        }
-        if (getBot(Long.parseLong(msgGroup.getGroupCode())) ||
-                msgGroup.getMsg().trim().equals(tagBotOn) ||
-                (msgGroup.getMsg().trim().contains(tagBotOn) && msgGroup.getMsg().trim().contains(tagMe))) {
-            setLogs(entityTypeMessages, msgGet);
-        }
+        setLogs(entityTypeMessages, msgGroup.getMsg(), msgGroup.getGroupCode());
     }
 
     /**
@@ -142,14 +148,7 @@ public class Listener {
     @Filter(value = "^[^.。].*")
     public void listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
-        if (msgDisGroup.getMsg().charAt(0) != '.') {
-            changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
-        }
-        if (getBot(Long.parseLong(msgDisGroup.getGroupCode())) ||
-                msgDisGroup.getMsg().trim().equals(tagBotOn) ||
-                (msgDisGroup.getMsg().trim().contains(tagBotOn) && msgDisGroup.getMsg().trim().contains(tagMe))) {
-            setLogs(entityTypeMessages, msgGet);
-        }
+        setLogs(entityTypeMessages, msgDisGroup.getMsg(), msgDisGroup.getGroupCode());
     }
 
     /**
@@ -157,11 +156,27 @@ public class Listener {
      * 内容为将某一句消息插入log数据库
      *
      * @param entityTypeMessages 消息封装类
-     * @param msgGet             消息对象
+     * @param msg             消息对象
+     * @param groupId 群号
      */
-    private void setLogs(EntityTypeMessages entityTypeMessages, MsgGet msgGet) {
+    private void setLogs(EntityTypeMessages entityTypeMessages, String msg, String groupId) {
+        if (msg.charAt(0) != '.') {
+            try {
+                changeBotSwitch(entityTypeMessages, msg);
+            } catch (OnlyManagerException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+        if (getBot(Long.parseLong(groupId)) ||
+                msg.trim().equals(tagBotOn) ||
+                (msg.trim().contains(tagBotOn) && msg.trim().contains(tagMe))) {
+            setLogsForText(entityTypeMessages, msg);
+        }
+    }
+
+    private void setLogsForText(EntityTypeMessages entityTypeMessages, String msg) {
         if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
-            setLogText(entityTypeMessages, new EntityLogTag(entityTypeMessages.getFromGroup(), getOtherLogTrue(entityTypeMessages.getFromGroup())), msgGet.getMsg());
+            setLogText(entityTypeMessages, new EntityLogTag(entityTypeMessages.getFromGroup(), getOtherLogTrue(entityTypeMessages.getFromGroup())), msg);
         }
     }
 
@@ -171,7 +186,7 @@ public class Listener {
      * @param entityTypeMessages 消息封装类
      * @param messages           消息字符串
      */
-    private void changeBotSwitch(EntityTypeMessages entityTypeMessages, String messages) {
+    private void changeBotSwitch(EntityTypeMessages entityTypeMessages, String messages) throws OnlyManagerException {
         messages = messages.toLowerCase();
         String tagBotOff = ".*[.。][ ]*bot[ ]*off.*";
         String tagBotInfo = ".*[.。][ ]*bot.*";
@@ -185,20 +200,18 @@ public class Listener {
         if (!messages.contains("bot")) {
             return;
         }
-        Resp_getGroupMemberInfo.GroupMemberInfo isAdmin = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getOtherParam("result", Resp_getGroupMemberInfo.GroupMemberInfo.class);
 
-        boolean boolIsAdmin = isAdmin.getPower() != 1;
-        boolean boolIsAdminOrInDiscuss = boolIsAdmin || entityTypeMessages.getMsgGetTypes() == discussMsg;
-        if (botOn && boolIsAdminOrInDiscuss) {
+        if (botOn) {
+            checkAudit(entityTypeMessages);
             new Bot(entityTypeMessages).on();
-        } else if (botOff && boolIsAdminOrInDiscuss) {
+        } else if (botOff) {
+            checkAudit(entityTypeMessages);
             new Bot(entityTypeMessages).off();
-        } else if (botExit && boolIsAdminOrInDiscuss) {
+        } else if (botExit) {
+            checkAudit(entityTypeMessages);
             new Bot(entityTypeMessages).exit();
         } else if (botInfo) {
             new Bot(entityTypeMessages).info();
-        } else {
-            sender(entityTypeMessages, MESSAGES_SYSTEM.get("onlyManager"));
         }
     }
 
@@ -213,5 +226,16 @@ public class Listener {
     private boolean messagesContainsQqId(String messages, String tagBotSwitch) {
         String qqId = String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ());
         return messages.trim().matches(tagBotSwitch) && (messages.trim().contains(qqId) || messages.trim().contains(qqId.substring(qqId.length() - 5)));
+    }
+
+    private void checkAudit(EntityTypeMessages entityTypeMessages) throws OnlyManagerException {
+        Resp_getGroupMemberInfo.GroupMemberInfo isAdmin = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getOtherParam("result", Resp_getGroupMemberInfo.GroupMemberInfo.class);
+
+        boolean boolIsAdmin = isAdmin.getPower() != 1;
+        boolean boolIsAdminOrInDiscuss = boolIsAdmin || entityTypeMessages.getMsgGetTypes() == discussMsg;
+        if (!boolIsAdminOrInDiscuss) {
+            sender(entityTypeMessages, MESSAGES_SYSTEM.get("onlyManager"));
+            throw new OnlyManagerException(entityTypeMessages);
+        }
     }
 }
