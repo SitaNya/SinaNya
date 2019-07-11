@@ -84,7 +84,7 @@ public class RiAndInit implements MakeNickToSender {
         Matcher mNumAndName = numAndName.matcher(msg);
         while (mNumAndName.find()) {
             msg = mNumAndName.group(1);
-            nick = mNumAndName.group(2) + "(" + getNickName(entityTypeMessages) + ")";
+            nick = mNumAndName.group(2).trim() + "(" + getNickName(entityTypeMessages) + ")";
         }
 
         Matcher mPlus = plus.matcher(msg);
