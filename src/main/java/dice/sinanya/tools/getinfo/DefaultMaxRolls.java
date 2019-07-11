@@ -15,12 +15,11 @@ import dice.sinanya.db.setdefaultrolls.SelectDefaultMaxRolls;
  */
 public class DefaultMaxRolls {
 
+    private static InsertDefaultMaxRolls insertDefaultMaxRolls = new InsertDefaultMaxRolls();
+    private static SelectDefaultMaxRolls selectDefaultMaxRolls = new SelectDefaultMaxRolls();
     private DefaultMaxRolls() {
         throw new IllegalStateException("Utility class");
     }
-
-    private static InsertDefaultMaxRolls insertDefaultMaxRolls = new InsertDefaultMaxRolls();
-    private static SelectDefaultMaxRolls selectDefaultMaxRolls = new SelectDefaultMaxRolls();
 
     /**
      * 刷新默认骰，只在启动时这样做

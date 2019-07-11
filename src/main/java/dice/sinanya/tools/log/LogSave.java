@@ -29,10 +29,10 @@ public class LogSave {
      */
     public static void logSave(String groupId, String logName, String info) {
         // 1：利用File类找到要操作的对象
-        File file = new File("../saveLogs/" + groupId + "/" + logName+".txt");
+        File file = new File("../saveLogs/" + groupId + "/" + logName + ".txt");
 
         if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
-                Log.error("上层目录未能创建");
+            Log.error("上层目录未能创建");
         }
 
         try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "GBK"));) {

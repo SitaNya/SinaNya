@@ -23,7 +23,7 @@ import static java.lang.Math.ceil;
  * 有任何问题欢迎咨询
  * 类说明: 获取昵称、随机值、技能值
  */
-public class GetNickAndRandomAndSkill{
+public class GetNickAndRandomAndSkill {
     private static Pattern p = Pattern.compile("[+*/\\-]");
     private static Pattern skillNamePatten = Pattern.compile("([^\\d+*\\-/]+)");
 
@@ -64,7 +64,7 @@ public class GetNickAndRandomAndSkill{
 
 //        如果没找到技能名，则看看剩余消息是不是数字技能值
         if (skill == 0 && isNumeric(msg.trim())) {
-                skill = Integer.parseInt(msg.trim());
+            skill = Integer.parseInt(msg.trim());
         }
 
 //        如果正段消息包含运算符，则将传入消息中的技能计算为技能值返回

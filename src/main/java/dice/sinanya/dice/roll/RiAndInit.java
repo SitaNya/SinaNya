@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 import static dice.sinanya.system.MessagesInit.INIT_LIST;
 import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.system.MessagesTag.TAG_RI;
-import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByFromQQ;

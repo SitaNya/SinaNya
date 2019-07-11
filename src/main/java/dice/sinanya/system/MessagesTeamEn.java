@@ -15,9 +15,9 @@ import java.util.HashMap;
  */
 public class MessagesTeamEn {
 
+    public static final HashMap<EntityQqAndGroup, ArrayList<String>> TEAM_EN = new HashMap<>();
+
     private MessagesTeamEn() {
         throw new IllegalStateException("Utility class");
     }
-
-    public static final HashMap<EntityQqAndGroup, ArrayList<String>> TEAM_EN = new HashMap<>();
 }

@@ -13,10 +13,10 @@ import java.util.HashMap;
  * 将对方的昵称hash后存到这里，可以确保同一个人说话用同一种颜色
  */
 public class MessagesLogColorTag {
+    public static final HashMap<String, HashMap<String, Integer>> LOG_COLOR_TAG = new HashMap<>();
+
+
     private MessagesLogColorTag() {
         throw new IllegalStateException("Utility class");
     }
-
-
-    public static final HashMap<String, HashMap<String, Integer>> LOG_COLOR_TAG = new HashMap<>();
 }

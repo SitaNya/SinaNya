@@ -33,10 +33,9 @@ import static java.lang.Math.min;
  * 类说明: 进行SanCheck检定
  */
 public class MakeSanCheck {
+    private static Pattern plus = Pattern.compile("[+*/\\-]");
     private EntityTypeMessages entityTypeMessages;
     private long qq;
-
-    private static Pattern plus = Pattern.compile("[+*/\\-]");
     private String sanCheckFunctionError = "sanCheck";
 
     public MakeSanCheck(EntityTypeMessages entityTypeMessages) {
@@ -133,7 +132,7 @@ public class MakeSanCheck {
         boolean containsSeq = strCheckValue.contains(sanFunctionSeq);
         boolean firstFunctionError = strCheckValue.split(sanFunctionSeq)[0].equals(tagNone);
         boolean secondFunctionError = containsSeq && strCheckValue.split(sanFunctionSeq)[1].equals(tagNone);
-        boolean functionError=!containsSeq||firstFunctionError||secondFunctionError;
+        boolean functionError = !containsSeq || firstFunctionError || secondFunctionError;
         if (functionError) {
             throw new SanCheckSetException(entityTypeMessages);
         }

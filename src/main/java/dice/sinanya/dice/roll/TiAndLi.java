@@ -18,13 +18,12 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  */
 public class TiAndLi {
 
+    String tagD10 = "1D10=";
     private EntityTypeMessages entityTypeMessages;
 
     public TiAndLi(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
     }
-
-    String tagD10 = "1D10=";
 
     /**
      * 临时疯狂

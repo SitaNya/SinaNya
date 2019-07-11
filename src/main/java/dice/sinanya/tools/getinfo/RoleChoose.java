@@ -70,7 +70,7 @@ public class RoleChoose {
     public static String getRoleChooseByQQ(String qqId) {
         long qq = Long.parseLong(qqId);
         if (checkRoleChooseExistByQQ(qq)) {
-            return  ROLE_CHOOSE.get(qq) ;
+            return ROLE_CHOOSE.get(qq);
         } else {
             return "未找到当前角色";
         }
@@ -84,7 +84,7 @@ public class RoleChoose {
      */
     public static String getRoleChooseByQQ(long qq) {
         if (checkRoleChooseExistByQQ(qq)) {
-            return  ROLE_CHOOSE.get(qq) ;
+            return ROLE_CHOOSE.get(qq);
         } else {
             return "未找到当前角色";
         }

@@ -98,9 +98,9 @@ public class Log implements MakeNickToSender {
                 LOG_GET_LOCK.add(msg);
             }
             String bigResult = getLogText(new EntityLogTag(entityTypeMessages.getFromGroup(), msg));
-            sender(entityTypeMessages, "正在抽取数据库为"+makeLogNickToSender(msg)+"生成文件");
+            sender(entityTypeMessages, "正在抽取数据库为" + makeLogNickToSender(msg) + "生成文件");
             logSave(entityTypeMessages.getFromGroup(), msg, bigResult);
-            sender(entityTypeMessages, "正在抽取数据库为"+makeLogNickToSender(msg)+"生成染色文件");
+            sender(entityTypeMessages, "正在抽取数据库为" + makeLogNickToSender(msg) + "生成染色文件");
             try {
                 new SaveDocx(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq(), msg, bigResult);
             } catch (Docx4JException e) {
@@ -111,7 +111,7 @@ public class Log implements MakeNickToSender {
             sender(entityTypeMessages, "[CQ:at,qq=" + entityTypeMessages.getFromQq() + "] 已发送到您的QQ邮箱，注意查收");
             LOG_GET_LOCK.remove(msg);
         } else {
-            sender(entityTypeMessages, makeLogNickToSender(msg)+"仍处于打开状态，请关闭后再试");
+            sender(entityTypeMessages, makeLogNickToSender(msg) + "仍处于打开状态，请关闭后再试");
         }
     }
 

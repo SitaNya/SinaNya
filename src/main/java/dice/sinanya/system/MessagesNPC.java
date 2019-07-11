@@ -12,10 +12,6 @@ import java.util.ArrayList;
  */
 public class MessagesNPC {
 
-    private MessagesNPC() {
-        throw new IllegalStateException("Utility class");
-    }
-
     public static final ArrayList<String> SpeTag = new ArrayList<String>() {{
         add("聆听，可以轻松地察觉到周围环境中的微弱声音，可以轻松察觉到他人的偷袭。");
         add("潜行，可以轻易地隐藏在黑暗中，面对危险时更容易规避掉。");
@@ -782,5 +778,8 @@ public class MessagesNPC {
         add("看不起身体残疾和精神残疾的人");
         add("对待残疾人彬彬有礼");
     }};
+    private MessagesNPC() {
+        throw new IllegalStateException("Utility class");
+    }
 
 }

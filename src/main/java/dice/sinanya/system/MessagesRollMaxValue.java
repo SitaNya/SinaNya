@@ -12,9 +12,9 @@ import java.util.HashMap;
  */
 public class MessagesRollMaxValue {
 
+    public static final HashMap<String, Integer> ROLL_MAX_VALUE = new HashMap<>();
+
     private MessagesRollMaxValue() {
         throw new IllegalStateException("Utility class");
     }
-
-    public static final HashMap<String, Integer> ROLL_MAX_VALUE = new HashMap<>();
 }

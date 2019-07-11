@@ -12,9 +12,9 @@ import dice.sinanya.entity.EntityLoginQQInfo;
  */
 public class MessagesLoginInfo {
 
+    public static EntityLoginQQInfo ENTITY_LOGINQQ_INFO = new EntityLoginQQInfo();
+
     private MessagesLoginInfo() {
         throw new IllegalStateException("Utility class");
     }
-
-    public static EntityLoginQQInfo ENTITY_LOGINQQ_INFO = new EntityLoginQQInfo();
 }

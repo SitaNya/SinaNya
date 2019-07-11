@@ -25,7 +25,7 @@ public class CheckIsNumbers {
      * @param str 字符串
      * @return 布尔值
      */
-    public static boolean isNumeric(String str){
+    public static boolean isNumeric(String str) {
         Matcher isNum = pattern.matcher(str);
         return isNum.matches();
     }

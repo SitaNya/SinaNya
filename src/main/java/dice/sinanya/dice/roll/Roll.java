@@ -142,7 +142,7 @@ public class Roll implements MakeNickToSender {
             }
 //            如果数学表达式和符号表达式相等，那么只能是因为一开始输入的就是纯数字表达式，因此把可能的技能名表达式重新复制给符号表达式
 
-            String groupName=makeGroupNickToSender(getGroupName(entityTypeMessages));
+            String groupName = makeGroupNickToSender(getGroupName(entityTypeMessages));
             if (skill != 0) {
 //                如果技能值取到了，那就不管表达式直接进行判定
                 String resLevel = new CheckResultLevel(intHidden, skill, true).getLevelResultStr();

@@ -76,7 +76,7 @@ public class SaveDocx {
         }
         File file = new File("../saveLogs/" + groupId + "/" + msg + ".docx");
         if (!file.getParentFile().mkdirs() || !file.getParentFile().exists()) {
-                Log.error("docx染色文件未能成功生成");
+            Log.error("docx染色文件未能成功生成");
         }
         wordMlPackage.save(file);
     }

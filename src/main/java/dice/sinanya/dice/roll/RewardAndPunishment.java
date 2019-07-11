@@ -56,7 +56,7 @@ public class RewardAndPunishment implements En, MakeNickToSender {
         for (int result : listDice) {
             stringBuilder.append(result).append(",");
             if (result < min && (random % 10 != 0 || result != 0)) {
-                    min = result;
+                min = result;
             }
         }
 //        取最小值
@@ -124,10 +124,10 @@ public class RewardAndPunishment implements En, MakeNickToSender {
 
         String strRes;
         String substring = stringBuilder.substring(0, stringBuilder.length() - 1);
-        String nick=makeNickToSender(entityNickAndRandomAndSkill.getNick());
+        String nick = makeNickToSender(entityNickAndRandomAndSkill.getNick());
         if (getTimesAndSkill(msg).getSkill() != 0) {
             CheckResultLevel checkResultLevel = new CheckResultLevel(resultRandom, getTimesAndSkill(msg).getSkill(), false);
-            strRes =  nick+
+            strRes = nick +
                     "进行惩罚骰鉴定: D100=" + random + "[惩罚骰:" + substring + "] = " + resultRandom + "/" + getTimesAndSkill(msg).getSkill() +
                     checkResultLevel.getLevelResultStr();
             checkEn(checkResultLevel.getLevel(), msg, entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup());

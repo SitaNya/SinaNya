@@ -47,24 +47,48 @@ public class EntityHistory {
         return fumble;
     }
 
+    public void setFumble(int fumble) {
+        this.fumble = fumble;
+    }
+
     public int getCriticalSuccess() {
         return criticalSuccess;
+    }
+
+    public void setCriticalSuccess(int criticalSuccess) {
+        this.criticalSuccess = criticalSuccess;
     }
 
     public int getExtremeSuccess() {
         return extremeSuccess;
     }
 
+    public void setExtremeSuccess(int extremeSuccess) {
+        this.extremeSuccess = extremeSuccess;
+    }
+
     public int getHardSuccess() {
         return hardSuccess;
+    }
+
+    public void setHardSuccess(int hardSuccess) {
+        this.hardSuccess = hardSuccess;
     }
 
     public int getSuccess() {
         return success;
     }
 
+    public void setSuccess(int success) {
+        this.success = success;
+    }
+
     public int getFailure() {
         return failure;
+    }
+
+    public void setFailure(int failure) {
+        this.failure = failure;
     }
 
     public int getTimes() {
@@ -81,6 +105,10 @@ public class EntityHistory {
 
     private void setMean(int mean) {
         this.mean = (this.mean * (times - 1) + mean) / times;
+    }
+
+    public void setMean(double mean) {
+        this.mean = mean;
     }
 
     /**
@@ -133,33 +161,5 @@ public class EntityHistory {
             default:
                 break;
         }
-    }
-
-    public void setFumble(int fumble) {
-        this.fumble = fumble;
-    }
-
-    public void setCriticalSuccess(int criticalSuccess) {
-        this.criticalSuccess = criticalSuccess;
-    }
-
-    public void setExtremeSuccess(int extremeSuccess) {
-        this.extremeSuccess = extremeSuccess;
-    }
-
-    public void setHardSuccess(int hardSuccess) {
-        this.hardSuccess = hardSuccess;
-    }
-
-    public void setSuccess(int success) {
-        this.success = success;
-    }
-
-    public void setFailure(int failure) {
-        this.failure = failure;
-    }
-
-    public void setMean(double mean) {
-        this.mean = mean;
     }
 }

@@ -18,12 +18,11 @@ import static dice.sinanya.system.MessagesSystem.NONE;
  */
 public class Clue {
 
+    private static SelectClue selectClue = new SelectClue();
+    private static InsertClue insertClue = new InsertClue();
     private Clue() {
         throw new IllegalStateException("Utility class");
     }
-
-    private static SelectClue selectClue = new SelectClue();
-    private static InsertClue insertClue = new InsertClue();
 
     /**
      * 插入一条新线索

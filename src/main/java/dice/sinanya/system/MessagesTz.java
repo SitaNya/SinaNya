@@ -13,10 +13,6 @@ import java.util.HashMap;
  */
 public class MessagesTz {
 
-    private MessagesTz() {
-        throw new IllegalStateException("Utility class");
-    }
-
     private static ArrayList<String> TZ0 = new ArrayList<String>() {{
         add("害怕夜晚(D):你因为某些原因害怕夜晚,深夜12点以后还要活动的话,“IDEA”和“知识”判定的成功范围变为各自的2分之1。但是擅长早起");
         add("快速恢复:你的恢复能力比一般人要强,生命力的回复判定结果+1");
@@ -193,7 +189,6 @@ public class MessagesTz {
         add("调查员有着失踪很久的家人,有可能会在模组作为NPC中登场，在导入时投一个1D4，如果出点为4时就会登场，不过需要PL本人提交人物卡(例:兄弟/姐妹/或者其他亲人遭遇海难,死在海外,被其他亲戚带走等情况)。");
         add("没有特性，但是获得3D3*10的兴趣点");
     }};
-
     public static final HashMap<Integer, ArrayList<String>> TZ_LIST = new HashMap<Integer, ArrayList<String>>() {{
         put(0, TZ0);
         put(1, TZ1);
@@ -204,4 +199,8 @@ public class MessagesTz {
         put(6, TZ6);
         put(7, TZ7);
     }};
+
+    private MessagesTz() {
+        throw new IllegalStateException("Utility class");
+    }
 }

@@ -20,6 +20,7 @@ public class GetMessagesSystem {
      * 各种回复的默认值，保证配置文件里写错或者删掉了，也不会报错
      */
     public final static Map<String, String> MESSAGES_SYSTEM = new HashMap<>();
+    private static org.apache.log4j.Logger log = org.apache.log4j.LogManager.getLogger(GetMessagesSystem.class.getName());
 
     static {
         MESSAGES_SYSTEM.put("botStart", "机器人已开启");
@@ -103,7 +104,6 @@ public class GetMessagesSystem {
     private GetMessagesSystem() {
         throw new IllegalStateException("Utility class");
     }
-    private static org.apache.log4j.Logger log = org.apache.log4j.LogManager.getLogger(GetMessagesSystem.class.getName());
 
     /**
      * 读取配置文件，默认从bin目录的上一层找conf目录，然后找sinanya.properties文件，也就是说如果启动时不在bin目录，可能会找不到文件
