@@ -51,7 +51,6 @@ public class Log implements MakeNickToSender {
             return;
         }
         if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
-
             sender(entityTypeMessages, getOtherLogTrue(entityTypeMessages.getFromGroup()) + MESSAGES_SYSTEM.get("alreadyOpen"));
         } else {
             if (checkLogTagExist(entityTypeMessages, msg)) {
@@ -106,7 +105,7 @@ public class Log implements MakeNickToSender {
             } catch (Docx4JException e) {
                 logger.error(e.getMessage(), e);
             }
-            sender(entityTypeMessages, msg + "正在发送到您的邮箱" + entityTypeMessages.getFromQq() + "@qq.com");
+            sender(entityTypeMessages, makeLogNickToSender(msg) + "正在发送到您的邮箱" + entityTypeMessages.getFromQq() + "@qq.com");
             sendMail(entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup(), getGroupName(entityTypeMessages), msg);
             sender(entityTypeMessages, "[CQ:at,qq=" + entityTypeMessages.getFromQq() + "] 已发送到您的QQ邮箱，注意查收");
             LOG_GET_LOCK.remove(msg);
