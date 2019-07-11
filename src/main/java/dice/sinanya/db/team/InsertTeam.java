@@ -131,7 +131,7 @@ public class InsertTeam {
      */
     public void changeTeamInfo(EntityTeamInfo entityTeamInfo, boolean add) {
         int num = 0;
-        ArrayList<String> qqChangeList = entityTeamInfo.getQqList();
+        ArrayList<String> qqChangeList = (ArrayList<String>) entityTeamInfo.getQqList();
         ArrayList<String> qqList = new ArrayList<>();
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from team where groupId=?";

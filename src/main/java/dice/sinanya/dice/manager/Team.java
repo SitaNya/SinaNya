@@ -10,7 +10,6 @@ import dice.sinanya.entity.imal.GetDb;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
 import dice.sinanya.exceptions.TeamIsEmptyException;
-import dice.sinanya.tools.makedata.GetRollResultAndStr;
 import dice.sinanya.tools.makedata.MakeSanCheck;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -131,7 +130,7 @@ public class Team implements GetDb, Role, AtQq {
 
             String role;
             int hp;
-            HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);
+            HashMap<String, Integer> prop = (HashMap<String, Integer>) getRoleInfoFromChooseByQQ(qq);
             if (prop != null) {
 
                 role = getRoleChooseByQQ(qq);
@@ -201,7 +200,7 @@ public class Team implements GetDb, Role, AtQq {
                             String[] everFunctions=msg.split(plus.toString());
                             changeValue =  getResFunctionAndResultInt(entityTypeMessages,msg, everFunctions).getResult();
                         }
-                        HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);
+                        HashMap<String, Integer> prop = (HashMap<String, Integer>) getRoleInfoFromChooseByQQ(qq);
                         if (prop != null) {
                             StringBuilder strResult = new StringBuilder();
                             int newSan = max(0, prop.get("san") - changeValue);
@@ -238,7 +237,7 @@ public class Team implements GetDb, Role, AtQq {
     public void show() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("您的小队情况目前为: ");
-        ArrayList<String> qqList = queryTeam(entityTypeMessages.getFromGroup());
+        ArrayList<String> qqList = (ArrayList<String>) queryTeam(entityTypeMessages.getFromGroup());
         if (qqList == null) {
             try {
                 throw new TeamIsEmptyException(entityTypeMessages);
@@ -248,7 +247,7 @@ public class Team implements GetDb, Role, AtQq {
             }
         }
         for (String qq : qqList) {
-            HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);
+            HashMap<String, Integer> prop = (HashMap<String, Integer>) getRoleInfoFromChooseByQQ(qq);
             if (prop != null) {
                 String role = getRoleChooseByQQ(qq);
                 int str = prop.get("str");
@@ -291,7 +290,7 @@ public class Team implements GetDb, Role, AtQq {
     public void desc() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        ArrayList<String> qqList = queryTeam(entityTypeMessages.getFromGroup());
+        ArrayList<String> qqList = (ArrayList<String>) queryTeam(entityTypeMessages.getFromGroup());
         if (qqList == null) {
             try {
                 throw new TeamIsEmptyException(entityTypeMessages);
@@ -314,7 +313,7 @@ public class Team implements GetDb, Role, AtQq {
     public void en() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        ArrayList<String> qqList = queryTeam(entityTypeMessages.getFromGroup());
+        ArrayList<String> qqList = (ArrayList<String>) queryTeam(entityTypeMessages.getFromGroup());
         if (qqList == null) {
             try {
                 throw new TeamIsEmptyException(entityTypeMessages);

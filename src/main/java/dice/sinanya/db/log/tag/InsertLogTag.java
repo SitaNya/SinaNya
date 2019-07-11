@@ -23,6 +23,7 @@ public class InsertLogTag {
     private static final Logger Log = LogManager.getLogger(InsertLogTag.class);
 
     public InsertLogTag() {
+        //        初始化时不需要参数
     }
 
     /**

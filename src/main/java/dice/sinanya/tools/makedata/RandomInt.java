@@ -23,6 +23,11 @@ import static java.lang.Math.max;
  */
 public class RandomInt {
     private static Logger log = LogManager.getLogger(RandomInt.class.getName());
+    private static Random r = new Random();
+
+    private RandomInt() {
+        throw new IllegalStateException("Utility class");
+    }
 
     /**
      * 尝试了系统随机数和梅森旋转
@@ -42,7 +47,6 @@ public class RandomInt {
     public static int random(int lowest, int highest) {
         int result;
         int times = 0;
-        Random r = new Random();
         do {
             int mean = max((int) ceil((highest - lowest) / 2.0), 1);
             result = (int) ((mean + 2) * r.nextGaussian() + mean);
@@ -57,7 +61,6 @@ public class RandomInt {
     private static int overRandom(int lowest, int highest) {
         log.info("使用原始骰点逻辑");
         int result = 0;
-        Random r = new Random();
         while (result == 0) {
             result = r.nextInt(highest + 1 - lowest) + lowest;
         }

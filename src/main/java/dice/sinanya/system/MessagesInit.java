@@ -1,6 +1,7 @@
 package dice.sinanya.system;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author SitaNya
@@ -11,5 +12,10 @@ import java.util.HashMap;
  * 接口说明: 先攻列表的静态信息，目前此值不入库
  */
 public class MessagesInit {
-    public static final HashMap<String, HashMap<String, String>> INIT_LIST = new HashMap<>();
+
+    public static final Map<String, HashMap<String, String>> INIT_LIST = new HashMap<>();
+
+    private MessagesInit() {
+        throw new IllegalStateException("Utility class");
+    }
 }

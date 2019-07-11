@@ -43,16 +43,6 @@ class DbPool {
             dataSource.setJdbcUrl("jdbc:mysql://123.207.150.160:3306/roles?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull&useSSL=false");
             dataSource.setUser("root");
             dataSource.setPassword(MESSAGES_SYSTEM.get("dbPassword"));
-
-//            connPoolConfig(dataSource);
-//            connAgeConfig(dataSource);
-//            connTestConfig(dataSource);
-//            reconnConfig(dataSource);
-//            statementConfig(dataSource);
-//            threadConfig(dataSource);
-//            tranConfig(dataSource);
-
-
             Log.info("create DbPool");
         } catch (PropertyVetoException e) {
             Log.error(e.getMessage(), e);

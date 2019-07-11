@@ -1,6 +1,7 @@
 package dice.sinanya.entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author SitaNya
@@ -14,9 +15,9 @@ public class EntityTeamInfo {
     private String group;
     private ArrayList<String> qqList;
 
-    public EntityTeamInfo(String group, ArrayList<String> qqList) {
+    public EntityTeamInfo(String group, List<String> qqList) {
         this.group = group;
-        this.qqList = qqList;
+        this.qqList = (ArrayList<String>) qqList;
     }
 
     public String getGroup() {
@@ -27,7 +28,7 @@ public class EntityTeamInfo {
         this.group = group;
     }
 
-    public ArrayList<String> getQqList() {
+    public List<String> getQqList() {
         return qqList;
     }
 

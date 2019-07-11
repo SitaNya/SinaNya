@@ -25,7 +25,7 @@ import static dice.sinanya.tools.getinfo.GetTime.getNowString;
 public class TestRunningTime implements TimeJob {
 
     public TestRunningTime() {
-
+//        定时任务按照接口无逻辑
     }
 
     @Override

@@ -47,33 +47,36 @@ public class SaveDocx {
         String fromName = "";
         int colorTag = 100;
         for (final String line : bigResult.split("\n")) {
-            if (line.contains(":") && !line.split(":")[0].equals(NONE)) {
-                if (!LOG_COLOR_TAG.containsKey(groupId)) {
-                    LOG_COLOR_TAG.put(groupId, new HashMap<String, Integer>() {{
-                        put(line.split(":")[0], 1);
-                    }});
-                } else {
+            boolean isSpeak = line.contains(":") && !line.split(":")[0].equals(NONE);
+            boolean isBotOrHidden = line.contains("=========================================================================================") || line.contains("(");
+            boolean isBotDice = line.contains("发起骰掷") || line.contains("骰娘:");
+            boolean isKp = getRoleChooseByQQ(qqId).equals(fromName);
+
+            if (isSpeak) {
+                if (LOG_COLOR_TAG.containsKey(groupId)) {
                     HashMap<String, Integer> tmp = LOG_COLOR_TAG.get(groupId);
                     if (!tmp.containsKey(line.split(":")[0])) {
                         tmp.put(line.split(":")[0], tmp.size());
                     }
+                } else {
+                    HashMap<String, Integer> prop = new HashMap<>();
+                    prop.put(line.split(":")[0], 1);
+                    LOG_COLOR_TAG.put(groupId, prop);
                 }
                 colorTag = LOG_COLOR_TAG.get(groupId).get(line.split(":")[0]);
                 fromName = line.split(":")[0];
-            } else if (line.contains("=========================================================================================") || line.contains("(")) {
+            } else if (isBotOrHidden) {
                 colorTag = 11;
-            } else if (line.contains("发起骰掷") || line.contains("骰娘:")) {
+            } else if (isBotDice) {
                 colorTag = 10;
-            } else if (getRoleChooseByQQ(qqId).equals(fromName)) {
+            } else if (isKp) {
                 colorTag = 12;
             }
             makePdf(line, RGB.get(colorTag));
         }
         File file = new File("../saveLogs/" + groupId + "/" + msg + ".docx");
-        if (!file.getParentFile().exists()) {
-            if (!file.getParentFile().mkdirs()) {
+        if (!file.getParentFile().mkdirs() || !file.getParentFile().exists()) {
                 Log.error("docx染色文件未能成功生成");
-            }
         }
         wordMlPackage.save(file);
     }
@@ -113,34 +116,9 @@ public class SaveDocx {
 
         //设置字体大小
         HpsMeasure fontSize = new HpsMeasure();
-        fontSize.setVal(new BigInteger("30"));
+        fontSize.setVal(BigInteger.valueOf(30));
         rpr.setSzCs(fontSize);
         rpr.setSz(fontSize);
-
-//        //设置粗体
-//        BooleanDefaultTrue bold = factory.createBooleanDefaultTrue();
-//        bold.setVal(Boolean.TRUE);
-//        rpr.setB(bold);
-//
-//        //设置斜体
-//        BooleanDefaultTrue ltalic = new BooleanDefaultTrue();
-//        rpr.setI(ltalic);
-//
-//        //设置删除线
-//        BooleanDefaultTrue deleteLine = new BooleanDefaultTrue();
-//        deleteLine.setVal(Boolean.TRUE);
-//        rpr.setStrike(deleteLine);
-//
-//        //设置下划线
-//        U u = factory.createU();
-//        u.setVal(UnderlineEnumeration.SINGLE);
-//        u.setVal(UnderlineEnumeration.DOUBLE);//双下划线
-//        u.setVal(UnderlineEnumeration.DASH);//虚线
-//        u.setVal(UnderlineEnumeration.WAVE);//波浪线
-//        rpr.setU(u);
-
-
-        //设置显示文本
 
         Text text = factory.createText();
         text.setValue(inputText);

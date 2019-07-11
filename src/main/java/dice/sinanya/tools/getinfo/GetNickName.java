@@ -16,6 +16,10 @@ import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
  */
 public class GetNickName implements RootBean {
 
+    private GetNickName() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * 如果已经设定了人物卡则默认给人物卡名字，没设定的话给QQ昵称
      *

@@ -9,6 +9,11 @@ package dice.sinanya.tools.makedata;
  * 类说明: 消息格式化类
  */
 public class MakeMessages {
+
+    private MakeMessages() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * 删除消息标签并删除两端空格
      *

@@ -18,6 +18,10 @@ import java.util.Date;
 public class GetTime {
     private static final Logger Log = LogManager.getLogger(GetTime.class);
 
+    private GetTime() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * @return 获取当前时间（格式化后的）
      */

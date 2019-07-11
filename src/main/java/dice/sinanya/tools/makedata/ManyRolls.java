@@ -18,6 +18,10 @@ import static dice.sinanya.tools.makedata.RandomInt.random;
  */
 public class ManyRolls {
 
+    private ManyRolls() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * 根据骰点次数，最大值，取最大值个数，返回数字字符串
      *

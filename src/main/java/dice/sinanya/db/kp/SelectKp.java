@@ -24,6 +24,7 @@ public class SelectKp {
     private static final Logger Log = LogManager.getLogger(SelectKp.class);
 
     public SelectKp() {
+        //        初始化时无需逻辑
     }
 
     /**

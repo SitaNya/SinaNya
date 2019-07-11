@@ -26,6 +26,7 @@ public class SelectHistory {
     private static final Logger Log = LogManager.getLogger(SelectHistory.class);
 
     public SelectHistory() {
+        //        初始化时无需逻辑
     }
 
     /**
@@ -38,7 +39,16 @@ public class SelectHistory {
                 ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
-                        HISTORY_LIST.put(set.getString("qqId"), new EntityHistory(set.getString("qqId"), set.getInt("Fumble"), set.getInt("CriticalSuccess"), set.getInt("ExtremeSuccess"), set.getInt("HardSuccess"), set.getInt("Success"), set.getInt("Failure"), set.getInt("times"), set.getInt("mean")));
+                        EntityHistory history = new EntityHistory(set.getString("qqId"));
+                        history.setFumble(set.getInt("Fumble"));
+                        history.setCriticalSuccess(set.getInt("CriticalSuccess"));
+                        history.setExtremeSuccess(set.getInt("ExtremeSuccess"));
+                        history.setHardSuccess(set.getInt("HardSuccess"));
+                        history.setSuccess(set.getInt("Success"));
+                        history.setFailure(set.getInt("Failure"));
+                        history.setTimes(set.getInt("times"));
+                        history.setMean(set.getInt("mean"));
+                        HISTORY_LIST.put(set.getString("qqId"), history);
                     }
                 }
             }

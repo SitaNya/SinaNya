@@ -24,6 +24,8 @@ public class TiAndLi {
         this.entityTypeMessages = entityTypeMessages;
     }
 
+    String tagD10 = "1D10=";
+
     /**
      * 临时疯狂
      */
@@ -36,7 +38,7 @@ public class TiAndLi {
                 .append(getRoleChooseByFromQQ(entityTypeMessages))
                 .append("]")
                 .append("的疯狂发作-临时症状:\n")
-                .append("1D10=")
+                .append(tagD10)
                 .append(indexTi + 1)
                 .append("\n");
         symptomFormatAndSend(stringBuilder, strTi, indexTi);
@@ -55,7 +57,7 @@ public class TiAndLi {
                 .append(getRoleChooseByFromQQ(entityTypeMessages))
                 .append("]")
                 .append("的疯狂发作-总结症状:\n")
-                .append("1D10=")
+                .append(tagD10)
                 .append(indexLi + 1)
                 .append("\n");
 
@@ -75,14 +77,14 @@ public class TiAndLi {
         switch (index) {
             case 9:
                 int indexPanic = random(0, STR_PANIC.size() - 1);
-                strSymptom = String.format(strSymptom, "1D10=" + random(1, 10), "1D" + STR_PANIC.size() + "=" + (indexPanic + 1), STR_PANIC.get(indexPanic));
+                strSymptom = String.format(strSymptom, tagD10 + random(1, 10), "1D" + STR_PANIC.size() + "=" + (indexPanic + 1), STR_PANIC.get(indexPanic));
                 break;
             case 8:
                 int indexFear = random(0, STR_FEAR.size() - 1);
-                strSymptom = String.format(strSymptom, "1D10=" + random(1, 10), "1D" + STR_FEAR.size() + "=" + (indexFear + 1), STR_FEAR.get(indexFear));
+                strSymptom = String.format(strSymptom, tagD10 + random(1, 10), "1D" + STR_FEAR.size() + "=" + (indexFear + 1), STR_FEAR.get(indexFear));
                 break;
             default:
-                strSymptom = String.format(strSymptom, "1D10=" + random(1, 10));
+                strSymptom = String.format(strSymptom, tagD10 + random(1, 10));
                 break;
         }
         stringBuilder.append(strSymptom);

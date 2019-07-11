@@ -3,6 +3,7 @@ package dice.sinanya.system;
 import dice.sinanya.entity.EntityHistory;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author SitaNya
@@ -14,5 +15,9 @@ import java.util.HashMap;
  * 所有数据优先从静态对象取，取不到再去找数据库，这样可以提高效率
  */
 public class MessagesHistory {
-    public static final HashMap<String, EntityHistory> HISTORY_LIST = new HashMap<>();
+    public static final Map<String, EntityHistory> HISTORY_LIST = new HashMap<>();
+
+    private MessagesHistory() {
+        throw new IllegalStateException("Utility class");
+    }
 }

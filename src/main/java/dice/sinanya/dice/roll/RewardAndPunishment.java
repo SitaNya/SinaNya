@@ -55,10 +55,8 @@ public class RewardAndPunishment implements En, MakeNickToSender {
         int min = 10;
         for (int result : listDice) {
             stringBuilder.append(result).append(",");
-            if (result < min) {
-                if (random % 10 != 0 || result != 0) {
+            if (result < min && (random % 10 != 0 || result != 0)) {
                     min = result;
-                }
             }
         }
 //        取最小值

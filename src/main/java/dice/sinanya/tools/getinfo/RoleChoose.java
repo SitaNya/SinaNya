@@ -18,6 +18,10 @@ public class RoleChoose {
     private static SelectRoles selectRoles = new SelectRoles();
     private static InsertRoles insertRoles = new InsertRoles();
 
+    private RoleChoose() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * 从数据库读取当前选择角色数据刷写到静态变量，这个方法只在启动时调用一次
      */

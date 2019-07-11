@@ -24,6 +24,7 @@ public class InsertLogInfo {
     private static final Logger Log = LogManager.getLogger(InsertLogInfo.class);
 
     public InsertLogInfo() {
+        //        初始化时不需要参数
     }
 
     /**

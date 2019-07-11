@@ -31,7 +31,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  */
 public class Log {
 
-    private static final Logger log = LogManager.getLogger(Log.class.getName());
+    private static final Logger logger = LogManager.getLogger(Log.class.getName());
 
     private EntityTypeMessages entityTypeMessages;
 
@@ -75,7 +75,7 @@ public class Log {
                 setLogTagSwitch(entityTypeMessages, msg, false);
                 LOG_NAME_FOR_GROUP.remove(entityTypeMessages.getFromGroup());
                 LOG_SWITCH_FOR_GROUP.put(entityTypeMessages.getFromGroup(), false);
-                sender(entityTypeMessages, "{"+msg + "}已关闭，现在可以使用\".log get " + msg + "\"进行获取");
+                sender(entityTypeMessages, "{" + msg + "}已关闭，现在可以使用\".logger get " + msg + "\"进行获取");
             } else {
                 sender(entityTypeMessages, "{"+msg+"}" + MESSAGES_SYSTEM.get("alreadyClose"));
             }
@@ -103,7 +103,7 @@ public class Log {
             try {
                 new SaveDocx(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq(), msg, bigResult);
             } catch (Docx4JException e) {
-                log.error(e.getMessage(), e);
+                logger.error(e.getMessage(), e);
             }
             sender(entityTypeMessages, msg + "正在发送到您的邮箱" + entityTypeMessages.getFromQq() + "@qq.com");
             sendMail(entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup(), getGroupName(entityTypeMessages), msg);

@@ -10,10 +10,9 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.Properties;
-import java.util.Vector;
 
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
@@ -28,6 +27,7 @@ import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
  */
 public class SendMail {
     private static final Logger log = LogManager.getLogger(SendMail.class);
+    private static String malUserName = MESSAGES_SYSTEM.get("mailUserName");
 
     /**
      * 重新编码为GBK2312（中文），可以解决大部分乱码问题
@@ -53,13 +53,14 @@ public class SendMail {
      */
     public static void sendMail(String to, String groupId, String groupName, String logName) {
         MailBean mb = new MailBean();
+
         mb.setHost("smtp.qq.com");
         // 设置SMTP主机(163)，若用126，则设为：smtp.126.com
-        mb.setUsername(MESSAGES_SYSTEM.get("mailUserName"));
+        mb.setUsername(malUserName);
         // 设置发件人邮箱的用户名
         mb.setPassword(MESSAGES_SYSTEM.get("mailPassword"));
         // 设置发件人邮箱的密码，需将*号改成正确的密码
-        mb.setFrom(MESSAGES_SYSTEM.get("mailUserName"));
+        mb.setFrom(malUserName);
         // 设置发件人的邮箱
         mb.setTo(to + "@qq.com");
         // 设置收件人的邮箱
@@ -89,11 +90,11 @@ public class SendMail {
         MailBean mb = new MailBean();
         mb.setHost("smtp.qq.com");
         // 设置SMTP主机(163)，若用126，则设为：smtp.126.com
-        mb.setUsername(MESSAGES_SYSTEM.get("mailUserName"));
+        mb.setUsername(malUserName);
         // 设置发件人邮箱的用户名
         mb.setPassword(MESSAGES_SYSTEM.get("mailPassword"));
         // 设置发件人邮箱的密码，需将*号改成正确的密码
-        mb.setFrom(MESSAGES_SYSTEM.get("mailUserName"));
+        mb.setFrom(malUserName);
         // 设置发件人的邮箱
         mb.setTo(MESSAGES_SYSTEM.get("masterMail"));
         // 设置收件人的邮箱
@@ -127,7 +128,7 @@ public class SendMail {
         String subject = mb.getSubject();
         String content = mb.getContent();
         String fileName;
-        Vector<String> file = mb.getFile();
+        ArrayList<String> file = mb.getFile();
 
         Properties props = System.getProperties();
         props.put("mail.smtp.host", host);
@@ -156,10 +157,9 @@ public class SendMail {
 
             /* 往邮件中添加附件 */
             if (file != null) {
-                Enumeration<String> efile = file.elements();
-                while (efile.hasMoreElements()) {
+                for (String s : file) {
                     MimeBodyPart mbpFile = new MimeBodyPart();
-                    fileName = efile.nextElement();
+                    fileName = s;
                     FileDataSource fds = new FileDataSource(fileName);
                     mbpFile.setDataHandler(new DataHandler(fds));
                     try {

@@ -16,6 +16,10 @@ import static dice.sinanya.tools.makedata.RandomInt.random;
  */
 public class GetName {
 
+    private GetName() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * @return 中文人名
      */
@@ -27,7 +31,9 @@ public class GetName {
      * @return 英文人名（含有中文翻译）
      */
     private static String getEnglishName() {
-        return getFromList(EnglishFirstName) + "·" + getFromList(EnglishLastName) + "(" + getFromList(EnglishFirstNameChineseTranslation) + "·" + getFromList(EnglishLastNameChineseTranslation) + ")";
+        String firstName = getFromList(EnglishFirstName);
+        String lastName = getFromList(EnglishLastName);
+        return firstName + "·" + lastName + "(" + EnglishFirstNameChineseTranslation.get(EnglishFirstName.indexOf(firstName)) + "·" + EnglishLastNameChineseTranslation.get(EnglishLastName.indexOf(lastName)) + ")";
     }
 
     /**

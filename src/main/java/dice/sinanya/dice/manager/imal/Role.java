@@ -92,9 +92,9 @@ public interface Role extends MakeNickToSender {
         ArrayList<String> result = new ArrayList<>();
         for (Map.Entry<String, Integer> mapEntry : Objects.requireNonNull(getRoleInfoFromChooseByFromQQ(entityTypeMessages)).entrySet()) {
             if (!prop.contains(mapEntry.getKey()) && mapEntry.getValue() != 0) {
-                if (up && mapEntry.getValue() >= 50) {
-                    result.add(replaceSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
-                } else if (!up && mapEntry.getValue() < 50 && mapEntry.getValue() > 5) {
+                boolean inUpFor50 = up && mapEntry.getValue() >= 50;
+                boolean notInUpAndValueIn50And5 = !up && mapEntry.getValue() < 50 && mapEntry.getValue() > 5;
+                if (inUpFor50 || notInUpAndValueIn50And5) {
                     result.add(replaceSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
                 }
 

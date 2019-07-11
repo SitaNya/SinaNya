@@ -3,7 +3,9 @@ package dice.sinanya.tools.getinfo;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.HashMap;
+import java.util.Map;
 
+import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.tools.getinfo.GetMessagesToValue.getMessagesToValue;
 import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByFromQQ;
 
@@ -34,20 +36,20 @@ public class MakeRolesInfo {
         propertiesForRole = makeProperties();
     }
 
-    public MakeRolesInfo(String properties, HashMap<String, Integer> propertiesDefault) {
+    public MakeRolesInfo(String properties, Map<String, Integer> propertiesDefault) {
         this.properties = properties;
-        propertiesForRole = makeProperties(propertiesDefault);
+        propertiesForRole = makeProperties((HashMap<String, Integer>) propertiesDefault);
     }
 
     public MakeRolesInfo() {
-        propertiesForRole = init();
+        propertiesForRole = (HashMap<String, Integer>) init();
     }
 
     public void setPropertiesForRole(String skillName, int skillValue) {
         this.propertiesForRole.put(skillName, skillValue);
     }
 
-    public HashMap<String, Integer> getPropertiesForRole() {
+    public Map<String, Integer> getPropertiesForRole() {
         return propertiesForRole;
     }
 
@@ -58,10 +60,8 @@ public class MakeRolesInfo {
      * @return 包装完成的HashMap对象
      */
     private HashMap<String, Integer> makeProperties() {
-        HashMap<String, Integer> propertiesDefault = getRoleInfoFromChooseByFromQQ(entityTypeMessages);
-
-        String strInputNone = "";
-        if (properties != null && !properties.equals(strInputNone)) {
+        HashMap<String, Integer> propertiesDefault = (HashMap<String, Integer>) getRoleInfoFromChooseByFromQQ(entityTypeMessages);
+        if (properties != null && !properties.equals(NONE)) {
             return getMessagesToValue(propertiesDefault, properties);
         }
         return propertiesDefault;
@@ -74,9 +74,7 @@ public class MakeRolesInfo {
      * @return 包装后的对象
      */
     private HashMap<String, Integer> makeProperties(HashMap<String, Integer> propertiesDefault) {
-
-        String strInputNone = "";
-        if (properties != null && !properties.equals(strInputNone)) {
+        if (properties != null && !properties.equals(NONE)) {
             return getMessagesToValue(propertiesDefault, properties);
         }
         return propertiesDefault;
@@ -87,122 +85,124 @@ public class MakeRolesInfo {
      *
      * @return 初始化后的属性值列表
      */
-    public HashMap<String, Integer> init() {
-        return new HashMap<String, Integer>(200) {{
-            put("str", 0);
-            put("dex", 0);
-            put("pow", 0);
-            put("con", 0);
-            put("app", 0);
-            put("edu", 0);
-            put("siz", 0);
-            put("intValue", 0);
-            put("san", 0);
-            put("luck", 0);
-            put("mp", 0);
-            put("hp", 0);
-            put("accounting", 5);
-            put("anthropology", 1);
-            put("evaluation", 5);
-            put("archaeology", 1);
-            put("enchantment", 15);
-            put("toClimb", 20);
-            put("computerUsage", 5);
-            put("creditRating", 0);
-            put("cthulhuMythos", 0);
-            put("disguise", 5);
-            put("drive", 20);
-            put("electricalMaintenance", 10);
-            put("electronics", 1);
-            put("talkingSkill", 5);
-            put("aFistFight", 25);
-            put("wrangle", 25);
-            put("pistol", 20);
-            put("firstAid", 30);
-            put("history", 5);
-            put("intimidate", 15);
-            put("jump", 20);
-            put("law", 5);
-            put("libraryUse", 20);
-            put("listen", 20);
-            put("unlock", 1);
-            put("mechanicalMaintenance", 10);
-            put("medicalScience", 1);
-            put("naturalHistory", 10);
-            put("naturalScience", 10);
-            put("pilotage", 10);
-            put("occultScience", 5);
-            put("operatingHeavyMachinery", 1);
-            put("persuade", 10);
-            put("psychoanalysis", 1);
-            put("psychology", 10);
-            put("horsemanship", 5);
-            put("aWonderfulHand", 10);
-            put("investigationOfCrimes", 25);
-            put("stealth", 20);
-            put("existence", 10);
-            put("swimming", 20);
-            put("throwValue", 20);
-            put("trackValue", 10);
-            put("domesticatedAnimal", 5);
-            put("diving", 1);
-            put("blast", 1);
-            put("lipReading", 1);
-            put("hypnosis", 1);
-            put("artillery", 1);
-            put("motherTongue", 0);
-            put("dodge", 0);
-            put("shipping", 1);
-            put("rifle", 25);
-            put("aircraftOperation", 1);
-            put("machineGun", 10);
-            put("sing", 5);
-            put("paint", 5);
-            put("tillage", 5);
-            put("photography", 5);
-            put("perform", 5);
-            put("forge", 5);
-            put("literature", 5);
-            put("calligraphy", 5);
-            put("music", 5);
-            put("cooking", 5);
-            put("tailor", 5);
-            put("haircut", 5);
-            put("architecture", 5);
-            put("dance", 5);
-            put("makeWine", 5);
-            put("fishing", 5);
-            put("potteryMaking", 5);
-            put("sculpture", 5);
-            put("acrobatics", 5);
-            put("fengshui", 5);
-            put("technicalDrawing", 5);
-            put("typing", 5);
-            put("shorthand", 5);
-            put("whip", 5);
-            put("electricSaw", 10);
-            put("axe", 15);
-            put("sword", 20);
-            put("flail", 25);
-            put("spear", 25);
-            put("submachineGun", 15);
-            put("archery", 15);
-            put("flameEjector", 10);
-            put("heavyWeapons", 10);
-            put("ride", 5);
-            put("geology", 1);
-            put("chemistry", 1);
-            put("biology", 1);
-            put("mathematics", 1);
-            put("astronomy", 1);
-            put("physics", 1);
-            put("pharmacy", 1);
-            put("botany", 1);
-            put("zoology", 1);
-            put("cryptography", 1);
-            put("engineering", 1);
-            put("meteorology", 1);
-            put("judicialScience", 1);
-        }};
+    public Map<String, Integer> init() {
+        HashMap<String, Integer> prop = new HashMap<>(200);
+
+        prop.put("str", 0);
+        prop.put("dex", 0);
+        prop.put("pow", 0);
+        prop.put("con", 0);
+        prop.put("app", 0);
+        prop.put("edu", 0);
+        prop.put("siz", 0);
+        prop.put("intValue", 0);
+        prop.put("san", 0);
+        prop.put("luck", 0);
+        prop.put("mp", 0);
+        prop.put("hp", 0);
+        prop.put("accounting", 5);
+        prop.put("anthropology", 1);
+        prop.put("evaluation", 5);
+        prop.put("archaeology", 1);
+        prop.put("enchantment", 15);
+        prop.put("toClimb", 20);
+        prop.put("computerUsage", 5);
+        prop.put("creditRating", 0);
+        prop.put("cthulhuMythos", 0);
+        prop.put("disguise", 5);
+        prop.put("drive", 20);
+        prop.put("electricalMaintenance", 10);
+        prop.put("electronics", 1);
+        prop.put("talkingSkill", 5);
+        prop.put("aFistFight", 25);
+        prop.put("wrangle", 25);
+        prop.put("pistol", 20);
+        prop.put("firstAid", 30);
+        prop.put("history", 5);
+        prop.put("intimidate", 15);
+        prop.put("jump", 20);
+        prop.put("law", 5);
+        prop.put("libraryUse", 20);
+        prop.put("listen", 20);
+        prop.put("unlock", 1);
+        prop.put("mechanicalMaintenance", 10);
+        prop.put("medicalScience", 1);
+        prop.put("naturalHistory", 10);
+        prop.put("naturalScience", 10);
+        prop.put("pilotage", 10);
+        prop.put("occultScience", 5);
+        prop.put("operatingHeavyMachinery", 1);
+        prop.put("persuade", 10);
+        prop.put("psychoanalysis", 1);
+        prop.put("psychology", 10);
+        prop.put("horsemanship", 5);
+        prop.put("aWonderfulHand", 10);
+        prop.put("investigationOfCrimes", 25);
+        prop.put("stealth", 20);
+        prop.put("existence", 10);
+        prop.put("swimming", 20);
+        prop.put("throwValue", 20);
+        prop.put("trackValue", 10);
+        prop.put("domesticatedAnimal", 5);
+        prop.put("diving", 1);
+        prop.put("blast", 1);
+        prop.put("lipReading", 1);
+        prop.put("hypnosis", 1);
+        prop.put("artillery", 1);
+        prop.put("motherTongue", 0);
+        prop.put("dodge", 0);
+        prop.put("shipping", 1);
+        prop.put("rifle", 25);
+        prop.put("aircraftOperation", 1);
+        prop.put("machineGun", 10);
+        prop.put("sing", 5);
+        prop.put("paint", 5);
+        prop.put("tillage", 5);
+        prop.put("photography", 5);
+        prop.put("perform", 5);
+        prop.put("forge", 5);
+        prop.put("literature", 5);
+        prop.put("calligraphy", 5);
+        prop.put("music", 5);
+        prop.put("cooking", 5);
+        prop.put("tailor", 5);
+        prop.put("haircut", 5);
+        prop.put("architecture", 5);
+        prop.put("dance", 5);
+        prop.put("makeWine", 5);
+        prop.put("fishing", 5);
+        prop.put("potteryMaking", 5);
+        prop.put("sculpture", 5);
+        prop.put("acrobatics", 5);
+        prop.put("fengshui", 5);
+        prop.put("technicalDrawing", 5);
+        prop.put("typing", 5);
+        prop.put("shorthand", 5);
+        prop.put("whip", 5);
+        prop.put("electricSaw", 10);
+        prop.put("axe", 15);
+        prop.put("sword", 20);
+        prop.put("flail", 25);
+        prop.put("spear", 25);
+        prop.put("submachineGun", 15);
+        prop.put("archery", 15);
+        prop.put("flameEjector", 10);
+        prop.put("heavyWeapons", 10);
+        prop.put("ride", 5);
+        prop.put("geology", 1);
+        prop.put("chemistry", 1);
+        prop.put("biology", 1);
+        prop.put("mathematics", 1);
+        prop.put("astronomy", 1);
+        prop.put("physics", 1);
+        prop.put("pharmacy", 1);
+        prop.put("botany", 1);
+        prop.put("zoology", 1);
+        prop.put("cryptography", 1);
+        prop.put("engineering", 1);
+        prop.put("meteorology", 1);
+        prop.put("judicialScience", 1);
+
+        return prop;
     }
 }

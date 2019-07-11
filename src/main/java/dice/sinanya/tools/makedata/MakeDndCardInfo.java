@@ -15,6 +15,10 @@ import static dice.sinanya.tools.makedata.RandomInt.random;
  */
 public class MakeDndCardInfo {
 
+    private MakeDndCardInfo() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static String makeDndCardInfo() {
         StringBuilder stringBuffer = new StringBuilder();
         int str = get4d6k3multiply();

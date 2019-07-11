@@ -11,6 +11,8 @@ import com.forte.qqrobot.utils.CQCodeUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
+
 import static dice.sinanya.db.system.SelectBot.flushBot;
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.DefaultMaxRolls.flushMaxRolls;
@@ -42,9 +44,9 @@ public class RunApplication implements HttpApp {
     public static void main(String[] args) {
         initMessagesSystem();
 //        读取配置文件
-        try {
-            new HttpApplication().run(new RunApplication());
-        } catch (RobotRuntionException e) {
+        try (HttpApplication httpApplication = new HttpApplication()) {
+            httpApplication.run(new RunApplication());
+        } catch (RobotRuntionException | IOException e) {
             sendMail(e.getMessage());
             log.error(e.getMessage(), e);
         }

@@ -14,6 +14,10 @@ import static dice.sinanya.tools.getinfo.MakeSkillName.skillTable;
  */
 public class ReplaceSkillName {
 
+    private ReplaceSkillName() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * @param skillId 传入的疑似技能名的信息
      * @return 规整化后的技能名，都是无空格的英文名

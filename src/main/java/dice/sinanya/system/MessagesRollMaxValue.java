@@ -11,5 +11,10 @@ import java.util.HashMap;
  * 接口说明:
  */
 public class MessagesRollMaxValue {
+
+    private MessagesRollMaxValue() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static final HashMap<String, Integer> ROLL_MAX_VALUE = new HashMap<>();
 }

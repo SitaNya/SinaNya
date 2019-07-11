@@ -6,6 +6,7 @@ import dice.sinanya.entity.EntityRoleTag;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOSE;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
@@ -22,6 +23,10 @@ import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByQQ;
 public class RoleInfo {
     private static SelectRoles selectRoles = new SelectRoles();
     private static InsertRoles insertRoles = new InsertRoles();
+
+    private RoleInfo() {
+        throw new IllegalStateException("Utility class");
+    }
 
     /**
      * 从数据库读取角色具体信息数据刷写到静态变量，这个方法只在启动时调用一次
@@ -123,7 +128,7 @@ public class RoleInfo {
      * @param role 角色名
      * @return 属性值列表
      */
-    public static HashMap<String, Integer> getRoleInfoByQQ(long qqId, String role) {
+    public static Map<String, Integer> getRoleInfoByQQ(long qqId, String role) {
         if (checkRoleInfoExistByQQ(qqId, role)) {
             return ROLE_INFO_CACHE.get(new EntityRoleTag(qqId, role));
         } else {
@@ -138,7 +143,7 @@ public class RoleInfo {
      * @param role 角色名
      * @return 属性值列表
      */
-    public static HashMap<String, Integer> getRoleInfoByQQ(String qq, String role) {
+    public static Map<String, Integer> getRoleInfoByQQ(String qq, String role) {
         long qqId = Long.parseLong(qq);
         if (checkRoleInfoExistByQQ(qqId, role)) {
             return ROLE_INFO_CACHE.get(new EntityRoleTag(qqId, role));
@@ -153,7 +158,7 @@ public class RoleInfo {
      * @param qqId QQ号
      * @return 属性值列表
      */
-    public static HashMap<String, Integer> getRoleInfoFromChooseByQQ(long qqId) {
+    public static Map<String, Integer> getRoleInfoFromChooseByQQ(long qqId) {
         String role;
         if (checkRoleChooseExistByQQ(qqId)) {
             role = ROLE_CHOOSE.get(qqId);
@@ -173,7 +178,7 @@ public class RoleInfo {
      * @param qq QQ号
      * @return 属性值列表
      */
-    public static HashMap<String, Integer> getRoleInfoFromChooseByQQ(String qq) {
+    public static Map<String, Integer> getRoleInfoFromChooseByQQ(String qq) {
         long qqId = Long.parseLong(qq);
         String role;
         if (checkRoleChooseExistByQQ(qqId)) {
@@ -195,7 +200,7 @@ public class RoleInfo {
      * @param role               角色名
      * @return 属性值列表
      */
-    public static HashMap<String, Integer> getRoleInfoByFromQQ(EntityTypeMessages entityTypeMessages, String role) {
+    public static Map<String, Integer> getRoleInfoByFromQQ(EntityTypeMessages entityTypeMessages, String role) {
         long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         if (checkRoleInfoExistByQQ(qqId, role)) {
             return ROLE_INFO_CACHE.get(new EntityRoleTag(qqId, role));
@@ -210,7 +215,7 @@ public class RoleInfo {
      * @param entityTypeMessages 消息封装类
      * @return 属性值列表
      */
-    public static HashMap<String, Integer> getRoleInfoFromChooseByFromQQ(EntityTypeMessages entityTypeMessages) {
+    public static Map<String, Integer> getRoleInfoFromChooseByFromQQ(EntityTypeMessages entityTypeMessages) {
         long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         String role;
         if (checkRoleChooseExistByQQ(qqId)) {
@@ -315,7 +320,7 @@ public class RoleInfo {
      * @param qqId QQ号
      * @param prop 全部属性列表（HashMap格式）
      */
-    public static void setRoleInfoFromChooseByQQ(String qqId, HashMap<String, Integer> prop) {
+    public static void setRoleInfoFromChooseByQQ(String qqId, Map<String, Integer> prop) {
         long qq = Long.parseLong(qqId);
         String role;
         if (checkRoleChooseExistByQQ(qq)) {
@@ -323,7 +328,7 @@ public class RoleInfo {
         } else {
             return;
         }
-        insertRoles.insertRoleInfo(prop, role, qq);
+        insertRoles.insertRoleInfo((HashMap<String, Integer>) prop, role, qq);
     }
 
     /**
@@ -332,14 +337,14 @@ public class RoleInfo {
      * @param qq   QQ号
      * @param prop 全部属性列表（HashMap格式）
      */
-    public static void setRoleInfoFromChooseByQQ(long qq, HashMap<String, Integer> prop) {
+    public static void setRoleInfoFromChooseByQQ(long qq, Map<String, Integer> prop) {
         String role;
         if (checkRoleChooseExistByQQ(qq)) {
             role = ROLE_CHOOSE.get(qq);
         } else {
             return;
         }
-        insertRoles.insertRoleInfo(prop, role, qq);
+        insertRoles.insertRoleInfo((HashMap<String, Integer>) prop, role, qq);
     }
 
     /**
@@ -348,7 +353,7 @@ public class RoleInfo {
      * @param entityTypeMessages 消息封装类
      * @param prop               全部属性列表（HashMap格式）
      */
-    public static void setRoleInfoFromChooseByFromQQ(EntityTypeMessages entityTypeMessages, HashMap<String, Integer> prop) {
+    public static void setRoleInfoFromChooseByFromQQ(EntityTypeMessages entityTypeMessages, Map<String, Integer> prop) {
         long qq = Long.parseLong(entityTypeMessages.getFromQq());
         String role;
         if (checkRoleChooseExistByQQ(qq)) {
@@ -356,7 +361,7 @@ public class RoleInfo {
         } else {
             return;
         }
-        insertRoles.insertRoleInfo(prop, role, qq);
+        insertRoles.insertRoleInfo((HashMap<String, Integer>) prop, role, qq);
     }
 
     /**

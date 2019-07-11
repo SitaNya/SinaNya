@@ -16,6 +16,10 @@ import java.io.*;
 public class LogSave {
     private static final Logger Log = LogManager.getLogger(LogSave.class);
 
+    private LogSave() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * 将格式化后的全部日志信息存储到相对路径"bin/../saveLogs/${groupId}/${logName}"下
      *
@@ -27,26 +31,14 @@ public class LogSave {
         // 1：利用File类找到要操作的对象
         File file = new File("../saveLogs/" + groupId + "/" + logName+".txt");
 
-        if (!file.getParentFile().exists()) {
-            if (!file.getParentFile().mkdirs()) {
+        if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
                 Log.error("上层目录未能创建");
-            }
         }
 
-        //2：准备输出流
-        BufferedWriter out = null;
-        try {
-            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "GBK"));
+        try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "GBK"));) {
             out.write(info);
         } catch (IOException e) {
             Log.error(e.getMessage(), e);
-        } finally {
-            try {
-                assert out != null;
-                out.close();
-            } catch (IOException e) {
-                Log.error(e.getMessage(), e);
-            }
         }
     }
 }

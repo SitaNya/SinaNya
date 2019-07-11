@@ -1,6 +1,7 @@
 package dice.sinanya.system;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author SitaNya
@@ -13,7 +14,8 @@ import java.util.HashMap;
  * 这里我挑了一些比较方便看的颜色，括号内颜色是灰色，骰子颜色是橘红色，kp颜色是鲜红色
  */
 public class MessagesRgb {
-    public static final HashMap<Integer, String> RGB = new HashMap<Integer, String>() {{
+
+    public static final Map<Integer, String> RGB = new HashMap<Integer, String>() {{
         put(0, "FF7F24");
         put(1, "8B4513");
         put(2, "483D8B");
@@ -31,4 +33,8 @@ public class MessagesRgb {
         put(12, "FF0000");
 //        kp颜色
     }};
+
+    private MessagesRgb() {
+        throw new IllegalStateException("Utility class");
+    }
 }

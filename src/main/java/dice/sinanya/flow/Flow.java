@@ -251,16 +251,7 @@ class Flow {
      * 私聊逻辑，同时在私聊和群中生效
      */
     public void toPrivate() {
-        Roll roll = new Roll(entityTypeMessages);
-        Roles roles = new Roles(entityTypeMessages);
-        SanCheck sanCheck = new SanCheck(entityTypeMessages);
-        RollAndCheck rollAndCheck = new RollAndCheck(entityTypeMessages);
-        RewardAndPunishment rewardAndPunishment = new RewardAndPunishment(entityTypeMessages);
-        MakeCocCard makeCocCard = new MakeCocCard(entityTypeMessages);
         MakeDndCard makeDndCard = new MakeDndCard(entityTypeMessages);
-        TiAndLi tiAndLi = new TiAndLi(entityTypeMessages);
-        Help help = new Help(entityTypeMessages);
-        Book book = new Book(entityTypeMessages);
         Bj bj = new Bj(entityTypeMessages);
         Npc npc = new Npc(entityTypeMessages);
         Tz tz = new Tz(entityTypeMessages);
@@ -268,101 +259,14 @@ class Flow {
         History history = new History(entityTypeMessages);
         Jrrp jrrp = new Jrrp(entityTypeMessages);
 
-        if (isr) {
-            roll.r();
-        } else if (isRa) {
-            rollAndCheck.ra();
-        } else if (isRc) {
-            rollAndCheck.rc();
-        } else if (isRal) {
-            rollAndCheck.ral();
-        } else if (isRcl) {
-            rollAndCheck.rcl();
-        } else if (isRav) {
-            try {
-                rollAndCheck.rav();
-            } catch (NotSetKpGroupException e) {
-                Log.error(e.getMessage(), e);
-            }
-        } else if (isRcv) {
-            try {
-                rollAndCheck.rcv();
-            } catch (NotSetKpGroupException e) {
-                Log.error(e.getMessage(), e);
-            }
-        }
-
-        if (isStSet) {
-            try {
-                if (roles.set()) {
-                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("setPropSuccess"));
-                } else {
-                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("setHelp"));
-                }
-            } catch (PlayerSetException e) {
-                Log.error(e.getMessage(), e);
-            }
-        } else if (isStShow) {
-            roles.show();
-        } else if (isStList) {
-            roles.list();
-        } else if (isStMove) {
-            roles.move();
-        }
-
-        if (isSc) {
-            try {
-                sanCheck.sc();
-            } catch (PlayerSetException | SanCheckSetException e) {
-                Log.error(e.getMessage(), e);
-            }
-        }
-
-        if (isRb) {
-            rewardAndPunishment.rb();
-        } else if (isRp) {
-            rewardAndPunishment.rp();
-        }
-
-        if (isCoc7d) {
-            makeCocCard.coc7d();
-        } else if (isCoc7) {
-            makeCocCard.coc7();
-        } else if (isCoc6d) {
-            makeCocCard.coc6d();
-        } else if (isCoc6) {
-            makeCocCard.coc6();
-        }
-
-        if (isTi) {
-            tiAndLi.ti();
-        } else if (isLi) {
-            tiAndLi.li();
-        }
-
-        if (isHelpNormal) {
-            help.normal();
-        } else if (isHelpMake) {
-            help.make();
-        } else if (isHelpGroup) {
-            help.group();
-        } else if (isHelpBook) {
-            help.book();
-        } else if (isHelpDnd) {
-            help.dnd();
-        } else if (isHelpInfo) {
-            help.info();
-        }
-
-        if (isBookKp) {
-            book.kp();
-        } else if (isBookCard) {
-            book.card();
-        } else if (isBookRp) {
-            book.rp();
-        } else if (isBookMake) {
-            book.make();
-        }
+        isFunctionR();
+        isStFunction();
+        isScFunction();
+        isRbAndRpFunction();
+        isCocCardFunction();
+        isTiAndLiFunction();
+        isHelpFunction();
+        isBookFunction();
 
         if (isNpc) {
             npc.npc();
@@ -400,75 +304,17 @@ class Flow {
      */
     private void toPrivateAndGroup() {
         Roll roll = new Roll(entityTypeMessages);
-        Team team = new Team(entityTypeMessages);
-        SkillUp skillUp = new SkillUp(entityTypeMessages);
-        Log log = new Log(entityTypeMessages);
-        RiAndInit riAndInit = new RiAndInit(entityTypeMessages);
         SetRollMaxValue setRollMaxValue = new SetRollMaxValue(entityTypeMessages);
-
-        Clue clue = new Clue(entityTypeMessages);
         Kp kp = new Kp(entityTypeMessages);
+
+        isTeamFunction();
+        isEnFunction();
+        isLogFunction();
+        isRiFunction();
+        isClueFunction();
 
         if (isRh) {
             roll.rh();
-        }
-
-        if (isTeamSet) {
-            team.set();
-        } else if (isTeamShow) {
-            team.show();
-        } else if (isTeamMove) {
-            team.remove();
-        } else if (isTeamClr) {
-            team.clr();
-        } else if (isTeamCall) {
-            team.call();
-        } else if (isTeamHp) {
-            team.hp();
-        } else if (isTeamSan) {
-            team.san();
-        } else if (isTeamDesc) {
-            team.desc();
-        } else if (isTeamEn) {
-            team.en();
-        }
-
-        if (isEn) {
-            try {
-                skillUp.en();
-            } catch (NotFoundSkillException e) {
-                Log.error(e.getMessage(), e);
-            }
-        }
-
-        if (isLogOn) {
-            log.logOn();
-        } else if (isLogOff) {
-            log.logOff();
-        } else if (isLogGet) {
-            log.get();
-        } else if (isLogList) {
-            log.list();
-        } else if (isLogDel) {
-            log.del();
-        }
-
-        if (isRi) {
-            riAndInit.ri();
-        } else if (isInit) {
-            riAndInit.init();
-        } else if (isInitClr) {
-            riAndInit.clr();
-        }
-
-        if (isClueRm) {
-            clue.rm();
-        } else if (isClueSet) {
-            clue.set();
-        } else if (isClueClr) {
-            clue.clr();
-        } else if (isClueShow) {
-            clue.show();
         }
 
         if (isKp) {
@@ -498,5 +344,212 @@ class Flow {
 
     private boolean checkTagRegex(String tag) {
         return entityTypeMessages.getMsgGet().getMsg().trim().toLowerCase().matches(tag);
+    }
+
+
+    private void isFunctionR() {
+        Roll roll = new Roll(entityTypeMessages);
+        RollAndCheck rollAndCheck = new RollAndCheck(entityTypeMessages);
+        if (isr) {
+            roll.r();
+        } else if (isRa) {
+            rollAndCheck.ra();
+        } else if (isRc) {
+            rollAndCheck.rc();
+        } else if (isRal) {
+            rollAndCheck.ral();
+        } else if (isRcl) {
+            rollAndCheck.rcl();
+        } else if (isRav) {
+            try {
+                rollAndCheck.rav();
+            } catch (NotSetKpGroupException e) {
+                Log.error(e.getMessage(), e);
+            }
+        } else if (isRcv) {
+            try {
+                rollAndCheck.rcv();
+            } catch (NotSetKpGroupException e) {
+                Log.error(e.getMessage(), e);
+            }
+        }
+    }
+
+    private void isStFunction() {
+        Roles roles = new Roles(entityTypeMessages);
+
+        if (isStSet) {
+            try {
+                if (roles.set()) {
+                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("setPropSuccess"));
+                } else {
+                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("setHelp"));
+                }
+            } catch (PlayerSetException e) {
+                Log.error(e.getMessage(), e);
+            }
+        } else if (isStShow) {
+            roles.show();
+        } else if (isStList) {
+            roles.list();
+        } else if (isStMove) {
+            roles.move();
+        }
+    }
+
+    private void isScFunction() {
+        SanCheck sanCheck = new SanCheck(entityTypeMessages);
+
+        if (isSc) {
+            try {
+                sanCheck.sc();
+            } catch (PlayerSetException | SanCheckSetException e) {
+                Log.error(e.getMessage(), e);
+            }
+        }
+    }
+
+    private void isRbAndRpFunction() {
+        RewardAndPunishment rewardAndPunishment = new RewardAndPunishment(entityTypeMessages);
+
+        if (isRb) {
+            rewardAndPunishment.rb();
+        } else if (isRp) {
+            rewardAndPunishment.rp();
+        }
+    }
+
+    private void isCocCardFunction() {
+        MakeCocCard makeCocCard = new MakeCocCard(entityTypeMessages);
+
+        if (isCoc7d) {
+            makeCocCard.coc7d();
+        } else if (isCoc7) {
+            makeCocCard.coc7();
+        } else if (isCoc6d) {
+            makeCocCard.coc6d();
+        } else if (isCoc6) {
+            makeCocCard.coc6();
+        }
+    }
+
+    private void isTiAndLiFunction() {
+        TiAndLi tiAndLi = new TiAndLi(entityTypeMessages);
+
+        if (isTi) {
+            tiAndLi.ti();
+        } else if (isLi) {
+            tiAndLi.li();
+        }
+    }
+
+    private void isHelpFunction() {
+        Help help = new Help(entityTypeMessages);
+
+        if (isHelpNormal) {
+            help.normal();
+        } else if (isHelpMake) {
+            help.make();
+        } else if (isHelpGroup) {
+            help.group();
+        } else if (isHelpBook) {
+            help.book();
+        } else if (isHelpDnd) {
+            help.dnd();
+        } else if (isHelpInfo) {
+            help.info();
+        }
+    }
+
+    private void isBookFunction() {
+        Book book = new Book(entityTypeMessages);
+
+        if (isBookKp) {
+            book.kp();
+        } else if (isBookCard) {
+            book.card();
+        } else if (isBookRp) {
+            book.rp();
+        } else if (isBookMake) {
+            book.make();
+        }
+    }
+
+    private void isTeamFunction() {
+        Team team = new Team(entityTypeMessages);
+
+        if (isTeamSet) {
+            team.set();
+        } else if (isTeamShow) {
+            team.show();
+        } else if (isTeamMove) {
+            team.remove();
+        } else if (isTeamClr) {
+            team.clr();
+        } else if (isTeamCall) {
+            team.call();
+        } else if (isTeamHp) {
+            team.hp();
+        } else if (isTeamSan) {
+            team.san();
+        } else if (isTeamDesc) {
+            team.desc();
+        } else if (isTeamEn) {
+            team.en();
+        }
+    }
+
+    private void isEnFunction() {
+        SkillUp skillUp = new SkillUp(entityTypeMessages);
+
+        if (isEn) {
+            try {
+                skillUp.en();
+            } catch (NotFoundSkillException e) {
+                Log.error(e.getMessage(), e);
+            }
+        }
+    }
+
+    private void isLogFunction() {
+        Log log = new Log(entityTypeMessages);
+
+        if (isLogOn) {
+            log.logOn();
+        } else if (isLogOff) {
+            log.logOff();
+        } else if (isLogGet) {
+            log.get();
+        } else if (isLogList) {
+            log.list();
+        } else if (isLogDel) {
+            log.del();
+        }
+    }
+
+    private void isRiFunction() {
+        RiAndInit riAndInit = new RiAndInit(entityTypeMessages);
+
+        if (isRi) {
+            riAndInit.ri();
+        } else if (isInit) {
+            riAndInit.init();
+        } else if (isInitClr) {
+            riAndInit.clr();
+        }
+    }
+
+    private void isClueFunction() {
+        Clue clue = new Clue(entityTypeMessages);
+
+        if (isClueRm) {
+            clue.rm();
+        } else if (isClueSet) {
+            clue.set();
+        } else if (isClueClr) {
+            clue.clr();
+        } else if (isClueShow) {
+            clue.show();
+        }
     }
 }

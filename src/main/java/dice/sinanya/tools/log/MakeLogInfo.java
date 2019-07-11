@@ -14,6 +14,10 @@ import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
  */
 public class MakeLogInfo {
 
+    private MakeLogInfo() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * 规整输入的单条日志信息，规整后的结果存入数据库
      *

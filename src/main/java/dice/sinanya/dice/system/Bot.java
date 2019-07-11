@@ -3,6 +3,8 @@ package dice.sinanya.dice.system;
 import dice.sinanya.dice.manager.imal.AtQq;
 import dice.sinanya.entity.EntityGroupCensus;
 import dice.sinanya.entity.EntityTypeMessages;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,8 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  */
 public class Bot implements AtQq {
 
+    private Logger log = LogManager.getLogger(Bot.class.getName());
+
     private EntityTypeMessages entityTypeMessages;
 
     public Bot(EntityTypeMessages entityTypeMessages) {
@@ -40,7 +44,7 @@ public class Bot implements AtQq {
 
         ArrayList<String> qqList = getAtQqList(msg);
 
-        if (qqList.size() == 0) {
+        if (qqList.isEmpty()) {
             qqList.add(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
         }
         for (String qq : qqList) {
@@ -69,7 +73,7 @@ public class Bot implements AtQq {
 
         ArrayList<String> qqList = getAtQqList(msg);
 
-        if (qqList.size() == 0) {
+        if (qqList.isEmpty()) {
             qqList.add(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
         }
 
@@ -105,7 +109,8 @@ public class Bot implements AtQq {
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error(e.getMessage(), e);
+                    Thread.currentThread().interrupt();
                 }
                 entityTypeMessages.getMsgSender().SETTER.setGroupLeave(entityTypeMessages.getFromGroup());
             }

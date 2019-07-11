@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static dice.sinanya.system.MessagesLog.LOG_NAME_SWITCH;
 import static dice.sinanya.system.MessagesLog.LOG_SWITCH_FOR_GROUP;
@@ -27,6 +28,7 @@ public class SelectLogTag {
 
 
     public SelectLogTag() {
+        //        初始化时无需逻辑
     }
 
     /**
@@ -56,7 +58,7 @@ public class SelectLogTag {
      * @param groupId 群号
      * @return 日志名称列表
      */
-    public ArrayList<String> getTagList(String groupId) {
+    public List<String> getTagList(String groupId) {
         ArrayList<String> tagList = new ArrayList<>();
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select logName from tagLog where groupId=?";

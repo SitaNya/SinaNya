@@ -1,6 +1,7 @@
 package dice.sinanya.system;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author SitaNya
@@ -12,5 +13,10 @@ import java.util.HashMap;
  * 所有数据优先从静态对象取，取不到再去找数据库，这样可以提高效率
  */
 public class MessagesKp {
-    public static final HashMap<String, String> KP_GROUP = new HashMap<>();
+
+    public static final Map<String, String> KP_GROUP = new HashMap<>();
+
+    private MessagesKp() {
+        throw new IllegalStateException("Utility class");
+    }
 }

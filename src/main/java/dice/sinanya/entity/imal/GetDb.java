@@ -9,7 +9,6 @@ package dice.sinanya.entity.imal;
  * 接口说明: 获取DB加值，默认方法为coc7版
  */
 public interface GetDb {
-
     int SIZE_LEVEL1 = 2;
     int SIZE_LEVEL2 = 64;
     int SIZE_LEVEL3 = 84;

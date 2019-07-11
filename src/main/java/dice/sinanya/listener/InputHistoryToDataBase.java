@@ -26,7 +26,7 @@ import static dice.sinanya.tools.getinfo.Team.saveTeamEn;
 public class InputHistoryToDataBase implements TimeJob {
 
     public InputHistoryToDataBase() {
-
+//        初始化时不需要参数
     }
 
     @Override

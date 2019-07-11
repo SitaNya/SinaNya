@@ -13,6 +13,12 @@ import java.util.regex.Pattern;
  */
 public class CheckIsNumbers {
 
+    private static Pattern pattern = Pattern.compile("[-]{0,1}[0-9]+");
+
+    private CheckIsNumbers() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * 是否为数字类型
      *
@@ -20,7 +26,6 @@ public class CheckIsNumbers {
      * @return 布尔值
      */
     public static boolean isNumeric(String str){
-        Pattern pattern = Pattern.compile("[-]{0,1}[0-9]+");
         Matcher isNum = pattern.matcher(str);
         return isNum.matches();
     }

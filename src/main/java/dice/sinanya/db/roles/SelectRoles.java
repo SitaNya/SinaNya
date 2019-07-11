@@ -27,6 +27,7 @@ public class SelectRoles {
     private static final Logger Log = LogManager.getLogger(SelectRoles.class);
 
     public SelectRoles() {
+        //        初始化时无需逻辑
     }
 
     /**
@@ -57,7 +58,7 @@ public class SelectRoles {
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
-                        HashMap<String, Integer> propertiesForRole = new MakeRolesInfo().getPropertiesForRole();
+                        HashMap<String, Integer> propertiesForRole = (HashMap<String, Integer>) new MakeRolesInfo().getPropertiesForRole();
                         String role = set.getString("userName");
                         long qqId = Long.parseLong(set.getString("qqId"));
                         propertiesForRole.put("str", set.getInt("str"));

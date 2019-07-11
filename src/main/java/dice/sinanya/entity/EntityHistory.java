@@ -35,18 +35,6 @@ public class EntityHistory {
         this.qqId = qqId;
     }
 
-    public EntityHistory(String qqId, int fumble, int criticalSuccess, int extremeSuccess, int hardSuccess, int success, int failure, int times, int mean) {
-        this.qqId = qqId;
-        this.fumble = fumble;
-        this.criticalSuccess = criticalSuccess;
-        this.extremeSuccess = extremeSuccess;
-        this.hardSuccess = hardSuccess;
-        this.success = success;
-        this.failure = failure;
-        this.times = times;
-        this.mean = mean;
-    }
-
     public String getQqId() {
         return qqId;
     }
@@ -145,5 +133,33 @@ public class EntityHistory {
             default:
                 break;
         }
+    }
+
+    public void setFumble(int fumble) {
+        this.fumble = fumble;
+    }
+
+    public void setCriticalSuccess(int criticalSuccess) {
+        this.criticalSuccess = criticalSuccess;
+    }
+
+    public void setExtremeSuccess(int extremeSuccess) {
+        this.extremeSuccess = extremeSuccess;
+    }
+
+    public void setHardSuccess(int hardSuccess) {
+        this.hardSuccess = hardSuccess;
+    }
+
+    public void setSuccess(int success) {
+        this.success = success;
+    }
+
+    public void setFailure(int failure) {
+        this.failure = failure;
+    }
+
+    public void setMean(double mean) {
+        this.mean = mean;
     }
 }

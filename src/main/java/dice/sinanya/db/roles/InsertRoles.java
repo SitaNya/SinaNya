@@ -77,11 +77,11 @@ public class InsertRoles {
      * @param qqId       qq号
      */
     public void insertRoleInfo(String properties, String role, long qqId) {
-        HashMap<String, Integer> propertiesForRole = getRoleInfoByQQ(qqId, role);
+        HashMap<String, Integer> propertiesForRole = (HashMap<String, Integer>) getRoleInfoByQQ(qqId, role);
         if (propertiesForRole == null) {
-            propertiesForRole = new MakeRolesInfo().init();
+            propertiesForRole = (HashMap<String, Integer>) new MakeRolesInfo().init();
         }
-        propertiesForRole = new MakeRolesInfo(properties, propertiesForRole).getPropertiesForRole();
+        propertiesForRole = (HashMap<String, Integer>) new MakeRolesInfo(properties, propertiesForRole).getPropertiesForRole();
         insertRoleInfo(propertiesForRole, role, qqId);
     }
 

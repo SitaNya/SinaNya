@@ -17,6 +17,10 @@ import java.text.SimpleDateFormat;
 public class MakeTimeStamp {
     private static Logger log = LogManager.getLogger(MakeTimeStamp.class.getName());
 
+    private MakeTimeStamp() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * 将格式化好的时间转化为时间戳
      *

@@ -12,6 +12,11 @@ import java.util.HashMap;
  * 接口说明: 自定义特质的静态信息
  */
 public class MessagesTz {
+
+    private MessagesTz() {
+        throw new IllegalStateException("Utility class");
+    }
+
     private static ArrayList<String> TZ0 = new ArrayList<String>() {{
         add("害怕夜晚(D):你因为某些原因害怕夜晚,深夜12点以后还要活动的话,“IDEA”和“知识”判定的成功范围变为各自的2分之1。但是擅长早起");
         add("快速恢复:你的恢复能力比一般人要强,生命力的回复判定结果+1");

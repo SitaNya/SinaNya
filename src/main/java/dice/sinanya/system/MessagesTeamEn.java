@@ -14,5 +14,10 @@ import java.util.HashMap;
  * 接口说明: 小队技能成功情况的记录，用于记录EN
  */
 public class MessagesTeamEn {
+
+    private MessagesTeamEn() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static final HashMap<EntityQqAndGroup, ArrayList<String>> TEAM_EN = new HashMap<>();
 }

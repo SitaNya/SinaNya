@@ -22,6 +22,7 @@ public class InsertClue {
     private static final Logger Log = LogManager.getLogger(InsertClue.class);
 
     public InsertClue() {
+        //        初始化时不需要参数
     }
 
     /**

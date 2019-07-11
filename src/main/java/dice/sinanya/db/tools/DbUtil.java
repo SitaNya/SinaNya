@@ -11,6 +11,11 @@ import java.sql.Connection;
  * 类说明: 数据库连接池初始化类，没有特殊需要无需改动
  */
 public class DbUtil {
+
+    private DbUtil() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * @return 将从连接池中取连接的动作封装一层
      */

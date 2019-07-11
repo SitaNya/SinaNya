@@ -3,6 +3,7 @@ package dice.sinanya.system;
 import dice.sinanya.entity.EntityRoleTag;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author SitaNya
@@ -20,6 +21,10 @@ public class RoleInfoCache {
      * value为HashMap。其中key为技能名，value为技能值
      * @param ROLE_CHOOSE 当前选择人物卡对象，key为QQ号，value为角色名
      */
-    public static final HashMap<EntityRoleTag, HashMap<String, Integer>> ROLE_INFO_CACHE = new HashMap<>();
-    public static final HashMap<Long, String> ROLE_CHOOSE = new HashMap<>();
+    public static final Map<EntityRoleTag, HashMap<String, Integer>> ROLE_INFO_CACHE = new HashMap<>();
+    public static final Map<Long, String> ROLE_CHOOSE = new HashMap<>();
+
+    private RoleInfoCache() {
+        throw new IllegalStateException("Utility class");
+    }
 }

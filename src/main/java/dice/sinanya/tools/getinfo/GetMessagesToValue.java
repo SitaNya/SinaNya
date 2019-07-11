@@ -20,6 +20,10 @@ import static dice.sinanya.tools.getinfo.MakeSkillName.makeSkillName;
 class GetMessagesToValue {
     private static final Logger Log = LogManager.getLogger(GetMessagesToValue.class);
 
+    private GetMessagesToValue() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * 将输入的属性值字符串转变为HashMap形式
      *
@@ -33,20 +37,11 @@ class GetMessagesToValue {
         int i = 0;
         while (i < msg.length()) {
             int tmp = i;
-            while (i < msg.length() && !Character.isSpaceChar(msg.charAt(i)) &&
-                    !Character.isDigit(msg.charAt(i))) {
-                strSkillName.append(msg.charAt(i));
-                i++;
-            }
-
-            while (i < msg.length() && Character.isDigit(msg.charAt(i))) {
-                strSkillValue.append(msg.charAt(i));
-                i++;
-            }
-
+            i = findSkillName(i, msg, strSkillName);
+            i = findSkillValue(i, msg, strSkillValue);
             try {
                 if (!strSkillValue.toString().equals(NONE)) {
-                    String skillName = "";
+                    String skillName;
                     if (strSkillName.toString().contains(":")) {
                         skillName = strSkillName.toString().split(":")[strSkillName.toString().split(":").length - 1];
                     } else if (strSkillName.toString().contains("=")) {
@@ -66,5 +61,22 @@ class GetMessagesToValue {
             }
         }
         return properties;
+    }
+
+    private static int findSkillName(int i, String msg, StringBuilder strSkillName) {
+        while (i < msg.length() && !Character.isSpaceChar(msg.charAt(i)) &&
+                !Character.isDigit(msg.charAt(i))) {
+            strSkillName.append(msg.charAt(i));
+            i++;
+        }
+        return i;
+    }
+
+    private static int findSkillValue(int i, String msg, StringBuilder strSkillValue) {
+        while (i < msg.length() && Character.isDigit(msg.charAt(i))) {
+            strSkillValue.append(msg.charAt(i));
+            i++;
+        }
+        return i;
     }
 }

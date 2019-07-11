@@ -23,6 +23,7 @@ public class SelectLogInfo {
     private static final Logger Log = LogManager.getLogger(SelectLogInfo.class);
 
     public SelectLogInfo() {
+        //        初始化时无需逻辑
     }
 
     /**

@@ -37,6 +37,7 @@ public class MakeSanCheck {
     private long qq;
 
     private static Pattern plus = Pattern.compile("[+*/\\-]");
+    private String sanCheckFunctionError = "sanCheck";
 
     public MakeSanCheck(EntityTypeMessages entityTypeMessages) {
         qq = Long.parseLong(entityTypeMessages.getFromQq());
@@ -90,7 +91,7 @@ public class MakeSanCheck {
         }
 //        如果表达式是数字，那么直接恢复即可。如果不是则需要过一下GetRollResultAndStr方法计算最终的值
 
-        HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);
+        HashMap<String, Integer> prop = (HashMap<String, Integer>) getRoleInfoFromChooseByQQ(qq);
         if (san == 0 && prop != null) {
             role = getRoleChooseByQQ(qq);
             san = prop.get("san");
@@ -109,6 +110,7 @@ public class MakeSanCheck {
     public String checkSanCheck(String function) throws SanCheckSetException, PlayerSetException {
         int levelFumbleLine = 100;
         String sanFunctionSeq = "/";
+        String sanText = "%d/%d=%s\n你的理智值减少%d=%d点,当前剩余%d点";
 
         String strCheckValue;
         String role;
@@ -125,7 +127,11 @@ public class MakeSanCheck {
 //        如果字符串中含有空格且第二位不为空，则认为是指定了san值。否则整段都是表达式
 
         String tagNone = NONE;
-        if (!strCheckValue.contains(sanFunctionSeq) || strCheckValue.split(sanFunctionSeq)[0].equals(tagNone) || strCheckValue.split(sanFunctionSeq)[1].equals(tagNone)) {
+        boolean containsSeq = strCheckValue.contains(sanFunctionSeq);
+        boolean firstFunctionIsNone = strCheckValue.split(sanFunctionSeq)[0].equals(tagNone);
+        boolean secondFunctionIsNone = strCheckValue.split(sanFunctionSeq)[1].equals(tagNone);
+        boolean functionIsError = (firstFunctionIsNone || secondFunctionIsNone);
+        if (containsSeq && functionIsError) {
             throw new SanCheckSetException(entityTypeMessages);
         }
 //        确认表达式合规
@@ -143,7 +149,7 @@ public class MakeSanCheck {
 
         boolean useCard = false;
 //        默认为未使用人物卡
-        HashMap<String, Integer> prop = getRoleInfoFromChooseByQQ(qq);
+        HashMap<String, Integer> prop = (HashMap<String, Integer>) getRoleInfoFromChooseByQQ(qq);
         if (san == 0 && prop != null) {
             role = getRoleChooseByQQ(qq);
             san = prop.get("san");
@@ -165,121 +171,30 @@ public class MakeSanCheck {
         int random = random(1, 100);
 //        骰点
         String regexFunctionSeq = "[dD]";
+        int newSan;
         if (random == levelFumbleLine) {
 //            如果大失败，默认掉最大值
-            int maxSan = 0;
-            if (hasFunctionSeq(strFail)) {
-                if (isNumeric(strFail.split(regexFunctionSeq)[1])) {
-                    maxSan = Integer.parseInt(strFail.split(regexFunctionSeq)[1]);
-                } else {
-                    sender(entityTypeMessages, "sc格式错误");
-                }
-            } else {
-                if (isNumeric(strFail)) {
-                    maxSan = Integer.parseInt(strFail);
-                } else {
-                    sender(entityTypeMessages, "sc格式错误");
-                }
-            }
-            int newSan = max(0, san - maxSan);
-
-            strResult.append(random)
-                    .append("/")
-                    .append(san)
-                    .append("=大失败")
-                    .append("\n")
-                    .append("你的理智值减少")
-                    .append(strFail)
-                    .append("=")
-                    .append(maxSan)
-                    .append("点")
-                    .append(",当前剩余")
-                    .append(newSan)
-                    .append("点")
-                    .append(MESSAGES_SYSTEM.get("sanCheckFumble"));
-            if (useCard) {
-                setCard(newSan, prop, role);
-            }
+            int maxSan = hasFunctionSeq(strFail) ? getMaxSan(strFail.split(regexFunctionSeq)[1]) : getMaxSan(strFail);
+            newSan = max(0, san - maxSan);
+            strResult.append(String.format(sanText, random, san, "大失败", strFail, maxSan, newSan, MESSAGES_SYSTEM.get("sanCheckFumble")));
             makeInsane(strResult, newSan, san);
         } else if (random == 1) {
 //            如果大成功，默认掉最小值
-            int minSan = 0;
-            if (hasFunctionSeq(strSuccess)) {
-                if (isNumeric(strSuccess.split(regexFunctionSeq)[0])) {
-                    minSan = Integer.parseInt(strSuccess.split(regexFunctionSeq)[0]);
-                } else {
-                    sender(entityTypeMessages, "sc格式错误");
-                }
-            } else {
-                if (isNumeric(strSuccess)) {
-                    minSan = Integer.parseInt(strSuccess);
-                } else {
-                    sender(entityTypeMessages, "sc格式错误");
-                }
-            }
-            int newSan = max(0, san - minSan);
-
-            strResult.append(random)
-                    .append("/")
-                    .append(san)
-                    .append("=大成功")
-                    .append("\n")
-                    .append("你的理智值减少")
-                    .append(strSuccess)
-                    .append("=")
-                    .append(minSan)
-                    .append("点")
-                    .append(",当前剩余")
-                    .append(newSan)
-                    .append("点")
-                    .append(MESSAGES_SYSTEM.get("sanCheckCriticalSuccess"));
-
-            if (useCard) {
-                setCard(newSan, prop, role);
-            }
+            int minSan = hasFunctionSeq(strSuccess) ? getMinSan(strSuccess.split(regexFunctionSeq)[0]) : getMinSan(strSuccess);
+            newSan = max(0, san - minSan);
+            strResult.append(String.format(sanText, random, san, "大成功", strSuccess, minSan, newSan, MESSAGES_SYSTEM.get("sanCheckCriticalSuccess")));
             makeInsane(strResult, newSan, san);
         } else if (random <= san) {
-            int newSan = max(0, san - mSuccess.getResult());
-            strResult
-                    .append(random)
-                    .append("/")
-                    .append(san)
-                    .append("=成功")
-                    .append("\n")
-                    .append("你的理智值减少")
-                    .append(strSuccess)
-                    .append("=")
-                    .append(mSuccess.getResult())
-                    .append("点")
-                    .append(",当前剩余")
-                    .append(newSan)
-                    .append("点")
-                    .append(MESSAGES_SYSTEM.get("sanCheckSuccess"));
-            if (useCard) {
-                setCard(newSan, prop, role);
-            }
+            newSan = max(0, san - mSuccess.getResult());
+            strResult.append(String.format(sanText, random, san, "成功", strSuccess, mSuccess.getResult(), newSan, MESSAGES_SYSTEM.get("sanCheckSuccess")));
             makeInsane(strResult, newSan, san);
         } else {
-            int newSan = max(0, san - mFail.getResult());
-            strResult
-                    .append(random)
-                    .append("/")
-                    .append(san)
-                    .append("=失败")
-                    .append("\n")
-                    .append("你的理智值减少")
-                    .append(strFail)
-                    .append("=")
-                    .append(mFail.getResult())
-                    .append("点")
-                    .append(",当前剩余")
-                    .append(newSan)
-                    .append("点")
-                    .append(MESSAGES_SYSTEM.get("sanCheckFailure"));
-            if (useCard) {
-                setCard(newSan, prop, role);
-            }
+            newSan = max(0, san - mFail.getResult());
+            strResult.append(String.format(sanText, random, san, "失败", strFail, mFail.getResult(), newSan, MESSAGES_SYSTEM.get("sanCheckFailure")));
             makeInsane(strResult, newSan, san);
+        }
+        if (useCard) {
+            setCard(newSan, prop, role);
         }
         return strResult.toString();
     }
@@ -305,15 +220,16 @@ public class MakeSanCheck {
      * @param san       原本的san值
      */
     private void makeInsane(StringBuilder strResult, int newSan, int san) {
+        String tagSymptom = "symptom";
         if (newSan == 0) {
             strResult.append("\n已永久疯狂")
-                    .append(MESSAGES_SYSTEM.get("symptom"));
+                    .append(MESSAGES_SYSTEM.get(tagSymptom));
         } else if (san - newSan >= 5) {
             strResult.append("\n已进入临时性疯狂")
-                    .append(MESSAGES_SYSTEM.get("symptom"));
+                    .append(MESSAGES_SYSTEM.get(tagSymptom));
         } else if (san - newSan >= san / 5) {
             strResult.append("\n已因单次损失值进入不定性疯狂")
-                    .append(MESSAGES_SYSTEM.get("symptom"));
+                    .append(MESSAGES_SYSTEM.get(tagSymptom));
         }
     }
 
@@ -325,5 +241,25 @@ public class MakeSanCheck {
      */
     private boolean hasFunctionSeq(String function) {
         return function.contains("D") || function.contains("d");
+    }
+
+    private int getMaxSan(String failFunction) {
+        int maxSan = 0;
+        if (isNumeric(failFunction)) {
+            maxSan = Integer.parseInt(failFunction);
+        } else {
+            sender(entityTypeMessages, MESSAGES_SYSTEM.get(sanCheckFunctionError));
+        }
+        return maxSan;
+    }
+
+    private int getMinSan(String failFunction) {
+        int minSan = 0;
+        if (isNumeric(failFunction)) {
+            minSan = Integer.parseInt(failFunction);
+        } else {
+            sender(entityTypeMessages, MESSAGES_SYSTEM.get(sanCheckFunctionError));
+        }
+        return minSan;
     }
 }

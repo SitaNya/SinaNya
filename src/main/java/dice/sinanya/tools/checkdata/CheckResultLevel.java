@@ -2,10 +2,10 @@ package dice.sinanya.tools.checkdata;
 
 import dice.sinanya.entity.EntityAntagonize;
 import dice.sinanya.entity.EntityLevelResult;
+import dice.sinanya.system.MessagesLevel;
 
 import java.util.ArrayList;
 
-import static dice.sinanya.system.MessagesLevel.LEVEL_MAP;
 import static dice.sinanya.tools.makedata.RandomInt.random;
 
 /**
@@ -72,7 +72,7 @@ public class CheckResultLevel {
      */
     public String getLevelResultStr() {
         String strlevel = checkResultLevel();
-        ArrayList<String> resultInfo = LEVEL_MAP.get(strlevel);
+        ArrayList<String> resultInfo = MessagesLevel.valueOf(strlevel).getText();
         return resultInfo.get(random(0, resultInfo.size() - 1));
     }
 

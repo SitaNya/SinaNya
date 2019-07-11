@@ -18,6 +18,10 @@ import static dice.sinanya.system.MessagesSystem.NONE;
  */
 public class Clue {
 
+    private Clue() {
+        throw new IllegalStateException("Utility class");
+    }
+
     private static SelectClue selectClue = new SelectClue();
     private static InsertClue insertClue = new InsertClue();
 

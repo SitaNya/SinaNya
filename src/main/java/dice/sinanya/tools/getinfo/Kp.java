@@ -19,6 +19,10 @@ public class Kp {
     private static SelectKp selectKp = new SelectKp();
     private static InsertKp insertKp = new InsertKp();
 
+    private Kp() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * 从数据库读取kp主群数据刷写到静态变量，这个方法只在启动时调用一次
      */

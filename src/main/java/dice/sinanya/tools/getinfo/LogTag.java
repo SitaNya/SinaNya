@@ -23,6 +23,10 @@ public class LogTag {
     private static SelectLogTag selectLogTag = new SelectLogTag();
     private static InsertLogTag insertLogTag = new InsertLogTag();
 
+    private LogTag() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * 从数据库读取日志标签数据刷写到静态变量，这个方法只在启动时调用一次
      */
@@ -118,7 +122,7 @@ public class LogTag {
     public static String getTagList(String groupId) {
         StringBuilder stringBuffer = new StringBuilder();
         stringBuffer.append("此群中存在以下日志\n");
-        ArrayList<String> tagList = selectLogTag.getTagList(groupId);
+        ArrayList<String> tagList = (ArrayList<String>) selectLogTag.getTagList(groupId);
         for (String tag : tagList) {
             stringBuffer.append(tag)
                     .append("\n");

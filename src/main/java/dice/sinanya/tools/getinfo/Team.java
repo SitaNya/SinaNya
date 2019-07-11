@@ -8,6 +8,7 @@ import dice.sinanya.entity.EntityTypeMessages;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static dice.sinanya.system.MessagesTeamEn.TEAM_EN;
@@ -26,6 +27,10 @@ import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 public class Team {
     private static InsertTeam insertTeam = new InsertTeam();
     private static SelectTeam selectTeam = new SelectTeam();
+
+    private Team() {
+        throw new IllegalStateException("Utility class");
+    }
 
     /**
      * 小队成员添加或小队创建
@@ -60,7 +65,7 @@ public class Team {
      * @param group 群号
      * @return 小队成员QQ号列表
      */
-    public static ArrayList<String> queryTeam(String group) {
+    public static List<String> queryTeam(String group) {
         return selectTeam.selectTeamInfo(group);
     }
 

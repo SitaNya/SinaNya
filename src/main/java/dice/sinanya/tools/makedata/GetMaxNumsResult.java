@@ -13,6 +13,11 @@ import java.util.Collections;
  */
 class GetMaxNumsResult {
 
+
+    private GetMaxNumsResult() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * 给K参数的方法，取一系列骰点结果中的最大值
      *

@@ -1,6 +1,7 @@
 package dice.sinanya.system;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author SitaNya
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public class TiAndLi {
 
-    public static final ArrayList<String> TI = new ArrayList<String>() {{
+    public static final List<String> TI = new ArrayList<String>() {{
         add("失忆:在%s轮之内,调查员会发现自己只记得最后身处的安全地点,却没有任何来到这里的记忆。");
         add("假性残疾:调查员陷入了心理性的失明,失聪以及躯体缺失感中,持续%s轮。");
         add("暴力倾向:调查员陷入了六亲不认的暴力行为中,对周围的敌人与友方进行着无差别的攻击,持续%s轮。");
@@ -24,8 +25,7 @@ public class TiAndLi {
         add("恐惧:调查员陷入对某一事物的恐惧之中,就算这一恐惧的事物是并不存在的,持续%s轮。\n%s\n具体恐惧症:%s(守秘人也可以自行从恐惧症状表中选择其他症状)");
         add("狂躁:调查员由于某种诱因进入狂躁状态,症状持续%s轮。\n%s\n具体狂躁症:%s(KP也可以自行从狂躁症状表中选择其他症状)");
     }};
-
-    public static final ArrayList<String> LI = new ArrayList<String>() {{
+    public static final List<String> LI = new ArrayList<String>() {{
         add("失忆:在%s小时后,调查员回过神来,发现自己身处一个陌生的地方,并忘记了自己是谁。记忆会随时间恢复");
         add("被窃:调查员在%s小时后恢复清醒,发觉自己被盗,身体毫发无损");
         add("遍体鳞伤:调查员在%s小时后恢复清醒,发现自己身上满是拳痕和瘀伤。生命值减少到疯狂前的一半,但这不会造成重伤。调查员没有被窃。这种伤害如何持续到现在由守秘人决定");
@@ -37,8 +37,7 @@ public class TiAndLi {
         add("恐惧:调查员患上一个新的恐惧症。调查员会在%s小时后恢复正常,并开始为避开恐惧源而采取任何措施\n%s\n具体恐惧症:%s(守秘人也可以自行从恐惧症状表中选择其他症状)");
         add("狂躁:调查员患上一个新的狂躁症,在%s小时后恢复理智。在这次疯狂发作中,调查员将完全沉浸于其新的狂躁症状。这是否会被其他人理解则取决于守秘人和此调查员。\n%s\n具体狂躁症:%s(KP也可以自行从狂躁症状表中选择其他症状)");
     }};
-
-    public static final ArrayList<String> STR_FEAR = new ArrayList<String>() {{
+    public static final List<String> STR_FEAR = new ArrayList<String>() {{
         add("洗澡恐惧症(Ablutophobia):对于洗涤或洗澡的恐惧。");
         add("恐高症(Acrophobia):对于身处高处的恐惧。");
         add("飞行恐惧症(Aerophobia):对飞行的恐惧。");
@@ -140,8 +139,7 @@ public class TiAndLi {
         add("异域恐惧症(Xenophobia):对陌生人或外国人的恐惧。");
         add("动物恐惧症(Zoophobia):对动物的恐惧。");
     }};
-
-    public static final ArrayList<String> STR_PANIC = new ArrayList<String>() {{
+    public static final List<String> STR_PANIC = new ArrayList<String>() {{
         add("沐浴癖(Ablutomania):执着于清洗自己。");
         add("犹豫癖(Aboulomania):病态地犹豫不定。");
         add("喜暗狂(Achluomania):对黑暗的过度热爱。");
@@ -243,4 +241,8 @@ public class TiAndLi {
         add("嗜外狂(Xenomania):痴迷于异国的事物。");
         add("喜兽癖(Zoomania):对待动物的态度近乎疯狂地友好。");
     }};
+
+    private TiAndLi() {
+        throw new IllegalStateException("Utility class");
+    }
 }

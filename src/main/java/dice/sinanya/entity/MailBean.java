@@ -1,6 +1,6 @@
 package dice.sinanya.entity;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  * @author SitaNya
@@ -30,10 +30,11 @@ public class MailBean {
     private String password;
     private String subject;
     private String content;
-    private Vector<String> file;
+    private ArrayList<String> file;
     private String filename;
 
     public MailBean() {
+//        初始化时无需传入参数
     }
 
     public String getTo() {
@@ -100,14 +101,14 @@ public class MailBean {
         this.filename = filename;
     }
 
-    public Vector<String> getFile() {
+    public ArrayList<String> getFile() {
         return file;
     }
 
     public void attachFile(String fileName) {
         if (file == null) {
-            file = new Vector<>();
+            file = new ArrayList<>();
         }
-        file.addElement(fileName);
+        file.add(fileName);
     }
 }

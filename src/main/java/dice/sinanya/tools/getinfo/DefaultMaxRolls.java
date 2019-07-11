@@ -15,6 +15,10 @@ import dice.sinanya.db.setdefaultrolls.SelectDefaultMaxRolls;
  */
 public class DefaultMaxRolls {
 
+    private DefaultMaxRolls() {
+        throw new IllegalStateException("Utility class");
+    }
+
     private static InsertDefaultMaxRolls insertDefaultMaxRolls = new InsertDefaultMaxRolls();
     private static SelectDefaultMaxRolls selectDefaultMaxRolls = new SelectDefaultMaxRolls();
 

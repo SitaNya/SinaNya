@@ -18,6 +18,11 @@ import static dice.sinanya.tools.getinfo.LogText.setLogText;
  * 用这个静态方法可以直接发出消息而不用在乎消息来源
  */
 public class Sender {
+
+    private Sender() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * 用这个静态方法可以直接发出消息而不用在乎消息来源
      *

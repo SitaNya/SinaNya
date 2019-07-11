@@ -1,6 +1,7 @@
 package dice.sinanya.system;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author SitaNya
@@ -12,5 +13,9 @@ import java.util.HashMap;
  */
 public class SystemInfo {
 
-    public static final HashMap<Long, Boolean> SWITCH_BOT = new HashMap<>();
+    public static final Map<Long, Boolean> SWITCH_BOT = new HashMap<>();
+
+    private SystemInfo() {
+        throw new IllegalStateException("Utility class");
+    }
 }

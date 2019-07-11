@@ -20,6 +20,10 @@ public class History {
     private static SelectHistory selectHistory = new SelectHistory();
     private static InsertHistory insertHistory = new InsertHistory();
 
+    private History() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * 刷新骰点历史到静态变量，只在程序启动时刷新一次
      */

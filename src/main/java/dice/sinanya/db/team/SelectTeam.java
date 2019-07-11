@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static dice.sinanya.system.MessagesTeamEn.TEAM_EN;
 
@@ -49,7 +50,7 @@ public class SelectTeam {
      * @param groupId 群号
      * @return 成员列表
      */
-    public ArrayList<String> selectTeamInfo(String groupId) {
+    public List<String> selectTeamInfo(String groupId) {
         String strQqList = null;
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from team where groupId=?";
@@ -67,7 +68,7 @@ public class SelectTeam {
         if (strQqList != null) {
             return new ArrayList<>(Arrays.asList(strQqList.split(",")));
         } else {
-            return null;
+            return new ArrayList<>();
         }
 
     }

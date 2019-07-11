@@ -11,6 +11,11 @@ import java.util.ArrayList;
  * 接口说明: NPC信息的静态信息
  */
 public class MessagesNPC {
+
+    private MessagesNPC() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static final ArrayList<String> SpeTag = new ArrayList<String>() {{
         add("聆听，可以轻松地察觉到周围环境中的微弱声音，可以轻松察觉到他人的偷袭。");
         add("潜行，可以轻易地隐藏在黑暗中，面对危险时更容易规避掉。");

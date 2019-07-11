@@ -19,6 +19,10 @@ public class LogText {
     private static SelectLogInfo selectLogInfo = new SelectLogInfo();
     private static InsertLogInfo insertLogInfo = new InsertLogInfo();
 
+    private LogText() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * 将某个具体信息（通常是PC发言或行动的话）插入数据库
      *

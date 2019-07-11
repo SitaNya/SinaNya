@@ -11,5 +11,10 @@ import dice.sinanya.entity.EntityLoginQQInfo;
  * 类说明:
  */
 public class MessagesLoginInfo {
+
+    private MessagesLoginInfo() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static EntityLoginQQInfo ENTITY_LOGINQQ_INFO = new EntityLoginQQInfo();
 }

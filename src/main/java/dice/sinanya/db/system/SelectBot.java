@@ -24,6 +24,9 @@ import static dice.sinanya.system.SystemInfo.SWITCH_BOT;
 public class SelectBot {
     private static final Logger Log = LogManager.getLogger(SelectBot.class);
 
+    private SelectBot() {
+        throw new IllegalStateException("Utility class");
+    }
 
     /**
      * 将所有开关值刷写到静态变量中

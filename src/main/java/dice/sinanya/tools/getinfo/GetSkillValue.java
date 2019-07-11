@@ -45,7 +45,7 @@ public class GetSkillValue {
         replaceSkill(qq);
     }
 
-    public GetSkillValue(Long qq, String msg) {
+    public GetSkillValue(Long qq) {
         this.qq = qq;
         replaceSkill(qq);
     }

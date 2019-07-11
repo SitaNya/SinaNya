@@ -28,6 +28,7 @@ public class SelectClue {
     private static final Logger Log = LogManager.getLogger(SelectClue.class);
 
     public SelectClue() {
+//        初始化时无需逻辑
     }
 
     /**

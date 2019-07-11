@@ -15,6 +15,10 @@ import static dice.sinanya.system.SystemInfo.SWITCH_BOT;
 public class SwitchBot {
     private static InsertBot insertBot = new InsertBot();
 
+    private SwitchBot() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * 设定某个群机器人开启
      *

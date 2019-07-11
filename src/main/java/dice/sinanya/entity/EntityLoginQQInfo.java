@@ -5,6 +5,7 @@ public class EntityLoginQQInfo {
     long loginQQ;
 
     public EntityLoginQQInfo() {
+//        因为初始化给静态变量时可能无数据，所以这里没有方法体
     }
 
     public String getLoginQQNick() {

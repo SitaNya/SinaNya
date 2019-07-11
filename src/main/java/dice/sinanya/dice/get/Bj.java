@@ -3,6 +3,8 @@ package dice.sinanya.dice.get;
 import dice.sinanya.dice.get.imal.GetRandomList;
 import dice.sinanya.entity.EntityTypeMessages;
 
+import java.util.ArrayList;
+
 import static dice.sinanya.system.MessagesBg.*;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
@@ -28,25 +30,25 @@ public class Bj implements GetRandomList {
     public void bg() {
 
         String stringBuilder = "个人描述:\t\t" +
-                randomFromList(INFO) +
+                randomFromList((ArrayList<String>) INFO) +
                 "\n" +
                 "思想信念:\t\t" +
-                randomFromList(PERSUASION) +
+                randomFromList((ArrayList<String>) PERSUASION) +
                 "\n" +
                 "重要之人:\t\t" +
-                randomFromList(IMPORTANT_PERSONS) +
+                randomFromList((ArrayList<String>) IMPORTANT_PERSONS) +
                 "\n" +
                 "重要之人理由:\t" +
-                randomFromList(IMPORTANT_PERSONS_INFO) +
+                randomFromList((ArrayList<String>) IMPORTANT_PERSONS_INFO) +
                 "\n" +
                 "意义非凡之地:\t" +
-                randomFromList(IMPORTANT_MAP) +
+                randomFromList((ArrayList<String>) IMPORTANT_MAP) +
                 "\n" +
                 "宝贵之物:\t\t" +
-                randomFromList(PRECIOUS) +
+                randomFromList((ArrayList<String>) PRECIOUS) +
                 "\n" +
                 "调查员特点:\t\t" +
-                randomFromList(SPECIALITY) +
+                randomFromList((ArrayList<String>) SPECIALITY) +
                 "\n" +
                 "既然决定了背景，就一定要好好扮演不要出戏哦！";
         sender(entityTypeMessages, stringBuilder);

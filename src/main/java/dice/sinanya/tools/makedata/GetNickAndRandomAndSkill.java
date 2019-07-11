@@ -1,6 +1,5 @@
 package dice.sinanya.tools.makedata;
 
-import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityNickAndRandomAndSkill;
 import dice.sinanya.entity.EntityTypeMessages;
 
@@ -27,6 +26,10 @@ import static java.lang.Math.ceil;
 public class GetNickAndRandomAndSkill{
     private static Pattern p = Pattern.compile("[+*/\\-]");
     private static Pattern skillNamePatten = Pattern.compile("([^\\d+*\\-/]+)");
+
+    private GetNickAndRandomAndSkill() {
+        throw new IllegalStateException("Utility class");
+    }
 
     /**
      * 从传入的整体信息中获取昵称、随机值、技能值
@@ -60,16 +63,14 @@ public class GetNickAndRandomAndSkill{
         }
 
 //        如果没找到技能名，则看看剩余消息是不是数字技能值
-        if (skill == 0) {
-            if (isNumeric(msg.trim())) {
+        if (skill == 0 && isNumeric(msg.trim())) {
                 skill = Integer.parseInt(msg.trim());
-            }
         }
 
 //        如果正段消息包含运算符，则将传入消息中的技能计算为技能值返回
         Matcher m = p.matcher(msg);
         if (m.find()) {
-            if (!skillName.equals("")) {
+            if (!skillName.equals(NONE)) {
                 msg = msg.replaceAll(skillName, String.valueOf(skill));
             }
             skill = (int) ceil(Calculator.conversion(skill + msg));

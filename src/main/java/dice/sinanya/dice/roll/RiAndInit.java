@@ -80,12 +80,7 @@ public class RiAndInit implements MakeNickToSender {
         int result = 0;
         boolean add = false;
         int random = random(1, 20);
-        String nick;
-        if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
-            nick = getRoleChooseByFromQQ(entityTypeMessages);
-        } else {
-            nick = getNickName(entityTypeMessages);
-        }
+        String nick = checkRoleChooseExistByFromQQ(entityTypeMessages) ? getRoleChooseByFromQQ(entityTypeMessages) : getNickName(entityTypeMessages);
 
         Matcher mNumAndName = numAndName.matcher(msg);
         while (mNumAndName.find()) {
@@ -96,9 +91,7 @@ public class RiAndInit implements MakeNickToSender {
         Matcher mPlus = plus.matcher(msg);
         while (mPlus.find()) {
             result = (int) ceil(Calculator.conversion(random + msg));
-            if (msg.contains("+")) {
-                add = true;
-            }
+            add = msg.contains("+");
         }
 
         if (isNumeric(msg)) {
@@ -118,34 +111,25 @@ public class RiAndInit implements MakeNickToSender {
         }
 
         nick = makeNickToSender(nick);
+        String tagInitText = "的先攻骰掷,掷出了: D20=";
         if (msg.equals(NONE)) {
-            sender(entityTypeMessages, nick + "的先攻骰掷,掷出了: D20=" + result);
+            sender(entityTypeMessages, nick + tagInitText + result);
         } else {
             if (add) {
-                sender(entityTypeMessages, nick + "的先攻骰掷,掷出了: D20=" + random + "+" + msg.replace("+", "") + "=" + result);
+                sender(entityTypeMessages, nick + tagInitText + random + "+" + msg.replace("+", "") + "=" + result);
                 msgBefore = random + "+" + msg.replace("+", "").replace("-", "") + "=";
             } else {
-                sender(entityTypeMessages, nick + "的先攻骰掷,掷出了: D20=" + random + msg + "=" + result);
+                sender(entityTypeMessages, nick + tagInitText + random + msg + "=" + result);
                 msgBefore = random + "-" + msg.replace("+", "").replace("-", "") + "=";
             }
         }
         Matcher mMsgBefore = nickNameRegex.matcher(msgBefore);
         if (INIT_LIST.containsKey(entityTypeMessages.getFromGroup())) {
-            HashMap<String, String> riList = INIT_LIST.get(entityTypeMessages.getFromGroup());
-            if (mMsgBefore.find()) {
-                riList.put(nick, ": D20=" + result);
-            } else {
-                riList.put(nick, ": D20=" + msgBefore + result);
-            }
-            INIT_LIST.put(entityTypeMessages.getFromGroup(), riList);
+            Map<String, String> riList = INIT_LIST.get(entityTypeMessages.getFromGroup());
+            INIT_LIST.put(entityTypeMessages.getFromGroup(), (HashMap<String, String>) putInitList(nick, riList, mMsgBefore, msgBefore, result));
         } else {
-            HashMap<String, String> riList = new HashMap<>(30);
-            if (mMsgBefore.find()) {
-                riList.put(nick, ": D20=" + result);
-            } else {
-                riList.put(nick, ": D20=" + msgBefore + result);
-            }
-            INIT_LIST.put(entityTypeMessages.getFromGroup(), riList);
+            Map<String, String> riList = new HashMap<>(30);
+            INIT_LIST.put(entityTypeMessages.getFromGroup(), (HashMap<String, String>) putInitList(nick, riList, mMsgBefore, msgBefore, result));
         }
     }
 
@@ -182,5 +166,15 @@ public class RiAndInit implements MakeNickToSender {
     public void clr() {
         INIT_LIST.remove(entityTypeMessages.getFromGroup());
         sender(entityTypeMessages, MESSAGES_SYSTEM.get("clrDndInit"));
+    }
+
+    private Map<String, String> putInitList(String nick, Map<String, String> initList, Matcher mMsgBefore, String msgBefore, int result) {
+        String tagD20 = ": D20=";
+        if (mMsgBefore.find()) {
+            initList.put(nick, tagD20 + result);
+        } else {
+            initList.put(nick, tagD20 + msgBefore + result);
+        }
+        return initList;
     }
 }
