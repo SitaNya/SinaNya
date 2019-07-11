@@ -11,8 +11,6 @@ import com.forte.qqrobot.utils.CQCodeUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
-
 import static dice.sinanya.db.system.SelectBot.flushBot;
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.DefaultMaxRolls.flushMaxRolls;

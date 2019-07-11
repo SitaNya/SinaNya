@@ -110,7 +110,7 @@ public class MakeSanCheck {
     public String checkSanCheck(String function) throws SanCheckSetException, PlayerSetException {
         int levelFumbleLine = 100;
         String sanFunctionSeq = "/";
-        String sanText = "%s/%s=%s\n你的理智值减少%s=%s点,当前剩余%s点";
+        String sanText = "%s/%s=%s\n你的理智值减少%s=%s点,当前剩余%s点\n%s";
 
         String strCheckValue;
         String role;
@@ -129,9 +129,8 @@ public class MakeSanCheck {
         String tagNone = NONE;
         boolean containsSeq = strCheckValue.contains(sanFunctionSeq);
         boolean firstFunctionIsNone = strCheckValue.split(sanFunctionSeq)[0].equals(tagNone);
-        boolean secondFunctionIsNone = strCheckValue.split(sanFunctionSeq)[1].equals(tagNone);
-        boolean functionIsError = (firstFunctionIsNone || secondFunctionIsNone);
-        if (containsSeq && functionIsError) {
+        boolean secondFunctionIsNone = containsSeq && strCheckValue.split(sanFunctionSeq)[1].equals(tagNone);
+        if (firstFunctionIsNone || secondFunctionIsNone) {
             throw new SanCheckSetException(entityTypeMessages);
         }
 //        确认表达式合规
