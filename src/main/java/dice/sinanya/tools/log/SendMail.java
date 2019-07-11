@@ -148,7 +148,7 @@ public class SendMail {
             msg.setFrom(new InternetAddress(from));
             InternetAddress[] address = {new InternetAddress(to)};
             msg.setRecipients(Message.RecipientType.TO, address);
-            msg.setSubject(toChinese(subject));
+            msg.setSubject(subject);
 
             Multipart mp = new MimeMultipart();
             MimeBodyPart mbpContent = new MimeBodyPart();
