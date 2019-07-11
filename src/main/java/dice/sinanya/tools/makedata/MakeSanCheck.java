@@ -110,7 +110,7 @@ public class MakeSanCheck {
     public String checkSanCheck(String function) throws SanCheckSetException, PlayerSetException {
         int levelFumbleLine = 100;
         String sanFunctionSeq = "/";
-        String sanText = "%s/%s=%s\n你的理智值减少%s=%s点,当前剩余%s点\n%s";
+        String sanText = "%s/%s=%s\n你的理智值减少%s=%s点,当前剩余%s点%s";
 
         String strCheckValue;
         String role;

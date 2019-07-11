@@ -71,6 +71,8 @@ public class RunApplication implements HttpApp {
             sender.SENDER.sendPrivateMsg("450609203", "获取本机QQ号超过20次失败");
             System.exit(1);
         }
+
+
 //        从数据库中读取幕间成长到缓存
         flushMaxRolls();
 //        从数据库中读取最大默认骰到缓存
