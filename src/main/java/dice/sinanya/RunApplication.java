@@ -44,9 +44,10 @@ public class RunApplication implements HttpApp {
     public static void main(String[] args) {
         initMessagesSystem();
 //        读取配置文件
-        try (HttpApplication httpApplication = new HttpApplication()) {
+        try {
+            HttpApplication httpApplication = new HttpApplication();
             httpApplication.run(new RunApplication());
-        } catch (RobotRuntionException | IOException e) {
+        } catch (RobotRuntionException e) {
             sendMail(e.getMessage());
             log.error(e.getMessage(), e);
         }

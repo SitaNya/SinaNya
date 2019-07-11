@@ -57,14 +57,13 @@ public class Listener {
      */
     @Listen(MsgGetTypes.privateMsg)
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
-    public boolean listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, PrivateMsg msgPrivate) {
+    public void listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, PrivateMsg msgPrivate) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgPrivate);
         if (entityTypeMessages.getMsgGet().getMsg().contains("bot")) {
             new Bot(entityTypeMessages).info();
         } else {
             new Flow(entityTypeMessages).toPrivate();
         }
-        return true;
     }
 
     /**
