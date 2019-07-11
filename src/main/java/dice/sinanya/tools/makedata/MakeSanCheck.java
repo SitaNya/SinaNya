@@ -116,6 +116,9 @@ public class MakeSanCheck {
         String role;
         int san = 0;
 
+        /*
+         * 如果字符串中含有空格且第二位不为空，则认为是指定了san值。否则整段都是表达式
+         */
         if (function.contains(SPACE) && !function.split(SPACE)[1].isEmpty()) {
             strCheckValue = function.split(SPACE)[0];
             if (isNumeric(function.split(SPACE)[1])) {
@@ -124,13 +127,14 @@ public class MakeSanCheck {
         } else {
             strCheckValue = function;
         }
-//        如果字符串中含有空格且第二位不为空，则认为是指定了san值。否则整段都是表达式
+
 
         String tagNone = NONE;
         boolean containsSeq = strCheckValue.contains(sanFunctionSeq);
-        boolean firstFunctionIsNone = strCheckValue.split(sanFunctionSeq)[0].equals(tagNone);
-        boolean secondFunctionIsNone = containsSeq && strCheckValue.split(sanFunctionSeq)[1].equals(tagNone);
-        if (firstFunctionIsNone || secondFunctionIsNone) {
+        boolean firstFunctionError = strCheckValue.split(sanFunctionSeq)[0].equals(tagNone);
+        boolean secondFunctionError = containsSeq && strCheckValue.split(sanFunctionSeq)[1].equals(tagNone);
+        boolean functionError=!containsSeq||firstFunctionError||secondFunctionError;
+        if (functionError) {
             throw new SanCheckSetException(entityTypeMessages);
         }
 //        确认表达式合规
