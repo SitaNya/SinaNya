@@ -30,22 +30,25 @@ import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
  */
 @CronTask("*/30 * * * * ? *")
 public class Prometheus implements TimeJob {
-    private Logger log = LogManager.getLogger(Prometheus.class.getName());
-    private int port;
-    final Counter cpuRequest
+
+    private final Counter cpuRequest
             = Counter.build()
             .name("system_load_average").help("average cpu load").register();
 
     public Prometheus() {
         String tagPrometheus = "PrometheusPort";
+        int port;
         if (isNumeric(MESSAGES_SYSTEM.get(tagPrometheus))) {
-            this.port = Integer.parseInt(MESSAGES_SYSTEM.get(tagPrometheus));
+            port = Integer.parseInt(MESSAGES_SYSTEM.get(tagPrometheus));
         } else {
-            this.port = 1234;
+            port = 1234;
         }
+        Logger log = LogManager.getLogger(Prometheus.class.getName());
         try {
             HTTPServer server = new HTTPServer(port);
+            log.info("Prometheus监控系统已在本机" + server.getPort() + "端口启动");
         } catch (IOException e) {
+
             log.error(e.getMessage(), e);
         }
         DefaultExports.initialize();
