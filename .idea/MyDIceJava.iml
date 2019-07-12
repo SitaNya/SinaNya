@@ -59,5 +59,10 @@
     <orderEntry type="library" name="Maven: com.mchange:mchange-commons-java:0.2.15" level="project" />
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP-java7:2.4.13" level="project" />
     <orderEntry type="library" name="Maven: com.mchange:c3p0:0.9.5.4" level="project" />
+    <orderEntry type="library" name="Maven: io.prometheus:simpleclient:0.6.0" level="project" />
+    <orderEntry type="library" name="Maven: io.prometheus:simpleclient_hotspot:0.6.0" level="project" />
+    <orderEntry type="library" name="Maven: io.prometheus:simpleclient_httpserver:0.6.0" level="project" />
+    <orderEntry type="library" name="Maven: io.prometheus:simpleclient_common:0.6.0" level="project" />
+    <orderEntry type="library" name="Maven: io.prometheus:simpleclient_pushgateway:0.6.0" level="project" />
   </component>
 </module>

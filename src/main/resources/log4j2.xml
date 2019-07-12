@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="DEBUG">
+<Configuration packages="io.prometheus.client.log4j2" status="DEBUG">
 
     <Properties>
         <Property name="pattern_layout">%d %-5p (%F:%L) - %m%n</Property>
@@ -39,6 +39,7 @@
             <AppenderRef ref="file"/>
             <AppenderRef ref="console"/>
             <AppenderRef ref="errorLog"/>
+            <AppenderRef ref="METRICS"/>
         </Root>
     </Loggers>
 </Configuration>

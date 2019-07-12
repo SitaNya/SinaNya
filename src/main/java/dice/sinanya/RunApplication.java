@@ -8,8 +8,12 @@ import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
 import com.forte.qqrobot.exception.RobotRuntionException;
 import com.forte.qqrobot.sender.MsgSender;
 import com.forte.qqrobot.utils.CQCodeUtil;
+import io.prometheus.client.exporter.HTTPServer;
+import io.prometheus.client.hotspot.DefaultExports;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
+import java.io.IOException;
 
 import static dice.sinanya.db.system.SelectBot.flushBot;
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
@@ -88,5 +92,14 @@ public class RunApplication implements HttpApp {
 //        从数据库中读取kp主群设定到缓存
         flushHistory();
 //        从数据库中读取骰点历史信息到缓存
+
+        DefaultExports.initialize();
+
+        HTTPServer server = null;
+        try {
+            server = new HTTPServer(1234);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
