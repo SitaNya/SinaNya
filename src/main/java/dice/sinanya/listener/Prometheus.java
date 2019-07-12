@@ -40,8 +40,7 @@ public class Prometheus implements TimeJob {
 
     @Override
     public void execute(MsgSender msgSender, CQCodeUtil cqCodeUtil) {
-        CPU_REQUEST.inc();
-        CPU_REQUEST.dec(ManagementFactory.getOperatingSystemMXBean().getSystemLoadAverage());
+        CPU_REQUEST.set(ManagementFactory.getOperatingSystemMXBean().getSystemLoadAverage());
     }
 
     @Override
