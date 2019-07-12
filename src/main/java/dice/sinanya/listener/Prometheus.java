@@ -57,8 +57,6 @@ public class Prometheus implements TimeJob {
     @Override
     public void execute(MsgSender msgSender, CQCodeUtil cqCodeUtil) {
         cpuRequest.inc(ManagementFactory.getOperatingSystemMXBean().getSystemLoadAverage());
-        cpuRequest.dec(ManagementFactory.getOperatingSystemMXBean().getSystemLoadAverage());
-        cpuRequest.setToCurrentTime();
     }
 
     @Override
