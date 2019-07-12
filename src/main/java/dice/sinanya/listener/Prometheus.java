@@ -41,7 +41,15 @@ public class Prometheus implements TimeJob {
 
     @Override
     public void execute(MsgSender msgSender, CQCodeUtil cqCodeUtil) {
-        CPU_REQUEST.set(getProcessCpuRate(Integer.parseInt(ManagementFactory.getRuntimeMXBean().getName().split("@")[0].trim())));
+        int pid = 0;
+        try {
+            pid = Integer.parseInt(ManagementFactory.getRuntimeMXBean().getName().split("@")[0].trim());
+        } catch (NumberFormatException e) {
+            log.error(e.getMessage(), e);
+            log.error("pid is: " + ManagementFactory.getRuntimeMXBean().getName().split("@")[0].trim());
+            System.exit(1);
+        }
+        CPU_REQUEST.set(getProcessCpuRate(pid));
     }
 
     @Override
