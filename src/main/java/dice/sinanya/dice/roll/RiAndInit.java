@@ -170,9 +170,9 @@ public class RiAndInit implements MakeNickToSender {
     private Map<String, String> putInitList(String nick, Map<String, String> initList, Matcher mMsgBefore, String msgBefore, int result) {
         String tagD20 = ": D20=";
         if (mMsgBefore.find()) {
-            initList.put(nick, tagD20 + "\t" + result);
+            initList.put(nick, tagD20 + result);
         } else {
-            initList.put(nick, tagD20 + msgBefore + "\t" + result);
+            initList.put(nick, tagD20 + msgBefore + result);
         }
         return initList;
     }

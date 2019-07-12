@@ -12,13 +12,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.quartz.JobExecutionContext;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.management.ManagementFactory;
-import java.text.DecimalFormat;
-
 /**
  * @author SitaNya
  * 日期: 2019-07-12
