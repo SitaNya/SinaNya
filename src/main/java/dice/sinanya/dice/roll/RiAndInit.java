@@ -57,7 +57,7 @@ public class RiAndInit implements MakeNickToSender {
             //按照age倒敘排列
             String[] o1Value = o1.getValue().split("=");
             String[] o2Value = o2.getValue().split("=");
-            return Integer.parseInt(o2Value[o2Value.length - 1]) - Integer.parseInt(o1Value[o1Value.length - 1]);
+            return Integer.parseInt(o2Value[o2Value.length - 1].trim()) - Integer.parseInt(o1Value[o1Value.length - 1].trim());
         });
         //創建一個HashMap的子類LinkedHashMap集合
         LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<>();
@@ -170,9 +170,9 @@ public class RiAndInit implements MakeNickToSender {
     private Map<String, String> putInitList(String nick, Map<String, String> initList, Matcher mMsgBefore, String msgBefore, int result) {
         String tagD20 = ": D20=";
         if (mMsgBefore.find()) {
-            initList.put(nick, tagD20 + result);
+            initList.put(nick, tagD20 + "\t" + result);
         } else {
-            initList.put(nick, tagD20 + msgBefore + result);
+            initList.put(nick, tagD20 + msgBefore + "\t" + result);
         }
         return initList;
     }
