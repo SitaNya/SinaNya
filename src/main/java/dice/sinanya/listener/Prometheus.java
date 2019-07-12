@@ -27,7 +27,7 @@ import java.text.DecimalFormat;
  * 有任何问题欢迎咨询
  * 类说明:
  */
-@CronTask("* * * * * ? *")
+@CronTask("0 * * * * ? *")
 public class Prometheus implements TimeJob {
 
     static Logger log = LogManager.getLogger(dice.sinanya.listener.Prometheus.class.getName());

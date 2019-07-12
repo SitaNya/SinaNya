@@ -70,10 +70,11 @@ public class RunApplication implements HttpApp {
         } while (ENTITY_LOGINQQ_INFO.getLoginQQ() == 0 && times < 20);
         if (times >= 20) {
             sender.SENDER.sendPrivateMsg("450609203", "获取本机QQ号超过20次失败");
+            log.error("获取本机QQ号超过20次失败");
             System.exit(1);
         }
 
-
+        log.info("开始刷写数据库");
 //        从数据库中读取幕间成长到缓存
         flushMaxRolls();
 //        从数据库中读取最大默认骰到缓存
