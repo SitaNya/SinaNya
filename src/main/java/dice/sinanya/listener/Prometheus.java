@@ -28,7 +28,7 @@ import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
  * 有任何问题欢迎咨询
  * 类说明:
  */
-@CronTask("*/30 * * * * ? *")
+@CronTask("*/1 * * * * ? *")
 public class Prometheus implements TimeJob {
 
     private final Counter cpuRequest
@@ -48,7 +48,6 @@ public class Prometheus implements TimeJob {
             HTTPServer server = new HTTPServer(port);
             log.info("Prometheus监控系统已在本机" + server.getPort() + "端口启动");
         } catch (IOException e) {
-
             log.error(e.getMessage(), e);
         }
         DefaultExports.initialize();
