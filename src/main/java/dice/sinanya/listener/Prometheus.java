@@ -46,7 +46,7 @@ public class Prometheus implements TimeJob {
             pid = Integer.parseInt(ManagementFactory.getRuntimeMXBean().getName().split("@")[0].trim());
         } catch (NumberFormatException e) {
             log.error(e.getMessage(), e);
-            log.error("pid is: " + ManagementFactory.getRuntimeMXBean().getName().split("@")[0].trim());
+            log.error("pid is: " + ManagementFactory.getRuntimeMXBean().getName());
             System.exit(1);
         }
         CPU_REQUEST.set(getProcessCpuRate(pid));
@@ -66,6 +66,7 @@ public class Prometheus implements TimeJob {
     private float getProcessCpuRate(int pid) // 获得应用cpu占用率
     {
         float cpu = 0;
+        String str = "";
         try {
             float totalCpuTime1 = getTotalCpuTime();
             float processCpuTime1 = getAppCpuTime(pid);
@@ -79,10 +80,12 @@ public class Prometheus implements TimeJob {
             float processCpuTime2 = getAppCpuTime(pid);
             float cpuRate = 100 * (processCpuTime2 - processCpuTime1)
                     / (totalCpuTime2 - totalCpuTime1);
-            String str = new DecimalFormat("0.00").format(cpuRate);
+            str = new DecimalFormat("0.00").format(cpuRate);
             cpu = Float.parseFloat(str);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
+            log.error("str is: " + str);
+            System.exit(1);
         }
         return cpu;
     }
