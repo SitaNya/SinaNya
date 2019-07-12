@@ -38,8 +38,6 @@
         <Root level="DEBUG" includeLocation="true">
             <AppenderRef ref="file"/>
             <AppenderRef ref="console"/>
-            <AppenderRef ref="errorLog"/>
-            <AppenderRef ref="METRICS"/>
         </Root>
     </Loggers>
 </Configuration>

@@ -8,6 +8,7 @@ import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
 import com.forte.qqrobot.exception.RobotRuntionException;
 import com.forte.qqrobot.sender.MsgSender;
 import com.forte.qqrobot.utils.CQCodeUtil;
+import dice.sinanya.monitor.Prometheus;
 import io.prometheus.client.exporter.HTTPServer;
 import io.prometheus.client.hotspot.DefaultExports;
 import org.apache.log4j.LogManager;
@@ -92,14 +93,7 @@ public class RunApplication implements HttpApp {
 //        从数据库中读取kp主群设定到缓存
         flushHistory();
 //        从数据库中读取骰点历史信息到缓存
-
-        DefaultExports.initialize();
-
-        HTTPServer server = null;
-        try {
-            server = new HTTPServer(1234);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        new Prometheus(MESSAGES_SYSTEM.get("PrometheusPort")).start();
+//        打开普罗米修斯监控
     }
 }

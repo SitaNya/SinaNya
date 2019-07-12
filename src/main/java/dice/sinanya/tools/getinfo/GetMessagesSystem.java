@@ -99,6 +99,8 @@ public class GetMessagesSystem {
         MESSAGES_SYSTEM.put("SUCCESS", "");
         MESSAGES_SYSTEM.put("FAILURE", "");
         MESSAGES_SYSTEM.put("FUMBLE", "");
+
+        MESSAGES_SYSTEM.put("PrometheusPort", "1234");
     }
 
     private GetMessagesSystem() {
