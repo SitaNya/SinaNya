@@ -2,6 +2,7 @@ package dice.sinanya.monitor;
 
 import io.prometheus.client.exporter.HTTPServer;
 import io.prometheus.client.hotspot.DefaultExports;
+import io.prometheus.client.hotspot.StandardExports;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
