@@ -18,13 +18,13 @@ description: 答疑解难
 
 ## 我这里报错为:服务器构建失败！
 
-![](../.gitbook/assets/db4bceef64abeb5e282f6f5fd141e7f5.jpg)
+![](../../.gitbook/assets/db4bceef64abeb5e282f6f5fd141e7f5.jpg)
 
 返回你的HttpApi插件配置界面，查找`localhost`后的端口，必须和你`sinanya.properties`配置文件中的javaPort一致
 
 ## 我这里报错为:'java'不是内部或外部命令，也不是可运行的程序
 
-![](../.gitbook/assets/c2812b866f04d36382b701e0367be0db.jpg)
+![](../../.gitbook/assets/c2812b866f04d36382b701e0367be0db.jpg)
 
 请参见教程的JDK安装部分并重新安装JDK
 
@@ -34,7 +34,7 @@ description: 答疑解难
 
 可以通过如下方式开启，这里以腾讯云为例
 
-![](../.gitbook/assets/f75cce96-1b15-44b7-a228-c38d5287e86e.png)
+![](../../.gitbook/assets/f75cce96-1b15-44b7-a228-c38d5287e86e.png)
 
 不过据我所知，阿里云的25端口解封有些繁琐，我也没用过请自行研究
 
