@@ -32,7 +32,7 @@ import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 @CronTask("*/1 * * * * ? *")
 public class Prometheus implements TimeJob {
 
-    private final Gauge cpuRequest
+    private static final Gauge cpuRequest
             = Gauge.build()
             .name("system_load_average").help("average cpu load").register();
 
