@@ -1,5 +1,6 @@
 package dice.sinanya.monitor;
 
+import io.prometheus.client.Counter;
 import io.prometheus.client.exporter.HTTPServer;
 import io.prometheus.client.hotspot.DefaultExports;
 import io.prometheus.client.hotspot.StandardExports;
@@ -7,6 +8,8 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.OperatingSystemMXBean;
 
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
 
@@ -22,6 +25,8 @@ public class Prometheus {
 
     private static Logger log = LogManager.getLogger(Prometheus.class.getName());
     private int port;
+    static final Counter requests = Counter.build()
+            .name("cpu").help("cpu use").register();
 
     public Prometheus(String port) {
         if (isNumeric(port)) {
@@ -34,10 +39,14 @@ public class Prometheus {
     public void start() {
         DefaultExports.initialize();
 
+        OperatingSystemMXBean osMxBean = ManagementFactory.getOperatingSystemMXBean();
+        double cpu = osMxBean.getSystemLoadAverage();
+        requests.inc(cpu);
         try {
             HTTPServer server = new HTTPServer(port);
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
     }
+
 }
