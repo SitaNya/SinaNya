@@ -88,7 +88,5 @@ public class RunApplication implements HttpApp {
 //        从数据库中读取kp主群设定到缓存
         flushHistory();
 //        从数据库中读取骰点历史信息到缓存
-        new Prometheus(MESSAGES_SYSTEM.get("PrometheusPort")).start();
-//        打开普罗米修斯监控
     }
 }
