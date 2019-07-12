@@ -7,6 +7,7 @@ import com.forte.qqrobot.timetask.TimeJob;
 import com.forte.qqrobot.timetask.TimeTaskContext;
 import com.forte.qqrobot.utils.CQCodeUtil;
 import io.prometheus.client.Counter;
+import io.prometheus.client.Gauge;
 import io.prometheus.client.exporter.HTTPServer;
 import io.prometheus.client.hotspot.DefaultExports;
 import org.apache.log4j.LogManager;
@@ -31,8 +32,8 @@ import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 @CronTask("*/1 * * * * ? *")
 public class Prometheus implements TimeJob {
 
-    private final Counter cpuRequest
-            = Counter.build()
+    private final Gauge cpuRequest
+            = Gauge.build()
             .name("system_load_average").help("average cpu load").register();
 
     public Prometheus() {
@@ -55,8 +56,9 @@ public class Prometheus implements TimeJob {
 
     @Override
     public void execute(MsgSender msgSender, CQCodeUtil cqCodeUtil) {
-        OperatingSystemMXBean osMxBean = ManagementFactory.getOperatingSystemMXBean();
-        cpuRequest.inc(osMxBean.getSystemLoadAverage());
+        cpuRequest.inc(ManagementFactory.getOperatingSystemMXBean().getSystemLoadAverage());
+        cpuRequest.dec(ManagementFactory.getOperatingSystemMXBean().getSystemLoadAverage());
+        cpuRequest.setToCurrentTime();
     }
 
     @Override
