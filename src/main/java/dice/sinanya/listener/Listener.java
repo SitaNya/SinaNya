@@ -239,6 +239,7 @@ public class Listener {
             }
         } catch (NullPointerException e) {
             log.error(e.getMessage(), e);
+            log.error(isAdmin == null);
         }
     }
 }
