@@ -230,16 +230,14 @@ public class Listener {
 
     private void checkAudit(EntityTypeMessages entityTypeMessages) throws OnlyManagerException {
         Resp_getGroupMemberInfo.GroupMemberInfo isAdmin = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getOtherParam("result", Resp_getGroupMemberInfo.GroupMemberInfo.class);
-        try {
-            boolean boolIsAdmin = isAdmin.getPower() != 1;
-            boolean boolIsAdminOrInDiscuss = (isAdmin.getPower() != null && boolIsAdmin) || entityTypeMessages.getMsgGetTypes() == discussMsg;
-            if (!boolIsAdminOrInDiscuss) {
-                sender(entityTypeMessages, MESSAGES_SYSTEM.get("onlyManager"));
-                throw new OnlyManagerException(entityTypeMessages);
-            }
-        } catch (NullPointerException e) {
-            log.error(e.getMessage(), e);
-            log.error(isAdmin == null);
+        if (isAdmin == null) {
+            return;
+        }
+        boolean boolIsAdmin = isAdmin.getPower() != 1;
+        boolean boolIsAdminOrInDiscuss = boolIsAdmin || entityTypeMessages.getMsgGetTypes() == discussMsg;
+        if (!boolIsAdminOrInDiscuss) {
+            sender(entityTypeMessages, MESSAGES_SYSTEM.get("onlyManager"));
+            throw new OnlyManagerException(entityTypeMessages);
         }
     }
 }

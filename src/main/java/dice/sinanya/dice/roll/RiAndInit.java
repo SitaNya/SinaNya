@@ -93,7 +93,7 @@ public class RiAndInit implements MakeNickToSender {
             add = msg.contains("+");
         }
 
-        if (!msg.contains("-") && !msg.equals(NONE)) {
+        if (!msg.contains("-") && !msg.equals(NONE) && msg.matches("\\d+")) {
             result = random + Integer.parseInt(msg);
             add = true;
         }
