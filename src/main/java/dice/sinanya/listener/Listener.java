@@ -232,7 +232,7 @@ public class Listener {
         Resp_getGroupMemberInfo.GroupMemberInfo isAdmin = entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getOtherParam("result", Resp_getGroupMemberInfo.GroupMemberInfo.class);
 
         boolean boolIsAdmin = isAdmin.getPower() != 1;
-        boolean boolIsAdminOrInDiscuss = boolIsAdmin || entityTypeMessages.getMsgGetTypes() == discussMsg;
+        boolean boolIsAdminOrInDiscuss = (isAdmin.getPower() != null && boolIsAdmin) || entityTypeMessages.getMsgGetTypes() == discussMsg;
         if (!boolIsAdminOrInDiscuss) {
             sender(entityTypeMessages, MESSAGES_SYSTEM.get("onlyManager"));
             throw new OnlyManagerException(entityTypeMessages);
