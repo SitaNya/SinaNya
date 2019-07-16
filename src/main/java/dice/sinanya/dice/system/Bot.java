@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 
+import static com.forte.qqrobot.beans.messages.types.MsgGetTypes.discussMsg;
+import static com.forte.qqrobot.beans.messages.types.MsgGetTypes.groupMsg;
 import static dice.sinanya.db.system.SelectBot.selectBot;
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.system.MessagesSystem.STR_BOT_VERSIONS;
@@ -103,6 +105,10 @@ public class Bot implements AtQq {
 
         ArrayList<String> qqList = getAtQqList(msg);
 
+        if (qqList.isEmpty()) {
+            qqList.add(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+        }
+
         for (String qq : qqList) {
             if (qq.equals(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()))) {
                 sender(entityTypeMessages, MESSAGES_SYSTEM.get("botExit"));
@@ -112,7 +118,11 @@ public class Bot implements AtQq {
                     log.error(e.getMessage(), e);
                     Thread.currentThread().interrupt();
                 }
-                entityTypeMessages.getMsgSender().SETTER.setGroupLeave(entityTypeMessages.getFromGroup());
+                if (entityTypeMessages.getMsgGetTypes() == groupMsg) {
+                    entityTypeMessages.getMsgSender().SETTER.setGroupLeave(entityTypeMessages.getFromGroup());
+                } else if (entityTypeMessages.getMsgGetTypes() == discussMsg) {
+                    entityTypeMessages.getMsgSender().SETTER.setDiscussLeave(entityTypeMessages.getFromGroup());
+                }
             }
         }
     }
