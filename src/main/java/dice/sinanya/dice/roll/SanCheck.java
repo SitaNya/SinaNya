@@ -1,6 +1,7 @@
 package dice.sinanya.dice.roll;
 
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.exceptions.ManyRollsTimesTooMoreException;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
 import dice.sinanya.tools.makedata.MakeSanCheck;
@@ -29,7 +30,7 @@ public class SanCheck {
      * @throws PlayerSetException   可能因为用户输入格式错误而报错
      * @throws SanCheckSetException 用户可能输入无法识别的sc表达式
      */
-    public void sc() throws PlayerSetException, SanCheckSetException {
+    public void sc() throws PlayerSetException, SanCheckSetException, ManyRollsTimesTooMoreException {
         String tag = TAG_SC;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         String result = new MakeSanCheck(entityTypeMessages).checkSanCheck(msg);

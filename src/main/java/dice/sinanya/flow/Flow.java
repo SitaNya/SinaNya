@@ -9,10 +9,7 @@ import dice.sinanya.dice.system.Help;
 import dice.sinanya.dice.system.History;
 import dice.sinanya.dice.system.Log;
 import dice.sinanya.entity.EntityTypeMessages;
-import dice.sinanya.exceptions.NotFoundSkillException;
-import dice.sinanya.exceptions.NotSetKpGroupException;
-import dice.sinanya.exceptions.PlayerSetException;
-import dice.sinanya.exceptions.SanCheckSetException;
+import dice.sinanya.exceptions.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -314,7 +311,11 @@ class Flow {
         isClueFunction();
 
         if (isRh) {
-            roll.rh();
+            try {
+                roll.rh();
+            } catch (ManyRollsTimesTooMoreException e) {
+                Log.error(e.getMessage(), e);
+            }
         }
 
         if (isKp) {
@@ -351,7 +352,11 @@ class Flow {
         Roll roll = new Roll(entityTypeMessages);
         RollAndCheck rollAndCheck = new RollAndCheck(entityTypeMessages);
         if (isr) {
-            roll.r();
+            try {
+                roll.r();
+            } catch (ManyRollsTimesTooMoreException e) {
+                Log.error(e.getMessage(), e);
+            }
         } else if (isRa) {
             rollAndCheck.ra();
         } else if (isRc) {
@@ -403,7 +408,7 @@ class Flow {
         if (isSc) {
             try {
                 sanCheck.sc();
-            } catch (PlayerSetException | SanCheckSetException e) {
+            } catch (PlayerSetException | SanCheckSetException | ManyRollsTimesTooMoreException e) {
                 Log.error(e.getMessage(), e);
             }
         }
@@ -489,7 +494,11 @@ class Flow {
         } else if (isTeamCall) {
             team.call();
         } else if (isTeamHp) {
-            team.hp();
+            try {
+                team.hp();
+            } catch (ManyRollsTimesTooMoreException e) {
+                Log.error(e.getMessage(), e);
+            }
         } else if (isTeamSan) {
             team.san();
         } else if (isTeamDesc) {

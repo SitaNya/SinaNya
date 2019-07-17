@@ -7,6 +7,7 @@ import dice.sinanya.entity.EntityStrManyRolls;
 import dice.sinanya.entity.EntityTeamInfo;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.entity.imal.GetDb;
+import dice.sinanya.exceptions.ManyRollsTimesTooMoreException;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
 import dice.sinanya.exceptions.TeamIsEmptyException;
@@ -110,7 +111,7 @@ public class Team implements GetDb, Role, AtQq {
      * 调整@到的小队成员的血量，默认为减少，可以使用1D3或1D3+20之类的表达式，每个小队成员都会单独计算表达式
      * 使用+为前缀则恢复血量
      */
-    public void hp() {
+    public void hp() throws ManyRollsTimesTooMoreException {
         String tag = TAG_TEAM_HP;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
@@ -222,7 +223,7 @@ public class Team implements GetDb, Role, AtQq {
                         }
                     }
 
-                } catch (SanCheckSetException | PlayerSetException e) {
+                } catch (SanCheckSetException | PlayerSetException | ManyRollsTimesTooMoreException e) {
                     log.error(e.getMessage(), e);
                 }
             }

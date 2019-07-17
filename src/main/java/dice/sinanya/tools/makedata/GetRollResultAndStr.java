@@ -2,6 +2,7 @@ package dice.sinanya.tools.makedata;
 
 import dice.sinanya.entity.EntityStrManyRolls;
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.exceptions.ManyRollsTimesTooMoreException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,10 +40,10 @@ public class GetRollResultAndStr {
      * @param entityTypeMessages 消息封装类
      * @param msg                传入的所有信息
      */
-    public GetRollResultAndStr(EntityTypeMessages entityTypeMessages, String msg) {
+    public GetRollResultAndStr(EntityTypeMessages entityTypeMessages, String msg) throws ManyRollsTimesTooMoreException {
         this.msg = msg;
         maxRolls = ROLL_MAX_VALUE.getOrDefault(entityTypeMessages.getFromGroup(), 100);
-        makeResult();
+        makeResult(entityTypeMessages);
     }
 
     /**
@@ -53,7 +54,7 @@ public class GetRollResultAndStr {
      * @param everyFunction      通过运算符分割后的分段值
      * @return 最终得出的字符、数字表达式
      */
-    public static EntityStrManyRolls getResFunctionAndResultInt(EntityTypeMessages entityTypeMessages, String inputMsg, String[] everyFunction) {
+    public static EntityStrManyRolls getResFunctionAndResultInt(EntityTypeMessages entityTypeMessages, String inputMsg, String[] everyFunction) throws ManyRollsTimesTooMoreException {
         String strFunction = inputMsg;
         String strResult = inputMsg;
         if (isNumeric(inputMsg)) {
@@ -89,7 +90,7 @@ public class GetRollResultAndStr {
      * <p>
      * 可以分别取出XdXkX中的3个X
      */
-    private void makeResult() {
+    private void makeResult(EntityTypeMessages entityTypeMessages) throws ManyRollsTimesTooMoreException {
 
         if (isNumeric(msg)) {
             resInt = Integer.parseInt(msg);
@@ -121,6 +122,9 @@ public class GetRollResultAndStr {
 
 //        通过manyRollsProcess计算得出结果字符串
         resStr = manyRollsProcess(times, maxRolls, maxNums);
+        if (times>1000){
+            throw new ManyRollsTimesTooMoreException(entityTypeMessages);
+        }
         if (isNumeric(resStr)) {
             resInt = Integer.parseInt(resStr);
         } else {

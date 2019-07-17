@@ -3,6 +3,7 @@ package dice.sinanya.dice.roll;
 import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityStrManyRolls;
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.exceptions.ManyRollsTimesTooMoreException;
 import dice.sinanya.tools.checkdata.CheckResultLevel;
 import dice.sinanya.tools.getinfo.GetSkillValue;
 
@@ -54,7 +55,7 @@ public class Roll implements MakeNickToSender {
      * 支持k+数字的方式取出几个较大值
      * 支持f+数字的方式取出几个较小值
      */
-    public void r() {
+    public void r() throws ManyRollsTimesTooMoreException {
         String tag = TAGR;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +", "");
 
@@ -102,7 +103,7 @@ public class Roll implements MakeNickToSender {
      * 同样支持上面的所有表达式
      * 支持使用技能或表达式进行判定
      */
-    public void rh() {
+    public void rh() throws ManyRollsTimesTooMoreException {
         String tag = TAG_RH;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
 

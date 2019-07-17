@@ -3,8 +3,11 @@ package dice.sinanya.tools.makedata;
 import dice.sinanya.entity.EntityRoleTag;
 import dice.sinanya.entity.EntityStrManyRolls;
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.exceptions.ManyRollsTimesTooMoreException;
 import dice.sinanya.exceptions.PlayerSetException;
 import dice.sinanya.exceptions.SanCheckSetException;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -33,6 +36,8 @@ import static java.lang.Math.min;
  * 类说明: 进行SanCheck检定
  */
 public class MakeSanCheck {
+
+    private static Logger log = LogManager.getLogger(MakeSanCheck.class.getName());
     private static Pattern plus = Pattern.compile("[+*/\\-]");
     private EntityTypeMessages entityTypeMessages;
     private long qq;
@@ -84,7 +89,12 @@ public class MakeSanCheck {
             changeValue = Integer.parseInt(strAddValue);
             changeFunction = strAddValue;
         } else {
-            GetRollResultAndStr getRollResultAndStr = new GetRollResultAndStr(entityTypeMessages, strAddValue);
+            GetRollResultAndStr getRollResultAndStr = null;
+            try {
+                getRollResultAndStr = new GetRollResultAndStr(entityTypeMessages, strAddValue);
+            } catch (ManyRollsTimesTooMoreException e) {
+
+            }
             changeValue = getRollResultAndStr.getResInt();
             changeFunction = getRollResultAndStr.getResStr();
         }
@@ -106,7 +116,7 @@ public class MakeSanCheck {
     }
 
     @SuppressWarnings("AlibabaMethodTooLong")
-    public String checkSanCheck(String function) throws SanCheckSetException, PlayerSetException {
+    public String checkSanCheck(String function) throws SanCheckSetException, PlayerSetException, ManyRollsTimesTooMoreException {
         int levelFumbleLine = 100;
         String sanFunctionSeq = "/";
         String sanText = "%s/%s=%s\n你的理智值减少%s=%s点,当前剩余%s点%s";
@@ -144,6 +154,7 @@ public class MakeSanCheck {
 
         String[] everyFunctionSuccess = strSuccess.split(plus.toString());
         String[] everyFunctionFail = strFail.split(plus.toString());
+
 
         EntityStrManyRolls mSuccess = getResFunctionAndResultInt(entityTypeMessages, strSuccess, everyFunctionSuccess);
         EntityStrManyRolls mFail = getResFunctionAndResultInt(entityTypeMessages, strFail, everyFunctionFail);
