@@ -1,6 +1,7 @@
 package dice.sinanya.tools.makedata;
 
 import static dice.sinanya.tools.makedata.ManyRolls.manyRollsProcessForCard;
+import static java.lang.Math.ceil;
 
 /**
  * @author SitaNya
@@ -59,6 +60,6 @@ public class MakeDndCardInfo {
      * @return 生成4D6K3的值
      */
     private static int get4d6k3multiply() {
-        return Integer.parseInt(manyRollsProcessForCard(4, 6, 3));
+        return (int) ceil(Calculator.conversion(manyRollsProcessForCard(4, 6, 3)));
     }
 }
