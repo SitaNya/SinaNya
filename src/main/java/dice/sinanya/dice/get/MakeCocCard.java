@@ -199,7 +199,7 @@ public class MakeCocCard implements MakeCard, MakeNickToSender {
             stringBuilder.append("\n")
                     .append(cocText);
         }
-        sender(entityTypeMessages, stringBuilder.substring(0, stringBuilder.length() - 1));
+        sender(entityTypeMessages, stringBuilder.toString());
     }
 
     /**
@@ -226,6 +226,6 @@ public class MakeCocCard implements MakeCard, MakeNickToSender {
             stringBuilder.append("\n")
                     .append(cocText);
         }
-        sender(entityTypeMessages, stringBuilder.substring(0, stringBuilder.length() - 1));
+        sender(entityTypeMessages, stringBuilder.toString());
     }
 }

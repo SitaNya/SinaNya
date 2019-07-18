@@ -52,8 +52,7 @@ public class MakeDndCardInfo {
                 .append("\t")
 
                 .append("共计:")
-                .append(all)
-                .append("\t");
+                .append(all);
         return stringBuffer.toString();
     }
 

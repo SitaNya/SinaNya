@@ -53,7 +53,7 @@ public class MakeDndCard implements MakeCard, MakeNickToSender {
             stringBuilder.append("\n")
                     .append(dndText);
         }
-        sender(entityTypeMessages, stringBuilder.substring(0, stringBuilder.length() - 1));
+        sender(entityTypeMessages, stringBuilder.toString());
 
 
     }
