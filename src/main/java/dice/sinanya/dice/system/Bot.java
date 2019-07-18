@@ -132,6 +132,6 @@ public class Bot implements AtQq {
      */
     public void info() {
         EntityGroupCensus entityGroupCensus = selectBot();
-        sender(entityTypeMessages, STR_BOT_VERSIONS.toString() + "\n目前供职于: " + entityGroupCensus.getGroupNum() + " 个群，其中 " + entityGroupCensus.getOnNum() + " 个群处于开启状态");
+        sender(entityTypeMessages, STR_BOT_VERSIONS.toString() + "\n目前供职于:\t" + entityGroupCensus.getGroupNum() + " 个群，其中 " + entityGroupCensus.getOnNum() + " 个群处于开启状态");
     }
 }
