@@ -162,7 +162,6 @@ public interface Role extends MakeNickToSender {
 
         if (checkRoleInfoFromChooseExistByQQ(qq)) {
             stringBuilder
-                    .append("\n")
                     .append("======================================================")
                     .append("\n")
                     .append(qq)
@@ -199,6 +198,7 @@ public interface Role extends MakeNickToSender {
             ArrayList<String> propDownResult = formatProp(entityTypeMessages, allSelect, false);
             Collections.sort(propDownResult);
             formatResult(stringBuilder, propDownResult);
+            stringBuilder.append("\n");
         } else {
             stringBuilder.append(getRoleChooseByQQ(qq)).append("似乎未设定角色");
         }

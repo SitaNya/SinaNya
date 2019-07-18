@@ -101,7 +101,8 @@ public class MakeCocCard implements MakeCard, MakeNickToSender {
                 cocCardInfo.getBuild() +
                 "\n" +
                 "移动力MOV=" +
-                cocCardInfo.getMov();
+                cocCardInfo.getMov()
+                + "\n";
         sender(entityTypeMessages, stringBuilder);
     }
 
