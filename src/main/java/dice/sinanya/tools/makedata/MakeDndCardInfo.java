@@ -1,9 +1,6 @@
 package dice.sinanya.tools.makedata;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
-import static dice.sinanya.tools.makedata.RandomInt.random;
+import static dice.sinanya.tools.makedata.ManyRolls.manyRollsProcessForCard;
 
 /**
  * @author SitaNya
@@ -62,16 +59,6 @@ public class MakeDndCardInfo {
      * @return 生成4D6K3的值
      */
     private static int get4d6k3multiply() {
-        ArrayList<Integer> rollsList = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            rollsList.add(random(1, 6));
-        }
-        Collections.sort(rollsList);
-        rollsList.remove(0);
-        int result = 0;
-        for (int tmp : rollsList) {
-            result += tmp;
-        }
-        return result;
+        return Integer.parseInt(manyRollsProcessForCard(4, 6, 3));
     }
 }

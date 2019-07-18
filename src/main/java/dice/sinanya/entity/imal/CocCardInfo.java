@@ -3,6 +3,7 @@ package dice.sinanya.entity.imal;
 import dice.sinanya.tools.makedata.Calculator;
 
 import static dice.sinanya.tools.makedata.ManyRolls.manyRollsProcess;
+import static dice.sinanya.tools.makedata.ManyRolls.manyRollsProcessForCard;
 import static java.lang.Math.ceil;
 
 /**
@@ -37,11 +38,11 @@ public class CocCardInfo {
     protected int notLuck = str + con + siz + dex + app + intValue + pow + edu;
 
     private int get2d6plus6multiply() {
-        return (int) (ceil(Calculator.conversion(manyRollsProcess(2, 6, 0))) + 6);
+        return (int) (ceil(Calculator.conversion(manyRollsProcessForCard(2, 6, 0))) + 6);
     }
 
     protected int get3d6multiply() {
-        return (int) ceil(Calculator.conversion(manyRollsProcess(3, 6, 0)));
+        return (int) ceil(Calculator.conversion(manyRollsProcessForCard(3, 6, 0)));
     }
 
     public int getStr() {

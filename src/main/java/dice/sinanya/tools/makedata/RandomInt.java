@@ -58,7 +58,7 @@ public class RandomInt {
         return result;
     }
 
-    private static int overRandom(int lowest, int highest) {
+    static int overRandom(int lowest, int highest) {
         log.info("使用原始骰点逻辑");
         int result = 0;
         while (result == 0) {

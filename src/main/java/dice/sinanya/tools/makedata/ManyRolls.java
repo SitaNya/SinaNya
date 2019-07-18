@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import static dice.sinanya.tools.makedata.GetMaxNumsResult.getMaxNumsResult;
+import static dice.sinanya.tools.makedata.RandomInt.overRandom;
 import static dice.sinanya.tools.makedata.RandomInt.random;
 
 /**
@@ -56,6 +57,55 @@ public class ManyRolls {
             ArrayList<Integer> tmp = new ArrayList<>();
             for (int i = 0; i < times; i++) {
                 tmp.add(random(1, rolls));
+            }
+            int i = 0;
+            for (int tmpRandom : getMaxNumsResult(tmp, maxNums)) {
+                stringBuilder.append(tmpRandom);
+                if (i != (maxNums - 1)) {
+                    stringBuilder.append("+");
+                }
+                intResult += tmpRandom;
+                i++;
+            }
+            stringBuilder.append(")");
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 根据骰点次数，最大值，取最大值个数，返回数字字符串
+     *
+     * @param times   次数
+     * @param rolls   骰点最大值
+     * @param maxNums 取最大值个数
+     * @return 格式化好的数字字符串，如(3+6+4)
+     */
+    public static String manyRollsProcessForCard(int times, int rolls, int maxNums) {
+        if (maxNums == 0) {
+            maxNums = times;
+        }
+        int maxTimesRolls = 10;
+        StringBuilder stringBuilder = new StringBuilder(200);
+        int intResult = 0;
+        if (times == 1) {
+            int tmpResult = overRandom(1, rolls);
+            return String.valueOf(tmpResult);
+        } else if (times > maxTimesRolls) {
+            ArrayList<Integer> list = new ArrayList<>();
+            for (int i = 0; i < times; i++) {
+                list.add(rolls);
+            }
+            ArrayList<Integer> collect = (ArrayList<Integer>) list.stream().parallel().map(s -> overRandom(1, s)).collect(Collectors.toList());
+
+            for (int intTmp : getMaxNumsResult(collect, maxNums)) {
+                intResult += intTmp;
+            }
+            stringBuilder.append(intResult);
+        } else if (times > 1) {
+            stringBuilder.append("(");
+            ArrayList<Integer> tmp = new ArrayList<>();
+            for (int i = 0; i < times; i++) {
+                tmp.add(overRandom(1, rolls));
             }
             int i = 0;
             for (int tmpRandom : getMaxNumsResult(tmp, maxNums)) {
