@@ -16,7 +16,6 @@ import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.makedata.GetNickAndRandomAndSkill.getNickAndRandomAndSkill;
 import static dice.sinanya.tools.makedata.RandomInt.random;
 import static dice.sinanya.tools.makedata.Sender.sender;
-import static java.lang.Integer.min;
 
 /**
  * @author SitaNya
@@ -103,9 +102,6 @@ public class RewardAndPunishment implements En, MakeNickToSender {
 
         int max = 0;
         for (int result : listDice) {
-            if (result == 0) {
-                result = 10;
-            }
             stringBuilder.append(result).append(",");
             if (result > max) {
                 max = result;
@@ -119,7 +115,12 @@ public class RewardAndPunishment implements En, MakeNickToSender {
             max = random / multiple;
         }
 
-        int resultRandom = min(100, max * multiple + random % multiple);
+        int resultRandom;
+        if (random % multiple == 0 && max == 0) {
+            resultRandom = 100;
+        } else {
+            resultRandom = max * multiple + random % multiple;
+        }
 //        进行替换，高位替换为整个列表中最大值
 
         String strRes;
