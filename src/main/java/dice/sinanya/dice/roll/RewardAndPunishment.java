@@ -101,10 +101,14 @@ public class RewardAndPunishment implements En, MakeNickToSender {
 //        得到惩罚投列表
 
         int max = 0;
+        boolean hasZero = false;
         for (int result : listDice) {
             stringBuilder.append(result).append(",");
             if (result > max) {
                 max = result;
+            }
+            if (result == 0) {
+                hasZero = true;
             }
         }
 //        取最大值
@@ -116,7 +120,7 @@ public class RewardAndPunishment implements En, MakeNickToSender {
         }
 
         int resultRandom;
-        if (random % multiple == 0 && max == 0) {
+        if (random % multiple == 0 && hasZero) {
             resultRandom = 100;
         } else {
             resultRandom = max * multiple + random % multiple;
