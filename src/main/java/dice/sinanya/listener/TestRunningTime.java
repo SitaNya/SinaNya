@@ -6,8 +6,15 @@ import com.forte.qqrobot.sender.MsgSender;
 import com.forte.qqrobot.timetask.TimeJob;
 import com.forte.qqrobot.timetask.TimeTaskContext;
 import com.forte.qqrobot.utils.CQCodeUtil;
+import dice.sinanya.dice.MakeNickToSender;
 import org.quartz.JobExecutionContext;
 
+import java.util.ArrayList;
+
+import static dice.sinanya.db.system.InsertBot.deleteBot;
+import static dice.sinanya.db.system.SelectBot.selectOffBotList;
+import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
+import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.GetTime.getNowString;
 
 /**
@@ -22,7 +29,7 @@ import static dice.sinanya.tools.getinfo.GetTime.getNowString;
  * 前5位应该是:分 时 日 月 周
  */
 @CronTask("0 0 * * * ? *")
-public class TestRunningTime implements TimeJob {
+public class TestRunningTime implements TimeJob, MakeNickToSender {
 
     public TestRunningTime() {
 //        定时任务按照接口无逻辑
@@ -31,6 +38,7 @@ public class TestRunningTime implements TimeJob {
     @Override
     public void execute(MsgSender msgSender, CQCodeUtil cqCodeUtil) {
         msgSender.SENDER.sendPrivateMsg("450609203", getNowString());
+        autoClean(msgSender);
     }
 
     @Override
@@ -41,6 +49,26 @@ public class TestRunningTime implements TimeJob {
             execute(msgSender, cqCodeUtil);
         } catch (Exception e) {
             throw new TimeTaskException(e);
+        }
+    }
+
+    private void autoClean(MsgSender msgSender) {
+        ArrayList<String> offBotList = selectOffBotList();
+        for (String offBotGroupId : offBotList) {
+            long lastMsg = msgSender.GETTER.getGroupMemberInfo(offBotGroupId, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ())).getLastTime();
+            if (lastMsg > 21600) {
+                msgSender.SENDER.sendGroupMsg("162279609", "已清理15日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId) + offBotGroupId));
+                deleteBot(offBotGroupId);
+                String type = msgSender.GETTER.getGroupInfo(offBotGroupId).getType();
+                if ("discuss".equals(type)) {
+                    msgSender.SENDER.sendDiscussMsg(offBotGroupId, "已在群: " + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。");
+                    msgSender.SETTER.setDiscussLeave(offBotGroupId);
+                } else {
+                    msgSender.SENDER.sendGroupMsg(offBotGroupId, "已在群: " + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。");
+                    msgSender.SETTER.setGroupLeave(offBotGroupId);
+                }
+                return;
+            }
         }
     }
 }

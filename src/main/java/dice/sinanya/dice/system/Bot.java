@@ -1,5 +1,7 @@
 package dice.sinanya.dice.system;
 
+import com.forte.qqrobot.sender.MsgSender;
+import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.dice.manager.imal.AtQq;
 import dice.sinanya.entity.EntityGroupCensus;
 import dice.sinanya.entity.EntityTypeMessages;
@@ -10,11 +12,14 @@ import java.util.ArrayList;
 
 import static com.forte.qqrobot.beans.messages.types.MsgGetTypes.discussMsg;
 import static com.forte.qqrobot.beans.messages.types.MsgGetTypes.groupMsg;
+import static dice.sinanya.db.system.InsertBot.deleteBot;
 import static dice.sinanya.db.system.SelectBot.selectBot;
+import static dice.sinanya.db.system.SelectBot.selectOffBotList;
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.system.MessagesSystem.STR_BOT_VERSIONS;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.SwitchBot.*;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.makedata.Sender.sender;
@@ -27,7 +32,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 有任何问题欢迎咨询
  * 类说明: 机器人控制类，如开关退群等
  */
-public class Bot implements AtQq {
+public class Bot implements AtQq, MakeNickToSender {
 
     private Logger log = LogManager.getLogger(Bot.class.getName());
 

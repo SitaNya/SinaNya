@@ -2,6 +2,9 @@ package dice.sinanya.tools.getinfo;
 
 import dice.sinanya.db.system.InsertBot;
 
+import java.util.ArrayList;
+
+import static dice.sinanya.db.system.SelectBot.selectOffBotList;
 import static dice.sinanya.system.SystemInfo.SWITCH_BOT;
 
 /**
@@ -53,4 +56,5 @@ public class SwitchBot {
             return true;
         }
     }
+
 }

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.system.SystemInfo.SWITCH_BOT;
@@ -70,5 +71,27 @@ public class SelectBot {
             Log.error(e.getMessage(), e);
         }
         return new EntityGroupCensus(groupNum, onNum);
+    }
+
+    /**
+     * 通过查询开关列表，得到有多少开启的群，加入多少群
+     * @return 关闭的群列表
+     */
+    public static ArrayList<String> selectOffBotList() {
+        ArrayList<String> offGroupList=new ArrayList<>();
+        try (Connection conn = DbUtil.getConnection()) {
+            String sql = "select groupId from switchBot where botId=? and switchBot=0";
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                try (ResultSet set = ps.executeQuery()) {
+                    while (set.next()) {
+                      offGroupList.add(set.getString("groupId"));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            Log.error(e.getMessage(), e);
+        }
+        return offGroupList;
     }
 }

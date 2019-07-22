@@ -70,4 +70,17 @@ public class InsertBot {
             Log.error(e.getMessage(), e);
         }
     }
+
+    public static void deleteBot(String groupId) {
+        try (Connection conn = DbUtil.getConnection()) {
+            String sql = "delete from switchBot where botId=? and groupId=?";
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setString(2, groupId);
+                ps.execute();
+            }
+        } catch (SQLException e) {
+            Log.error(e.getMessage(), e);
+        }
+    }
 }

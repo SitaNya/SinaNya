@@ -1,6 +1,7 @@
 package dice.sinanya.tools.getinfo;
 
 import com.forte.qqrobot.beans.messages.RootBean;
+import com.forte.qqrobot.sender.MsgSender;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByFromQQ;
@@ -66,5 +67,15 @@ public class GetNickName implements RootBean {
      */
     public static String getGroupName(EntityTypeMessages entityTypeMessages, String groupId) {
         return entityTypeMessages.getMsgSender().getGroupInfoByCode(groupId).getName();
+    }
+
+    /**
+     * 返回群或讨论组名
+     *
+     * @param msgSender 消息包装类
+     * @return 昵称
+     */
+    public static String getGroupName(MsgSender msgSender, String groupId) {
+        return msgSender.getGroupInfoByCode(groupId).getName();
     }
 }
