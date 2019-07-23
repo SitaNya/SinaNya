@@ -3,6 +3,8 @@ package dice.sinanya.dice.system;
 import com.forte.qqrobot.sender.MsgSender;
 import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityTypeMessages;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,8 @@ import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
  */
 public class Test implements MakeNickToSender {
 
+    Logger log = LogManager.getLogger(Test.class.getName());
+
     private EntityTypeMessages entityTypeMessages;
 
     public Test(EntityTypeMessages entityTypeMessages) {
@@ -34,12 +38,20 @@ public class Test implements MakeNickToSender {
     private void autoClean(MsgSender msgSender) {
         ArrayList<String> offBotList = selectOffBotList();
         for (String offBotGroupId : offBotList) {
-            long lastMsg = msgSender.GETTER.getGroupMemberInfo(offBotGroupId, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ())).getLastTime();
+            long lastMsg = 0L;
+            try {
+                lastMsg = msgSender.GETTER.getGroupMemberInfo(offBotGroupId, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ())).getLastTime();
+            } catch (NullPointerException e) {
+                log.error(e.getMessage(), e);
+                log.error(msgSender == null);
+                log.error(offBotGroupId == null);
+                log.error(ENTITY_LOGINQQ_INFO.getLoginQQ());
+            }
             if (lastMsg > 21600) {
                 msgSender.SENDER.sendPrivateMsg("450609203", "已清理15日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId) + offBotGroupId));
                 deleteBot(offBotGroupId);
                 String type = msgSender.GETTER.getGroupInfo(offBotGroupId).getType();
-                msgSender.SENDER.sendPrivateMsg("450609203", "获取类型为: " + type);
+                log.error("获取类型为: " + type);
                 if ("discuss".equals(type)) {
                     msgSender.SENDER.sendPrivateMsg("450609203", "已清理15日未使用，且已关闭本骰的讨论组: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId) + offBotGroupId));
 //                    msgSender.SENDER.sendDiscussMsg(offBotGroupId, "已在群: " + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。");
