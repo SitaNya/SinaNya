@@ -66,10 +66,10 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
                 deleteBot(offBotGroupId);
                 int type = msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId();
                 if (type == 1) {
-                    msgSender.SENDER.sendDiscussMsg(offBotGroupId, "已在群: " + makeGroupNickToSender(offBotGroupId) + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。");
+                    msgSender.SENDER.sendDiscussMsg(offBotGroupId, "已在群: " + makeGroupNickToSender(getGroupName(msgSender,offBotGroupId)) + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。");
                     msgSender.SETTER.setDiscussLeave(offBotGroupId);
                 } else {
-                    msgSender.SENDER.sendGroupMsg(offBotGroupId, "已在群: " + makeGroupNickToSender(offBotGroupId) + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。");
+                    msgSender.SENDER.sendGroupMsg(offBotGroupId, "已在群: " + makeGroupNickToSender(getGroupName(msgSender,offBotGroupId)) + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。");
                     msgSender.SETTER.setGroupLeave(offBotGroupId);
                 }
                 return;
