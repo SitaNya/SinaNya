@@ -38,7 +38,7 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
     @Override
     public void execute(MsgSender msgSender, CQCodeUtil cqCodeUtil) {
         msgSender.SENDER.sendPrivateMsg("450609203", getNowString());
-//        autoClean(msgSender);
+        autoClean(msgSender);
     }
 
     @Override
@@ -55,16 +55,21 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
     private void autoClean(MsgSender msgSender) {
         ArrayList<String> offBotList = selectOffBotList();
         for (String offBotGroupId : offBotList) {
+            if (msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId() == null) {
+                deleteBot(offBotGroupId);
+                msgSender.SENDER.sendPrivateMsg("450609203", "删除不存在群： " + offBotGroupId);
+                continue;
+            }
             long lastMsg = msgSender.GETTER.getGroupMemberInfo(offBotGroupId, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ())).getLastTime();
             if (lastMsg > 21600) {
-                msgSender.SENDER.sendGroupMsg("162279609", "已清理15日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId) + offBotGroupId));
+                msgSender.SENDER.sendGroupMsg("162279609", "已清理15日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
                 deleteBot(offBotGroupId);
-                String type = msgSender.GETTER.getGroupInfo(offBotGroupId).getType();
-                if ("discuss".equals(type)) {
-                    msgSender.SENDER.sendDiscussMsg(offBotGroupId, "已在群: " + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。");
+                int type = msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId();
+                if (type == 1) {
+                    msgSender.SENDER.sendDiscussMsg(offBotGroupId, "已在群: " + makeGroupNickToSender(offBotGroupId) + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。");
                     msgSender.SETTER.setDiscussLeave(offBotGroupId);
                 } else {
-                    msgSender.SENDER.sendGroupMsg(offBotGroupId, "已在群: " + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。");
+                    msgSender.SENDER.sendGroupMsg(offBotGroupId, "已在群: " + makeGroupNickToSender(offBotGroupId) + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。");
                     msgSender.SETTER.setGroupLeave(offBotGroupId);
                 }
                 return;
