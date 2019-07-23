@@ -8,6 +8,7 @@ import dice.sinanya.dice.roll.*;
 import dice.sinanya.dice.system.Help;
 import dice.sinanya.dice.system.History;
 import dice.sinanya.dice.system.Log;
+import dice.sinanya.dice.system.Test;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.*;
 import org.apache.logging.log4j.LogManager;
@@ -120,6 +121,8 @@ class Flow {
     private boolean isHiy = false;
 
     private boolean isJrrp = false;
+
+    private boolean isTest = false;
 
     public Flow(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
@@ -241,6 +244,8 @@ class Flow {
             isGas = checkTagRegex(TAG_GAS);
             isTi = checkTagRegex(TAG_TI);
             isLi = checkTagRegex(TAG_LI);
+
+            isTest=checkTagRegex(TAG_TEST);
         }
     }
 
@@ -255,6 +260,7 @@ class Flow {
         Gas gas = new Gas(entityTypeMessages);
         History history = new History(entityTypeMessages);
         Jrrp jrrp = new Jrrp(entityTypeMessages);
+        Test test=new Test(entityTypeMessages);
 
         isFunctionR();
         isStFunction();
@@ -291,6 +297,10 @@ class Flow {
 
         if (isJrrp) {
             jrrp.get();
+        }
+
+        if (isTest){
+            test.get();
         }
 
     }

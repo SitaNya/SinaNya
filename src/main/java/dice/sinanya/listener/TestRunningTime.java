@@ -38,7 +38,7 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
     @Override
     public void execute(MsgSender msgSender, CQCodeUtil cqCodeUtil) {
         msgSender.SENDER.sendPrivateMsg("450609203", getNowString());
-        autoClean(msgSender);
+//        autoClean(msgSender);
     }
 
     @Override
