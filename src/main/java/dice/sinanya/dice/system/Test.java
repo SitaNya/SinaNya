@@ -42,11 +42,7 @@ public class Test implements MakeNickToSender {
                 msgSender.SENDER.sendPrivateMsg("450609203", "type: " + type + "名称: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId) + offBotGroupId));
             } catch (NullPointerException e) {
                 log.error(e.getMessage(), e);
-                log.error(offBotGroupId == null);
-                log.error(msgSender.GETTER == null);
-                log.error(ENTITY_LOGINQQ_INFO.getLoginQQ());
-                log.error(offBotGroupId);
-                log.error(msgSender.GETTER.getGroupInfo(offBotGroupId)==null);
+                log.error(msgSender.GETTER.getGroupInfo(offBotGroupId).getOriginalData());
             }
         }
     }
