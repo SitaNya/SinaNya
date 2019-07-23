@@ -39,12 +39,12 @@ public class Test implements MakeNickToSender {
         ArrayList<String> offBotList = selectOffBotList();
         for (String offBotGroupId : offBotList) {
             if (msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId() == null) {
-//                deleteBot(offBotGroupId);
+                deleteBot(offBotGroupId);
                 msgSender.SENDER.sendPrivateMsg("450609203", "删除不存在群： " + offBotGroupId);
                 continue;
             }
             long lastMsg = msgSender.GETTER.getGroupMemberInfo(offBotGroupId, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ())).getLastTime();
-//            if (lastMsg > 21600) {
+            if (lastMsg > 21600) {
                 msgSender.SENDER.sendPrivateMsg("450609203", "已清理15日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId) + offBotGroupId));
                 deleteBot(offBotGroupId);
                 int type = msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId();
@@ -59,7 +59,7 @@ public class Test implements MakeNickToSender {
 //                    msgSender.SETTER.setGroupLeave(offBotGroupId);
                 }
                 return;
-//            }
+            }
         }
     }
 }
