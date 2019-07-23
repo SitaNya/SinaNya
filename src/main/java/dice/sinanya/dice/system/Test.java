@@ -46,6 +46,7 @@ public class Test implements MakeNickToSender {
                 log.error(msgSender.GETTER == null);
                 log.error(ENTITY_LOGINQQ_INFO.getLoginQQ());
                 log.error(offBotGroupId);
+                log.error(msgSender.GETTER.getGroupInfo(offBotGroupId)==null);
             }
         }
     }
