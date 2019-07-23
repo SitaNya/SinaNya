@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 
 import static dice.sinanya.db.system.SelectBot.selectOffBotList;
-import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 
 /**
@@ -42,6 +41,7 @@ public class Test implements MakeNickToSender {
                 msgSender.SENDER.sendPrivateMsg("450609203", "type: " + type + "名称: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId) + offBotGroupId));
             } catch (NullPointerException e) {
                 log.error(e.getMessage(), e);
+                log.error(getGroupName(msgSender, offBotGroupId));
                 log.error(msgSender.GETTER.getGroupInfo(offBotGroupId).getOriginalData());
             }
         }
