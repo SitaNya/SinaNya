@@ -39,7 +39,7 @@ public class Test implements MakeNickToSender {
                 msgSender.SENDER.sendPrivateMsg("450609203", "已清理15日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId) + offBotGroupId));
                 deleteBot(offBotGroupId);
                 String type = msgSender.GETTER.getGroupInfo(offBotGroupId).getType();
-                msgSender.SENDER.sendPrivateMsg("450609203", type);
+                msgSender.SENDER.sendPrivateMsg("450609203", "获取类型为: " + type);
                 if ("discuss".equals(type)) {
                     msgSender.SENDER.sendPrivateMsg("450609203", "已清理15日未使用，且已关闭本骰的讨论组: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId) + offBotGroupId));
 //                    msgSender.SENDER.sendDiscussMsg(offBotGroupId, "已在群: " + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。");

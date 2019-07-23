@@ -31,6 +31,9 @@ public class InsertBot {
      */
     public void insertBot(long groupId, boolean switchBot) {
         int num = 0;
+        if (ENTITY_LOGINQQ_INFO.getLoginQQ() == 0) {
+            return;
+        }
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from switchBot where groupId=? and botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
