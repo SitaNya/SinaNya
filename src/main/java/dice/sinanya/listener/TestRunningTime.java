@@ -61,8 +61,10 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
         ArrayList<String> offBotList = selectOffBotList();
 
         for (String offBotGroupId : offBotList) {
-            if (msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId() == null) {
+            if (checkExitGroup(msgSender, offBotGroupId) && msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId() == null) {
                 deleteBot(offBotGroupId);
+                msgSender.SETTER.setDiscussLeave(offBotGroupId);
+                msgSender.SETTER.setGroupLeave(offBotGroupId);
                 msgSender.SENDER.sendPrivateMsg("450609203", "删除不存在群： " + offBotGroupId);
                 continue;
             }
