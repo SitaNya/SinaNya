@@ -295,9 +295,9 @@ class Flow {
             history.hiy();
         }
 
-        if (isJrrp) {
-            jrrp.get();
-        }
+//        if (isJrrp) {
+//            jrrp.get();
+//        }
 
         if (isTest){
             test.get();
