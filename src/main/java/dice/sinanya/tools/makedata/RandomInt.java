@@ -53,13 +53,13 @@ public class RandomInt {
             times++;
         } while ((result > highest || result < lowest) && times < 50);
         if (times >= 50) {
+            log.info("使用原始骰点逻辑");
             result = overRandom(lowest, highest);
         }
         return result;
     }
 
     static int overRandom(int lowest, int highest) {
-        log.info("使用原始骰点逻辑");
         int result = 0;
         while (result == 0) {
             result = r.nextInt(highest + 1 - lowest) + lowest;
