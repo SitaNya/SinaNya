@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import static dice.sinanya.db.system.InsertBot.deleteBot;
 import static dice.sinanya.db.system.SelectBot.selectOffBotList;
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
-import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.GetTime.getNowString;
 
@@ -72,11 +71,7 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
                 deleteBot(offBotGroupId);
                 msgSender.SETTER.setDiscussLeave(offBotGroupId);
                 msgSender.SETTER.setGroupLeave(offBotGroupId);
-                if (!msgSender.getGroupInfoByCode(offBotGroupId).getName().equals(NONE) && msgSender.getGroupInfoByCode(offBotGroupId).getName() != null) {
-                    msgSender.SENDER.sendGroupMsg(groupManager, "删除无法获取类型的群： " + makeGroupNickToSender(msgSender.getGroupInfoByCode(offBotGroupId).getName()) + offBotGroupId);
-                } else {
-                    msgSender.SENDER.sendGroupMsg(groupManager, "删除无法获取类型的群： " + offBotGroupId);
-                }
+                msgSender.SENDER.sendGroupMsg(groupManager, "删除无法获取类型的群： " + offBotGroupId);
                 return;
             } else if (msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId() == null) {
                 deleteBot(offBotGroupId);
