@@ -70,7 +70,7 @@ class DbPool {
         try {
             Exception e = new Exception("线程池调用流程为");
             Log.info("当前线程池中链接数为: " + dataSource.getNumConnections());
-            Log.info(e.getMessage(), e);
+            Log.debug(e.getMessage(), e);
         } catch (SQLException e) {
             Log.error(e.getMessage(), e);
         }

@@ -37,7 +37,6 @@ public class InsertHistory {
         try (Connection conn = DbUtil.getConnection()) {
             for (Map.Entry<String, EntityHistory> mapEntry : HISTORY_LIST.entrySet()) {
                 int num = 0;
-                Log.info("");
                 EntityHistory entityHistory = mapEntry.getValue();
                 String sql = "select * from history where qqId=? and botId=?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
