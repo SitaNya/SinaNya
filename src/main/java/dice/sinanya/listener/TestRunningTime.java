@@ -28,7 +28,7 @@ import static dice.sinanya.tools.getinfo.GetTime.getNowString;
  * 这里的“0 * * * * ? *”表示每分钟执行一次，具体怎么写请去查crontab的使用
  * 前5位应该是:分 时 日 月 周
  */
-@CronTask("0 0 * * * ? *")
+@CronTask("0 */15 * * * ? *")
 public class TestRunningTime implements TimeJob, MakeNickToSender {
 
     public TestRunningTime() {
@@ -61,7 +61,7 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
                 continue;
             }
             long lastMsg = msgSender.GETTER.getGroupMemberInfo(offBotGroupId, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ())).getLastTime();
-            if (lastMsg > 21600) {
+            if (lastMsg > 10800000) {
                 msgSender.SENDER.sendGroupMsg("162279609", "已清理15日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
                 deleteBot(offBotGroupId);
                 int type = msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId();
