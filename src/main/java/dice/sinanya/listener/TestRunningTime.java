@@ -66,6 +66,11 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
                 msgSender.SETTER.setDiscussLeave(offBotGroupId);
                 msgSender.SETTER.setGroupLeave(offBotGroupId);
                 msgSender.SENDER.sendPrivateMsg("450609203", "删除不存在群： " + offBotGroupId);
+                try {
+                    Thread.sleep(60000);
+                } catch (InterruptedException e) {
+                    log.error(e.getMessage(), e);
+                }
                 continue;
             }
             long lastMsg = msgSender.GETTER.getGroupMemberInfo(offBotGroupId, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ())).getLastTime();
