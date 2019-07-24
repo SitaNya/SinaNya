@@ -62,16 +62,27 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
             }
             long lastMsg = msgSender.GETTER.getGroupMemberInfo(offBotGroupId, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ())).getLastTime();
             if (lastMsg > 10800000) {
-                msgSender.SENDER.sendGroupMsg("162279609", "已清理15日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
-                deleteBot(offBotGroupId);
                 int type = msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId();
                 if (type == 1) {
+                    msgSender.SENDER.sendGroupMsg("162279609", "已清理15日未使用，且已关闭本骰的讨论组: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
+                    try {
+                        Thread.sleep(60000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     msgSender.SENDER.sendDiscussMsg(offBotGroupId, "已在群: " + makeGroupNickToSender(getGroupName(msgSender,offBotGroupId)) + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。");
                     msgSender.SETTER.setDiscussLeave(offBotGroupId);
                 } else {
+                    msgSender.SENDER.sendGroupMsg("162279609", "已清理15日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
+                    try {
+                        Thread.sleep(60000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     msgSender.SENDER.sendGroupMsg(offBotGroupId, "已在群: " + makeGroupNickToSender(getGroupName(msgSender,offBotGroupId)) + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。");
                     msgSender.SETTER.setGroupLeave(offBotGroupId);
                 }
+                deleteBot(offBotGroupId);
                 return;
             }
         }
