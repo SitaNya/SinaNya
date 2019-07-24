@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import static dice.sinanya.db.system.InsertBot.deleteBot;
 import static dice.sinanya.db.system.SelectBot.selectOffBotList;
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
+import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.GetTime.getNowString;
 
@@ -32,18 +33,24 @@ import static dice.sinanya.tools.getinfo.GetTime.getNowString;
  * 这里的“0 * * * * ? *”表示每分钟执行一次，具体怎么写请去查crontab的使用
  * 前5位应该是:分 时 日 月 周
  */
-@CronTask("0 */15 * * * ? *")
+@CronTask("0 */10 * * * ? *")
 public class TestRunningTime implements TimeJob, MakeNickToSender {
     private static Logger log = LogManager.getLogger(TestRunningTime.class.getName());
 
+    private static String groupManager = "162279609";
     public TestRunningTime() {
 //        定时任务按照接口无逻辑
     }
 
     @Override
     public void execute(MsgSender msgSender, CQCodeUtil cqCodeUtil) {
-        msgSender.SENDER.sendPrivateMsg("450609203", getNowString());
-        autoClean(msgSender);
+        String heapGroupId = "825848066";
+        if (checkExitGroup(msgSender, heapGroupId)) {
+            msgSender.SENDER.sendGroupMsg(heapGroupId, getNowString());
+        }
+        if (checkExitGroup(msgSender, groupManager)) {
+            autoClean(msgSender);
+        }
     }
 
     @Override
@@ -65,25 +72,29 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
                 deleteBot(offBotGroupId);
                 msgSender.SETTER.setDiscussLeave(offBotGroupId);
                 msgSender.SETTER.setGroupLeave(offBotGroupId);
-                msgSender.SENDER.sendPrivateMsg("450609203", "删除无法获取类型的群： " + offBotGroupId);
+                if (!msgSender.getGroupInfoByCode(offBotGroupId).getName().equals(NONE) && msgSender.getGroupInfoByCode(offBotGroupId).getName() != null) {
+                    msgSender.SENDER.sendGroupMsg(groupManager, "删除无法获取类型的群： " + makeGroupNickToSender(msgSender.getGroupInfoByCode(offBotGroupId).getName()) + offBotGroupId);
+                } else {
+                    msgSender.SENDER.sendGroupMsg(groupManager, "删除无法获取类型的群： " + offBotGroupId);
+                }
                 return;
             } else if (msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId() == null) {
                 deleteBot(offBotGroupId);
-                msgSender.SENDER.sendPrivateMsg("450609203", "删除不存在群： " + offBotGroupId);
+                msgSender.SENDER.sendGroupMsg(groupManager, "删除已不存在群： " + offBotGroupId);
                 continue;
             }
             long lastMsg = msgSender.GETTER.getGroupMemberInfo(offBotGroupId, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ())).getLastTime();
             if (lastMsg > 10800000) {
                 int type = msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId();
                 if (type == 1) {
-                    msgSender.SENDER.sendGroupMsg("162279609", "已清理15日未使用，且已关闭本骰的讨论组: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
+                    msgSender.SENDER.sendGroupMsg(groupManager, "已清理" + lastMsg / 1000 / 60 / 24 + "日未使用，且已关闭本骰的讨论组: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
                     msgSender.SENDER.sendDiscussMsg(offBotGroupId, "已在讨论组: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题");
                     while (checkExitGroup(msgSender, offBotGroupId)) {
                         log.info("尝试退出群" + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
                         msgSender.SETTER.setDiscussLeave(offBotGroupId);
                     }
                 } else {
-                    msgSender.SENDER.sendGroupMsg("162279609", "已清理15日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
+                    msgSender.SENDER.sendGroupMsg(groupManager, "已清理" + lastMsg / 1000 / 60 / 24 + "日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
                     msgSender.SENDER.sendGroupMsg(offBotGroupId, "已在群: " + makeGroupNickToSender(getGroupName(msgSender,offBotGroupId)) + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题");
                     while (checkExitGroup(msgSender, offBotGroupId)) {
                         log.info("尝试退出群" + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
