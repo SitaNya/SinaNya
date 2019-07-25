@@ -65,31 +65,26 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
 
     private void autoClean(MsgSender msgSender) {
         ArrayList<String> offBotList = selectOffBotList();
-
+        int type = 1;
         for (String offBotGroupId : offBotList) {
-            if (checkHasGroup(msgSender, offBotGroupId) && msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId() == null) {
-                deleteBot(offBotGroupId);
-                msgSender.SETTER.setDiscussLeave(offBotGroupId);
-                msgSender.SETTER.setGroupLeave(offBotGroupId);
-                msgSender.SENDER.sendGroupMsg(groupManager, "删除无法获取类型的群： " + offBotGroupId);
-                return;
-            } else if (msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId() == null) {
+            if (msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId() == null && !checkHasGroup(msgSender, offBotGroupId)) {
                 deleteBot(offBotGroupId);
                 msgSender.SENDER.sendGroupMsg(groupManager, "删除已不存在群： " + offBotGroupId);
                 continue;
+            } else if (msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId() == null) {
+                type = msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId();
             }
-            long lastMsgForNow = System.currentTimeMillis() -msgSender.GETTER.getGroupMemberInfo(offBotGroupId, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ())).getLastTime();
-            if (lastMsgForNow > 10800000) {
-                int type = msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId();
+            long lastMsgForNow = System.currentTimeMillis() / 1000 - msgSender.GETTER.getGroupMemberInfo(offBotGroupId, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ())).getLastTime();
+            if (lastMsgForNow > 10800) {
                 if (type == 1) {
-                    msgSender.SENDER.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 1000 / 60 / 24 + "日未使用，且已关闭本骰的讨论组: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
+                    msgSender.SENDER.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 60 / 60 / 24 + "日未使用，且已关闭本骰的讨论组: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
                     msgSender.SENDER.sendDiscussMsg(offBotGroupId, "已在讨论组: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题");
                     while (checkHasGroup(msgSender, offBotGroupId)) {
                         log.info("尝试退出群" + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
                         msgSender.SETTER.setDiscussLeave(offBotGroupId);
                     }
                 } else {
-                    msgSender.SENDER.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 1000 / 60 / 24 + "日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
+                    msgSender.SENDER.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 60 / 60 / 24 + "日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
                     msgSender.SENDER.sendGroupMsg(offBotGroupId, "已在群: " + makeGroupNickToSender(getGroupName(msgSender,offBotGroupId)) + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题");
                     while (checkHasGroup(msgSender, offBotGroupId)) {
                         log.info("尝试退出群" + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
