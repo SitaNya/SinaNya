@@ -67,6 +67,7 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
         ArrayList<String> offBotList = selectOffBotList();
         int type;
         for (String offBotGroupId : offBotList) {
+            int times = 0;
             if (msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId() == null && !checkHasGroup(msgSender, offBotGroupId)) {
                 deleteBot(offBotGroupId);
                 msgSender.SENDER.sendGroupMsg(groupManager, "删除已不存在群： " + offBotGroupId);
@@ -81,9 +82,13 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
                 if (type == 1) {
                     msgSender.SENDER.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 60 / 60 / 24 + "日未使用，且已关闭本骰的讨论组: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
                     msgSender.SENDER.sendDiscussMsg(offBotGroupId, "已在讨论组: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题");
-                    while (checkHasGroup(msgSender, offBotGroupId)) {
+                    while (checkHasGroup(msgSender, offBotGroupId) && times < 20) {
                         log.info("尝试退出讨论组" + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId + " type: " + type);
                         msgSender.SETTER.setDiscussLeave(offBotGroupId);
+                        times++;
+                    }
+                    if (times >= 20) {
+                        msgSender.SETTER.setGroupLeave(offBotGroupId);
                     }
                 } else {
                     msgSender.SENDER.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 60 / 60 / 24 + "日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
