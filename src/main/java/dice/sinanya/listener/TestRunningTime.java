@@ -65,13 +65,15 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
 
     private void autoClean(MsgSender msgSender) {
         ArrayList<String> offBotList = selectOffBotList();
-        int type = 1;
+        int type;
         for (String offBotGroupId : offBotList) {
             if (msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId() == null && !checkHasGroup(msgSender, offBotGroupId)) {
                 deleteBot(offBotGroupId);
                 msgSender.SENDER.sendGroupMsg(groupManager, "删除已不存在群： " + offBotGroupId);
                 continue;
-            } else if (msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId() != null && checkHasGroup(msgSender, offBotGroupId)) {
+            } else if (msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId() == null) {
+                type = 1;
+            } else {
                 type = msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId();
             }
             long lastMsgForNow = System.currentTimeMillis() / 1000 - msgSender.GETTER.getGroupMemberInfo(offBotGroupId, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ())).getLastTime();
