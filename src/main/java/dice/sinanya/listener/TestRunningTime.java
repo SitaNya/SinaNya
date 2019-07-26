@@ -82,6 +82,7 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
                     while (checkHasGroup(msgSender, offBotGroupId)) {
                         log.info("尝试退出群" + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
                         msgSender.SETTER.setDiscussLeave(offBotGroupId);
+                        msgSender.SETTER.setGroupLeave(offBotGroupId);
                     }
                 } else {
                     msgSender.SENDER.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 60 / 60 / 24 + "日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
@@ -89,6 +90,7 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
                     while (checkHasGroup(msgSender, offBotGroupId)) {
                         log.info("尝试退出群" + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
                         msgSender.SETTER.setGroupLeave(offBotGroupId);
+                        msgSender.SETTER.setDiscussLeave(offBotGroupId);
                     }
                 }
                 deleteBot(offBotGroupId);
