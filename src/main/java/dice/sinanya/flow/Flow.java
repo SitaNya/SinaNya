@@ -395,9 +395,7 @@ class Flow {
 
         if (isStSet) {
             try {
-                if (roles.set()) {
-                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("setPropSuccess"));
-                } else {
+                if (!roles.set()) {
                     sender(entityTypeMessages, MESSAGES_SYSTEM.get("setHelp"));
                 }
             } catch (PlayerSetException e) {

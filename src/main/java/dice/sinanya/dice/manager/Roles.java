@@ -13,6 +13,7 @@ import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.system.MessagesTag.TAG_ST_RM;
 import static dice.sinanya.system.MessagesTag.TAG_ST_SET;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.getinfo.RoleChoose.*;
 import static dice.sinanya.tools.getinfo.RoleInfo.*;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
@@ -69,6 +70,7 @@ public class Roles implements Role {
             } else {
                 throw new PlayerSetException(entityTypeMessages);
             }
+            sender(entityTypeMessages, MESSAGES_SYSTEM.get("已为您切换到人物卡: " + role));
             return true;
         } else {
             return false;

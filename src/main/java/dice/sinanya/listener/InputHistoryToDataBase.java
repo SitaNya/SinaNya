@@ -6,6 +6,13 @@ import com.forte.qqrobot.sender.MsgSender;
 import com.forte.qqrobot.timetask.TimeJob;
 import com.forte.qqrobot.timetask.TimeTaskContext;
 import com.forte.qqrobot.utils.CQCodeUtil;
+import dice.sinanya.db.history.SelectHistory;
+import dice.sinanya.db.kp.SelectKp;
+import dice.sinanya.db.log.tag.SelectLogTag;
+import dice.sinanya.db.roles.SelectRoles;
+import dice.sinanya.db.setdefaultrolls.SelectDefaultMaxRolls;
+import dice.sinanya.db.system.SelectBot;
+import dice.sinanya.db.team.SelectTeam;
 import org.quartz.JobExecutionContext;
 
 import static dice.sinanya.tools.getinfo.History.setHistory;
@@ -33,6 +40,13 @@ public class InputHistoryToDataBase implements TimeJob {
     public void execute(MsgSender msgSender, CQCodeUtil cqCodeUtil) {
         setHistory();
         saveTeamEn();
+        new SelectHistory().flushHistoryFromDatabase();
+        new SelectKp().flushKpFromDatabase();
+        new SelectLogTag().flushLogTagFromDatabase();
+        new SelectRoles().flushRoleChooseFromDatabase();
+        new SelectRoles().flushRoleInfoCacheFromDatabase();
+        new SelectDefaultMaxRolls().flushMaxRollsFromDatabase();
+        new SelectTeam().flushTeamEnFromDatabase();
     }
 
     @Override
