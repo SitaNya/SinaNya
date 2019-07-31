@@ -14,7 +14,7 @@ public interface MessagesSystem {
     String NONE = "";
     String SPACE = " ";
 
-    String VERSIONS = "1.1.14.34";
+    String VERSIONS = "1.1.15.37";
 
     StringBuilder STR_BOT_VERSIONS = new StringBuilder()
             .append("Dice made in java\n")

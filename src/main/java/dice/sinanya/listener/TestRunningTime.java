@@ -32,7 +32,7 @@ import static dice.sinanya.tools.getinfo.GetTime.getNowString;
  * 这里的“0 * * * * ? *”表示每分钟执行一次，具体怎么写请去查crontab的使用
  * 前5位应该是:分 时 日 月 周
  */
-@CronTask("0 */10 * * * ? *")
+@CronTask("0 */1 * * * ? *")
 public class TestRunningTime implements TimeJob, MakeNickToSender {
     private static Logger log = LogManager.getLogger(TestRunningTime.class.getName());
 
@@ -67,6 +67,7 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
         ArrayList<String> offBotList = selectOffBotList();
         int type;
         for (String offBotGroupId : offBotList) {
+            offBotGroupId="818914076";
             int times = 0;
             if (msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId() == null && !checkHasGroup(msgSender, offBotGroupId)) {
                 deleteBot(offBotGroupId);
@@ -77,10 +78,10 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
             } else {
                 type = msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId();
             }
-            long lastMsgForNow = System.currentTimeMillis() / 1000 - msgSender.GETTER.getGroupMemberInfo(offBotGroupId, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ())).getLastTime();
-            if (lastMsgForNow > 10800) {
+            long lastMsgForNow =  System.currentTimeMillis()-msgSender.GETTER.getGroupMemberInfo(offBotGroupId, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ())).getLastTime()*1000;
+            if (lastMsgForNow/1000 > 432000) {
                 if (type == 1) {
-                    msgSender.SENDER.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 60 / 60 / 24 + "日未使用，且已关闭本骰的讨论组: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
+                    msgSender.SENDER.sendGroupMsg(groupManager, "已清理" + lastMsgForNow/1000 / 60 / 60 / 24 + "日未使用，且已关闭本骰的讨论组: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
                     msgSender.SENDER.sendDiscussMsg(offBotGroupId, "已在讨论组: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题");
                     while (checkHasGroup(msgSender, offBotGroupId) && times < 20) {
                         log.info("尝试退出讨论组" + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId + " type: " + type);
