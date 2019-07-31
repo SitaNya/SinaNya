@@ -49,11 +49,9 @@ public class SkillUp {
             roleName = getNickName(entityTypeMessages);
         }
         int skill = 0;
-        if (msg.matches(numbers.toString())) {
-            Matcher skillNumber = numbers.matcher(msg);
-            while (skillNumber.find()) {
-                skill = Integer.parseInt(skillNumber.group(0));
-            }
+        Matcher skillNumber = numbers.matcher(msg);
+        if (skillNumber.find()) {
+            skill = Integer.parseInt(skillNumber.group(1));
         } else {
             skill = getSkillValue(entityTypeMessages, msg);
         }
