@@ -4,9 +4,14 @@ import dice.sinanya.db.roles.InsertRoles;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.NotFoundSkillException;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static dice.sinanya.system.MessagesTag.TAG_EN;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.GetSkillValue.getSkillValue;
+import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByFromQQ;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.makedata.RandomInt.random;
@@ -27,6 +32,8 @@ public class SkillUp {
         this.entityTypeMessages = entityTypeMessages;
     }
 
+    private static Pattern numbers = Pattern.compile("\\d+");
+
     /**
      * 若未设定技能，则无法进行en，而单纯的.en 60从自然逻辑上讲是无意义的
      *
@@ -35,7 +42,22 @@ public class SkillUp {
     public void en() throws NotFoundSkillException {
         String tag = TAG_EN;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
-        int skill = getSkillValue(entityTypeMessages, msg);
+        String roleName;
+        if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
+            roleName = getRoleChooseByFromQQ(entityTypeMessages);
+        } else {
+            roleName = getNickName(entityTypeMessages);
+        }
+        int skill = 0;
+        if (msg.matches(numbers.toString())) {
+            Matcher skillNumber = numbers.matcher(msg);
+            while (skillNumber.find()) {
+                skill = Integer.parseInt(skillNumber.group(0));
+            }
+        } else {
+            skill = getSkillValue(entityTypeMessages, msg);
+        }
+
         if (skill == 0) {
             throw new NotFoundSkillException(entityTypeMessages);
         }
@@ -48,7 +70,7 @@ public class SkillUp {
             int skillUp = random(1, 10);
             stringBuilder
                     .append("[")
-                    .append(getRoleChooseByFromQQ(entityTypeMessages))
+                    .append(roleName)
                     .append("]")
                     .append("的技能成长检定:\n")
                     .append(random)
@@ -60,12 +82,14 @@ public class SkillUp {
                     .append("点，目前为:")
                     .append(skill + skillUp)
                     .append(MESSAGES_SYSTEM.get("enSuccess"));
-            new InsertRoles().insertRoleInfo(msg + (skill + skillUp), getRoleChooseByFromQQ(entityTypeMessages), entityTypeMessages.getFromQq());
+            if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
+                new InsertRoles().insertRoleInfo(msg + (skill + skillUp), roleName, entityTypeMessages.getFromQq());
+            }
             sender(entityTypeMessages, stringBuilder.toString());
         } else {
             stringBuilder
                     .append("[")
-                    .append(getRoleChooseByFromQQ(entityTypeMessages))
+                    .append(roleName)
                     .append("]")
                     .append("的技能成长检定:\n")
                     .append(random)
