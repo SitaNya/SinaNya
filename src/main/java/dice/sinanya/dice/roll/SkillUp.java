@@ -86,7 +86,7 @@ public class SkillUp {
                 new InsertRoles().insertRoleInfo(msg + (skill + skillUp), roleName, entityTypeMessages.getFromQq());
                 stringBuilder.append("\n本次结果会自动更新到人物卡中");
             }else{
-                stringBuilder.append("\n本次结果不会自动更新到人物卡中，请使用.st<角色名>-<属性><新属性值>的格式进行更新录入，没有更改的属性不需要再次录入");
+                stringBuilder.append("\n本次结果不会自动更新到人物卡中，请使用.st<角色名>-<属性><新属性值>的格式进行更新录入，没有更改的属性不需要再次录入\n.en <技能>这种格式可以自动录入人物卡，无需再次st");
             }
             stringBuilder.append(MESSAGES_SYSTEM.get("enSuccess"));
             sender(entityTypeMessages, stringBuilder.toString());
