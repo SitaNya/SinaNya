@@ -32,7 +32,7 @@ public class SkillUp {
         this.entityTypeMessages = entityTypeMessages;
     }
 
-    private static Pattern numbers = Pattern.compile("(\\d)+");
+    private static Pattern numbers = Pattern.compile("(\\d+)");
 
     /**
      * 若未设定技能，则无法进行en，而单纯的.en 60从自然逻辑上讲是无意义的
