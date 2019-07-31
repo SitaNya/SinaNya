@@ -43,20 +43,20 @@ public class SkillUp {
         String tag = TAG_EN;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         String roleName;
-        boolean useRoleCard;
         if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
             roleName = getRoleChooseByFromQQ(entityTypeMessages);
-            useRoleCard = true;
         } else {
             roleName = getNickName(entityTypeMessages);
-            useRoleCard = false;
         }
         int skill;
         Matcher skillNumber = numbers.matcher(msg);
+        boolean useRoleCard;
         if (skillNumber.find()) {
             skill = Integer.parseInt(skillNumber.group(1));
+            useRoleCard = false;
         } else {
             skill = getSkillValue(entityTypeMessages, msg);
+            useRoleCard = true;
         }
 
         if (skill == 0) {
