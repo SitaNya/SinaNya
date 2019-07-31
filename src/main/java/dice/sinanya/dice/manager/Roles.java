@@ -104,7 +104,11 @@ public class Roles implements Role {
                 standbyRole.append(mapEntry.getKey().getRole()).append("\n");
             }
         }
-        standbyRole.append("自定义").append("\n");
+        if (!stringBuilder.toString().contains("自定义")) {
+            standbyRole.append("自定义").append("\n");
+        }else if (standbyRole.length() == 0){
+            standbyRole.append("无").append("\n");
+        }
         stringBuilder.append(standbyRole);
         String result = stringBuilder.toString();
         sender(entityTypeMessages, result.substring(0, result.length() - 1));
