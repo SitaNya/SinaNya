@@ -64,9 +64,9 @@ public class SkillUp {
 
         int random = random(1, 100);
 
-        int strFumbleLevel = 100;
+        int strFumbleLevel = 95;
         StringBuilder stringBuilder = new StringBuilder();
-        if (random > skill || random == strFumbleLevel) {
+        if (random > skill || random > strFumbleLevel) {
             int skillUp = random(1, 10);
             stringBuilder
                     .append("[")
@@ -77,14 +77,17 @@ public class SkillUp {
                     .append("/")
                     .append(skill)
                     .append("成功!\n")
-                    .append("您的技能增长了")
+                    .append("您的技能增长了1D10=")
                     .append(skillUp)
                     .append("点，目前为:")
-                    .append(skill + skillUp)
-                    .append(MESSAGES_SYSTEM.get("enSuccess"));
+                    .append(skill + skillUp);
             if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
                 new InsertRoles().insertRoleInfo(msg + (skill + skillUp), roleName, entityTypeMessages.getFromQq());
+                stringBuilder.append("\n本次结果会自动更新到人物卡中");
+            }else{
+                stringBuilder.append("\n本次结果不会自动更新到人物卡中，请使用.st<角色名>-<属性><新属性值>的格式进行更新录入，没有更改的属性不需要再次录入");
             }
+            stringBuilder.append(MESSAGES_SYSTEM.get("enSuccess"));
             sender(entityTypeMessages, stringBuilder.toString());
         } else {
             stringBuilder
