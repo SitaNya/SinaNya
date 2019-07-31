@@ -102,7 +102,7 @@ public class Roles implements Role {
         for (Map.Entry<EntityRoleTag, HashMap<String, Integer>> mapEntry : ROLE_INFO_CACHE.entrySet()) {
             if (checkRoleChooseExistByQQ(qqId) && !getRoleChooseByQQ(qqId).equals(mapEntry.getKey().getRole()) && mapEntry.getKey().getQq() == qqId) {
                 standbyRole.append(mapEntry.getKey().getRole()).append("\n");
-            } else if (mapEntry.getKey().getQq() == qqId) {
+            } else if (stringBuilder.toString().contains("自定义") && mapEntry.getKey().getQq() == qqId) {
                 standbyRole.append(mapEntry.getKey().getRole()).append("\n");
             }
         }
