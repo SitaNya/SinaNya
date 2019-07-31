@@ -12,8 +12,9 @@ import java.util.Map;
 import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.system.MessagesTag.TAG_ST_RM;
 import static dice.sinanya.system.MessagesTag.TAG_ST_SET;
+import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOSE;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.RoleChoose.*;
 import static dice.sinanya.tools.getinfo.RoleInfo.*;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
@@ -48,6 +49,7 @@ public class Roles implements Role {
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         String sepRoleAndPro = "-";
         String tagRoleNameNone = "";
+        String defaultRole = "自定义";
         int lenRoleAndPro = 2;
         String properties;
         InsertRoles insertRoles = new InsertRoles();
@@ -67,10 +69,13 @@ public class Roles implements Role {
             role = msg;
             if (checkRoleInfoExistByQQ(qqId, role)) {
                 setRoleChooseByQQ(qqId, role);
+            } else if (defaultRole.equals(role)) {
+                ROLE_CHOOSE.remove(qqId);
+                sender(entityTypeMessages, "已为" + makeNickToSender(getNickName(entityTypeMessages)) + "切换到自定义档位\n此状态下无法使用.team\\.en功能，但所有技能使用不会受到限制。骰点时会默认取用群昵称");
             } else {
                 throw new PlayerSetException(entityTypeMessages);
             }
-            sender(entityTypeMessages, MESSAGES_SYSTEM.get("已为您切换到人物卡: " + role));
+            sender(entityTypeMessages, "已为" + makeNickToSender(getNickName(entityTypeMessages)) + "切换到人物卡: " + role);
             return true;
         } else {
             return false;
@@ -87,7 +92,7 @@ public class Roles implements Role {
         if (checkRoleChooseExistByQQ(qqId)) {
             stringBuilder.append(getRoleChooseByQQ(qqId)).append("\n");
         } else {
-            stringBuilder.append("无").append("\n");
+            stringBuilder.append("自定义").append("\n");
         }
         stringBuilder.append("当前备选角色:\n");
         StringBuilder standbyRole = new StringBuilder();
@@ -97,9 +102,7 @@ public class Roles implements Role {
                 standbyRole.append(mapEntry.getKey().getRole()).append("\n");
             }
         }
-        if (standbyRole.length() == 0) {
-            standbyRole.append("无").append("\n");
-        }
+        standbyRole.append("自定义").append("\n");
         stringBuilder.append(standbyRole);
         String result = stringBuilder.toString();
         sender(entityTypeMessages, result.substring(0, result.length() - 1));
