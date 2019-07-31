@@ -43,10 +43,13 @@ public class SkillUp {
         String tag = TAG_EN;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
         String roleName;
+        boolean useRoleCard;
         if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
             roleName = getRoleChooseByFromQQ(entityTypeMessages);
+            useRoleCard = true;
         } else {
             roleName = getNickName(entityTypeMessages);
+            useRoleCard = false;
         }
         int skill;
         Matcher skillNumber = numbers.matcher(msg);
@@ -79,7 +82,7 @@ public class SkillUp {
                     .append(skillUp)
                     .append("点，目前为:")
                     .append(skill + skillUp);
-            if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
+            if (useRoleCard) {
                 new InsertRoles().insertRoleInfo(msg + (skill + skillUp), roleName, entityTypeMessages.getFromQq());
                 stringBuilder.append("\n本次结果会自动更新到人物卡中");
             }else{
