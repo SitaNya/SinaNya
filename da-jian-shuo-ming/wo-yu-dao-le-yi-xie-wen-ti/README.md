@@ -28,6 +28,10 @@ description: 答疑解难
 
 请参见教程的JDK安装部分并重新安装JDK
 
+如果确定已安装，可以参照
+
+[https://www.cnblogs.com/boringwind/p/8001300.html](https://www.cnblogs.com/boringwind/p/8001300.html)
+
 ## 我的邮件发不出去！
 
 由于云服务商会封禁邮件的25端口，邮件会发送失败
