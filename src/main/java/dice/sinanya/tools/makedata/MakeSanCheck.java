@@ -235,13 +235,13 @@ public class MakeSanCheck {
     private void makeInsane(StringBuilder strResult, int newSan, int san) {
         String tagSymptom = "symptom";
         if (newSan == 0) {
-            strResult.append("\n已永久疯狂")
+            strResult.append("\n已永久疯狂（请KP注意需要int检定成功后才进行疯狂，此信息只做提示）")
                     .append(MESSAGES_SYSTEM.get(tagSymptom));
         } else if (san - newSan >= 5) {
-            strResult.append("\n已进入临时性疯狂")
+            strResult.append("\n已进入临时性疯狂（请KP注意需要int检定成功后才进行疯狂，此信息只做提示）")
                     .append(MESSAGES_SYSTEM.get(tagSymptom));
         } else if (san - newSan >= san / 5) {
-            strResult.append("\n已因单次损失值进入不定性疯狂")
+            strResult.append("\n已因单次损失值进入不定性疯狂（请KP注意需要int检定成功后才进行疯狂，此信息只做提示）")
                     .append(MESSAGES_SYSTEM.get(tagSymptom));
         }
     }

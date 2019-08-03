@@ -18,7 +18,7 @@ public interface MessagesHelp {
 
             .append(".set\n")
             .append(".set 20")
-            .append("更改骰掷上线，但只作用于.r和.rd")
+            .append("更改骰掷上限，但只作用于.r和.rd")
             .append(SEQ)
 
             .append(".ra\n")
