@@ -119,7 +119,7 @@ public class Team implements GetDb, Role, AtQq {
         msg = msg.replaceAll(regex, "").trim();
         for (String qq : qqList) {
             boolean add = false;
-            if (msg.charAt(0) == '+') {
+            if (msg.matches("^\\+(\\d+)")) {
                 msg = msg.replaceAll("\\+", "");
                 add = true;
             }
@@ -175,7 +175,7 @@ public class Team implements GetDb, Role, AtQq {
         msg = msg.replaceAll(regex, "").trim();
         for (String qq : qqList) {
             boolean add = false;
-            if (msg.matches("^\\+") && !msg.contains("/")) {
+            if (msg.matches("^\\+(\\d+)") && !msg.contains("/")) {
                 msg = msg.replaceAll("\\+", "");
                 add = true;
             }
