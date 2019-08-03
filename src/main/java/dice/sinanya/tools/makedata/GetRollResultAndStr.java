@@ -24,6 +24,7 @@ public class GetRollResultAndStr {
     private String msg;
 
     private Pattern function = Pattern.compile("(\\d*)[dD](\\d*)[kK]?(\\d*)");
+    private static Pattern addSan = Pattern.compile("\\+(\\d+)");
 
     private int times = 1;
     private int maxRolls;
@@ -78,6 +79,9 @@ public class GetRollResultAndStr {
         if (isNumeric(strResult)) {
             result = Integer.parseInt(strResult);
         } else {
+            if (strResult.matches(addSan.toString())) {
+                strResult = strResult.replace("+", "");
+            }
             result = (int) ceil(Calculator.conversion(strResult));
         }
 //            由于Calculator.conversion处理纯数字时会错误的返回0，因此这里做一下判断
@@ -122,7 +126,7 @@ public class GetRollResultAndStr {
 
 //        通过manyRollsProcess计算得出结果字符串
         resStr = manyRollsProcess(times, maxRolls, maxNums);
-        if (times>1000){
+        if (times > 1000) {
             throw new ManyRollsTimesTooMoreException(entityTypeMessages);
         }
         if (isNumeric(resStr)) {
