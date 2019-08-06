@@ -67,7 +67,6 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
         ArrayList<String> offBotList = selectOffBotList();
         int type;
         for (String offBotGroupId : offBotList) {
-            offBotGroupId="818914076";
             int times = 0;
             if (msgSender.GETTER.getGroupInfo(offBotGroupId).getTypeId() == null && !checkHasGroup(msgSender, offBotGroupId)) {
                 deleteBot(offBotGroupId);
