@@ -1,10 +1,10 @@
 package dice.sinanya.dice.system;
 
-import com.forte.qqrobot.sender.MsgSender;
 import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.dice.manager.imal.AtQq;
 import dice.sinanya.entity.EntityGroupCensus;
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.system.MessagesSystem;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -12,14 +12,12 @@ import java.util.ArrayList;
 
 import static com.forte.qqrobot.beans.messages.types.MsgGetTypes.discussMsg;
 import static com.forte.qqrobot.beans.messages.types.MsgGetTypes.groupMsg;
-import static dice.sinanya.db.system.InsertBot.deleteBot;
 import static dice.sinanya.db.system.SelectBot.selectBot;
-import static dice.sinanya.db.system.SelectBot.selectOffBotList;
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.system.MessagesSystem.STR_BOT_VERSIONS;
+import static dice.sinanya.system.MessagesSystem.UPDATE;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
-import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.SwitchBot.*;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.makedata.Sender.sender;
@@ -137,6 +135,14 @@ public class Bot implements AtQq, MakeNickToSender {
      */
     public void info() {
         EntityGroupCensus entityGroupCensus = selectBot();
-        sender(entityTypeMessages, STR_BOT_VERSIONS.toString() + "\n目前供职于:\t" + entityGroupCensus.getGroupNum() + " 个群，其中 " + entityGroupCensus.getOnNum() + " 个群处于开启状态");
+        sender(entityTypeMessages, STR_BOT_VERSIONS.toString() + "\n目前供职于:\t" + entityGroupCensus.getGroupNum() + " 个群，其中 " + entityGroupCensus.getOnNum() + " 个群处于开启状态\n" + MESSAGES_SYSTEM.get("botInfo"));
     }
+
+    /**
+     * 机器人更新日志
+     */
+    public void update() {
+        sender(entityTypeMessages, "当前版本:\t" + MessagesSystem.VERSIONS + "\n" + UPDATE.toString());
+    }
+
 }

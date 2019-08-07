@@ -64,8 +64,10 @@ public class Listener {
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public void listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, PrivateMsg msgPrivate) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgPrivate);
-        if (entityTypeMessages.getMsgGet().getMsg().contains("bot")) {
+        if (entityTypeMessages.getMsgGet().getMsg().contains("bot") && !entityTypeMessages.getMsgGet().getMsg().contains("update")) {
             new Bot(entityTypeMessages).info();
+        } else if (entityTypeMessages.getMsgGet().getMsg().contains("bot update")) {
+            new Bot(entityTypeMessages).update();
         } else {
             new Flow(entityTypeMessages).toPrivate();
         }
@@ -191,11 +193,13 @@ public class Listener {
         String tagBotOff = ".*[.。][ ]*bot[ ]*off.*";
         String tagBotInfo = ".*[.。][ ]*bot.*";
         String tagBotExit = ".*[.。][ ]*bot[ ]*exit.*";
+        String tagBotUpdate = ".*[.。][ ]*bot[ ]*update.*";
 
         boolean botOn = messagesContainsAtMe(messages, tagBotOn, tagMe) || messagesBotForAll(messages, tagBotOn) || messagesContainsQqId(messages, tagBotOn);
         boolean botOff = messagesContainsAtMe(messages, tagBotOff, tagMe) || messagesBotForAll(messages, tagBotOff) || messagesContainsQqId(messages, tagBotOff);
         boolean botExit = messagesContainsAtMe(messages, tagBotExit, tagMe) || messagesBotForAll(messages, tagBotExit) || messagesContainsQqId(messages, tagBotExit);
-        boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo) || messagesContainsQqId(messages, tagBotInfo)) && !botOn && !botOff && !botExit;
+        boolean botUpdate = (messagesContainsAtMe(messages, tagBotUpdate, tagMe) || messagesBotForAll(messages, tagBotUpdate) || messagesContainsQqId(messages, tagBotUpdate));
+        boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo) || messagesContainsQqId(messages, tagBotInfo)) && !botOn && !botOff && !botExit && !botUpdate;
 
         if (!messages.contains("bot")) {
             return;
@@ -210,6 +214,8 @@ public class Listener {
         } else if (botExit) {
             checkAudit(entityTypeMessages);
             new Bot(entityTypeMessages).exit();
+        } else if (botUpdate) {
+            new Bot(entityTypeMessages).update();
         } else if (botInfo) {
             new Bot(entityTypeMessages).info();
         }

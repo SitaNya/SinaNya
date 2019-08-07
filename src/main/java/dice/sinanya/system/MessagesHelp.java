@@ -233,7 +233,12 @@ public interface MessagesHelp {
             .append(SEQ)
 
             .append(".getbook rp\n")
-            .append("角色扮演365问，不过只有问没有答，估计还是要读的人自己思考吧");
+            .append("角色扮演365问，不过只有问没有答，估计还是要读的人自己思考吧")
+
+            .append(".rule\n")
+            .append(".rule 力量\t.rule 领航\n")
+            .append("规则查询");
+
 
     StringBuilder DND_HELP = new StringBuilder()
             .append(".dnd\n")
