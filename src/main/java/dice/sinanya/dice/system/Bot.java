@@ -14,8 +14,7 @@ import static com.forte.qqrobot.beans.messages.types.MsgGetTypes.discussMsg;
 import static com.forte.qqrobot.beans.messages.types.MsgGetTypes.groupMsg;
 import static dice.sinanya.db.system.SelectBot.selectBot;
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
-import static dice.sinanya.system.MessagesSystem.STR_BOT_VERSIONS;
-import static dice.sinanya.system.MessagesSystem.UPDATE;
+import static dice.sinanya.system.MessagesSystem.*;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.getinfo.SwitchBot.*;
@@ -134,8 +133,12 @@ public class Bot implements AtQq, MakeNickToSender {
      * 机器人信息
      */
     public void info() {
+        String botInfo = MESSAGES_SYSTEM.toString();
+        if (botInfo.equals(NONE)) {
+            botInfo = "\n" + botInfo;
+        }
         EntityGroupCensus entityGroupCensus = selectBot();
-        sender(entityTypeMessages, STR_BOT_VERSIONS.toString() + "\n目前供职于:\t" + entityGroupCensus.getGroupNum() + " 个群，其中 " + entityGroupCensus.getOnNum() + " 个群处于开启状态\n" + MESSAGES_SYSTEM.get("botInfo"));
+        sender(entityTypeMessages, STR_BOT_VERSIONS.toString() + "\n目前供职于:\t" + entityGroupCensus.getGroupNum() + " 个群，其中 " + entityGroupCensus.getOnNum() + " 个群处于开启状态" + botInfo);
     }
 
     /**
