@@ -17,7 +17,7 @@ public interface MessagesSystem {
     String VERSIONS = "1.5.16.38";
     StringBuilder UPDATE=new StringBuilder()
             .append("更新日志:\n")
-            .append("2019年08月07日 支持了规则查询rule命令，感谢夏浅秋的支持");
+            .append("2019年08月07日 支持了规则查询rule命令，感谢夏浅秋、秃了秃了的支持");
 
     StringBuilder STR_BOT_VERSIONS = new StringBuilder()
             .append("Dice made in java\n")
