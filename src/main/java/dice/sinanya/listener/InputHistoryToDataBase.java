@@ -9,6 +9,7 @@ import com.forte.qqrobot.utils.CQCodeUtil;
 import org.quartz.JobExecutionContext;
 
 import static dice.sinanya.db.system.SelectBot.flushBot;
+import static dice.sinanya.tools.getinfo.BanList.flushBanList;
 import static dice.sinanya.tools.getinfo.DefaultMaxRolls.flushMaxRolls;
 import static dice.sinanya.tools.getinfo.History.flushHistory;
 import static dice.sinanya.tools.getinfo.History.setHistory;
@@ -57,6 +58,8 @@ public class InputHistoryToDataBase implements TimeJob {
 //        从数据库中读取kp主群设定到缓存
         flushHistory();
 //        从数据库中读取骰点历史信息到缓存
+        flushBanList();
+//        刷写黑名单
     }
 
     @Override

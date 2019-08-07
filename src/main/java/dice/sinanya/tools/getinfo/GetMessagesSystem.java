@@ -29,6 +29,7 @@ public class GetMessagesSystem {
         MESSAGES_SYSTEM.put("botAlreadyStop", "机器人当前处于关闭状态");
         MESSAGES_SYSTEM.put("botExit", "正在退出群");
         MESSAGES_SYSTEM.put("botInfo", "");
+        MESSAGES_SYSTEM.put("banListInputNotId","输入的不是QQ号或群号");
 
         MESSAGES_SYSTEM.put("bookCard", "COC七版规则空白卡奈梅斯·西莉亚私人订制版By贝尔巨佬.xlsx\n请使用此链接下载https://pan.baidu.com/s/1M3veskXYFJjwXP1eKHaX4g。有更新更好的版本请随时联系窝。");
         MESSAGES_SYSTEM.put("bookRP", "角色扮演三百六十五问.zip\n请使用此链接下载https://share1.heiluo.com/share/link/8b93f1f15a974d4a9fda1890863a0af1。有更新更好的版本请随时联系窝。");

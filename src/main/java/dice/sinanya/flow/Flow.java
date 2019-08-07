@@ -116,6 +116,14 @@ class Flow {
     private boolean isClueRm = false;
     private boolean isClueClr = false;
 
+
+    private boolean isBanUser = false;
+    private boolean isBanGroup = false;
+    private boolean isRmBanUser = false;
+    private boolean isRmBanGroup = false;
+    private boolean isListBanUser = false;
+    private boolean isListBanGroup = false;
+
     private boolean isKp = false;
 
     private boolean isHiy = false;
@@ -213,6 +221,15 @@ class Flow {
         isr = checkTagRegex(TAGR) && !isRh && !isRa && !isRc && !isRb && !isRp && !isRi && !isRal && !isRcl && !isRav && !isRcv && !isRules;
     }
 
+    private void banTag() {
+        isBanUser = checkTagRegex(TAG_BAN_USER);
+        isBanGroup = checkTagRegex(TAG_BAN_GROUP);
+        isRmBanUser = checkTagRegex(TAG_RM_BAN_USER);
+        isRmBanGroup = checkTagRegex(TAG_RM_BAN_GROUP);
+        isListBanUser = checkTagRegex(TAG_BAN_USER_LIST);
+        isListBanGroup = checkTagRegex(TAG_BAN_GROUP_LIST);
+    }
+
     private void checkMessages() {
         String forAll = ".*";
         if (checkTagRegex(HEADER_TEAM + forAll)) {
@@ -278,6 +295,7 @@ class Flow {
         isTiAndLiFunction();
         isHelpFunction();
         isBookFunction();
+        isBanFunction();
 
         if (isNpc) {
             npc.npc();
@@ -579,6 +597,24 @@ class Flow {
             clue.clr();
         } else if (isClueShow) {
             clue.show();
+        }
+    }
+
+    private void isBanFunction() {
+        BanList banList = new BanList(entityTypeMessages);
+
+        if (isBanUser) {
+            banList.inputQqBanList();
+        } else if (isBanGroup) {
+            banList.inputGroupBanList();
+        } else if (isRmBanUser) {
+            banList.rmQqBanList();
+        } else if (isRmBanGroup) {
+            banList.rmGroupBanList();
+        } else if (isListBanUser) {
+            banList.getQqBanList();
+        } else if (isListBanGroup) {
+            banList.getGroupBanList();
         }
     }
 }

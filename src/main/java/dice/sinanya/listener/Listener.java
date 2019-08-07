@@ -3,14 +3,12 @@ package dice.sinanya.listener;
 import com.forte.qqrobot.anno.Constr;
 import com.forte.qqrobot.anno.Filter;
 import com.forte.qqrobot.anno.Listen;
-import com.forte.qqrobot.beans.messages.msgget.DiscussMsg;
-import com.forte.qqrobot.beans.messages.msgget.GroupMsg;
-import com.forte.qqrobot.beans.messages.msgget.MsgGet;
-import com.forte.qqrobot.beans.messages.msgget.PrivateMsg;
+import com.forte.qqrobot.beans.messages.msgget.*;
 import com.forte.qqrobot.beans.messages.types.MsgGetTypes;
 import com.forte.qqrobot.beans.types.KeywordMatchType;
 import com.forte.qqrobot.component.forhttpapi.beans.response.Resp_getGroupMemberInfo;
 import com.forte.qqrobot.sender.MsgSender;
+import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.dice.system.Bot;
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
@@ -19,9 +17,11 @@ import dice.sinanya.flow.Flow;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import static com.forte.qqrobot.beans.messages.types.MsgGetTypes.discussMsg;
+import static com.forte.qqrobot.beans.messages.types.MsgGetTypes.*;
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
+import static dice.sinanya.tools.getinfo.BanList.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
 import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
 import static dice.sinanya.tools.getinfo.LogText.setLogText;
@@ -36,7 +36,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 有任何问题欢迎咨询
  * 类说明: 总监听入口类，这里是实际上接收到消息的第一个类
  */
-public class Listener {
+public class Listener implements MakeNickToSender {
     private String tagBotOn = ".*[.。][ ]*bot[ ]*on.*";
     private String atTag = "[cq:at,qq=?]";
     private String tagMe = String.format(atTag, ENTITY_LOGINQQ_INFO.getLoginQQ());
@@ -64,6 +64,9 @@ public class Listener {
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public void listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, PrivateMsg msgPrivate) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgPrivate);
+        if (checkQqInBanList(entityTypeMessages.getFromQq())) {
+            return;
+        }
         if (entityTypeMessages.getMsgGet().getMsg().contains("bot") && !entityTypeMessages.getMsgGet().getMsg().contains("update")) {
             new Bot(entityTypeMessages).info();
         } else if (entityTypeMessages.getMsgGet().getMsg().contains("bot update")) {
@@ -86,6 +89,22 @@ public class Listener {
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public void listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
+        if (checkQqInBanList(entityTypeMessages.getFromQq())) {
+            return;
+        }
+        if (checkGroupInBanList(entityTypeMessages.getFromGroup())) {
+            sender(entityTypeMessages, "检测到处于黑名单群中，正在退群");
+            msgSender.SENDER.sendGroupMsg("162279609", "检测到处于黑名单群" + makeGroupNickToSender(getGroupName(msgSender, entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中，正在退群");
+            msgSender.SETTER.setGroupLeave(entityTypeMessages.getFromGroup());
+            return;
+        }
+        if (checkBeBan(msgGet.getMsg())) {
+            sender(entityTypeMessages, "于群" + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
+            msgSender.SENDER.sendGroupMsg("162279609", "于群" + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
+            msgSender.SETTER.setDiscussLeave(entityTypeMessages.getFromGroup());
+            insertGroupBanList(entityTypeMessages.getFromGroup(), "被禁言");
+            return;
+        }
         try {
             changeBotSwitch(entityTypeMessages, msgGroup.getMsg());
         } catch (OnlyManagerException e) {
@@ -110,6 +129,22 @@ public class Listener {
     @Filter(value = "^[.。][ ]*.*", keywordMatchType = KeywordMatchType.TRIM_REGEX)
     public void listener(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
+        if (checkQqInBanList(entityTypeMessages.getFromQq())) {
+            return;
+        }
+        if (checkGroupInBanList(entityTypeMessages.getFromGroup())) {
+            sender(entityTypeMessages, "检测到处于黑名单讨论组中，正在退出讨论组");
+            msgSender.SENDER.sendGroupMsg("162279609", "检测到处于黑名单讨论组" + makeGroupNickToSender(getGroupName(msgSender, entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中，正在退出讨论组");
+            msgSender.SETTER.setDiscussLeave(entityTypeMessages.getFromGroup());
+            return;
+        }
+        if (checkBeBan(msgGet.getMsg())) {
+            sender(entityTypeMessages, "于讨论组" + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
+            msgSender.SENDER.sendGroupMsg("162279609", "于讨论组" + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
+            msgSender.SETTER.setDiscussLeave(entityTypeMessages.getFromGroup());
+            insertGroupBanList(entityTypeMessages.getFromGroup(), "被禁言");
+            return;
+        }
         try {
             changeBotSwitch(entityTypeMessages, msgDisGroup.getMsg());
         } catch (OnlyManagerException e) {
@@ -134,6 +169,23 @@ public class Listener {
     @Filter(value = "^[^.。].*")
     public void listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, GroupMsg msgGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgGroup);
+        if (checkQqInBanList(entityTypeMessages.getFromQq())) {
+            return;
+        }
+        if (checkGroupInBanList(entityTypeMessages.getFromGroup())) {
+            sender(entityTypeMessages, "检测到处于黑名单群中，正在退出群");
+            msgSender.SENDER.sendGroupMsg("162279609", "检测到处于黑名单群" + makeGroupNickToSender(getGroupName(msgSender, entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中，正在退出群");
+            msgSender.SETTER.setGroupLeave(entityTypeMessages.getFromGroup());
+            return;
+        }
+        if (checkBeBan(msgGet.getMsg())) {
+            sender(entityTypeMessages, "于群" + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
+            msgSender.SENDER.sendGroupMsg("162279609", "于群" + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
+            msgSender.SETTER.setDiscussLeave(entityTypeMessages.getFromGroup());
+            insertGroupBanList(entityTypeMessages.getFromGroup(), "被禁言");
+            return;
+        }
+
         setLogs(entityTypeMessages, msgGroup.getMsg(), msgGroup.getGroupCode());
     }
 
@@ -150,7 +202,56 @@ public class Listener {
     @Filter(value = "^[^.。].*")
     public void listenerToLog(MsgGet msgGet, MsgGetTypes msgGetTypes, MsgSender msgSender, DiscussMsg msgDisGroup) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(msgGetTypes, msgSender, msgGet, msgDisGroup);
+        if (checkQqInBanList(entityTypeMessages.getFromQq())) {
+            return;
+        }
+        if (checkBeBan(msgGet.getMsg())) {
+            sender(entityTypeMessages, "于讨论组" + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
+            msgSender.SENDER.sendGroupMsg("162279609", "于讨论组" + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
+            msgSender.SETTER.setDiscussLeave(entityTypeMessages.getFromGroup());
+            insertGroupBanList(entityTypeMessages.getFromGroup(), "被禁言");
+            return;
+        }
+        if (checkGroupInBanList(entityTypeMessages.getFromGroup())) {
+            sender(entityTypeMessages, "检测到处于黑名单讨论组中，正在退出讨论组");
+            msgSender.SENDER.sendGroupMsg("162279609", "检测到处于黑名单讨论组" + makeGroupNickToSender(getGroupName(msgSender, entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中，正在退出讨论组");
+            msgSender.SETTER.setDiscussLeave(entityTypeMessages.getFromGroup());
+            return;
+        }
         setLogs(entityTypeMessages, msgDisGroup.getMsg(), msgDisGroup.getGroupCode());
+    }
+
+    @Listen(groupMemberReduce)
+    public void listenerBanList(MsgSender msgSender, GroupMemberReduce groupMemberReduce) {
+        if (groupMemberReduce.getBeOperatedQQ().equals(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()))) {
+            msgSender.SENDER.sendGroupMsg("162279609", "已被移出群" + groupMemberReduce.getGroupCode() + "中，将群和操作者" + groupMemberReduce.getOperatorQQ() + "拉黑");
+            insertQqBanList(groupMemberReduce.getOperatorQQ(), "被踢出群" + groupMemberReduce.getGroupCode());
+            insertGroupBanList(groupMemberReduce.getGroupCode(), "被" + groupMemberReduce.getBeOperatedQQ() + "踢出");
+        }
+    }
+
+    @Listen(groupAddRequest)
+    public void listenGroupAddRequest(GroupAddRequest groupAddRequest, MsgSender msgSender) {
+        if (groupAddRequest.getRequestType().isInvite()) {
+            if (!checkQqInBanList(groupAddRequest.getQQCode()) && !checkGroupInBanList(groupAddRequest.getGroupCode())) {
+                msgSender.SENDER.sendGroupMsg("162279609", "收到" + groupAddRequest.getQQCode() + "的群" +groupAddRequest.getGroupCode() + "邀请，已同意");
+                msgSender.SETTER.setGroupAddRequest(groupAddRequest, true, "");
+            } else {
+                msgSender.SENDER.sendGroupMsg("162279609", "收到" + groupAddRequest.getQQCode() + "的群" +groupAddRequest.getGroupCode() + "邀请，处于黑名单中已拒绝");
+                msgSender.SETTER.setGroupAddRequest(groupAddRequest, false, "群或邀请人处于黑名单内");
+            }
+        }
+    }
+
+    @Listen(friendAddRequest)
+    public void listenFriendAddRequest(FriendAddRequest friendAddRequest, MsgSender msgSender) {
+        if (!checkQqInBanList(friendAddRequest.getQQCode())) {
+            msgSender.SENDER.sendGroupMsg("162279609", "收到" + friendAddRequest.getQQCode() + "的好友邀请，已同意");
+            msgSender.SETTER.setFriendAddRequest(friendAddRequest, "", true);
+        } else {
+            msgSender.SENDER.sendGroupMsg("162279609", "收到" + friendAddRequest.getQQCode() + "的好友邀请，处于黑名单中已拒绝");
+            msgSender.SETTER.setFriendAddRequest(friendAddRequest, "", false);
+        }
     }
 
     /**
@@ -221,6 +322,7 @@ public class Listener {
         }
     }
 
+
     private boolean messagesContainsAtMe(String messages, String tagBotSwitch, String tagMe) {
         return messages.trim().matches(tagBotSwitch) && messages.trim().contains(tagMe);
     }
@@ -244,6 +346,14 @@ public class Listener {
         if (!boolIsAdminOrInDiscuss) {
             sender(entityTypeMessages, MESSAGES_SYSTEM.get("onlyManager"));
             throw new OnlyManagerException(entityTypeMessages);
+        }
+    }
+
+    private boolean checkBeBan(String msg) {
+        if (msg.contains("禁言") && msg.contains(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()))) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

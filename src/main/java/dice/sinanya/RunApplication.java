@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 
 import static dice.sinanya.db.system.SelectBot.flushBot;
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
+import static dice.sinanya.tools.getinfo.BanList.flushBanList;
 import static dice.sinanya.tools.getinfo.DefaultMaxRolls.flushMaxRolls;
 import static dice.sinanya.tools.getinfo.GetLoginInfo.getLoginInfo;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
@@ -92,6 +93,7 @@ public class RunApplication implements HttpApp {
 //        从数据库中读取kp主群设定到缓存
         flushHistory();
 //        从数据库中读取骰点历史信息到缓存
+        flushBanList();
         new Prometheus().start();
 //        开启普罗米修斯监控端口
     }
