@@ -6,16 +6,17 @@ import com.forte.qqrobot.sender.MsgSender;
 import com.forte.qqrobot.timetask.TimeJob;
 import com.forte.qqrobot.timetask.TimeTaskContext;
 import com.forte.qqrobot.utils.CQCodeUtil;
-import dice.sinanya.db.history.SelectHistory;
-import dice.sinanya.db.kp.SelectKp;
-import dice.sinanya.db.log.tag.SelectLogTag;
-import dice.sinanya.db.roles.SelectRoles;
-import dice.sinanya.db.setdefaultrolls.SelectDefaultMaxRolls;
-import dice.sinanya.db.system.SelectBot;
-import dice.sinanya.db.team.SelectTeam;
 import org.quartz.JobExecutionContext;
 
+import static dice.sinanya.db.system.SelectBot.flushBot;
+import static dice.sinanya.tools.getinfo.DefaultMaxRolls.flushMaxRolls;
+import static dice.sinanya.tools.getinfo.History.flushHistory;
 import static dice.sinanya.tools.getinfo.History.setHistory;
+import static dice.sinanya.tools.getinfo.Kp.flushKp;
+import static dice.sinanya.tools.getinfo.LogTag.flushLogTag;
+import static dice.sinanya.tools.getinfo.RoleChoose.flushRoleChoose;
+import static dice.sinanya.tools.getinfo.RoleInfo.flushRoleInfoCache;
+import static dice.sinanya.tools.getinfo.Team.flushTeamEn;
 import static dice.sinanya.tools.getinfo.Team.saveTeamEn;
 
 /**
@@ -40,13 +41,22 @@ public class InputHistoryToDataBase implements TimeJob {
     public void execute(MsgSender msgSender, CQCodeUtil cqCodeUtil) {
         setHistory();
         saveTeamEn();
-        new SelectHistory().flushHistoryFromDatabase();
-        new SelectKp().flushKpFromDatabase();
-        new SelectLogTag().flushLogTagFromDatabase();
-        new SelectRoles().flushRoleChooseFromDatabase();
-        new SelectRoles().flushRoleInfoCacheFromDatabase();
-        new SelectDefaultMaxRolls().flushMaxRollsFromDatabase();
-        new SelectTeam().flushTeamEnFromDatabase();
+        flushTeamEn();
+//        从数据库中读取幕间成长到缓存
+        flushMaxRolls();
+//        从数据库中读取最大默认骰到缓存
+        flushBot();
+//        从数据库中读取机器人开关到缓存
+        flushRoleChoose();
+//        从数据库中读取当前已选角色到缓存
+        flushRoleInfoCache();
+//        从数据库中读取角色信息到缓存
+        flushLogTag();
+//        从数据库中读取日志开关到缓存
+        flushKp();
+//        从数据库中读取kp主群设定到缓存
+        flushHistory();
+//        从数据库中读取骰点历史信息到缓存
     }
 
     @Override

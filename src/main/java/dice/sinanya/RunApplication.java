@@ -23,6 +23,7 @@ import static dice.sinanya.tools.getinfo.Kp.flushKp;
 import static dice.sinanya.tools.getinfo.LogTag.flushLogTag;
 import static dice.sinanya.tools.getinfo.RoleChoose.flushRoleChoose;
 import static dice.sinanya.tools.getinfo.RoleInfo.flushRoleInfoCache;
+import static dice.sinanya.tools.getinfo.Team.flushTeamEn;
 import static dice.sinanya.tools.log.SendMail.sendMail;
 
 /**
@@ -75,6 +76,7 @@ public class RunApplication implements HttpApp {
         }
 
         log.info("开始刷写数据库");
+        flushTeamEn();
 //        从数据库中读取幕间成长到缓存
         flushMaxRolls();
 //        从数据库中读取最大默认骰到缓存
