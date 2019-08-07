@@ -207,7 +207,10 @@ class Flow {
         isRh = checkTagRegex(TAG_RH);
         isRa = checkTagRegex(TAG_RA) && !isRal && !isRav;
         isRc = checkTagRegex(TAG_RC) && !isRcl && !isRcv;
-        isr = checkTagRegex(TAGR) && !isRh && !isRa && !isRc && !isRb && !isRp && !isRi && !isRal && !isRcl && !isRav && !isRcv;
+
+        isRules = checkTagRegex(TAG_RULES);
+
+        isr = checkTagRegex(TAGR) && !isRh && !isRa && !isRc && !isRb && !isRp && !isRi && !isRal && !isRcl && !isRav && !isRcv && !isRules;
     }
 
     private void checkMessages() {
