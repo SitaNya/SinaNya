@@ -181,8 +181,8 @@ public interface MessagesHelp {
             .append("查看当前群组的日志列表")
             .append(SEQ)
 
-            .append(".log del\n")
-            .append(".log del test\t.log del 卡森德拉\n")
+            .append(".log rm\n")
+            .append(".log rm test\t.log rm 卡森德拉\n")
             .append("删除某个日志，基本很少会用到，删除后就再也找不回来了")
             .append(SEQ)
 
