@@ -120,6 +120,8 @@ class Flow {
 
     private boolean isHiy = false;
 
+    private boolean isRules = false;
+
     private boolean isJrrp = false;
 
     private boolean isTest = false;
@@ -245,6 +247,8 @@ class Flow {
             isTi = checkTagRegex(TAG_TI);
             isLi = checkTagRegex(TAG_LI);
 
+            isRules = checkTagRegex(TAG_RULES);
+
             isTest=checkTagRegex(TAG_TEST);
         }
     }
@@ -261,6 +265,7 @@ class Flow {
         History history = new History(entityTypeMessages);
         Jrrp jrrp = new Jrrp(entityTypeMessages);
         Test test=new Test(entityTypeMessages);
+        Rules rules = new Rules(entityTypeMessages);
 
         isFunctionR();
         isStFunction();
@@ -298,6 +303,10 @@ class Flow {
 //        if (isJrrp) {
 //            jrrp.get();
 //        }
+
+        if (isRules) {
+            rules.get();
+        }
 
         if (isTest){
             test.get();

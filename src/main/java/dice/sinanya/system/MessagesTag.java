@@ -142,4 +142,6 @@ public interface MessagesTag {
 
     //    获取测试标签
     String TAG_TEST = HEADER + "test[ ]*.*";
+
+    String TAG_RULES = HEADER + "rule[ ]*.*";
 }
