@@ -221,7 +221,7 @@ public class Listener implements MakeNickToSender {
         setLogs(entityTypeMessages, msgDisGroup.getMsg(), msgDisGroup.getGroupCode());
     }
 
-    @Listen(groupMemberReduce)
+    @Listen(MsgGetTypes.groupMemberReduce)
     public void listenerBanList(MsgSender msgSender, GroupMemberReduce groupMemberReduce) {
         if (groupMemberReduce.getBeOperatedQQ().equals(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()))) {
             msgSender.SENDER.sendGroupMsg("162279609", "已被移出群" + groupMemberReduce.getGroupCode() + "中，将群和操作者" + groupMemberReduce.getOperatorQQ() + "拉黑");
