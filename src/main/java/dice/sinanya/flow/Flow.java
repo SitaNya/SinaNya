@@ -248,6 +248,8 @@ class Flow {
             initLogTag();
         } else if (checkTagRegex(HEADER_CLUE + forAll)) {
             initClueTag();
+        } else if (checkTagRegex(HEADER_BAN + forAll)) {
+            banTag();
         } else if (checkTagRegex(TAGR)) {
             initDiceTag();
         } else {
