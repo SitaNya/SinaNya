@@ -133,10 +133,10 @@ public interface MessagesTag {
 
     //    获取云黑相关标签
     String HEADER_BAN = HEADER + "ban[ ]*";
-    String TAG_BAN_USER = HEADER_BAN + "user.*";
-    String TAG_BAN_GROUP = HEADER_BAN + "group.*";
-    String TAG_RM_BAN_USER = HEADER_BAN + "rm[ ]*user.*";
-    String TAG_RM_BAN_GROUP = HEADER_BAN + "rm[ ]*group.*";
+    String TAG_BAN_USER = HEADER_BAN + "user[ ]*[0-9]+";
+    String TAG_BAN_GROUP = HEADER_BAN + "group[ ]*[0-9]+";
+    String TAG_RM_BAN_USER = HEADER_BAN + "rm[ ]*user[ ]*[0-9]+";
+    String TAG_RM_BAN_GROUP = HEADER_BAN + "rm[ ]*group[ ]*[0-9]+";
     String TAG_BAN_USER_LIST = HEADER_BAN + "user[ ]*list.*";
     String TAG_BAN_GROUP_LIST = HEADER_BAN + "group[ ]*list.*";
 
