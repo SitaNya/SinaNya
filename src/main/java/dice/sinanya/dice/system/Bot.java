@@ -134,7 +134,7 @@ public class Bot implements AtQq, MakeNickToSender {
      */
     public void info() {
         String botInfo = MESSAGES_SYSTEM.toString();
-        if (botInfo.equals(NONE)) {
+        if (!botInfo.equals(NONE)) {
             botInfo = "\n" + botInfo;
         }
         EntityGroupCensus entityGroupCensus = selectBot();
