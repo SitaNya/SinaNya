@@ -38,7 +38,7 @@ public class BanList {
      */
     public void inputQqBanList() {
         String tag = TAG_BAN_USER;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag);
         try {
             isQqOrGroup(msg);
             insertQqBanList(msg, "手工录入");
@@ -54,7 +54,7 @@ public class BanList {
      */
     public void inputGroupBanList() {
         String tag = TAG_BAN_GROUP;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag);
         try {
             isQqOrGroup(msg);
             insertGroupBanList(msg, "手工录入");
@@ -70,7 +70,7 @@ public class BanList {
      */
     public void rmQqBanList() {
         String tag = TAG_RM_BAN_USER;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag);
         try {
             isQqOrGroup(msg);
             removeQqBanList(msg, entityTypeMessages);
@@ -86,7 +86,7 @@ public class BanList {
      */
     public void rmGroupBanList() {
         String tag = TAG_RM_BAN_GROUP;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag);
         try {
             isQqOrGroup(msg);
             removeGroupBanList(msg, entityTypeMessages);
