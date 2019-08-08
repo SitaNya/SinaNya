@@ -80,7 +80,7 @@ public class InputBanList {
      */
     public void removeQqBanList(String qq, EntityTypeMessages entityTypeMessages) throws NotBanListInputException {
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "delete from qqBanList where qq=? and botId=?";
+            String sql = "delete from qqBanList where qqId=? and botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, qq);
                 ps.setString(2, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
