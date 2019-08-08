@@ -46,7 +46,7 @@ public class InputBanList {
      */
     public void insertGroupBanList(String groupId, String reason) {
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "INSERT INTO groupBanList(botId,qqId,reason) VALUES(?,?,?)";
+            String sql = "INSERT INTO groupBanList(botId,groupId,reason) VALUES(?,?,?)";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
                 ps.setString(2, groupId);
