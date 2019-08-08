@@ -14,9 +14,10 @@ public interface MessagesSystem {
     String NONE = "";
     String SPACE = " ";
 
-    String VERSIONS = "1.5.16.38";
+    String VERSIONS = "2.5.17.40Beta";
     StringBuilder UPDATE=new StringBuilder()
             .append("更新日志:\n")
+            .append("2019年08月08日 支持云黑名单")
             .append("2019年08月07日 支持了规则查询rule命令，感谢夏浅秋、秃了秃了的支持");
 
     StringBuilder STR_BOT_VERSIONS = new StringBuilder()
