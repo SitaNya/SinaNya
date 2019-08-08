@@ -123,6 +123,7 @@ public class BanList {
 
     private void isQqOrGroup(String input) throws BanListInputNotIdException {
         if (!isNumeric(input) || input.length() > 15 || input.length() < 4) {
+            Log.error(input);
             throw new BanListInputNotIdException(entityTypeMessages);
         }
     }
