@@ -230,7 +230,7 @@ public class Listener implements MakeNickToSender {
         }
     }
 
-    @Listen(groupAddRequest)
+    @Listen(MsgGetTypes.groupAddRequest)
     public void listenGroupAddRequest(GroupAddRequest groupAddRequest, MsgSender msgSender) {
         if (groupAddRequest.getRequestType().isInvite()) {
             if (!checkQqInBanList(groupAddRequest.getQQCode()) && !checkGroupInBanList(groupAddRequest.getGroupCode())) {
@@ -243,7 +243,7 @@ public class Listener implements MakeNickToSender {
         }
     }
 
-    @Listen(friendAddRequest)
+    @Listen(MsgGetTypes.friendAddRequest)
     public void listenFriendAddRequest(FriendAddRequest friendAddRequest, MsgSender msgSender) {
         if (!checkQqInBanList(friendAddRequest.getQQCode())) {
             msgSender.SENDER.sendGroupMsg("162279609", "收到" + friendAddRequest.getQQCode() + "的好友邀请，已同意");
