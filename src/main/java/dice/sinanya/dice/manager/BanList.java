@@ -42,6 +42,7 @@ public class BanList {
         try {
             isQqOrGroup(msg);
             insertQqBanList(msg, "手工录入");
+            sender(entityTypeMessages,"已将用户:\t"+msg+"加入云黑名单");
         } catch (BanListInputNotIdException e) {
             Log.error(e.getMessage(), e);
         }
@@ -57,6 +58,7 @@ public class BanList {
         try {
             isQqOrGroup(msg);
             insertGroupBanList(msg, "手工录入");
+            sender(entityTypeMessages,"已将群:\t"+msg+"加入云黑名单");
         } catch (BanListInputNotIdException e) {
             Log.error(e.getMessage(), e);
         }
@@ -72,6 +74,7 @@ public class BanList {
         try {
             isQqOrGroup(msg);
             removeQqBanList(msg, entityTypeMessages);
+            sender(entityTypeMessages,"已将用户:\t"+msg+"移出云黑名单");
         } catch (BanListInputNotIdException | NotBanListInputException e) {
             Log.error(e.getMessage(), e);
         }
@@ -87,6 +90,7 @@ public class BanList {
         try {
             isQqOrGroup(msg);
             removeGroupBanList(msg, entityTypeMessages);
+            sender(entityTypeMessages,"已将群:\t"+msg+"移出云黑名单");
         } catch (BanListInputNotIdException | NotBanListInputException e) {
             Log.error(e.getMessage(), e);
         }
