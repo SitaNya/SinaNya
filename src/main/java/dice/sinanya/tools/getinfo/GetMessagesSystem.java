@@ -102,6 +102,9 @@ public class GetMessagesSystem {
         MESSAGES_SYSTEM.put("FAILURE", "");
         MESSAGES_SYSTEM.put("FUMBLE", "");
 
+        MESSAGES_SYSTEM.put("notMaster","除设定的Master外其他人不可使用此命令");
+        MESSAGES_SYSTEM.put("master","0");
+
         MESSAGES_SYSTEM.put("PrometheusPort", "1234");
     }
 

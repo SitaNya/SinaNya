@@ -3,6 +3,7 @@ package dice.sinanya.dice.manager;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.BanListInputNotIdException;
 import dice.sinanya.exceptions.NotBanListInputException;
+import dice.sinanya.exceptions.NotMasterException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,6 +14,7 @@ import static dice.sinanya.system.MessagesBanList.qqBanList;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.getinfo.BanList.*;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
@@ -37,6 +39,11 @@ public class BanList {
      *
      */
     public void inputQqBanList() {
+        try {
+            checkMaster();
+        } catch (NotMasterException e) {
+            Log.error(e.getMessage(), e);
+        }
         String tag = TAG_BAN_USER;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 4));
         try {
@@ -53,6 +60,11 @@ public class BanList {
      *
      */
     public void inputGroupBanList() {
+        try {
+            checkMaster();
+        } catch (NotMasterException e) {
+            Log.error(e.getMessage(), e);
+        }
         String tag = TAG_BAN_GROUP;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 4));
         try {
@@ -69,6 +81,11 @@ public class BanList {
      *
      */
     public void rmQqBanList() {
+        try {
+            checkMaster();
+        } catch (NotMasterException e) {
+            Log.error(e.getMessage(), e);
+        }
         String tag = TAG_RM_BAN_USER;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 4));
         try {
@@ -85,6 +102,11 @@ public class BanList {
      *
      */
     public void rmGroupBanList() {
+        try {
+            checkMaster();
+        } catch (NotMasterException e) {
+            Log.error(e.getMessage(), e);
+        }
         String tag = TAG_RM_BAN_GROUP;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 4));
         try {
@@ -101,6 +123,11 @@ public class BanList {
      *
      */
     public void getQqBanList() {
+        try {
+            checkMaster();
+        } catch (NotMasterException e) {
+            Log.error(e.getMessage(), e);
+        }
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("当前云黑内记录的黑名单用户列表如下，黑名单的刷新周期为15分钟，其他人新添加的黑名单可能暂时未同步");
         for (Map.Entry<String, String> mapEntry : qqBanList.entrySet()) {
@@ -125,6 +152,12 @@ public class BanList {
         if (!isNumeric(input) || input.length() > 15 || input.length() < 4) {
             Log.error(input);
             throw new BanListInputNotIdException(entityTypeMessages);
+        }
+    }
+
+    private void checkMaster() throws NotMasterException {
+        if (!entityTypeMessages.getFromQq().equals(MESSAGES_SYSTEM.get("master"))) {
+            throw new NotMasterException(entityTypeMessages);
         }
     }
 }
