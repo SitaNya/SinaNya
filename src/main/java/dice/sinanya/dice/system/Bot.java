@@ -133,7 +133,7 @@ public class Bot implements AtQq, MakeNickToSender {
      * 机器人信息
      */
     public void info() {
-        String botInfo = MESSAGES_SYSTEM.toString();
+        String botInfo = MESSAGES_SYSTEM.get("botInfo").toString();
         if (!botInfo.equals(NONE)) {
             botInfo = "\n" + botInfo;
         }
