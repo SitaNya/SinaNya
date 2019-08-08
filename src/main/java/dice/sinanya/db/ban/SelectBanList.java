@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 
 import static dice.sinanya.system.MessagesBanList.groupBanList;
 import static dice.sinanya.system.MessagesBanList.qqBanList;
@@ -28,9 +27,9 @@ public class SelectBanList {
      * 读取数据库中的骰点历史信息到缓存
      */
     public void flushQqBanListFromDataBase() {
-        qqBanList = new HashMap<>();
+        qqBanList.clear();
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from qqBanList";
+            String sql = "select * from qqBanList order by qqId";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
@@ -47,9 +46,9 @@ public class SelectBanList {
      * 读取数据库中的骰点历史信息到缓存
      */
     public void flushGroupBanListFromDataBase() {
-        groupBanList = new HashMap<>();
+        groupBanList.clear();
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select * from groupBanList";
+            String sql = "select * from groupBanList order by groupId";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
