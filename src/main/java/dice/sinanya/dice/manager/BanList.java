@@ -39,18 +39,14 @@ public class BanList {
      *
      */
     public void inputQqBanList() {
-        try {
-            checkMaster();
-        } catch (NotMasterException e) {
-            Log.error(e.getMessage(), e);
-        }
         String tag = TAG_BAN_USER;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 4));
         try {
+            checkMaster();
             isQqOrGroup(msg);
             insertQqBanList(msg, "手工录入");
             sender(entityTypeMessages,"已将用户:\t"+msg+"加入云黑名单");
-        } catch (BanListInputNotIdException e) {
+        } catch (BanListInputNotIdException|NotMasterException e) {
             Log.error(e.getMessage(), e);
         }
     }
@@ -60,18 +56,14 @@ public class BanList {
      *
      */
     public void inputGroupBanList() {
-        try {
-            checkMaster();
-        } catch (NotMasterException e) {
-            Log.error(e.getMessage(), e);
-        }
         String tag = TAG_BAN_GROUP;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 4));
         try {
+            checkMaster();
             isQqOrGroup(msg);
             insertGroupBanList(msg, "手工录入");
             sender(entityTypeMessages,"已将群:\t"+msg+"加入云黑名单");
-        } catch (BanListInputNotIdException e) {
+        } catch (BanListInputNotIdException|NotMasterException e) {
             Log.error(e.getMessage(), e);
         }
     }
@@ -81,18 +73,14 @@ public class BanList {
      *
      */
     public void rmQqBanList() {
-        try {
-            checkMaster();
-        } catch (NotMasterException e) {
-            Log.error(e.getMessage(), e);
-        }
         String tag = TAG_RM_BAN_USER;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 4));
         try {
+            checkMaster();
             isQqOrGroup(msg);
             removeQqBanList(msg, entityTypeMessages);
             sender(entityTypeMessages,"已将用户:\t"+msg+"移出云黑名单");
-        } catch (BanListInputNotIdException | NotBanListInputException e) {
+        } catch (BanListInputNotIdException | NotBanListInputException|NotMasterException e) {
             Log.error(e.getMessage(), e);
         }
     }
@@ -102,18 +90,14 @@ public class BanList {
      *
      */
     public void rmGroupBanList() {
-        try {
-            checkMaster();
-        } catch (NotMasterException e) {
-            Log.error(e.getMessage(), e);
-        }
         String tag = TAG_RM_BAN_GROUP;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 4));
         try {
+            checkMaster();
             isQqOrGroup(msg);
             removeGroupBanList(msg, entityTypeMessages);
             sender(entityTypeMessages,"已将群:\t"+msg+"移出云黑名单");
-        } catch (BanListInputNotIdException | NotBanListInputException e) {
+        } catch (BanListInputNotIdException | NotBanListInputException|NotMasterException e) {
             Log.error(e.getMessage(), e);
         }
     }
@@ -125,15 +109,15 @@ public class BanList {
     public void getQqBanList() {
         try {
             checkMaster();
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("当前云黑内记录的黑名单用户列表如下，黑名单的刷新周期为15分钟，其他人新添加的黑名单可能暂时未同步");
+            for (Map.Entry<String, String> mapEntry : qqBanList.entrySet()) {
+                stringBuilder.append("\n").append(mapEntry.getKey());
+            }
+            sender(entityTypeMessages, stringBuilder.toString());
         } catch (NotMasterException e) {
-            Log.error(e.getMessage(), e);
+            Log.error(e.getMessage(),e);
         }
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("当前云黑内记录的黑名单用户列表如下，黑名单的刷新周期为15分钟，其他人新添加的黑名单可能暂时未同步");
-        for (Map.Entry<String, String> mapEntry : qqBanList.entrySet()) {
-            stringBuilder.append("\n").append(mapEntry.getKey());
-        }
-        sender(entityTypeMessages, stringBuilder.toString());
     }
 
     /**
