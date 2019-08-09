@@ -8,6 +8,7 @@ import com.forte.qqrobot.sender.MsgSender;
 import com.forte.qqrobot.timetask.TimeJob;
 import com.forte.qqrobot.timetask.TimeTaskContext;
 import com.forte.qqrobot.utils.CQCodeUtil;
+import dice.sinanya.db.heap.InsertHeap;
 import dice.sinanya.dice.MakeNickToSender;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -50,6 +51,7 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
         if (checkHasGroup(msgSender, groupManager)) {
             autoClean(msgSender);
         }
+        new InsertHeap().updateHeap();
     }
 
     @Override

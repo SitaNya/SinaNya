@@ -106,6 +106,8 @@ public class GetMessagesSystem {
         MESSAGES_SYSTEM.put("master","0");
 
         MESSAGES_SYSTEM.put("PrometheusPort", "1234");
+
+        MESSAGES_SYSTEM.put("heap","true");
     }
 
     private GetMessagesSystem() {
