@@ -107,7 +107,8 @@ public class GetMessagesSystem {
 
         MESSAGES_SYSTEM.put("PrometheusPort", "1234");
 
-        MESSAGES_SYSTEM.put("heap","true");
+        MESSAGES_SYSTEM.put("heap","false");
+        MESSAGES_SYSTEM.put("cloudBan","true");
     }
 
     private GetMessagesSystem() {

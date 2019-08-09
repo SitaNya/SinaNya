@@ -14,9 +14,10 @@ public interface MessagesSystem {
     String NONE = "";
     String SPACE = " ";
 
-    String VERSIONS = "2.6.18.42Beta";
+    String VERSIONS = "2.6.19.43Beta";
     StringBuilder UPDATE=new StringBuilder()
             .append("更新日志:\n")
+            .append("2019年08月09日 增加配置文件云黑开关\n")
             .append("2019年08月09日 增加心跳连接\n")
             .append("2019年08月08日 支持云黑名单\n")
             .append("2019年08月07日 支持了规则查询rule命令，感谢夏浅秋、秃了秃了的支持");

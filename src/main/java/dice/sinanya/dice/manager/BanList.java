@@ -39,6 +39,10 @@ public class BanList {
      *
      */
     public void inputQqBanList() {
+        if (!Boolean.parseBoolean(MESSAGES_SYSTEM.get("cloudBan"))) {
+            sender(entityTypeMessages,"配置文件中未启用云黑");
+            return;
+        }
         String tag = TAG_BAN_USER;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 4));
         try {
@@ -56,6 +60,10 @@ public class BanList {
      *
      */
     public void inputGroupBanList() {
+        if (!Boolean.parseBoolean(MESSAGES_SYSTEM.get("cloudBan"))) {
+            sender(entityTypeMessages,"配置文件中未启用云黑");
+            return;
+        }
         String tag = TAG_BAN_GROUP;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 4));
         try {
@@ -73,6 +81,10 @@ public class BanList {
      *
      */
     public void rmQqBanList() {
+        if (!Boolean.parseBoolean(MESSAGES_SYSTEM.get("cloudBan"))) {
+            sender(entityTypeMessages,"配置文件中未启用云黑");
+            return;
+        }
         String tag = TAG_RM_BAN_USER;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 4));
         try {
@@ -90,6 +102,10 @@ public class BanList {
      *
      */
     public void rmGroupBanList() {
+        if (!Boolean.parseBoolean(MESSAGES_SYSTEM.get("cloudBan"))) {
+            sender(entityTypeMessages,"配置文件中未启用云黑");
+            return;
+        }
         String tag = TAG_RM_BAN_GROUP;
         String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 4));
         try {
@@ -107,6 +123,10 @@ public class BanList {
      *
      */
     public void getQqBanList() {
+        if (!Boolean.parseBoolean(MESSAGES_SYSTEM.get("cloudBan"))) {
+            sender(entityTypeMessages,"配置文件中未启用云黑");
+            return;
+        }
         try {
             checkMaster();
             StringBuilder stringBuilder = new StringBuilder();
@@ -124,6 +144,10 @@ public class BanList {
      *
      */
     public void getGroupBanList() {
+        if (!Boolean.parseBoolean(MESSAGES_SYSTEM.get("cloudBan"))) {
+            sender(entityTypeMessages,"配置文件中未启用云黑");
+            return;
+        }
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("当前云黑内记录的黑名单群列表如下，黑名单的刷新周期为15分钟，其他人新添加的黑名单可能暂时未同步");
         for (Map.Entry<String, String> mapEntry : groupBanList.entrySet()) {

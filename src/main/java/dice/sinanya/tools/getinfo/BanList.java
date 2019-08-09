@@ -7,6 +7,7 @@ import dice.sinanya.exceptions.NotBanListInputException;
 
 import static dice.sinanya.system.MessagesBanList.groupBanList;
 import static dice.sinanya.system.MessagesBanList.qqBanList;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 
 /**
  * @author SitaNya
@@ -26,8 +27,10 @@ public class BanList {
     private static InputBanList insertBanList = new InputBanList();
 
     public static void flushBanList() {
-        selectBanList.flushGroupBanListFromDataBase();
-        selectBanList.flushQqBanListFromDataBase();
+        if (Boolean.parseBoolean(MESSAGES_SYSTEM.get("cloudBan"))){
+            selectBanList.flushGroupBanListFromDataBase();
+            selectBanList.flushQqBanListFromDataBase();
+        }
     }
 
     public static void insertQqBanList(String qq, String reason) {
