@@ -185,7 +185,6 @@ public class Listener implements MakeNickToSender {
             insertGroupBanList(entityTypeMessages.getFromGroup(), "被禁言");
             return;
         }
-
         setLogs(entityTypeMessages, msgGroup.getMsg(), msgGroup.getGroupCode());
     }
 
