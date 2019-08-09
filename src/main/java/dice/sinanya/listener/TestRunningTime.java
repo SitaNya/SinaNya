@@ -21,6 +21,7 @@ import static dice.sinanya.db.system.SelectBot.selectOffBotList;
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.GetTime.getNowString;
+import static dice.sinanya.tools.makedata.RandomInt.random;
 
 /**
  * @author SitaNya
@@ -50,6 +51,11 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
         }
         if (checkHasGroup(msgSender, groupManager)) {
             autoClean(msgSender);
+            try {
+                Thread.sleep(random(2000, 12000));
+            } catch (InterruptedException e) {
+                log.error(e.getMessage(), e);
+            }
             autoCleanNotPlay(msgSender);
         }
         try{
