@@ -51,7 +51,13 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
         if (checkHasGroup(msgSender, groupManager)) {
             autoClean(msgSender);
         }
-        new InsertHeap().updateHeap();
+        try{
+            msgSender.GETTER.getGroupList();
+            new InsertHeap().updateHeap();
+        }catch (Exception e){
+            log.error(e.getMessage(),e);
+            log.error("获取群列表失败，停止心跳");
+        }
     }
 
     @Override
