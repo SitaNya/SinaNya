@@ -29,11 +29,12 @@ public class InsertHeap {
      */
     public void updateHeap() {
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "replace into heap(botId,time,enable)  VALUES (?,?,?);";
+            String sql = "replace into heap(botId,time,enable,botMaster)  VALUES (?,?,?,?);";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
                 ps.setTimestamp(2, getTime(getNowString()));
                 ps.setBoolean(3, Boolean.parseBoolean(MESSAGES_SYSTEM.get("heap")));
+                ps.setString(4,MESSAGES_SYSTEM.get("master"));
 
                 ps.executeUpdate();
             }
