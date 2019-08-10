@@ -236,6 +236,11 @@ public class Listener implements MakeNickToSender {
             if (!checkQqInBanList(groupAddRequest.getQQCode()) && !checkGroupInBanList(groupAddRequest.getGroupCode())) {
                 msgSender.SETTER.setGroupAddRequest(groupAddRequest, true, "");
                 msgSender.SENDER.sendGroupMsg(groupAddRequest.getGroupCode(), MESSAGES_SYSTEM.get("addGroup"));
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    log.error(e.getMessage(), e);
+                }
                 msgSender.SENDER.sendGroupMsg("162279609", "收到[" + getNickName(msgSender, groupAddRequest.getQQCode()) + "(" + groupAddRequest.getQQCode() + ")]的群[" + getGroupName(msgSender, groupAddRequest.getGroupCode()) + "(" + groupAddRequest.getGroupCode() + ")]邀请，已同意");
             } else {
                 msgSender.SENDER.sendGroupMsg("162279609", "收到" + groupAddRequest.getQQCode() + "的群" + groupAddRequest.getGroupCode() + "邀请，处于黑名单中已拒绝");
