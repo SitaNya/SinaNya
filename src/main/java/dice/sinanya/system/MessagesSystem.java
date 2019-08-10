@@ -14,7 +14,7 @@ public interface MessagesSystem {
     String NONE = "";
     String SPACE = " ";
 
-    String VERSIONS = "2.6.19.43Beta";
+    String VERSIONS = "2.6.20.44Beta";
     StringBuilder UPDATE=new StringBuilder()
             .append("更新日志:\n")
             .append("2019年08月09日 增加配置文件云黑开关\n")

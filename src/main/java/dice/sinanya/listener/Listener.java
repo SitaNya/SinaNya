@@ -22,6 +22,7 @@ import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.BanList.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
+import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
 import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
 import static dice.sinanya.tools.getinfo.LogText.setLogText;
@@ -180,7 +181,7 @@ public class Listener implements MakeNickToSender {
         }
         if (checkBeBan(msgGet.getMsg())) {
             sender(entityTypeMessages, "于群" + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
-            msgSender.SENDER.sendGroupMsg("162279609", "于群" + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
+            msgSender.SENDER.sendGroupMsg("162279609", "于群" + makeGroupNickToSender(getGroupName(msgSender, entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
             msgSender.SETTER.setDiscussLeave(entityTypeMessages.getFromGroup());
             insertGroupBanList(entityTypeMessages.getFromGroup(), "被禁言");
             return;
@@ -206,7 +207,7 @@ public class Listener implements MakeNickToSender {
         }
         if (checkBeBan(msgGet.getMsg())) {
             sender(entityTypeMessages, "于讨论组" + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
-            msgSender.SENDER.sendGroupMsg("162279609", "于讨论组" + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
+            msgSender.SENDER.sendGroupMsg("162279609", "于讨论组" + makeGroupNickToSender(getGroupName(msgSender, entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
             msgSender.SETTER.setDiscussLeave(entityTypeMessages.getFromGroup());
             insertGroupBanList(entityTypeMessages.getFromGroup(), "被禁言");
             return;
@@ -223,7 +224,7 @@ public class Listener implements MakeNickToSender {
     @Listen(MsgGetTypes.groupMemberReduce)
     public void listenerBanList(MsgSender msgSender, GroupMemberReduce groupMemberReduce) {
         if (groupMemberReduce.getBeOperatedQQ().equals(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()))) {
-            msgSender.SENDER.sendGroupMsg("162279609", "已被移出群" + groupMemberReduce.getGroupCode() + "中，将群和操作者" + groupMemberReduce.getOperatorQQ() + "拉黑");
+            msgSender.SENDER.sendGroupMsg("162279609", "已被移出群" + groupMemberReduce.getGroupCode() + "中，将群和操作者" + getNickName(msgSender, groupMemberReduce.getOperatorQQ()) + "(" + groupMemberReduce.getOperatorQQ() + ")拉黑");
             insertQqBanList(groupMemberReduce.getOperatorQQ(), "被踢出群" + groupMemberReduce.getGroupCode());
             insertGroupBanList(groupMemberReduce.getGroupCode(), "被" + groupMemberReduce.getBeOperatedQQ() + "踢出");
         }
@@ -234,10 +235,10 @@ public class Listener implements MakeNickToSender {
         if (groupAddRequest.getRequestType().isInvite()) {
             if (!checkQqInBanList(groupAddRequest.getQQCode()) && !checkGroupInBanList(groupAddRequest.getGroupCode())) {
                 msgSender.SETTER.setGroupAddRequest(groupAddRequest, true, "");
-                msgSender.SENDER.sendGroupMsg("162279609", "收到" + groupAddRequest.getQQ() + "(" + groupAddRequest.getQQCode() + ")的群" + groupAddRequest.getGroup() + "(" + groupAddRequest.getGroupCode() + ")邀请，已同意");
+                msgSender.SENDER.sendGroupMsg("162279609", "收到[" + getNickName(msgSender, groupAddRequest.getQQ()) + "(" + groupAddRequest.getQQCode() + ")]的群[" + getGroupName(msgSender, groupAddRequest.getGroup()) + "(" + groupAddRequest.getGroupCode() + ")]邀请，已同意");
                 msgSender.SENDER.sendGroupMsg(groupAddRequest.getGroupCode(), MESSAGES_SYSTEM.get("addGroup"));
             } else {
-                msgSender.SENDER.sendGroupMsg("162279609", "收到" + groupAddRequest.getQQCode() + "的群" +groupAddRequest.getGroupCode() + "邀请，处于黑名单中已拒绝");
+                msgSender.SENDER.sendGroupMsg("162279609", "收到" + groupAddRequest.getQQCode() + "的群" + groupAddRequest.getGroupCode() + "邀请，处于黑名单中已拒绝");
                 msgSender.SETTER.setGroupAddRequest(groupAddRequest, false, "群或邀请人处于黑名单内");
             }
         }
@@ -246,8 +247,8 @@ public class Listener implements MakeNickToSender {
     @Listen(MsgGetTypes.friendAddRequest)
     public void listenFriendAddRequest(FriendAddRequest friendAddRequest, MsgSender msgSender) {
         if (!checkQqInBanList(friendAddRequest.getQQCode())) {
-            msgSender.SENDER.sendGroupMsg("162279609", "收到" + friendAddRequest.getQQ() + "(" + friendAddRequest.getQQCode() + ")的好友邀请，已同意");
             msgSender.SETTER.setFriendAddRequest(friendAddRequest, "", true);
+            msgSender.SENDER.sendGroupMsg("162279609", "收到[" + getNickName(msgSender, friendAddRequest.getQQCode()) + "(" + friendAddRequest.getQQCode() + ")]的好友邀请，已同意");
             msgSender.SENDER.sendPrivateMsg(friendAddRequest.getQQCode(), MESSAGES_SYSTEM.get("addFriend"));
         } else {
             msgSender.SENDER.sendGroupMsg("162279609", "收到" + friendAddRequest.getQQCode() + "的好友邀请，处于黑名单中已拒绝");
@@ -260,8 +261,8 @@ public class Listener implements MakeNickToSender {
      * 内容为将某一句消息插入log数据库
      *
      * @param entityTypeMessages 消息封装类
-     * @param msg             消息对象
-     * @param groupId 群号
+     * @param msg                消息对象
+     * @param groupId            群号
      */
     private void setLogs(EntityTypeMessages entityTypeMessages, String msg, String groupId) {
         if (msg.charAt(0) != '.') {
