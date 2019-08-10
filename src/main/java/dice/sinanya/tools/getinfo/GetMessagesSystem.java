@@ -110,8 +110,8 @@ public class GetMessagesSystem {
         MESSAGES_SYSTEM.put("heap","false");
         MESSAGES_SYSTEM.put("cloudBan","true");
 
-        MESSAGES_SYSTEM.put("addGroup","已通过您的好友邀请");
-        MESSAGES_SYSTEM.put("addFriend","骰娘已加入本群");
+        MESSAGES_SYSTEM.put("addGroup","骰娘已加入本群");
+        MESSAGES_SYSTEM.put("addFriend","已通过您的好友邀请");
     }
 
     private GetMessagesSystem() {

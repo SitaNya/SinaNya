@@ -235,8 +235,8 @@ public class Listener implements MakeNickToSender {
         if (groupAddRequest.getRequestType().isInvite()) {
             if (!checkQqInBanList(groupAddRequest.getQQCode()) && !checkGroupInBanList(groupAddRequest.getGroupCode())) {
                 msgSender.SETTER.setGroupAddRequest(groupAddRequest, true, "");
-                msgSender.SENDER.sendGroupMsg("162279609", "收到[" + getNickName(msgSender, groupAddRequest.getQQ()) + "(" + groupAddRequest.getQQCode() + ")]的群[" + getGroupName(msgSender, groupAddRequest.getGroup()) + "(" + groupAddRequest.getGroupCode() + ")]邀请，已同意");
                 msgSender.SENDER.sendGroupMsg(groupAddRequest.getGroupCode(), MESSAGES_SYSTEM.get("addGroup"));
+                msgSender.SENDER.sendGroupMsg("162279609", "收到[" + getNickName(msgSender, groupAddRequest.getQQ()) + "(" + groupAddRequest.getQQCode() + ")]的群[" + getGroupName(msgSender, groupAddRequest.getGroup()) + "(" + groupAddRequest.getGroupCode() + ")]邀请，已同意");
             } else {
                 msgSender.SENDER.sendGroupMsg("162279609", "收到" + groupAddRequest.getQQCode() + "的群" + groupAddRequest.getGroupCode() + "邀请，处于黑名单中已拒绝");
                 msgSender.SETTER.setGroupAddRequest(groupAddRequest, false, "群或邀请人处于黑名单内");
@@ -248,8 +248,8 @@ public class Listener implements MakeNickToSender {
     public void listenFriendAddRequest(FriendAddRequest friendAddRequest, MsgSender msgSender) {
         if (!checkQqInBanList(friendAddRequest.getQQCode())) {
             msgSender.SETTER.setFriendAddRequest(friendAddRequest, "", true);
-            msgSender.SENDER.sendGroupMsg("162279609", "收到[" + getNickName(msgSender, friendAddRequest.getQQCode()) + "(" + friendAddRequest.getQQCode() + ")]的好友邀请，已同意");
             msgSender.SENDER.sendPrivateMsg(friendAddRequest.getQQCode(), MESSAGES_SYSTEM.get("addFriend"));
+            msgSender.SENDER.sendGroupMsg("162279609", "收到[" + getNickName(msgSender, friendAddRequest.getQQCode()) + "(" + friendAddRequest.getQQCode() + ")]的好友邀请，已同意");
         } else {
             msgSender.SENDER.sendGroupMsg("162279609", "收到" + friendAddRequest.getQQCode() + "的好友邀请，处于黑名单中已拒绝");
             msgSender.SETTER.setFriendAddRequest(friendAddRequest, "", false);
