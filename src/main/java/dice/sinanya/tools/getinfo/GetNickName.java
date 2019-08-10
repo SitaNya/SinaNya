@@ -74,7 +74,7 @@ public class GetNickName implements RootBean {
      * @return 昵称
      */
     public static String getGroupName(EntityTypeMessages entityTypeMessages, String groupId) {
-        return entityTypeMessages.getMsgSender().getGroupInfoByCode(groupId).getName();
+        return entityTypeMessages.getMsgSender().GETTER.getGroupInfo(groupId).getName();
     }
 
     /**
@@ -84,6 +84,6 @@ public class GetNickName implements RootBean {
      * @return 昵称
      */
     public static String getGroupName(MsgSender msgSender, String groupId) {
-        return msgSender.getGroupInfoByCode(groupId).getName();
+        return  msgSender.GETTER.getGroupInfo(groupId).getName();
     }
 }
