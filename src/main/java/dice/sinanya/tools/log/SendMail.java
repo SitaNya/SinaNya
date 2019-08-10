@@ -123,6 +123,7 @@ public class SendMail {
         String host = mb.getHost();
         final String username = mb.getUsername();
         final String password = mb.getPassword();
+        final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
         String from = mb.getFrom();
         String to = mb.getTo();
         String subject = mb.getSubject();
@@ -133,6 +134,11 @@ public class SendMail {
         Properties props = System.getProperties();
         props.put("mail.smtp.host", host);
         // 设置SMTP的主机
+        props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+        props.setProperty("mail.smtp.socketFactory.fallback", "false");
+        //邮箱发送服务器端口,这里设置为465端口
+        props.setProperty("mail.smtp.port", "465");
+        props.setProperty("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.auth", "true");
         // 需要经过验证
 

@@ -17,7 +17,7 @@ import dice.sinanya.flow.Flow;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import static com.forte.qqrobot.beans.messages.types.MsgGetTypes.*;
+import static com.forte.qqrobot.beans.messages.types.MsgGetTypes.discussMsg;
 import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.tools.getinfo.BanList.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
@@ -233,8 +233,9 @@ public class Listener implements MakeNickToSender {
     public void listenGroupAddRequest(GroupAddRequest groupAddRequest, MsgSender msgSender) {
         if (groupAddRequest.getRequestType().isInvite()) {
             if (!checkQqInBanList(groupAddRequest.getQQCode()) && !checkGroupInBanList(groupAddRequest.getGroupCode())) {
-                msgSender.SENDER.sendGroupMsg("162279609", "收到" + groupAddRequest.getQQCode() + "的群" +groupAddRequest.getGroupCode() + "邀请，已同意");
                 msgSender.SETTER.setGroupAddRequest(groupAddRequest, true, "");
+                msgSender.SENDER.sendGroupMsg("162279609", "收到" + groupAddRequest.getQQ() + "(" + groupAddRequest.getQQCode() + ")的群" + groupAddRequest.getGroup() + "(" + groupAddRequest.getGroupCode() + ")邀请，已同意");
+                msgSender.SENDER.sendGroupMsg(groupAddRequest.getGroupCode(), MESSAGES_SYSTEM.get("addGroup"));
             } else {
                 msgSender.SENDER.sendGroupMsg("162279609", "收到" + groupAddRequest.getQQCode() + "的群" +groupAddRequest.getGroupCode() + "邀请，处于黑名单中已拒绝");
                 msgSender.SETTER.setGroupAddRequest(groupAddRequest, false, "群或邀请人处于黑名单内");
@@ -245,8 +246,9 @@ public class Listener implements MakeNickToSender {
     @Listen(MsgGetTypes.friendAddRequest)
     public void listenFriendAddRequest(FriendAddRequest friendAddRequest, MsgSender msgSender) {
         if (!checkQqInBanList(friendAddRequest.getQQCode())) {
-            msgSender.SENDER.sendGroupMsg("162279609", "收到" + friendAddRequest.getQQCode() + "的好友邀请，已同意");
+            msgSender.SENDER.sendGroupMsg("162279609", "收到" + friendAddRequest.getQQ() + "(" + friendAddRequest.getQQCode() + ")的好友邀请，已同意");
             msgSender.SETTER.setFriendAddRequest(friendAddRequest, "", true);
+            msgSender.SENDER.sendPrivateMsg(friendAddRequest.getQQCode(), MESSAGES_SYSTEM.get("addFriend"));
         } else {
             msgSender.SENDER.sendGroupMsg("162279609", "收到" + friendAddRequest.getQQCode() + "的好友邀请，处于黑名单中已拒绝");
             msgSender.SETTER.setFriendAddRequest(friendAddRequest, "", false);
