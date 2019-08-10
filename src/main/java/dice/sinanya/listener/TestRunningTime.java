@@ -106,7 +106,7 @@ public class TestRunningTime implements TimeJob, MakeNickToSender {
                         msgSender.SETTER.setGroupLeave(offBotGroupId);
                     }
                 } else {
-                    msgSender.SENDER.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 60 / 60 / 24 + "日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
+                    msgSender.SENDER.sendGroupMsg(groupManager, "已清理" + lastMsgForNow/1000 / 60 / 60 / 24 + "日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId);
                     msgSender.SENDER.sendGroupMsg(offBotGroupId, "已在群: " + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId + "中超过5日未响应且处于关闭状态，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题");
                     while (checkHasGroup(msgSender, offBotGroupId)) {
                         log.info("尝试退出群" + makeGroupNickToSender(getGroupName(msgSender, offBotGroupId)) + offBotGroupId + " type: " + type);
