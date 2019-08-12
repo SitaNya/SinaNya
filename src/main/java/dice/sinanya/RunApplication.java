@@ -13,6 +13,7 @@ import dice.sinanya.exceptions.OnlyManagerException;
 import dice.sinanya.flow.Flow;
 import dice.sinanya.monitor.Prometheus;
 
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -453,6 +454,16 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
             setLogText(entityTypeMessages, new EntityLogTag(entityTypeMessages.getFromGroup(), getOtherLogTrue(entityTypeMessages.getFromGroup())), entityTypeMessages.getMsg());
         }
+    }
+
+    public int menuA(){
+        JOptionPane.showMessageDialog(null, "这是测试菜单A，可以在这里加载窗口");
+        return 0;
+    }
+
+    public int menuB(){
+        JOptionPane.showMessageDialog(null, "这是测试菜单A，可以在这里加载窗口");
+        return 0
     }
 
     /**
