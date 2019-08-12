@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesAntagonize.ANTAGONIZE;
 import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.*;
@@ -54,7 +55,7 @@ public class RollAndCheck implements En, MakeNickToSender {
      */
     public void ra() {
         String tag = TAG_RA;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +", "");
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +", "");
         String result = check(msg, false);
         sender(entityTypeMessages, result);
     }
@@ -64,7 +65,7 @@ public class RollAndCheck implements En, MakeNickToSender {
      */
     public void rc() {
         String tag = TAG_RC;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +", "").replaceAll(" +", "");
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +", "").replaceAll(" +", "");
         String result = check(msg, true);
         sender(entityTypeMessages, result);
     }
@@ -77,7 +78,7 @@ public class RollAndCheck implements En, MakeNickToSender {
      */
     public void rav() throws NotSetKpGroupException {
         String tag = TAG_RAV;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +", "");
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +", "");
         EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
         if (entityNickAndRandomAndSkill.getSkill() == 0) {
             sender(entityTypeMessages, "请输入技能名或技能值");
@@ -100,11 +101,11 @@ public class RollAndCheck implements En, MakeNickToSender {
             sender(entityTypeMessages, stringBuilder.toString());
             checkAntagonize(entityTypeMessages, thisEntityAntagonize, entityAntagonize, groupId);
             ANTAGONIZE.remove(groupId);
-            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeOver"));
+            CQ.sendGroupMsg(Long.parseLong(groupId), MESSAGES_SYSTEM.get("antagonizeOver"));
         } else if (!groupId.equals(defaultGroupId)) {
             sender(entityTypeMessages, stringBuilder.toString());
             ANTAGONIZE.put(groupId, checkResultLevel.getAntagonize());
-            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, makeNickToSender(getNickName(entityTypeMessages)) + "发起一次对抗");
+            CQ.sendGroupMsg(Long.parseLong(groupId), makeNickToSender(getNickName(entityTypeMessages)) + "发起一次对抗");
         } else {
             throw new NotSetKpGroupException(entityTypeMessages);
         }
@@ -117,7 +118,7 @@ public class RollAndCheck implements En, MakeNickToSender {
      */
     public void rcv() throws NotSetKpGroupException {
         String tag = TAG_RCV;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +", "");
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +", "");
         EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
         if (entityNickAndRandomAndSkill.getSkill() == 0) {
             sender(entityTypeMessages, "请输入技能名或技能值");
@@ -140,10 +141,10 @@ public class RollAndCheck implements En, MakeNickToSender {
             sender(entityTypeMessages, stringBuilder.toString());
             checkAntagonize(entityTypeMessages, thisEntityAntagonize, entityAntagonize, groupId);
             ANTAGONIZE.remove(groupId);
-            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeOver"));
+            CQ.sendGroupMsg(Long.parseLong(groupId), MESSAGES_SYSTEM.get("antagonizeOver"));
         } else if (!groupId.equals(defaultGroupId)) {
 //            静态对象Antagonize中包含了以群号为key的EntityAntagonize对象，如果不包含的话，那么就说明这次是发起对抗，直接插入进去
-            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, makeNickToSender(getNickName(entityTypeMessages)) + "发起一次对抗");
+            CQ.sendGroupMsg(Long.parseLong(groupId), makeNickToSender(getNickName(entityTypeMessages)) + "发起一次对抗");
             sender(entityTypeMessages, stringBuilder.toString());
             ANTAGONIZE.put(groupId, checkResultLevel.getAntagonize());
         } else {
@@ -157,7 +158,7 @@ public class RollAndCheck implements En, MakeNickToSender {
      */
     public void ral() {
         String tag = TAG_RAL;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<Integer> rollsList = initRalAndRcl(msg);
         EntityHistory entityHistory = new EntityHistory("0");
         rollsList = (ArrayList<Integer>) rollsList.stream().parallel().map(s -> new MakeRal(entityTypeMessages, msg.split(" ")[0]).call()).collect(Collectors.toList());
@@ -170,7 +171,7 @@ public class RollAndCheck implements En, MakeNickToSender {
      */
     public void rcl() {
         String tag = TAG_RCL;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<Integer> rollsList = initRalAndRcl(msg);
         EntityHistory entityHistory = new EntityHistory("0");
 
@@ -206,16 +207,16 @@ public class RollAndCheck implements En, MakeNickToSender {
     private void checkAntagonize(EntityTypeMessages entityTypeMessages, EntityAntagonize thisAntagonize, EntityAntagonize lastAntagonize, String groupId) {
         int successMinLevel = 2;
         if (lastAntagonize.getLevel() > thisAntagonize.getLevel()) {
-            entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeFirstSuccess"));
+            CQ.sendGroupMsg(Long.parseLong(groupId), MESSAGES_SYSTEM.get("antagonizeFirstSuccess"));
         } else if (lastAntagonize.getLevel() == thisAntagonize.getLevel()) {
             if (lastAntagonize.getLevel() < successMinLevel && thisAntagonize.getLevel() < successMinLevel) {
-                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeAllFailed"));
+                CQ.sendGroupMsg(Long.parseLong(groupId), MESSAGES_SYSTEM.get("antagonizeAllFailed"));
             } else if (lastAntagonize.getRandom() < thisAntagonize.getRandom()) {
-                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeFirstSuccess"));
+                CQ.sendGroupMsg(Long.parseLong(groupId), MESSAGES_SYSTEM.get("antagonizeFirstSuccess"));
             } else if (lastAntagonize.getSkill() > thisAntagonize.getSkill()) {
-                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeFirstSuccess"));
+                CQ.sendGroupMsg(Long.parseLong(groupId), MESSAGES_SYSTEM.get("antagonizeFirstSuccess"));
             } else if (lastAntagonize.getSkill() == thisAntagonize.getSkill()) {
-                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(groupId, MESSAGES_SYSTEM.get("antagonizeDraw"));
+                CQ.sendGroupMsg(Long.parseLong(groupId), MESSAGES_SYSTEM.get("antagonizeDraw"));
             }
         } else {
             sender(entityTypeMessages, MESSAGES_SYSTEM.get("antagonizeSecondSuccess"));
@@ -290,7 +291,7 @@ public class RollAndCheck implements En, MakeNickToSender {
         if (entityTypeMessages.getFromGroup().equals(defaultGroupId)) {
             try {
                 groupId = getKpGroup(entityTypeMessages);
-                sender(entityTypeMessages, "本次对抗将用于群" + makeGroupNickToSender(getGroupName(entityTypeMessages, groupId)) + "(" + groupId + ")");
+                sender(entityTypeMessages, "本次对抗将用于群" + makeGroupNickToSender(getGroupName(groupId)) + "(" + groupId + ")");
             } catch (NotSetKpGroupException e) {
                 Log.error(e.getMessage(), e);
                 groupId = "0";

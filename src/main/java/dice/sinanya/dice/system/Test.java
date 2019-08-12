@@ -1,17 +1,10 @@
 package dice.sinanya.dice.system;
 
-import com.forte.qqrobot.sender.MsgSender;
 import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityTypeMessages;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-
-import static dice.sinanya.db.system.InsertBot.deleteBot;
-import static dice.sinanya.db.system.SelectBot.selectOffBotList;
-import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
-import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 
 /**
  * @author SitaNya

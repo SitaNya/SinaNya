@@ -14,25 +14,35 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
-
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4.1</version>
                 <configuration>
-                    <descriptor>src/main/resources/assembly.xml</descriptor>
-                    <finalName>SinaNya</finalName>
-                    <appendAssemblyId>false</appendAssemblyId>
+                    <!-- get all project dependencies -->
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <!-- MainClass in mainfest make a executable jar -->
+                    <archive>
+                        <manifest>
+                            <mainClass>com.forte.demo.MyRobotRunApplication</mainClass>
+                        </manifest>
+                    </archive>
+
                 </configuration>
                 <executions>
                     <execution>
-                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                        <phase>package</phase> <!-- 指定在打包节点执行jar包合并操作 -->
+                        <id>make-assembly</id>
+                        <!-- bind to the packaging phase -->
+                        <phase>package</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>
@@ -43,18 +53,28 @@
     </build>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/io.github.ForteScarlet.simple-robot-core/component-forhttpapi -->
+        <!-- quartz -->
         <dependency>
-            <groupId>io.github.ForteScarlet.simple-robot-core</groupId>
-            <artifactId>component-forhttpapi</artifactId>
-            <version>0.7.2-BETA-1.3-BETA</version>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.3.0</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/io.gitee.ForteScarlet.plusutils/console-plus -->
+        <!--调度器核心包-->
         <dependency>
-            <groupId>io.gitee.ForteScarlet.plusutils</groupId>
-            <artifactId>console-plus</artifactId>
-            <version>1.2</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>4.3.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sobte.cqp</groupId>
+            <artifactId>jcq-coolq</artifactId>
+            <version>1.2.7</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/vip.vtool.jcq/vtool-jcq -->
+        <dependency>
+            <groupId>vip.vtool.jcq</groupId>
+            <artifactId>vtool-jcq</artifactId>
+            <version>1.0.1</version>
         </dependency>
 
         <dependency>

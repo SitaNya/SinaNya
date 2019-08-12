@@ -386,7 +386,7 @@ class Flow {
     }
 
     private boolean checkTagRegex(String tag) {
-        return entityTypeMessages.getMsgGet().getMsg().trim().toLowerCase().matches(tag);
+        return entityTypeMessages.getMsg().trim().toLowerCase().matches(tag);
     }
 
 

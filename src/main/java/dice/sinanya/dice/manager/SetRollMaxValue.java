@@ -29,7 +29,7 @@ public class SetRollMaxValue {
      */
     public void set() {
         String tag = TAG_SET_ROLL_MAX_VALUE;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         if (isNumeric(msg)) {
             ROLL_MAX_VALUE.put(entityTypeMessages.getFromGroup(), Integer.parseInt(msg));
             setMaxRolls(entityTypeMessages.getFromGroup(), Integer.parseInt(msg));

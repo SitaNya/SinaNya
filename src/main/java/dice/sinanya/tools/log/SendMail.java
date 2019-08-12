@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
-import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 
 /**
@@ -100,7 +100,7 @@ public class SendMail {
         // 设置收件人的邮箱
         mb.setSubject("骰娘宕机");
         // 设置邮件的主题
-        mb.setContent("您的骰娘:" + ENTITY_LOGINQQ_INFO.getLoginQQNick() + "(" + ENTITY_LOGINQQ_INFO.getLoginQQ() + ")失去响应，请查看\n" + messages);
+        mb.setContent("您的骰娘:" + CQ.getLoginNick() + "(" + CQ.getLoginQQ() + ")失去响应，请查看\n" + messages);
         // 设置邮件的正文
 
         SendMail sm = new SendMail();

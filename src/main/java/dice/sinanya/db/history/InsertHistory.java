@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 import static dice.sinanya.system.MessagesHistory.HISTORY_LIST;
-import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
 
 /**
@@ -41,7 +41,7 @@ public class InsertHistory {
                 String sql = "select * from history where qqId=? and botId=?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     ps.setString(1, entityHistory.getQqId());
-                    ps.setString(2, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                    ps.setString(2, String.valueOf(CQ.getLoginQQ()));
                     try (ResultSet set = ps.executeQuery()) {
                         while (set.next()) {
                             num++;
@@ -51,7 +51,7 @@ public class InsertHistory {
                 if (num == 0) {
                     sql = "INSERT INTO history(botId,qqId,Fumble,CriticalSuccess,ExtremeSuccess,HardSuccess,Success,Failure,times,mean) VALUES(?,?,?,?,?,?,?,?,?,?)";
                     try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                        ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                        ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                         ps.setString(2, entityHistory.getQqId());
                         ps.setInt(3, entityHistory.getFumble());
                         ps.setInt(4, entityHistory.getCriticalSuccess());
@@ -76,7 +76,7 @@ public class InsertHistory {
                         ps.setInt(7, entityHistory.getTimes());
                         ps.setInt(8, entityHistory.getMean());
                         ps.setString(9, entityHistory.getQqId());
-                        ps.setString(10, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                        ps.setString(10, String.valueOf(CQ.getLoginQQ()));
 
                         ps.executeUpdate();
                     }

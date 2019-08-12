@@ -47,7 +47,7 @@ public class Roles implements Role {
     @SuppressWarnings("AlibabaMethodTooLong")
     public boolean set() throws PlayerSetException {
         String tag = TAG_ST_SET;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         String sepRoleAndPro = "-";
         String tagRoleNameNone = "";
         String defaultRole = "自定义";
@@ -121,7 +121,7 @@ public class Roles implements Role {
      */
     public void move() {
         String tag = TAG_ST_RM;
-        String role = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String role = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         if (checkRoleInfoExistByFromQQ(entityTypeMessages, role)) {
             if (getRoleChooseByQQ(qqId).equals(role)) {

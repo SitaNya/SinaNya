@@ -33,7 +33,7 @@ public class SelectBanList {
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
-                       qqBanList.put(set.getString("qqId"),set.getString("reason"));
+                        qqBanList.put(set.getString("qqId"), set.getString("reason"));
                     }
                 }
             }
@@ -52,7 +52,7 @@ public class SelectBanList {
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
-                        groupBanList.put(set.getString("groupId"),set.getString("reason"));
+                        groupBanList.put(set.getString("groupId"), set.getString("reason"));
                     }
                 }
             }

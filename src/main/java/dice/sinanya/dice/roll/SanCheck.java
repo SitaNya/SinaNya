@@ -32,7 +32,7 @@ public class SanCheck {
      */
     public void sc() throws PlayerSetException, SanCheckSetException, ManyRollsTimesTooMoreException {
         String tag = TAG_SC;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         String result = new MakeSanCheck(entityTypeMessages).checkSanCheck(msg);
         sender(entityTypeMessages, result);
     }

@@ -7,8 +7,10 @@ import dice.sinanya.exceptions.NotMasterException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Arrays;
 import java.util.Map;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesBanList.groupBanList;
 import static dice.sinanya.system.MessagesBanList.qqBanList;
 import static dice.sinanya.system.MessagesTag.*;
@@ -44,7 +46,7 @@ public class BanList {
             return;
         }
         String tag = TAG_BAN_USER;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 4));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 4));
         try {
             checkMaster();
             isQqOrGroup(msg);
@@ -65,7 +67,7 @@ public class BanList {
             return;
         }
         String tag = TAG_BAN_GROUP;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 4));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 4));
         try {
             checkMaster();
             isQqOrGroup(msg);
@@ -86,7 +88,7 @@ public class BanList {
             return;
         }
         String tag = TAG_RM_BAN_USER;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 4));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 4));
         try {
             checkMaster();
             isQqOrGroup(msg);
@@ -107,7 +109,7 @@ public class BanList {
             return;
         }
         String tag = TAG_RM_BAN_GROUP;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 4));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 4));
         try {
             checkMaster();
             isQqOrGroup(msg);
@@ -136,7 +138,7 @@ public class BanList {
             }
             sender(entityTypeMessages, stringBuilder.toString());
         } catch (NotMasterException e) {
-            Log.error(e.getMessage(),e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -164,7 +166,7 @@ public class BanList {
     }
 
     private void checkMaster() throws NotMasterException {
-        if (!entityTypeMessages.getFromQq().equals(MESSAGES_SYSTEM.get("master"))) {
+        if (!MESSAGES_SYSTEM.get("master").equals(String.valueOf(entityTypeMessages.getFromQq()))) {
             throw new NotMasterException(entityTypeMessages);
         }
     }

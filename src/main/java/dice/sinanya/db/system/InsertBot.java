@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
 
 /**
@@ -31,14 +31,14 @@ public class InsertBot {
      */
     public void insertBot(long groupId, boolean switchBot) {
         int num = 0;
-        if (ENTITY_LOGINQQ_INFO.getLoginQQ() == 0) {
+        if (CQ.getLoginQQ() == 0) {
             return;
         }
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from switchBot where groupId=? and botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setLong(1, groupId);
-                ps.setString(2, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setString(2, String.valueOf(CQ.getLoginQQ()));
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         num++;
@@ -53,11 +53,11 @@ public class InsertBot {
                         "switchBot" +
                         ") VALUES(?,?,?)";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                    ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                     ps.setLong(2, groupId);
                     ps.setBoolean(3, switchBot);
                     ps.executeUpdate();
-                    Log.info("插入新的群开关，" + ENTITY_LOGINQQ_INFO.getLoginQQ() + "groupId: " + groupId + "switchBot: " + switchBot);
+                    Log.info("插入新的群开关，" + CQ.getLoginQQ() + "groupId: " + groupId + "switchBot: " + switchBot);
                 }
             } else {
                 sql = "update switchBot set " +
@@ -65,7 +65,7 @@ public class InsertBot {
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     ps.setBoolean(1, switchBot);
                     ps.setLong(2, groupId);
-                    ps.setString(3, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                    ps.setString(3, String.valueOf(CQ.getLoginQQ()));
                     ps.executeUpdate();
                 }
             }
@@ -74,12 +74,12 @@ public class InsertBot {
         }
     }
 
-    public static void deleteBot(String groupId) {
+    public static void deleteBot(long groupId) {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "delete from switchBot where botId=? and groupId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
-                ps.setString(2, groupId);
+                ps.setString(1, String.valueOf(CQ.getLoginQQ()));
+                ps.setString(2, String.valueOf(groupId));
                 ps.execute();
             }
         } catch (SQLException e) {

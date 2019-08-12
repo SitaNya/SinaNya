@@ -41,7 +41,7 @@ public class RewardAndPunishment implements En, MakeNickToSender {
      */
     public void rb() {
         String tag = TAG_RB;
-        String msg = entityTypeMessages.getMsgGet().getMsg().trim().replaceFirst(tag.substring(0, tag.length() - 2), "");
+        String msg = entityTypeMessages.getMsg().trim().replaceFirst(tag.substring(0, tag.length() - 2), "");
         EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -92,7 +92,7 @@ public class RewardAndPunishment implements En, MakeNickToSender {
      */
     public void rp() {
         String tag = TAG_RP;
-        String msg = entityTypeMessages.getMsgGet().getMsg().trim().replaceFirst(tag.substring(0, tag.length() - 2), "");
+        String msg = entityTypeMessages.getMsg().trim().replaceFirst(tag.substring(0, tag.length() - 2), "");
         EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
 
         StringBuilder stringBuilder = new StringBuilder();

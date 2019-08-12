@@ -1,11 +1,6 @@
 package dice.sinanya.listener;
 
-import com.forte.qqrobot.anno.timetask.CronTask;
-import com.forte.qqrobot.exception.TimeTaskException;
-import com.forte.qqrobot.sender.MsgSender;
-import com.forte.qqrobot.timetask.TimeJob;
-import com.forte.qqrobot.timetask.TimeTaskContext;
-import com.forte.qqrobot.utils.CQCodeUtil;
+import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 
 import static dice.sinanya.db.system.SelectBot.flushBot;
@@ -31,15 +26,10 @@ import static dice.sinanya.tools.getinfo.Team.saveTeamEn;
  * 这里的“0 * * * * ? *”表示每分钟执行一次，具体怎么写请去查crontab的使用
  * 前5位应该是:分 时 日 月 周
  */
-@CronTask("0 */15 * * * ? *")
-public class InputHistoryToDataBase implements TimeJob {
-
-    public InputHistoryToDataBase() {
-//        初始化时不需要参数
-    }
+public class InputHistoryToDataBase implements Job {
 
     @Override
-    public void execute(MsgSender msgSender, CQCodeUtil cqCodeUtil) {
+    public void execute(JobExecutionContext context) {
         setHistory();
         saveTeamEn();
         flushTeamEn();
@@ -60,16 +50,5 @@ public class InputHistoryToDataBase implements TimeJob {
 //        从数据库中读取骰点历史信息到缓存
         flushBanList();
 //        刷写黑名单
-    }
-
-    @Override
-    public void execute(JobExecutionContext context) {
-        try {
-            CQCodeUtil cqCodeUtil = TimeTaskContext.getCQCodeUtil(context);
-            MsgSender msgSender = TimeTaskContext.getMsgSender(context);
-            execute(msgSender, cqCodeUtil);
-        } catch (Exception e) {
-            throw new TimeTaskException(e);
-        }
     }
 }

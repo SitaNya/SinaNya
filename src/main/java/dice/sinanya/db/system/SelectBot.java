@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.SystemInfo.SWITCH_BOT;
 
 /**
@@ -36,7 +36,7 @@ public class SelectBot {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select groupId,switchBot from switchBot where botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         SWITCH_BOT.put(set.getLong("groupId"), set.getBoolean("switchBot"));
@@ -57,7 +57,7 @@ public class SelectBot {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select groupId,switchBot from switchBot where botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         groupNum++;
@@ -82,7 +82,7 @@ public class SelectBot {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select groupId from switchBot where botId=? and switchBot=0";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                       offGroupList.add(set.getString("groupId"));

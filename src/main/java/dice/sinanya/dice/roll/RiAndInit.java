@@ -74,7 +74,7 @@ public class RiAndInit implements MakeNickToSender {
      */
     public void ri() {
         String tag = TAG_RI;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         String msgBefore = msg;
         int result = 0;
         boolean add = false;

@@ -45,7 +45,7 @@ public class Log implements MakeNickToSender {
      */
     public void logOn() {
         String tag = TAG_LOG_ON;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         if (msg.equals(NONE)) {
             sender(entityTypeMessages, MESSAGES_SYSTEM.get("CantEmptyLogName"));
             return;
@@ -69,7 +69,7 @@ public class Log implements MakeNickToSender {
      */
     public void logOff() {
         String tag = TAG_LOG_OFF;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         if (checkLogTagExist(entityTypeMessages, msg)) {
             if (checkLogTagSwitch(entityTypeMessages, msg)) {
                 setLogTagSwitch(entityTypeMessages, msg, false);
@@ -89,7 +89,7 @@ public class Log implements MakeNickToSender {
      */
     public void get() {
         String tag = TAG_LOG_GET;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         if (!checkLogTagSwitch(entityTypeMessages, msg)) {
             if (LOG_GET_LOCK.contains(msg)) {
                 sender(entityTypeMessages, MESSAGES_SYSTEM.get("readLock"));
@@ -126,7 +126,7 @@ public class Log implements MakeNickToSender {
      */
     public void del() {
         String tag = TAG_LOG_RM;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         if (checkLogTagExist(entityTypeMessages, msg)) {
             if (checkLogTagSwitch(entityTypeMessages, msg)) {
                 sender(entityTypeMessages, MESSAGES_SYSTEM.get("deleteOpenLog"));

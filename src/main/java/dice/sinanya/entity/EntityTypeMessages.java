@@ -1,13 +1,6 @@
 package dice.sinanya.entity;
 
-import com.forte.qqrobot.beans.messages.msgget.DiscussMsg;
-import com.forte.qqrobot.beans.messages.msgget.GroupMsg;
-import com.forte.qqrobot.beans.messages.msgget.MsgGet;
-import com.forte.qqrobot.beans.messages.msgget.PrivateMsg;
-import com.forte.qqrobot.beans.messages.types.MsgGetTypes;
-import com.forte.qqrobot.sender.MsgSender;
-
-import static dice.sinanya.tools.checkdata.CheckValue.checkValue;
+import dice.sinanya.entity.imal.MessagesTypes;
 
 /**
  * @author SitaNya
@@ -26,98 +19,53 @@ public class EntityTypeMessages {
      * @param msgDisGroup 讨论组对象，可以拿到比如讨论组号之类的信息
      * @param msgPrivate 私聊对象，可以拿到私聊昵称之类的消息
      */
-    private MsgGetTypes msgGetTypes;
-    private MsgSender msgSender;
-    private MsgGet msgGet;
-    private GroupMsg msgGroup;
-    private DiscussMsg msgDisGroup;
-    private PrivateMsg msgPrivate;
+    private MessagesTypes messagesTypes;
+    private long fromQq;
+    private long fromGroup;
+    private String msg;
 
-
-    public EntityTypeMessages(MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGet msgGet, PrivateMsg msgPrivate) {
-        this.msgGetTypes = msgGetTypes;
-        this.msgSender = msgSender;
-        this.msgGet = msgGet;
-        this.msgPrivate = msgPrivate;
+    public EntityTypeMessages(MessagesTypes messagesTypes, long fromQq, String msg) {
+        this.messagesTypes = messagesTypes;
+        this.fromQq = fromQq;
+        this.msg = msg;
     }
 
-    public EntityTypeMessages(MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGet msgGet, GroupMsg msgGroup) {
-        this.msgGetTypes = msgGetTypes;
-        this.msgSender = msgSender;
-        this.msgGet = msgGet;
-        this.msgGroup = msgGroup;
+    public EntityTypeMessages(MessagesTypes messagesTypes, long fromQq, long fromGroup, String msg) {
+        this.messagesTypes = messagesTypes;
+        this.fromQq = fromQq;
+        this.fromGroup = fromGroup;
+        this.msg = msg;
     }
 
-    public EntityTypeMessages(MsgGetTypes msgGetTypes, MsgSender msgSender, MsgGet msgGet, DiscussMsg msgDisGroup) {
-        this.msgGetTypes = msgGetTypes;
-        this.msgSender = msgSender;
-        this.msgGet = msgGet;
-        this.msgDisGroup = msgDisGroup;
+    public MessagesTypes getMessagesTypes() {
+        return messagesTypes;
     }
 
-    /**
-     * @return 获取对方QQ号，需要根据消息来源，分别从三种不同对象中取得，这里我默认写了自己的QQ号，遇到问题自己可以知道
-     */
+    public void setMessagesTypes(MessagesTypes messagesTypes) {
+        this.messagesTypes = messagesTypes;
+    }
+
     public String getFromQq() {
-        switch (msgGetTypes) {
-            case groupMsg:
-                return msgGroup.getQQ();
-            case discussMsg:
-                return msgDisGroup.getQQCode();
-            case privateMsg:
-                return msgPrivate.getQQCode();
-            default:
-                return "450609203";
-        }
+        return String.valueOf(fromQq);
     }
 
-    /**
-     * @return 获取来源群号，需要根据消息来源，分别从2中不同渠道取得，这里我默认写了0
-     */
+    public void setFromQq(long fromQq) {
+        this.fromQq = fromQq;
+    }
+
     public String getFromGroup() {
-        switch (msgGetTypes) {
-            case groupMsg:
-                return msgGroup.getGroupCode();
-            case discussMsg:
-                return msgDisGroup.getGroupCode();
-            default:
-                return "0";
-        }
+        return String.valueOf(fromGroup);
     }
 
-    public MsgGetTypes getMsgGetTypes() {
-        return msgGetTypes;
+    public void setFromGroup(long fromGroup) {
+        this.fromGroup = fromGroup;
     }
 
-    public MsgSender getMsgSender() {
-        return msgSender;
+    public String getMsg() {
+        return msg;
     }
 
-    public MsgGet getMsgGet() {
-        return msgGet;
-    }
-
-    public GroupMsg getMsgGroup() {
-        return msgGroup;
-    }
-
-    public DiscussMsg getMsgDisGroup() {
-        return msgDisGroup;
-    }
-
-    public PrivateMsg getMsgPrivate() {
-        return msgPrivate;
-    }
-
-    @Override
-    public String toString() {
-        String result = "";
-        result += "msgGetTypes: " + checkValue(msgGetTypes) + "\n";
-        result += "msgSender: " + checkValue(msgSender) + "\n";
-        result += "msgGet: " + checkValue(msgGet) + "\n";
-        result += "msgGroup: " + checkValue(msgGroup) + "\n";
-        result += "msgDisGroup: " + checkValue(msgDisGroup) + "\n";
-        result += "msgPrivate: " + checkValue(msgPrivate) + "\n";
-        return result;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }

@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
 /**
  * @author SitaNya
@@ -30,7 +30,7 @@ public class InputBanList {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "INSERT INTO qqBanList(botId,qqId,reason) VALUES(?,?,?)";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                 ps.setString(2, qq);
                 ps.setString(3, reason);
 
@@ -48,7 +48,7 @@ public class InputBanList {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "INSERT INTO groupBanList(botId,groupId,reason) VALUES(?,?,?)";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                 ps.setString(2, groupId);
                 ps.setString(3, reason);
 
@@ -67,7 +67,7 @@ public class InputBanList {
             String sql = "delete from groupBanList where groupId=? and botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, groupId);
-                ps.setString(2, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setString(2, String.valueOf(CQ.getLoginQQ()));
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
@@ -83,7 +83,7 @@ public class InputBanList {
             String sql = "delete from qqBanList where qqId=? and botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, qq);
-                ps.setString(2, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setLong(2, CQ.getLoginQQ());
 
                 ps.executeUpdate();
             }

@@ -34,7 +34,7 @@ public class Clue {
      */
     public void set() {
         String tag = TAG_CLUE_SET;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         setClue(new EntityClue(entityTypeMessages.getFromGroup(), new Timestamp(System.currentTimeMillis()), entityTypeMessages.getFromQq()), msg);
     }
 
@@ -51,7 +51,7 @@ public class Clue {
      */
     public void rm() {
         String tag = TAG_CLUE_RM;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
 
         delClue(new EntityClue(entityTypeMessages.getFromGroup(), getTime(msg), entityTypeMessages.getFromQq()));
         sender(entityTypeMessages, "已删除线索");

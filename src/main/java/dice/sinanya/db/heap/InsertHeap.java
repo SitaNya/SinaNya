@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 import static dice.sinanya.tools.getinfo.GetTime.getNowString;
 import static dice.sinanya.tools.getinfo.GetTime.getTime;
@@ -31,7 +31,7 @@ public class InsertHeap {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "replace into heap(botId,time,enable,botMaster)  VALUES (?,?,?,?);";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                 ps.setTimestamp(2, getTime(getNowString()));
                 ps.setBoolean(3, Boolean.parseBoolean(MESSAGES_SYSTEM.get("heap")));
                 ps.setString(4,MESSAGES_SYSTEM.get("master"));

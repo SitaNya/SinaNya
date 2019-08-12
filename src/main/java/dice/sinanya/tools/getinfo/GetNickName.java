@@ -1,11 +1,12 @@
 package dice.sinanya.tools.getinfo;
 
-import com.forte.qqrobot.beans.messages.RootBean;
-import com.forte.qqrobot.sender.MsgSender;
+import com.sobte.cqp.jcq.entity.Group;
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByFromQQ;
-import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
+import java.util.List;
+
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import static dice.sinanya.tools.getinfo.RoleChoose.*;
 
 /**
  * @author SitaNya
@@ -15,7 +16,7 @@ import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
  * 有任何问题欢迎咨询
  * 类说明: 获取昵称
  */
-public class GetNickName implements RootBean {
+public class GetNickName {
 
     private GetNickName() {
         throw new IllegalStateException("Utility class");
@@ -31,14 +32,34 @@ public class GetNickName implements RootBean {
         if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
             return getRoleChooseByFromQQ(entityTypeMessages);
         }
-        switch (entityTypeMessages.getMsgGetTypes()) {
-            case groupMsg:
-            case discussMsg:
-                return entityTypeMessages.getMsgSender().GETTER.getGroupMemberInfo(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq()).getName();
+        switch (entityTypeMessages.getMessagesTypes()) {
+            case GROUP_MSG:
+            case DISCUSS_MSG:
+                return CQ.getGroupMemberInfo(Long.parseLong(entityTypeMessages.getFromGroup()), Long.parseLong(entityTypeMessages.getFromQq())).getNick();
             default:
-                return entityTypeMessages.getMsgSender().getPersonInfoByCode(entityTypeMessages.getFromQq()).getName();
+                return CQ.getStrangerInfo(Long.parseLong(entityTypeMessages.getFromQq())).getNick();
         }
+    }
 
+    /**
+     * 如果已经设定了人物卡则默认给人物卡名字，没设定的话给QQ昵称
+     *
+     * @return 昵称
+     */
+    public static String getNickName(long qqId) {
+        if (checkRoleChooseExistByQQ(qqId)) {
+            return getRoleChooseByQQ(qqId);
+        }
+        return CQ.getStrangerInfo(qqId).getNick();
+    }
+
+    /**
+     * 如果已经设定了人物卡则默认给人物卡名字，没设定的话给QQ昵称
+     *
+     * @return 昵称
+     */
+    public static String getUserName(long qqId) {
+        return CQ.getStrangerInfo(qqId).getNick();
     }
 
     /**
@@ -48,34 +69,37 @@ public class GetNickName implements RootBean {
      * @return 昵称
      */
     public static String getGroupName(EntityTypeMessages entityTypeMessages) {
-        switch (entityTypeMessages.getMsgGetTypes()) {
-            case groupMsg:
-                return entityTypeMessages.getMsgSender().getGroupInfoByCode(entityTypeMessages.getMsgGroup().getGroupCode()).getName();
-            case discussMsg:
-                return entityTypeMessages.getMsgSender().getGroupInfoByCode(entityTypeMessages.getMsgDisGroup().getGroupCode()).getName();
-            default:
-                entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg("450609203", entityTypeMessages.toString());
-                return entityTypeMessages.toString();
+        return getGroupName(entityTypeMessages.getFromGroup());
+    }
+
+    /**
+     * 返回群或讨论组名
+     *
+     * @return 昵称
+     */
+    public static String getGroupName(long groupId) {
+        List<Group> groupList = CQ.getGroupList();
+        for (Group group : groupList) {
+            if (group.getId() == groupId) {
+                return group.getName();
+            }
         }
+        return "未找到";
     }
+
 
     /**
      * 返回群或讨论组名
      *
-     * @param entityTypeMessages 消息包装类
      * @return 昵称
      */
-    public static String getGroupName(EntityTypeMessages entityTypeMessages, String groupId) {
-        return entityTypeMessages.getMsgSender().getGroupInfoByCode(groupId).getName();
-    }
-
-    /**
-     * 返回群或讨论组名
-     *
-     * @param msgSender 消息包装类
-     * @return 昵称
-     */
-    public static String getGroupName(MsgSender msgSender, String groupId) {
-        return msgSender.getGroupInfoByCode(groupId).getName();
+    public static String getGroupName(String groupId) {
+        List<Group> groupList = CQ.getGroupList();
+        for (Group group : groupList) {
+            if (group.getId() == Long.parseLong(groupId)) {
+                return group.getName();
+            }
+        }
+        return "未找到";
     }
 }

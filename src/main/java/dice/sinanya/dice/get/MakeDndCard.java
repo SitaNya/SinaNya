@@ -34,7 +34,7 @@ public class MakeDndCard implements MakeCard, MakeNickToSender {
      */
     public void dnd() {
         String tag = TAG_DND;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 11));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 11));
 
         int times = getTime(msg);
 

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
@@ -59,7 +60,7 @@ public class Team implements GetDb, Role, AtQq {
      */
     public void set() {
         String tag = TAG_TEAM_SET;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
         for (String qq : qqList) {
             sender(entityTypeMessages, "已将玩家: [CQ:at,qq=" + qq + "]加入小队。可以使用.team查看队伍信息,.team hp/san对成员状态进行强制调整\n其余使用方式请查看.help命令");
@@ -73,7 +74,7 @@ public class Team implements GetDb, Role, AtQq {
      */
     public void remove() {
         String tag = TAG_TEAM_RM;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
         EntityTeamInfo entityTeamInfo = new EntityTeamInfo(entityTypeMessages.getFromGroup(), qqList);
         removeFromTeam(entityTeamInfo);
@@ -113,7 +114,7 @@ public class Team implements GetDb, Role, AtQq {
      */
     public void hp() throws ManyRollsTimesTooMoreException {
         String tag = TAG_TEAM_HP;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
 
         msg = msg.replaceAll(regex, "").trim();
@@ -169,7 +170,7 @@ public class Team implements GetDb, Role, AtQq {
      */
     public void san() {
         String tag = TAG_TEAM_SAN;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
 
         msg = msg.replaceAll(regex, "").trim();
@@ -305,7 +306,7 @@ public class Team implements GetDb, Role, AtQq {
         for (String qq : qqList) {
             stringBuilder.append(new Roles(entityTypeMessages).showProp(entityTypeMessages, qq));
         }
-        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), stringBuilder.toString());
+        CQ.sendPrivateMsg(Long.parseLong(entityTypeMessages.getFromQq()), stringBuilder.toString());
     }
 
     /**
