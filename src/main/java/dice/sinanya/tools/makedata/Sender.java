@@ -3,6 +3,7 @@ package dice.sinanya.tools.makedata;
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.tools.getinfo.LogTag.checkOthorLogTrue;
 import static dice.sinanya.tools.getinfo.LogTag.getOtherLogTrue;
 import static dice.sinanya.tools.getinfo.LogText.setLogText;
@@ -33,18 +34,16 @@ public class Sender {
         if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
             setLogText(new EntityLogTag(entityTypeMessages.getFromGroup(), getOtherLogTrue(entityTypeMessages.getFromGroup())), messages);
         }
-        switch (entityTypeMessages.getMsgGetTypes()) {
-            case privateMsg:
-                entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getMsgPrivate().getQQCode(), messages);
+        switch (entityTypeMessages.getMessagesTypes()) {
+            case PRIVATE_MSG:
+                CQ.sendPrivateMsg(Long.parseLong(entityTypeMessages.getFromQq()), messages);
                 break;
-            case groupMsg:
-                entityTypeMessages.getMsgSender().SENDER.sendGroupMsg(entityTypeMessages.getMsgGroup().getGroupCode(), messages);
-                break;
-            case discussMsg:
-                entityTypeMessages.getMsgSender().SENDER.sendDiscussMsg(entityTypeMessages.getMsgDisGroup().getGroupCode(), messages);
+            case GROUP_MSG:
+            case DISCUSS_MSG:
+                CQ.sendDiscussMsg(Long.parseLong(entityTypeMessages.getFromGroup()), messages);
                 break;
             default:
-                entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg("450609203", entityTypeMessages + "\nmessages: " + messages);
+                CQ.sendPrivateMsg(450609203, entityTypeMessages + "\nmessages: " + messages);
         }
     }
 }

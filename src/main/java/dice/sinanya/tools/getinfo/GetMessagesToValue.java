@@ -1,7 +1,8 @@
 package dice.sinanya.tools.getinfo;
 
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.util.HashMap;
 
@@ -18,7 +19,7 @@ import static dice.sinanya.tools.getinfo.MakeSkillName.makeSkillName;
  * 类说明:将传入的msg人物属性信息整理包装为HashMap格式
  */
 class GetMessagesToValue {
-    private static final Logger Log = LogManager.getLogger(GetMessagesToValue.class);
+
 
     private GetMessagesToValue() {
         throw new IllegalStateException("Utility class");
@@ -54,7 +55,7 @@ class GetMessagesToValue {
                     strSkillValue = new StringBuilder();
                 }
             } catch (NumberFormatException e) {
-                Log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
             }
             if (tmp == i) {
                 i++;

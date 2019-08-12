@@ -4,13 +4,15 @@ import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.NotBanListInputException;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Arrays;
 
-import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
 /**
  * @author SitaNya
@@ -21,7 +23,7 @@ import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
  * 类说明:
  */
 public class InputBanList {
-    private static final Logger Log = LogManager.getLogger(InputBanList.class.getName());
+
 
     /**
      * 将QQ黑名单列表入库
@@ -30,14 +32,14 @@ public class InputBanList {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "INSERT INTO qqBanList(botId,qqId,reason) VALUES(?,?,?)";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                 ps.setString(2, qq);
                 ps.setString(3, reason);
 
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -48,14 +50,14 @@ public class InputBanList {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "INSERT INTO groupBanList(botId,groupId,reason) VALUES(?,?,?)";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                 ps.setString(2, groupId);
                 ps.setString(3, reason);
 
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -67,7 +69,7 @@ public class InputBanList {
             String sql = "delete from groupBanList where groupId=? and botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, groupId);
-                ps.setString(2, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setString(2, String.valueOf(CQ.getLoginQQ()));
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
@@ -83,7 +85,7 @@ public class InputBanList {
             String sql = "delete from qqBanList where qqId=? and botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, qq);
-                ps.setString(2, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setLong(2, CQ.getLoginQQ());
 
                 ps.executeUpdate();
             }

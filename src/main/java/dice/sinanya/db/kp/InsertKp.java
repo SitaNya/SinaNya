@@ -2,12 +2,16 @@ package dice.sinanya.db.kp;
 
 import dice.sinanya.db.tools.DbUtil;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
+
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
 /**
  * @author SitaNya
@@ -19,7 +23,7 @@ import java.sql.SQLException;
  */
 public class InsertKp {
 
-    private static final Logger Log = LogManager.getLogger(InsertKp.class);
+
 
     /**
      * 将kp主群设定插入或更新到数据库中
@@ -60,7 +64,7 @@ public class InsertKp {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 }

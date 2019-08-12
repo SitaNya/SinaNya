@@ -1,7 +1,8 @@
 package dice.sinanya.tools.getinfo;
 
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -16,7 +17,7 @@ import java.util.Date;
  * 类说明: 当前时间的相关方法
  */
 public class GetTime {
-    private static final Logger Log = LogManager.getLogger(GetTime.class);
+
 
     private GetTime() {
         throw new IllegalStateException("Utility class");
@@ -43,7 +44,7 @@ public class GetTime {
         try {
             d = format.parse(time);
         } catch (Exception e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
 
         return new Timestamp((d != null)

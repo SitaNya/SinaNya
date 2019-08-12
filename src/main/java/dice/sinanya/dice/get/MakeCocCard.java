@@ -178,7 +178,7 @@ public class MakeCocCard implements MakeCard, MakeNickToSender {
      */
     public void coc7() {
         String tag = TAG_COC7;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 11));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 11));
         msg = deleteTag(msg, ".coc");
 
         int times = getTime(msg);
@@ -207,7 +207,7 @@ public class MakeCocCard implements MakeCard, MakeNickToSender {
      */
     public void coc6() {
         String tag = TAG_COC6;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 11));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 11));
 
         int times = getTime(msg);
 

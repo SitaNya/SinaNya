@@ -4,6 +4,7 @@ import dice.sinanya.dice.get.imal.GetRandomList;
 import dice.sinanya.dice.get.imal.MakeCard;
 import dice.sinanya.entity.EntityTypeMessages;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesNPC.Character;
 import static dice.sinanya.system.MessagesNPC.*;
 import static dice.sinanya.tools.getinfo.GetName.getRandomName;
@@ -124,7 +125,7 @@ public class Npc implements MakeCard, GetRandomList {
                 "\n" +
                 "3.\t" +
                 randomFromList(TZ);
-        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), stringBuilder);
+        CQ.sendPrivateMsg(Long.parseLong(entityTypeMessages.getFromQq()), stringBuilder);
     }
 
     /**
@@ -148,6 +149,6 @@ public class Npc implements MakeCard, GetRandomList {
                 "\n\n" +
                 "其余属性为:\n\n" +
                 getCoc7CardInfo();
-        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), stringBuilder);
+        CQ.sendPrivateMsg(Long.parseLong(entityTypeMessages.getFromQq()), stringBuilder);
     }
 }

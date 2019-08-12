@@ -3,7 +3,8 @@ package dice.sinanya.db.clue;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityClue;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +26,7 @@ import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
  */
 public class SelectClue {
 
-    private static final Logger Log = LogManager.getLogger(SelectClue.class);
+
 
     public SelectClue() {
 //        初始化时无需逻辑
@@ -60,7 +61,7 @@ public class SelectClue {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
         if (stringBuffer.toString().equals(NONE)) {
             return stringBuffer.toString();

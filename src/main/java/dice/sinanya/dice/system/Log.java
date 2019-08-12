@@ -5,7 +5,8 @@ import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.tools.log.SaveDocx;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 
 import static dice.sinanya.system.MessagesLog.LOG_NAME_FOR_GROUP;
@@ -32,8 +33,6 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  */
 public class Log implements MakeNickToSender {
 
-    private static final Logger logger = LogManager.getLogger(Log.class.getName());
-
     private EntityTypeMessages entityTypeMessages;
 
     public Log(EntityTypeMessages entityTypeMessages) {
@@ -45,7 +44,7 @@ public class Log implements MakeNickToSender {
      */
     public void logOn() {
         String tag = TAG_LOG_ON;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         if (msg.equals(NONE)) {
             sender(entityTypeMessages, MESSAGES_SYSTEM.get("CantEmptyLogName"));
             return;
@@ -69,7 +68,7 @@ public class Log implements MakeNickToSender {
      */
     public void logOff() {
         String tag = TAG_LOG_OFF;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         if (checkLogTagExist(entityTypeMessages, msg)) {
             if (checkLogTagSwitch(entityTypeMessages, msg)) {
                 setLogTagSwitch(entityTypeMessages, msg, false);
@@ -89,7 +88,7 @@ public class Log implements MakeNickToSender {
      */
     public void get() {
         String tag = TAG_LOG_GET;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         if (!checkLogTagSwitch(entityTypeMessages, msg)) {
             if (LOG_GET_LOCK.contains(msg)) {
                 sender(entityTypeMessages, MESSAGES_SYSTEM.get("readLock"));
@@ -103,7 +102,7 @@ public class Log implements MakeNickToSender {
             try {
                 new SaveDocx(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq(), msg, bigResult);
             } catch (Docx4JException e) {
-                logger.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
             }
             sender(entityTypeMessages, makeLogNickToSender(msg) + "正在发送到您的邮箱" + entityTypeMessages.getFromQq() + "@qq.com");
             sendMail(entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup(), getGroupName(entityTypeMessages), msg);
@@ -126,7 +125,7 @@ public class Log implements MakeNickToSender {
      */
     public void del() {
         String tag = TAG_LOG_RM;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         if (checkLogTagExist(entityTypeMessages, msg)) {
             if (checkLogTagSwitch(entityTypeMessages, msg)) {
                 sender(entityTypeMessages, MESSAGES_SYSTEM.get("deleteOpenLog"));

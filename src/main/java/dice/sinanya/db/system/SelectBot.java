@@ -3,7 +3,8 @@ package dice.sinanya.db.system;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityGroupCensus;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.SystemInfo.SWITCH_BOT;
 
 /**
@@ -23,7 +24,7 @@ import static dice.sinanya.system.SystemInfo.SWITCH_BOT;
  * 类说明: 查询所有开关的情况，并刷新到变量中，一般只在变量中找不到时才会使用
  */
 public class SelectBot {
-    private static final Logger Log = LogManager.getLogger(SelectBot.class);
+
 
     private SelectBot() {
         throw new IllegalStateException("Utility class");
@@ -36,7 +37,7 @@ public class SelectBot {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select groupId,switchBot from switchBot where botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         SWITCH_BOT.put(set.getLong("groupId"), set.getBoolean("switchBot"));
@@ -44,7 +45,7 @@ public class SelectBot {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -57,7 +58,7 @@ public class SelectBot {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select groupId,switchBot from switchBot where botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         groupNum++;
@@ -68,7 +69,7 @@ public class SelectBot {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
         return new EntityGroupCensus(groupNum, onNum);
     }
@@ -82,7 +83,7 @@ public class SelectBot {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select groupId from switchBot where botId=? and switchBot=0";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+                ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                       offGroupList.add(set.getString("groupId"));
@@ -90,7 +91,7 @@ public class SelectBot {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
         return offGroupList;
     }

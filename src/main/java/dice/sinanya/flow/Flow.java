@@ -12,7 +12,8 @@ import dice.sinanya.dice.system.Test;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.*;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
@@ -34,7 +35,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
 @SuppressWarnings("AlibabaLowerCamelCaseVariableNaming")
 public
 class Flow {
-    private static final Logger Log = LogManager.getLogger(Flow.class);
+
 
     private EntityTypeMessages entityTypeMessages;
 
@@ -356,7 +357,7 @@ class Flow {
             try {
                 roll.rh();
             } catch (ManyRollsTimesTooMoreException e) {
-                Log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
             }
         }
 
@@ -386,7 +387,7 @@ class Flow {
     }
 
     private boolean checkTagRegex(String tag) {
-        return entityTypeMessages.getMsgGet().getMsg().trim().toLowerCase().matches(tag);
+        return entityTypeMessages.getMsg().trim().toLowerCase().matches(tag);
     }
 
 
@@ -397,7 +398,7 @@ class Flow {
             try {
                 roll.r();
             } catch (ManyRollsTimesTooMoreException e) {
-                Log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
             }
         } else if (isRa) {
             rollAndCheck.ra();
@@ -411,13 +412,13 @@ class Flow {
             try {
                 rollAndCheck.rav();
             } catch (NotSetKpGroupException e) {
-                Log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
             }
         } else if (isRcv) {
             try {
                 rollAndCheck.rcv();
             } catch (NotSetKpGroupException e) {
-                Log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
             }
         }
     }
@@ -431,7 +432,7 @@ class Flow {
                     sender(entityTypeMessages, MESSAGES_SYSTEM.get("setHelp"));
                 }
             } catch (PlayerSetException e) {
-                Log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
             }
         } else if (isStShow) {
             roles.show();
@@ -449,7 +450,7 @@ class Flow {
             try {
                 sanCheck.sc();
             } catch (PlayerSetException | SanCheckSetException | ManyRollsTimesTooMoreException e) {
-                Log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
             }
         }
     }
@@ -537,7 +538,7 @@ class Flow {
             try {
                 team.hp();
             } catch (ManyRollsTimesTooMoreException e) {
-                Log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
             }
         } else if (isTeamSan) {
             team.san();
@@ -555,7 +556,7 @@ class Flow {
             try {
                 skillUp.en();
             } catch (NotFoundSkillException e) {
-                Log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
             }
         }
     }

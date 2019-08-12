@@ -10,6 +10,7 @@ import dice.sinanya.tools.getinfo.GetSkillValue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesRollMaxValue.ROLL_MAX_VALUE;
 import static dice.sinanya.system.MessagesTag.TAGR;
 import static dice.sinanya.system.MessagesTag.TAG_RH;
@@ -57,7 +58,7 @@ public class Roll implements MakeNickToSender {
      */
     public void r() throws ManyRollsTimesTooMoreException {
         String tag = TAGR;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +", "");
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2)).replaceAll(" +", "");
 
         String nick = makeNickToSender(getNickName(entityTypeMessages));
 
@@ -105,7 +106,7 @@ public class Roll implements MakeNickToSender {
      */
     public void rh() throws ManyRollsTimesTooMoreException {
         String tag = TAG_RH;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
 
         GetSkillValue getSkillValue = new GetSkillValue(entityTypeMessages, msg);
         int skill = getSkillValue.getSkill();
@@ -147,19 +148,19 @@ public class Roll implements MakeNickToSender {
             if (skill != 0) {
 //                如果技能值取到了，那就不管表达式直接进行判定
                 String resLevel = new CheckResultLevel(intHidden, skill, true).getLevelResultStr();
-                entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + groupName + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n1D" + skill + "=" + intHidden + "/" + skill + "\n" + resLevel);
+                CQ.sendPrivateMsg(Long.parseLong(entityTypeMessages.getFromQq()), "您在群" + groupName + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n1D" + skill + "=" + intHidden + "/" + skill + "\n" + resLevel);
                 return;
             } else {
 //                如果技能值没取到，则使用表达式进行判定
                 if (isNumeric(entityStrManyRolls.getStrFunction())) {
-                    entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + groupName + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n1D" + maxRolls + "=" + entityStrManyRolls.getResult());
+                    CQ.sendPrivateMsg(Long.parseLong(entityTypeMessages.getFromQq()), "您在群" + groupName + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n1D" + maxRolls + "=" + entityStrManyRolls.getResult());
                     return;
                 }
 
                 if (isNumeric(entityStrManyRolls.getStrResult())) {
-                    entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + groupName + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n" + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getResult());
+                    CQ.sendPrivateMsg(Long.parseLong(entityTypeMessages.getFromQq()), "您在群" + groupName + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n" + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getResult());
                 } else {
-                    entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), "您在群" + groupName + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n" + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getStrResult() + "=" + entityStrManyRolls.getResult());
+                    CQ.sendPrivateMsg(Long.parseLong(entityTypeMessages.getFromQq()), "您在群" + groupName + "(" + entityTypeMessages.getFromGroup() + ")的暗骰结果为:\n" + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getStrResult() + "=" + entityStrManyRolls.getResult());
                 }
             }
 //            骰点结果和之前的表达式比较后得出成功等级等，私聊回复给命令发起人

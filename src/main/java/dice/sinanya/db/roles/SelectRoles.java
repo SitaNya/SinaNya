@@ -4,14 +4,17 @@ import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityRoleTag;
 import dice.sinanya.tools.getinfo.MakeRolesInfo;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.HashMap;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOSE;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 
@@ -24,7 +27,7 @@ import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
  * 类说明: 查询角色信息，其中当前激活角色信息和角色技能信息的结果不会反回，而是自动刷写到静态变量中
  */
 public class SelectRoles {
-    private static final Logger Log = LogManager.getLogger(SelectRoles.class);
+
 
     public SelectRoles() {
         //        初始化时无需逻辑
@@ -44,7 +47,7 @@ public class SelectRoles {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -182,7 +185,7 @@ public class SelectRoles {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 }

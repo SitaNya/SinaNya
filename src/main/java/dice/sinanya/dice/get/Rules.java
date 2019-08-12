@@ -27,7 +27,7 @@ public class Rules {
      */
     public void get() {
         String tag = TAG_RULES;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         sender(entityTypeMessages, rulesText.getOrDefault(msg, "不存在此规则解释:\t" +msg));
     }
 }

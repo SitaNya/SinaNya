@@ -4,7 +4,7 @@ import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityHistory;
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.History.changeHistory;
 import static dice.sinanya.tools.makedata.Sender.sender;
@@ -32,7 +32,7 @@ public class History implements MakeNickToSender {
         StringBuilder stringBuilder = new StringBuilder();
         EntityHistory entityHistory = changeHistory(entityTypeMessages.getFromQq());
 
-        stringBuilder.append(makeNickToSender(getNickName(entityTypeMessages))).append("\t").append("您使用").append(ENTITY_LOGINQQ_INFO.getLoginQQNick()).append("以来，共计产生以下历史数据:\n")
+        stringBuilder.append(makeNickToSender(getNickName(entityTypeMessages))).append("\t").append("您使用").append(CQ.getLoginNick()).append("以来，共计产生以下历史数据:\n")
                 .append("骰点:\t")
                 .append(entityHistory.getTimes())
                 .append("次")

@@ -4,16 +4,16 @@ import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.dice.manager.imal.AtQq;
 import dice.sinanya.entity.EntityGroupCensus;
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.entity.imal.MessagesTypes;
 import dice.sinanya.system.MessagesSystem;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
-import static com.forte.qqrobot.beans.messages.types.MsgGetTypes.discussMsg;
-import static com.forte.qqrobot.beans.messages.types.MsgGetTypes.groupMsg;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.db.system.SelectBot.selectBot;
-import static dice.sinanya.system.MessagesLoginInfo.ENTITY_LOGINQQ_INFO;
 import static dice.sinanya.system.MessagesSystem.*;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
@@ -44,15 +44,15 @@ public class Bot implements AtQq, MakeNickToSender {
      */
     public void on() {
         String tag = TAG_BOT_ON;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
 
         ArrayList<String> qqList = getAtQqList(msg);
 
         if (qqList.isEmpty()) {
-            qqList.add(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+            qqList.add(String.valueOf(CQ.getLoginQQ()));
         }
         for (String qq : qqList) {
-            if (qq.equals(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()))) {
+            if (qq.equals(String.valueOf(CQ.getLoginQQ()))) {
                 long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
                 if (groupId == 0) {
                     sender(entityTypeMessages, MESSAGES_SYSTEM.get("can'tInPrivate"));
@@ -73,16 +73,16 @@ public class Bot implements AtQq, MakeNickToSender {
      */
     public void off() {
         String tag = TAG_BOT_OFF;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
 
         ArrayList<String> qqList = getAtQqList(msg);
 
         if (qqList.isEmpty()) {
-            qqList.add(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+            qqList.add(String.valueOf(CQ.getLoginQQ()));
         }
 
         for (String qq : qqList) {
-            if (qq.equals(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()))) {
+            if (qq.equals(String.valueOf(CQ.getLoginQQ()))) {
                 long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
                 if (groupId == 0) {
                     sender(entityTypeMessages, MESSAGES_SYSTEM.get("can'tInPrivate"));
@@ -103,27 +103,27 @@ public class Bot implements AtQq, MakeNickToSender {
      */
     public void exit() {
         String tag = TAG_BOT_EXIT;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
 
         ArrayList<String> qqList = getAtQqList(msg);
 
         if (qqList.isEmpty()) {
-            qqList.add(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()));
+            qqList.add(String.valueOf(CQ.getLoginQQ()));
         }
 
         for (String qq : qqList) {
-            if (qq.equals(String.valueOf(ENTITY_LOGINQQ_INFO.getLoginQQ()))) {
+            if (qq.equals(String.valueOf(CQ.getLoginQQ()))) {
                 sender(entityTypeMessages, MESSAGES_SYSTEM.get("botExit"));
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
-                    log.error(e.getMessage(), e);
+                    CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
                     Thread.currentThread().interrupt();
                 }
-                if (entityTypeMessages.getMsgGetTypes() == groupMsg) {
-                    entityTypeMessages.getMsgSender().SETTER.setGroupLeave(entityTypeMessages.getFromGroup());
-                } else if (entityTypeMessages.getMsgGetTypes() == discussMsg) {
-                    entityTypeMessages.getMsgSender().SETTER.setDiscussLeave(entityTypeMessages.getFromGroup());
+                if (entityTypeMessages.getMessagesTypes() == MessagesTypes.GROUP_MSG) {
+                    CQ.setGroupLeave(Long.parseLong(entityTypeMessages.getFromGroup()), false);
+                } else if (entityTypeMessages.getMessagesTypes() == MessagesTypes.DISCUSS_MSG) {
+                    CQ.setDiscussLeave(Long.parseLong(entityTypeMessages.getFromGroup()));
                 }
             }
         }

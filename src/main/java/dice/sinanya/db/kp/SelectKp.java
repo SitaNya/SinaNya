@@ -2,13 +2,16 @@ package dice.sinanya.db.kp;
 
 import dice.sinanya.db.tools.DbUtil;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesKp.KP_GROUP;
 
 
@@ -21,7 +24,7 @@ import static dice.sinanya.system.MessagesKp.KP_GROUP;
  * 类说明: 查询KP主群类，刷写到静态变量中，只在静态变量中找不到时才需要使用
  */
 public class SelectKp {
-    private static final Logger Log = LogManager.getLogger(SelectKp.class);
+
 
     public SelectKp() {
         //        初始化时无需逻辑
@@ -41,7 +44,7 @@ public class SelectKp {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 }

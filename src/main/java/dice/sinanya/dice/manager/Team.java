@@ -13,12 +13,14 @@ import dice.sinanya.exceptions.SanCheckSetException;
 import dice.sinanya.exceptions.TeamIsEmptyException;
 import dice.sinanya.tools.makedata.MakeSanCheck;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
@@ -42,7 +44,6 @@ import static java.lang.Math.max;
  */
 public class Team implements GetDb, Role, AtQq {
 
-    private static Logger log = LogManager.getLogger(Team.class.getName());
 
     private String regex = "\\[cq:at,qq=([0-9]+)]";
 
@@ -59,7 +60,7 @@ public class Team implements GetDb, Role, AtQq {
      */
     public void set() {
         String tag = TAG_TEAM_SET;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
         for (String qq : qqList) {
             sender(entityTypeMessages, "已将玩家: [CQ:at,qq=" + qq + "]加入小队。可以使用.team查看队伍信息,.team hp/san对成员状态进行强制调整\n其余使用方式请查看.help命令");
@@ -73,7 +74,7 @@ public class Team implements GetDb, Role, AtQq {
      */
     public void remove() {
         String tag = TAG_TEAM_RM;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
         EntityTeamInfo entityTeamInfo = new EntityTeamInfo(entityTypeMessages.getFromGroup(), qqList);
         removeFromTeam(entityTeamInfo);
@@ -113,7 +114,7 @@ public class Team implements GetDb, Role, AtQq {
      */
     public void hp() throws ManyRollsTimesTooMoreException {
         String tag = TAG_TEAM_HP;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
 
         msg = msg.replaceAll(regex, "").trim();
@@ -169,7 +170,7 @@ public class Team implements GetDb, Role, AtQq {
      */
     public void san() {
         String tag = TAG_TEAM_SAN;
-        String msg = deleteTag(entityTypeMessages.getMsgGet().getMsg(), tag.substring(0, tag.length() - 2));
+        String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         ArrayList<String> qqList = getAtQqList(msg);
 
         msg = msg.replaceAll(regex, "").trim();
@@ -186,7 +187,7 @@ public class Team implements GetDb, Role, AtQq {
                 try {
                     makeSanCheck.addSanCheck(msg);
                 } catch (PlayerSetException e) {
-                    log.error(e.getMessage(), e);
+                    CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
                 }
             } else {
                 try {
@@ -224,7 +225,7 @@ public class Team implements GetDb, Role, AtQq {
                     }
 
                 } catch (SanCheckSetException | PlayerSetException | ManyRollsTimesTooMoreException e) {
-                    log.error(e.getMessage(), e);
+                    CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
                 }
             }
 
@@ -243,7 +244,7 @@ public class Team implements GetDb, Role, AtQq {
             try {
                 throw new TeamIsEmptyException(entityTypeMessages);
             } catch (TeamIsEmptyException e) {
-                log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
                 return;
             }
         }
@@ -296,7 +297,7 @@ public class Team implements GetDb, Role, AtQq {
             try {
                 throw new TeamIsEmptyException(entityTypeMessages);
             } catch (TeamIsEmptyException e) {
-                log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
                 return;
             }
         } else {
@@ -305,7 +306,7 @@ public class Team implements GetDb, Role, AtQq {
         for (String qq : qqList) {
             stringBuilder.append(new Roles(entityTypeMessages).showProp(entityTypeMessages, qq));
         }
-        entityTypeMessages.getMsgSender().SENDER.sendPrivateMsg(entityTypeMessages.getFromQq(), stringBuilder.toString());
+        CQ.sendPrivateMsg(Long.parseLong(entityTypeMessages.getFromQq()), stringBuilder.toString());
     }
 
     /**
@@ -319,7 +320,7 @@ public class Team implements GetDb, Role, AtQq {
             try {
                 throw new TeamIsEmptyException(entityTypeMessages);
             } catch (TeamIsEmptyException e) {
-                log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
                 return;
             }
         } else {

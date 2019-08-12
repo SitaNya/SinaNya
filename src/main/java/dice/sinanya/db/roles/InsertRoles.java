@@ -4,7 +4,8 @@ import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityRoleTag;
 import dice.sinanya.tools.getinfo.MakeRolesInfo;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.*;
 import java.util.HashMap;
@@ -24,7 +25,7 @@ import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoByQQ;
  * 类说明: 录入角色信息，包含当前激活角色和角色内容（分两张表存储），log内容的信息会在另一个类中初始化好，未设定的技能将置为初始值
  */
 public class InsertRoles {
-    private static final Logger Log = LogManager.getLogger(InsertRoles.class);
+
 
     /**
      * 将某个QQ当前选择角色置为某个角色名，这个信息是跨群的，这也就是为什么在一个群中切角色，其它群也自动切换
@@ -65,7 +66,7 @@ public class InsertRoles {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -106,7 +107,7 @@ public class InsertRoles {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
 
         ROLE_CHOOSE.put(qqId, role);
@@ -266,7 +267,7 @@ public class InsertRoles {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -406,7 +407,7 @@ public class InsertRoles {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -427,7 +428,7 @@ public class InsertRoles {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 }
