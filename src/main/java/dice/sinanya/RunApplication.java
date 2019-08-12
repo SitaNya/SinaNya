@@ -464,6 +464,12 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
      */
     @Override
     public String appInfo() {
-        return null;
+        // 应用AppID,规则见 http://d.cqp.me/Pro/开发/基础信息#appid
+        String AppID = "com.sinanya.dice";// 记住编译后的文件和json也要使用appid做文件名
+        /**
+         * 本函数【禁止】处理其他任何代码，以免发生异常情况。
+         * 如需执行初始化代码请在 startup 事件中执行（Type=1001）。
+         */
+        return CQAPIVER + "," + AppID;
     }
 }
