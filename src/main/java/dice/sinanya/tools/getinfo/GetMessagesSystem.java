@@ -109,6 +109,8 @@ public class GetMessagesSystem {
 
         MESSAGES_SYSTEM.put("heap","false");
         MESSAGES_SYSTEM.put("cloudBan","true");
+
+        MESSAGES_SYSTEM.put("dbPassword", "rong");
     }
 
     private GetMessagesSystem() {
