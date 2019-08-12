@@ -463,7 +463,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
 
     public int menuB(){
         JOptionPane.showMessageDialog(null, "这是测试菜单A，可以在这里加载窗口");
-        return 0
+        return 0;
     }
 
     /**
