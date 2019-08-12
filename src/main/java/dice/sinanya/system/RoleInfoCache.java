@@ -22,7 +22,7 @@ public class RoleInfoCache {
      * @param ROLE_CHOOSE 当前选择人物卡对象，key为QQ号，value为角色名
      */
     public static final Map<EntityRoleTag, HashMap<String, Integer>> ROLE_INFO_CACHE = new HashMap<>();
-    public static final Map<Long, String> ROLE_CHOOSE = new HashMap<>();
+    public static final Map<String, String> ROLE_CHOOSE = new HashMap<>();
 
     private RoleInfoCache() {
         throw new IllegalStateException("Utility class");
