@@ -4,6 +4,7 @@ import com.sobte.cqp.jcq.entity.ICQVer;
 import com.sobte.cqp.jcq.entity.IMsg;
 import com.sobte.cqp.jcq.entity.IRequest;
 import com.sobte.cqp.jcq.event.JcqAppAbstract;
+import dice.sinanya.db.properties.SelectProperties;
 import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.dice.system.Bot;
 import dice.sinanya.entity.EntityLogTag;
@@ -20,8 +21,7 @@ import java.util.regex.Pattern;
 import static dice.sinanya.db.system.SelectBot.flushBot;
 import static dice.sinanya.tools.getinfo.BanList.*;
 import static dice.sinanya.tools.getinfo.DefaultMaxRolls.flushMaxRolls;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.initMessagesSystem;
+import static dice.sinanya.tools.getinfo.GetMessagesSystem.*;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.GetNickName.getUserName;
 import static dice.sinanya.tools.getinfo.History.flushHistory;
@@ -67,7 +67,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
      */
     @Override
     public int startup() {
-        MESSAGES_SYSTEM.put("system_dir",CQ.getAppDirectory());
+        entityProperties.setSystemDir(CQ.getAppDirectory());
         return 0;
     }
 
@@ -98,6 +98,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         flushHistory();
         CQ.logInfo("数据库", "读取骰点历史信息到缓存");
         flushBanList();
+        new SelectProperties().flushProperties();
         CQ.logInfo("数据库", "读取云黑列表到缓存");
 //        new Prometheus().start();
 //        CQ.logInfo("监控", "开启普罗米修斯监控");

@@ -1,9 +1,6 @@
 package dice.sinanya.tools.log;
 
 import dice.sinanya.entity.MailBean;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
@@ -12,11 +9,11 @@ import javax.mail.internet.*;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Properties;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 
 /**
  * @author SitaNya
@@ -28,7 +25,7 @@ import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
  */
 public class SendMail {
 
-    private static String malUserName = MESSAGES_SYSTEM.get("mailUserName");
+    private static String malUserName = "2730902267@qq.com";
 
     /**
      * 重新编码为GBK2312（中文），可以解决大部分乱码问题
@@ -59,7 +56,7 @@ public class SendMail {
         // 设置SMTP主机(163)，若用126，则设为：smtp.126.com
         mb.setUsername(malUserName);
         // 设置发件人邮箱的用户名
-        mb.setPassword(MESSAGES_SYSTEM.get("mailPassword"));
+        mb.setPassword("kktjwuakdafbdcej");
         // 设置发件人邮箱的密码，需将*号改成正确的密码
         mb.setFrom(malUserName);
         // 设置发件人的邮箱
@@ -84,35 +81,6 @@ public class SendMail {
         }
     }
 
-    /**
-     * 设定邮件必要的信息
-     */
-    public static void sendMail(String messages) {
-        MailBean mb = new MailBean();
-        mb.setHost("smtp.qq.com");
-        // 设置SMTP主机(163)，若用126，则设为：smtp.126.com
-        mb.setUsername(malUserName);
-        // 设置发件人邮箱的用户名
-        mb.setPassword(MESSAGES_SYSTEM.get("mailPassword"));
-        // 设置发件人邮箱的密码，需将*号改成正确的密码
-        mb.setFrom(malUserName);
-        // 设置发件人的邮箱
-        mb.setTo(MESSAGES_SYSTEM.get("masterMail"));
-        // 设置收件人的邮箱
-        mb.setSubject("骰娘宕机");
-        // 设置邮件的主题
-        mb.setContent("您的骰娘:" + CQ.getLoginNick() + "(" + CQ.getLoginQQ() + ")失去响应，请查看\n" + messages);
-        // 设置邮件的正文
-
-        SendMail sm = new SendMail();
-        CQ.logInfo("邮件发送","正在发送邮件...");
-        // 发送邮件
-        if (sm.sendMail(mb)) {
-            CQ.logInfo("邮件发送","发送成功!");
-        } else {
-            CQ.logInfo("邮件发送","发送失败!");
-        }
-    }
 
     /**
      * 实际发送邮件
