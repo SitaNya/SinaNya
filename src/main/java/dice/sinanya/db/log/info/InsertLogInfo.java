@@ -3,7 +3,8 @@ package dice.sinanya.db.log.info;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityLogTag;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,7 +22,7 @@ import static dice.sinanya.system.MessagesLog.LOG_NAME_SWITCH;
  * 类说明: 录入log信息类，这里是实际的log内容而不是log是否开启的标签
  */
 public class InsertLogInfo {
-    private static final Logger Log = LogManager.getLogger(InsertLogInfo.class);
+
 
     public InsertLogInfo() {
         //        初始化时不需要参数
@@ -44,7 +45,7 @@ public class InsertLogInfo {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
             StringBuilder stringBuilder = new StringBuilder();
             for (Map.Entry<EntityLogTag, Boolean> mapEntry : LOG_NAME_SWITCH.entrySet()) {
                 stringBuilder.append("groupId")
@@ -55,7 +56,6 @@ public class InsertLogInfo {
                         .append(mapEntry.getKey().getLogName())
                         .append("\n");
             }
-            Log.debug(stringBuilder.toString());
         }
     }
 }

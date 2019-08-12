@@ -3,7 +3,8 @@ package dice.sinanya.db.log.tag;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityLogTag;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +25,7 @@ import static dice.sinanya.system.MessagesLog.LOG_SWITCH_FOR_GROUP;
  * 类说明: 查询log开启状况，包含当前群内是否有log开启，是哪个log，目前某个log是否处于开启状态
  */
 public class SelectLogTag {
-    private static final Logger Log = LogManager.getLogger(SelectLogTag.class);
+
 
 
     public SelectLogTag() {
@@ -48,7 +49,7 @@ public class SelectLogTag {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -71,7 +72,7 @@ public class SelectLogTag {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
         return tagList;
     }
@@ -96,7 +97,7 @@ public class SelectLogTag {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
         return "未找到";
     }

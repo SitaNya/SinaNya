@@ -1,7 +1,8 @@
 package dice.sinanya.tools.log;
 
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.io.*;
 
@@ -14,7 +15,7 @@ import java.io.*;
  * 类说明: 日志存储落地类
  */
 public class LogSave {
-    private static final Logger Log = LogManager.getLogger(LogSave.class);
+
 
     private LogSave() {
         throw new IllegalStateException("Utility class");
@@ -32,13 +33,13 @@ public class LogSave {
         File file = new File("../saveLogs/" + groupId + "/" + logName + ".txt");
 
         if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
-            Log.error("上层目录未能创建");
+            CQ.logError("日志存储异常","上层目录未能创建");
         }
 
         try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "GBK"));) {
             out.write(info);
         } catch (IOException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 }

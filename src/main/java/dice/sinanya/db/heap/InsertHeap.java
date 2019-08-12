@@ -2,7 +2,8 @@ package dice.sinanya.db.heap;
 
 import dice.sinanya.db.tools.DbUtil;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +23,7 @@ import static dice.sinanya.tools.getinfo.GetTime.getTime;
  * 类说明:
  */
 public class InsertHeap {
-    private static final Logger Log = LogManager.getLogger(InsertHeap.class.getName());
+
 
     /**
      * 将QQ黑名单列表入库
@@ -39,7 +40,7 @@ public class InsertHeap {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 }

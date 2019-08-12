@@ -1,7 +1,8 @@
 package dice.sinanya.tools.log;
 
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 import org.docx4j.jaxb.Context;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -27,7 +28,7 @@ import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
  */
 public class SaveDocx {
 
-    private static final Logger Log = LogManager.getLogger(SaveDocx.class);
+
     private ObjectFactory factory;
     private MainDocumentPart documentPart;
 
@@ -76,7 +77,7 @@ public class SaveDocx {
         }
         File file = new File("../saveLogs/" + groupId + "/" + msg + ".docx");
         if (!file.getParentFile().mkdirs() || !file.getParentFile().exists()) {
-            Log.error("docx染色文件未能成功生成");
+            CQ.logError("日志落地异常", "docx染色文件未能成功生成");
         }
         wordMlPackage.save(file);
     }

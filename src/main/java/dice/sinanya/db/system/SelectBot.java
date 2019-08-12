@@ -3,7 +3,8 @@ package dice.sinanya.db.system;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityGroupCensus;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +24,7 @@ import static dice.sinanya.system.SystemInfo.SWITCH_BOT;
  * 类说明: 查询所有开关的情况，并刷新到变量中，一般只在变量中找不到时才会使用
  */
 public class SelectBot {
-    private static final Logger Log = LogManager.getLogger(SelectBot.class);
+
 
     private SelectBot() {
         throw new IllegalStateException("Utility class");
@@ -44,7 +45,7 @@ public class SelectBot {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -68,7 +69,7 @@ public class SelectBot {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
         return new EntityGroupCensus(groupNum, onNum);
     }
@@ -90,7 +91,7 @@ public class SelectBot {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
         return offGroupList;
     }

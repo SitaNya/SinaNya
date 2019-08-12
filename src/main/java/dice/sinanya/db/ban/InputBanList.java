@@ -4,11 +4,13 @@ import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.NotBanListInputException;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
@@ -21,7 +23,7 @@ import static com.sobte.cqp.jcq.event.JcqApp.CQ;
  * 类说明:
  */
 public class InputBanList {
-    private static final Logger Log = LogManager.getLogger(InputBanList.class.getName());
+
 
     /**
      * 将QQ黑名单列表入库
@@ -37,7 +39,7 @@ public class InputBanList {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -55,7 +57,7 @@ public class InputBanList {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 

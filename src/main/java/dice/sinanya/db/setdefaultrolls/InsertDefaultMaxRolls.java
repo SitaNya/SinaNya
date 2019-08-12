@@ -2,7 +2,8 @@ package dice.sinanya.db.setdefaultrolls;
 
 import dice.sinanya.db.tools.DbUtil;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +21,7 @@ import java.sql.SQLException;
  * 这里不再特地录入默认值100了
  */
 public class InsertDefaultMaxRolls {
-    private static final Logger Log = LogManager.getLogger(InsertDefaultMaxRolls.class);
+
 
     /**
      * 将设定的最大骰点值记录进数据库
@@ -61,7 +62,7 @@ public class InsertDefaultMaxRolls {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 }

@@ -5,7 +5,8 @@ import dice.sinanya.exceptions.BanListInputNotIdException;
 import dice.sinanya.exceptions.NotBanListInputException;
 import dice.sinanya.exceptions.NotMasterException;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -29,7 +30,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 类说明:
  */
 public class BanList {
-    private static final Logger Log = LogManager.getLogger(BanList.class.getName());
+
 
     private EntityTypeMessages entityTypeMessages;
 
@@ -53,7 +54,7 @@ public class BanList {
             insertQqBanList(msg, "手工录入");
             sender(entityTypeMessages,"已将用户:\t"+msg+"加入云黑名单");
         } catch (BanListInputNotIdException|NotMasterException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -74,7 +75,7 @@ public class BanList {
             insertGroupBanList(msg, "手工录入");
             sender(entityTypeMessages,"已将群:\t"+msg+"加入云黑名单");
         } catch (BanListInputNotIdException|NotMasterException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -95,7 +96,7 @@ public class BanList {
             removeQqBanList(msg, entityTypeMessages);
             sender(entityTypeMessages,"已将用户:\t"+msg+"移出云黑名单");
         } catch (BanListInputNotIdException | NotBanListInputException|NotMasterException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -116,7 +117,7 @@ public class BanList {
             removeGroupBanList(msg, entityTypeMessages);
             sender(entityTypeMessages,"已将群:\t"+msg+"移出云黑名单");
         } catch (BanListInputNotIdException | NotBanListInputException|NotMasterException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -160,7 +161,7 @@ public class BanList {
 
     private void isQqOrGroup(String input) throws BanListInputNotIdException {
         if (!isNumeric(input) || input.length() > 15 || input.length() < 4) {
-            Log.error(input);
+            CQ.logError("黑名单添加错误", "输入的不是群号或QQ号");
             throw new BanListInputNotIdException(entityTypeMessages);
         }
     }

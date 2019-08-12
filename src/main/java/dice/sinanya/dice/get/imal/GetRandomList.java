@@ -4,8 +4,10 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.tools.makedata.RandomInt.random;
 import static java.lang.Math.min;
 
@@ -32,7 +34,7 @@ public interface GetRandomList {
         try {
             tmp = infoList.get(index);
         } catch (IndexOutOfBoundsException e) {
-            log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
             log.error("size: " + (infoList.size() - 1));
             log.error("index: " + index);
         }

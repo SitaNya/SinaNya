@@ -67,7 +67,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
      */
     @Override
     public int startup() {
-//        String appDirectory = CQ.getAppDirectory();
+        MESSAGES_SYSTEM.put("system_dir",CQ.getAppDirectory());
         return 0;
     }
 
@@ -99,8 +99,8 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         CQ.logInfo("数据库", "读取骰点历史信息到缓存");
         flushBanList();
         CQ.logInfo("数据库", "读取云黑列表到缓存");
-        new Prometheus().start();
-        CQ.logInfo("监控", "开启普罗米修斯监控");
+//        new Prometheus().start();
+//        CQ.logInfo("监控", "开启普罗米修斯监控");
         return 0;
     }
 

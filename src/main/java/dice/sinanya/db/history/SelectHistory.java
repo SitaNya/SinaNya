@@ -3,7 +3,8 @@ package dice.sinanya.db.history;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityHistory;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +24,7 @@ import static com.sobte.cqp.jcq.event.JcqApp.CQ;
  * 类说明: 查询骰点历史类，这里不会返回对象而是直接刷写到静态变量中，只有在静态变量中获取不到时才会使用
  */
 public class SelectHistory {
-    private static final Logger Log = LogManager.getLogger(SelectHistory.class);
+
 
     public SelectHistory() {
         //        初始化时无需逻辑
@@ -53,7 +54,7 @@ public class SelectHistory {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 }

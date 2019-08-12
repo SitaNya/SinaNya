@@ -10,6 +10,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.db.system.SelectBot.selectBot;
@@ -116,7 +117,7 @@ public class Bot implements AtQq, MakeNickToSender {
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
-                    log.error(e.getMessage(), e);
+                    CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
                     Thread.currentThread().interrupt();
                 }
                 if (entityTypeMessages.getMessagesTypes() == MessagesTypes.GROUP_MSG) {

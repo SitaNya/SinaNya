@@ -2,7 +2,8 @@ package dice.sinanya.db.ban;
 
 import dice.sinanya.db.tools.DbUtil;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,7 +22,7 @@ import static dice.sinanya.system.MessagesBanList.qqBanList;
  * 类说明:
  */
 public class SelectBanList {
-    private static final Logger Log = LogManager.getLogger(SelectBanList.class.getName());
+
 
     /**
      * 读取数据库中的骰点历史信息到缓存
@@ -38,7 +39,7 @@ public class SelectBanList {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -57,7 +58,7 @@ public class SelectBanList {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 }

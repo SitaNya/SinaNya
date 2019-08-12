@@ -1,5 +1,6 @@
 package dice.sinanya.tools.getinfo;
 
+import com.sobte.cqp.jcq.entity.CoolQ;
 import com.sobte.cqp.jcq.entity.Group;
 import dice.sinanya.entity.EntityTypeMessages;
 
@@ -37,7 +38,7 @@ public class GetNickName {
             case DISCUSS_MSG:
                 return CQ.getGroupMemberInfo(Long.parseLong(entityTypeMessages.getFromGroup()), Long.parseLong(entityTypeMessages.getFromQq())).getNick();
             default:
-                return CQ.getStrangerInfo(Long.parseLong(entityTypeMessages.getFromQq())).getNick();
+            return CQ.getStrangerInfo(Long.parseLong(entityTypeMessages.getFromQq())).getNick();
         }
     }
 

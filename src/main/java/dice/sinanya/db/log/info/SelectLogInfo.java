@@ -3,7 +3,8 @@ package dice.sinanya.db.log.info;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityLogTag;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +21,7 @@ import java.sql.SQLException;
  */
 public class SelectLogInfo {
 
-    private static final Logger Log = LogManager.getLogger(SelectLogInfo.class);
+
 
     public SelectLogInfo() {
         //        初始化时无需逻辑
@@ -47,7 +48,7 @@ public class SelectLogInfo {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
         return stringBuilder.toString();
     }

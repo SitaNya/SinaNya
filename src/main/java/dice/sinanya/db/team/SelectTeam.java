@@ -3,7 +3,8 @@ package dice.sinanya.db.team;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityQqAndGroup;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesTeamEn.TEAM_EN;
 
 /**
@@ -24,7 +26,7 @@ import static dice.sinanya.system.MessagesTeamEn.TEAM_EN;
  * 类说明: 查询队伍QQ号列表，这些QQ号会用到角色逻辑中以获取角色信息
  */
 public class SelectTeam {
-    private static final Logger Log = LogManager.getLogger(SelectTeam.class);
+
 
     /**
      * 从数据库中刷新幕间成长的缓存到teamEn静态变量
@@ -40,7 +42,7 @@ public class SelectTeam {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -63,7 +65,7 @@ public class SelectTeam {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
         if (strQqList != null) {
             return new ArrayList<>(Arrays.asList(strQqList.split(",")));

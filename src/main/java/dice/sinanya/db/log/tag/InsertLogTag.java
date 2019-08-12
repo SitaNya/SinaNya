@@ -3,7 +3,8 @@ package dice.sinanya.db.log.tag;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityLogTag;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +21,7 @@ import java.sql.SQLException;
  */
 public class InsertLogTag {
 
-    private static final Logger Log = LogManager.getLogger(InsertLogTag.class);
+
 
     public InsertLogTag() {
         //        初始化时不需要参数
@@ -64,7 +65,7 @@ public class InsertLogTag {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -82,7 +83,7 @@ public class InsertLogTag {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
 
         try (Connection conn = DbUtil.getConnection()) {
@@ -93,7 +94,7 @@ public class InsertLogTag {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 }

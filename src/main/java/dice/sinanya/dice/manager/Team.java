@@ -13,7 +13,8 @@ import dice.sinanya.exceptions.SanCheckSetException;
 import dice.sinanya.exceptions.TeamIsEmptyException;
 import dice.sinanya.tools.makedata.MakeSanCheck;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +44,6 @@ import static java.lang.Math.max;
  */
 public class Team implements GetDb, Role, AtQq {
 
-    private static Logger log = LogManager.getLogger(Team.class.getName());
 
     private String regex = "\\[cq:at,qq=([0-9]+)]";
 
@@ -187,7 +187,7 @@ public class Team implements GetDb, Role, AtQq {
                 try {
                     makeSanCheck.addSanCheck(msg);
                 } catch (PlayerSetException e) {
-                    log.error(e.getMessage(), e);
+                    CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
                 }
             } else {
                 try {
@@ -225,7 +225,7 @@ public class Team implements GetDb, Role, AtQq {
                     }
 
                 } catch (SanCheckSetException | PlayerSetException | ManyRollsTimesTooMoreException e) {
-                    log.error(e.getMessage(), e);
+                    CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
                 }
             }
 
@@ -244,7 +244,7 @@ public class Team implements GetDb, Role, AtQq {
             try {
                 throw new TeamIsEmptyException(entityTypeMessages);
             } catch (TeamIsEmptyException e) {
-                log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
                 return;
             }
         }
@@ -297,7 +297,7 @@ public class Team implements GetDb, Role, AtQq {
             try {
                 throw new TeamIsEmptyException(entityTypeMessages);
             } catch (TeamIsEmptyException e) {
-                log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
                 return;
             }
         } else {
@@ -320,7 +320,7 @@ public class Team implements GetDb, Role, AtQq {
             try {
                 throw new TeamIsEmptyException(entityTypeMessages);
             } catch (TeamIsEmptyException e) {
-                log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
                 return;
             }
         } else {

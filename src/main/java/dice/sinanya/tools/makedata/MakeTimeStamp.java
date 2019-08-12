@@ -1,10 +1,14 @@
 package dice.sinanya.tools.makedata;
 
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
+
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
 /**
  * @author SitaNya
@@ -15,7 +19,6 @@ import java.text.SimpleDateFormat;
  * 类说明:
  */
 public class MakeTimeStamp {
-    private static Logger log = LogManager.getLogger(MakeTimeStamp.class.getName());
 
     private MakeTimeStamp() {
         throw new IllegalStateException("Utility class");
@@ -34,7 +37,7 @@ public class MakeTimeStamp {
         try {
             d = format.parse(time);
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
 
         return new Timestamp((d != null)

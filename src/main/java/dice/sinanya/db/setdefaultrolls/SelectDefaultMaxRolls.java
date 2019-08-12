@@ -2,7 +2,8 @@ package dice.sinanya.db.setdefaultrolls;
 
 import dice.sinanya.db.tools.DbUtil;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +23,7 @@ import static dice.sinanya.system.MessagesRollMaxValue.ROLL_MAX_VALUE;
  * 直接刷新到静态变量
  */
 public class SelectDefaultMaxRolls {
-    private static final Logger Log = LogManager.getLogger(SelectDefaultMaxRolls.class.getName());
+
 
     /**
      * 从数据库刷写默认骰最大值到静态变量
@@ -38,7 +39,7 @@ public class SelectDefaultMaxRolls {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 }

@@ -5,7 +5,8 @@ import dice.sinanya.entity.EntityQqAndGroup;
 import dice.sinanya.entity.EntityTeamInfo;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +23,7 @@ import java.util.*;
  * 类说明: 录入、删除、更新队伍信息，这里其实只包含QQ账号列表而不包含成员状态。QQ账号会拿到角色信息相关逻辑中再获得角色信息。
  */
 public class InsertTeam {
-    private static final Logger Log = LogManager.getLogger(InsertTeam.class);
+
 
     /**
      * 将teamEn静态变量遍历后更新到数据库中
@@ -39,7 +40,7 @@ public class InsertTeam {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -59,7 +60,7 @@ public class InsertTeam {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -76,7 +77,7 @@ public class InsertTeam {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -93,7 +94,7 @@ public class InsertTeam {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -119,7 +120,7 @@ public class InsertTeam {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -175,7 +176,7 @@ public class InsertTeam {
 
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 }

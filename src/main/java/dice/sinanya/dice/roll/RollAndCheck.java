@@ -12,7 +12,8 @@ import dice.sinanya.tools.checkdata.CheckResultLevel;
 import dice.sinanya.tools.makedata.MakeRal;
 import dice.sinanya.tools.makedata.MakeRcl;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 类说明: ra、rc判定，ral、rcl多次骰点，rav、rcv对抗
  */
 public class RollAndCheck implements En, MakeNickToSender {
-    private static final Logger Log = LogManager.getLogger(RollAndCheck.class);
+
 
     private String defaultGroupId = "0";
 
@@ -293,7 +294,7 @@ public class RollAndCheck implements En, MakeNickToSender {
                 groupId = getKpGroup(entityTypeMessages);
                 sender(entityTypeMessages, "本次对抗将用于群" + makeGroupNickToSender(getGroupName(groupId)) + "(" + groupId + ")");
             } catch (NotSetKpGroupException e) {
-                Log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
                 groupId = "0";
             }
         } else {
@@ -306,7 +307,7 @@ public class RollAndCheck implements En, MakeNickToSender {
         try {
             checkManyRollsError(msg);
         } catch (ManyRollsTimesTooMoreException | ManyRollsFormatException manyRollsTimesTooMoreException) {
-            Log.error(manyRollsTimesTooMoreException.getMessage(), manyRollsTimesTooMoreException);
+            CQ.logError(manyRollsTimesTooMoreException.getMessage(), Arrays.toString(manyRollsTimesTooMoreException.getStackTrace()));
         }
 
         ArrayList<Integer> rollsList = new ArrayList<>();

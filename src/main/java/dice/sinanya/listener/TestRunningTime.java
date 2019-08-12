@@ -49,7 +49,7 @@ public class TestRunningTime implements Job, MakeNickToSender {
             try {
                 Thread.sleep(random(2000, 12000));
             } catch (InterruptedException e) {
-                log.error(e.getMessage(), e);
+                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
             }
             autoCleanNotPlay();
         }

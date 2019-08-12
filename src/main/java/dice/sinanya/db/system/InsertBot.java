@@ -2,7 +2,8 @@ package dice.sinanya.db.system;
 
 import dice.sinanya.db.tools.DbUtil;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,7 +22,7 @@ import static com.sobte.cqp.jcq.event.JcqApp.CQ;
  * 类说明: 录入机器人在某个群内的开关情况
  */
 public class InsertBot {
-    private static final Logger Log = LogManager.getLogger(InsertBot.class);
+
 
     /**
      * 将机器人的开关值插入某个群，true为开启，false为关闭
@@ -57,7 +58,7 @@ public class InsertBot {
                     ps.setLong(2, groupId);
                     ps.setBoolean(3, switchBot);
                     ps.executeUpdate();
-                    Log.info("插入新的群开关，" + CQ.getLoginQQ() + "groupId: " + groupId + "switchBot: " + switchBot);
+                    CQ.logInfo("插入新的群开关", CQ.getLoginQQ() + "groupId: " + groupId + "switchBot: " + switchBot);
                 }
             } else {
                 sql = "update switchBot set " +
@@ -70,7 +71,7 @@ public class InsertBot {
                 }
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -83,7 +84,7 @@ public class InsertBot {
                 ps.execute();
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
     }
 }
