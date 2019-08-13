@@ -77,7 +77,6 @@ public class BanProperties extends MakeBan {
             entityBanProperties.setMaster(master.getText());
             entityBanProperties.setBanListInputNotId(banListInputNotId.getText());
             entityBanProperties.setNotMaster(notMaster.getText());
-            entityBanProperties.setDoSomthingForBanUserInGroup(doSomthingForBanUserInGroup.isSelected());
             entityBanProperties.setIgnoreBanUser(ignoreBanUser.isSelected());
             entityBanProperties.setLeaveByBanUser(leaveByBanUser.isSelected());
             entityBanProperties.setLeaveGroupByBan(leaveGroupByBan.isSelected());
@@ -88,8 +87,6 @@ public class BanProperties extends MakeBan {
             entityBanProperties.setAddFriend(addFriend.getText());
             entityBanProperties.setRefuseGroupByBan(refuseGroupByBan.getText());
             entityBanProperties.setRefuseFriendByBan(refuseFriendByBan.getText());
-            entityBanProperties.setWhiteGroup(whiteGroup.getText());
-            entityBanProperties.setWhiteUser(whiteUser.getText());
             new InsertProperties().insertProperties(entityBanProperties);
             JOptionPane.showMessageDialog(null, "保存成功");
         });
