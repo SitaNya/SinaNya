@@ -59,8 +59,8 @@ public class MakeBan extends MessagesWindows {
         ignoreBanUser = radioButton.createRadioButton(jPanel, "当黑名单用户处于白名单群中时，忽略此用户");
         ignoreBanUser.setSelected(entityBanProperties.isIgnoreBanUser());
 
-        ignoreBanUser = radioButton.createRadioButton(jPanel, "当黑名单用户处于白名单群中时，因此而退群");
-        ignoreBanUser.setSelected(entityBanProperties.isLeaveByBanUser());
+        leaveByBanUser = radioButton.createRadioButton(jPanel, "当黑名单用户处于白名单群中时，因此而退群");
+        leaveByBanUser.setSelected(entityBanProperties.isLeaveByBanUser());
 
         leaveGroupByBan = radioButton.createRadioButton(jPanel, "自动退出黑名单群");
         leaveGroupByBan.setSelected(entityBanProperties.isLeaveGroupByBan());

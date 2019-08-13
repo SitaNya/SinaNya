@@ -26,9 +26,7 @@ class DbPool {
     private static DbPool instance;
 
     static {
-        if (instance == null) {
-            instance = new DbPool();
-        }
+        instance = new DbPool();
     }
 
     private ComboPooledDataSource dataSource;
@@ -63,6 +61,15 @@ class DbPool {
         Connection conn = null;
         try {
             conn = dataSource.getConnection();
+            CQ.logDebug("数据库","获取连接");
+        } catch (SQLException e) {
+            CQ.logDebug("数据库数据源",dataSource.toString());
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+        }
+        try {
+            Exception e = new Exception("线程池调用流程为");
+            CQ.logDebug("当前线程池中链接数 " , String.valueOf(dataSource.getNumConnections()));
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         } catch (SQLException e) {
             CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }

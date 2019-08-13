@@ -139,12 +139,12 @@ public class EntitySystemProperties {
 //        mailUserName="2730902267@qq.com";
 //        mailPassword="kktjwuakdafbdcej";
 
-        CRITICAL_SUCCESS="";
-        EXTREME_SUCCESS="";
-        HARD_SUCCESS="";
-        SUCCESS="";
-        FAILURE="";
-        FUMBLE="";
+        CRITICAL_SUCCESS="大成功";
+        EXTREME_SUCCESS="极难成功";
+        HARD_SUCCESS="困难成功";
+        SUCCESS="成功";
+        FAILURE="失败";
+        FUMBLE="大失败";
     }
 
     public String getSystemDir() {
