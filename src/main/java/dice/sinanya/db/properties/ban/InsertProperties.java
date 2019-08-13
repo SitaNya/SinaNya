@@ -27,7 +27,7 @@ public class InsertProperties {
                     "cloudBan," +
                     "Prometheus," +
                     "heap," +
-                    "master," +
+                    "`master`," +
                     "notMaster," +
                     "banListInputNotId," +
                     "doSomthingForBanUserInGroup," +
