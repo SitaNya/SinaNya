@@ -78,4 +78,25 @@ public class MessagesWindows {
     public JTextArea success;
     public JTextArea failure;
     public JTextArea fumble;
+
+    public JCheckBox cloudBan;
+    public JCheckBox Prometheus;
+    public JCheckBox heap;
+    public JTextField master;
+    public JTextField banListInputNotId;
+    public JTextField notMaster;
+    public JCheckBox doSomthingForBanUserInGroup;
+    public JCheckBox ignoreBanUser;
+    public JCheckBox leaveByBanUser;
+    public JCheckBox leaveGroupByBan;
+    public JCheckBox banGroupBecauseBan;
+    public JCheckBox banGroupBecauseReduce;
+    public JCheckBox banUserBecauseReduce;
+    public JTextArea addGroup;
+    public JTextArea addFriend;
+    public JTextArea refuseGroupByBan;
+    public JTextArea refuseFriendByBan;
+    public JTextArea whiteGroup;
+    public JTextArea whiteUser;
+
 }

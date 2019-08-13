@@ -20,10 +20,10 @@ import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemPrope
  * <p>
  * 类说明:
  */
-public class Tools extends MakeText {
+public class DiceProperties extends MakeText {
     static JCheckBox jCheckBox;
 
-    public Tools() {
+    public DiceProperties() {
     }
 
     public static int getLength(String text) {

@@ -14,9 +14,9 @@ import dice.sinanya.entity.imal.MessagesTypes;
 import dice.sinanya.exceptions.OnlyManagerException;
 import dice.sinanya.flow.Flow;
 import dice.sinanya.monitor.Prometheus;
-import dice.sinanya.windows.Tools;
+import dice.sinanya.windows.BanProperties;
+import dice.sinanya.windows.DiceProperties;
 
-import javax.swing.*;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -168,7 +168,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     public int groupMsg(int subType, int msgId, long fromGroup, long fromQq, String fromAnonymous, String msg,
                         int font) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(MessagesTypes.GROUP_MSG, fromQq, fromGroup, msg);
-        if (checkBeBanOrInBan(entityTypeMessages) == MSG_INTERCEPT || getBot(fromGroup)) {
+        if ((checkBeBanOrInBan(entityTypeMessages) == MSG_INTERCEPT) || getBot(fromGroup)) {
             return MSG_INTERCEPT;
         }
 
@@ -271,10 +271,15 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
      */
     @Override
     public int groupMemberDecrease(int subtype, int sendTime, long fromGroup, long fromQQ, long beingOperateQQ) {
-        if (subtype == 2 && beingOperateQQ == CQ.getLoginQQ()) {
-            CQ.sendGroupMsg(162279609, "已被移出群" + getGroupName(fromGroup) + "(" + fromGroup + ")中，将群和操作者" + getUserName(fromQQ) + "(" + fromQQ + ")拉黑");
-            insertQqBanList(String.valueOf(beingOperateQQ), "被踢出群" + fromGroup);
-            insertGroupBanList(String.valueOf(fromGroup), "被" + fromQQ + "踢出");
+        if (subtype == 2 && beingOperateQQ == CQ.getLoginQQ() && entityBanProperties.isBanGroupBecauseReduce()) {
+            if (entityBanProperties.isBanUserBecauseReduce()) {
+                CQ.sendGroupMsg(162279609, "已被移出群" + getGroupName(fromGroup) + "(" + fromGroup + ")中，将群和操作者" + getUserName(fromQQ) + "(" + fromQQ + ")拉黑");
+                insertQqBanList(String.valueOf(beingOperateQQ), "被踢出群" + fromGroup);
+                insertGroupBanList(String.valueOf(fromGroup), "被" + fromQQ + "踢出");
+            }else{
+                CQ.sendGroupMsg(162279609, "已被移出群" + getGroupName(fromGroup) + "(" + fromGroup + ")中，将群拉黑");
+                insertGroupBanList(String.valueOf(fromGroup), "被" + fromQQ + "踢出");
+            }
         }
         return 0;
     }
@@ -361,18 +366,18 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     }
 
     private int checkBeBanOrInBan(EntityTypeMessages entityTypeMessages) {
-        if (checkQqInBanList(entityTypeMessages.getFromQq())) {
+        if (checkQqInBanList(entityTypeMessages.getFromQq()) && entityBanProperties.isIgnoreBanUser()) {
             return MSG_INTERCEPT;
         }
 
-        if (checkGroupInBanList(entityTypeMessages.getFromGroup())) {
+        if (checkGroupInBanList(entityTypeMessages.getFromGroup())&&entityBanProperties.isLeaveGroupByBan()) {
             sender(entityTypeMessages, "检测到处于黑名单群中，正在退群");
             CQ.sendGroupMsg(162279609, "检测到处于黑名单群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "(" + entityTypeMessages.getFromGroup() + ")中，正在退群");
             leave(entityTypeMessages.getMessagesTypes(), entityTypeMessages.getFromGroup());
             return MSG_INTERCEPT;
         }
 
-        if (checkBeBan(entityTypeMessages.getMsg())) {
+        if (checkBeBan(entityTypeMessages.getMsg()) && entityBanProperties.isBanGroupBecauseBan()) {
             sender(entityTypeMessages, "于群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "(" + entityTypeMessages.getFromGroup() + ")中被禁言，已退出并拉黑");
             CQ.sendGroupMsg(162279609, "于群" + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
             leave(entityTypeMessages.getMessagesTypes(), entityTypeMessages.getFromGroup());
@@ -466,12 +471,12 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     }
 
     public int menuA(){
-        new Tools().init();
+        new DiceProperties().init();
         return 0;
     }
 
     public int menuB(){
-        JOptionPane.showMessageDialog(null, "这是测试菜单A，可以在这里加载窗口");
+        new BanProperties().init();
         return 0;
     }
 
