@@ -124,19 +124,19 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
             scheduler.start();
             JobDetail jobDetail1 = newJob(Prometheus.class).withIdentity("Prometheus", "monitor").build();
             jobDetail1.getJobDataMap().put("CONTENT", String.valueOf(System.currentTimeMillis()));
-            Trigger trigger1 = newTrigger().withIdentity("trigger1", "group").startNow()
+            Trigger trigger1 = newTrigger().withIdentity("trigger1", "monitor").startNow()
                     .withSchedule(CronScheduleBuilder.cronSchedule("*/10 * * * * ?")).build();
             scheduler.scheduleJob(jobDetail1, trigger1);
 
             JobDetail jobDetail2 = newJob(InputHistoryToDataBase.class).withIdentity("flushDatabase", "data").build();
             jobDetail2.getJobDataMap().put("CONTENT", String.valueOf(System.currentTimeMillis()));
-            Trigger trigger2 = newTrigger().withIdentity("trigger2", "group").startNow()
+            Trigger trigger2 = newTrigger().withIdentity("trigger2", "data").startNow()
                     .withSchedule(CronScheduleBuilder.cronSchedule("*/10 * * * * ?")).build();
             scheduler.scheduleJob(jobDetail2, trigger2);
 
-            JobDetail jobDetail3 = newJob(TestRunningTime.class).withIdentity("cleanGroup", "monitor").build();
-            jobDetail2.getJobDataMap().put("CONTENT", String.valueOf(System.currentTimeMillis()));
-            Trigger trigger3 = newTrigger().withIdentity("trigger2", "group").startNow()
+            JobDetail jobDetail3 = newJob(TestRunningTime.class).withIdentity("cleanGroup", "clean").build();
+            jobDetail3.getJobDataMap().put("CONTENT", String.valueOf(System.currentTimeMillis()));
+            Trigger trigger3 = newTrigger().withIdentity("trigger3", "clean").startNow()
                     .withSchedule(CronScheduleBuilder.cronSchedule("*/10 * * * * ?")).build();
             scheduler.scheduleJob(jobDetail3, trigger3);
 
