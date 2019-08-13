@@ -31,7 +31,7 @@ public class DiceProperties extends MakeText {
     }
 
     public void init() {
-        JFrame jFrame = new Frame("个性化配置", 1200, 965).init();
+        JFrame jFrame = new Frame("个性化配置", 1200, 980).init();
 //        JPanel botSwitch = new Panel().init(jFrame, "开关", 510, 10, 400, 200);
 //        botSwitch.setLayout(new GridLayout(0, 1));
 
