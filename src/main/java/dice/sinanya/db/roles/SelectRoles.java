@@ -56,6 +56,7 @@ public class SelectRoles {
      */
     @SuppressWarnings("AlibabaMethodTooLong")
     public void flushRoleInfoCacheFromDatabase() {
+
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from role";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {

@@ -31,6 +31,7 @@ import static dice.sinanya.tools.getinfo.GetMessagesProperties.*;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.GetNickName.getUserName;
 import static dice.sinanya.tools.getinfo.History.flushHistory;
+import static dice.sinanya.tools.getinfo.History.setHistory;
 import static dice.sinanya.tools.getinfo.Kp.flushKp;
 import static dice.sinanya.tools.getinfo.LogTag.*;
 import static dice.sinanya.tools.getinfo.LogText.setLogText;
@@ -38,6 +39,7 @@ import static dice.sinanya.tools.getinfo.RoleChoose.flushRoleChoose;
 import static dice.sinanya.tools.getinfo.RoleInfo.flushRoleInfoCache;
 import static dice.sinanya.tools.getinfo.SwitchBot.getBot;
 import static dice.sinanya.tools.getinfo.Team.flushTeamEn;
+import static dice.sinanya.tools.getinfo.Team.saveTeamEn;
 import static dice.sinanya.tools.makedata.Sender.sender;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
@@ -83,6 +85,26 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
 
     @Override
     public int exit() {
+        setHistory();
+        saveTeamEn();
+        flushTeamEn();
+//        从数据库中读取幕间成长到缓存
+        flushMaxRolls();
+//        从数据库中读取最大默认骰到缓存
+        flushBot();
+//        从数据库中读取机器人开关到缓存
+        flushRoleChoose();
+//        从数据库中读取当前已选角色到缓存
+        flushRoleInfoCache();
+//        从数据库中读取角色信息到缓存
+        flushLogTag();
+//        从数据库中读取日志开关到缓存
+        flushKp();
+//        从数据库中读取kp主群设定到缓存
+        flushHistory();
+//        从数据库中读取骰点历史信息到缓存
+        flushBanList();
+//        刷写黑名单
         return 0;
     }
 
@@ -148,6 +170,26 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
 
     @Override
     public int disable() {
+        setHistory();
+        saveTeamEn();
+        flushTeamEn();
+//        从数据库中读取幕间成长到缓存
+        flushMaxRolls();
+//        从数据库中读取最大默认骰到缓存
+        flushBot();
+//        从数据库中读取机器人开关到缓存
+        flushRoleChoose();
+//        从数据库中读取当前已选角色到缓存
+        flushRoleInfoCache();
+//        从数据库中读取角色信息到缓存
+        flushLogTag();
+//        从数据库中读取日志开关到缓存
+        flushKp();
+//        从数据库中读取kp主群设定到缓存
+        flushHistory();
+//        从数据库中读取骰点历史信息到缓存
+        flushBanList();
+//        刷写黑名单
         return 0;
     }
 
