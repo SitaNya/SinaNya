@@ -39,6 +39,8 @@ public class Sender {
                 CQ.sendPrivateMsg(Long.parseLong(entityTypeMessages.getFromQq()), messages);
                 break;
             case GROUP_MSG:
+                CQ.sendGroupMsg(Long.parseLong(entityTypeMessages.getFromGroup()),messages);
+                break;
             case DISCUSS_MSG:
                 CQ.sendDiscussMsg(Long.parseLong(entityTypeMessages.getFromGroup()), messages);
                 break;

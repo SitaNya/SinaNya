@@ -243,7 +243,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     public int groupMsg(int subType, int msgId, long fromGroup, long fromQq, String fromAnonymous, String msg,
                         int font) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(MessagesTypes.GROUP_MSG, fromQq, fromGroup, msg);
-        if ((checkBeBanOrInBan(entityTypeMessages) == MSG_INTERCEPT) || getBot(fromGroup)) {
+        if ((checkBeBanOrInBan(entityTypeMessages) == MSG_INTERCEPT) || !getBot(fromGroup)) {
             return MSG_INTERCEPT;
         }
 
@@ -280,7 +280,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     @Override
     public int discussMsg(int subtype, int msgId, long fromDiscuss, long fromQq, String msg, int font) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(MessagesTypes.DISCUSS_MSG, fromQq, fromDiscuss, msg);
-        if (checkBeBanOrInBan(entityTypeMessages) == MSG_INTERCEPT || getBot(fromDiscuss)) {
+        if (checkBeBanOrInBan(entityTypeMessages) == MSG_INTERCEPT || !getBot(fromDiscuss)) {
             return MSG_INTERCEPT;
         }
 
