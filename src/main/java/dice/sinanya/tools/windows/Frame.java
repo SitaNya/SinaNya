@@ -26,7 +26,6 @@ public class Frame {
         JFrame f = new JFrame(title);
         f.setSize(width, height);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setVisible(true);
         f.setLayout(null);
 //        f.setLayout(new GridLayout(0,4));
         try {

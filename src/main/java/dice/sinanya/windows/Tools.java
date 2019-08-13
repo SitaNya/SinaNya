@@ -37,6 +37,7 @@ public class Tools extends MakeText {
 
         initText(jFrame);
         save(jFrame);
+        jFrame.setVisible(true);
     }
 
     private void initText(JFrame jFrame) {

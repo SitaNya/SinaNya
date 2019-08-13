@@ -5,6 +5,7 @@ import dice.sinanya.tools.windows.Text;
 
 import javax.swing.*;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 
 /**
@@ -22,10 +23,10 @@ public class MakeText extends MessagesWindows {
 
     public void info(JPanel jPanel) {
         lable.createLable(jPanel, "你当前登录的骰娘QQ为:\t");
-        lable.createLable(jPanel, "12345");
+        lable.createLable(jPanel, String.valueOf(CQ.getLoginQQ()));
 
         lable.createLable(jPanel, "你当前登录的骰娘昵称为:\t");
-        lable.createLable(jPanel, "aaa");
+        lable.createLable(jPanel, CQ.getLoginNick());
     }
 
     public void botInfo(JPanel jPanel) {
