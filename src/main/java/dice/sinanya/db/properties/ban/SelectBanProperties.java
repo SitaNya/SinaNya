@@ -59,11 +59,9 @@ public class SelectBanProperties {
                         entityBanProperties.setWhiteUser(set.getString("whiteUser"));
                         entityBanProperties.setNotBanListInput(set.getString("notBanListInput"));
                         i++;
-                        CQ.logInfo("测试","从数据库中获取数据");
                     }
                 }
                 if (i == 0) {
-                    CQ.logInfo("测试","初始化数据");
                     new InsertProperties().insertProperties(entityBanProperties);
                 }
             }
