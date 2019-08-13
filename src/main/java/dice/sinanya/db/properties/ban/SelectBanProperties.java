@@ -1,7 +1,6 @@
 package dice.sinanya.db.properties.ban;
 
 import dice.sinanya.db.tools.DbUtil;
-import dice.sinanya.entity.EntityBanProperties;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +10,6 @@ import java.util.Arrays;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
-import static dice.sinanya.tools.getinfo.GetMessagesProperties.initMessagesBanProperties;
 
 
 /**
@@ -61,10 +59,11 @@ public class SelectBanProperties {
                         entityBanProperties.setWhiteUser(set.getString("whiteUser"));
                         entityBanProperties.setNotBanListInput(set.getString("notBanListInput"));
                         i++;
+                        CQ.logInfo("测试","从数据库中获取数据");
                     }
                 }
                 if (i == 0) {
-                    initMessagesBanProperties();
+                    CQ.logInfo("测试","初始化数据");
                     new InsertProperties().insertProperties(entityBanProperties);
                 }
             }
