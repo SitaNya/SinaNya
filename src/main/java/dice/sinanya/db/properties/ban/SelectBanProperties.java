@@ -1,6 +1,7 @@
 package dice.sinanya.db.properties.ban;
 
 import dice.sinanya.db.tools.DbUtil;
+import dice.sinanya.entity.EntityBanProperties;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

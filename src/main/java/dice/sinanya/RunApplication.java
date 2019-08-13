@@ -22,8 +22,7 @@ import java.util.regex.Pattern;
 import static dice.sinanya.db.system.SelectBot.flushBot;
 import static dice.sinanya.tools.getinfo.BanList.*;
 import static dice.sinanya.tools.getinfo.DefaultMaxRolls.flushMaxRolls;
-import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
-import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.*;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.GetNickName.getUserName;
 import static dice.sinanya.tools.getinfo.History.flushHistory;
@@ -69,8 +68,8 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
      */
     @Override
     public int startup() {
-        new SelectSystemProperties().flushProperties();
-        new SelectBanProperties().flushProperties();
+        initMessagesSystemProperties();
+        initMessagesBanProperties();
         entitySystemProperties.setSystemDir(CQ.getAppDirectory());
         return 0;
     }
@@ -83,6 +82,8 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     @Override
     public int enable() {
         tagMe = String.format(atTag, CQ.getLoginQQ());
+        new SelectSystemProperties().flushProperties();
+        new SelectBanProperties().flushProperties();
         CQ.logInfo("系统日志", "开始刷写数据库");
         flushTeamEn();
         CQ.logInfo("数据库", "读取幕间成长到缓存");

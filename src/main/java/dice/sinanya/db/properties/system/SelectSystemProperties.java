@@ -10,7 +10,6 @@ import java.util.Arrays;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
-import static dice.sinanya.tools.getinfo.GetMessagesProperties.initMessagesSystemProperties;
 
 
 /**
@@ -95,7 +94,6 @@ public class SelectSystemProperties {
                     }
                 }
                 if (i == 0) {
-                    initMessagesSystemProperties();
                     new InsertProperties().insertProperties(entitySystemProperties);
                 }
             }

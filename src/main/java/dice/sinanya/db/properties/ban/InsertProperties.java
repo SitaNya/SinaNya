@@ -43,7 +43,8 @@ public class InsertProperties {
                     "refuseFriendByBan," +
                     "whiteGroup," +
                     "whiteUser," +
-                    "notBanListInput,botId)  VALUES (?," +
+                    "notBanListInput," +
+                    "botId)  VALUES (?," +
                     "?," +
                     "?," +
                     "?," +
@@ -85,7 +86,7 @@ public class InsertProperties {
                 ps.setString(18, entityBanProperties.getWhiteGroup());
                 ps.setString(19, entityBanProperties.getWhiteUser());
                 ps.setString(20,entityBanProperties.getNotBanListInput());
-                ps.setLong(21, CQ.getLoginQQ());
+                ps.setString(21, String.valueOf(CQ.getLoginQQ()));
             }
         } catch (SQLException e) {
             CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
