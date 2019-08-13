@@ -14,6 +14,7 @@ import dice.sinanya.entity.imal.MessagesTypes;
 import dice.sinanya.exceptions.OnlyManagerException;
 import dice.sinanya.flow.Flow;
 import dice.sinanya.monitor.Prometheus;
+import dice.sinanya.windows.Tools;
 
 import javax.swing.*;
 import java.util.Arrays;
@@ -465,7 +466,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     }
 
     public int menuA(){
-        JOptionPane.showMessageDialog(null, "这是测试菜单A，可以在这里加载窗口");
+        new Tools().init();
         return 0;
     }
 

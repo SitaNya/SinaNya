@@ -426,7 +426,6 @@ class Flow {
 
     private void isStFunction() {
         Roles roles = new Roles(entityTypeMessages);
-
         if (isStSet) {
             try {
                 if (!roles.set()) {
