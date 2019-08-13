@@ -26,7 +26,7 @@ public class Prometheus {
     public void start(){
         Logger log = LogManager.getLogger(dice.sinanya.listener.Prometheus.class.getName());
         try {
-            HTTPServer server = new HTTPServer(1234);
+            HTTPServer server = new HTTPServer(62258);
             log.info("Prometheus监控系统已在本机" + server.getPort() + "端口启动");
         } catch (IOException e) {
             CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));

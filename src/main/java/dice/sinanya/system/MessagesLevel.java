@@ -49,7 +49,7 @@ public enum MessagesLevel {
         return text;
     }
 
-    public void setText(ArrayList<String> text) {
-        this.text = text;
+    public void setText(String input) {
+        this.text = new ArrayList<>(Arrays.asList(input.split("\\|")));
     }
 }

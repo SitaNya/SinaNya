@@ -2,12 +2,12 @@ package dice.sinanya.windows;
 
 import dice.sinanya.db.properties.system.InsertProperties;
 import dice.sinanya.tools.windows.Frame;
-import dice.sinanya.tools.windows.RadioButton;
 import dice.sinanya.windows.imal.MakeText;
 
 import javax.swing.*;
 import java.awt.*;
 
+import static dice.sinanya.system.MessagesLevel.*;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 
 
@@ -152,6 +152,12 @@ public class DiceProperties extends MakeText {
             entitySystemProperties.setSUCCESS(success.getText());
             entitySystemProperties.setFAILURE(failure.getText());
             entitySystemProperties.setFUMBLE(fumble.getText());
+            STR_CRITICAL_SUCCESS.setText(criticalSuccess.getText());
+            STR_EXTREME_SUCCESS.setText(extremeSuccess.getText());
+            STR_HARD_SUCCESS.setText(headSuccess.getText());
+            STR_SUCCESS.setText(success.getText());
+            STR_FAILURE.setText(failure.getText());
+            STR_FUMBLE.setText(fumble.getText());
             new InsertProperties().insertProperties(entitySystemProperties);
             JOptionPane.showMessageDialog(null, "保存成功");
         });
