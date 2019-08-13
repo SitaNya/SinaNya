@@ -2,11 +2,11 @@ package dice.sinanya.monitor;
 
 import io.prometheus.client.exporter.HTTPServer;
 import io.prometheus.client.hotspot.DefaultExports;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
@@ -20,16 +20,17 @@ import static com.sobte.cqp.jcq.event.JcqApp.CQ;
  */
 public class Prometheus {
     private int port;
-    public Prometheus(){
+
+    public Prometheus() {
     }
 
-    public void start(){
+    public void start() {
         Logger log = LogManager.getLogger(dice.sinanya.listener.Prometheus.class.getName());
         try {
             HTTPServer server = new HTTPServer(62258);
             log.info("Prometheus监控系统已在本机" + server.getPort() + "端口启动");
         } catch (IOException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
         DefaultExports.initialize();
     }

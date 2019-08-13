@@ -15,7 +15,6 @@ import static dice.sinanya.system.MessagesRollMaxValue.ROLL_MAX_VALUE;
 import static dice.sinanya.system.MessagesTag.TAGR;
 import static dice.sinanya.system.MessagesTag.TAG_RH;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
-
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;

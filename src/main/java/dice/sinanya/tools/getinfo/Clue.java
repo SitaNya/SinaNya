@@ -20,6 +20,7 @@ public class Clue {
 
     private static SelectClue selectClue = new SelectClue();
     private static InsertClue insertClue = new InsertClue();
+
     private Clue() {
         throw new IllegalStateException("Utility class");
     }

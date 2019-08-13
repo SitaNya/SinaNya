@@ -2,15 +2,14 @@ package dice.sinanya.db.clue;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityClue;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByQQ;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
@@ -25,7 +24,6 @@ import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
  * 类说明: 线索获取类，查询并包装成对象
  */
 public class SelectClue {
-
 
 
     public SelectClue() {
@@ -61,7 +59,7 @@ public class SelectClue {
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
         if (stringBuffer.toString().equals(NONE)) {
             return stringBuffer.toString();

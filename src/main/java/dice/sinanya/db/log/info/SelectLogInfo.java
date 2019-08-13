@@ -2,14 +2,14 @@ package dice.sinanya.db.log.info;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityLogTag;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
 /**
  * @author SitaNya
@@ -20,7 +20,6 @@ import java.sql.SQLException;
  * 类说明: 查询log信息类，只在log get时使用
  */
 public class SelectLogInfo {
-
 
 
     public SelectLogInfo() {
@@ -48,7 +47,7 @@ public class SelectLogInfo {
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
         return stringBuilder.toString();
     }

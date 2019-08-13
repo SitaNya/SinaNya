@@ -8,7 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static dice.sinanya.system.MessagesTag.TAG_EN;
-
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.GetSkillValue.getSkillValue;
@@ -27,13 +26,12 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  * 类说明: 幕间成长
  */
 public class SkillUp {
+    private static Pattern numbers = Pattern.compile("(\\d+)");
     private EntityTypeMessages entityTypeMessages;
 
     public SkillUp(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
     }
-
-    private static Pattern numbers = Pattern.compile("(\\d+)");
 
     /**
      * 若未设定技能，则无法进行en，而单纯的.en 60从自然逻辑上讲是无意义的
@@ -86,7 +84,7 @@ public class SkillUp {
             if (useRoleCard) {
                 new InsertRoles().insertRoleInfo(msg + (skill + skillUp), roleName, entityTypeMessages.getFromQq());
                 stringBuilder.append("\n本次结果会自动更新到人物卡中");
-            }else{
+            } else {
                 stringBuilder.append("\n本次结果不会自动更新到人物卡中，请使用.st<角色名>-<属性><新属性值>的格式进行更新录入，没有更改的属性不需要再次录入\n.en <技能>这种格式可以自动录入人物卡，无需再次st");
             }
             stringBuilder.append(entitySystemProperties.getEnSuccess());

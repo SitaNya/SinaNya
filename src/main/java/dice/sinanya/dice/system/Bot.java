@@ -6,17 +6,16 @@ import dice.sinanya.entity.EntityGroupCensus;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.entity.imal.MessagesTypes;
 import dice.sinanya.system.MessagesSystem;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.db.system.SelectBot.selectBot;
 import static dice.sinanya.system.MessagesSystem.*;
 import static dice.sinanya.system.MessagesTag.*;
-
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.SwitchBot.*;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
@@ -118,7 +117,7 @@ public class Bot implements AtQq, MakeNickToSender {
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
-                    CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+                    CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
                     Thread.currentThread().interrupt();
                 }
                 if (entityTypeMessages.getMessagesTypes() == MessagesTypes.GROUP_MSG) {

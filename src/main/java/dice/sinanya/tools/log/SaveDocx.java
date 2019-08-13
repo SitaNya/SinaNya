@@ -1,8 +1,5 @@
 package dice.sinanya.tools.log;
 
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
 import org.docx4j.jaxb.Context;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -13,6 +10,7 @@ import java.io.File;
 import java.math.BigInteger;
 import java.util.HashMap;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesLogColorTag.LOG_COLOR_TAG;
 import static dice.sinanya.system.MessagesRgb.RGB;
 import static dice.sinanya.system.MessagesSystem.NONE;
@@ -76,7 +74,7 @@ public class SaveDocx {
             }
             makePdf(line, RGB.get(colorTag));
         }
-        File file = new File(entitySystemProperties.getSystemDir()+"/saveLogs/" + groupId + "/" + msg + ".docx");
+        File file = new File(entitySystemProperties.getSystemDir() + "/saveLogs/" + groupId + "/" + msg + ".docx");
         if (!file.getParentFile().mkdirs() || !file.getParentFile().exists()) {
             CQ.logError("日志落地异常", "docx染色文件未能成功生成");
         }

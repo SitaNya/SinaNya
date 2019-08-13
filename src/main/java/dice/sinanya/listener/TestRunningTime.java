@@ -3,13 +3,13 @@ package dice.sinanya.listener;
 import com.sobte.cqp.jcq.entity.Group;
 import dice.sinanya.db.heap.InsertHeap;
 import dice.sinanya.dice.MakeNickToSender;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
@@ -34,6 +34,7 @@ public class TestRunningTime implements Job, MakeNickToSender {
     private static Logger log = LogManager.getLogger(TestRunningTime.class.getName());
 
     private static long groupManager = 162279609;
+
     public TestRunningTime() {
 //        定时任务按照接口无逻辑
     }
@@ -49,7 +50,7 @@ public class TestRunningTime implements Job, MakeNickToSender {
             try {
                 Thread.sleep(random(2000, 12000));
             } catch (InterruptedException e) {
-                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+                CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
             }
             autoCleanNotPlay();
         }
@@ -57,7 +58,7 @@ public class TestRunningTime implements Job, MakeNickToSender {
             CQ.getGroupList();
             new InsertHeap().updateHeap();
         } catch (Exception e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
             log.error("获取群列表失败，停止心跳");
         }
     }
@@ -72,7 +73,7 @@ public class TestRunningTime implements Job, MakeNickToSender {
                 continue;
             }
             long lastMsgForNow = System.currentTimeMillis() - CQ.getGroupMemberInfo(offBotGroupId, CQ.getLoginQQ()).getLastTime().getTime();
-            if (lastMsgForNow/1000 > 432000) {
+            if (lastMsgForNow / 1000 > 432000) {
                 try {
                     CQ.setDiscussLeave(offBotGroupId);
                     CQ.sendDiscussMsg(offBotGroupId, "已在讨论组: " + makeGroupNickToSender(getGroupName(offBotGroupId)) + offBotGroupId + "中超过5日未响应且处于关闭状态，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题");

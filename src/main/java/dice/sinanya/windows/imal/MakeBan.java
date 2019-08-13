@@ -46,15 +46,15 @@ public class MakeBan extends MessagesWindows {
         lable.createLable(jPanel, "非master拒绝命令");
         notMaster = text.createText(jPanel);
         notMaster.setText(entityBanProperties.getNotMaster());
+
+        lable.createLable(jPanel, "输入的不是QQ号或群号");
+        banListInputNotId = text.createText(jPanel);
+        banListInputNotId.setText(entityBanProperties.getBanListInputNotId());
     }
 
     public void cloudBan(JPanel jPanel) {
         cloudBan = radioButton.createRadioButton(jPanel, "开启云黑");
         cloudBan.setSelected(entityBanProperties.isCloudBan());
-
-        lable.createLable(jPanel, "输入的不是QQ号或群号");
-        banListInputNotId = text.createText(jPanel);
-        banListInputNotId.setText(entityBanProperties.getBanListInputNotId());
 
         ignoreBanUser = radioButton.createRadioButton(jPanel, "当黑名单用户处于白名单群中时，忽略此用户");
         ignoreBanUser.setSelected(entityBanProperties.isIgnoreBanUser());
@@ -72,7 +72,7 @@ public class MakeBan extends MessagesWindows {
         banUserBecauseReduce.setSelected(entityBanProperties.isBanUserBecauseReduce());
     }
 
-    public void cloudBanInfo(JPanel jPanel){
+    public void cloudBanInfo(JPanel jPanel) {
         lable.createLable(jPanel, "入群词");
         addGroup = text.createTextArea(jPanel);
         addGroup.setText(entityBanProperties.getAddGroup());

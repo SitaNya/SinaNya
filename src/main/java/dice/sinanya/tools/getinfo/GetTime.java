@@ -1,12 +1,12 @@
 package dice.sinanya.tools.getinfo;
 
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
 /**
  * @author SitaNya
@@ -44,7 +44,7 @@ public class GetTime {
         try {
             d = format.parse(time);
         } catch (Exception e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
 
         return new Timestamp((d != null)

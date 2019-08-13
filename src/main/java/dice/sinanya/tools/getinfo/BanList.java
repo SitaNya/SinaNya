@@ -19,12 +19,11 @@ import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperti
  */
 public class BanList {
 
+    private static SelectBanList selectBanList = new SelectBanList();
+    private static InputBanList insertBanList = new InputBanList();
     private BanList() {
         throw new IllegalStateException("Utility class");
     }
-
-    private static SelectBanList selectBanList = new SelectBanList();
-    private static InputBanList insertBanList = new InputBanList();
 
     public static void flushBanList() {
         if (entityBanProperties.isCloudBan()) {

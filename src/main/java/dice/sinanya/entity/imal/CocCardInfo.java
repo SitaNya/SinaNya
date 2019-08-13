@@ -2,7 +2,6 @@ package dice.sinanya.entity.imal;
 
 import dice.sinanya.tools.makedata.Calculator;
 
-import static dice.sinanya.tools.makedata.ManyRolls.manyRollsProcess;
 import static dice.sinanya.tools.makedata.ManyRolls.manyRollsProcessForCard;
 import static java.lang.Math.ceil;
 

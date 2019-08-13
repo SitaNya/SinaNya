@@ -2,13 +2,13 @@ package dice.sinanya.db.clue;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityClue;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
 /**
  * @author SitaNya
@@ -19,7 +19,6 @@ import java.sql.SQLException;
  * 类说明: 线索入库类，包含更新、插入、删除、清空
  */
 public class InsertClue {
-
 
 
     public InsertClue() {
@@ -44,7 +43,7 @@ public class InsertClue {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 
@@ -64,7 +63,7 @@ public class InsertClue {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 
@@ -82,7 +81,7 @@ public class InsertClue {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 }

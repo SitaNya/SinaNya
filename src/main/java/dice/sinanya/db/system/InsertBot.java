@@ -1,9 +1,7 @@
 package dice.sinanya.db.system;
 
 import dice.sinanya.db.tools.DbUtil;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-
 
 /**
  * @author SitaNya
@@ -23,6 +20,19 @@ import static com.sobte.cqp.jcq.event.JcqApp.CQ;
  */
 public class InsertBot {
 
+
+    public static void deleteBot(long groupId) {
+        try (Connection conn = DbUtil.getConnection()) {
+            String sql = "delete from switchBot where botId=? and groupId=?";
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, String.valueOf(CQ.getLoginQQ()));
+                ps.setString(2, String.valueOf(groupId));
+                ps.execute();
+            }
+        } catch (SQLException e) {
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
+        }
+    }
 
     /**
      * 将机器人的开关值插入某个群，true为开启，false为关闭
@@ -71,20 +81,7 @@ public class InsertBot {
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
-        }
-    }
-
-    public static void deleteBot(long groupId) {
-        try (Connection conn = DbUtil.getConnection()) {
-            String sql = "delete from switchBot where botId=? and groupId=?";
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, String.valueOf(CQ.getLoginQQ()));
-                ps.setString(2, String.valueOf(groupId));
-                ps.execute();
-            }
-        } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 }

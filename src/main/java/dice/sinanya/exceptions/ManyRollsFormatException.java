@@ -2,7 +2,6 @@ package dice.sinanya.exceptions;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.makedata.Sender.sender;
 

@@ -4,8 +4,8 @@ import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.BanListInputNotIdException;
 import dice.sinanya.exceptions.NotBanListInputException;
 import dice.sinanya.exceptions.NotMasterException;
+import org.apache.commons.lang.StringUtils;
 
-import java.util.Arrays;
 import java.util.Map;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
@@ -14,9 +14,7 @@ import static dice.sinanya.system.MessagesBanList.qqBanList;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.getinfo.BanList.*;
-
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
-import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
@@ -42,7 +40,7 @@ public class BanList {
      */
     public void inputQqBanList() {
         if (!entityBanProperties.isCloudBan()) {
-            sender(entityTypeMessages,"配置文件中未启用云黑");
+            sender(entityTypeMessages, "配置文件中未启用云黑");
             return;
         }
         String tag = TAG_BAN_USER;
@@ -51,9 +49,9 @@ public class BanList {
             checkMaster();
             isQqOrGroup(msg);
             insertQqBanList(msg, "手工录入");
-            sender(entityTypeMessages,"已将用户:\t"+msg+"加入云黑名单");
-        } catch (BanListInputNotIdException|NotMasterException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            sender(entityTypeMessages, "已将用户:\t" + msg + "加入云黑名单");
+        } catch (BanListInputNotIdException | NotMasterException e) {
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 
@@ -63,7 +61,7 @@ public class BanList {
      */
     public void inputGroupBanList() {
         if (!entityBanProperties.isCloudBan()) {
-            sender(entityTypeMessages,"配置文件中未启用云黑");
+            sender(entityTypeMessages, "配置文件中未启用云黑");
             return;
         }
         String tag = TAG_BAN_GROUP;
@@ -72,9 +70,9 @@ public class BanList {
             checkMaster();
             isQqOrGroup(msg);
             insertGroupBanList(msg, "手工录入");
-            sender(entityTypeMessages,"已将群:\t"+msg+"加入云黑名单");
-        } catch (BanListInputNotIdException|NotMasterException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            sender(entityTypeMessages, "已将群:\t" + msg + "加入云黑名单");
+        } catch (BanListInputNotIdException | NotMasterException e) {
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 
@@ -84,7 +82,7 @@ public class BanList {
      */
     public void rmQqBanList() {
         if (!entityBanProperties.isCloudBan()) {
-            sender(entityTypeMessages,"配置文件中未启用云黑");
+            sender(entityTypeMessages, "配置文件中未启用云黑");
             return;
         }
         String tag = TAG_RM_BAN_USER;
@@ -93,9 +91,9 @@ public class BanList {
             checkMaster();
             isQqOrGroup(msg);
             removeQqBanList(msg, entityTypeMessages);
-            sender(entityTypeMessages,"已将用户:\t"+msg+"移出云黑名单");
-        } catch (BanListInputNotIdException | NotBanListInputException|NotMasterException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            sender(entityTypeMessages, "已将用户:\t" + msg + "移出云黑名单");
+        } catch (BanListInputNotIdException | NotBanListInputException | NotMasterException e) {
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 
@@ -105,7 +103,7 @@ public class BanList {
      */
     public void rmGroupBanList() {
         if (!entityBanProperties.isCloudBan()) {
-            sender(entityTypeMessages,"配置文件中未启用云黑");
+            sender(entityTypeMessages, "配置文件中未启用云黑");
             return;
         }
         String tag = TAG_RM_BAN_GROUP;
@@ -114,9 +112,9 @@ public class BanList {
             checkMaster();
             isQqOrGroup(msg);
             removeGroupBanList(msg, entityTypeMessages);
-            sender(entityTypeMessages,"已将群:\t"+msg+"移出云黑名单");
-        } catch (BanListInputNotIdException | NotBanListInputException|NotMasterException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            sender(entityTypeMessages, "已将群:\t" + msg + "移出云黑名单");
+        } catch (BanListInputNotIdException | NotBanListInputException | NotMasterException e) {
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 
@@ -126,7 +124,7 @@ public class BanList {
      */
     public void getQqBanList() {
         if (!entityBanProperties.isCloudBan()) {
-            sender(entityTypeMessages,"配置文件中未启用云黑");
+            sender(entityTypeMessages, "配置文件中未启用云黑");
             return;
         }
         try {
@@ -138,7 +136,7 @@ public class BanList {
             }
             sender(entityTypeMessages, stringBuilder.toString());
         } catch (NotMasterException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 
@@ -147,7 +145,7 @@ public class BanList {
      */
     public void getGroupBanList() {
         if (!entityBanProperties.isCloudBan()) {
-            sender(entityTypeMessages,"配置文件中未启用云黑");
+            sender(entityTypeMessages, "配置文件中未启用云黑");
             return;
         }
         StringBuilder stringBuilder = new StringBuilder();

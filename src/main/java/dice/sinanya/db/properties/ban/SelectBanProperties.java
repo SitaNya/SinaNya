@@ -1,16 +1,15 @@
 package dice.sinanya.db.properties.ban;
 
 import dice.sinanya.db.tools.DbUtil;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
-
 
 /**
  * @author SitaNya
@@ -66,7 +65,7 @@ public class SelectBanProperties {
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 }

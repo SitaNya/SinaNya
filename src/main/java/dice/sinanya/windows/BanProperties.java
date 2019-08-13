@@ -50,12 +50,12 @@ public class BanProperties extends MakeBan {
         monitorPanel.setLayout(new GridLayout(0, 2));
         monitor(monitorPanel);
 
-        JPanel masterPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "管理员信息", 0, 170, 400, 100);
+        JPanel masterPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "管理员信息", 0, 210, 400, 100);
         masterPanel.setLayout(new GridLayout(0, 2));
         master(masterPanel);
 
-        JPanel cloudBanPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "云黑名单", 0, 270, 400, 280);
-        cloudBanPanel.setLayout(new GridLayout(0, 2));
+        JPanel cloudBanPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "云黑名单", 0, 310, 400, 250);
+        cloudBanPanel.setLayout(new GridLayout(0, 1));
         cloudBan(cloudBanPanel);
 
         JPanel cloudBanInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "用语", 400, 0, 400, 600);
@@ -64,7 +64,7 @@ public class BanProperties extends MakeBan {
     }
 
     private void save(JFrame jFrame) {
-        createButton(jFrame, "保存", 0, 550);
+        createButton(jFrame, "保存", 30, 570);
     }
 
     public void createButton(JFrame jFrame, String text, int x, int y) {

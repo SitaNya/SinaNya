@@ -2,17 +2,15 @@ package dice.sinanya.db.history;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityHistory;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static dice.sinanya.system.MessagesHistory.HISTORY_LIST;
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import static dice.sinanya.system.MessagesHistory.HISTORY_LIST;
 
 
 /**
@@ -54,7 +52,7 @@ public class SelectHistory {
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 }

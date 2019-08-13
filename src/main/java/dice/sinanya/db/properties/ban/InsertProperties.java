@@ -2,11 +2,11 @@ package dice.sinanya.db.properties.ban;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityBanProperties;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
@@ -85,12 +85,12 @@ public class InsertProperties {
                 ps.setString(17, entityBanProperties.getRefuseFriendByBan());
                 ps.setString(18, entityBanProperties.getWhiteGroup());
                 ps.setString(19, entityBanProperties.getWhiteUser());
-                ps.setString(20,entityBanProperties.getNotBanListInput());
+                ps.setString(20, entityBanProperties.getNotBanListInput());
                 ps.setString(21, String.valueOf(CQ.getLoginQQ()));
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 }

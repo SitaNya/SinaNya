@@ -11,12 +11,10 @@ import dice.sinanya.dice.system.Log;
 import dice.sinanya.dice.system.Test;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.*;
-
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesTag.*;
-
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
@@ -273,7 +271,7 @@ class Flow {
 
             isRules = checkTagRegex(TAG_RULES);
 
-            isTest=checkTagRegex(TAG_TEST);
+            isTest = checkTagRegex(TAG_TEST);
         }
     }
 
@@ -288,7 +286,7 @@ class Flow {
         Gas gas = new Gas(entityTypeMessages);
         History history = new History(entityTypeMessages);
         Jrrp jrrp = new Jrrp(entityTypeMessages);
-        Test test=new Test(entityTypeMessages);
+        Test test = new Test(entityTypeMessages);
         Rules rules = new Rules(entityTypeMessages);
 
         isFunctionR();
@@ -333,7 +331,7 @@ class Flow {
             rules.get();
         }
 
-        if (isTest){
+        if (isTest) {
             test.get();
         }
 
@@ -358,7 +356,7 @@ class Flow {
             try {
                 roll.rh();
             } catch (ManyRollsTimesTooMoreException e) {
-                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+                CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
             }
         }
 
@@ -399,7 +397,7 @@ class Flow {
             try {
                 roll.r();
             } catch (ManyRollsTimesTooMoreException e) {
-                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+                CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
             }
         } else if (isRa) {
             rollAndCheck.ra();
@@ -413,13 +411,13 @@ class Flow {
             try {
                 rollAndCheck.rav();
             } catch (NotSetKpGroupException e) {
-                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+                CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
             }
         } else if (isRcv) {
             try {
                 rollAndCheck.rcv();
             } catch (NotSetKpGroupException e) {
-                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+                CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
             }
         }
     }
@@ -432,7 +430,7 @@ class Flow {
                     sender(entityTypeMessages, entitySystemProperties.getSetHelp());
                 }
             } catch (PlayerSetException e) {
-                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+                CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
             }
         } else if (isStShow) {
             roles.show();
@@ -450,7 +448,7 @@ class Flow {
             try {
                 sanCheck.sc();
             } catch (PlayerSetException | SanCheckSetException | ManyRollsTimesTooMoreException e) {
-                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+                CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
             }
         }
     }
@@ -538,7 +536,7 @@ class Flow {
             try {
                 team.hp();
             } catch (ManyRollsTimesTooMoreException e) {
-                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+                CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
             }
         } else if (isTeamSan) {
             team.san();
@@ -556,7 +554,7 @@ class Flow {
             try {
                 skillUp.en();
             } catch (NotFoundSkillException e) {
-                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+                CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
             }
         }
     }

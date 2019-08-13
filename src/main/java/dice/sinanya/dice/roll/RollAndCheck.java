@@ -11,6 +11,7 @@ import dice.sinanya.exceptions.NotSetKpGroupException;
 import dice.sinanya.tools.checkdata.CheckResultLevel;
 import dice.sinanya.tools.makedata.MakeRal;
 import dice.sinanya.tools.makedata.MakeRcl;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +22,6 @@ import static dice.sinanya.system.MessagesAntagonize.ANTAGONIZE;
 import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
-
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
@@ -101,7 +101,7 @@ public class RollAndCheck implements En, MakeNickToSender {
             sender(entityTypeMessages, stringBuilder.toString());
             checkAntagonize(entityTypeMessages, thisEntityAntagonize, entityAntagonize, groupId);
             ANTAGONIZE.remove(groupId);
-            CQ.sendGroupMsg(Long.parseLong(groupId),entitySystemProperties.getAntagonizeOver());
+            CQ.sendGroupMsg(Long.parseLong(groupId), entitySystemProperties.getAntagonizeOver());
         } else if (!groupId.equals(defaultGroupId)) {
             sender(entityTypeMessages, stringBuilder.toString());
             ANTAGONIZE.put(groupId, checkResultLevel.getAntagonize());
@@ -210,7 +210,7 @@ public class RollAndCheck implements En, MakeNickToSender {
             CQ.sendGroupMsg(Long.parseLong(groupId), entitySystemProperties.getAntagonizeFirstSuccess());
         } else if (lastAntagonize.getLevel() == thisAntagonize.getLevel()) {
             if (lastAntagonize.getLevel() < successMinLevel && thisAntagonize.getLevel() < successMinLevel) {
-                CQ.sendGroupMsg(Long.parseLong(groupId),entitySystemProperties.getAntagonizeAllFailed());
+                CQ.sendGroupMsg(Long.parseLong(groupId), entitySystemProperties.getAntagonizeAllFailed());
             } else if (lastAntagonize.getRandom() < thisAntagonize.getRandom()) {
                 CQ.sendGroupMsg(Long.parseLong(groupId), entitySystemProperties.getAntagonizeFirstSuccess());
             } else if (lastAntagonize.getSkill() > thisAntagonize.getSkill()) {
@@ -293,7 +293,7 @@ public class RollAndCheck implements En, MakeNickToSender {
                 groupId = getKpGroup(entityTypeMessages);
                 sender(entityTypeMessages, "本次对抗将用于群" + makeGroupNickToSender(getGroupName(groupId)) + "(" + groupId + ")");
             } catch (NotSetKpGroupException e) {
-                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+                CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
                 groupId = "0";
             }
         } else {

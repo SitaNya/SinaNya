@@ -3,7 +3,6 @@ package dice.sinanya.dice.roll;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.system.TiAndLi.*;
-
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.makedata.RandomInt.random;

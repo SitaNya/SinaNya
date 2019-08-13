@@ -2,9 +2,7 @@ package dice.sinanya.db.system;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityGroupCensus;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,7 +43,7 @@ public class SelectBot {
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 
@@ -69,29 +67,30 @@ public class SelectBot {
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
         return new EntityGroupCensus(groupNum, onNum);
     }
 
     /**
      * 通过查询开关列表，得到有多少开启的群，加入多少群
+     *
      * @return 关闭的群列表
      */
     public static ArrayList<String> selectOffBotList() {
-        ArrayList<String> offGroupList=new ArrayList<>();
+        ArrayList<String> offGroupList = new ArrayList<>();
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select groupId from switchBot where botId=? and switchBot=0";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
-                      offGroupList.add(set.getString("groupId"));
+                        offGroupList.add(set.getString("groupId"));
                     }
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
         return offGroupList;
     }

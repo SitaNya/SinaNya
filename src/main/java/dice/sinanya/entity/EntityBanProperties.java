@@ -43,7 +43,7 @@ public class EntityBanProperties {
         master = "";
         banListInputNotId = "输入的不是QQ号或群号";
         notMaster = "除设定的Master外其他人不可使用此命令";
-        notBanListInput="只有黑名单录入者才可以删除相应调目";
+        notBanListInput = "只有黑名单录入者才可以删除相应调目";
 
         doSomthingForBanUserInGroup = true;
         ignoreBanUser = true;

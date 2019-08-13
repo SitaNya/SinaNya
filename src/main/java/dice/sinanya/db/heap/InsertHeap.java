@@ -1,11 +1,11 @@
 package dice.sinanya.db.heap;
 
 import dice.sinanya.db.tools.DbUtil;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
@@ -33,12 +33,12 @@ public class InsertHeap {
                 ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                 ps.setTimestamp(2, getTime(getNowString()));
                 ps.setBoolean(3, entityBanProperties.isHeap());
-                ps.setString(4,entityBanProperties.getMaster());
+                ps.setString(4, entityBanProperties.getMaster());
 
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 }

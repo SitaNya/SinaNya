@@ -16,7 +16,6 @@ import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
-
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;

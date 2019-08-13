@@ -2,9 +2,7 @@ package dice.sinanya.db.history;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityHistory;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,8 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import static dice.sinanya.system.MessagesHistory.HISTORY_LIST;
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import static dice.sinanya.system.MessagesHistory.HISTORY_LIST;
 
 
 /**
@@ -25,8 +23,6 @@ import static com.sobte.cqp.jcq.event.JcqApp.CQ;
  * 类说明: 骰点历史录入类，包含插入、清空、更新、删除。只会被dice.sinanya.listener.InputHistoryToDatabase类中被定时启用，而不是每次骰点都会入库
  */
 public class InsertHistory {
-
-
 
 
     /**
@@ -84,7 +80,7 @@ public class InsertHistory {
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 }

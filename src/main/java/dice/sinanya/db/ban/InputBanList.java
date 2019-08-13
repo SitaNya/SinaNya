@@ -3,14 +3,11 @@ package dice.sinanya.db.ban;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.NotBanListInputException;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
@@ -39,7 +36,7 @@ public class InputBanList {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 
@@ -57,7 +54,7 @@ public class InputBanList {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 

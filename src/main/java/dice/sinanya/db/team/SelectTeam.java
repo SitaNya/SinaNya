@@ -2,9 +2,7 @@ package dice.sinanya.db.team;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityQqAndGroup;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,7 +40,7 @@ public class SelectTeam {
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 
@@ -65,7 +63,7 @@ public class SelectTeam {
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
         if (strQqList != null) {
             return new ArrayList<>(Arrays.asList(strQqList.split(",")));

@@ -17,6 +17,7 @@ public class DefaultMaxRolls {
 
     private static InsertDefaultMaxRolls insertDefaultMaxRolls = new InsertDefaultMaxRolls();
     private static SelectDefaultMaxRolls selectDefaultMaxRolls = new SelectDefaultMaxRolls();
+
     private DefaultMaxRolls() {
         throw new IllegalStateException("Utility class");
     }

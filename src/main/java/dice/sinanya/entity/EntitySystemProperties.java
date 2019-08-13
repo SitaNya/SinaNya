@@ -72,79 +72,79 @@ public class EntitySystemProperties {
     String systemDir;
 
     public EntitySystemProperties() {
-        botStart="机器人已开启";
-        botAlreadyStart="机器人当前处于开启状态";
-        botStop="机器人已关闭";
-        botAlreadyStop="机器人当前处于关闭状态";
-        botExit="正在退出群";
-        botInfo="";
+        botStart = "机器人已开启";
+        botAlreadyStart = "机器人当前处于开启状态";
+        botStop = "机器人已关闭";
+        botAlreadyStop = "机器人当前处于关闭状态";
+        botExit = "正在退出群";
+        botInfo = "";
 
-        bookCard="COC七版规则空白卡奈梅斯·西莉亚私人订制版By贝尔巨佬.xlsx\n请使用此链接下载https://pan.baidu.com/s/1M3veskXYFJjwXP1eKHaX4g。有更新更好的版本请随时联系窝。";
-        bookRp="角色扮演三百六十五问.zip\n请使用此链接下载https://share1.heiluo.com/share/link/8b93f1f15a974d4a9fda1890863a0af1。有更新更好的版本请随时联系窝。";
-        bookKp="克苏鲁的呼唤第七版守秘人规则书 Version1901.pdf\n请使用此链接下载https://share1.heiluo.com/share/link/e88daa8d6565440cbff0a8f7c9c8fe29。有更新更好的版本请随时联系窝。\n此外提供网盘下载版，上面的链接无需登录即可查看。\n链接：https://pan.baidu.com/s/12XSQc9EEBsfEhhQEesc6nw";
-        bookMake="车卡指南.pdf\n请使用此链接下载https://share1.heiluo.com/share/link/0e1083cdb8144b109be07fd4ef09b082。有更新更好的版本请随时联系窝。\n此外提供网盘下载版，上面的链接无需登录即可查看。\n链接：https://pan.baidu.com/s/1HHo1B1F9kMRIFDB8J9Ulww 提取码：ql5h";
+        bookCard = "COC七版规则空白卡奈梅斯·西莉亚私人订制版By贝尔巨佬.xlsx\n请使用此链接下载https://pan.baidu.com/s/1M3veskXYFJjwXP1eKHaX4g。有更新更好的版本请随时联系窝。";
+        bookRp = "角色扮演三百六十五问.zip\n请使用此链接下载https://share1.heiluo.com/share/link/8b93f1f15a974d4a9fda1890863a0af1。有更新更好的版本请随时联系窝。";
+        bookKp = "克苏鲁的呼唤第七版守秘人规则书 Version1901.pdf\n请使用此链接下载https://share1.heiluo.com/share/link/e88daa8d6565440cbff0a8f7c9c8fe29。有更新更好的版本请随时联系窝。\n此外提供网盘下载版，上面的链接无需登录即可查看。\n链接：https://pan.baidu.com/s/12XSQc9EEBsfEhhQEesc6nw";
+        bookMake = "车卡指南.pdf\n请使用此链接下载https://share1.heiluo.com/share/link/0e1083cdb8144b109be07fd4ef09b082。有更新更好的版本请随时联系窝。\n此外提供网盘下载版，上面的链接无需登录即可查看。\n链接：https://pan.baidu.com/s/1HHo1B1F9kMRIFDB8J9Ulww 提取码：ql5h";
 
-        manyRollsFormat="请按照\".ral 值 次数\"的格式输入";
-        diceTimesTooBig="骰点次数过多";
+        manyRollsFormat = "请按照\".ral 值 次数\"的格式输入";
+        diceTimesTooBig = "骰点次数过多";
 
-        setPropFormat="请符合格式.st角色名-力量50体质60";
-        setHelp=".st命令使用错误，请使用.help make命令查看具体用法";
-        NotFoundSkill="您未设置角色卡";
+        setPropFormat = "请符合格式.st角色名-力量50体质60";
+        setHelp = ".st命令使用错误，请使用.help make命令查看具体用法";
+        NotFoundSkill = "您未设置角色卡";
 
-        dndInitIsEmtpy="先攻列表为空";
+        dndInitIsEmtpy = "先攻列表为空";
 
-        needKpGroup="未设置kp群";
+        needKpGroup = "未设置kp群";
 
-        cantInPrivate="此命令私聊不可用";
-        onlyManager="此命令仅群主或管理员可以使用";
+        cantInPrivate = "此命令私聊不可用";
+        onlyManager = "此命令仅群主或管理员可以使用";
 
-        alreadyOpen="日志已经处于开启状态，无法再次开启";
-        alreadyClose="日志已经处于关闭状态，无法再次关闭";
-        notFoundLog="未找到日志";
-        readLock="正在有人取日志，请稍后";
-        deleteOpenLog="无法删除打开的日志，请先关闭";
+        alreadyOpen = "日志已经处于开启状态，无法再次开启";
+        alreadyClose = "日志已经处于关闭状态，无法再次关闭";
+        notFoundLog = "未找到日志";
+        readLock = "正在有人取日志，请稍后";
+        deleteOpenLog = "无法删除打开的日志，请先关闭";
 
-        sanCheck="请符合1/1d3|1d6/1d3|0/1这样的san check格式";
+        sanCheck = "请符合1/1d3|1d6/1d3|0/1这样的san check格式";
 
-        setPropSuccess="已记录人物卡";
+        setPropSuccess = "已记录人物卡";
 
-        clrDndInit="清空先攻列表";
+        clrDndInit = "清空先攻列表";
 
-        antagonizeOver="对抗结束";
-        antagonizeFirstSuccess="先手胜利";
-        antagonizeSecondSuccess="后手胜利";
-        antagonizeAllFailed="全部失败";
-        antagonizeDraw="平手";
+        antagonizeOver = "对抗结束";
+        antagonizeFirstSuccess = "先手胜利";
+        antagonizeSecondSuccess = "后手胜利";
+        antagonizeAllFailed = "全部失败";
+        antagonizeDraw = "平手";
 
-        symptom="";
+        symptom = "";
 
-        enSuccess="";
-        enFailed="";
+        enSuccess = "";
+        enFailed = "";
 
-        hiddenDice="kp正在进行暗骰";
+        hiddenDice = "kp正在进行暗骰";
 
-        teamIsEmpty="您的小队为空";
-        teamMemberEnIsEmpty="的技能成功记录为空";
+        teamIsEmpty = "您的小队为空";
+        teamMemberEnIsEmpty = "的技能成功记录为空";
 
 
-        appendLog="日志已重新开启，将在原基础上追加";
-        createLog="日志已创建";
-        CantEmptyLogName="不支持空日志名";
+        appendLog = "日志已重新开启，将在原基础上追加";
+        createLog = "日志已创建";
+        CantEmptyLogName = "不支持空日志名";
 
-        sanCheckFumble="";
-        sanCheckCriticalSuccess="";
-        sanCheckSuccess="";
-        sanCheckFailure="";
+        sanCheckFumble = "";
+        sanCheckCriticalSuccess = "";
+        sanCheckSuccess = "";
+        sanCheckFailure = "";
 
 //        mailUserName="2730902267@qq.com";
 //        mailPassword="kktjwuakdafbdcej";
 
-        CRITICAL_SUCCESS="大成功";
-        EXTREME_SUCCESS="极难成功";
-        HARD_SUCCESS="困难成功";
-        SUCCESS="成功";
-        FAILURE="失败";
-        FUMBLE="大失败";
+        CRITICAL_SUCCESS = "大成功";
+        EXTREME_SUCCESS = "极难成功";
+        HARD_SUCCESS = "困难成功";
+        SUCCESS = "成功";
+        FAILURE = "失败";
+        FUMBLE = "大失败";
     }
 
     public String getSystemDir() {

@@ -14,7 +14,6 @@ import static dice.sinanya.system.MessagesTag.TAG_ST_RM;
 import static dice.sinanya.system.MessagesTag.TAG_ST_SET;
 import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOSE;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
-
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.RoleChoose.*;
@@ -109,7 +108,7 @@ public class Roles implements Role {
         }
         if (!stringBuilder.toString().contains("自定义")) {
             standbyRole.append("自定义").append("\n");
-        }else if (standbyRole.length() == 0){
+        } else if (standbyRole.length() == 0) {
             standbyRole.append("无").append("\n");
         }
         stringBuilder.append(standbyRole);

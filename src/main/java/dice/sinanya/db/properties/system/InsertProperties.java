@@ -2,11 +2,11 @@ package dice.sinanya.db.properties.system;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntitySystemProperties;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
@@ -183,7 +183,7 @@ public class InsertProperties {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 }

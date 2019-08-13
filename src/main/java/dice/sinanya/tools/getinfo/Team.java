@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 import static dice.sinanya.system.MessagesTeamEn.TEAM_EN;
-
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByQQ;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;

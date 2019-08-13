@@ -3,13 +3,12 @@ package dice.sinanya.db.roles;
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityRoleTag;
 import dice.sinanya.tools.getinfo.MakeRolesInfo;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.*;
 import java.util.HashMap;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOSE;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.getinfo.GetTime.getNowString;
@@ -66,7 +65,7 @@ public class InsertRoles {
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 
@@ -107,7 +106,7 @@ public class InsertRoles {
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
 
         ROLE_CHOOSE.put(qqId, role);
@@ -267,7 +266,7 @@ public class InsertRoles {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 
@@ -407,7 +406,7 @@ public class InsertRoles {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 
@@ -428,7 +427,7 @@ public class InsertRoles {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 }

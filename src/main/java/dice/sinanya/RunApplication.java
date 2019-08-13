@@ -18,10 +18,10 @@ import dice.sinanya.listener.Prometheus;
 import dice.sinanya.listener.TestRunningTime;
 import dice.sinanya.windows.BanProperties;
 import dice.sinanya.windows.DiceProperties;
+import org.apache.commons.lang.StringUtils;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import static dice.sinanya.db.system.SelectBot.flushBot;
@@ -163,7 +163,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
             scheduler.scheduleJob(jobDetail3, trigger3);
 
         } catch (SchedulerException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
         return 0;
     }
@@ -252,7 +252,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
                 return MSG_INTERCEPT;
             }
         } catch (OnlyManagerException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
 
         if (msg.matches(commandHeader.toString())) {
@@ -289,7 +289,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
                 return MSG_INTERCEPT;
             }
         } catch (OnlyManagerException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
 
         if (msg.matches(commandHeader.toString())) {
@@ -351,7 +351,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
                 CQ.sendGroupMsg(162279609, "已被移出群" + getGroupName(fromGroup) + "(" + fromGroup + ")中，将群和操作者" + getUserName(fromQQ) + "(" + fromQQ + ")拉黑");
                 insertQqBanList(String.valueOf(beingOperateQQ), "被踢出群" + fromGroup);
                 insertGroupBanList(String.valueOf(fromGroup), "被" + fromQQ + "踢出");
-            }else{
+            } else {
                 CQ.sendGroupMsg(162279609, "已被移出群" + getGroupName(fromGroup) + "(" + fromGroup + ")中，将群拉黑");
                 insertGroupBanList(String.valueOf(fromGroup), "被" + fromQQ + "踢出");
             }
@@ -445,7 +445,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
             return MSG_INTERCEPT;
         }
 
-        if (checkGroupInBanList(entityTypeMessages.getFromGroup())&&entityBanProperties.isLeaveGroupByBan()) {
+        if (checkGroupInBanList(entityTypeMessages.getFromGroup()) && entityBanProperties.isLeaveGroupByBan()) {
             sender(entityTypeMessages, "检测到处于黑名单群中，正在退群");
             CQ.sendGroupMsg(162279609, "检测到处于黑名单群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "(" + entityTypeMessages.getFromGroup() + ")中，正在退群");
             leave(entityTypeMessages.getMessagesTypes(), entityTypeMessages.getFromGroup());
@@ -545,12 +545,12 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         }
     }
 
-    public int menuA(){
+    public int menuA() {
         new DiceProperties().init();
         return 0;
     }
 
-    public int menuB(){
+    public int menuB() {
         new BanProperties().init();
         return 0;
     }

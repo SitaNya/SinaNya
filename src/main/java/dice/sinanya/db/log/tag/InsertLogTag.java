@@ -2,14 +2,14 @@ package dice.sinanya.db.log.tag;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityLogTag;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
 /**
  * @author SitaNya
@@ -20,7 +20,6 @@ import java.sql.SQLException;
  * 类说明: 录入log开启标签，不包含log日志内容
  */
 public class InsertLogTag {
-
 
 
     public InsertLogTag() {
@@ -65,7 +64,7 @@ public class InsertLogTag {
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 
@@ -83,7 +82,7 @@ public class InsertLogTag {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
 
         try (Connection conn = DbUtil.getConnection()) {
@@ -94,7 +93,7 @@ public class InsertLogTag {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 }

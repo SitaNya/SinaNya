@@ -2,9 +2,7 @@ package dice.sinanya.db.log.tag;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityLogTag;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesLog.LOG_NAME_SWITCH;
 import static dice.sinanya.system.MessagesLog.LOG_SWITCH_FOR_GROUP;
 
@@ -25,7 +24,6 @@ import static dice.sinanya.system.MessagesLog.LOG_SWITCH_FOR_GROUP;
  * 类说明: 查询log开启状况，包含当前群内是否有log开启，是哪个log，目前某个log是否处于开启状态
  */
 public class SelectLogTag {
-
 
 
     public SelectLogTag() {
@@ -49,7 +47,7 @@ public class SelectLogTag {
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 
@@ -72,7 +70,7 @@ public class SelectLogTag {
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
         return tagList;
     }
@@ -97,7 +95,7 @@ public class SelectLogTag {
                 }
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
         return "未找到";
     }

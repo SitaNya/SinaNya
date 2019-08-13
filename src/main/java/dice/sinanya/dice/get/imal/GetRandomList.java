@@ -1,10 +1,10 @@
 package dice.sinanya.dice.get.imal;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
@@ -34,7 +34,7 @@ public interface GetRandomList {
         try {
             tmp = infoList.get(index);
         } catch (IndexOutOfBoundsException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
             log.error("size: " + (infoList.size() - 1));
             log.error("index: " + index);
         }

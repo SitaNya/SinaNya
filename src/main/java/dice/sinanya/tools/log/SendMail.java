@@ -1,6 +1,7 @@
 package dice.sinanya.tools.log;
 
 import dice.sinanya.entity.MailBean;
+import org.apache.commons.lang.StringUtils;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
@@ -9,7 +10,6 @@ import javax.mail.internet.*;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Properties;
 
@@ -38,7 +38,7 @@ public class SendMail {
         try {
             text = MimeUtility.encodeText(new String(text.getBytes(StandardCharsets.UTF_8), "GBK"), "GB2312", "B");
         } catch (Exception e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
         return text;
     }
@@ -69,16 +69,16 @@ public class SendMail {
         // 设置邮件的正文
 
 //        这里取相对路径"bin/../saveLogs/${groupId}/${logName}"
-        mb.attachFile(entitySystemProperties.getSystemDir()+"/saveLogs/" + groupId + "/" + logName + ".txt");
-        mb.attachFile(entitySystemProperties.getSystemDir()+"/saveLogs/" + groupId + "/" + logName + ".docx");
+        mb.attachFile(entitySystemProperties.getSystemDir() + "/saveLogs/" + groupId + "/" + logName + ".txt");
+        mb.attachFile(entitySystemProperties.getSystemDir() + "/saveLogs/" + groupId + "/" + logName + ".docx");
 
         SendMail sm = new SendMail();
-        CQ.logInfo("邮件发送","正在发送邮件...");
+        CQ.logInfo("邮件发送", "正在发送邮件...");
         // 发送邮件
         if (sm.sendMail(mb)) {
-            CQ.logInfo("邮件发送","发送成功!");
+            CQ.logInfo("邮件发送", "发送成功!");
         } else {
-            CQ.logInfo("邮件发送","发送失败!");
+            CQ.logInfo("邮件发送", "发送失败!");
         }
     }
 
@@ -141,11 +141,11 @@ public class SendMail {
                     try {
                         mbpFile.setFileName(MimeUtility.encodeWord(fds.getName()));
                     } catch (UnsupportedEncodingException e) {
-                        CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+                        CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
                     }
                     mp.addBodyPart(mbpFile);
                 }
-                CQ.logInfo("邮件发送","添加成功");
+                CQ.logInfo("邮件发送", "添加成功");
             }
 
             msg.setContent(mp);
@@ -153,7 +153,7 @@ public class SendMail {
             Transport.send(msg);
 
         } catch (MessagingException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
             return false;
         }
         return true;

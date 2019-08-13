@@ -12,14 +12,14 @@ import javax.swing.*;
  * 类说明:
  */
 public class Text {
-    public JTextArea createTextArea(JPanel jPanel){
-        JTextArea jTextArea=new JTextArea();
+    public JTextArea createTextArea(JPanel jPanel) {
+        JTextArea jTextArea = new JTextArea();
         jPanel.add(jTextArea);
         return jTextArea;
     }
 
-    public JTextField createText(JPanel jPanel){
-        JTextField jTextField=new JTextField();
+    public JTextField createText(JPanel jPanel) {
+        JTextField jTextField = new JTextField();
         jPanel.add(jTextField);
         return jTextField;
     }

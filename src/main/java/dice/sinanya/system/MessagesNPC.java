@@ -778,6 +778,7 @@ public class MessagesNPC {
         add("看不起身体残疾和精神残疾的人");
         add("对待残疾人彬彬有礼");
     }};
+
     private MessagesNPC() {
         throw new IllegalStateException("Utility class");
     }

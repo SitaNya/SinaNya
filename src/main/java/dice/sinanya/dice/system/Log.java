@@ -4,9 +4,8 @@ import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.tools.log.SaveDocx;
+import org.apache.commons.lang.StringUtils;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
-
-import java.util.Arrays;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesLog.LOG_NAME_FOR_GROUP;
@@ -102,7 +101,7 @@ public class Log implements MakeNickToSender {
             try {
                 new SaveDocx(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq(), msg, bigResult);
             } catch (Docx4JException e) {
-                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+                CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
             }
             sender(entityTypeMessages, makeLogNickToSender(msg) + "正在发送到您的邮箱" + entityTypeMessages.getFromQq() + "@qq.com");
             sendMail(entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup(), getGroupName(entityTypeMessages), msg);

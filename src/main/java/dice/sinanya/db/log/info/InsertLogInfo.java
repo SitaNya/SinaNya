@@ -2,15 +2,14 @@ package dice.sinanya.db.log.info;
 
 import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityLogTag;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Map;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesLog.LOG_NAME_SWITCH;
 
 /**
@@ -45,7 +44,7 @@ public class InsertLogInfo {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
             StringBuilder stringBuilder = new StringBuilder();
             for (Map.Entry<EntityLogTag, Boolean> mapEntry : LOG_NAME_SWITCH.entrySet()) {
                 stringBuilder.append("groupId")

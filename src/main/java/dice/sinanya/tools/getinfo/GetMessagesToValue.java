@@ -1,11 +1,10 @@
 package dice.sinanya.tools.getinfo;
 
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.HashMap;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.tools.getinfo.MakeSkillName.makeSkillName;
 
@@ -55,7 +54,7 @@ class GetMessagesToValue {
                     strSkillValue = new StringBuilder();
                 }
             } catch (NumberFormatException e) {
-                CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+                CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
             }
             if (tmp == i) {
                 i++;

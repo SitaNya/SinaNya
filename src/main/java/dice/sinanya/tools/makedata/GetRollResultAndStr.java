@@ -122,7 +122,7 @@ public class GetRollResultAndStr {
 
 //        通过manyRollsProcess计算得出结果字符串
         resStr = manyRollsProcess(times, maxRolls, maxNums);
-        if (times>1000){
+        if (times > 1000) {
             throw new ManyRollsTimesTooMoreException(entityTypeMessages);
         }
         if (isNumeric(resStr)) {

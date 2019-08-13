@@ -1,14 +1,11 @@
 package dice.sinanya.db.tools;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
 
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
@@ -43,7 +40,7 @@ class DbPool {
             dataSource.setUser("root");
             dataSource.setPassword("rong");
         } catch (PropertyVetoException e) {
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
     }
 
@@ -61,17 +58,17 @@ class DbPool {
         Connection conn = null;
         try {
             conn = dataSource.getConnection();
-            CQ.logDebug("数据库","获取连接");
+            CQ.logDebug("数据库", "获取连接");
         } catch (SQLException e) {
-            CQ.logDebug("数据库数据源",dataSource.toString());
-            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logDebug("数据库数据源", dataSource.toString());
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
         try {
             Exception e = new Exception("线程池调用流程为");
-            CQ.logDebug("当前线程池中链接数 " , String.valueOf(dataSource.getNumConnections()));
-            CQ.logDebug(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logDebug("当前线程池中链接数 ", String.valueOf(dataSource.getNumConnections()));
+            CQ.logDebug(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         } catch (SQLException e) {
-            CQ.logDebug(e.getMessage(), Arrays.toString(e.getStackTrace()));
+            CQ.logDebug(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
         return conn;
     }
