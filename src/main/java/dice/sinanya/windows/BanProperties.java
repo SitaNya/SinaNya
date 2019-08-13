@@ -31,7 +31,7 @@ public class BanProperties extends MakeBan {
     }
 
     public void init() {
-        JFrame jFrame = new Frame("个性化配置", 800, 650).init();
+        JFrame jFrame = new Frame("安全性配置", 800, 650).init();
 //        JPanel botSwitch = new Panel().init(jFrame, "开关", 510, 10, 400, 200);
 //        botSwitch.setLayout(new GridLayout(0, 1));
 
