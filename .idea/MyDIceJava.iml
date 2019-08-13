@@ -27,7 +27,8 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.3.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.3.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.3.4.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: com.sobte.cqp:jcq-coolq:1.2.7" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.sobte.cqp:jcq-coolq:1.2.7" level="project" />
+    <orderEntry type="library" name="Maven: vip.vtool.jcq:vtool-jcq:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: net.sf.json-lib:json-lib:jdk15:2.4" level="project" />
     <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.8.0" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.1" level="project" />

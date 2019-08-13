@@ -69,7 +69,7 @@
             <groupId>com.sobte.cqp</groupId>
             <artifactId>jcq-coolq</artifactId>
             <version>1.2.7</version>
-            <scope>test</scope>
+            <scope>provided</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/vip.vtool.jcq/vtool-jcq -->
         <dependency>
