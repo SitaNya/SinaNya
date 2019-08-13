@@ -16,7 +16,8 @@ import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.db.system.SelectBot.selectBot;
 import static dice.sinanya.system.MessagesSystem.*;
 import static dice.sinanya.system.MessagesTag.*;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.SwitchBot.*;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.makedata.Sender.sender;
@@ -55,14 +56,14 @@ public class Bot implements AtQq, MakeNickToSender {
             if (qq.equals(String.valueOf(CQ.getLoginQQ()))) {
                 long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
                 if (groupId == 0) {
-                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("can'tInPrivate"));
+                    sender(entityTypeMessages, entitySystemProperties.getCantInPrivate());
                     return;
                 }
                 if (getBot(groupId)) {
-                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("botAlreadyStart"));
+                    sender(entityTypeMessages, entitySystemProperties.getBotAlreadyStart());
                 } else {
                     botOn(groupId);
-                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("botStart"));
+                    sender(entityTypeMessages, entitySystemProperties.getBotStart());
                 }
             }
         }
@@ -85,14 +86,14 @@ public class Bot implements AtQq, MakeNickToSender {
             if (qq.equals(String.valueOf(CQ.getLoginQQ()))) {
                 long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
                 if (groupId == 0) {
-                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("can'tInPrivate"));
+                    sender(entityTypeMessages, entitySystemProperties.getCantInPrivate());
                     return;
                 }
                 if (!getBot(groupId)) {
-                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("botAlreadyStop"));
+                    sender(entityTypeMessages, entitySystemProperties.getBotAlreadyStop());
                 } else {
                     botOff(groupId);
-                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("botStop"));
+                    sender(entityTypeMessages, entitySystemProperties.getBotStop());
                 }
             }
         }
@@ -113,7 +114,7 @@ public class Bot implements AtQq, MakeNickToSender {
 
         for (String qq : qqList) {
             if (qq.equals(String.valueOf(CQ.getLoginQQ()))) {
-                sender(entityTypeMessages, MESSAGES_SYSTEM.get("botExit"));
+                sender(entityTypeMessages, entitySystemProperties.getBotExit());
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
@@ -133,7 +134,7 @@ public class Bot implements AtQq, MakeNickToSender {
      * 机器人信息
      */
     public void info() {
-        String botInfo = MESSAGES_SYSTEM.get("botInfo").toString();
+        String botInfo = entitySystemProperties.getBotInfo();
         if (!botInfo.equals(NONE)) {
             botInfo = "\n" + botInfo;
         }

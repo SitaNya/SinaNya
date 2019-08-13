@@ -2,7 +2,7 @@ package dice.sinanya.exceptions;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
@@ -16,7 +16,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  */
 public class OnlyManagerException extends Exception {
     public OnlyManagerException(EntityTypeMessages entityTypeMessages) {
-        super(MESSAGES_SYSTEM.get("onlyManager"));
-        sender(entityTypeMessages, MESSAGES_SYSTEM.get("onlyManager"));
+        super(entitySystemProperties.getOnlyManager());
+        sender(entityTypeMessages, entitySystemProperties.getOnlyManager());
     }
 }

@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 import static dice.sinanya.system.MessagesTeamEn.TEAM_EN;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByQQ;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 
@@ -106,7 +107,7 @@ public class Team {
             }
             return role + StringUtils.join(TEAM_EN.get(entityQqAndGroup), ",");
         } else {
-            return "[CQ:at,qq=" + qqId + "]" + MESSAGES_SYSTEM.get("teamMemberEnIsEmpty");
+            return "[CQ:at,qq=" + qqId + "]" + entitySystemProperties.getTeamMemberEnIsEmpty();
         }
     }
 

@@ -11,12 +11,13 @@ import dice.sinanya.dice.system.Log;
 import dice.sinanya.dice.system.Test;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.*;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+
 import java.util.Arrays;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesTag.*;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
@@ -429,7 +430,7 @@ class Flow {
         if (isStSet) {
             try {
                 if (!roles.set()) {
-                    sender(entityTypeMessages, MESSAGES_SYSTEM.get("setHelp"));
+                    sender(entityTypeMessages, entitySystemProperties.getSetHelp());
                 }
             } catch (PlayerSetException e) {
                 CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));

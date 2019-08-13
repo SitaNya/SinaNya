@@ -2,7 +2,8 @@ package dice.sinanya.exceptions;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
@@ -17,8 +18,8 @@ import static dice.sinanya.tools.makedata.Sender.sender;
 public class PlayerSetException extends Exception {
 
     public PlayerSetException(EntityTypeMessages entityTypeMessages) {
-        super(MESSAGES_SYSTEM.get("setPropFormat"));
-        sender(entityTypeMessages, MESSAGES_SYSTEM.get("setPropFormat"));
+        super(entitySystemProperties.getSetPropFormat());
+        sender(entityTypeMessages, entitySystemProperties.getSetPropFormat());
     }
 
 }

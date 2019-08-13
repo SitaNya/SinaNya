@@ -1,6 +1,6 @@
 package dice.sinanya.entity;
 
-public class EntityProperties {
+public class EntitySystemProperties {
     String botStart;
     String botAlreadyStart;
     String botStop;
@@ -69,27 +69,15 @@ public class EntityProperties {
     String FAILURE;
     String FUMBLE;
 
-    String notMaster;
-    String master;
-
-    String PrometheusPort;
-    String heap;
-
-    String dbPassword;
-
-    String cloudBan;
-    String banListInputNotId;
-
     String systemDir;
 
-    public EntityProperties() {
+    public EntitySystemProperties() {
         botStart="机器人已开启";
         botAlreadyStart="机器人当前处于开启状态";
         botStop="机器人已关闭";
         botAlreadyStop="机器人当前处于关闭状态";
         botExit="正在退出群";
         botInfo="";
-        banListInputNotId="输入的不是QQ号或群号";
 
         bookCard="COC七版规则空白卡奈梅斯·西莉亚私人订制版By贝尔巨佬.xlsx\n请使用此链接下载https://pan.baidu.com/s/1M3veskXYFJjwXP1eKHaX4g。有更新更好的版本请随时联系窝。";
         bookRp="角色扮演三百六十五问.zip\n请使用此链接下载https://share1.heiluo.com/share/link/8b93f1f15a974d4a9fda1890863a0af1。有更新更好的版本请随时联系窝。";
@@ -157,16 +145,6 @@ public class EntityProperties {
         SUCCESS="";
         FAILURE="";
         FUMBLE="";
-
-        notMaster="除设定的Master外其他人不可使用此命令";
-        master="0";
-
-        PrometheusPort="1260";
-
-        heap="false";
-        cloudBan="true";
-
-        dbPassword="rong";
     }
 
     public String getSystemDir() {
@@ -583,61 +561,5 @@ public class EntityProperties {
 
     public void setFUMBLE(String FUMBLE) {
         this.FUMBLE = FUMBLE;
-    }
-
-    public String getNotMaster() {
-        return notMaster;
-    }
-
-    public void setNotMaster(String notMaster) {
-        this.notMaster = notMaster;
-    }
-
-    public String getMaster() {
-        return master;
-    }
-
-    public void setMaster(String master) {
-        this.master = master;
-    }
-
-    public String getPrometheusPort() {
-        return PrometheusPort;
-    }
-
-    public void setPrometheusPort(String prometheusPort) {
-        PrometheusPort = prometheusPort;
-    }
-
-    public String getHeap() {
-        return heap;
-    }
-
-    public void setHeap(String heap) {
-        this.heap = heap;
-    }
-
-    public String getDbPassword() {
-        return dbPassword;
-    }
-
-    public void setDbPassword(String dbPassword) {
-        this.dbPassword = dbPassword;
-    }
-
-    public String getCloudBan() {
-        return cloudBan;
-    }
-
-    public void setCloudBan(String cloudBan) {
-        this.cloudBan = cloudBan;
-    }
-
-    public String getBanListInputNotId() {
-        return banListInputNotId;
-    }
-
-    public void setBanListInputNotId(String banListInputNotId) {
-        this.banListInputNotId = banListInputNotId;
     }
 }

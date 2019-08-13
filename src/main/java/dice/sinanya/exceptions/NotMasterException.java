@@ -2,7 +2,7 @@ package dice.sinanya.exceptions;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
@@ -16,7 +16,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  */
 public class NotMasterException extends Exception {
     public NotMasterException(EntityTypeMessages entityTypeMessages) {
-        super(MESSAGES_SYSTEM.get("notMaster"));
-        sender(entityTypeMessages, MESSAGES_SYSTEM.get("notMaster"));
+        super(entityBanProperties.getNotMaster());
+        sender(entityTypeMessages, entityBanProperties.getNotMaster());
     }
 }

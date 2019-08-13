@@ -11,7 +11,7 @@
  * <p>
  * Clue 获取线索方法
  * DefaultMaxRolls 默认骰数据库交互类
- * GetMessagesSystem 设定默认回复语，并读取配置文件中的回复语
+ * GetMessagesProperties 设定默认回复语，并读取配置文件中的回复语
  * GetMessagesToValue 将传入的msg人物属性信息整理包装为HashMap格式
  * GetName 获取人名，不是指玩家，而是NPC名称
  * GetNickName 获取昵称

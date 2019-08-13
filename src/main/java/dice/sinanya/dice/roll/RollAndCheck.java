@@ -11,11 +11,9 @@ import dice.sinanya.exceptions.NotSetKpGroupException;
 import dice.sinanya.tools.checkdata.CheckResultLevel;
 import dice.sinanya.tools.makedata.MakeRal;
 import dice.sinanya.tools.makedata.MakeRcl;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
@@ -23,7 +21,8 @@ import static dice.sinanya.system.MessagesAntagonize.ANTAGONIZE;
 import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.History.changeHistory;
@@ -102,7 +101,7 @@ public class RollAndCheck implements En, MakeNickToSender {
             sender(entityTypeMessages, stringBuilder.toString());
             checkAntagonize(entityTypeMessages, thisEntityAntagonize, entityAntagonize, groupId);
             ANTAGONIZE.remove(groupId);
-            CQ.sendGroupMsg(Long.parseLong(groupId), MESSAGES_SYSTEM.get("antagonizeOver"));
+            CQ.sendGroupMsg(Long.parseLong(groupId),entitySystemProperties.getAntagonizeOver());
         } else if (!groupId.equals(defaultGroupId)) {
             sender(entityTypeMessages, stringBuilder.toString());
             ANTAGONIZE.put(groupId, checkResultLevel.getAntagonize());
@@ -142,7 +141,7 @@ public class RollAndCheck implements En, MakeNickToSender {
             sender(entityTypeMessages, stringBuilder.toString());
             checkAntagonize(entityTypeMessages, thisEntityAntagonize, entityAntagonize, groupId);
             ANTAGONIZE.remove(groupId);
-            CQ.sendGroupMsg(Long.parseLong(groupId), MESSAGES_SYSTEM.get("antagonizeOver"));
+            CQ.sendGroupMsg(Long.parseLong(groupId), entitySystemProperties.getAntagonizeOver());
         } else if (!groupId.equals(defaultGroupId)) {
 //            静态对象Antagonize中包含了以群号为key的EntityAntagonize对象，如果不包含的话，那么就说明这次是发起对抗，直接插入进去
             CQ.sendGroupMsg(Long.parseLong(groupId), makeNickToSender(getNickName(entityTypeMessages)) + "发起一次对抗");
@@ -208,19 +207,19 @@ public class RollAndCheck implements En, MakeNickToSender {
     private void checkAntagonize(EntityTypeMessages entityTypeMessages, EntityAntagonize thisAntagonize, EntityAntagonize lastAntagonize, String groupId) {
         int successMinLevel = 2;
         if (lastAntagonize.getLevel() > thisAntagonize.getLevel()) {
-            CQ.sendGroupMsg(Long.parseLong(groupId), MESSAGES_SYSTEM.get("antagonizeFirstSuccess"));
+            CQ.sendGroupMsg(Long.parseLong(groupId), entitySystemProperties.getAntagonizeFirstSuccess());
         } else if (lastAntagonize.getLevel() == thisAntagonize.getLevel()) {
             if (lastAntagonize.getLevel() < successMinLevel && thisAntagonize.getLevel() < successMinLevel) {
-                CQ.sendGroupMsg(Long.parseLong(groupId), MESSAGES_SYSTEM.get("antagonizeAllFailed"));
+                CQ.sendGroupMsg(Long.parseLong(groupId),entitySystemProperties.getAntagonizeAllFailed());
             } else if (lastAntagonize.getRandom() < thisAntagonize.getRandom()) {
-                CQ.sendGroupMsg(Long.parseLong(groupId), MESSAGES_SYSTEM.get("antagonizeFirstSuccess"));
+                CQ.sendGroupMsg(Long.parseLong(groupId), entitySystemProperties.getAntagonizeFirstSuccess());
             } else if (lastAntagonize.getSkill() > thisAntagonize.getSkill()) {
-                CQ.sendGroupMsg(Long.parseLong(groupId), MESSAGES_SYSTEM.get("antagonizeFirstSuccess"));
+                CQ.sendGroupMsg(Long.parseLong(groupId), entitySystemProperties.getAntagonizeFirstSuccess());
             } else if (lastAntagonize.getSkill() == thisAntagonize.getSkill()) {
-                CQ.sendGroupMsg(Long.parseLong(groupId), MESSAGES_SYSTEM.get("antagonizeDraw"));
+                CQ.sendGroupMsg(Long.parseLong(groupId), entitySystemProperties.getAntagonizeDraw());
             }
         } else {
-            sender(entityTypeMessages, MESSAGES_SYSTEM.get("antagonizeSecondSuccess"));
+            sender(entityTypeMessages, entitySystemProperties.getAntagonizeSecondSuccess());
         }
     }
 

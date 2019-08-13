@@ -2,7 +2,8 @@ package dice.sinanya.exceptions;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
@@ -17,7 +18,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
 public class ManyRollsTimesTooMoreException extends Exception {
 
     public ManyRollsTimesTooMoreException(EntityTypeMessages entityTypeMessages) {
-        super(MESSAGES_SYSTEM.get("diceTimesTooBig"));
-        sender(entityTypeMessages, MESSAGES_SYSTEM.get("diceTimesTooBig"));
+        super(entitySystemProperties.getDiceTimesTooBig());
+        sender(entityTypeMessages, entitySystemProperties.getDiceTimesTooBig());
     }
 }

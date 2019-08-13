@@ -2,7 +2,9 @@ package dice.sinanya.exceptions;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
@@ -16,7 +18,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  */
 public class BanListInputNotIdException extends Exception {
     public BanListInputNotIdException(EntityTypeMessages entityTypeMessages) {
-        super(MESSAGES_SYSTEM.get("banListInputNotId"));
-        sender(entityTypeMessages, MESSAGES_SYSTEM.get("banListInputNotId"));
+        super(entityBanProperties.getBanListInputNotId());
+        sender(entityTypeMessages, entityBanProperties.getBanListInputNotId());
     }
 }

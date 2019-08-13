@@ -4,9 +4,6 @@ import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.BanListInputNotIdException;
 import dice.sinanya.exceptions.NotBanListInputException;
 import dice.sinanya.exceptions.NotMasterException;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -17,7 +14,9 @@ import static dice.sinanya.system.MessagesBanList.qqBanList;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
 import static dice.sinanya.tools.getinfo.BanList.*;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
@@ -42,7 +41,7 @@ public class BanList {
      *
      */
     public void inputQqBanList() {
-        if (!Boolean.parseBoolean(MESSAGES_SYSTEM.get("cloudBan"))) {
+        if (!entityBanProperties.isCloudBan()) {
             sender(entityTypeMessages,"配置文件中未启用云黑");
             return;
         }
@@ -63,7 +62,7 @@ public class BanList {
      *
      */
     public void inputGroupBanList() {
-        if (!Boolean.parseBoolean(MESSAGES_SYSTEM.get("cloudBan"))) {
+        if (!entityBanProperties.isCloudBan()) {
             sender(entityTypeMessages,"配置文件中未启用云黑");
             return;
         }
@@ -84,7 +83,7 @@ public class BanList {
      *
      */
     public void rmQqBanList() {
-        if (!Boolean.parseBoolean(MESSAGES_SYSTEM.get("cloudBan"))) {
+        if (!entityBanProperties.isCloudBan()) {
             sender(entityTypeMessages,"配置文件中未启用云黑");
             return;
         }
@@ -105,7 +104,7 @@ public class BanList {
      *
      */
     public void rmGroupBanList() {
-        if (!Boolean.parseBoolean(MESSAGES_SYSTEM.get("cloudBan"))) {
+        if (!entityBanProperties.isCloudBan()) {
             sender(entityTypeMessages,"配置文件中未启用云黑");
             return;
         }
@@ -126,7 +125,7 @@ public class BanList {
      *
      */
     public void getQqBanList() {
-        if (!Boolean.parseBoolean(MESSAGES_SYSTEM.get("cloudBan"))) {
+        if (!entityBanProperties.isCloudBan()) {
             sender(entityTypeMessages,"配置文件中未启用云黑");
             return;
         }
@@ -147,7 +146,7 @@ public class BanList {
      *
      */
     public void getGroupBanList() {
-        if (!Boolean.parseBoolean(MESSAGES_SYSTEM.get("cloudBan"))) {
+        if (!entityBanProperties.isCloudBan()) {
             sender(entityTypeMessages,"配置文件中未启用云黑");
             return;
         }
@@ -167,7 +166,7 @@ public class BanList {
     }
 
     private void checkMaster() throws NotMasterException {
-        if (!MESSAGES_SYSTEM.get("master").equals(String.valueOf(entityTypeMessages.getFromQq()))) {
+        if (!entityBanProperties.getMaster().equals(String.valueOf(entityTypeMessages.getFromQq()))) {
             throw new NotMasterException(entityTypeMessages);
         }
     }

@@ -3,7 +3,8 @@ package dice.sinanya.dice.roll;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import static dice.sinanya.system.TiAndLi.*;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByFromQQ;
 import static dice.sinanya.tools.makedata.RandomInt.random;
 import static dice.sinanya.tools.makedata.Sender.sender;
@@ -87,6 +88,6 @@ public class TiAndLi {
                 break;
         }
         stringBuilder.append(strSymptom);
-        stringBuilder.append(MESSAGES_SYSTEM.get("symptom"));
+        stringBuilder.append(entitySystemProperties.getSymptom());
     }
 }

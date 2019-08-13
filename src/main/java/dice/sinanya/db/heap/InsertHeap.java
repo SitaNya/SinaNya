@@ -1,16 +1,14 @@
 package dice.sinanya.db.heap;
 
 import dice.sinanya.db.tools.DbUtil;
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import java.util.Arrays;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
 import static dice.sinanya.tools.getinfo.GetTime.getNowString;
 import static dice.sinanya.tools.getinfo.GetTime.getTime;
 
@@ -34,8 +32,8 @@ public class InsertHeap {
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                 ps.setTimestamp(2, getTime(getNowString()));
-                ps.setBoolean(3, Boolean.parseBoolean(MESSAGES_SYSTEM.get("heap")));
-                ps.setString(4,MESSAGES_SYSTEM.get("master"));
+                ps.setBoolean(3, entityBanProperties.isHeap());
+                ps.setString(4,entityBanProperties.getMaster());
 
                 ps.executeUpdate();
             }

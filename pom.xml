@@ -70,12 +70,6 @@
             <artifactId>jcq-coolq</artifactId>
             <version>1.2.7</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/vip.vtool.jcq/vtool-jcq -->
-        <dependency>
-            <groupId>vip.vtool.jcq</groupId>
-            <artifactId>vtool-jcq</artifactId>
-            <version>1.0.1</version>
-        </dependency>
 
         <dependency>
             <groupId>net.sf.json-lib</groupId>

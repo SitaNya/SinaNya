@@ -3,7 +3,7 @@ package dice.sinanya.system;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 
 /**
  * @author SitaNya
@@ -23,12 +23,12 @@ public enum MessagesLevel {
      * @param STR_FAILURE 失败
      * @param STR_FUMBLE 大失败
      */
-    STR_CRITICAL_SUCCESS("STR_CRITICAL_SUCCESS", new ArrayList<String>(Arrays.asList(MESSAGES_SYSTEM.get("CRITICAL_SUCCESS").split("\\|")))),
-    STR_EXTREME_SUCCESS("STR_EXTREME_SUCCESS", new ArrayList<>(Arrays.asList(MESSAGES_SYSTEM.get("EXTREME_SUCCESS").split("\\|")))),
-    STR_HARD_SUCCESS("STR_HARD_SUCCESS", new ArrayList<>(Arrays.asList(MESSAGES_SYSTEM.get("HARD_SUCCESS").split("\\|")))),
-    STR_SUCCESS("STR_SUCCESS", new ArrayList<>(Arrays.asList(MESSAGES_SYSTEM.get("SUCCESS").split("\\|")))),
-    STR_FAILURE("STR_FAILURE", new ArrayList<>(Arrays.asList(MESSAGES_SYSTEM.get("FAILURE").split("\\|")))),
-    STR_FUMBLE("STR_FUMBLE", new ArrayList<>(Arrays.asList(MESSAGES_SYSTEM.get("FUMBLE").split("\\|"))));
+    STR_CRITICAL_SUCCESS("STR_CRITICAL_SUCCESS", new ArrayList<String>(Arrays.asList(entitySystemProperties.getCRITICAL_SUCCESS().split("\\|")))),
+    STR_EXTREME_SUCCESS("STR_EXTREME_SUCCESS", new ArrayList<>(Arrays.asList(entitySystemProperties.getEXTREME_SUCCESS().split("\\|")))),
+    STR_HARD_SUCCESS("STR_HARD_SUCCESS", new ArrayList<>(Arrays.asList(entitySystemProperties.getHARD_SUCCESS().split("\\|")))),
+    STR_SUCCESS("STR_SUCCESS", new ArrayList<>(Arrays.asList(entitySystemProperties.getSUCCESS().split("\\|")))),
+    STR_FAILURE("STR_FAILURE", new ArrayList<>(Arrays.asList(entitySystemProperties.getFAILURE().split("\\|")))),
+    STR_FUMBLE("STR_FUMBLE", new ArrayList<>(Arrays.asList(entitySystemProperties.getFUMBLE().split("\\|"))));
     private String levelName;
     private ArrayList<String> text;
 

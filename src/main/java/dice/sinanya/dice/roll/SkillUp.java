@@ -8,7 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static dice.sinanya.system.MessagesTag.TAG_EN;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.GetSkillValue.getSkillValue;
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByFromQQ;
@@ -88,7 +89,7 @@ public class SkillUp {
             }else{
                 stringBuilder.append("\n本次结果不会自动更新到人物卡中，请使用.st<角色名>-<属性><新属性值>的格式进行更新录入，没有更改的属性不需要再次录入\n.en <技能>这种格式可以自动录入人物卡，无需再次st");
             }
-            stringBuilder.append(MESSAGES_SYSTEM.get("enSuccess"));
+            stringBuilder.append(entitySystemProperties.getEnSuccess());
             sender(entityTypeMessages, stringBuilder.toString());
         } else {
             stringBuilder
@@ -100,7 +101,7 @@ public class SkillUp {
                     .append("/")
                     .append(skill)
                     .append("失败!")
-                    .append(MESSAGES_SYSTEM.get("enFailed"));
+                    .append(entitySystemProperties.getEnFailed());
             sender(entityTypeMessages, stringBuilder.toString());
         }
     }

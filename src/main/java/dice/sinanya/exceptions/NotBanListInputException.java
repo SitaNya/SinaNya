@@ -2,7 +2,7 @@ package dice.sinanya.exceptions;
 
 import dice.sinanya.entity.EntityTypeMessages;
 
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
@@ -16,7 +16,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  */
 public class NotBanListInputException extends Exception {
     public NotBanListInputException(EntityTypeMessages entityTypeMessages) {
-        super(MESSAGES_SYSTEM.get("notBanListInput"));
-        sender(entityTypeMessages, MESSAGES_SYSTEM.get("notBanListInput"));
+        super(entityBanProperties.getNotBanListInput());
+        sender(entityTypeMessages, entityBanProperties.getNotBanListInput());
     }
 }

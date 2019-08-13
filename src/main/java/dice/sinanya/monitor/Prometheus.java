@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
-import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 
 /**
  * @author SitaNya
@@ -23,18 +21,12 @@ import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
 public class Prometheus {
     private int port;
     public Prometheus(){
-        String tagPrometheus = "PrometheusPort";
-        if (isNumeric(MESSAGES_SYSTEM.get(tagPrometheus))) {
-            this.port = Integer.parseInt(MESSAGES_SYSTEM.get(tagPrometheus));
-        } else {
-            this.port = 1234;
-        }
     }
 
     public void start(){
         Logger log = LogManager.getLogger(dice.sinanya.listener.Prometheus.class.getName());
         try {
-            HTTPServer server = new HTTPServer(port);
+            HTTPServer server = new HTTPServer(1234);
             log.info("Prometheus监控系统已在本机" + server.getPort() + "端口启动");
         } catch (IOException e) {
             CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));

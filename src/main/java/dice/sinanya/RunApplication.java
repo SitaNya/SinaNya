@@ -4,7 +4,8 @@ import com.sobte.cqp.jcq.entity.ICQVer;
 import com.sobte.cqp.jcq.entity.IMsg;
 import com.sobte.cqp.jcq.entity.IRequest;
 import com.sobte.cqp.jcq.event.JcqAppAbstract;
-import dice.sinanya.db.properties.SelectProperties;
+import dice.sinanya.db.properties.ban.SelectBanProperties;
+import dice.sinanya.db.properties.system.SelectSystemProperties;
 import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.dice.system.Bot;
 import dice.sinanya.entity.EntityLogTag;
@@ -21,7 +22,8 @@ import java.util.regex.Pattern;
 import static dice.sinanya.db.system.SelectBot.flushBot;
 import static dice.sinanya.tools.getinfo.BanList.*;
 import static dice.sinanya.tools.getinfo.DefaultMaxRolls.flushMaxRolls;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.*;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.GetNickName.getUserName;
 import static dice.sinanya.tools.getinfo.History.flushHistory;
@@ -67,7 +69,9 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
      */
     @Override
     public int startup() {
-        entityProperties.setSystemDir(CQ.getAppDirectory());
+        new SelectSystemProperties().flushProperties();
+        new SelectBanProperties().flushProperties();
+        entitySystemProperties.setSystemDir(CQ.getAppDirectory());
         return 0;
     }
 
@@ -79,7 +83,6 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     @Override
     public int enable() {
         tagMe = String.format(atTag, CQ.getLoginQQ());
-        initMessagesSystem();
         CQ.logInfo("系统日志", "开始刷写数据库");
         flushTeamEn();
         CQ.logInfo("数据库", "读取幕间成长到缓存");
@@ -97,11 +100,14 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         CQ.logInfo("数据库", "读取kp主群设定到缓存");
         flushHistory();
         CQ.logInfo("数据库", "读取骰点历史信息到缓存");
-        flushBanList();
-        new SelectProperties().flushProperties();
-        CQ.logInfo("数据库", "读取云黑列表到缓存");
-//        new Prometheus().start();
-//        CQ.logInfo("监控", "开启普罗米修斯监控");
+        if (entityBanProperties.isCloudBan()) {
+            flushBanList();
+            CQ.logInfo("数据库", "读取云黑列表到缓存");
+        }
+        if (entityBanProperties.isPrometheus()) {
+            new Prometheus().start();
+            CQ.logInfo("监控", "开启普罗米修斯监控");
+        }
         return 0;
     }
 
@@ -317,7 +323,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         if (!checkQqInBanList(String.valueOf(fromQQ))) {
             CQ.sendGroupMsg(162279609, "收到" + getUserName(fromQQ) + "(" + fromQQ + ")的好友邀请，已同意");
             CQ.setFriendAddRequest(responseFlag, REQUEST_ADOPT, "");
-            CQ.sendPrivateMsg(fromQQ, MESSAGES_SYSTEM.get("addFriend"));
+            CQ.sendPrivateMsg(fromQQ, entityBanProperties.getAddFriend());
         } else {
             CQ.sendPrivateMsg(162279609, "收到" + fromQQ + "的好友邀请，处于黑名单中已拒绝");
             CQ.setFriendAddRequest(responseFlag, REQUEST_REFUSE, "您处于黑名单中");
@@ -343,7 +349,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
             if (!checkQqInBanList(String.valueOf(fromQQ)) && !checkGroupInBanList(String.valueOf(fromGroup))) {
                 CQ.setGroupAddRequestV2(responseFlag, REQUEST_GROUP_INVITE, REQUEST_ADOPT, "");
                 CQ.sendGroupMsg(162279609, "收到" + getUserName(fromQQ) + "(" + fromQQ + ")的群" + fromGroup + "(" + getGroupName(fromGroup) + ")邀请，已同意");
-                CQ.sendGroupMsg(fromGroup, MESSAGES_SYSTEM.get("addGroup"));
+                CQ.sendGroupMsg(fromGroup, entityBanProperties.getAddGroup());
             } else {
                 CQ.sendGroupMsg(162279609, "收到" + getUserName(fromQQ) + "(" + fromQQ + ")的群" + fromGroup + "邀请，处于黑名单中已拒绝");
                 CQ.setGroupAddRequestV2(responseFlag, REQUEST_GROUP_INVITE, REQUEST_REFUSE, "群或邀请人处于黑名单内");
@@ -446,7 +452,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         boolean boolIsAdmin = power != 1;
         boolean boolIsAdminOrInDiscuss = boolIsAdmin || entityTypeMessages.getMessagesTypes() == MessagesTypes.DISCUSS_MSG;
         if (!boolIsAdminOrInDiscuss) {
-            sender(entityTypeMessages, MESSAGES_SYSTEM.get("onlyManager"));
+            sender(entityTypeMessages, entitySystemProperties.getOnlyManager());
             throw new OnlyManagerException(entityTypeMessages);
         }
     }

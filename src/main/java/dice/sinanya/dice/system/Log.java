@@ -14,7 +14,7 @@ import static dice.sinanya.system.MessagesLog.LOG_SWITCH_FOR_GROUP;
 import static dice.sinanya.system.MessagesLogGetLock.LOG_GET_LOCK;
 import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.system.MessagesTag.*;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.entityProperties;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.getinfo.LogTag.*;
 import static dice.sinanya.tools.getinfo.LogText.getLogText;
@@ -46,16 +46,16 @@ public class Log implements MakeNickToSender {
         String tag = TAG_LOG_ON;
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         if (msg.equals(NONE)) {
-            sender(entityTypeMessages, entityProperties.getCantEmptyLogName());
+            sender(entityTypeMessages, entitySystemProperties.getCantEmptyLogName());
             return;
         }
         if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
-            sender(entityTypeMessages, getOtherLogTrue(entityTypeMessages.getFromGroup()) + entityProperties.getAlreadyOpen());
+            sender(entityTypeMessages, getOtherLogTrue(entityTypeMessages.getFromGroup()) + entitySystemProperties.getAlreadyOpen());
         } else {
             if (checkLogTagExist(entityTypeMessages, msg)) {
-                sender(entityTypeMessages, makeLogNickToSender(msg) +entityProperties.getAppendLog());
+                sender(entityTypeMessages, makeLogNickToSender(msg) + entitySystemProperties.getAppendLog());
             } else {
-                sender(entityTypeMessages, makeLogNickToSender(msg) +entityProperties.getCreateLog());
+                sender(entityTypeMessages, makeLogNickToSender(msg) + entitySystemProperties.getCreateLog());
             }
             LOG_NAME_FOR_GROUP.put(entityTypeMessages.getFromGroup(), msg);
             LOG_SWITCH_FOR_GROUP.put(entityTypeMessages.getFromGroup(), true);
@@ -76,10 +76,10 @@ public class Log implements MakeNickToSender {
                 LOG_SWITCH_FOR_GROUP.put(entityTypeMessages.getFromGroup(), false);
                 sender(entityTypeMessages, makeLogNickToSender(msg) + "已关闭，现在可以使用\".log get " + msg + "\"进行获取");
             } else {
-                sender(entityTypeMessages, makeLogNickToSender(msg) + entityProperties.getAlreadyClose());
+                sender(entityTypeMessages, makeLogNickToSender(msg) + entitySystemProperties.getAlreadyClose());
             }
         } else {
-            sender(entityTypeMessages, entityProperties.getNotFoundLog());
+            sender(entityTypeMessages, entitySystemProperties.getNotFoundLog());
         }
     }
 
@@ -91,7 +91,7 @@ public class Log implements MakeNickToSender {
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         if (!checkLogTagSwitch(entityTypeMessages, msg)) {
             if (LOG_GET_LOCK.contains(msg)) {
-                sender(entityTypeMessages, entityProperties.getReadLock());
+                sender(entityTypeMessages, entitySystemProperties.getReadLock());
             } else {
                 LOG_GET_LOCK.add(msg);
             }
@@ -128,7 +128,7 @@ public class Log implements MakeNickToSender {
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         if (checkLogTagExist(entityTypeMessages, msg)) {
             if (checkLogTagSwitch(entityTypeMessages, msg)) {
-                sender(entityTypeMessages,entityProperties.getDeleteOpenLog());
+                sender(entityTypeMessages, entitySystemProperties.getDeleteOpenLog());
             } else {
                 delLog(new EntityLogTag(entityTypeMessages.getFromGroup(), msg));
                 sender(entityTypeMessages, "已删除日志: " + makeLogNickToSender(msg));

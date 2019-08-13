@@ -16,7 +16,8 @@ import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.checkdata.CheckIsNumbers.isNumeric;
-import static dice.sinanya.tools.getinfo.GetMessagesSystem.MESSAGES_SYSTEM;
+
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByQQ;
@@ -41,7 +42,7 @@ public class MakeSanCheck {
     private static Pattern plus = Pattern.compile("[+*/\\-]");
     private EntityTypeMessages entityTypeMessages;
     private long qq;
-    private String sanCheckFunctionError = "sanCheck";
+
 
     public MakeSanCheck(EntityTypeMessages entityTypeMessages) {
         qq = Long.parseLong(entityTypeMessages.getFromQq());
@@ -189,21 +190,21 @@ public class MakeSanCheck {
 //            如果大失败，默认掉最大值
             int maxSan = hasFunctionSeq(strFail) ? getMaxSan(strFail.split(regexFunctionSeq)[1]) : getMaxSan(strFail);
             newSan = max(0, san - maxSan);
-            strResult.append(String.format(sanText, random, san, "大失败", strFail, maxSan, newSan, MESSAGES_SYSTEM.get("sanCheckFumble")));
+            strResult.append(String.format(sanText, random, san, "大失败", strFail, maxSan, newSan, entitySystemProperties.getSanCheckFumble()));
             makeInsane(strResult, newSan, san);
         } else if (random == 1) {
 //            如果大成功，默认掉最小值
             int minSan = hasFunctionSeq(strSuccess) ? getMinSan(strSuccess.split(regexFunctionSeq)[0]) : getMinSan(strSuccess);
             newSan = max(0, san - minSan);
-            strResult.append(String.format(sanText, random, san, "大成功", strSuccess, minSan, newSan, MESSAGES_SYSTEM.get("sanCheckCriticalSuccess")));
+            strResult.append(String.format(sanText, random, san, "大成功", strSuccess, minSan, newSan, entitySystemProperties.getSanCheckCriticalSuccess()));
             makeInsane(strResult, newSan, san);
         } else if (random <= san) {
             newSan = max(0, san - mSuccess.getResult());
-            strResult.append(String.format(sanText, random, san, "成功", strSuccess, mSuccess.getResult(), newSan, MESSAGES_SYSTEM.get("sanCheckSuccess")));
+            strResult.append(String.format(sanText, random, san, "成功", strSuccess, mSuccess.getResult(), newSan, entitySystemProperties.getSanCheckSuccess()));
             makeInsane(strResult, newSan, san);
         } else {
             newSan = max(0, san - mFail.getResult());
-            strResult.append(String.format(sanText, random, san, "失败", strFail, mFail.getResult(), newSan, MESSAGES_SYSTEM.get("sanCheckFailure")));
+            strResult.append(String.format(sanText, random, san, "失败", strFail, mFail.getResult(), newSan, entitySystemProperties.getSanCheckFailure()));
             makeInsane(strResult, newSan, san);
         }
         if (useCard) {
@@ -233,16 +234,15 @@ public class MakeSanCheck {
      * @param san       原本的san值
      */
     private void makeInsane(StringBuilder strResult, int newSan, int san) {
-        String tagSymptom = "symptom";
         if (newSan == 0) {
             strResult.append("\n已永久疯狂（请KP注意需要int检定成功后才进行疯狂，此信息只做提示）")
-                    .append(MESSAGES_SYSTEM.get(tagSymptom));
+                    .append(entitySystemProperties.getSymptom());
         } else if (san - newSan >= 5) {
             strResult.append("\n已进入临时性疯狂（请KP注意需要int检定成功后才进行疯狂，此信息只做提示）")
-                    .append(MESSAGES_SYSTEM.get(tagSymptom));
+                    .append(entitySystemProperties.getSymptom());
         } else if (san - newSan >= san / 5) {
             strResult.append("\n已因单次损失值进入不定性疯狂（请KP注意需要int检定成功后才进行疯狂，此信息只做提示）")
-                    .append(MESSAGES_SYSTEM.get(tagSymptom));
+                    .append(entitySystemProperties.getSymptom());
         }
     }
 
@@ -261,7 +261,7 @@ public class MakeSanCheck {
         if (isNumeric(failFunction)) {
             maxSan = Integer.parseInt(failFunction);
         } else {
-            sender(entityTypeMessages, MESSAGES_SYSTEM.get(sanCheckFunctionError));
+            sender(entityTypeMessages, entitySystemProperties.getSanCheck());
         }
         return maxSan;
     }
@@ -271,7 +271,7 @@ public class MakeSanCheck {
         if (isNumeric(failFunction)) {
             minSan = Integer.parseInt(failFunction);
         } else {
-            sender(entityTypeMessages, MESSAGES_SYSTEM.get(sanCheckFunctionError));
+            sender(entityTypeMessages, entitySystemProperties.getSanCheck());
         }
         return minSan;
     }
