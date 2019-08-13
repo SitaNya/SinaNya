@@ -58,8 +58,8 @@ public class Roles implements Role {
 
         String role;
         if (msg.contains(sepRoleAndPro) && msg.split(sepRoleAndPro).length == lenRoleAndPro) {
-            role = msg.split(sepRoleAndPro)[0];
-            if (role != null && !role.equals(NONE)) {
+            role = msg.split(sepRoleAndPro)[0].trim();
+            if (!role.equals(NONE)) {
                 properties = msg.split(sepRoleAndPro)[1];
                 insertRoles.insertRoleInfo(properties, role, qqId);
                 sender(entityTypeMessages, entitySystemProperties.getSetPropSuccess());
