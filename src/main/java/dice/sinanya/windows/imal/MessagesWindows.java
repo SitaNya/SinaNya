@@ -12,70 +12,70 @@ import javax.swing.*;
  * 类说明:
  */
 public class MessagesWindows {
-    JTextField botStart;
-    JTextField botAlreadyStart;
-    JTextField botStop;
-    JTextField botAlreadyStop;
-    JTextField botExit;
-    JTextField botInfo;
+    public JTextField botStart;
+    public JTextField botAlreadyStart;
+    public JTextField botStop;
+    public JTextField botAlreadyStop;
+    public JTextField botExit;
+    public JTextField botInfo;
 
-    JTextField bookCard;
-    JTextField bookRp;
-    JTextField bookKp;
-    JTextField bookMake;
+    public JTextField bookCard;
+    public JTextField bookRp;
+    public JTextField bookKp;
+    public JTextField bookMake;
 
-    JTextField manyRollsFormat;
-    JTextField diceTimesTooBig;
+    public JTextField manyRollsFormat;
+    public JTextField diceTimesTooBig;
 
-    JTextField setPropFormat;
-    JTextField setHelp;
-    JTextField notFoundSkill;
-    JTextField setPropSuccess;
+    public JTextField setPropFormat;
+    public JTextField setHelp;
+    public JTextField notFoundSkill;
+    public JTextField setPropSuccess;
 
-    JTextField needKpGroup;
+    public JTextField needKpGroup;
 
-    JTextField cantInPrivate;
-    JTextField onlyManager;
+    public JTextField cantInPrivate;
+    public JTextField onlyManager;
 
-    JTextField sanCheck;
+    public JTextField sanCheck;
 
-    JTextField alreadyOpen;
-    JTextField alreadyClose;
-    JTextField notFoundLog;
-    JTextField readLock;
-    JTextField deleteOpenLog;
-    JTextField appendLog;
-    JTextField createLog;
-    JTextField cantEmptyLogName;
+    public JTextField alreadyOpen;
+    public JTextField alreadyClose;
+    public JTextField notFoundLog;
+    public JTextField readLock;
+    public JTextField deleteOpenLog;
+    public JTextField appendLog;
+    public JTextField createLog;
+    public JTextField cantEmptyLogName;
 
-    JTextField dndInitIsEmtpy;
-    JTextField clrDndInit;
+    public JTextField dndInitIsEmtpy;
+    public JTextField clrDndInit;
 
-    JTextField antagonizeOver;
-    JTextField antagonizeFirstSuccess;
-    JTextField antagonizeSecondSuccess;
-    JTextField antagonizeAllFailed;
-    JTextField antagonizeDraw;
+    public JTextField antagonizeOver;
+    public JTextField antagonizeFirstSuccess;
+    public JTextField antagonizeSecondSuccess;
+    public JTextField antagonizeAllFailed;
+    public JTextField antagonizeDraw;
 
-    JTextField symptom;
+    public JTextField symptom;
 
-    JTextField sanCheckFumble;
-    JTextField sanCheckCriticalSuccess;
-    JTextField sanCheckSuccess;
-    JTextField sanCheckFailure;
+    public JTextField sanCheckFumble;
+    public JTextField sanCheckCriticalSuccess;
+    public JTextField sanCheckSuccess;
+    public JTextField sanCheckFailure;
 
-    JTextField enSuccess;
-    JTextField enFailed;
+    public JTextField enSuccess;
+    public JTextField enFailed;
 
-    JTextField hiddenDice;
+    public JTextField hiddenDice;
 
-    JTextField teamIsEmpty;
-    JTextField teamMemberEnIsEmpty;
+    public JTextField teamIsEmpty;
+    public JTextField teamMemberEnIsEmpty;
 
-    JTextArea criticalSuccess;
-    JTextArea extremeSuccess;
-    JTextArea headSuccess;
-    JTextArea success;
-    JTextArea failure;
-    JTextArea fumble;
+    public JTextArea criticalSuccess;
+    public JTextArea extremeSuccess;
+    public JTextArea headSuccess;
+    public JTextArea success;
+    public JTextArea failure;
+    public JTextArea fumble;
 }

@@ -36,14 +36,13 @@ public class Tools extends MakeText {
 //        botSwitch.setLayout(new GridLayout(0, 1));
 
         initText(jFrame);
-//        save(jFrame);
+        save(jFrame);
     }
 
     private void initText(JFrame jFrame) {
         JPanel infoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "骰娘信息", 0, 0, 400, 70);
         infoPanel.setLayout(new GridLayout(0, 2));
         info(infoPanel);
-        jFrame.add(infoPanel);
 
         JPanel botInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "机器人基本信息", 0, 70, 400, 210);
         botInfoPanel.setLayout(new GridLayout(0, 2));
@@ -94,7 +93,7 @@ public class Tools extends MakeText {
 
     private void save(JFrame jFrame) {
         Button button = new Button();
-        button.createButton(jFrame, "测试按钮", 1200 - getLength("测试按钮") / 2, 965 - 50);
+        button.createButton(jFrame, "保存", 0, 800);
     }
 
     private void initRadioButton(JPanel jPanel) {
