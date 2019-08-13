@@ -2,7 +2,8 @@ package dice.sinanya.tools.windows;
 
 import javax.swing.*;
 
-import static com.test.Tools.getLength;
+import static dice.sinanya.windows.Tools.getLength;
+
 
 /**
  * @author SitaNya
