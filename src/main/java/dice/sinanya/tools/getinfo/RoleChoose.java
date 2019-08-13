@@ -98,7 +98,7 @@ public class RoleChoose {
      */
     public static String getRoleChooseByFromQQ(EntityTypeMessages entityTypeMessages) {
         if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
-            return ROLE_CHOOSE.get(entityTypeMessages.getFromQq());
+            return ROLE_CHOOSE.get(Long.parseLong(entityTypeMessages.getFromQq()));
         } else {
             return "未找到当前角色";
         }
