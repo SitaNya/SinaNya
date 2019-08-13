@@ -13,9 +13,13 @@ import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.entity.imal.MessagesTypes;
 import dice.sinanya.exceptions.OnlyManagerException;
 import dice.sinanya.flow.Flow;
-import dice.sinanya.monitor.Prometheus;
+import dice.sinanya.listener.InputHistoryToDataBase;
+import dice.sinanya.listener.Prometheus;
+import dice.sinanya.listener.TestRunningTime;
 import dice.sinanya.windows.BanProperties;
 import dice.sinanya.windows.DiceProperties;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -35,6 +39,8 @@ import static dice.sinanya.tools.getinfo.RoleInfo.flushRoleInfoCache;
 import static dice.sinanya.tools.getinfo.SwitchBot.getBot;
 import static dice.sinanya.tools.getinfo.Team.flushTeamEn;
 import static dice.sinanya.tools.makedata.Sender.sender;
+import static org.quartz.JobBuilder.newJob;
+import static org.quartz.TriggerBuilder.newTrigger;
 
 /**
  * @author SitaNya
@@ -107,8 +113,35 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
             CQ.logInfo("数据库", "读取云黑列表到缓存");
         }
         if (entityBanProperties.isPrometheus()) {
-            new Prometheus().start();
+            new dice.sinanya.monitor.Prometheus().start();
             CQ.logInfo("监控", "开启普罗米修斯监控");
+        }
+
+        try {
+            // 从Scheduler工厂获取一个Scheduler的实例
+            Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+
+            scheduler.start();
+            JobDetail jobDetail1 = newJob(Prometheus.class).withIdentity("Prometheus", "monitor").build();
+            jobDetail1.getJobDataMap().put("CONTENT", String.valueOf(System.currentTimeMillis()));
+            Trigger trigger1 = newTrigger().withIdentity("trigger1", "group").startNow()
+                    .withSchedule(CronScheduleBuilder.cronSchedule("*/10 * * * * ?")).build();
+            scheduler.scheduleJob(jobDetail1, trigger1);
+
+            JobDetail jobDetail2 = newJob(InputHistoryToDataBase.class).withIdentity("flushDatabase", "data").build();
+            jobDetail2.getJobDataMap().put("CONTENT", String.valueOf(System.currentTimeMillis()));
+            Trigger trigger2 = newTrigger().withIdentity("trigger2", "group").startNow()
+                    .withSchedule(CronScheduleBuilder.cronSchedule("*/10 * * * * ?")).build();
+            scheduler.scheduleJob(jobDetail2, trigger2);
+
+            JobDetail jobDetail3 = newJob(TestRunningTime.class).withIdentity("cleanGroup", "monitor").build();
+            jobDetail2.getJobDataMap().put("CONTENT", String.valueOf(System.currentTimeMillis()));
+            Trigger trigger3 = newTrigger().withIdentity("trigger2", "group").startNow()
+                    .withSchedule(CronScheduleBuilder.cronSchedule("*/10 * * * * ?")).build();
+            scheduler.scheduleJob(jobDetail3, trigger3);
+
+        } catch (SchedulerException e) {
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
         }
         return 0;
     }
