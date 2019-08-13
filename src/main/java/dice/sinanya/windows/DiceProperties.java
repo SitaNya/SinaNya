@@ -157,9 +157,4 @@ public class DiceProperties extends MakeText {
         });
         jFrame.add(jButton);
     }
-
-    private void initRadioButton(JPanel jPanel) {
-        RadioButton radioButton = new RadioButton();
-        jCheckBox = radioButton.createRadioButton(jPanel, "禁言退群", 1200, 965);
-    }
 }
