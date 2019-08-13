@@ -1,10 +1,10 @@
 package dice.sinanya.tools.log;
 
-import org.apache.logging.log4j.LogManager;
-import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import java.io.*;
 import java.util.Arrays;
 
-import java.io.*;
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 
 /**
  * @author SitaNya
@@ -30,7 +30,7 @@ public class LogSave {
      */
     public static void logSave(String groupId, String logName, String info) {
         // 1：利用File类找到要操作的对象
-        File file = new File("../saveLogs/" + groupId + "/" + logName + ".txt");
+        File file = new File(entitySystemProperties.getSystemDir()+"/saveLogs/" + groupId + "/" + logName + ".txt");
 
         if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
             CQ.logError("日志存储异常","上层目录未能创建");

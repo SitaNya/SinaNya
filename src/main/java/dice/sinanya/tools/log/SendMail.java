@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.Properties;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 
 /**
  * @author SitaNya
@@ -68,8 +69,8 @@ public class SendMail {
         // 设置邮件的正文
 
 //        这里取相对路径"bin/../saveLogs/${groupId}/${logName}"
-        mb.attachFile("../saveLogs/" + groupId + "/" + logName + ".txt");
-        mb.attachFile("../saveLogs/" + groupId + "/" + logName + ".docx");
+        mb.attachFile(entitySystemProperties.getSystemDir()+"/saveLogs/" + groupId + "/" + logName + ".txt");
+        mb.attachFile(entitySystemProperties.getSystemDir()+"/saveLogs/" + groupId + "/" + logName + ".docx");
 
         SendMail sm = new SendMail();
         CQ.logInfo("邮件发送","正在发送邮件...");

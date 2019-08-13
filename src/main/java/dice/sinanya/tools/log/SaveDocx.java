@@ -16,6 +16,7 @@ import java.util.HashMap;
 import static dice.sinanya.system.MessagesLogColorTag.LOG_COLOR_TAG;
 import static dice.sinanya.system.MessagesRgb.RGB;
 import static dice.sinanya.system.MessagesSystem.NONE;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 
 /**
@@ -75,7 +76,7 @@ public class SaveDocx {
             }
             makePdf(line, RGB.get(colorTag));
         }
-        File file = new File("../saveLogs/" + groupId + "/" + msg + ".docx");
+        File file = new File(entitySystemProperties.getSystemDir()+"/saveLogs/" + groupId + "/" + msg + ".docx");
         if (!file.getParentFile().mkdirs() || !file.getParentFile().exists()) {
             CQ.logError("日志落地异常", "docx染色文件未能成功生成");
         }
