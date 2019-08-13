@@ -38,6 +38,7 @@ public class Tools extends MakeText {
         initText(jFrame);
         save(jFrame);
         jFrame.setVisible(true);
+        jFrame.setResizable(false);
     }
 
     private void initText(JFrame jFrame) {
