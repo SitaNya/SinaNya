@@ -87,6 +87,7 @@ public class InsertProperties {
                 ps.setString(19, entityBanProperties.getWhiteUser());
                 ps.setString(20,entityBanProperties.getNotBanListInput());
                 ps.setString(21, String.valueOf(CQ.getLoginQQ()));
+                ps.executeUpdate();
             }
         } catch (SQLException e) {
             CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
