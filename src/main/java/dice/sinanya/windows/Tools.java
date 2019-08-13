@@ -1,12 +1,14 @@
 package dice.sinanya.windows;
 
-import dice.sinanya.tools.windows.Button;
+import dice.sinanya.db.properties.system.InsertProperties;
 import dice.sinanya.tools.windows.Frame;
 import dice.sinanya.tools.windows.RadioButton;
 import dice.sinanya.windows.imal.MakeText;
 
 import javax.swing.*;
 import java.awt.*;
+
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 
 
 /**
@@ -30,8 +32,6 @@ public class Tools extends MakeText {
 
     public void init() {
         JFrame jFrame = new Frame("个性化配置", 1200, 965).init();
-
-
 //        JPanel botSwitch = new Panel().init(jFrame, "开关", 510, 10, 400, 200);
 //        botSwitch.setLayout(new GridLayout(0, 1));
 
@@ -92,8 +92,68 @@ public class Tools extends MakeText {
     }
 
     private void save(JFrame jFrame) {
-        Button button = new Button();
-        button.createButton(jFrame, "保存", 0, 800);
+        createButton(jFrame, "保存", 0, 800);
+    }
+
+    public void createButton(JFrame jFrame, String text, int x, int y) {
+        JButton jButton = new JButton(text);
+        jButton.setBounds(x, y, getLength(text) * 4, 100);
+        jButton.addActionListener(e -> {
+            entitySystemProperties.setBotStart(botStart.getText());
+            entitySystemProperties.setBotAlreadyStart(botAlreadyStart.getText());
+            entitySystemProperties.setBotStop(botStop.getText());
+            entitySystemProperties.setBotAlreadyStop(botAlreadyStop.getText());
+            entitySystemProperties.setBotExit(botExit.getText());
+            entitySystemProperties.setBotInfo(botInfo.getText());
+            entitySystemProperties.setBookCard(bookCard.getText());
+            entitySystemProperties.setBookRp(bookRp.getText());
+            entitySystemProperties.setBookKp(bookKp.getText());
+            entitySystemProperties.setBookMake(bookMake.getText());
+            entitySystemProperties.setSetPropFormat(setPropFormat.getText());
+            entitySystemProperties.setSetHelp(setHelp.getText());
+            entitySystemProperties.setNotFoundSkill(notFoundSkill.getText());
+            entitySystemProperties.setSetPropSuccess(setPropSuccess.getText());
+            entitySystemProperties.setManyRollsFormat(manyRollsFormat.getText());
+            entitySystemProperties.setDiceTimesTooBig(diceTimesTooBig.getText());
+            entitySystemProperties.setNeedKpGroup(needKpGroup.getText());
+            entitySystemProperties.setCantInPrivate(cantInPrivate.getText());
+            entitySystemProperties.setOnlyManager(onlyManager.getText());
+            entitySystemProperties.setAlreadyOpen(alreadyOpen.getText());
+            entitySystemProperties.setAlreadyClose(alreadyClose.getText());
+            entitySystemProperties.setNotFoundLog(notFoundLog.getText());
+            entitySystemProperties.setReadLock(readLock.getText());
+            entitySystemProperties.setDeleteOpenLog(deleteOpenLog.getText());
+            entitySystemProperties.setAppendLog(appendLog.getText());
+            entitySystemProperties.setCreateLog(createLog.getText());
+            entitySystemProperties.setCantEmptyLogName(cantEmptyLogName.getText());
+            entitySystemProperties.setDndInitIsEmtpy(dndInitIsEmtpy.getText());
+            entitySystemProperties.setClrDndInit(clrDndInit.getText());
+            entitySystemProperties.setAntagonizeOver(antagonizeOver.getText());
+            entitySystemProperties.setAntagonizeFirstSuccess(antagonizeFirstSuccess.getText());
+            entitySystemProperties.setAntagonizeSecondSuccess(antagonizeSecondSuccess.getText());
+            entitySystemProperties.setAntagonizeAllFailed(antagonizeAllFailed.getText());
+            entitySystemProperties.setAntagonizeDraw(antagonizeDraw.getText());
+            entitySystemProperties.setSanCheck(sanCheck.getText());
+            entitySystemProperties.setSymptom(symptom.getText());
+            entitySystemProperties.setSanCheckFumble(sanCheckFumble.getText());
+            entitySystemProperties.setSanCheckCriticalSuccess(sanCheckCriticalSuccess.getText());
+            entitySystemProperties.setSanCheckSuccess(sanCheckSuccess.getText());
+            entitySystemProperties.setSanCheckFailure(sanCheckFailure.getText());
+            entitySystemProperties.setEnSuccess(enSuccess.getText());
+            entitySystemProperties.setEnFailed(enFailed.getText());
+            entitySystemProperties.setHiddenDice(hiddenDice.getText());
+            entitySystemProperties.setTeamIsEmpty(teamIsEmpty.getText());
+            entitySystemProperties.setTeamMemberEnIsEmpty(teamMemberEnIsEmpty.getText());
+            entitySystemProperties.setCRITICAL_SUCCESS(criticalSuccess.getText());
+            entitySystemProperties.setEXTREME_SUCCESS(extremeSuccess.getText());
+            entitySystemProperties.setHARD_SUCCESS(headSuccess.getText());
+            entitySystemProperties.setSUCCESS(success.getText());
+            entitySystemProperties.setFAILURE(failure.getText());
+            entitySystemProperties.setFUMBLE(fumble.getText());
+            new InsertProperties().insertProperties(entitySystemProperties);
+            JOptionPane.showMessageDialog(null, "保存成功");
+        });
+        jFrame.add(jButton);
     }
 
     private void initRadioButton(JPanel jPanel) {
