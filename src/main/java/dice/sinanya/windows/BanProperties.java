@@ -31,7 +31,7 @@ public class BanProperties extends MakeBan {
     }
 
     public void init() {
-        JFrame jFrame = new Frame("安全性配置", 1200, 600).init();
+        JFrame jFrame = new Frame("安全性配置", 1200, 420).init();
 //        JPanel botSwitch = new Panel().init(jFrame, "开关", 510, 10, 400, 200);
 //        botSwitch.setLayout(new GridLayout(0, 1));
 
@@ -50,31 +50,31 @@ public class BanProperties extends MakeBan {
         monitorPanel.setLayout(new GridLayout(0, 2));
         monitor(monitorPanel);
 
-        JPanel masterPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "管理员信息", 0, 170, 400, 150);
-        masterPanel.setLayout(new GridLayout(0, 2));
-        master(masterPanel);
-
-        JPanel cloudBanPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "云黑名单", 0, 320, 400, 250);
+        JPanel cloudBanPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "云黑名单", 0, 170, 400, 250);
         cloudBanPanel.setLayout(new GridLayout(0, 1));
         cloudBan(cloudBanPanel);
 
-        JPanel clearInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "清理", 400, 0, 400, 200);
+        JPanel masterPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "管理员信息", 400, 0, 400, 150);
+        masterPanel.setLayout(new GridLayout(0, 2));
+        master(masterPanel);
+
+        JPanel clearInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "清理", 400, 150, 400, 200);
         clearInfoPanel.setLayout(new GridLayout(0, 2));
         clearInfo(clearInfoPanel);
 
-        JPanel cloudBanInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "用语", 800, 0, 400, 600);
+        JPanel cloudBanInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "用语", 800, 0, 400, 420);
         cloudBanInfoPanel.setLayout(new GridLayout(0, 2));
         cloudBanInfo(cloudBanInfoPanel);
 
     }
 
     private void save(JFrame jFrame) {
-        createButton(jFrame, "保存", 400, 300);
+        createButton(jFrame, "保存", 400, 360);
     }
 
     public void createButton(JFrame jFrame, String text, int x, int y) {
         JButton jButton = new JButton(text);
-        jButton.setBounds(x, y, 200, 100);
+        jButton.setBounds(x, y, 200, 50);
         jButton.addActionListener(e -> {
             entityBanProperties.setCloudBan(cloudBan.isSelected());
             entityBanProperties.setPrometheus(Prometheus.isSelected());
