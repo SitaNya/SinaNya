@@ -1,6 +1,8 @@
 package dice.sinanya.entity;
 
+
 public class EntitySystemProperties {
+    String NONE = "";
     String botStart;
     String botAlreadyStart;
     String botStop;
@@ -127,17 +129,14 @@ public class EntitySystemProperties {
         teamMemberEnIsEmpty = "的技能成功记录为空";
 
 
-        appendLog = "日志已重新开启，将在原基础上追加";
-        createLog = "日志已创建";
+        appendLog = "日志%s已重新开启，将在原基础上追加";
+        createLog = "日志%s已创建";
         CantEmptyLogName = "不支持空日志名";
 
         sanCheckFumble = "";
         sanCheckCriticalSuccess = "";
         sanCheckSuccess = "";
         sanCheckFailure = "";
-
-//        mailUserName="2730902267@qq.com";
-//        mailPassword="kktjwuakdafbdcej";
 
         CRITICAL_SUCCESS = "大成功";
         EXTREME_SUCCESS = "极难成功";
@@ -416,7 +415,11 @@ public class EntitySystemProperties {
     }
 
     public void setSymptom(String symptom) {
-        this.symptom = symptom;
+        if (symptom.equals(NONE)) {
+            this.symptom = symptom;
+        } else {
+            this.symptom = "\n" + symptom;
+        }
     }
 
     public String getEnSuccess() {
@@ -488,7 +491,11 @@ public class EntitySystemProperties {
     }
 
     public void setSanCheckFumble(String sanCheckFumble) {
-        this.sanCheckFumble = sanCheckFumble;
+        if (sanCheckFumble.equals(NONE)) {
+            this.sanCheckFumble = sanCheckFumble;
+        } else {
+            this.sanCheckFumble = "\n" + sanCheckFumble;
+        }
     }
 
     public String getSanCheckCriticalSuccess() {
@@ -496,7 +503,11 @@ public class EntitySystemProperties {
     }
 
     public void setSanCheckCriticalSuccess(String sanCheckCriticalSuccess) {
-        this.sanCheckCriticalSuccess = sanCheckCriticalSuccess;
+        if (sanCheckCriticalSuccess.equals(NONE)) {
+            this.sanCheckCriticalSuccess = sanCheckCriticalSuccess;
+        } else {
+            this.sanCheckCriticalSuccess = "\n" + sanCheckCriticalSuccess;
+        }
     }
 
     public String getSanCheckSuccess() {
@@ -504,7 +515,11 @@ public class EntitySystemProperties {
     }
 
     public void setSanCheckSuccess(String sanCheckSuccess) {
-        this.sanCheckSuccess = sanCheckSuccess;
+        if (sanCheckSuccess.equals(NONE)) {
+            this.sanCheckSuccess = sanCheckSuccess;
+        } else {
+            this.sanCheckSuccess = "\n" + sanCheckSuccess;
+        }
     }
 
     public String getSanCheckFailure() {
@@ -512,7 +527,11 @@ public class EntitySystemProperties {
     }
 
     public void setSanCheckFailure(String sanCheckFailure) {
-        this.sanCheckFailure = sanCheckFailure;
+        if (sanCheckFailure.equals(NONE)) {
+            this.sanCheckFailure = sanCheckFailure;
+        } else {
+            this.sanCheckFailure = "\n" + sanCheckFailure;
+        }
     }
 
     public String getCRITICAL_SUCCESS() {

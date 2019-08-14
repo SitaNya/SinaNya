@@ -52,9 +52,9 @@ public class Log implements MakeNickToSender {
             sender(entityTypeMessages, getOtherLogTrue(entityTypeMessages.getFromGroup()) + entitySystemProperties.getAlreadyOpen());
         } else {
             if (checkLogTagExist(entityTypeMessages, msg)) {
-                sender(entityTypeMessages, makeLogNickToSender(msg) + entitySystemProperties.getAppendLog());
+                sender(entityTypeMessages, String.format(entitySystemProperties.getAppendLog(), makeLogNickToSender(msg)));
             } else {
-                sender(entityTypeMessages, makeLogNickToSender(msg) + entitySystemProperties.getCreateLog());
+                sender(entityTypeMessages, String.format(entitySystemProperties.getCreateLog(), makeLogNickToSender(msg)));
             }
             LOG_NAME_FOR_GROUP.put(entityTypeMessages.getFromGroup(), msg);
             LOG_SWITCH_FOR_GROUP.put(entityTypeMessages.getFromGroup(), true);
@@ -75,7 +75,7 @@ public class Log implements MakeNickToSender {
                 LOG_SWITCH_FOR_GROUP.put(entityTypeMessages.getFromGroup(), false);
                 sender(entityTypeMessages, makeLogNickToSender(msg) + "已关闭，现在可以使用\".log get " + msg + "\"进行获取");
             } else {
-                sender(entityTypeMessages, makeLogNickToSender(msg) + entitySystemProperties.getAlreadyClose());
+                sender(entityTypeMessages, String.format(entitySystemProperties.getAlreadyClose(), makeLogNickToSender(msg)));
             }
         } else {
             sender(entityTypeMessages, entitySystemProperties.getNotFoundLog());

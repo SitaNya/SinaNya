@@ -14,6 +14,8 @@ import javax.swing.*;
 public class Text {
     public JTextArea createTextArea(JPanel jPanel) {
         JTextArea jTextArea = new JTextArea();
+        jTextArea.setLineWrap(true);        //激活自动换行功能
+        jTextArea.setWrapStyleWord(true);            // 激活断行不断字功能
         jPanel.add(jTextArea);
         return jTextArea;
     }

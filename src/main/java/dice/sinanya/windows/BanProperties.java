@@ -50,11 +50,11 @@ public class BanProperties extends MakeBan {
         monitorPanel.setLayout(new GridLayout(0, 2));
         monitor(monitorPanel);
 
-        JPanel masterPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "管理员信息", 0, 170, 400, 100);
+        JPanel masterPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "管理员信息", 0, 170, 400, 150);
         masterPanel.setLayout(new GridLayout(0, 2));
         master(masterPanel);
 
-        JPanel cloudBanPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "云黑名单", 0, 270, 400, 250);
+        JPanel cloudBanPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "云黑名单", 0, 320, 400, 250);
         cloudBanPanel.setLayout(new GridLayout(0, 1));
         cloudBan(cloudBanPanel);
 
@@ -64,12 +64,12 @@ public class BanProperties extends MakeBan {
     }
 
     private void save(JFrame jFrame) {
-        createButton(jFrame, "保存", 100, 530);
+        createButton(jFrame, "保存", 100, 570);
     }
 
     public void createButton(JFrame jFrame, String text, int x, int y) {
         JButton jButton = new JButton(text);
-        jButton.setBounds(x, y, 200, 50);
+        jButton.setBounds(x, y, 200, 20);
         jButton.addActionListener(e -> {
             entityBanProperties.setCloudBan(cloudBan.isSelected());
             entityBanProperties.setPrometheus(Prometheus.isSelected());

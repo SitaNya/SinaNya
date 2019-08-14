@@ -66,7 +66,7 @@ public class MakeText extends MessagesWindows {
 
         lable.createLable(jPanel, "规则书");
         bookKp = text.createText(jPanel);
-        bookRp.setText(entitySystemProperties.getBookKp());
+        bookKp.setText(entitySystemProperties.getBookKp());
 
         lable.createLable(jPanel, "车卡指南");
         bookMake = text.createText(jPanel);
@@ -134,11 +134,11 @@ public class MakeText extends MessagesWindows {
         deleteOpenLog = text.createText(jPanel);
         deleteOpenLog.setText(entitySystemProperties.getDeleteOpenLog());
 
-        lable.createLable(jPanel, "开启日志");
+        lable.createLable(jPanel, "追加日志");
         appendLog = text.createText(jPanel);
         appendLog.setText(entitySystemProperties.getAppendLog());
 
-        lable.createLable(jPanel, "追加日志");
+        lable.createLable(jPanel, "创建日志");
         createLog = text.createText(jPanel);
         createLog.setText(entitySystemProperties.getCreateLog());
 
