@@ -100,11 +100,11 @@ public class EntitySystemProperties {
         cantInPrivate = "此命令私聊不可用";
         onlyManager = "此命令仅群主或管理员可以使用";
 
-        alreadyOpen = "日志已经处于开启状态，无法再次开启";
-        alreadyClose = "日志已经处于关闭状态，无法再次关闭";
-        notFoundLog = "未找到日志";
+        alreadyOpen = "日志%s已经处于开启状态，无法再次开启";
+        alreadyClose = "日志%s已经处于关闭状态，无法再次关闭";
+        notFoundLog = "未找到日志%s";
         readLock = "正在有人取日志，请稍后";
-        deleteOpenLog = "无法删除打开的日志，请先关闭";
+        deleteOpenLog = "无法删除打开的日志%s，请先关闭";
 
         sanCheck = "请符合1/1d3|1d6/1d3|0/1这样的san check格式";
 
