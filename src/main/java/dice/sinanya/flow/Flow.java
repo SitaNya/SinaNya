@@ -386,20 +386,7 @@ class Flow implements MakeNickToSender {
      */
     public void toGroup() {
         toPrivateAndGroup();
-        ArrayList<Long> timeList = new ArrayList<>();
-        long now = System.currentTimeMillis();
-        timeList.add(now);
-        if (frequentnessForGroupList.containsKey(entityTypeMessages.getFromGroup())) {
-            for (long time : frequentnessForGroupList.get(entityTypeMessages.getFromGroup())) {
-                if (time > now - 1000 * 60) {
-                    timeList.add(time);
-                }
-            }
-        }
-        if (timeList.size() >= entityBanProperties.getAlterFrequentness()) {
-            CQ.sendGroupMsg(162279609, "于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中频度达到" + timeList.size());
-        }
-        frequentnessForGroupList.put(entityTypeMessages.getFromGroup(), timeList);
+        checkFre();
     }
 
     /**
@@ -407,6 +394,10 @@ class Flow implements MakeNickToSender {
      */
     public void toDisGroup() {
         toPrivateAndGroup();
+        checkFre();
+    }
+
+    private void checkFre(){
         ArrayList<Long> timeList = new ArrayList<>();
         long now = System.currentTimeMillis();
         timeList.add(now);
