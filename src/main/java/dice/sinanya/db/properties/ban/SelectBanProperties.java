@@ -57,6 +57,10 @@ public class SelectBanProperties {
                         entityBanProperties.setWhiteGroup(set.getString("whiteGroup"));
                         entityBanProperties.setWhiteUser(set.getString("whiteUser"));
                         entityBanProperties.setNotBanListInput(set.getString("notBanListInput"));
+                        entityBanProperties.setClearGroupByOff(set.getInt("clearGroupByOff"));
+                        entityBanProperties.setClearGroup(set.getInt("clearGroup"));
+                        entityBanProperties.setAlterFrequentness(set.getInt("alterFrequentness"));
+                        entityBanProperties.setBanFrequentness(set.getInt("banFrequentness"));
                         i++;
                     }
                 }

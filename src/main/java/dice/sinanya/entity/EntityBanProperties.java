@@ -35,6 +35,10 @@ public class EntityBanProperties {
     String whiteGroup;
     String whiteUser;
     int alterFrequentness;
+    int banFrequentness;
+
+    int clearGroupByOff;
+    int clearGroup;
 
     public EntityBanProperties() {
         cloudBan = true;
@@ -55,15 +59,43 @@ public class EntityBanProperties {
         banGroupBecauseReduce = true;
         banUserBecauseReduce = true;
 
+        clearGroupByOff = 10;
+        clearGroup = 30;
+
         addGroup = "已加入群";
         addFriend = "已添加好友";
         refuseGroupByBan = "拒绝加入黑名单群";
         refuseFriendByBan = "拒绝添加黑名单好友";
 
-        alterFrequentness=30;
+        alterFrequentness = 40;
+        banFrequentness = 80;
 
         whiteGroup = "";
         whiteUser = "";
+    }
+
+    public int getClearGroupByOff() {
+        return clearGroupByOff;
+    }
+
+    public void setClearGroupByOff(int clearGroupByOff) {
+        this.clearGroupByOff = clearGroupByOff;
+    }
+
+    public int getClearGroup() {
+        return clearGroup;
+    }
+
+    public void setClearGroup(int clearGroup) {
+        this.clearGroup = clearGroup;
+    }
+
+    public int getBanFrequentness() {
+        return banFrequentness;
+    }
+
+    public void setBanFrequentness(int banFrequentness) {
+        this.banFrequentness = banFrequentness;
     }
 
     public int getAlterFrequentness() {

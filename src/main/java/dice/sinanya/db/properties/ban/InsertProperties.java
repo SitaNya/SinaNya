@@ -44,7 +44,8 @@ public class InsertProperties {
                     "whiteGroup," +
                     "whiteUser," +
                     "notBanListInput," +
-                    "botId)  VALUES (?," +
+                    "botId," +
+                    "clearGroupByOff,clearGroup,alterFrequentness,banFrequentness)  VALUES (?," +
                     "?," +
                     "?," +
                     "?," +
@@ -64,7 +65,7 @@ public class InsertProperties {
                     "?," +
                     "?," +
                     "?," +
-                    "?);";
+                    "?,?,?,?,?);";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setBoolean(1, entityBanProperties.isCloudBan());
                 ps.setBoolean(2, entityBanProperties.isPrometheus());
@@ -87,6 +88,10 @@ public class InsertProperties {
                 ps.setString(19, entityBanProperties.getWhiteUser());
                 ps.setString(20, entityBanProperties.getNotBanListInput());
                 ps.setString(21, String.valueOf(CQ.getLoginQQ()));
+                ps.setInt(22,entityBanProperties.getClearGroupByOff());
+                ps.setInt(23,entityBanProperties.getClearGroup());
+                ps.setInt(24,entityBanProperties.getAlterFrequentness());
+                ps.setInt(25,entityBanProperties.getBanFrequentness());
                 ps.executeUpdate();
             }
         } catch (SQLException e) {

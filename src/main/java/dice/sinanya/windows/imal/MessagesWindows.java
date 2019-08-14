@@ -99,4 +99,9 @@ public class MessagesWindows {
     public JTextArea whiteGroup;
     public JTextArea whiteUser;
 
+
+    public JTextField clearGroupByOff;
+    public JTextField clearGroup;
+    public JTextField alterFrequentness;
+    public JTextField banFrequentness;
 }

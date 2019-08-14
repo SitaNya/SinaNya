@@ -31,7 +31,7 @@ public class BanProperties extends MakeBan {
     }
 
     public void init() {
-        JFrame jFrame = new Frame("安全性配置", 800, 650).init();
+        JFrame jFrame = new Frame("安全性配置", 1200, 600).init();
 //        JPanel botSwitch = new Panel().init(jFrame, "开关", 510, 10, 400, 200);
 //        botSwitch.setLayout(new GridLayout(0, 1));
 
@@ -58,18 +58,23 @@ public class BanProperties extends MakeBan {
         cloudBanPanel.setLayout(new GridLayout(0, 1));
         cloudBan(cloudBanPanel);
 
-        JPanel cloudBanInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "用语", 400, 0, 400, 600);
+        JPanel clearInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "清理", 400, 0, 400, 200);
+        clearInfoPanel.setLayout(new GridLayout(0, 2));
+        clearInfo(clearInfoPanel);
+
+        JPanel cloudBanInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "用语", 800, 0, 400, 600);
         cloudBanInfoPanel.setLayout(new GridLayout(0, 2));
         cloudBanInfo(cloudBanInfoPanel);
+
     }
 
     private void save(JFrame jFrame) {
-        createButton(jFrame, "保存", 100, 570);
+        createButton(jFrame, "保存", 400, 300);
     }
 
     public void createButton(JFrame jFrame, String text, int x, int y) {
         JButton jButton = new JButton(text);
-        jButton.setBounds(x, y, 200, 60);
+        jButton.setBounds(x, y, 200, 100);
         jButton.addActionListener(e -> {
             entityBanProperties.setCloudBan(cloudBan.isSelected());
             entityBanProperties.setPrometheus(Prometheus.isSelected());
@@ -87,6 +92,10 @@ public class BanProperties extends MakeBan {
             entityBanProperties.setAddFriend(addFriend.getText());
             entityBanProperties.setRefuseGroupByBan(refuseGroupByBan.getText());
             entityBanProperties.setRefuseFriendByBan(refuseFriendByBan.getText());
+            entityBanProperties.setClearGroup(Integer.parseInt(clearGroup.getText()));
+            entityBanProperties.setClearGroupByOff(Integer.parseInt(clearGroupByOff.getText()));
+            entityBanProperties.setAlterFrequentness(Integer.parseInt(alterFrequentness.getText()));
+            entityBanProperties.setBanFrequentness(Integer.parseInt(banFrequentness.getText()));
             new InsertProperties().insertProperties(entityBanProperties);
             JOptionPane.showMessageDialog(null, "保存成功");
         });
