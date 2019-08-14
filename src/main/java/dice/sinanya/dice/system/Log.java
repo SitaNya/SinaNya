@@ -49,7 +49,7 @@ public class Log implements MakeNickToSender {
             return;
         }
         if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
-            sender(entityTypeMessages, String.format(entitySystemProperties.getAlreadyOpen(),getOtherLogTrue(entityTypeMessages.getFromGroup())));
+            sender(entityTypeMessages, String.format(entitySystemProperties.getAlreadyOpen(), getOtherLogTrue(entityTypeMessages.getFromGroup())));
         } else {
             if (checkLogTagExist(entityTypeMessages, msg)) {
                 sender(entityTypeMessages, String.format(entitySystemProperties.getAppendLog(), makeLogNickToSender(msg)));

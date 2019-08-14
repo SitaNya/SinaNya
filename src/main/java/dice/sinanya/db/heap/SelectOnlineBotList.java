@@ -4,7 +4,10 @@ import dice.sinanya.db.tools.DbUtil;
 import dice.sinanya.entity.EntityOtherBotInfo;
 import org.apache.commons.lang.StringUtils;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
@@ -20,7 +23,7 @@ import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 public class SelectOnlineBotList {
 
     public ArrayList<EntityOtherBotInfo> selectOnlineBotList() {
-        ArrayList<EntityOtherBotInfo> otherBotInfos=new ArrayList<>();
+        ArrayList<EntityOtherBotInfo> otherBotInfos = new ArrayList<>();
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "select * from heap";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {

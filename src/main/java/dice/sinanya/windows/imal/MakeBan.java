@@ -89,7 +89,8 @@ public class MakeBan extends MessagesWindows {
         refuseFriendByBan = text.createTextArea(jPanel);
         refuseFriendByBan.setText(entityBanProperties.getRefuseFriendByBan());
     }
-    public void clearInfo(JPanel jPanel){
+
+    public void clearInfo(JPanel jPanel) {
         lable.createLable(jPanel, "关闭群清理期限");
         clearGroupByOff = text.createText(jPanel);
         clearGroupByOff.setText(String.valueOf(entityBanProperties.getClearGroupByOff()));

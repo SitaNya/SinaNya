@@ -23,12 +23,12 @@ public enum MessagesLevel {
      * @param STR_FAILURE 失败
      * @param STR_FUMBLE 大失败
      */
-    STR_CRITICAL_SUCCESS("STR_CRITICAL_SUCCESS", new ArrayList<String>(Arrays.asList(entitySystemProperties.getCRITICAL_SUCCESS().replace("\\n","\n").split("\\|")))),
-    STR_EXTREME_SUCCESS("STR_EXTREME_SUCCESS", new ArrayList<>(Arrays.asList(entitySystemProperties.getEXTREME_SUCCESS().replace("\\n","\n").split("\\|")))),
-    STR_HARD_SUCCESS("STR_HARD_SUCCESS", new ArrayList<>(Arrays.asList(entitySystemProperties.getHARD_SUCCESS().replace("\\n","\n").split("\\|")))),
-    STR_SUCCESS("STR_SUCCESS", new ArrayList<>(Arrays.asList(entitySystemProperties.getSUCCESS().replace("\\n","\n").split("\\|")))),
-    STR_FAILURE("STR_FAILURE", new ArrayList<>(Arrays.asList(entitySystemProperties.getFAILURE().replace("\\n","\n").split("\\|")))),
-    STR_FUMBLE("STR_FUMBLE", new ArrayList<>(Arrays.asList(entitySystemProperties.getFUMBLE().replace("\\n","\n").split("\\|"))));
+    STR_CRITICAL_SUCCESS("STR_CRITICAL_SUCCESS", new ArrayList<String>(Arrays.asList(entitySystemProperties.getCRITICAL_SUCCESS().replace("\\n", "\n").split("\\|")))),
+    STR_EXTREME_SUCCESS("STR_EXTREME_SUCCESS", new ArrayList<>(Arrays.asList(entitySystemProperties.getEXTREME_SUCCESS().replace("\\n", "\n").split("\\|")))),
+    STR_HARD_SUCCESS("STR_HARD_SUCCESS", new ArrayList<>(Arrays.asList(entitySystemProperties.getHARD_SUCCESS().replace("\\n", "\n").split("\\|")))),
+    STR_SUCCESS("STR_SUCCESS", new ArrayList<>(Arrays.asList(entitySystemProperties.getSUCCESS().replace("\\n", "\n").split("\\|")))),
+    STR_FAILURE("STR_FAILURE", new ArrayList<>(Arrays.asList(entitySystemProperties.getFAILURE().replace("\\n", "\n").split("\\|")))),
+    STR_FUMBLE("STR_FUMBLE", new ArrayList<>(Arrays.asList(entitySystemProperties.getFUMBLE().replace("\\n", "\n").split("\\|"))));
     private String levelName;
     private ArrayList<String> text;
 
@@ -50,6 +50,6 @@ public enum MessagesLevel {
     }
 
     public void setText(String input) {
-        this.text = new ArrayList<>(Arrays.asList(input.replace("\\n","\n").split("\\|")));
+        this.text = new ArrayList<>(Arrays.asList(input.replace("\\n", "\n").split("\\|")));
     }
 }

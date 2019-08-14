@@ -166,7 +166,8 @@
     //置群匿名设置		setGroupAnonymous
     126,
     //置群成员名片		setGroupCard
-    127, //[敏感]置群退出		setGroupLeave
+    127,
+    //[敏感]置群退出		setGroupLeave
     128,
     //置群成员专属头衔	setGroupSpecialTitle
     130,

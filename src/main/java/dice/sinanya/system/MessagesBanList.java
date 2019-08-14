@@ -14,6 +14,6 @@ import java.util.HashMap;
 public class MessagesBanList {
     public static HashMap<String, String> qqBanList = new HashMap<>();
     public static HashMap<String, String> groupBanList = new HashMap<>();
-    public static ArrayList<String> allBotList=new ArrayList<>();
-    public static HashMap<String,ArrayList<Long>> frequentnessForGroupList=new HashMap<>();
+    public static ArrayList<String> allBotList = new ArrayList<>();
+    public static HashMap<String, ArrayList<Long>> frequentnessForGroupList = new HashMap<>();
 }

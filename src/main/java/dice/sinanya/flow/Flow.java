@@ -398,7 +398,7 @@ class Flow implements MakeNickToSender {
         checkFre();
     }
 
-    private void checkFre(){
+    private void checkFre() {
         ArrayList<Long> timeList = new ArrayList<>();
         long now = System.currentTimeMillis();
         timeList.add(now);
@@ -410,14 +410,14 @@ class Flow implements MakeNickToSender {
             }
         }
         if (timeList.size() >= entityBanProperties.getAlterFrequentness()) {
-            CQ.sendGroupMsg(Long.parseLong(entityTypeMessages.getFromGroup()),"请勿刷屏，过多可能导致退群拉黑，谢谢合作");
+            CQ.sendGroupMsg(Long.parseLong(entityTypeMessages.getFromGroup()), "请勿刷屏，过多可能导致退群拉黑，谢谢合作");
             CQ.sendGroupMsg(162279609, "于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中频度达到" + timeList.size());
         }
         if (timeList.size() >= entityBanProperties.getBanFrequentness()) {
-            CQ.sendGroupMsg(Long.parseLong(entityTypeMessages.getFromGroup()),"检测到极大量刷屏，正在退群拉黑");
-            CQ.sendGroupMsg(162279609,"于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中频度达到" + timeList.size()+"已退群并拉黑");
-            CQ.setGroupLeave(Long.parseLong(entityTypeMessages.getFromGroup()),false);
-            insertQqBanList(entityTypeMessages.getFromGroup(),"大量刷屏");
+            CQ.sendGroupMsg(Long.parseLong(entityTypeMessages.getFromGroup()), "检测到极大量刷屏，正在退群拉黑");
+            CQ.sendGroupMsg(162279609, "于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中频度达到" + timeList.size() + "已退群并拉黑");
+            CQ.setGroupLeave(Long.parseLong(entityTypeMessages.getFromGroup()), false);
+            insertQqBanList(entityTypeMessages.getFromGroup(), "大量刷屏");
         }
         frequentnessForGroupList.put(entityTypeMessages.getFromGroup(), timeList);
     }

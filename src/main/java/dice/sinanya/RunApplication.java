@@ -46,16 +46,16 @@ import static org.quartz.TriggerBuilder.newTrigger;
 
 /**
  * @author SitaNya 日期: 2019-06-15 电子邮箱: sitanya@qq.com 维护群(QQ): 162279609
- *         有任何问题欢迎咨询 类说明: 整个程序的入口类
- *         <p>
- *         这里可以修改的是before方法(但我已经改造为配置文件了，因此可以不动这个方法）
- *         此外这里声明了大量服务启动时需要从服务器中获取的缓存数据
+ * 有任何问题欢迎咨询 类说明: 整个程序的入口类
+ * <p>
+ * 这里可以修改的是before方法(但我已经改造为配置文件了，因此可以不动这个方法）
+ * 此外这里声明了大量服务启动时需要从服务器中获取的缓存数据
  */
 public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IRequest, MakeNickToSender {
+    Scheduler scheduler;
     private Pattern commandHeader = Pattern.compile("^[ ]*[.。][ ]*.*");
     private String atTag = "[cq:at,qq=?]";
     private String tagMe = "";
-    Scheduler scheduler;
 
     public static void main(String[] args) {
         RunApplication runApplication = new RunApplication();
@@ -210,10 +210,10 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
      * @param msg     消息内容
      * @param font    字体
      * @return 返回值*不能*直接返回文本 如果要回复消息，请调用api发送<br>
-     *         这里 返回 {@link IMsg#MSG_INTERCEPT MSG_INTERCEPT} - 截断本条消息，不再继续处理<br>
-     *         注意：应用优先级设置为"最高"(10000)时，不得使用本返回值<br>
-     *         如果不回复消息，交由之后的应用/过滤器处理，这里 返回 {@link IMsg#MSG_IGNORE MSG_IGNORE} -
-     *         忽略本条消息
+     * 这里 返回 {@link IMsg#MSG_INTERCEPT MSG_INTERCEPT} - 截断本条消息，不再继续处理<br>
+     * 注意：应用优先级设置为"最高"(10000)时，不得使用本返回值<br>
+     * 如果不回复消息，交由之后的应用/过滤器处理，这里 返回 {@link IMsg#MSG_IGNORE MSG_IGNORE} -
+     * 忽略本条消息
      */
     @Override
     public int privateMsg(int subType, int msgId, long fromQq, String msg, int font) {
@@ -249,7 +249,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
      */
     @Override
     public int groupMsg(int subType, int msgId, long fromGroup, long fromQq, String fromAnonymous, String msg,
-            int font) {
+                        int font) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(MessagesTypes.GROUP_MSG, fromQq, fromGroup, msg);
         if ((checkBeBanOrInBan(entityTypeMessages) == MSG_INTERCEPT) || !getBot(fromGroup)) {
             return MSG_INTERCEPT;
@@ -437,7 +437,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
      */
     @Override
     public int requestAddGroup(int subtype, int sendTime, long fromGroup, long fromQQ, String msg,
-            String responseFlag) {
+                               String responseFlag) {
         if (subtype == 2) {
             if (!checkQqInBanList(String.valueOf(fromQQ)) && !checkGroupInBanList(String.valueOf(fromGroup))) {
                 CQ.setGroupAddRequestV2(responseFlag, REQUEST_GROUP_INVITE, REQUEST_ADOPT, "");
@@ -483,14 +483,14 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
 
     private void leave(MessagesTypes messagesTypes, String groupId) {
         switch (messagesTypes) {
-        case GROUP_MSG:
-            CQ.setGroupLeave(Long.parseLong(groupId), false);
-            break;
-        case DISCUSS_MSG:
-            CQ.setDiscussLeave(Long.parseLong(groupId));
-            break;
-        default:
-            break;
+            case GROUP_MSG:
+                CQ.setGroupLeave(Long.parseLong(groupId), false);
+                break;
+            case DISCUSS_MSG:
+                CQ.setDiscussLeave(Long.parseLong(groupId));
+                break;
+            default:
+                break;
         }
     }
 

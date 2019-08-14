@@ -21,6 +21,7 @@ public class BanList {
 
     private static SelectBanList selectBanList = new SelectBanList();
     private static InputBanList insertBanList = new InputBanList();
+
     private BanList() {
         throw new IllegalStateException("Utility class");
     }
