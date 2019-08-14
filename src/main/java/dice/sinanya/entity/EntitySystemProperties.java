@@ -427,7 +427,11 @@ public class EntitySystemProperties {
     }
 
     public void setEnSuccess(String enSuccess) {
-        this.enSuccess = enSuccess;
+        if (enSuccess.equals(NONE)) {
+            this.enSuccess = enSuccess;
+        } else {
+            this.enSuccess = "\n" + enSuccess;
+        }
     }
 
     public String getEnFailed() {
@@ -435,7 +439,11 @@ public class EntitySystemProperties {
     }
 
     public void setEnFailed(String enFailed) {
-        this.enFailed = enFailed;
+        if (enFailed.equals(NONE)) {
+            this.enFailed = enFailed;
+        } else {
+            this.enFailed = "\n" + enFailed;
+        }
     }
 
     public String getHiddenDice() {
