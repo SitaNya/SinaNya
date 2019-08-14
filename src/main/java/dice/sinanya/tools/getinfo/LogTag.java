@@ -6,7 +6,9 @@ import dice.sinanya.entity.EntityLogTag;
 import dice.sinanya.entity.EntityTypeMessages;
 
 import java.util.ArrayList;
+import java.util.Map;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesLog.*;
 
 /**
@@ -45,6 +47,12 @@ public class LogTag {
      */
     public static boolean checkLogTagExist(EntityTypeMessages entityTypeMessages, String logName) {
         EntityLogTag entityLogTag = new EntityLogTag(entityTypeMessages.getFromGroup(), logName);
+        CQ.logDebug("日志记录", String.valueOf(LOG_NAME_SWITCH.containsKey(entityLogTag)));
+        if (!LOG_NAME_SWITCH.containsKey(entityLogTag)) {
+            for (Map.Entry<EntityLogTag, Boolean> Entity : LOG_NAME_SWITCH.entrySet()) {
+                CQ.logDebug("日志记录", "未找到:\t" + Entity.getKey().toString());
+            }
+        }
         return LOG_NAME_SWITCH.containsKey(entityLogTag);
     }
 

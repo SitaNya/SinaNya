@@ -44,7 +44,7 @@ public class EntityLogTag {
             return false;
         }
         EntityLogTag that = (EntityLogTag) o;
-        return getGroupId() == that.getGroupId() &&
+        return getGroupId().equals(that.getGroupId()) &&
                 getLogName().equals(that.getLogName());
     }
 

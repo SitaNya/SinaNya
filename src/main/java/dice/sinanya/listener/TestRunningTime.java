@@ -51,7 +51,9 @@ public class TestRunningTime implements Job, MakeNickToSender {
         }
         try {
             CQ.getGroupList();
-            new InsertHeap().updateHeap();
+            if (CQ.getLoginQQ() != -10006) {
+                new InsertHeap().updateHeap();
+            }
         } catch (Exception e) {
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
             log.error("获取群列表失败，停止心跳");
@@ -71,7 +73,7 @@ public class TestRunningTime implements Job, MakeNickToSender {
             if (lastMsgForNow / 1000 > 432000) {
                 try {
                     CQ.setGroupLeave(offBotGroupId, false);
-                    CQ.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 60 / 60 / 24 + "日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(offBotGroupId)) + offBotGroupId);
+                    CQ.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 1000 / 60 / 60 / 24 + "日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(offBotGroupId)) + offBotGroupId);
                     CQ.sendGroupMsg(offBotGroupId, "已在群: " + makeGroupNickToSender(getGroupName(offBotGroupId)) + offBotGroupId + "中超过5日未响应且处于关闭状态，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题");
                 } catch (Exception e) {
                     CQ.setDiscussLeave(offBotGroupId);
@@ -97,7 +99,7 @@ public class TestRunningTime implements Job, MakeNickToSender {
             if (lastMsgForNow / 1000 > 1296000) {
                 try {
                     CQ.setGroupLeave(notPlayBotGroupId, false);
-                    CQ.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 60 / 60 / 24 + "日未使用的群: " + makeGroupNickToSender(getGroupName(notPlayBotGroupId)) + notPlayBotGroupId);
+                    CQ.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 1000 / 60 / 60 / 24 + "日未使用的群: " + makeGroupNickToSender(getGroupName(notPlayBotGroupId)) + notPlayBotGroupId);
                     CQ.sendGroupMsg(notPlayBotGroupId, "已在群: " + makeGroupNickToSender(getGroupName(notPlayBotGroupId)) + notPlayBotGroupId + "中超过15日未响应且处于关闭状态，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题");
                 } catch (Exception e) {
                     CQ.setDiscussLeave(notPlayBotGroupId);
