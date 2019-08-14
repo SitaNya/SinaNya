@@ -28,12 +28,13 @@ public class InsertHeap {
      */
     public void updateHeap() {
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "replace into heap(botId,time,enable,botMaster)  VALUES (?,?,?,?);";
+            String sql = "replace into heap(botId,botName,time,enable,botMaster)  VALUES (?,?,?,?,?);";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, String.valueOf(CQ.getLoginQQ()));
-                ps.setTimestamp(2, getTime(getNowString()));
-                ps.setBoolean(3, entityBanProperties.isHeap());
-                ps.setString(4, entityBanProperties.getMaster());
+                ps.setString(2, CQ.getLoginNick());
+                ps.setTimestamp(3, getTime(getNowString()));
+                ps.setBoolean(4, entityBanProperties.isHeap());
+                ps.setString(5, entityBanProperties.getMaster());
 
                 ps.executeUpdate();
             }
