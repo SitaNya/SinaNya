@@ -1,6 +1,10 @@
 package dice.sinanya.tools.windows;
 
+import org.apache.commons.lang.StringUtils;
+
 import javax.swing.*;
+
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
 /**
  * @author SitaNya
@@ -31,7 +35,7 @@ public class Frame {
         try {
             UIManager.setLookAndFeel(javax.swing.plaf.nimbus.NimbusLookAndFeel.class.getName());
         } catch (Exception e) {
-            e.printStackTrace();
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
         return f;
     }

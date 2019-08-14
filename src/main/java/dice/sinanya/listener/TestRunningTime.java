@@ -16,7 +16,6 @@ import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.db.system.InsertBot.deleteBot;
 import static dice.sinanya.db.system.SelectBot.selectOffBotList;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
-import static dice.sinanya.tools.getinfo.GetTime.getNowString;
 import static dice.sinanya.tools.makedata.RandomInt.random;
 
 /**
@@ -41,10 +40,6 @@ public class TestRunningTime implements Job, MakeNickToSender {
 
     @Override
     public void execute(JobExecutionContext context) {
-        long heapGroupId = 825848066;
-        if (checkHasGroup(heapGroupId)) {
-            CQ.sendGroupMsg(heapGroupId, getNowString());
-        }
         if (checkHasGroup(groupManager)) {
             autoClean();
             try {
