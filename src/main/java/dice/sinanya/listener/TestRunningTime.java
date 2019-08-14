@@ -71,7 +71,7 @@ public class TestRunningTime implements Job, MakeNickToSender {
                 continue;
             }
             long lastMsgForNow = System.currentTimeMillis() - CQ.getGroupMemberInfo(offBotGroupId, CQ.getLoginQQ()).getLastTime().getTime();
-            if (lastMsgForNow / 1000 > entityBanProperties.getClearGroupByOff() * 1000 * 60 * 60 * 24) {
+            if (lastMsgForNow / 1000 > entityBanProperties.getClearGroupByOff() * 60 * 60 * 24) {
                 try {
                     CQ.sendGroupMsg(offBotGroupId, "已在群: " + makeGroupNickToSender(getGroupName(offBotGroupId)) + offBotGroupId + "中超过" + lastMsgForNow / 1000 / 60 / 60 / 24 + "日未响应且处于关闭状态，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题");
                     CQ.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 1000 / 60 / 60 / 24 + "日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(offBotGroupId)) + offBotGroupId);
@@ -97,7 +97,7 @@ public class TestRunningTime implements Job, MakeNickToSender {
                 continue;
             }
             long lastMsgForNow = System.currentTimeMillis() - CQ.getGroupMemberInfo(notPlayBotGroupId, CQ.getLoginQQ()).getLastTime().getTime();
-            if (lastMsgForNow / 1000 > entityBanProperties.getClearGroup() * 1000 * 60 * 60 * 24) {
+            if (lastMsgForNow / 1000 > entityBanProperties.getClearGroup() * 60 * 60 * 24) {
                 try {
                     CQ.sendGroupMsg(notPlayBotGroupId, "已在群: " + makeGroupNickToSender(getGroupName(notPlayBotGroupId)) + notPlayBotGroupId + "中超过" + lastMsgForNow / 1000 / 60 / 60 / 24 + "日未响应且处于关闭状态，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题");
                     CQ.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 1000 / 60 / 60 / 24 + "日未使用的群: " + makeGroupNickToSender(getGroupName(notPlayBotGroupId)) + notPlayBotGroupId);
