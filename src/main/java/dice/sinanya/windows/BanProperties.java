@@ -69,7 +69,7 @@ public class BanProperties extends MakeBan {
 
     public void createButton(JFrame jFrame, String text, int x, int y) {
         JButton jButton = new JButton(text);
-        jButton.setBounds(x, y, 200, 20);
+        jButton.setBounds(x, y, 200, 60);
         jButton.addActionListener(e -> {
             entityBanProperties.setCloudBan(cloudBan.isSelected());
             entityBanProperties.setPrometheus(Prometheus.isSelected());

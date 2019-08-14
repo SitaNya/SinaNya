@@ -126,7 +126,7 @@ public class EntitySystemProperties {
         hiddenDice = "kp正在进行暗骰";
 
         teamIsEmpty = "您的小队为空";
-        teamMemberEnIsEmpty = "的技能成功记录为空";
+        teamMemberEnIsEmpty = "%s的技能成功记录为空";
 
 
         appendLog = "日志%s已重新开启，将在原基础上追加";

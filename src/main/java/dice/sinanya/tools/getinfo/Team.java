@@ -106,7 +106,7 @@ public class Team {
             }
             return role + StringUtils.join(TEAM_EN.get(entityQqAndGroup), ",");
         } else {
-            return "[CQ:at,qq=" + qqId + "]" + entitySystemProperties.getTeamMemberEnIsEmpty();
+            return String.format(entitySystemProperties.getTeamMemberEnIsEmpty(), "[CQ:at,qq=" + qqId + "]");
         }
     }
 
