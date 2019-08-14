@@ -45,20 +45,17 @@ import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
 /**
- * @author SitaNya
- * 日期: 2019-06-15
- * 电子邮箱: sitanya@qq.com
- * 维护群(QQ): 162279609
- * 有任何问题欢迎咨询
- * 类说明: 整个程序的入口类
- * <p>
- * 这里可以修改的是before方法(但我已经改造为配置文件了，因此可以不动这个方法）
- * 此外这里声明了大量服务启动时需要从服务器中获取的缓存数据
+ * @author SitaNya 日期: 2019-06-15 电子邮箱: sitanya@qq.com 维护群(QQ): 162279609
+ *         有任何问题欢迎咨询 类说明: 整个程序的入口类
+ *         <p>
+ *         这里可以修改的是before方法(但我已经改造为配置文件了，因此可以不动这个方法）
+ *         此外这里声明了大量服务启动时需要从服务器中获取的缓存数据
  */
 public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IRequest, MakeNickToSender {
     private Pattern commandHeader = Pattern.compile("^[ ]*[.。][ ]*.*");
     private String atTag = "[cq:at,qq=?]";
     private String tagMe = "";
+    Scheduler scheduler;
 
     public static void main(String[] args) {
         RunApplication runApplication = new RunApplication();
@@ -88,23 +85,28 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         setHistory();
         saveTeamEn();
         flushTeamEn();
-//        从数据库中读取幕间成长到缓存
+        // 从数据库中读取幕间成长到缓存
         flushMaxRolls();
-//        从数据库中读取最大默认骰到缓存
+        // 从数据库中读取最大默认骰到缓存
         flushBot();
-//        从数据库中读取机器人开关到缓存
+        // 从数据库中读取机器人开关到缓存
         flushRoleChoose();
-//        从数据库中读取当前已选角色到缓存
+        // 从数据库中读取当前已选角色到缓存
         flushRoleInfoCache();
-//        从数据库中读取角色信息到缓存
+        // 从数据库中读取角色信息到缓存
         flushLogTag();
-//        从数据库中读取日志开关到缓存
+        // 从数据库中读取日志开关到缓存
         flushKp();
-//        从数据库中读取kp主群设定到缓存
+        // 从数据库中读取kp主群设定到缓存
         flushHistory();
-//        从数据库中读取骰点历史信息到缓存
+        // 从数据库中读取骰点历史信息到缓存
         flushBanList();
-//        刷写黑名单
+        // 刷写黑名单
+        try {
+            scheduler.shutdown();
+        } catch (SchedulerException e) {
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
+        }
         return 0;
     }
 
@@ -141,25 +143,25 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
 
         try {
             // 从Scheduler工厂获取一个Scheduler的实例
-            Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+            scheduler = StdSchedulerFactory.getDefaultScheduler();
 
             scheduler.start();
             JobDetail jobDetail1 = newJob(Prometheus.class).withIdentity("Prometheus", "monitor").build();
             jobDetail1.getJobDataMap().put("CONTENT", String.valueOf(System.currentTimeMillis()));
             Trigger trigger1 = newTrigger().withIdentity("trigger1", "monitor").startNow()
-                    .withSchedule(CronScheduleBuilder.cronSchedule("*/10 * * * * ?")).build();
+                    .withSchedule(CronScheduleBuilder.cronSchedule("0 0/10 * * * ?")).build();
             scheduler.scheduleJob(jobDetail1, trigger1);
 
             JobDetail jobDetail2 = newJob(InputHistoryToDataBase.class).withIdentity("flushDatabase", "data").build();
             jobDetail2.getJobDataMap().put("CONTENT", String.valueOf(System.currentTimeMillis()));
             Trigger trigger2 = newTrigger().withIdentity("trigger2", "data").startNow()
-                    .withSchedule(CronScheduleBuilder.cronSchedule("*/10 * * * * ?")).build();
+                    .withSchedule(CronScheduleBuilder.cronSchedule("0 0/10 * * * ?")).build();
             scheduler.scheduleJob(jobDetail2, trigger2);
 
             JobDetail jobDetail3 = newJob(TestRunningTime.class).withIdentity("cleanGroup", "clean").build();
             jobDetail3.getJobDataMap().put("CONTENT", String.valueOf(System.currentTimeMillis()));
             Trigger trigger3 = newTrigger().withIdentity("trigger3", "clean").startNow()
-                    .withSchedule(CronScheduleBuilder.cronSchedule("*/10 * * * * ?")).build();
+                    .withSchedule(CronScheduleBuilder.cronSchedule("0 0/10 * * * ?")).build();
             scheduler.scheduleJob(jobDetail3, trigger3);
 
         } catch (SchedulerException e) {
@@ -173,23 +175,28 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         setHistory();
         saveTeamEn();
         flushTeamEn();
-//        从数据库中读取幕间成长到缓存
+        // 从数据库中读取幕间成长到缓存
         flushMaxRolls();
-//        从数据库中读取最大默认骰到缓存
+        // 从数据库中读取最大默认骰到缓存
         flushBot();
-//        从数据库中读取机器人开关到缓存
+        // 从数据库中读取机器人开关到缓存
         flushRoleChoose();
-//        从数据库中读取当前已选角色到缓存
+        // 从数据库中读取当前已选角色到缓存
         flushRoleInfoCache();
-//        从数据库中读取角色信息到缓存
+        // 从数据库中读取角色信息到缓存
         flushLogTag();
-//        从数据库中读取日志开关到缓存
+        // 从数据库中读取日志开关到缓存
         flushKp();
-//        从数据库中读取kp主群设定到缓存
+        // 从数据库中读取kp主群设定到缓存
         flushHistory();
-//        从数据库中读取骰点历史信息到缓存
+        // 从数据库中读取骰点历史信息到缓存
         flushBanList();
-//        刷写黑名单
+        // 刷写黑名单
+        try {
+            scheduler.shutdown();
+        } catch (SchedulerException e) {
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
+        }
         return 0;
     }
 
@@ -203,9 +210,10 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
      * @param msg     消息内容
      * @param font    字体
      * @return 返回值*不能*直接返回文本 如果要回复消息，请调用api发送<br>
-     * 这里 返回  {@link IMsg#MSG_INTERCEPT MSG_INTERCEPT} - 截断本条消息，不再继续处理<br>
-     * 注意：应用优先级设置为"最高"(10000)时，不得使用本返回值<br>
-     * 如果不回复消息，交由之后的应用/过滤器处理，这里 返回  {@link IMsg#MSG_IGNORE MSG_IGNORE} - 忽略本条消息
+     *         这里 返回 {@link IMsg#MSG_INTERCEPT MSG_INTERCEPT} - 截断本条消息，不再继续处理<br>
+     *         注意：应用优先级设置为"最高"(10000)时，不得使用本返回值<br>
+     *         如果不回复消息，交由之后的应用/过滤器处理，这里 返回 {@link IMsg#MSG_IGNORE MSG_IGNORE} -
+     *         忽略本条消息
      */
     @Override
     public int privateMsg(int subType, int msgId, long fromQq, String msg, int font) {
@@ -241,7 +249,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
      */
     @Override
     public int groupMsg(int subType, int msgId, long fromGroup, long fromQq, String fromAnonymous, String msg,
-                        int font) {
+            int font) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(MessagesTypes.GROUP_MSG, fromQq, fromGroup, msg);
         if ((checkBeBanOrInBan(entityTypeMessages) == MSG_INTERCEPT) || !getBot(fromGroup)) {
             return MSG_INTERCEPT;
@@ -279,7 +287,8 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
      */
     @Override
     public int discussMsg(int subtype, int msgId, long fromDiscuss, long fromQq, String msg, int font) {
-        EntityTypeMessages entityTypeMessages = new EntityTypeMessages(MessagesTypes.DISCUSS_MSG, fromQq, fromDiscuss, msg);
+        EntityTypeMessages entityTypeMessages = new EntityTypeMessages(MessagesTypes.DISCUSS_MSG, fromQq, fromDiscuss,
+                msg);
         if (checkBeBanOrInBan(entityTypeMessages) == MSG_INTERCEPT || !getBot(fromDiscuss)) {
             return MSG_INTERCEPT;
         }
@@ -348,7 +357,8 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     public int groupMemberDecrease(int subtype, int sendTime, long fromGroup, long fromQQ, long beingOperateQQ) {
         if (subtype == 2 && beingOperateQQ == CQ.getLoginQQ() && entityBanProperties.isBanGroupBecauseReduce()) {
             if (entityBanProperties.isBanUserBecauseReduce()) {
-                CQ.sendGroupMsg(162279609, "已被移出群" + getGroupName(fromGroup) + "(" + fromGroup + ")中，将群和操作者" + getUserName(fromQQ) + "(" + fromQQ + ")拉黑");
+                CQ.sendGroupMsg(162279609, "已被移出群" + getGroupName(fromGroup) + "(" + fromGroup + ")中，将群和操作者"
+                        + getUserName(fromQQ) + "(" + fromQQ + ")拉黑");
                 insertQqBanList(String.valueOf(beingOperateQQ), "被踢出群" + fromGroup);
                 insertGroupBanList(String.valueOf(fromGroup), "被" + fromQQ + "踢出");
             } else {
@@ -426,14 +436,17 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
      * @return 关于返回值说明, 见 {@link #privateMsg 私聊消息} 的方法
      */
     @Override
-    public int requestAddGroup(int subtype, int sendTime, long fromGroup, long fromQQ, String msg, String responseFlag) {
+    public int requestAddGroup(int subtype, int sendTime, long fromGroup, long fromQQ, String msg,
+            String responseFlag) {
         if (subtype == 2) {
             if (!checkQqInBanList(String.valueOf(fromQQ)) && !checkGroupInBanList(String.valueOf(fromGroup))) {
                 CQ.setGroupAddRequestV2(responseFlag, REQUEST_GROUP_INVITE, REQUEST_ADOPT, "");
-                CQ.sendGroupMsg(162279609, "收到" + getUserName(fromQQ) + "(" + fromQQ + ")的群" + fromGroup + "(" + getGroupName(fromGroup) + ")邀请，已同意");
+                CQ.sendGroupMsg(162279609, "收到" + getUserName(fromQQ) + "(" + fromQQ + ")的群" + fromGroup + "("
+                        + getGroupName(fromGroup) + ")邀请，已同意");
                 CQ.sendGroupMsg(fromGroup, entityBanProperties.getAddGroup());
             } else {
-                CQ.sendGroupMsg(162279609, "收到" + getUserName(fromQQ) + "(" + fromQQ + ")的群" + fromGroup + "邀请，处于黑名单中已拒绝");
+                CQ.sendGroupMsg(162279609,
+                        "收到" + getUserName(fromQQ) + "(" + fromQQ + ")的群" + fromGroup + "邀请，处于黑名单中已拒绝");
                 CQ.setGroupAddRequestV2(responseFlag, REQUEST_GROUP_INVITE, REQUEST_REFUSE, "群或邀请人处于黑名单内");
             }
         }
@@ -447,13 +460,15 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
 
         if (checkGroupInBanList(entityTypeMessages.getFromGroup()) && entityBanProperties.isLeaveGroupByBan()) {
             sender(entityTypeMessages, "检测到处于黑名单群中，正在退群");
-            CQ.sendGroupMsg(162279609, "检测到处于黑名单群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "(" + entityTypeMessages.getFromGroup() + ")中，正在退群");
+            CQ.sendGroupMsg(162279609, "检测到处于黑名单群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "("
+                    + entityTypeMessages.getFromGroup() + ")中，正在退群");
             leave(entityTypeMessages.getMessagesTypes(), entityTypeMessages.getFromGroup());
             return MSG_INTERCEPT;
         }
 
         if (checkBeBan(entityTypeMessages.getMsg()) && entityBanProperties.isBanGroupBecauseBan()) {
-            sender(entityTypeMessages, "于群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "(" + entityTypeMessages.getFromGroup() + ")中被禁言，已退出并拉黑");
+            sender(entityTypeMessages, "于群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "("
+                    + entityTypeMessages.getFromGroup() + ")中被禁言，已退出并拉黑");
             CQ.sendGroupMsg(162279609, "于群" + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
             leave(entityTypeMessages.getMessagesTypes(), entityTypeMessages.getFromGroup());
             insertGroupBanList(entityTypeMessages.getFromGroup(), "被禁言");
@@ -468,14 +483,14 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
 
     private void leave(MessagesTypes messagesTypes, String groupId) {
         switch (messagesTypes) {
-            case GROUP_MSG:
-                CQ.setGroupLeave(Long.parseLong(groupId), false);
-                break;
-            case DISCUSS_MSG:
-                CQ.setDiscussLeave(Long.parseLong(groupId));
-                break;
-            default:
-                break;
+        case GROUP_MSG:
+            CQ.setGroupLeave(Long.parseLong(groupId), false);
+            break;
+        case DISCUSS_MSG:
+            CQ.setDiscussLeave(Long.parseLong(groupId));
+            break;
+        default:
+            break;
         }
     }
 
@@ -492,11 +507,16 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         String tagBotUpdate = ".*[.。][ ]*bot[ ]*update.*";
 
         String tagBotOn = ".*[.。][ ]*bot[ ]*on.*";
-        boolean botOn = messagesContainsAtMe(messages, tagBotOn, tagMe) || messagesBotForAll(messages, tagBotOn) || messagesContainsQqId(messages, tagBotOn);
-        boolean botOff = messagesContainsAtMe(messages, tagBotOff, tagMe) || messagesBotForAll(messages, tagBotOff) || messagesContainsQqId(messages, tagBotOff);
-        boolean botExit = messagesContainsAtMe(messages, tagBotExit, tagMe) || messagesBotForAll(messages, tagBotExit) || messagesContainsQqId(messages, tagBotExit);
-        boolean botUpdate = (messagesContainsAtMe(messages, tagBotUpdate, tagMe) || messagesBotForAll(messages, tagBotUpdate) || messagesContainsQqId(messages, tagBotUpdate));
-        boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo) || messagesContainsQqId(messages, tagBotInfo)) && !botOn && !botOff && !botExit && !botUpdate;
+        boolean botOn = messagesContainsAtMe(messages, tagBotOn, tagMe) || messagesBotForAll(messages, tagBotOn)
+                || messagesContainsQqId(messages, tagBotOn);
+        boolean botOff = messagesContainsAtMe(messages, tagBotOff, tagMe) || messagesBotForAll(messages, tagBotOff)
+                || messagesContainsQqId(messages, tagBotOff);
+        boolean botExit = messagesContainsAtMe(messages, tagBotExit, tagMe) || messagesBotForAll(messages, tagBotExit)
+                || messagesContainsQqId(messages, tagBotExit);
+        boolean botUpdate = (messagesContainsAtMe(messages, tagBotUpdate, tagMe)
+                || messagesBotForAll(messages, tagBotUpdate) || messagesContainsQqId(messages, tagBotUpdate));
+        boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo)
+                || messagesContainsQqId(messages, tagBotInfo)) && !botOn && !botOff && !botExit && !botUpdate;
 
         if (botOn) {
             checkAudit(entityTypeMessages);
@@ -520,19 +540,23 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     }
 
     private boolean messagesBotForAll(String messages, String tagBotSwitch) {
-        return messages.trim().matches(tagBotSwitch) && !messages.trim().contains("[cq:at") && !messages.matches(".*[0-9]+.*");
+        return messages.trim().matches(tagBotSwitch) && !messages.trim().contains("[cq:at")
+                && !messages.matches(".*[0-9]+.*");
     }
 
     private boolean messagesContainsQqId(String messages, String tagBotSwitch) {
         String qqId = String.valueOf(CQ.getLoginQQ());
-        return messages.trim().matches(tagBotSwitch) && (messages.trim().contains(qqId) || messages.trim().contains(qqId.substring(qqId.length() - 5)));
+        return messages.trim().matches(tagBotSwitch)
+                && (messages.trim().contains(qqId) || messages.trim().contains(qqId.substring(qqId.length() - 5)));
     }
 
     private void checkAudit(EntityTypeMessages entityTypeMessages) throws OnlyManagerException {
-        int power = CQ.getGroupMemberInfo(Long.parseLong(entityTypeMessages.getFromGroup()), Long.parseLong(entityTypeMessages.getFromQq())).getAuthority();
+        int power = CQ.getGroupMemberInfo(Long.parseLong(entityTypeMessages.getFromGroup()),
+                Long.parseLong(entityTypeMessages.getFromQq())).getAuthority();
 
         boolean boolIsAdmin = power != 1;
-        boolean boolIsAdminOrInDiscuss = boolIsAdmin || entityTypeMessages.getMessagesTypes() == MessagesTypes.DISCUSS_MSG;
+        boolean boolIsAdminOrInDiscuss = boolIsAdmin
+                || entityTypeMessages.getMessagesTypes() == MessagesTypes.DISCUSS_MSG;
         if (!boolIsAdminOrInDiscuss) {
             sender(entityTypeMessages, entitySystemProperties.getOnlyManager());
             throw new OnlyManagerException(entityTypeMessages);
@@ -541,7 +565,8 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
 
     private void setLogsForText(EntityTypeMessages entityTypeMessages) {
         if (checkOthorLogTrue(entityTypeMessages.getFromGroup())) {
-            setLogText(entityTypeMessages, new EntityLogTag(entityTypeMessages.getFromGroup(), getOtherLogTrue(entityTypeMessages.getFromGroup())), entityTypeMessages.getMsg());
+            setLogText(entityTypeMessages, new EntityLogTag(entityTypeMessages.getFromGroup(),
+                    getOtherLogTrue(entityTypeMessages.getFromGroup())), entityTypeMessages.getMsg());
         }
     }
 
@@ -567,8 +592,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         // 应用AppID,规则见 http://d.cqp.me/Pro/开发/基础信息#appid
         String AppID = "com.sinanya.dice";// 记住编译后的文件和json也要使用appid做文件名
         /**
-         * 本函数【禁止】处理其他任何代码，以免发生异常情况。
-         * 如需执行初始化代码请在 startup 事件中执行（Type=1001）。
+         * 本函数【禁止】处理其他任何代码，以免发生异常情况。 如需执行初始化代码请在 startup 事件中执行（Type=1001）。
          */
         return CQAPIVER + "," + AppID;
     }
