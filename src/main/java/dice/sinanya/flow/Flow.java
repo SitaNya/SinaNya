@@ -299,6 +299,10 @@ class Flow {
         isBookFunction();
         isBanFunction();
 
+        if (isEn) {
+            sender(entityTypeMessages, entitySystemProperties.getCantInPrivate());
+        }
+
         if (isNpc) {
             npc.npc();
         }
@@ -366,10 +370,6 @@ class Flow {
 
         if (isSetRollMaxValue) {
             setRollMaxValue.set();
-        }
-
-        if (isEn) {
-            sender(entityTypeMessages, entitySystemProperties.getCantInPrivate());
         }
 
         toPrivate();
