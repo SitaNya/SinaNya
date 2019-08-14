@@ -34,6 +34,7 @@ public class EntityBanProperties {
 
     String whiteGroup;
     String whiteUser;
+    int alterFrequentness;
 
     public EntityBanProperties() {
         cloudBan = true;
@@ -59,8 +60,18 @@ public class EntityBanProperties {
         refuseGroupByBan = "拒绝加入黑名单群";
         refuseFriendByBan = "拒绝添加黑名单好友";
 
+        alterFrequentness=30;
+
         whiteGroup = "";
         whiteUser = "";
+    }
+
+    public int getAlterFrequentness() {
+        return alterFrequentness;
+    }
+
+    public void setAlterFrequentness(int alterFrequentness) {
+        this.alterFrequentness = alterFrequentness;
     }
 
     public String getNotBanListInput() {

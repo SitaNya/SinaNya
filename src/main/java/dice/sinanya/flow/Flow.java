@@ -1,5 +1,6 @@
 package dice.sinanya.flow;
 
+import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.dice.game.Jrrp;
 import dice.sinanya.dice.get.*;
 import dice.sinanya.dice.getbook.Book;
@@ -13,9 +14,14 @@ import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.*;
 import org.apache.commons.lang.StringUtils;
 
+import java.util.ArrayList;
+
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import static dice.sinanya.system.MessagesBanList.frequentnessForGroupList;
 import static dice.sinanya.system.MessagesTag.*;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
+import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
@@ -33,7 +39,7 @@ import static dice.sinanya.tools.makedata.Sender.sender;
  */
 @SuppressWarnings("AlibabaLowerCamelCaseVariableNaming")
 public
-class Flow {
+class Flow implements MakeNickToSender {
 
 
     private EntityTypeMessages entityTypeMessages;
@@ -380,6 +386,20 @@ class Flow {
      */
     public void toGroup() {
         toPrivateAndGroup();
+        ArrayList<Long> timeList = new ArrayList<>();
+        long now = System.currentTimeMillis();
+        timeList.add(now);
+        if (frequentnessForGroupList.containsKey(entityTypeMessages.getFromGroup())) {
+            for (long time : frequentnessForGroupList.get(entityTypeMessages.getFromGroup())) {
+                if (time > now - 1000 * 60) {
+                    timeList.add(time);
+                }
+            }
+        }
+        if (timeList.size() >= entityBanProperties.getAlterFrequentness()) {
+            CQ.sendGroupMsg(162279609, "于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中频度达到" + timeList.size());
+        }
+        frequentnessForGroupList.put(entityTypeMessages.getFromGroup(), timeList);
     }
 
     /**
@@ -387,6 +407,20 @@ class Flow {
      */
     public void toDisGroup() {
         toPrivateAndGroup();
+        ArrayList<Long> timeList = new ArrayList<>();
+        long now = System.currentTimeMillis();
+        timeList.add(now);
+        if (frequentnessForGroupList.containsKey(entityTypeMessages.getFromGroup())) {
+            for (long time : frequentnessForGroupList.get(entityTypeMessages.getFromGroup())) {
+                if (time > now - 1000 * 60) {
+                    timeList.add(time);
+                }
+            }
+        }
+        if (timeList.size() >= entityBanProperties.getAlterFrequentness()) {
+            CQ.sendGroupMsg(162279609, "于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中频度达到" + timeList.size());
+        }
+        frequentnessForGroupList.put(entityTypeMessages.getFromGroup(), timeList);
     }
 
     private boolean checkTagRegex(String tag) {
