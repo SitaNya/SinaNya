@@ -368,6 +368,10 @@ class Flow {
             setRollMaxValue.set();
         }
 
+        if (isEn) {
+            sender(entityTypeMessages, entitySystemProperties.getCantInPrivate());
+        }
+
         toPrivate();
     }
 
