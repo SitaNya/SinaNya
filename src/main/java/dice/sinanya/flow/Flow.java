@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesBanList.frequentnessForGroupList;
 import static dice.sinanya.system.MessagesTag.*;
+import static dice.sinanya.tools.getinfo.BanList.insertGroupBanList;
 import static dice.sinanya.tools.getinfo.BanList.insertQqBanList;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
@@ -417,7 +418,7 @@ class Flow implements MakeNickToSender {
             CQ.sendGroupMsg(Long.parseLong(entityTypeMessages.getFromGroup()), "检测到极大量刷屏，正在退群拉黑");
             CQ.sendGroupMsg(162279609, "于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中频度达到" + timeList.size() + "已退群并拉黑");
             CQ.setGroupLeave(Long.parseLong(entityTypeMessages.getFromGroup()), false);
-            insertQqBanList(entityTypeMessages.getFromGroup(), "大量刷屏");
+            insertGroupBanList(entityTypeMessages.getFromGroup(), "大量刷屏");
         }
         frequentnessForGroupList.put(entityTypeMessages.getFromGroup(), timeList);
     }
