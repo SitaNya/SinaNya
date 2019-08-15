@@ -2,8 +2,12 @@ package dice.sinanya.tools.getinfo;
 
 import dice.sinanya.db.ban.InputBanList;
 import dice.sinanya.db.ban.SelectBanList;
+import dice.sinanya.db.heap.SelectOnlineBotList;
+import dice.sinanya.entity.EntityOtherBotInfo;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.exceptions.NotBanListInputException;
+
+import java.util.ArrayList;
 
 import static dice.sinanya.system.MessagesBanList.groupBanList;
 import static dice.sinanya.system.MessagesBanList.qqBanList;
@@ -58,7 +62,15 @@ public class BanList {
             qqBanList.remove(qq);
             sender(entityTypeMessages, "已将用户:\t" + entityTypeMessages.getMsg() + "移出云黑名单");
         } else {
-            sender(entityTypeMessages, "您无法删除此用户黑名单，录入人为: " + insertBanList.selectOthorInputBanQq(entityTypeMessages.getMsg(), entityTypeMessages));
+            String id = insertBanList.selectOthorInputBanQq(entityTypeMessages.getMsg(), entityTypeMessages);
+            ArrayList<EntityOtherBotInfo> otherBotInfos = new SelectOnlineBotList().selectOnlineBotList();
+            for (EntityOtherBotInfo entityOtherBotInfo : otherBotInfos) {
+                if (entityOtherBotInfo.getBotId().equals(id)) {
+                    id = entityOtherBotInfo.getBotName() + "(" + entityOtherBotInfo.getBotId() + ")";
+                    break;
+                }
+            }
+            sender(entityTypeMessages, "您无法删除此用户黑名单，录入人为: " + id);
         }
     }
 
@@ -68,7 +80,15 @@ public class BanList {
             groupBanList.remove(groupId);
             sender(entityTypeMessages, "已将群:\t" + entityTypeMessages.getMsg() + "移出云黑名单");
         } else {
-            sender(entityTypeMessages, "您无法删除此群黑名单，录入人为: " + insertBanList.selectOthorInputBanGroup(entityTypeMessages.getMsg(), entityTypeMessages));
+            String id = insertBanList.selectOthorInputBanGroup(entityTypeMessages.getMsg(), entityTypeMessages);
+            ArrayList<EntityOtherBotInfo> otherBotInfos = new SelectOnlineBotList().selectOnlineBotList();
+            for (EntityOtherBotInfo entityOtherBotInfo : otherBotInfos) {
+                if (entityOtherBotInfo.getBotId().equals(id)) {
+                    id = entityOtherBotInfo.getBotName() + "(" + entityOtherBotInfo.getBotId() + ")";
+                    break;
+                }
+            }
+            sender(entityTypeMessages, "您无法删除此群黑名单，录入人为: " + id);
         }
     }
 }
