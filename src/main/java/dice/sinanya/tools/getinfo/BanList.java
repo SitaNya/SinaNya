@@ -8,6 +8,7 @@ import dice.sinanya.exceptions.NotBanListInputException;
 import static dice.sinanya.system.MessagesBanList.groupBanList;
 import static dice.sinanya.system.MessagesBanList.qqBanList;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
+import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
  * @author SitaNya
@@ -52,12 +53,22 @@ public class BanList {
     }
 
     public static void removeQqBanList(String qq, EntityTypeMessages entityTypeMessages) throws NotBanListInputException {
-        insertBanList.removeQqBanList(qq, entityTypeMessages);
-        qqBanList.remove(qq);
+        boolean remove = insertBanList.removeQqBanList(qq, entityTypeMessages);
+        if (remove) {
+            qqBanList.remove(qq);
+            sender(entityTypeMessages, "已将用户:\t" + entityTypeMessages.getMsg() + "移出云黑名单");
+        } else {
+            sender(entityTypeMessages, "您无法删除此用户黑名单，录入人为: " + insertBanList.selectOthorInputBanQq(entityTypeMessages.getMsg(), entityTypeMessages));
+        }
     }
 
     public static void removeGroupBanList(String groupId, EntityTypeMessages entityTypeMessages) throws NotBanListInputException {
-        insertBanList.removeGroupBanList(groupId, entityTypeMessages);
-        groupBanList.remove(groupId);
+        boolean remove = insertBanList.removeGroupBanList(groupId, entityTypeMessages);
+        if (remove) {
+            groupBanList.remove(groupId);
+            sender(entityTypeMessages, "已将群:\t" + entityTypeMessages.getMsg() + "移出云黑名单");
+        } else {
+            sender(entityTypeMessages, "您无法删除此群黑名单，录入人为: " + insertBanList.selectOthorInputBanGroup(entityTypeMessages.getMsg(), entityTypeMessages));
+        }
     }
 }

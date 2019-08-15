@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
@@ -61,23 +62,27 @@ public class InputBanList {
     /**
      * 移除QQ群黑名单
      */
-    public void removeGroupBanList(String groupId, EntityTypeMessages entityTypeMessages) throws NotBanListInputException {
+    public boolean removeGroupBanList(String groupId, EntityTypeMessages entityTypeMessages) throws NotBanListInputException {
+        boolean remove = false;
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "delete from groupBanList where groupId=? and botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, groupId);
                 ps.setString(2, String.valueOf(CQ.getLoginQQ()));
                 ps.executeUpdate();
+                remove = true;
             }
         } catch (SQLException e) {
             throw new NotBanListInputException(entityTypeMessages);
         }
+        return remove;
     }
 
     /**
      * 移除QQ群黑名单
      */
-    public void removeQqBanList(String qq, EntityTypeMessages entityTypeMessages) throws NotBanListInputException {
+    public boolean removeQqBanList(String qq, EntityTypeMessages entityTypeMessages) throws NotBanListInputException {
+        boolean remove = false;
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "delete from qqBanList where qqId=? and botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -85,9 +90,53 @@ public class InputBanList {
                 ps.setLong(2, CQ.getLoginQQ());
 
                 ps.executeUpdate();
+                remove = true;
             }
         } catch (SQLException e) {
             throw new NotBanListInputException(entityTypeMessages);
         }
+        return remove;
+    }
+
+    /**
+     * 查询其它录入人
+     */
+    public String selectOthorInputBanQq(String qq, EntityTypeMessages entityTypeMessages) throws NotBanListInputException {
+        String inputBot = "";
+        try (Connection conn = DbUtil.getConnection()) {
+            String sql = "select botId from qqBanList where qqId=? ";
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, qq);
+                try (ResultSet set = ps.executeQuery()) {
+                    while (set.next()) {
+                        inputBot = set.getString("botId");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new NotBanListInputException(entityTypeMessages);
+        }
+        return inputBot;
+    }
+
+    /**
+     * 查询其它录入人
+     */
+    public String selectOthorInputBanGroup(String groupId, EntityTypeMessages entityTypeMessages) throws NotBanListInputException {
+        String inputBot = "";
+        try (Connection conn = DbUtil.getConnection()) {
+            String sql = "select botId from groupBanList where groupId=? ";
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, groupId);
+                try (ResultSet set = ps.executeQuery()) {
+                    while (set.next()) {
+                        inputBot = set.getString("botId");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new NotBanListInputException(entityTypeMessages);
+        }
+        return inputBot;
     }
 }

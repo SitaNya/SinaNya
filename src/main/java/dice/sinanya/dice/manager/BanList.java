@@ -48,8 +48,12 @@ public class BanList {
         try {
             checkMaster();
             isQqOrGroup(msg);
-            insertQqBanList(msg, "手工录入");
-            sender(entityTypeMessages, "已将用户:\t" + msg + "加入云黑名单");
+            if (groupBanList.containsKey(msg)) {
+                sender(entityTypeMessages, "用户:\t" + msg + "已在云黑名单中");
+            } else {
+                insertQqBanList(msg, "手工录入");
+                sender(entityTypeMessages, "已将用户:\t" + msg + "加入云黑名单");
+            }
         } catch (BanListInputNotIdException | NotMasterException e) {
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
@@ -69,8 +73,12 @@ public class BanList {
         try {
             checkMaster();
             isQqOrGroup(msg);
-            insertGroupBanList(msg, "手工录入");
-            sender(entityTypeMessages, "已将群:\t" + msg + "加入云黑名单");
+            if (groupBanList.containsKey(msg)) {
+                sender(entityTypeMessages, "群:\t" + msg + "已在云黑名单中");
+            } else {
+                insertGroupBanList(msg, "手工录入");
+                sender(entityTypeMessages, "已将群:\t" + msg + "加入云黑名单");
+            }
         } catch (BanListInputNotIdException | NotMasterException e) {
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
@@ -90,8 +98,11 @@ public class BanList {
         try {
             checkMaster();
             isQqOrGroup(msg);
-            removeQqBanList(msg, entityTypeMessages);
-            sender(entityTypeMessages, "已将用户:\t" + msg + "移出云黑名单");
+            if (qqBanList.containsKey(msg)) {
+                removeQqBanList(msg, entityTypeMessages);
+            } else {
+                sender(entityTypeMessages, "用户:\t" + msg + "不在云黑名单中");
+            }
         } catch (BanListInputNotIdException | NotBanListInputException | NotMasterException e) {
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
@@ -111,8 +122,13 @@ public class BanList {
         try {
             checkMaster();
             isQqOrGroup(msg);
-            removeGroupBanList(msg, entityTypeMessages);
-            sender(entityTypeMessages, "已将群:\t" + msg + "移出云黑名单");
+
+            if (groupBanList.containsKey(msg)) {
+                removeGroupBanList(msg, entityTypeMessages);
+                sender(entityTypeMessages, "已将群:\t" + msg + "移出云黑名单");
+            } else {
+                sender(entityTypeMessages, "用群:\t" + msg + "不在云黑名单中");
+            }
         } catch (BanListInputNotIdException | NotBanListInputException | NotMasterException e) {
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }

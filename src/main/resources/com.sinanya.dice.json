@@ -8,7 +8,7 @@
   // Api版本，本SDK为9
   "name": "com.sinanya.dice",
   // 应用名称
-  "version": "1.0.0",
+  "version": "3.6.0.0",
   // 应用版本
   "version_id": 1,
   // 应用顺序版本（每次发布时至少+1）
