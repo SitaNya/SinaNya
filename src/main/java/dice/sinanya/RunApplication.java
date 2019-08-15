@@ -251,7 +251,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     public int groupMsg(int subType, int msgId, long fromGroup, long fromQq, String fromAnonymous, String msg,
                         int font) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(MessagesTypes.GROUP_MSG, fromQq, fromGroup, msg);
-        if ((checkBeBanOrInBan(entityTypeMessages) == MSG_INTERCEPT) || !getBot(fromGroup)) {
+        if ((checkBeBanOrInBan(entityTypeMessages) == MSG_INTERCEPT)) {
             return MSG_INTERCEPT;
         }
 
@@ -261,6 +261,10 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
             }
         } catch (OnlyManagerException e) {
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
+        }
+
+        if (!getBot(fromGroup)){
+            return MSG_INTERCEPT;
         }
 
         if (msg.matches(commandHeader.toString())) {
@@ -289,7 +293,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     public int discussMsg(int subtype, int msgId, long fromDiscuss, long fromQq, String msg, int font) {
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(MessagesTypes.DISCUSS_MSG, fromQq, fromDiscuss,
                 msg);
-        if (checkBeBanOrInBan(entityTypeMessages) == MSG_INTERCEPT || !getBot(fromDiscuss)) {
+        if (checkBeBanOrInBan(entityTypeMessages) == MSG_INTERCEPT) {
             return MSG_INTERCEPT;
         }
 
@@ -299,6 +303,10 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
             }
         } catch (OnlyManagerException e) {
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
+        }
+
+        if (!getBot(fromGroup)){
+            return MSG_INTERCEPT;
         }
 
         if (msg.matches(commandHeader.toString())) {
