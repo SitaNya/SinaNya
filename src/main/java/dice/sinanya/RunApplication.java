@@ -305,7 +305,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
 
-        if (!getBot(fromGroup)){
+        if (!getBot(fromDiscuss)){
             return MSG_INTERCEPT;
         }
 
