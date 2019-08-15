@@ -250,6 +250,13 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     @Override
     public int groupMsg(int subType, int msgId, long fromGroup, long fromQq, String fromAnonymous, String msg,
                         int font) {
+        try {
+            if (!scheduler.isStarted()){
+                scheduler.start();
+            }
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(MessagesTypes.GROUP_MSG, fromQq, fromGroup, msg);
         if ((checkBeBanOrInBan(entityTypeMessages) == MSG_INTERCEPT)) {
             return MSG_INTERCEPT;

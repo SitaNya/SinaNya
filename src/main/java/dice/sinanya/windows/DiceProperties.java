@@ -31,7 +31,7 @@ public class DiceProperties extends MakeText {
     }
 
     public void init() {
-        JFrame jFrame = new Frame("个性化配置", 1200, 980).init();
+        JFrame jFrame = new Frame("个性化配置", 1600, 980).init();
 //        JPanel botSwitch = new Panel().init(jFrame, "开关", 510, 10, 400, 200);
 //        botSwitch.setLayout(new GridLayout(0, 1));
 
@@ -58,48 +58,48 @@ public class DiceProperties extends MakeText {
         propInfoPanel.setLayout(new GridLayout(0, 2));
         propInfo(propInfoPanel);
 
-        JPanel teamPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "小队信息", 0, 570, 400, 100);
+        JPanel teamPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "小队信息", 400, 0, 400, 100);
         teamPanel.setLayout(new GridLayout(0, 2));
         team(teamPanel);
 
-        JPanel dndInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "dnd信息", 0, 670, 400, 100);
+        JPanel dndInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "dnd信息", 400, 100, 400, 100);
         dndInfoPanel.setLayout(new GridLayout(0, 2));
         dndInfo(dndInfoPanel);
 
 
-        JPanel logInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "日志信息", 400, 0, 400, 280);
+        JPanel logInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "日志信息", 400, 200, 400, 280);
         logInfoPanel.setLayout(new GridLayout(0, 2));
         logInfo(logInfoPanel);
 
-        JPanel sanCheckPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "理智检定信息", 400, 280, 400, 210);
+        JPanel sanCheckPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "理智检定信息", 800, 0, 400, 210);
         sanCheckPanel.setLayout(new GridLayout(0, 2));
         sanCheck(sanCheckPanel);
 
-        JPanel otherPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "其余常用信息", 400, 490, 400, 125);
+        JPanel otherPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "其余常用信息", 800, 210, 400, 125);
         otherPanel.setLayout(new GridLayout(0, 2));
         other(otherPanel);
 
-        JPanel antagonizeInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "对抗信息", 400, 615, 400, 175);
+        JPanel antagonizeInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "对抗信息", 800, 335, 400, 175);
         antagonizeInfoPanel.setLayout(new GridLayout(0, 2));
         antagonizeInfo(antagonizeInfoPanel);
 
-        JPanel errorInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "其余报错信息", 400, 790, 400, 175);
+        JPanel errorInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "其余报错信息", 800, 510, 400, 175);
         errorInfoPanel.setLayout(new GridLayout(0, 2));
         errorInfo(errorInfoPanel);
 
-        JPanel diceReturnPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "骰点返回信息", 800, 0, 400, 965);
+        JPanel diceReturnPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "骰点返回信息", 1200, 0, 400, 965);
         diceReturnPanel.setLayout(new GridLayout(0, 2));
         diceReturn(diceReturnPanel);
 
     }
 
     private void save(JFrame jFrame) {
-        createButton(jFrame, "保存", 0, 800);
+        createButton(jFrame, "保存", 0, 600);
     }
 
     public void createButton(JFrame jFrame, String text, int x, int y) {
         JButton jButton = new JButton(text);
-        jButton.setBounds(x, y, getLength(text) * 4, 100);
+        jButton.setBounds(x, y, getLength(text) * 4, 70);
         jButton.addActionListener(e -> {
             entitySystemProperties.setBotStart(botStart.getText());
             entitySystemProperties.setBotAlreadyStart(botAlreadyStart.getText());

@@ -62,27 +62,23 @@ public class InputBanList {
     /**
      * 移除QQ群黑名单
      */
-    public boolean removeGroupBanList(String groupId, EntityTypeMessages entityTypeMessages) throws NotBanListInputException {
-        boolean remove = false;
+    public void removeGroupBanList(String groupId, EntityTypeMessages entityTypeMessages) throws NotBanListInputException {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "delete from groupBanList where groupId=? and botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, groupId);
                 ps.setString(2, String.valueOf(CQ.getLoginQQ()));
                 ps.executeUpdate();
-                remove = true;
             }
         } catch (SQLException e) {
             throw new NotBanListInputException(entityTypeMessages);
         }
-        return remove;
     }
 
     /**
      * 移除QQ群黑名单
      */
-    public boolean removeQqBanList(String qq, EntityTypeMessages entityTypeMessages) throws NotBanListInputException {
-        boolean remove = false;
+    public void removeQqBanList(String qq, EntityTypeMessages entityTypeMessages) throws NotBanListInputException {
         try (Connection conn = DbUtil.getConnection()) {
             String sql = "delete from qqBanList where qqId=? and botId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -90,12 +86,10 @@ public class InputBanList {
                 ps.setLong(2, CQ.getLoginQQ());
 
                 ps.executeUpdate();
-                remove = true;
             }
         } catch (SQLException e) {
             throw new NotBanListInputException(entityTypeMessages);
         }
-        return remove;
     }
 
     /**

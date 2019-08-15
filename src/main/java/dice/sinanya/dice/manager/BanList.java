@@ -125,9 +125,8 @@ public class BanList {
 
             if (groupBanList.containsKey(msg)) {
                 removeGroupBanList(msg, entityTypeMessages);
-                sender(entityTypeMessages, "已将群:\t" + msg + "移出云黑名单");
             } else {
-                sender(entityTypeMessages, "用群:\t" + msg + "不在云黑名单中");
+                sender(entityTypeMessages, "群:\t" + msg + "不在云黑名单中");
             }
         } catch (BanListInputNotIdException | NotBanListInputException | NotMasterException e) {
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));

@@ -9,6 +9,7 @@ import dice.sinanya.exceptions.NotBanListInputException;
 
 import java.util.ArrayList;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesBanList.groupBanList;
 import static dice.sinanya.system.MessagesBanList.qqBanList;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
@@ -57,38 +58,40 @@ public class BanList {
     }
 
     public static void removeQqBanList(String qq, EntityTypeMessages entityTypeMessages) throws NotBanListInputException {
-        boolean remove = insertBanList.removeQqBanList(qq, entityTypeMessages);
-        if (remove) {
+        String id = insertBanList.selectOthorInputBanQq(qq, entityTypeMessages);
+
+        if (Long.parseLong(id) == CQ.getLoginQQ()) {
+            insertBanList.removeQqBanList(qq, entityTypeMessages);
             qqBanList.remove(qq);
-            sender(entityTypeMessages, "已将用户:\t" + entityTypeMessages.getMsg() + "移出云黑名单");
-        } else {
-            String id = insertBanList.selectOthorInputBanQq(entityTypeMessages.getMsg(), entityTypeMessages);
-            ArrayList<EntityOtherBotInfo> otherBotInfos = new SelectOnlineBotList().selectOnlineBotList();
-            for (EntityOtherBotInfo entityOtherBotInfo : otherBotInfos) {
-                if (entityOtherBotInfo.getBotId().equals(id)) {
-                    id = entityOtherBotInfo.getBotName() + "(" + entityOtherBotInfo.getBotId() + ")";
-                    break;
-                }
+            sender(entityTypeMessages, "已将用户:\t" + qq + "移出云黑名单");
+            return;
+        }
+
+        ArrayList<EntityOtherBotInfo> otherBotInfos = new SelectOnlineBotList().selectOnlineBotList();
+        for (EntityOtherBotInfo entityOtherBotInfo : otherBotInfos) {
+            if (entityOtherBotInfo.getBotId().equals(id)) {
+                id = entityOtherBotInfo.getBotName() + "(" + entityOtherBotInfo.getBotId() + ")";
+                sender(entityTypeMessages, "您无法删除此用户黑名单，录入人为: " + id);
+                return;
             }
-            sender(entityTypeMessages, "您无法删除此用户黑名单，录入人为: " + id);
         }
     }
 
     public static void removeGroupBanList(String groupId, EntityTypeMessages entityTypeMessages) throws NotBanListInputException {
-        boolean remove = insertBanList.removeGroupBanList(groupId, entityTypeMessages);
-        if (remove) {
+        String id = insertBanList.selectOthorInputBanGroup(groupId, entityTypeMessages);
+        if (Long.parseLong(id) == CQ.getLoginQQ()) {
+            insertBanList.removeGroupBanList(groupId, entityTypeMessages);
             groupBanList.remove(groupId);
-            sender(entityTypeMessages, "已将群:\t" + entityTypeMessages.getMsg() + "移出云黑名单");
-        } else {
-            String id = insertBanList.selectOthorInputBanGroup(entityTypeMessages.getMsg(), entityTypeMessages);
-            ArrayList<EntityOtherBotInfo> otherBotInfos = new SelectOnlineBotList().selectOnlineBotList();
-            for (EntityOtherBotInfo entityOtherBotInfo : otherBotInfos) {
-                if (entityOtherBotInfo.getBotId().equals(id)) {
-                    id = entityOtherBotInfo.getBotName() + "(" + entityOtherBotInfo.getBotId() + ")";
-                    break;
-                }
+            sender(entityTypeMessages, "已将群:\t" +groupId + "移出云黑名单");
+            return;
+        }
+        ArrayList<EntityOtherBotInfo> otherBotInfos = new SelectOnlineBotList().selectOnlineBotList();
+        for (EntityOtherBotInfo entityOtherBotInfo : otherBotInfos) {
+            if (entityOtherBotInfo.getBotId().equals(id)) {
+                id = entityOtherBotInfo.getBotName() + "(" + entityOtherBotInfo.getBotId() + ")";
+                sender(entityTypeMessages, "您无法删除此群黑名单，录入人为: " + id);
+                return;
             }
-            sender(entityTypeMessages, "您无法删除此群黑名单，录入人为: " + id);
         }
     }
 }
