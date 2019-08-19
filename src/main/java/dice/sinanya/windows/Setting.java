@@ -4,26 +4,117 @@
 
 package dice.sinanya.windows;
 
+import dice.sinanya.db.properties.ban.InsertProperties;
+
 import javax.swing.*;
-import javax.swing.border.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import static dice.sinanya.system.MessagesLevel.*;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 
 /**
  * @author unknown
  */
-public class test extends JFrame {
-    public test() {
+public class Setting extends JFrame {
+    public Setting() {
         initComponents();
     }
 
-    private void save(MouseEvent e) {
+    private void saveSystem(MouseEvent e) {
+        entitySystemProperties.setBotStart(botStart.getText());
+        entitySystemProperties.setBotAlreadyStart(botAlreadyStart.getText());
+        entitySystemProperties.setBotStop(botStop.getText());
+        entitySystemProperties.setBotAlreadyStop(botAlreadyStop.getText());
+        entitySystemProperties.setBotExit(botExit.getText());
+        entitySystemProperties.setBotInfo(botInfo.getText());
+        entitySystemProperties.setBookCard(bookCard.getText());
+        entitySystemProperties.setBookRp(bookRp.getText());
+        entitySystemProperties.setBookKp(bookKp.getText());
+        entitySystemProperties.setBookMake(bookMake.getText());
+        entitySystemProperties.setSetPropFormat(setPropFormat.getText());
+        entitySystemProperties.setSetHelp(setHelp.getText());
+        entitySystemProperties.setNotFoundSkill(notFoundSkill.getText());
+        entitySystemProperties.setSetPropSuccess(setPropSuccess.getText());
+        entitySystemProperties.setManyRollsFormat(manyRollsFormat.getText());
+        entitySystemProperties.setDiceTimesTooBig(diceTimesTooBig.getText());
+        entitySystemProperties.setNeedKpGroup(needKpGroup.getText());
+        entitySystemProperties.setCantInPrivate(cantInPrivate.getText());
+        entitySystemProperties.setOnlyManager(onlyManager.getText());
+        entitySystemProperties.setAlreadyOpen(alreadyOpen.getText());
+        entitySystemProperties.setAlreadyClose(alreadyClose.getText());
+        entitySystemProperties.setNotFoundLog(notFoundLog.getText());
+        entitySystemProperties.setReadLock(readLock.getText());
+        entitySystemProperties.setDeleteOpenLog(deleteOpenLog.getText());
+        entitySystemProperties.setAppendLog(appendLog.getText());
+        entitySystemProperties.setCreateLog(createLog.getText());
+        entitySystemProperties.setCantEmptyLogName(cantEmptyLogName.getText());
+        entitySystemProperties.setDndInitIsEmtpy(dndInitIsEmtpy.getText());
+        entitySystemProperties.setClrDndInit(clrDndInit.getText());
+        entitySystemProperties.setAntagonizeOver(antagonizeOver.getText());
+        entitySystemProperties.setAntagonizeFirstSuccess(antagonizeFirstSuccess.getText());
+        entitySystemProperties.setAntagonizeSecondSuccess(antagonizeSecondSuccess.getText());
+        entitySystemProperties.setAntagonizeAllFailed(antagonizeAllFailed.getText());
+        entitySystemProperties.setAntagonizeDraw(antagonizeDraw.getText());
+        entitySystemProperties.setSanCheck(sanCheck.getText());
+        entitySystemProperties.setSymptom(symptom.getText());
+        entitySystemProperties.setSanCheckFumble(sanCheckFumble.getText());
+        entitySystemProperties.setSanCheckCriticalSuccess(sanCheckCriticalSuccess.getText());
+        entitySystemProperties.setSanCheckSuccess(sanCheckSuccess.getText());
+        entitySystemProperties.setSanCheckFailure(sanCheckFailure.getText());
+        entitySystemProperties.setEnSuccess(enSuccess.getText());
+        entitySystemProperties.setEnFailed(enFailed.getText());
+        entitySystemProperties.setHiddenDice(hiddenDice.getText());
+        entitySystemProperties.setTeamIsEmpty(teamIsEmpty.getText());
+        entitySystemProperties.setTeamMemberEnIsEmpty(teamMemberEnIsEmpty.getText());
+        entitySystemProperties.setCRITICAL_SUCCESS(criticalSuccess.getText());
+        entitySystemProperties.setEXTREME_SUCCESS(extremeSuccess.getText());
+        entitySystemProperties.setHARD_SUCCESS(headSuccess.getText());
+        entitySystemProperties.setSUCCESS(success.getText());
+        entitySystemProperties.setFAILURE(failure.getText());
+        entitySystemProperties.setFUMBLE(fumble.getText());
+        STR_CRITICAL_SUCCESS.setText(criticalSuccess.getText());
+        STR_EXTREME_SUCCESS.setText(extremeSuccess.getText());
+        STR_HARD_SUCCESS.setText(headSuccess.getText());
+        STR_SUCCESS.setText(success.getText());
+        STR_FAILURE.setText(failure.getText());
+        STR_FUMBLE.setText(fumble.getText());
+        new dice.sinanya.db.properties.system.InsertProperties().insertProperties(entitySystemProperties);
+        JOptionPane.showMessageDialog(null, "保存成功");
+    }
 
+    private void saveBan(MouseEvent e) {
+        entityBanProperties.setCloudBan(cloudBan.isSelected());
+        entityBanProperties.setPrometheus(Prometheus.isSelected());
+        entityBanProperties.setHeap(heap.isSelected());
+        entityBanProperties.setMaster(master.getText());
+        entityBanProperties.setBanListInputNotId(banListInputNotId.getText());
+        entityBanProperties.setNotMaster(notMaster.getText());
+        entityBanProperties.setIgnoreBanUser(ignoreBanUser.isSelected());
+        entityBanProperties.setLeaveByBanUser(leaveByBanUser.isSelected());
+        entityBanProperties.setLeaveGroupByBan(leaveGroupByBan.isSelected());
+        entityBanProperties.setBanGroupBecauseBan(banGroupBecauseBan.isSelected());
+        entityBanProperties.setBanGroupBecauseReduce(banGroupBecauseReduce.isSelected());
+        entityBanProperties.setBanUserBecauseReduce(banUserBecauseReduce.isSelected());
+        entityBanProperties.setAddGroup(addGroup.getText());
+        entityBanProperties.setAddFriend(addFriend.getText());
+        entityBanProperties.setRefuseGroupByBan(refuseGroupByBan.getText());
+        entityBanProperties.setRefuseFriendByBan(refuseFriendByBan.getText());
+        entityBanProperties.setClearGroup(Integer.parseInt(clearGroup.getText()));
+        entityBanProperties.setClearGroupByOff(Integer.parseInt(clearGroupByOff.getText()));
+        entityBanProperties.setAlterFrequentness(Integer.parseInt(alterFrequentness.getText()));
+        entityBanProperties.setBanFrequentness(Integer.parseInt(banFrequentness.getText()));
+        entityBanProperties.setPrometheusPort(Integer.parseInt(prometheusPort.getText()));
+        entityBanProperties.setClearGroupByOffInfo(clearGroupByOffInfo.getText());
+        entityBanProperties.setClearGroupInfo(clearGroupInfo.getText());
+        entityBanProperties.setFrequentnessAlterInfo(frequentnessAlterInfo.getText());
+        entityBanProperties.setFrequentnessBanInfo(frequentnessBanInfo.getText());
+        new InsertProperties().insertProperties(entityBanProperties);
         JOptionPane.showMessageDialog(null, "保存成功");
     }
 
@@ -33,12 +124,12 @@ public class test extends JFrame {
         tabContain = new JTabbedPane();
         setting = new JPanel();
         panel3 = new JPanel();
-        infoPanel = new JPanel();
-        qqText = new JLabel();
-        nickText = new JLabel();
-        qqValue = new JLabel();
-        nickValue = new JLabel();
         save = new JButton();
+        infoPanel6 = new JPanel();
+        qqText6 = new JLabel();
+        nickText6 = new JLabel();
+        qqValue6 = new JLabel();
+        nickValue6 = new JLabel();
         scrollPane1 = new JScrollPane();
         panel2 = new JPanel();
         panel6 = new JPanel();
@@ -46,30 +137,35 @@ public class test extends JFrame {
         label12 = new JLabel();
         label13 = new JLabel();
         label14 = new JLabel();
-        textField7 = new JTextField();
-        textField8 = new JTextField();
-        textField9 = new JTextField();
-        textField10 = new JTextField();
+        setPropFormat = new JTextField();
+        setHelp = new JTextField();
+        notFoundSkill = new JTextField();
+        setPropSuccess = new JTextField();
         panel13 = new JPanel();
         label45 = new JLabel();
         label46 = new JLabel();
         label47 = new JLabel();
-        textField41 = new JTextField();
-        textField42 = new JTextField();
-        textField43 = new JTextField();
+        enSuccess = new JTextField();
+        enFailed = new JTextField();
+        hiddenDice = new JTextField();
         panel5 = new JPanel();
-        label5 = new JLabel();
-        label6 = new JLabel();
-        label7 = new JLabel();
-        label8 = new JLabel();
+        botStartLable = new JLabel();
+        botAlreadyStartLable = new JLabel();
+        botStopLable = new JLabel();
+        botAlreadyStopLable = new JLabel();
         label9 = new JLabel();
         label10 = new JLabel();
-        textField1 = new JTextField();
-        textField2 = new JTextField();
-        textField3 = new JTextField();
-        textField4 = new JTextField();
-        textField5 = new JTextField();
-        textField6 = new JTextField();
+        botStart = new JTextField();
+        botAlreadyStart = new JTextField();
+        botStop = new JTextField();
+        botAlreadyStop = new JTextField();
+        botExit = new JTextField();
+        botInfo = new JTextField();
+        infoPanel7 = new JPanel();
+        qqText7 = new JLabel();
+        nickText7 = new JLabel();
+        qqValue7 = new JLabel();
+        nickValue7 = new JLabel();
         panel12 = new JPanel();
         label39 = new JLabel();
         label40 = new JLabel();
@@ -77,12 +173,12 @@ public class test extends JFrame {
         label42 = new JLabel();
         label43 = new JLabel();
         label44 = new JLabel();
-        textField35 = new JTextField();
-        textField36 = new JTextField();
-        textField37 = new JTextField();
-        textField38 = new JTextField();
-        textField39 = new JTextField();
-        textField40 = new JTextField();
+        sanCheck = new JTextField();
+        symptom = new JTextField();
+        sanCheckCriticalSuccess = new JTextField();
+        sanCheckFumble = new JTextField();
+        sanCheckSuccess = new JTextField();
+        sanCheckFailure = new JTextField();
         panel9 = new JPanel();
         label24 = new JLabel();
         label25 = new JLabel();
@@ -90,96 +186,96 @@ public class test extends JFrame {
         label27 = new JLabel();
         label28 = new JLabel();
         label29 = new JLabel();
-        textField20 = new JTextField();
-        textField21 = new JTextField();
-        textField22 = new JTextField();
-        textField23 = new JTextField();
-        textField24 = new JTextField();
-        textField25 = new JTextField();
+        createLog = new JTextField();
+        appendLog = new JTextField();
+        alreadyOpen = new JTextField();
+        alreadyClose = new JTextField();
+        notFoundLog = new JTextField();
+        cantEmptyLogName = new JTextField();
         label30 = new JLabel();
         label31 = new JLabel();
-        textField26 = new JTextField();
-        textField27 = new JTextField();
+        deleteOpenLog = new JTextField();
+        readLock = new JTextField();
         panel8 = new JPanel();
         label19 = new JLabel();
         label20 = new JLabel();
         label21 = new JLabel();
         label22 = new JLabel();
         label23 = new JLabel();
-        textField15 = new JTextField();
-        textField16 = new JTextField();
-        textField17 = new JTextField();
-        textField18 = new JTextField();
-        textField19 = new JTextField();
+        manyRollsFormat = new JTextField();
+        diceTimesTooBig = new JTextField();
+        needKpGroup = new JTextField();
+        cantInPrivate = new JTextField();
+        onlyManager = new JTextField();
         panel10 = new JPanel();
         label32 = new JLabel();
         label33 = new JLabel();
-        textField28 = new JTextField();
-        textField29 = new JTextField();
+        dndInitIsEmtpy = new JTextField();
+        clrDndInit = new JTextField();
         panel14 = new JPanel();
         label48 = new JLabel();
         label49 = new JLabel();
-        textField44 = new JTextField();
-        textField45 = new JTextField();
+        teamIsEmpty = new JTextField();
+        teamMemberEnIsEmpty = new JTextField();
         panel7 = new JPanel();
         label15 = new JLabel();
         label16 = new JLabel();
         label17 = new JLabel();
         label18 = new JLabel();
-        textField11 = new JTextField();
-        textField12 = new JTextField();
-        textField13 = new JTextField();
-        textField14 = new JTextField();
+        bookCard = new JTextField();
+        bookRp = new JTextField();
+        bookKp = new JTextField();
+        bookMake = new JTextField();
         panel11 = new JPanel();
         label34 = new JLabel();
         label35 = new JLabel();
         label36 = new JLabel();
         label37 = new JLabel();
-        textField30 = new JTextField();
-        textField31 = new JTextField();
-        textField32 = new JTextField();
-        textField33 = new JTextField();
+        antagonizeOver = new JTextField();
+        antagonizeFirstSuccess = new JTextField();
+        antagonizeSecondSuccess = new JTextField();
+        antagonizeAllFailed = new JTextField();
         label38 = new JLabel();
-        textField34 = new JTextField();
+        antagonizeDraw = new JTextField();
         panel1 = new JPanel();
         panel4 = new JPanel();
-        infoPanel2 = new JPanel();
-        qqText2 = new JLabel();
-        nickText2 = new JLabel();
-        qqValue2 = new JLabel();
-        nickValue2 = new JLabel();
         save2 = new JButton();
+        infoPanel5 = new JPanel();
+        qqText5 = new JLabel();
+        nickText5 = new JLabel();
+        qqValue5 = new JLabel();
+        nickValue5 = new JLabel();
         panel15 = new JPanel();
         label1 = new JLabel();
         scrollPane2 = new JScrollPane();
-        textArea1 = new JTextArea();
+        criticalSuccess = new JTextArea();
         label2 = new JLabel();
         scrollPane3 = new JScrollPane();
-        textArea2 = new JTextArea();
+        extremeSuccess = new JTextArea();
         label3 = new JLabel();
         scrollPane4 = new JScrollPane();
-        textArea3 = new JTextArea();
+        headSuccess = new JTextArea();
         label4 = new JLabel();
         label50 = new JLabel();
         label51 = new JLabel();
         scrollPane5 = new JScrollPane();
-        textArea4 = new JTextArea();
+        success = new JTextArea();
         scrollPane6 = new JScrollPane();
-        textArea5 = new JTextArea();
+        failure = new JTextArea();
         scrollPane7 = new JScrollPane();
-        textArea6 = new JTextArea();
+        fumble = new JTextArea();
         clean = new JPanel();
         monitorPanel2 = new JPanel();
         promethusPortText2 = new JLabel();
-        promethusPortValue2 = new JTextField();
-        checkBox1 = new JCheckBox();
-        checkBox2 = new JCheckBox();
+        prometheusPort = new JTextField();
+        Prometheus = new JCheckBox();
+        heap = new JCheckBox();
         setMaster = new JPanel();
         masterText = new JLabel();
         notMasterInfoText = new JLabel();
-        masterValue = new JTextField();
+        master = new JTextField();
         scrollPane8 = new JScrollPane();
-        textArea7 = new JTextArea();
+        notMaster = new JTextArea();
         panel16 = new JPanel();
         infoPanel3 = new JPanel();
         qqText3 = new JLabel();
@@ -192,35 +288,60 @@ public class test extends JFrame {
         label53 = new JLabel();
         label54 = new JLabel();
         label55 = new JLabel();
-        textField46 = new JTextField();
-        textField47 = new JTextField();
-        textField48 = new JTextField();
-        textField49 = new JTextField();
+        clearGroupByOff = new JTextField();
+        clearGroupByOffInfo = new JTextField();
+        clearGroup = new JTextField();
+        clearGroupInfo = new JTextField();
         panel18 = new JPanel();
         label56 = new JLabel();
         label57 = new JLabel();
         label58 = new JLabel();
         label59 = new JLabel();
-        textField50 = new JTextField();
-        textField51 = new JTextField();
-        textField52 = new JTextField();
-        textField53 = new JTextField();
+        alterFrequentness = new JTextField();
+        frequentnessAlterInfo = new JTextField();
+        banFrequentness = new JTextField();
+        frequentnessBanInfo = new JTextField();
         panel19 = new JPanel();
         panel20 = new JPanel();
+        save4 = new JButton();
         infoPanel4 = new JPanel();
         qqText4 = new JLabel();
         nickText4 = new JLabel();
         qqValue4 = new JLabel();
         nickValue4 = new JLabel();
-        save4 = new JButton();
         panel21 = new JPanel();
-        checkBox3 = new JCheckBox();
-        checkBox4 = new JCheckBox();
+        cloudBan = new JCheckBox();
+        ignoreBanUser = new JCheckBox();
+        leaveByBanUser = new JCheckBox();
+        leaveGroupByBan = new JCheckBox();
+        banGroupBecauseBan = new JCheckBox();
+        banGroupBecauseReduce = new JCheckBox();
+        banUserBecauseReduce = new JCheckBox();
+        panel23 = new JPanel();
+        label60 = new JLabel();
+        scrollPane9 = new JScrollPane();
+        addGroup = new JTextArea();
+        label61 = new JLabel();
+        scrollPane10 = new JScrollPane();
+        addFriend = new JTextArea();
+        label62 = new JLabel();
+        label63 = new JLabel();
+        label64 = new JLabel();
+        scrollPane12 = new JScrollPane();
+        refuseGroupByBan = new JTextArea();
+        scrollPane13 = new JScrollPane();
+        refuseFriendByBan = new JTextArea();
+        panel24 = new JPanel();
+        label65 = new JLabel();
+        banListInputNotId = new JTextField();
+        panel22 = new JPanel();
 
         //======== windows ========
         {
             windows.setTitle("SinaNya\u8dd1\u56e2\u9ab0\u70b9\u6838\u5fc3 By SitaNya");
-            windows.setLayout(null);
+            windows.setBackground(new Color(60, 63, 65));
+            windows.setAlwaysOnTop(true);
+            windows.setLayout(new BorderLayout());
 
             //======== tabContain ========
             {
@@ -234,59 +355,59 @@ public class test extends JFrame {
                         panel3.setBorder(new EtchedBorder());
                         panel3.setLayout(null);
 
-                        //======== infoPanel ========
-                        {
-                            infoPanel.setBorder(new BevelBorder(BevelBorder.LOWERED));
-                            infoPanel.setLayout(null);
-
-                            //---- qqText ----
-                            qqText.setText("\u5f53\u524d\u9ab0\u5a18QQ\u53f7:");
-                            infoPanel.add(qqText);
-                            qqText.setBounds(5, 5, 90, 20);
-
-                            //---- nickText ----
-                            nickText.setText("\u5f53\u524d\u9ab0\u5a18\u6635\u79f0:");
-                            infoPanel.add(nickText);
-                            nickText.setBounds(5, 40, 90, 20);
-
-                            //---- qqValue ----
-                            qqValue.setText("text");
-                            infoPanel.add(qqValue);
-                            qqValue.setBounds(20, 25, 50, qqValue.getPreferredSize().height);
-
-                            //---- nickValue ----
-                            nickValue.setText("text");
-                            infoPanel.add(nickValue);
-                            nickValue.setBounds(15, 65, 40, 16);
-
-                            {
-                                // compute preferred size
-                                Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < infoPanel.getComponentCount(); i++) {
-                                    Rectangle bounds = infoPanel.getComponent(i).getBounds();
-                                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                                }
-                                Insets insets = infoPanel.getInsets();
-                                preferredSize.width += insets.right;
-                                preferredSize.height += insets.bottom;
-                                infoPanel.setMinimumSize(preferredSize);
-                                infoPanel.setPreferredSize(preferredSize);
-                            }
-                        }
-                        panel3.add(infoPanel);
-                        infoPanel.setBounds(5, 5, 145, 105);
-
                         //---- save ----
                         save.setText("\u4fdd\u5b58");
                         save.addMouseListener(new MouseAdapter() {
                             @Override
                             public void mouseClicked(MouseEvent e) {
-                                save(e);
+                                saveSystem(e);
                             }
                         });
                         panel3.add(save);
                         save.setBounds(new Rectangle(new Point(35, 435), save.getPreferredSize()));
+
+                        //======== infoPanel6 ========
+                        {
+                            infoPanel6.setBorder(new BevelBorder(BevelBorder.LOWERED));
+                            infoPanel6.setLayout(null);
+
+                            //---- qqText6 ----
+                            qqText6.setText("\u5f53\u524d\u9ab0\u5a18QQ\u53f7:");
+                            infoPanel6.add(qqText6);
+                            qqText6.setBounds(10, 10, 90, 25);
+
+                            //---- nickText6 ----
+                            nickText6.setText("\u5f53\u524d\u9ab0\u5a18\u6635\u79f0:");
+                            infoPanel6.add(nickText6);
+                            nickText6.setBounds(10, 70, nickText6.getPreferredSize().width, 25);
+
+                            //---- qqValue6 ----
+                            qqValue6.setText("text");
+                            infoPanel6.add(qqValue6);
+                            qqValue6.setBounds(10, 40, qqValue6.getPreferredSize().width, 25);
+
+                            //---- nickValue6 ----
+                            nickValue6.setText("text");
+                            infoPanel6.add(nickValue6);
+                            nickValue6.setBounds(10, 100, nickValue6.getPreferredSize().width, 25);
+
+                            {
+                                // compute preferred size
+                                Dimension preferredSize = new Dimension();
+                                for (int i = 0; i < infoPanel6.getComponentCount(); i++) {
+                                    Rectangle bounds = infoPanel6.getComponent(i).getBounds();
+                                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                                }
+                                Insets insets = infoPanel6.getInsets();
+                                preferredSize.width += insets.right;
+                                preferredSize.height += insets.bottom;
+                                infoPanel6.setMinimumSize(preferredSize);
+                                infoPanel6.setPreferredSize(preferredSize);
+                            }
+                        }
+                        panel3.add(infoPanel6);
+                        infoPanel6.setBounds(5, 5, 145, 135);
 
                         {
                             // compute preferred size
@@ -338,14 +459,14 @@ public class test extends JFrame {
                                 label14.setText("\u5c5e\u6027\u8bbe\u7f6e\u6210\u529f");
                                 panel6.add(label14);
                                 label14.setBounds(10, 100, 117, 25);
-                                panel6.add(textField7);
-                                textField7.setBounds(145, 10, 300, 25);
-                                panel6.add(textField8);
-                                textField8.setBounds(145, 40, 300, 25);
-                                panel6.add(textField9);
-                                textField9.setBounds(145, 70, 300, 25);
-                                panel6.add(textField10);
-                                textField10.setBounds(145, 100, 300, 25);
+                                panel6.add(setPropFormat);
+                                setPropFormat.setBounds(145, 10, 300, 25);
+                                panel6.add(setHelp);
+                                setHelp.setBounds(145, 40, 300, 25);
+                                panel6.add(notFoundSkill);
+                                notFoundSkill.setBounds(145, 70, 300, 25);
+                                panel6.add(setPropSuccess);
+                                setPropSuccess.setBounds(145, 100, 300, 25);
 
                                 {
                                     // compute preferred size
@@ -385,12 +506,12 @@ public class test extends JFrame {
                                 label47.setText("\u6697\u9ab0\u8bed");
                                 panel13.add(label47);
                                 label47.setBounds(10, 70, label47.getPreferredSize().width, 20);
-                                panel13.add(textField41);
-                                textField41.setBounds(105, 10, 340, 25);
-                                panel13.add(textField42);
-                                textField42.setBounds(105, 40, 340, 25);
-                                panel13.add(textField43);
-                                textField43.setBounds(105, 70, 340, 25);
+                                panel13.add(enSuccess);
+                                enSuccess.setBounds(105, 10, 340, 25);
+                                panel13.add(enFailed);
+                                enFailed.setBounds(105, 40, 340, 25);
+                                panel13.add(hiddenDice);
+                                hiddenDice.setBounds(105, 70, 340, 25);
 
                                 {
                                     // compute preferred size
@@ -416,25 +537,25 @@ public class test extends JFrame {
                                 panel5.setToolTipText("\u673a\u5668\u4eba\u5e38\u7528\u4fe1\u606f");
                                 panel5.setLayout(null);
 
-                                //---- label5 ----
-                                label5.setText("\u5f00\u542f\u4fe1\u606f");
-                                panel5.add(label5);
-                                label5.setBounds(10, 10, label5.getPreferredSize().width, 25);
+                                //---- botStartLable ----
+                                botStartLable.setText("\u5f00\u542f\u4fe1\u606f");
+                                panel5.add(botStartLable);
+                                botStartLable.setBounds(10, 10, botStartLable.getPreferredSize().width, 25);
 
-                                //---- label6 ----
-                                label6.setText("\u5df2\u5f00\u542f\u63d0\u793a");
-                                panel5.add(label6);
-                                label6.setBounds(10, 40, label6.getPreferredSize().width, 20);
+                                //---- botAlreadyStartLable ----
+                                botAlreadyStartLable.setText("\u5df2\u5f00\u542f\u63d0\u793a");
+                                panel5.add(botAlreadyStartLable);
+                                botAlreadyStartLable.setBounds(10, 40, botAlreadyStartLable.getPreferredSize().width, 20);
 
-                                //---- label7 ----
-                                label7.setText("\u5173\u95ed\u4fe1\u606f");
-                                panel5.add(label7);
-                                label7.setBounds(10, 70, label7.getPreferredSize().width, 20);
+                                //---- botStopLable ----
+                                botStopLable.setText("\u5173\u95ed\u4fe1\u606f");
+                                panel5.add(botStopLable);
+                                botStopLable.setBounds(10, 70, botStopLable.getPreferredSize().width, 20);
 
-                                //---- label8 ----
-                                label8.setText("\u5df2\u5173\u95ed\u63d0\u793a");
-                                panel5.add(label8);
-                                label8.setBounds(10, 100, label8.getPreferredSize().width, 20);
+                                //---- botAlreadyStopLable ----
+                                botAlreadyStopLable.setText("\u5df2\u5173\u95ed\u63d0\u793a");
+                                panel5.add(botAlreadyStopLable);
+                                botAlreadyStopLable.setBounds(10, 100, botAlreadyStopLable.getPreferredSize().width, 20);
 
                                 //---- label9 ----
                                 label9.setText("\u9000\u7fa4\u63d0\u793a");
@@ -445,18 +566,61 @@ public class test extends JFrame {
                                 label10.setText("\u673a\u5668\u4eba\u4fe1\u606f\u63d0\u793a");
                                 panel5.add(label10);
                                 label10.setBounds(10, 160, label10.getPreferredSize().width, 20);
-                                panel5.add(textField1);
-                                textField1.setBounds(105, 10, 340, 25);
-                                panel5.add(textField2);
-                                textField2.setBounds(105, 40, 340, 25);
-                                panel5.add(textField3);
-                                textField3.setBounds(105, 70, 340, 25);
-                                panel5.add(textField4);
-                                textField4.setBounds(105, 100, 340, 25);
-                                panel5.add(textField5);
-                                textField5.setBounds(105, 130, 340, 25);
-                                panel5.add(textField6);
-                                textField6.setBounds(105, 160, 340, 25);
+                                panel5.add(botStart);
+                                botStart.setBounds(105, 10, 340, 25);
+                                panel5.add(botAlreadyStart);
+                                botAlreadyStart.setBounds(105, 40, 340, 25);
+                                panel5.add(botStop);
+                                botStop.setBounds(105, 70, 340, 25);
+                                panel5.add(botAlreadyStop);
+                                botAlreadyStop.setBounds(105, 100, 340, 25);
+                                panel5.add(botExit);
+                                botExit.setBounds(105, 130, 340, 25);
+                                panel5.add(botInfo);
+                                botInfo.setBounds(105, 160, 340, 25);
+
+                                //======== infoPanel7 ========
+                                {
+                                    infoPanel7.setBorder(new BevelBorder(BevelBorder.LOWERED));
+                                    infoPanel7.setLayout(null);
+
+                                    //---- qqText7 ----
+                                    qqText7.setText("\u5f53\u524d\u9ab0\u5a18QQ\u53f7:");
+                                    infoPanel7.add(qqText7);
+                                    qqText7.setBounds(10, 10, 90, 25);
+
+                                    //---- nickText7 ----
+                                    nickText7.setText("\u5f53\u524d\u9ab0\u5a18\u6635\u79f0:");
+                                    infoPanel7.add(nickText7);
+                                    nickText7.setBounds(10, 70, nickText7.getPreferredSize().width, 25);
+
+                                    //---- qqValue7 ----
+                                    qqValue7.setText("text");
+                                    infoPanel7.add(qqValue7);
+                                    qqValue7.setBounds(10, 40, qqValue7.getPreferredSize().width, 25);
+
+                                    //---- nickValue7 ----
+                                    nickValue7.setText("text");
+                                    infoPanel7.add(nickValue7);
+                                    nickValue7.setBounds(10, 100, nickValue7.getPreferredSize().width, 25);
+
+                                    {
+                                        // compute preferred size
+                                        Dimension preferredSize = new Dimension();
+                                        for (int i = 0; i < infoPanel7.getComponentCount(); i++) {
+                                            Rectangle bounds = infoPanel7.getComponent(i).getBounds();
+                                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                                        }
+                                        Insets insets = infoPanel7.getInsets();
+                                        preferredSize.width += insets.right;
+                                        preferredSize.height += insets.bottom;
+                                        infoPanel7.setMinimumSize(preferredSize);
+                                        infoPanel7.setPreferredSize(preferredSize);
+                                    }
+                                }
+                                panel5.add(infoPanel7);
+                                infoPanel7.setBounds(0, 190, 145, 135);
 
                                 {
                                     // compute preferred size
@@ -511,33 +675,18 @@ public class test extends JFrame {
                                 label44.setText("SC\u5931\u8d25\u9644\u52a0\u8bed");
                                 panel12.add(label44);
                                 label44.setBounds(10, 160, label44.getPreferredSize().width, 20);
-                                panel12.add(textField35);
-                                textField35.setBounds(105, 10, 340, 25);
-                                panel12.add(textField36);
-                                textField36.setBounds(105, 40, 340, 25);
-                                panel12.add(textField37);
-                                textField37.setBounds(105, 70, 340, 25);
-                                panel12.add(textField38);
-                                textField38.setBounds(105, 100, 340, 25);
-                                panel12.add(textField39);
-                                textField39.setBounds(105, 130, 340, 25);
-                                panel12.add(textField40);
-                                textField40.setBounds(105, 160, 340, 25);
-
-                                {
-                                    // compute preferred size
-                                    Dimension preferredSize = new Dimension();
-                                    for(int i = 0; i < panel12.getComponentCount(); i++) {
-                                        Rectangle bounds = panel12.getComponent(i).getBounds();
-                                        preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                                        preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                                    }
-                                    Insets insets = panel12.getInsets();
-                                    preferredSize.width += insets.right;
-                                    preferredSize.height += insets.bottom;
-                                    panel12.setMinimumSize(preferredSize);
-                                    panel12.setPreferredSize(preferredSize);
-                                }
+                                panel12.add(sanCheck);
+                                sanCheck.setBounds(105, 10, 340, 25);
+                                panel12.add(symptom);
+                                symptom.setBounds(105, 40, 340, 25);
+                                panel12.add(sanCheckCriticalSuccess);
+                                sanCheckCriticalSuccess.setBounds(105, 70, 340, 25);
+                                panel12.add(sanCheckFumble);
+                                sanCheckFumble.setBounds(105, 100, 340, 25);
+                                panel12.add(sanCheckSuccess);
+                                sanCheckSuccess.setBounds(105, 130, 340, 25);
+                                panel12.add(sanCheckFailure);
+                                sanCheckFailure.setBounds(105, 160, 340, 25);
                             }
                             panel2.add(panel12);
                             panel12.setBounds(10, 470, 460, 195);
@@ -577,18 +726,18 @@ public class test extends JFrame {
                                 label29.setText("\u4e0d\u53ef\u4f7f\u7528\u7a7a\u65e5\u5fd7\u540d");
                                 panel9.add(label29);
                                 label29.setBounds(10, 160, label29.getPreferredSize().width, 20);
-                                panel9.add(textField20);
-                                textField20.setBounds(150, 10, 290, 25);
-                                panel9.add(textField21);
-                                textField21.setBounds(150, 40, 290, 25);
-                                panel9.add(textField22);
-                                textField22.setBounds(150, 70, 290, 25);
-                                panel9.add(textField23);
-                                textField23.setBounds(150, 100, 290, 25);
-                                panel9.add(textField24);
-                                textField24.setBounds(150, 130, 290, 25);
-                                panel9.add(textField25);
-                                textField25.setBounds(150, 160, 290, 25);
+                                panel9.add(createLog);
+                                createLog.setBounds(150, 10, 290, 25);
+                                panel9.add(appendLog);
+                                appendLog.setBounds(150, 40, 290, 25);
+                                panel9.add(alreadyOpen);
+                                alreadyOpen.setBounds(150, 70, 290, 25);
+                                panel9.add(alreadyClose);
+                                alreadyClose.setBounds(150, 100, 290, 25);
+                                panel9.add(notFoundLog);
+                                notFoundLog.setBounds(150, 130, 290, 25);
+                                panel9.add(cantEmptyLogName);
+                                cantEmptyLogName.setBounds(150, 160, 290, 25);
 
                                 //---- label30 ----
                                 label30.setText("\u65e0\u6cd5\u5220\u9664\u5df2\u5f00\u542f\u7684\u65e5\u5fd7");
@@ -599,10 +748,10 @@ public class test extends JFrame {
                                 label31.setText("\u83b7\u53d6\u65e5\u5fd7\u961f\u5217\u5835\u585e");
                                 panel9.add(label31);
                                 label31.setBounds(10, 220, label31.getPreferredSize().width, 20);
-                                panel9.add(textField26);
-                                textField26.setBounds(150, 190, 290, 25);
-                                panel9.add(textField27);
-                                textField27.setBounds(150, 220, 290, 25);
+                                panel9.add(deleteOpenLog);
+                                deleteOpenLog.setBounds(150, 190, 290, 25);
+                                panel9.add(readLock);
+                                readLock.setBounds(150, 220, 290, 25);
 
                                 {
                                     // compute preferred size
@@ -652,16 +801,16 @@ public class test extends JFrame {
                                 label23.setText("\u4ec5\u7fa4\u4e3b\u6216\u7ba1\u7406\u5458\u53ef\u7528");
                                 panel8.add(label23);
                                 label23.setBounds(10, 130, label23.getPreferredSize().width, 20);
-                                panel8.add(textField15);
-                                textField15.setBounds(175, 10, 270, 25);
-                                panel8.add(textField16);
-                                textField16.setBounds(175, 40, 270, 25);
-                                panel8.add(textField17);
-                                textField17.setBounds(175, 70, 270, 25);
-                                panel8.add(textField18);
-                                textField18.setBounds(175, 100, 270, 25);
-                                panel8.add(textField19);
-                                textField19.setBounds(175, 130, 270, 25);
+                                panel8.add(manyRollsFormat);
+                                manyRollsFormat.setBounds(175, 10, 270, 25);
+                                panel8.add(diceTimesTooBig);
+                                diceTimesTooBig.setBounds(175, 40, 270, 25);
+                                panel8.add(needKpGroup);
+                                needKpGroup.setBounds(175, 70, 270, 25);
+                                panel8.add(cantInPrivate);
+                                cantInPrivate.setBounds(175, 100, 270, 25);
+                                panel8.add(onlyManager);
+                                onlyManager.setBounds(175, 130, 270, 25);
 
                                 {
                                     // compute preferred size
@@ -695,10 +844,10 @@ public class test extends JFrame {
                                 label33.setText("\u6e05\u7a7a\u5148\u653b\u5217\u8868");
                                 panel10.add(label33);
                                 label33.setBounds(10, 40, 117, 25);
-                                panel10.add(textField28);
-                                textField28.setBounds(145, 10, 300, 25);
-                                panel10.add(textField29);
-                                textField29.setBounds(145, 40, 300, 25);
+                                panel10.add(dndInitIsEmtpy);
+                                dndInitIsEmtpy.setBounds(145, 10, 300, 25);
+                                panel10.add(clrDndInit);
+                                clrDndInit.setBounds(145, 40, 300, 25);
 
                                 {
                                     // compute preferred size
@@ -733,10 +882,10 @@ public class test extends JFrame {
                                 label49.setText("\u5f53\u524d\u5c0f\u961fEN\u5217\u8868\u4e3a\u7a7a");
                                 panel14.add(label49);
                                 label49.setBounds(10, 40, label49.getPreferredSize().width, 20);
-                                panel14.add(textField44);
-                                textField44.setBounds(105, 10, 340, 25);
-                                panel14.add(textField45);
-                                textField45.setBounds(105, 40, 340, 25);
+                                panel14.add(teamIsEmpty);
+                                teamIsEmpty.setBounds(145, 10, 300, 25);
+                                panel14.add(teamMemberEnIsEmpty);
+                                teamMemberEnIsEmpty.setBounds(145, 40, 300, 25);
 
                                 {
                                     // compute preferred size
@@ -780,14 +929,14 @@ public class test extends JFrame {
                                 label18.setText("\u8f66\u5361\u6307\u5357\u94fe\u63a5");
                                 panel7.add(label18);
                                 label18.setBounds(10, 100, 117, 25);
-                                panel7.add(textField11);
-                                textField11.setBounds(145, 10, 300, 25);
-                                panel7.add(textField12);
-                                textField12.setBounds(145, 40, 300, 25);
-                                panel7.add(textField13);
-                                textField13.setBounds(145, 70, 300, 25);
-                                panel7.add(textField14);
-                                textField14.setBounds(145, 100, 300, 25);
+                                panel7.add(bookCard);
+                                bookCard.setBounds(145, 10, 300, 25);
+                                panel7.add(bookRp);
+                                bookRp.setBounds(145, 40, 300, 25);
+                                panel7.add(bookKp);
+                                bookKp.setBounds(145, 70, 300, 25);
+                                panel7.add(bookMake);
+                                bookMake.setBounds(145, 100, 300, 25);
 
                                 {
                                     // compute preferred size
@@ -831,21 +980,21 @@ public class test extends JFrame {
                                 label37.setText("\u5168\u90e8\u5931\u8d25");
                                 panel11.add(label37);
                                 label37.setBounds(10, 100, 117, 25);
-                                panel11.add(textField30);
-                                textField30.setBounds(145, 10, 300, 25);
-                                panel11.add(textField31);
-                                textField31.setBounds(145, 40, 300, 25);
-                                panel11.add(textField32);
-                                textField32.setBounds(145, 70, 300, 25);
-                                panel11.add(textField33);
-                                textField33.setBounds(145, 100, 300, 25);
+                                panel11.add(antagonizeOver);
+                                antagonizeOver.setBounds(145, 10, 300, 25);
+                                panel11.add(antagonizeFirstSuccess);
+                                antagonizeFirstSuccess.setBounds(145, 40, 300, 25);
+                                panel11.add(antagonizeSecondSuccess);
+                                antagonizeSecondSuccess.setBounds(145, 70, 300, 25);
+                                panel11.add(antagonizeAllFailed);
+                                antagonizeAllFailed.setBounds(145, 100, 300, 25);
 
                                 //---- label38 ----
                                 label38.setText("\u5e73\u624b");
                                 panel11.add(label38);
-                                label38.setBounds(0, 130, 117, 25);
-                                panel11.add(textField34);
-                                textField34.setBounds(150, 130, 300, 25);
+                                label38.setBounds(10, 130, 117, 25);
+                                panel11.add(antagonizeDraw);
+                                antagonizeDraw.setBounds(145, 130, 300, 25);
 
                                 {
                                     // compute preferred size
@@ -883,7 +1032,7 @@ public class test extends JFrame {
                         scrollPane1.setViewportView(panel2);
                     }
                     setting.add(scrollPane1);
-                    scrollPane1.setBounds(170, 10, 970, 480);
+                    scrollPane1.setBounds(170, 10, 970, 820);
 
                     {
                         // compute preferred size
@@ -911,59 +1060,59 @@ public class test extends JFrame {
                         panel4.setBorder(new EtchedBorder());
                         panel4.setLayout(null);
 
-                        //======== infoPanel2 ========
-                        {
-                            infoPanel2.setBorder(new BevelBorder(BevelBorder.LOWERED));
-                            infoPanel2.setLayout(null);
-
-                            //---- qqText2 ----
-                            qqText2.setText("\u5f53\u524d\u9ab0\u5a18QQ\u53f7:");
-                            infoPanel2.add(qqText2);
-                            qqText2.setBounds(5, 5, 90, 20);
-
-                            //---- nickText2 ----
-                            nickText2.setText("\u5f53\u524d\u9ab0\u5a18\u6635\u79f0:");
-                            infoPanel2.add(nickText2);
-                            nickText2.setBounds(5, 40, 90, 20);
-
-                            //---- qqValue2 ----
-                            qqValue2.setText("text");
-                            infoPanel2.add(qqValue2);
-                            qqValue2.setBounds(20, 25, 50, qqValue2.getPreferredSize().height);
-
-                            //---- nickValue2 ----
-                            nickValue2.setText("text");
-                            infoPanel2.add(nickValue2);
-                            nickValue2.setBounds(15, 65, 40, 16);
-
-                            {
-                                // compute preferred size
-                                Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < infoPanel2.getComponentCount(); i++) {
-                                    Rectangle bounds = infoPanel2.getComponent(i).getBounds();
-                                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                                }
-                                Insets insets = infoPanel2.getInsets();
-                                preferredSize.width += insets.right;
-                                preferredSize.height += insets.bottom;
-                                infoPanel2.setMinimumSize(preferredSize);
-                                infoPanel2.setPreferredSize(preferredSize);
-                            }
-                        }
-                        panel4.add(infoPanel2);
-                        infoPanel2.setBounds(5, 5, 145, 105);
-
                         //---- save2 ----
                         save2.setText("\u4fdd\u5b58");
                         save2.addMouseListener(new MouseAdapter() {
                             @Override
                             public void mouseClicked(MouseEvent e) {
-                                save(e);
+                                saveSystem(e);
                             }
                         });
                         panel4.add(save2);
                         save2.setBounds(new Rectangle(new Point(35, 435), save2.getPreferredSize()));
+
+                        //======== infoPanel5 ========
+                        {
+                            infoPanel5.setBorder(new BevelBorder(BevelBorder.LOWERED));
+                            infoPanel5.setLayout(null);
+
+                            //---- qqText5 ----
+                            qqText5.setText("\u5f53\u524d\u9ab0\u5a18QQ\u53f7:");
+                            infoPanel5.add(qqText5);
+                            qqText5.setBounds(10, 10, 90, 25);
+
+                            //---- nickText5 ----
+                            nickText5.setText("\u5f53\u524d\u9ab0\u5a18\u6635\u79f0:");
+                            infoPanel5.add(nickText5);
+                            nickText5.setBounds(10, 70, nickText5.getPreferredSize().width, 25);
+
+                            //---- qqValue5 ----
+                            qqValue5.setText("text");
+                            infoPanel5.add(qqValue5);
+                            qqValue5.setBounds(10, 40, qqValue5.getPreferredSize().width, 25);
+
+                            //---- nickValue5 ----
+                            nickValue5.setText("text");
+                            infoPanel5.add(nickValue5);
+                            nickValue5.setBounds(10, 100, nickValue5.getPreferredSize().width, 25);
+
+                            {
+                                // compute preferred size
+                                Dimension preferredSize = new Dimension();
+                                for (int i = 0; i < infoPanel5.getComponentCount(); i++) {
+                                    Rectangle bounds = infoPanel5.getComponent(i).getBounds();
+                                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                                }
+                                Insets insets = infoPanel5.getInsets();
+                                preferredSize.width += insets.right;
+                                preferredSize.height += insets.bottom;
+                                infoPanel5.setMinimumSize(preferredSize);
+                                infoPanel5.setPreferredSize(preferredSize);
+                            }
+                        }
+                        panel4.add(infoPanel5);
+                        infoPanel5.setBounds(5, 5, 145, 135);
 
                         {
                             // compute preferred size
@@ -995,7 +1144,7 @@ public class test extends JFrame {
 
                         //======== scrollPane2 ========
                         {
-                            scrollPane2.setViewportView(textArea1);
+                            scrollPane2.setViewportView(criticalSuccess);
                         }
                         panel15.add(scrollPane2);
                         scrollPane2.setBounds(10, 30, 440, 120);
@@ -1007,7 +1156,7 @@ public class test extends JFrame {
 
                         //======== scrollPane3 ========
                         {
-                            scrollPane3.setViewportView(textArea2);
+                            scrollPane3.setViewportView(extremeSuccess);
                         }
                         panel15.add(scrollPane3);
                         scrollPane3.setBounds(10, 185, 440, 120);
@@ -1019,7 +1168,7 @@ public class test extends JFrame {
 
                         //======== scrollPane4 ========
                         {
-                            scrollPane4.setViewportView(textArea3);
+                            scrollPane4.setViewportView(headSuccess);
                         }
                         panel15.add(scrollPane4);
                         scrollPane4.setBounds(10, 340, 440, 120);
@@ -1041,21 +1190,21 @@ public class test extends JFrame {
 
                         //======== scrollPane5 ========
                         {
-                            scrollPane5.setViewportView(textArea4);
+                            scrollPane5.setViewportView(success);
                         }
                         panel15.add(scrollPane5);
                         scrollPane5.setBounds(490, 30, 440, 120);
 
                         //======== scrollPane6 ========
                         {
-                            scrollPane6.setViewportView(textArea5);
+                            scrollPane6.setViewportView(failure);
                         }
                         panel15.add(scrollPane6);
                         scrollPane6.setBounds(490, 185, 440, 120);
 
                         //======== scrollPane7 ========
                         {
-                            scrollPane7.setViewportView(textArea6);
+                            scrollPane7.setViewportView(fumble);
                         }
                         panel15.add(scrollPane7);
                         scrollPane7.setBounds(490, 340, 440, 120);
@@ -1109,18 +1258,18 @@ public class test extends JFrame {
                         promethusPortText2.setText("\u666e\u7f57\u7c73\u4fee\u65af\u81ea\u5b9a\u4e49\u7aef\u53e3");
                         monitorPanel2.add(promethusPortText2);
                         promethusPortText2.setBounds(10, 40, promethusPortText2.getPreferredSize().width, 25);
-                        monitorPanel2.add(promethusPortValue2);
-                        promethusPortValue2.setBounds(140, 40, 40, 25);
+                        monitorPanel2.add(prometheusPort);
+                        prometheusPort.setBounds(140, 40, 55, 25);
 
-                        //---- checkBox1 ----
-                        checkBox1.setText("\u542f\u7528\u666e\u7f57\u7c73\u4fee\u65af\u76d1\u63a7\u4e0a\u62a5");
-                        monitorPanel2.add(checkBox1);
-                        checkBox1.setBounds(new Rectangle(new Point(20, 10), checkBox1.getPreferredSize()));
+                        //---- Prometheus ----
+                        Prometheus.setText("\u542f\u7528\u666e\u7f57\u7c73\u4fee\u65af\u76d1\u63a7\u4e0a\u62a5");
+                        monitorPanel2.add(Prometheus);
+                        Prometheus.setBounds(new Rectangle(new Point(10, 10), Prometheus.getPreferredSize()));
 
-                        //---- checkBox2 ----
-                        checkBox2.setText("\u542f\u7528\u5fc3\u8df3\u62a5\u544a");
-                        monitorPanel2.add(checkBox2);
-                        checkBox2.setBounds(new Rectangle(new Point(40, 65), checkBox2.getPreferredSize()));
+                        //---- heap ----
+                        heap.setText("\u542f\u7528\u5fc3\u8df3\u62a5\u544a");
+                        monitorPanel2.add(heap);
+                        heap.setBounds(new Rectangle(new Point(10, 70), heap.getPreferredSize()));
 
                         {
                             // compute preferred size
@@ -1154,12 +1303,12 @@ public class test extends JFrame {
                         notMasterInfoText.setText("\u975eMaster\u547d\u4ee4\u56de\u590d");
                         setMaster.add(notMasterInfoText);
                         notMasterInfoText.setBounds(10, 40, 220, 25);
-                        setMaster.add(masterValue);
-                        masterValue.setBounds(80, 10, 144, masterValue.getPreferredSize().height);
+                        setMaster.add(master);
+                        master.setBounds(80, 10, 144, master.getPreferredSize().height);
 
                         //======== scrollPane8 ========
                         {
-                            scrollPane8.setViewportView(textArea7);
+                            scrollPane8.setViewportView(notMaster);
                         }
                         setMaster.add(scrollPane8);
                         scrollPane8.setBounds(15, 75, 205, 75);
@@ -1195,22 +1344,22 @@ public class test extends JFrame {
                             //---- qqText3 ----
                             qqText3.setText("\u5f53\u524d\u9ab0\u5a18QQ\u53f7:");
                             infoPanel3.add(qqText3);
-                            qqText3.setBounds(5, 5, 90, 20);
+                            qqText3.setBounds(10, 10, 90, 25);
 
                             //---- nickText3 ----
                             nickText3.setText("\u5f53\u524d\u9ab0\u5a18\u6635\u79f0:");
                             infoPanel3.add(nickText3);
-                            nickText3.setBounds(5, 40, 90, 20);
+                            nickText3.setBounds(10, 70, nickText3.getPreferredSize().width, 25);
 
                             //---- qqValue3 ----
                             qqValue3.setText("text");
                             infoPanel3.add(qqValue3);
-                            qqValue3.setBounds(20, 25, 50, qqValue3.getPreferredSize().height);
+                            qqValue3.setBounds(10, 40, qqValue3.getPreferredSize().width, 25);
 
                             //---- nickValue3 ----
                             nickValue3.setText("text");
                             infoPanel3.add(nickValue3);
-                            nickValue3.setBounds(15, 65, 40, 16);
+                            nickValue3.setBounds(10, 100, nickValue3.getPreferredSize().width, 25);
 
                             {
                                 // compute preferred size
@@ -1228,14 +1377,14 @@ public class test extends JFrame {
                             }
                         }
                         panel16.add(infoPanel3);
-                        infoPanel3.setBounds(5, 5, 145, 105);
+                        infoPanel3.setBounds(5, 5, 145, 135);
 
                         //---- save3 ----
                         save3.setText("\u4fdd\u5b58");
                         save3.addMouseListener(new MouseAdapter() {
                             @Override
                             public void mouseClicked(MouseEvent e) {
-                                save(e);
+                                saveBan(e);
                             }
                         });
                         panel16.add(save3);
@@ -1284,14 +1433,14 @@ public class test extends JFrame {
                         label55.setText("\u5e9f\u5f03\u7fa4\u6e05\u7406\u7528\u8bed");
                         panel17.add(label55);
                         label55.setBounds(10, 100, label55.getPreferredSize().width, 20);
-                        panel17.add(textField46);
-                        textField46.setBounds(205, 10, 320, 25);
-                        panel17.add(textField47);
-                        textField47.setBounds(205, 40, 320, 25);
-                        panel17.add(textField48);
-                        textField48.setBounds(205, 70, 320, 25);
-                        panel17.add(textField49);
-                        textField49.setBounds(205, 100, 320, 25);
+                        panel17.add(clearGroupByOff);
+                        clearGroupByOff.setBounds(205, 10, 320, 25);
+                        panel17.add(clearGroupByOffInfo);
+                        clearGroupByOffInfo.setBounds(205, 40, 320, 25);
+                        panel17.add(clearGroup);
+                        clearGroup.setBounds(205, 70, 320, 25);
+                        panel17.add(clearGroupInfo);
+                        clearGroupInfo.setBounds(205, 100, 320, 25);
 
                         {
                             // compute preferred size
@@ -1336,14 +1485,14 @@ public class test extends JFrame {
                         label59.setText("\u62c9\u9ed1\u9000\u7fa4\u5237\u5c4f\u7528\u8bed");
                         panel18.add(label59);
                         label59.setBounds(10, 100, label59.getPreferredSize().width, 20);
-                        panel18.add(textField50);
-                        textField50.setBounds(205, 10, 320, 25);
-                        panel18.add(textField51);
-                        textField51.setBounds(205, 40, 320, 25);
-                        panel18.add(textField52);
-                        textField52.setBounds(205, 70, 320, 25);
-                        panel18.add(textField53);
-                        textField53.setBounds(205, 100, 320, 25);
+                        panel18.add(alterFrequentness);
+                        alterFrequentness.setBounds(205, 10, 320, 25);
+                        panel18.add(frequentnessAlterInfo);
+                        frequentnessAlterInfo.setBounds(205, 40, 320, 25);
+                        panel18.add(banFrequentness);
+                        banFrequentness.setBounds(205, 70, 320, 25);
+                        panel18.add(frequentnessBanInfo);
+                        frequentnessBanInfo.setBounds(205, 100, 320, 25);
 
                         {
                             // compute preferred size
@@ -1389,6 +1538,17 @@ public class test extends JFrame {
                         panel20.setBorder(new EtchedBorder());
                         panel20.setLayout(null);
 
+                        //---- save4 ----
+                        save4.setText("\u4fdd\u5b58");
+                        save4.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                saveBan(e);
+                            }
+                        });
+                        panel20.add(save4);
+                        save4.setBounds(new Rectangle(new Point(35, 435), save4.getPreferredSize()));
+
                         //======== infoPanel4 ========
                         {
                             infoPanel4.setBorder(new BevelBorder(BevelBorder.LOWERED));
@@ -1397,22 +1557,22 @@ public class test extends JFrame {
                             //---- qqText4 ----
                             qqText4.setText("\u5f53\u524d\u9ab0\u5a18QQ\u53f7:");
                             infoPanel4.add(qqText4);
-                            qqText4.setBounds(5, 5, 90, 20);
+                            qqText4.setBounds(10, 10, 90, 25);
 
                             //---- nickText4 ----
                             nickText4.setText("\u5f53\u524d\u9ab0\u5a18\u6635\u79f0:");
                             infoPanel4.add(nickText4);
-                            nickText4.setBounds(5, 40, 90, 20);
+                            nickText4.setBounds(10, 70, nickText4.getPreferredSize().width, 25);
 
                             //---- qqValue4 ----
                             qqValue4.setText("text");
                             infoPanel4.add(qqValue4);
-                            qqValue4.setBounds(20, 25, 50, qqValue4.getPreferredSize().height);
+                            qqValue4.setBounds(10, 40, qqValue4.getPreferredSize().width, 25);
 
                             //---- nickValue4 ----
                             nickValue4.setText("text");
                             infoPanel4.add(nickValue4);
-                            nickValue4.setBounds(15, 65, 40, 16);
+                            nickValue4.setBounds(10, 100, nickValue4.getPreferredSize().width, 25);
 
                             {
                                 // compute preferred size
@@ -1430,18 +1590,7 @@ public class test extends JFrame {
                             }
                         }
                         panel20.add(infoPanel4);
-                        infoPanel4.setBounds(5, 5, 145, 105);
-
-                        //---- save4 ----
-                        save4.setText("\u4fdd\u5b58");
-                        save4.addMouseListener(new MouseAdapter() {
-                            @Override
-                            public void mouseClicked(MouseEvent e) {
-                                save(e);
-                            }
-                        });
-                        panel20.add(save4);
-                        save4.setBounds(new Rectangle(new Point(35, 435), save4.getPreferredSize()));
+                        infoPanel4.setBounds(5, 5, 145, 135);
 
                         {
                             // compute preferred size
@@ -1461,10 +1610,171 @@ public class test extends JFrame {
                     panel19.add(panel20);
                     panel20.setBounds(10, 10, 155, 480);
 
+                    //======== panel21 ========
+                    {
+                        panel21.setBorder(new EtchedBorder());
+                        panel21.setLayout(null);
+
+                        //---- cloudBan ----
+                        cloudBan.setText("\u5f00\u542f\u4e91\u9ed1\u540d\u5355");
+                        panel21.add(cloudBan);
+                        cloudBan.setBounds(new Rectangle(new Point(10, 10), cloudBan.getPreferredSize()));
+
+                        //---- ignoreBanUser ----
+                        ignoreBanUser.setText("\u5f53\u9ed1\u540d\u5355\u7528\u6237\u5904\u4e8e\u767d\u540d\u5355\u7fa4\u4e2d\u65f6\uff0c\u5ffd\u7565\u6b64\u7528\u6237");
+                        panel21.add(ignoreBanUser);
+                        ignoreBanUser.setBounds(new Rectangle(new Point(10, 35), ignoreBanUser.getPreferredSize()));
+
+                        //---- leaveByBanUser ----
+                        leaveByBanUser.setText("\u5f53\u9ed1\u540d\u5355\u7528\u6237\u5904\u4e8e\u767d\u540d\u5355\u7fa4\u4e2d\u65f6\uff0c\u56e0\u6b64\u800c\u9000\u7fa4");
+                        panel21.add(leaveByBanUser);
+                        leaveByBanUser.setBounds(new Rectangle(new Point(10, 60), leaveByBanUser.getPreferredSize()));
+
+                        //---- leaveGroupByBan ----
+                        leaveGroupByBan.setText("\u81ea\u52a8\u9000\u51fa\u9ed1\u540d\u5355\u7fa4");
+                        panel21.add(leaveGroupByBan);
+                        leaveGroupByBan.setBounds(new Rectangle(new Point(10, 85), leaveGroupByBan.getPreferredSize()));
+
+                        //---- banGroupBecauseBan ----
+                        banGroupBecauseBan.setText("\u9000\u51fa\u5e76\u62c9\u9ed1\u88ab\u7981\u8a00\u7684\u7fa4");
+                        panel21.add(banGroupBecauseBan);
+                        banGroupBecauseBan.setBounds(new Rectangle(new Point(10, 110), banGroupBecauseBan.getPreferredSize()));
+
+                        //---- banGroupBecauseReduce ----
+                        banGroupBecauseReduce.setText("\u62c9\u9ed1\u88ab\u8e22\u51fa\u7684\u7fa4");
+                        panel21.add(banGroupBecauseReduce);
+                        banGroupBecauseReduce.setBounds(new Rectangle(new Point(10, 135), banGroupBecauseReduce.getPreferredSize()));
+
+                        //---- banUserBecauseReduce ----
+                        banUserBecauseReduce.setText("\u62c9\u9ed1\u8e22\u51fa\u81ea\u5df1\u7684\u7ba1\u7406\u5458");
+                        panel21.add(banUserBecauseReduce);
+                        banUserBecauseReduce.setBounds(new Rectangle(new Point(10, 160), banUserBecauseReduce.getPreferredSize()));
+
+                        {
+                            // compute preferred size
+                            Dimension preferredSize = new Dimension();
+                            for (int i = 0; i < panel21.getComponentCount(); i++) {
+                                Rectangle bounds = panel21.getComponent(i).getBounds();
+                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            }
+                            Insets insets = panel21.getInsets();
+                            preferredSize.width += insets.right;
+                            preferredSize.height += insets.bottom;
+                            panel21.setMinimumSize(preferredSize);
+                            panel21.setPreferredSize(preferredSize);
+                        }
+                    }
+                    panel19.add(panel21);
+                    panel21.setBounds(175, 15, 325, 190);
+
+                    //======== panel23 ========
+                    {
+                        panel23.setBorder(new EtchedBorder());
+                        panel23.setLayout(null);
+
+                        //---- label60 ----
+                        label60.setText("\u5165\u7fa4\u8bcd");
+                        panel23.add(label60);
+                        label60.setBounds(10, 10, 150, label60.getPreferredSize().height);
+
+                        //======== scrollPane9 ========
+                        {
+                            scrollPane9.setViewportView(addGroup);
+                        }
+                        panel23.add(scrollPane9);
+                        scrollPane9.setBounds(10, 30, 440, 100);
+
+                        //---- label61 ----
+                        label61.setText("\u52a0\u597d\u53cb\u6b22\u8fce\u8bcd");
+                        panel23.add(label61);
+                        label61.setBounds(new Rectangle(new Point(10, 140), label61.getPreferredSize()));
+
+                        //======== scrollPane10 ========
+                        {
+                            scrollPane10.setViewportView(addFriend);
+                        }
+                        panel23.add(scrollPane10);
+                        scrollPane10.setBounds(10, 165, 440, 100);
+                        panel23.add(label62);
+                        label62.setBounds(new Rectangle(new Point(10, 320), label62.getPreferredSize()));
+
+                        //---- label63 ----
+                        label63.setText("\u62d2\u7edd\u9ed1\u540d\u5355\u7fa4\u7528\u8bed");
+                        panel23.add(label63);
+                        label63.setBounds(new Rectangle(new Point(490, 10), label63.getPreferredSize()));
+
+                        //---- label64 ----
+                        label64.setText("\u62d2\u7edd\u9ed1\u540d\u5355\u597d\u53cb\u7528\u8bed");
+                        panel23.add(label64);
+                        label64.setBounds(new Rectangle(new Point(490, 140), label64.getPreferredSize()));
+
+                        //======== scrollPane12 ========
+                        {
+                            scrollPane12.setViewportView(refuseGroupByBan);
+                        }
+                        panel23.add(scrollPane12);
+                        scrollPane12.setBounds(490, 30, 440, 100);
+
+                        //======== scrollPane13 ========
+                        {
+                            scrollPane13.setViewportView(refuseFriendByBan);
+                        }
+                        panel23.add(scrollPane13);
+                        scrollPane13.setBounds(490, 165, 440, 100);
+
+                        {
+                            // compute preferred size
+                            Dimension preferredSize = new Dimension();
+                            for (int i = 0; i < panel23.getComponentCount(); i++) {
+                                Rectangle bounds = panel23.getComponent(i).getBounds();
+                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            }
+                            Insets insets = panel23.getInsets();
+                            preferredSize.width += insets.right;
+                            preferredSize.height += insets.bottom;
+                            panel23.setMinimumSize(preferredSize);
+                            panel23.setPreferredSize(preferredSize);
+                        }
+                    }
+                    panel19.add(panel23);
+                    panel23.setBounds(175, 215, 970, 275);
+
+                    //======== panel24 ========
+                    {
+                        panel24.setBorder(new EtchedBorder());
+                        panel24.setLayout(null);
+
+                        //---- label65 ----
+                        label65.setText("\u9ed1\u540d\u5355\u5f55\u5165\u62a5\u9519:\u8f93\u5165\u7684\u4e0d\u662fQQ\u53f7\u6216\u7fa4\u53f7");
+                        panel24.add(label65);
+                        label65.setBounds(15, 15, label65.getPreferredSize().width, 25);
+                        panel24.add(banListInputNotId);
+                        banListInputNotId.setBounds(265, 15, 355, 25);
+
+                        {
+                            // compute preferred size
+                            Dimension preferredSize = new Dimension();
+                            for (int i = 0; i < panel24.getComponentCount(); i++) {
+                                Rectangle bounds = panel24.getComponent(i).getBounds();
+                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            }
+                            Insets insets = panel24.getInsets();
+                            preferredSize.width += insets.right;
+                            preferredSize.height += insets.bottom;
+                            panel24.setMinimumSize(preferredSize);
+                            panel24.setPreferredSize(preferredSize);
+                        }
+                    }
+                    panel19.add(panel24);
+                    panel24.setBounds(505, 15, 635, 190);
+
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel19.getComponentCount(); i++) {
+                        for (int i = 0; i < panel19.getComponentCount(); i++) {
                             Rectangle bounds = panel19.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1478,60 +1788,123 @@ public class test extends JFrame {
                 }
                 tabContain.addTab("\u4e91\u9ed1\u540d\u5355", panel19);
             }
-            windows.add(tabContain);
-            tabContain.setBounds(25, 30, 1155, 530);
+            windows.add(tabContain, BorderLayout.CENTER);
 
-            //======== panel21 ========
+            //======== panel22 ========
             {
-                panel21.setBorder(new EtchedBorder());
-                panel21.setLayout(null);
-
-                //---- checkBox3 ----
-                checkBox3.setText("\u5f00\u542f\u4e91\u9ed1\u540d\u5355");
-                panel21.add(checkBox3);
-                checkBox3.setBounds(new Rectangle(new Point(20, 20), checkBox3.getPreferredSize()));
-
-                //---- checkBox4 ----
-                checkBox4.setText("\u5f53\u9ed1\u540d\u5355\u7528\u6237\u5904\u4e8e\u767d\u540d\u5355\u7fa4\u4e2d\u65f6\uff0c\u5ffd\u7565\u6b64\u7528\u6237");
-                panel21.add(checkBox4);
-                checkBox4.setBounds(new Rectangle(new Point(40, 50), checkBox4.getPreferredSize()));
+                panel22.setLayout(null);
 
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < panel21.getComponentCount(); i++) {
-                        Rectangle bounds = panel21.getComponent(i).getBounds();
+                    for (int i = 0; i < panel22.getComponentCount(); i++) {
+                        Rectangle bounds = panel22.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
                     }
-                    Insets insets = panel21.getInsets();
+                    Insets insets = panel22.getInsets();
                     preferredSize.width += insets.right;
                     preferredSize.height += insets.bottom;
-                    panel21.setMinimumSize(preferredSize);
-                    panel21.setPreferredSize(preferredSize);
+                    panel22.setMinimumSize(preferredSize);
+                    panel22.setPreferredSize(preferredSize);
                 }
             }
-            windows.add(panel21);
-            panel21.setBounds(130, 600, 405, 325);
-
-            {
-                // compute preferred size
-                Dimension preferredSize = new Dimension();
-                for(int i = 0; i < windows.getComponentCount(); i++) {
-                    Rectangle bounds = windows.getComponent(i).getBounds();
-                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                }
-                Insets insets = windows.getInsets();
-                preferredSize.width += insets.right;
-                preferredSize.height += insets.bottom;
-                windows.setMinimumSize(preferredSize);
-                windows.setPreferredSize(preferredSize);
-            }
+            windows.add(panel22, BorderLayout.NORTH);
             windows.pack();
             windows.setLocationRelativeTo(windows.getOwner());
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
+
+    private void initData() {
+        String qqId = String.valueOf(CQ.getLoginQQ());
+        String nick = String.valueOf(CQ.getLoginNick());
+        qqValue3.setText(qqId);
+        qqValue4.setText(qqId);
+        qqValue5.setText(qqId);
+        qqValue6.setText(qqId);
+        nickValue3.setText(nick);
+        nickValue4.setText(nick);
+        nickValue5.setText(nick);
+        nickValue6.setText(nick);
+
+        Prometheus.setSelected(entityBanProperties.isPrometheus());
+        heap.setSelected(entityBanProperties.isHeap());
+        master.setText(entityBanProperties.getMaster());
+        notMaster.setText(entityBanProperties.getNotMaster());
+        banListInputNotId.setText(entityBanProperties.getBanListInputNotId());
+        prometheusPort.setText(String.valueOf(entityBanProperties.getPrometheusPort()));
+        cloudBan.setSelected(entityBanProperties.isCloudBan());
+        ignoreBanUser.setSelected(entityBanProperties.isIgnoreBanUser());
+        leaveByBanUser.setSelected(entityBanProperties.isLeaveByBanUser());
+        leaveGroupByBan.setSelected(entityBanProperties.isLeaveGroupByBan());
+        banGroupBecauseBan.setSelected(entityBanProperties.isBanGroupBecauseBan());
+        banGroupBecauseReduce.setSelected(entityBanProperties.isBanGroupBecauseReduce());
+        banUserBecauseReduce.setSelected(entityBanProperties.isBanUserBecauseReduce());
+        addGroup.setText(entityBanProperties.getAddGroup());
+        addFriend.setText(entityBanProperties.getAddFriend());
+        refuseGroupByBan.setText(entityBanProperties.getRefuseGroupByBan());
+        refuseFriendByBan.setText(entityBanProperties.getRefuseFriendByBan());
+        clearGroupByOff.setText(String.valueOf(entityBanProperties.getClearGroupByOff()));
+        clearGroupByOffInfo.setText(String.valueOf(entityBanProperties.getClearGroupByOffInfo()));
+        clearGroup.setText(String.valueOf(entityBanProperties.getClearGroup()));
+        clearGroupInfo.setText(String.valueOf(entityBanProperties.getClearGroupInfo()));
+        alterFrequentness.setText(String.valueOf(entityBanProperties.getAlterFrequentness()));
+        banFrequentness.setText(String.valueOf(entityBanProperties.getBanFrequentness()));
+        frequentnessAlterInfo.setText(String.valueOf(entityBanProperties.getFrequentnessAlterInfo()));
+        frequentnessBanInfo.setText(String.valueOf(entityBanProperties.getFrequentnessBanInfo()));
+
+        botStart.setText(entitySystemProperties.getBotStart());
+        botAlreadyStart.setText(entitySystemProperties.getBotAlreadyStart());
+        botStop.setText(entitySystemProperties.getBotStop());
+        botAlreadyStop.setText(entitySystemProperties.getBotAlreadyStop());
+        botExit.setText(entitySystemProperties.getBotExit());
+        botInfo.setText(entitySystemProperties.getBotInfo());
+        bookCard.setText(entitySystemProperties.getBookCard());
+        bookRp.setText(entitySystemProperties.getBookRp());
+        bookKp.setText(entitySystemProperties.getBookKp());
+        bookMake.setText(entitySystemProperties.getBookMake());
+        setPropFormat.setText(entitySystemProperties.getSetPropFormat());
+        setHelp.setText(entitySystemProperties.getSetHelp());
+        notFoundSkill.setText(entitySystemProperties.getNotFoundSkill());
+        setPropSuccess.setText(entitySystemProperties.getSetPropSuccess());
+        manyRollsFormat.setText(entitySystemProperties.getManyRollsFormat());
+        diceTimesTooBig.setText(entitySystemProperties.getDiceTimesTooBig());
+        needKpGroup.setText(entitySystemProperties.getNeedKpGroup());
+        cantInPrivate.setText(entitySystemProperties.getCantInPrivate());
+        onlyManager.setText(entitySystemProperties.getOnlyManager());
+        alreadyOpen.setText(entitySystemProperties.getAlreadyOpen());
+        alreadyClose.setText(entitySystemProperties.getAlreadyClose());
+        notFoundLog.setText(entitySystemProperties.getNotFoundLog());
+        readLock.setText(entitySystemProperties.getReadLock());
+        deleteOpenLog.setText(entitySystemProperties.getDeleteOpenLog());
+        appendLog.setText(entitySystemProperties.getAppendLog());
+        createLog.setText(entitySystemProperties.getCreateLog());
+        cantEmptyLogName.setText(entitySystemProperties.getCantEmptyLogName());
+        dndInitIsEmtpy.setText(entitySystemProperties.getDndInitIsEmtpy());
+        clrDndInit.setText(entitySystemProperties.getClrDndInit());
+        antagonizeOver.setText(entitySystemProperties.getAntagonizeOver());
+        antagonizeFirstSuccess.setText(entitySystemProperties.getAntagonizeFirstSuccess());
+        antagonizeSecondSuccess.setText(entitySystemProperties.getAntagonizeSecondSuccess());
+        antagonizeAllFailed.setText(entitySystemProperties.getAntagonizeAllFailed());
+        antagonizeDraw.setText(entitySystemProperties.getAntagonizeDraw());
+        sanCheck.setText(entitySystemProperties.getSanCheck());
+        symptom.setText(entitySystemProperties.getSymptom());
+        sanCheckFumble.setText(entitySystemProperties.getSanCheckFumble());
+        sanCheckCriticalSuccess.setText(entitySystemProperties.getSanCheckCriticalSuccess());
+        sanCheckSuccess.setText(entitySystemProperties.getSanCheckSuccess());
+        sanCheckFailure.setText(entitySystemProperties.getSanCheckFailure());
+        enSuccess.setText(entitySystemProperties.getEnSuccess());
+        enFailed.setText(entitySystemProperties.getEnFailed());
+        hiddenDice.setText(entitySystemProperties.getHiddenDice());
+        teamIsEmpty.setText(entitySystemProperties.getTeamIsEmpty());
+        teamMemberEnIsEmpty.setText(entitySystemProperties.getTeamMemberEnIsEmpty());
+        criticalSuccess.setText(entitySystemProperties.getCRITICAL_SUCCESS());
+        extremeSuccess.setText(entitySystemProperties.getEXTREME_SUCCESS());
+        headSuccess.setText(entitySystemProperties.getHARD_SUCCESS());
+        success.setText(entitySystemProperties.getSUCCESS());
+        failure.setText(entitySystemProperties.getFAILURE());
+        fumble.setText(entitySystemProperties.getFUMBLE());
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -1539,12 +1912,12 @@ public class test extends JFrame {
     private JTabbedPane tabContain;
     private JPanel setting;
     private JPanel panel3;
-    private JPanel infoPanel;
-    private JLabel qqText;
-    private JLabel nickText;
-    private JLabel qqValue;
-    private JLabel nickValue;
     private JButton save;
+    private JPanel infoPanel6;
+    private JLabel qqText6;
+    private JLabel nickText6;
+    private JLabel qqValue6;
+    private JLabel nickValue6;
     private JScrollPane scrollPane1;
     private JPanel panel2;
     private JPanel panel6;
@@ -1552,30 +1925,35 @@ public class test extends JFrame {
     private JLabel label12;
     private JLabel label13;
     private JLabel label14;
-    private JTextField textField7;
-    private JTextField textField8;
-    private JTextField textField9;
-    private JTextField textField10;
+    private JTextField setPropFormat;
+    private JTextField setHelp;
+    private JTextField notFoundSkill;
+    private JTextField setPropSuccess;
     private JPanel panel13;
     private JLabel label45;
     private JLabel label46;
     private JLabel label47;
-    private JTextField textField41;
-    private JTextField textField42;
-    private JTextField textField43;
+    private JTextField enSuccess;
+    private JTextField enFailed;
+    private JTextField hiddenDice;
     private JPanel panel5;
-    private JLabel label5;
-    private JLabel label6;
-    private JLabel label7;
-    private JLabel label8;
+    private JLabel botStartLable;
+    private JLabel botAlreadyStartLable;
+    private JLabel botStopLable;
+    private JLabel botAlreadyStopLable;
     private JLabel label9;
     private JLabel label10;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
+    private JTextField botStart;
+    private JTextField botAlreadyStart;
+    private JTextField botStop;
+    private JTextField botAlreadyStop;
+    private JTextField botExit;
+    private JTextField botInfo;
+    private JPanel infoPanel7;
+    private JLabel qqText7;
+    private JLabel nickText7;
+    private JLabel qqValue7;
+    private JLabel nickValue7;
     private JPanel panel12;
     private JLabel label39;
     private JLabel label40;
@@ -1583,12 +1961,12 @@ public class test extends JFrame {
     private JLabel label42;
     private JLabel label43;
     private JLabel label44;
-    private JTextField textField35;
-    private JTextField textField36;
-    private JTextField textField37;
-    private JTextField textField38;
-    private JTextField textField39;
-    private JTextField textField40;
+    private JTextField sanCheck;
+    private JTextField symptom;
+    private JTextField sanCheckCriticalSuccess;
+    private JTextField sanCheckFumble;
+    private JTextField sanCheckSuccess;
+    private JTextField sanCheckFailure;
     private JPanel panel9;
     private JLabel label24;
     private JLabel label25;
@@ -1596,96 +1974,96 @@ public class test extends JFrame {
     private JLabel label27;
     private JLabel label28;
     private JLabel label29;
-    private JTextField textField20;
-    private JTextField textField21;
-    private JTextField textField22;
-    private JTextField textField23;
-    private JTextField textField24;
-    private JTextField textField25;
+    private JTextField createLog;
+    private JTextField appendLog;
+    private JTextField alreadyOpen;
+    private JTextField alreadyClose;
+    private JTextField notFoundLog;
+    private JTextField cantEmptyLogName;
     private JLabel label30;
     private JLabel label31;
-    private JTextField textField26;
-    private JTextField textField27;
+    private JTextField deleteOpenLog;
+    private JTextField readLock;
     private JPanel panel8;
     private JLabel label19;
     private JLabel label20;
     private JLabel label21;
     private JLabel label22;
     private JLabel label23;
-    private JTextField textField15;
-    private JTextField textField16;
-    private JTextField textField17;
-    private JTextField textField18;
-    private JTextField textField19;
+    private JTextField manyRollsFormat;
+    private JTextField diceTimesTooBig;
+    private JTextField needKpGroup;
+    private JTextField cantInPrivate;
+    private JTextField onlyManager;
     private JPanel panel10;
     private JLabel label32;
     private JLabel label33;
-    private JTextField textField28;
-    private JTextField textField29;
+    private JTextField dndInitIsEmtpy;
+    private JTextField clrDndInit;
     private JPanel panel14;
     private JLabel label48;
     private JLabel label49;
-    private JTextField textField44;
-    private JTextField textField45;
+    private JTextField teamIsEmpty;
+    private JTextField teamMemberEnIsEmpty;
     private JPanel panel7;
     private JLabel label15;
     private JLabel label16;
     private JLabel label17;
     private JLabel label18;
-    private JTextField textField11;
-    private JTextField textField12;
-    private JTextField textField13;
-    private JTextField textField14;
+    private JTextField bookCard;
+    private JTextField bookRp;
+    private JTextField bookKp;
+    private JTextField bookMake;
     private JPanel panel11;
     private JLabel label34;
     private JLabel label35;
     private JLabel label36;
     private JLabel label37;
-    private JTextField textField30;
-    private JTextField textField31;
-    private JTextField textField32;
-    private JTextField textField33;
+    private JTextField antagonizeOver;
+    private JTextField antagonizeFirstSuccess;
+    private JTextField antagonizeSecondSuccess;
+    private JTextField antagonizeAllFailed;
     private JLabel label38;
-    private JTextField textField34;
+    private JTextField antagonizeDraw;
     private JPanel panel1;
     private JPanel panel4;
-    private JPanel infoPanel2;
-    private JLabel qqText2;
-    private JLabel nickText2;
-    private JLabel qqValue2;
-    private JLabel nickValue2;
     private JButton save2;
+    private JPanel infoPanel5;
+    private JLabel qqText5;
+    private JLabel nickText5;
+    private JLabel qqValue5;
+    private JLabel nickValue5;
     private JPanel panel15;
     private JLabel label1;
     private JScrollPane scrollPane2;
-    private JTextArea textArea1;
+    private JTextArea criticalSuccess;
     private JLabel label2;
     private JScrollPane scrollPane3;
-    private JTextArea textArea2;
+    private JTextArea extremeSuccess;
     private JLabel label3;
     private JScrollPane scrollPane4;
-    private JTextArea textArea3;
+    private JTextArea headSuccess;
     private JLabel label4;
     private JLabel label50;
     private JLabel label51;
     private JScrollPane scrollPane5;
-    private JTextArea textArea4;
+    private JTextArea success;
     private JScrollPane scrollPane6;
-    private JTextArea textArea5;
+    private JTextArea failure;
     private JScrollPane scrollPane7;
-    private JTextArea textArea6;
+    private JTextArea fumble;
     private JPanel clean;
     private JPanel monitorPanel2;
     private JLabel promethusPortText2;
-    private JTextField promethusPortValue2;
-    private JCheckBox checkBox1;
-    private JCheckBox checkBox2;
+    private JTextField prometheusPort;
+    private JCheckBox Prometheus;
+    private JCheckBox heap;
     private JPanel setMaster;
     private JLabel masterText;
     private JLabel notMasterInfoText;
-    private JTextField masterValue;
+    private JTextField master;
     private JScrollPane scrollPane8;
-    private JTextArea textArea7;
+    private JTextArea notMaster;
     private JPanel panel16;
     private JPanel infoPanel3;
     private JLabel qqText3;
@@ -1698,29 +2076,52 @@ public class test extends JFrame {
     private JLabel label53;
     private JLabel label54;
     private JLabel label55;
-    private JTextField textField46;
-    private JTextField textField47;
-    private JTextField textField48;
-    private JTextField textField49;
+    private JTextField clearGroupByOff;
+    private JTextField clearGroupByOffInfo;
+    private JTextField clearGroup;
+    private JTextField clearGroupInfo;
     private JPanel panel18;
     private JLabel label56;
     private JLabel label57;
     private JLabel label58;
     private JLabel label59;
-    private JTextField textField50;
-    private JTextField textField51;
-    private JTextField textField52;
-    private JTextField textField53;
+    private JTextField alterFrequentness;
+    private JTextField frequentnessAlterInfo;
+    private JTextField banFrequentness;
+    private JTextField frequentnessBanInfo;
     private JPanel panel19;
     private JPanel panel20;
+    private JButton save4;
     private JPanel infoPanel4;
     private JLabel qqText4;
     private JLabel nickText4;
     private JLabel qqValue4;
     private JLabel nickValue4;
-    private JButton save4;
     private JPanel panel21;
-    private JCheckBox checkBox3;
-    private JCheckBox checkBox4;
+    private JCheckBox cloudBan;
+    private JCheckBox ignoreBanUser;
+    private JCheckBox leaveByBanUser;
+    private JCheckBox leaveGroupByBan;
+    private JCheckBox banGroupBecauseBan;
+    private JCheckBox banGroupBecauseReduce;
+    private JCheckBox banUserBecauseReduce;
+    private JPanel panel23;
+    private JLabel label60;
+    private JScrollPane scrollPane9;
+    private JTextArea addGroup;
+    private JLabel label61;
+    private JScrollPane scrollPane10;
+    private JTextArea addFriend;
+    private JLabel label62;
+    private JLabel label63;
+    private JLabel label64;
+    private JScrollPane scrollPane12;
+    private JTextArea refuseGroupByBan;
+    private JScrollPane scrollPane13;
+    private JTextArea refuseFriendByBan;
+    private JPanel panel24;
+    private JLabel label65;
+    private JTextField banListInputNotId;
+    private JPanel panel22;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

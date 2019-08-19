@@ -16,8 +16,7 @@ import dice.sinanya.flow.Flow;
 import dice.sinanya.listener.InputHistoryToDataBase;
 import dice.sinanya.listener.Prometheus;
 import dice.sinanya.listener.TestRunningTime;
-import dice.sinanya.windows.BanProperties;
-import dice.sinanya.windows.DiceProperties;
+import dice.sinanya.windows.Setting;
 import org.apache.commons.lang.StringUtils;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
@@ -585,13 +584,8 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         }
     }
 
-    public int menuA() {
-        new DiceProperties().init();
-        return 0;
-    }
-
-    public int menuB() {
-        new BanProperties().init();
+    public int setting() {
+        new Setting();
         return 0;
     }
 

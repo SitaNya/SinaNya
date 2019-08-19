@@ -127,14 +127,10 @@
   "menu": [
     // 设置菜单（发布前请删除无用菜单，如果无需设置菜单请全部删除）
     {
-      "name": "个性化设置",
+      "name": "设置",
       //菜单名称
-      "function": "menuA"
+      "function": "setting"
       //菜单对应函数
-    },
-    {
-      "name": "安全性设置",
-      "function": "menuB"
     }
   ],
   "status": [
