@@ -8,6 +8,8 @@ import dice.sinanya.tools.checkdata.CheckResultLevel;
 import dice.sinanya.tools.getinfo.GetSkillValue;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static dice.sinanya.system.MessagesSystem.SPACE;
 import static dice.sinanya.system.MessagesTag.TAG_RB;
@@ -30,6 +32,8 @@ public class RewardAndPunishment implements En, MakeNickToSender {
     private EntityTypeMessages entityTypeMessages;
 
     private int multiple = 10;
+
+    private Pattern timesRegex = Pattern.compile("(\\d+)#");
 
     public RewardAndPunishment(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
@@ -93,6 +97,12 @@ public class RewardAndPunishment implements En, MakeNickToSender {
     public void rp() {
         String tag = TAG_RP;
         String msg = entityTypeMessages.getMsg().trim().replaceFirst(tag.substring(0, tag.length() - 2), "");
+        int times = 0;
+        Matcher findTimes = timesRegex.matcher(msg);
+        while (findTimes.find()) {
+            times = Integer.parseInt(findTimes.group(0));
+            msg = msg.replaceAll(timesRegex.toString(), "");
+        }
         EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -127,20 +137,22 @@ public class RewardAndPunishment implements En, MakeNickToSender {
         }
 //        进行替换，高位替换为整个列表中最大值
 
-        String strRes;
-        String substring = stringBuilder.substring(0, stringBuilder.length() - 1);
-        String nick = makeNickToSender(entityNickAndRandomAndSkill.getNick());
-        if (getTimesAndSkill(msg).getSkill() != 0) {
-            CheckResultLevel checkResultLevel = new CheckResultLevel(resultRandom, getTimesAndSkill(msg).getSkill(), false);
-            strRes = nick +
-                    "进行惩罚骰鉴定: D100=" + random + "[惩罚骰:" + substring + "] = " + resultRandom + "/" + getTimesAndSkill(msg).getSkill() +
-                    checkResultLevel.getLevelResultStr();
-            checkEn(checkResultLevel.getLevel(), msg, entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup());
-        } else {
-            strRes = nick +
-                    "进行惩罚骰鉴定: D100=" + random + "[惩罚骰:" + substring + "] = " + resultRandom;
+        StringBuilder strRes = new StringBuilder();
+        for (int i = 0; i <= times; i++) {
+            if (i != 0) {
+                strRes.append("\n");
+            }
+            String substring = stringBuilder.substring(0, stringBuilder.length() - 1);
+            String nick = makeNickToSender(entityNickAndRandomAndSkill.getNick());
+            if (getTimesAndSkill(msg).getSkill() != 0) {
+                CheckResultLevel checkResultLevel = new CheckResultLevel(resultRandom, getTimesAndSkill(msg).getSkill(), false);
+                strRes.append("进行惩罚骰鉴定: D100=").append(random).append("[惩罚骰:").append(substring).append("] = ").append(resultRandom).append("/").append(getTimesAndSkill(msg).getSkill()).append(checkResultLevel.getLevelResultStr());
+                checkEn(checkResultLevel.getLevel(), msg, entityTypeMessages.getFromQq(), entityTypeMessages.getFromGroup());
+            } else {
+                strRes.append(nick).append("进行惩罚骰鉴定: D100=").append(random).append("[惩罚骰:").append(substring).append("] = ").append(resultRandom);
+            }
         }
-        sender(entityTypeMessages, strRes);
+        sender(entityTypeMessages, strRes.toString());
         //        将列表打印，并根据最后确定的值进行成功登记判定
     }
 

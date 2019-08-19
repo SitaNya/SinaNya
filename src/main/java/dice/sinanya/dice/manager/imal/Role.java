@@ -11,7 +11,7 @@ import java.util.Objects;
 import static dice.sinanya.tools.getinfo.ReplaceSkillName.replaceSkillName;
 import static dice.sinanya.tools.getinfo.RoleChoose.getRoleChooseByQQ;
 import static dice.sinanya.tools.getinfo.RoleInfo.checkRoleInfoFromChooseExistByQQ;
-import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByFromQQ;
+import static dice.sinanya.tools.getinfo.RoleInfo.getRoleInfoFromChooseByQQ;
 
 /**
  * @author SitaNya
@@ -35,6 +35,7 @@ public interface Role extends MakeNickToSender {
         add("intValue");
         add("luck");
         add("mp");
+        add("dex");
     }};
 
     ArrayList<String> PROP_INVESTIGATION_OF_CRIMES = new ArrayList<String>() {{
@@ -64,14 +65,13 @@ public interface Role extends MakeNickToSender {
     /**
      * 格式化属性值为xxx:50
      *
-     * @param entityTypeMessages 获取当前选择角色用的标准数据类
      * @param propMain           主属性列表值
      * @return 获取后的列表值
      */
-    default ArrayList<String> formatProp(EntityTypeMessages entityTypeMessages, ArrayList<String> propMain) {
+    default ArrayList<String> formatProp(ArrayList<String> propMain, Long qq) {
 
         ArrayList<String> result = new ArrayList<>();
-        for (Map.Entry<String, Integer> mapEntry : Objects.requireNonNull(getRoleInfoFromChooseByFromQQ(entityTypeMessages)).entrySet()) {
+        for (Map.Entry<String, Integer> mapEntry : Objects.requireNonNull(getRoleInfoFromChooseByQQ(qq)).entrySet()) {
             if (propMain.contains(mapEntry.getKey()) && mapEntry.getValue() != 0) {
                 result.add(replaceSkillName(mapEntry.getKey()) + ":" + mapEntry.getValue());
             }
@@ -83,14 +83,13 @@ public interface Role extends MakeNickToSender {
     /**
      * 格式化属性值为xxx:50，这里会过滤掉所有传入的项目
      *
-     * @param entityTypeMessages 获取当前选择角色用的标准数据类
      * @param prop               需要过滤的列表值
      * @param up                 过滤后的值，true则返回50以上的项目，false则返回50以下的项目
      * @return 获取后的列表值
      */
-    default ArrayList<String> formatProp(EntityTypeMessages entityTypeMessages, ArrayList<String> prop, boolean up) {
+    default ArrayList<String> formatProp(ArrayList<String> prop, Long qq, boolean up) {
         ArrayList<String> result = new ArrayList<>();
-        for (Map.Entry<String, Integer> mapEntry : Objects.requireNonNull(getRoleInfoFromChooseByFromQQ(entityTypeMessages)).entrySet()) {
+        for (Map.Entry<String, Integer> mapEntry : Objects.requireNonNull(getRoleInfoFromChooseByQQ(qq)).entrySet()) {
             if (!prop.contains(mapEntry.getKey()) && mapEntry.getValue() != 0) {
                 boolean inUpFor50 = up && mapEntry.getValue() >= 50;
                 boolean notInUpAndValueIn50And5 = !up && mapEntry.getValue() < 50 && mapEntry.getValue() > 5;
@@ -170,32 +169,32 @@ public interface Role extends MakeNickToSender {
                     .append("包含有以下数据\n");
 
             stringBuilder.append("主属性为:\n");
-            ArrayList<String> propMainResult = formatProp(entityTypeMessages, PROP_MAIN);
+            ArrayList<String> propMainResult = formatProp(PROP_MAIN, Long.parseLong(qq));
             Collections.sort(propMainResult);
             formatResult(stringBuilder, propMainResult);
 
             stringBuilder.append("\n常规侦查技能:\n");
-            ArrayList<String> propInvestigationOfCrimesResult = formatProp(entityTypeMessages, PROP_INVESTIGATION_OF_CRIMES);
+            ArrayList<String> propInvestigationOfCrimesResult = formatProp(PROP_INVESTIGATION_OF_CRIMES, Long.parseLong(qq));
             Collections.sort(propInvestigationOfCrimesResult);
             formatResult(stringBuilder, propInvestigationOfCrimesResult);
 
             stringBuilder.append("\n常规社交技能:\n");
-            ArrayList<String> propTalkResult = formatProp(entityTypeMessages, PROP_TALK);
+            ArrayList<String> propTalkResult = formatProp(PROP_TALK, Long.parseLong(qq));
             Collections.sort(propTalkResult);
             formatResult(stringBuilder, propTalkResult);
 
             stringBuilder.append("\n常规战斗技能:\n");
-            ArrayList<String> propFightResult = formatProp(entityTypeMessages, PROP_FIGHT);
+            ArrayList<String> propFightResult = formatProp(PROP_FIGHT, Long.parseLong(qq));
             Collections.sort(propFightResult);
             formatResult(stringBuilder, propFightResult);
 
             stringBuilder.append("\n剩余技能值在50以上的技能:\n");
-            ArrayList<String> propUpResult = formatProp(entityTypeMessages, allSelect, true);
+            ArrayList<String> propUpResult = formatProp(allSelect, Long.parseLong(qq), true);
             Collections.sort(propUpResult);
             formatResult(stringBuilder, propUpResult);
 
             stringBuilder.append("\n不足50但也不止5的技能:\n");
-            ArrayList<String> propDownResult = formatProp(entityTypeMessages, allSelect, false);
+            ArrayList<String> propDownResult = formatProp(allSelect, Long.parseLong(qq), false);
             Collections.sort(propDownResult);
             formatResult(stringBuilder, propDownResult);
             stringBuilder.append("\n");

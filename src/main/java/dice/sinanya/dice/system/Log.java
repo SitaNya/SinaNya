@@ -68,6 +68,10 @@ public class Log implements MakeNickToSender {
     public void logOff() {
         String tag = TAG_LOG_OFF;
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
+        if (msg.equals(NONE)) {
+            sender(entityTypeMessages, entitySystemProperties.getCantEmptyLogName());
+            return;
+        }
         if (checkLogTagExist(entityTypeMessages, msg)) {
             if (checkLogTagSwitch(entityTypeMessages, msg)) {
                 setLogTagSwitch(entityTypeMessages, msg, false);
@@ -88,6 +92,10 @@ public class Log implements MakeNickToSender {
     public void get() {
         String tag = TAG_LOG_GET;
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
+        if (msg.equals(NONE)) {
+            sender(entityTypeMessages, entitySystemProperties.getCantEmptyLogName());
+            return;
+        }
         if (!checkLogTagSwitch(entityTypeMessages, msg)) {
             if (LOG_GET_LOCK.contains(msg)) {
                 sender(entityTypeMessages, entitySystemProperties.getReadLock());

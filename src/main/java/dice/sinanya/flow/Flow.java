@@ -20,7 +20,6 @@ import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesBanList.frequentnessForGroupList;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.BanList.insertGroupBanList;
-import static dice.sinanya.tools.getinfo.BanList.insertQqBanList;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
@@ -132,6 +131,10 @@ class Flow implements MakeNickToSender {
     private boolean isListBanUser = false;
     private boolean isListBanGroup = false;
 
+    private boolean isAdminOn = false;
+    private boolean isAdminOff = false;
+    private boolean isAdminExit = false;
+
     private boolean isKp = false;
 
     private boolean isHiy = false;
@@ -238,6 +241,12 @@ class Flow implements MakeNickToSender {
         isListBanGroup = checkTagRegex(TAG_BAN_GROUP_LIST);
     }
 
+    private void adminTag() {
+        isAdminOn = checkTagRegex(TAG_ADMIN_ON);
+        isAdminOff = checkTagRegex(TAG_ADMIN_OFF);
+        isAdminExit = checkTagRegex(TAG_ADMIN_EXIT);
+    }
+
     private void checkMessages() {
         String forAll = ".*";
         if (checkTagRegex(HEADER_TEAM + forAll)) {
@@ -258,6 +267,8 @@ class Flow implements MakeNickToSender {
             initClueTag();
         } else if (checkTagRegex(HEADER_BAN + forAll)) {
             banTag();
+        } else if (checkTagRegex(HEADER_ADMIN + forAll)) {
+            adminTag();
         } else if (checkTagRegex(TAGR)) {
             initDiceTag();
         } else {
@@ -296,6 +307,7 @@ class Flow implements MakeNickToSender {
         Jrrp jrrp = new Jrrp(entityTypeMessages);
         Test test = new Test(entityTypeMessages);
         Rules rules = new Rules(entityTypeMessages);
+        Admin admin = new Admin(entityTypeMessages);
 
         isFunctionR();
         isStFunction();
@@ -306,10 +318,6 @@ class Flow implements MakeNickToSender {
         isHelpFunction();
         isBookFunction();
         isBanFunction();
-
-        if (isEn) {
-            sender(entityTypeMessages, entitySystemProperties.getCantInPrivate());
-        }
 
         if (isNpc) {
             npc.npc();
@@ -345,6 +353,14 @@ class Flow implements MakeNickToSender {
 
         if (isTest) {
             test.get();
+        }
+
+        if (isAdminOn) {
+            admin.on();
+        } else if (isAdminOff) {
+            admin.off();
+        } else if (isAdminExit) {
+            admin.exit();
         }
 
     }

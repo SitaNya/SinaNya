@@ -94,7 +94,7 @@ public class GetSkillValue {
     public static int getSkillValue(long qq, String tmpSkillName) {
         String skillName = makeSkillName(tmpSkillName);
         if (checkRoleInfoFromChooseExistByQQ(qq)) {
-            return Objects.requireNonNull(getRoleInfoFromChooseByQQ(qq)).get(skillName);
+            return Objects.requireNonNull(getRoleInfoFromChooseByQQ(qq)).getOrDefault(skillName, 0);
         } else {
             return 0;
         }

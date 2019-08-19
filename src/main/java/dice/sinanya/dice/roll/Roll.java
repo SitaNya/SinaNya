@@ -85,18 +85,22 @@ public class Roll implements MakeNickToSender {
         }
         String[] everyFunction = stringBuilderFunction.toString().split(plus.toString());
 
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < intTimes; i++) {
 //            根据#次数循环
             EntityStrManyRolls entityStrManyRolls = getResFunctionAndResultInt(entityTypeMessages, stringBuilderFunction.toString(), everyFunction);
 
-
+            if (i != 0) {
+                result.append("\n");
+            }
             if (isNumeric(entityStrManyRolls.getStrResult())) {
-                sender(entityTypeMessages, resultMessage + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getResult());
+                result.append(resultMessage).append(entityStrManyRolls.getStrFunction()).append("=").append(entityStrManyRolls.getResult());
             } else {
-                sender(entityTypeMessages, resultMessage + entityStrManyRolls.getStrFunction() + "=" + entityStrManyRolls.getStrResult() + "=" + entityStrManyRolls.getResult());
+                result.append(resultMessage).append(entityStrManyRolls.getStrFunction()).append("=").append(entityStrManyRolls.getStrResult()).append("=").append(entityStrManyRolls.getResult());
             }
 //            如果骰纯数字，则不显示表达式
         }
+        sender(entityTypeMessages, result.toString());
     }
 
     /**

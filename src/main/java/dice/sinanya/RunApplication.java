@@ -54,6 +54,7 @@ import static org.quartz.TriggerBuilder.newTrigger;
 public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IRequest, MakeNickToSender {
     Scheduler scheduler;
     private Pattern commandHeader = Pattern.compile("^[ ]*[.。][ ]*.*");
+    private Pattern chineseRegex = Pattern.compile("([\\u4e00-\\u9fa5]+)");
     private String atTag = "[cq:at,qq=?]";
     private String tagMe = "";
 
@@ -255,7 +256,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
                 scheduler.start();
             }
         } catch (SchedulerException e) {
-            e.printStackTrace();
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
         EntityTypeMessages entityTypeMessages = new EntityTypeMessages(MessagesTypes.GROUP_MSG, fromQq, fromGroup, msg);
         if ((checkBeBanOrInBan(entityTypeMessages) == MSG_INTERCEPT)) {
@@ -556,7 +557,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
 
     private boolean messagesBotForAll(String messages, String tagBotSwitch) {
         return messages.trim().matches(tagBotSwitch) && !messages.trim().contains("[cq:at")
-                && !messages.matches(".*[0-9]+.*");
+                && !messages.matches(".*[0-9]+.*") && !messages.matches(chineseRegex.toString());
     }
 
     private boolean messagesContainsQqId(String messages, String tagBotSwitch) {
@@ -573,7 +574,6 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         boolean boolIsAdminOrInDiscuss = boolIsAdmin
                 || entityTypeMessages.getMessagesTypes() == MessagesTypes.DISCUSS_MSG;
         if (!boolIsAdminOrInDiscuss) {
-            sender(entityTypeMessages, entitySystemProperties.getOnlyManager());
             throw new OnlyManagerException(entityTypeMessages);
         }
     }

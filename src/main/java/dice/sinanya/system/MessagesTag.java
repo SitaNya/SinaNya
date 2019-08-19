@@ -140,6 +140,12 @@ public interface MessagesTag {
     String TAG_BAN_USER_LIST = HEADER_BAN + "user[ ]*list.*";
     String TAG_BAN_GROUP_LIST = HEADER_BAN + "group[ ]*list.*";
 
+    //    获取云黑相关标签
+    String HEADER_ADMIN = HEADER + "admin[ ]*";
+    String TAG_ADMIN_ON = HEADER_BAN + "on[ ]*\\d+";
+    String TAG_ADMIN_OFF = HEADER_BAN + "off[ ]*\\d+";
+    String TAG_ADMIN_EXIT = HEADER_BAN + "exit[ ]*\\d+";
+
     //    获取骰点历史标签
     String TAG_HIY = HEADER + "hiy[ ]*.*";
 

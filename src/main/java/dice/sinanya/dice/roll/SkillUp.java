@@ -41,6 +41,10 @@ public class SkillUp {
     public void en() throws NotFoundSkillException {
         String tag = TAG_EN;
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
+        if (entityTypeMessages.getFromGroup().equals("0")) {
+            sender(entityTypeMessages, entitySystemProperties.getCantInPrivate());
+            return;
+        }
         String roleName;
         if (checkRoleChooseExistByFromQQ(entityTypeMessages)) {
             roleName = getRoleChooseByFromQQ(entityTypeMessages);
