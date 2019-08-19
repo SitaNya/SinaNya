@@ -1825,6 +1825,7 @@ public class Setting extends JFrame {
             windows.add(panel22, BorderLayout.NORTH);
             windows.pack();
             windows.setLocationRelativeTo(windows.getOwner());
+            windows.setVisible(true);
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }

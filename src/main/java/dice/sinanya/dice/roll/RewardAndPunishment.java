@@ -100,45 +100,47 @@ public class RewardAndPunishment implements En, MakeNickToSender {
         int times = 0;
         Matcher findTimes = timesRegex.matcher(msg);
         while (findTimes.find()) {
-            times = Integer.parseInt(findTimes.group(0));
+            times = Integer.parseInt(findTimes.group(1));
             msg = msg.replaceAll(timesRegex.toString(), "");
         }
-        EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
 
-        StringBuilder stringBuilder = new StringBuilder();
-
-        ArrayList<Integer> listDice = makeBandProll(getTimesAndSkill(msg).getTimes());
-//        得到惩罚投列表
-
-        int max = 0;
-        boolean hasZero = false;
-        for (int result : listDice) {
-            stringBuilder.append(result).append(",");
-            if (result > max) {
-                max = result;
-            }
-            if (result == 0) {
-                hasZero = true;
-            }
-        }
-//        取最大值
-
-        int random = entityNickAndRandomAndSkill.getRandom();
-
-        if (random / multiple > max) {
-            max = random / multiple;
-        }
-
-        int resultRandom;
-        if (random % multiple == 0 && hasZero) {
-            resultRandom = 100;
-        } else {
-            resultRandom = max * multiple + random % multiple;
-        }
-//        进行替换，高位替换为整个列表中最大值
 
         StringBuilder strRes = new StringBuilder();
-        for (int i = 0; i <= times; i++) {
+        for (int i = 0; i < times; i++) {
+            EntityNickAndRandomAndSkill entityNickAndRandomAndSkill = getNickAndRandomAndSkill(entityTypeMessages, msg);
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            ArrayList<Integer> listDice = makeBandProll(getTimesAndSkill(msg).getTimes());
+//        得到惩罚投列表
+
+            int max = 0;
+            boolean hasZero = false;
+            for (int result : listDice) {
+                stringBuilder.append(result).append(",");
+                if (result > max) {
+                    max = result;
+                }
+                if (result == 0) {
+                    hasZero = true;
+                }
+            }
+//        取最大值
+
+            int random = entityNickAndRandomAndSkill.getRandom();
+
+            if (random / multiple > max) {
+                max = random / multiple;
+            }
+
+            int resultRandom;
+            if (random % multiple == 0 && hasZero) {
+                resultRandom = 100;
+            } else {
+                resultRandom = max * multiple + random % multiple;
+            }
+//        进行替换，高位替换为整个列表中最大值
+
             if (i != 0) {
                 strRes.append("\n");
             }
