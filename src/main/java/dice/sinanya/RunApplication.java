@@ -373,12 +373,12 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     public int groupMemberDecrease(int subtype, int sendTime, long fromGroup, long fromQQ, long beingOperateQQ) {
         if (subtype == 2 && beingOperateQQ == CQ.getLoginQQ() && entityBanProperties.isBanGroupBecauseReduce()) {
             if (entityBanProperties.isBanUserBecauseReduce()) {
-                CQ.sendGroupMsg(162279609, "已被移出群" + getGroupName(fromGroup) + "(" + fromGroup + ")中，将群和操作者"
+                CQ.sendGroupMsg(162279609, "已被移出群" + "(" + fromGroup + ")中，将群和操作者"
                         + getUserName(fromQQ) + "(" + fromQQ + ")拉黑");
                 insertQqBanList(String.valueOf(beingOperateQQ), "被踢出群" + fromGroup);
                 insertGroupBanList(String.valueOf(fromGroup), "被" + fromQQ + "踢出");
             } else {
-                CQ.sendGroupMsg(162279609, "已被移出群" + getGroupName(fromGroup) + "(" + fromGroup + ")中，将群拉黑");
+                CQ.sendGroupMsg(162279609, "已被移出群" + "(" + fromGroup + ")中，将群拉黑");
                 insertGroupBanList(String.valueOf(fromGroup), "被" + fromQQ + "踢出");
             }
         }
@@ -457,8 +457,8 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         if (subtype == 2) {
             if (!checkQqInBanList(String.valueOf(fromQQ)) && !checkGroupInBanList(String.valueOf(fromGroup))) {
                 CQ.setGroupAddRequestV2(responseFlag, REQUEST_GROUP_INVITE, REQUEST_ADOPT, "");
-                CQ.sendGroupMsg(162279609, "收到" + getUserName(fromQQ) + "(" + fromQQ + ")的群" + fromGroup + "("
-                        + getGroupName(fromGroup) + ")邀请，已同意");
+                CQ.sendGroupMsg(162279609, "收到" + getUserName(fromQQ) + "(" + fromQQ + ")的群" + getGroupName(fromGroup) + "("
+                        + fromGroup + ")邀请，已同意");
                 CQ.sendGroupMsg(fromGroup, entityBanProperties.getAddGroup());
             } else {
                 CQ.sendGroupMsg(162279609,
