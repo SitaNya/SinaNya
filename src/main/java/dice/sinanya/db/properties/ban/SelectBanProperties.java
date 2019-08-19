@@ -61,6 +61,11 @@ public class SelectBanProperties {
                         entityBanProperties.setClearGroup(set.getInt("clearGroup"));
                         entityBanProperties.setAlterFrequentness(set.getInt("alterFrequentness"));
                         entityBanProperties.setBanFrequentness(set.getInt("banFrequentness"));
+                        entityBanProperties.setClearGroupByOffInfo(set.getString("clearGroupByOffInfo"));
+                        entityBanProperties.setClearGroupInfo(set.getString("clearGroupInfo"));
+                        entityBanProperties.setFrequentnessAlterInfo(set.getString("frequentnessAlterInfo"));
+                        entityBanProperties.setFrequentnessBanInfo(set.getString("frequentnessBanInfo"));
+                        entityBanProperties.setPrometheusPort(set.getInt("prometheusPort"));
                         i++;
                     }
                 }

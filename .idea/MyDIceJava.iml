@@ -72,5 +72,6 @@
     <orderEntry type="library" name="Maven: io.prometheus:simpleclient_httpserver:0.6.0" level="project" />
     <orderEntry type="library" name="Maven: io.prometheus:simpleclient_common:0.6.0" level="project" />
     <orderEntry type="library" name="Maven: io.prometheus:simpleclient_pushgateway:0.6.0" level="project" />
+    <orderEntry type="library" name="MigLayout" level="project" />
   </component>
 </module>

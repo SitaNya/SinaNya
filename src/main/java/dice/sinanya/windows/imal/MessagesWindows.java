@@ -104,4 +104,10 @@ public class MessagesWindows {
     public JTextField clearGroup;
     public JTextField alterFrequentness;
     public JTextField banFrequentness;
+
+    public JTextField clearGroupByOffInfo;
+    public JTextField clearGroupInfo;
+    public JTextField frequentnessAlterInfo;
+    public JTextField frequentnessBanInfo;
+    public JTextField prometheusPort;
 }

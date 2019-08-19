@@ -50,6 +50,10 @@ public class MakeBan extends MessagesWindows {
         lable.createLable(jPanel, "输入的不是QQ号或群号");
         banListInputNotId = text.createText(jPanel);
         banListInputNotId.setText(entityBanProperties.getBanListInputNotId());
+
+        lable.createLable(jPanel, "普罗米修斯监控端口");
+        prometheusPort = text.createText(jPanel);
+        prometheusPort.setText(String.valueOf(entityBanProperties.getPrometheusPort()));
     }
 
     public void cloudBan(JPanel jPanel) {
@@ -95,9 +99,17 @@ public class MakeBan extends MessagesWindows {
         clearGroupByOff = text.createText(jPanel);
         clearGroupByOff.setText(String.valueOf(entityBanProperties.getClearGroupByOff()));
 
+        lable.createLable(jPanel, "关闭群清理用语");
+        clearGroupByOffInfo = text.createText(jPanel);
+        clearGroupByOffInfo.setText(String.valueOf(entityBanProperties.getClearGroupByOffInfo()));
+
         lable.createLable(jPanel, "废弃群清理期限");
         clearGroup = text.createText(jPanel);
         clearGroup.setText(String.valueOf(entityBanProperties.getClearGroup()));
+
+        lable.createLable(jPanel, "废弃群清理用语");
+        clearGroupInfo = text.createText(jPanel);
+        clearGroupInfo.setText(String.valueOf(entityBanProperties.getClearGroupInfo()));
 
         lable.createLable(jPanel, "警告刷屏频度");
         alterFrequentness = text.createText(jPanel);
@@ -106,5 +118,13 @@ public class MakeBan extends MessagesWindows {
         lable.createLable(jPanel, "拉黑退群刷屏频度");
         banFrequentness = text.createText(jPanel);
         banFrequentness.setText(String.valueOf(entityBanProperties.getBanFrequentness()));
+
+        lable.createLable(jPanel, "警告刷屏用语句");
+        frequentnessAlterInfo = text.createText(jPanel);
+        frequentnessAlterInfo.setText(String.valueOf(entityBanProperties.getFrequentnessAlterInfo()));
+
+        lable.createLable(jPanel, "拉黑退群刷屏用语");
+        frequentnessBanInfo = text.createText(jPanel);
+        frequentnessBanInfo.setText(String.valueOf(entityBanProperties.getFrequentnessBanInfo()));
     }
 }

@@ -54,18 +54,17 @@ public class BanProperties extends MakeBan {
         cloudBanPanel.setLayout(new GridLayout(0, 1));
         cloudBan(cloudBanPanel);
 
-        JPanel masterPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "管理员信息", 400, 0, 400, 150);
+        JPanel masterPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "管理员信息", 400, 0, 400, 200);
         masterPanel.setLayout(new GridLayout(0, 2));
         master(masterPanel);
 
-        JPanel clearInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "清理", 400, 150, 400, 200);
+        JPanel clearInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "清理", 400, 150, 400, 350);
         clearInfoPanel.setLayout(new GridLayout(0, 2));
         clearInfo(clearInfoPanel);
 
         JPanel cloudBanInfoPanel = new dice.sinanya.tools.windows.Panel().init(jFrame, "用语", 800, 0, 400, 420);
         cloudBanInfoPanel.setLayout(new GridLayout(0, 2));
         cloudBanInfo(cloudBanInfoPanel);
-
     }
 
     private void save(JFrame jFrame) {
@@ -96,6 +95,11 @@ public class BanProperties extends MakeBan {
             entityBanProperties.setClearGroupByOff(Integer.parseInt(clearGroupByOff.getText()));
             entityBanProperties.setAlterFrequentness(Integer.parseInt(alterFrequentness.getText()));
             entityBanProperties.setBanFrequentness(Integer.parseInt(banFrequentness.getText()));
+            entityBanProperties.setPrometheusPort(Integer.parseInt(prometheusPort.getText()));
+            entityBanProperties.setClearGroupByOffInfo(clearGroupByOffInfo.getText());
+            entityBanProperties.setClearGroupInfo(clearGroupInfo.getText());
+            entityBanProperties.setFrequentnessAlterInfo(frequentnessAlterInfo.getText());
+            entityBanProperties.setFrequentnessBanInfo(frequentnessBanInfo.getText());
             new InsertProperties().insertProperties(entityBanProperties);
             JOptionPane.showMessageDialog(null, "保存成功");
         });

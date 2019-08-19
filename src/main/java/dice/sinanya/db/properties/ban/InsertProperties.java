@@ -45,7 +45,15 @@ public class InsertProperties {
                     "whiteUser," +
                     "notBanListInput," +
                     "botId," +
-                    "clearGroupByOff,clearGroup,alterFrequentness,banFrequentness)  VALUES (?," +
+                    "clearGroupByOff," +
+                    "clearGroup," +
+                    "alterFrequentness," +
+                    "banFrequentness," +
+                    "clearGroupByOffInfo," +
+                    "clearGroupInfo," +
+                    "frequentnessAlterInfo," +
+                    "frequentnessBanInfo," +
+                    "prometheusPort)  VALUES (?," +
                     "?," +
                     "?," +
                     "?," +
@@ -65,7 +73,7 @@ public class InsertProperties {
                     "?," +
                     "?," +
                     "?," +
-                    "?,?,?,?,?);";
+                    "?,?,?,?,?,?,?,?,?,?);";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setBoolean(1, entityBanProperties.isCloudBan());
                 ps.setBoolean(2, entityBanProperties.isPrometheus());
@@ -92,6 +100,11 @@ public class InsertProperties {
                 ps.setInt(23, entityBanProperties.getClearGroup());
                 ps.setInt(24, entityBanProperties.getAlterFrequentness());
                 ps.setInt(25, entityBanProperties.getBanFrequentness());
+                ps.setString(26, entityBanProperties.getClearGroupByOffInfo());
+                ps.setString(27, entityBanProperties.getClearGroupInfo());
+                ps.setString(28, entityBanProperties.getFrequentnessAlterInfo());
+                ps.setString(29, entityBanProperties.getFrequentnessBanInfo());
+                ps.setInt(30, entityBanProperties.getPrometheusPort());
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
