@@ -51,6 +51,7 @@ new FormModel {
 								"x": 10
 								"y": 40
 								"height": 25
+								"width": 140
 							} )
 							add( new FormComponent( "javax.swing.JLabel" ) {
 								name: "nickValue6"
@@ -59,6 +60,7 @@ new FormModel {
 								"height": 25
 								"x": 10
 								"y": 100
+								"width": 140
 							} )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 145
@@ -1088,7 +1090,7 @@ new FormModel {
 						"x": 170
 						"y": 10
 						"width": 970
-						"height": 820
+						"height": 480
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "报错回复语等设置"
@@ -1133,6 +1135,7 @@ new FormModel {
 								"x": 10
 								"y": 40
 								"height": 25
+								"width": 140
 							} )
 							add( new FormComponent( "javax.swing.JLabel" ) {
 								name: "nickValue5"
@@ -1141,6 +1144,7 @@ new FormModel {
 								"height": 25
 								"x": 10
 								"y": 100
+								"width": 140
 							} )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 145
@@ -1419,6 +1423,7 @@ new FormModel {
 								"x": 10
 								"y": 40
 								"height": 25
+								"width": 140
 							} )
 							add( new FormComponent( "javax.swing.JLabel" ) {
 								name: "nickValue3"
@@ -1427,6 +1432,7 @@ new FormModel {
 								"height": 25
 								"x": 10
 								"y": 100
+								"width": 140
 							} )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"x": 5
@@ -1663,6 +1669,7 @@ new FormModel {
 								"x": 10
 								"y": 40
 								"height": 25
+								"width": 140
 							} )
 							add( new FormComponent( "javax.swing.JLabel" ) {
 								name: "nickValue4"
@@ -1671,6 +1678,7 @@ new FormModel {
 								"height": 25
 								"x": 10
 								"y": 100
+								"width": 140
 							} )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 145
@@ -1904,7 +1912,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 25, 0 )
-			"size": new java.awt.Dimension( 1150, 925 )
+			"size": new java.awt.Dimension( 1150, 560 )
 		} )
 	}
 }

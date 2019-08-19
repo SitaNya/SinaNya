@@ -397,12 +397,12 @@ public class Setting extends JFrame {
                             //---- qqValue6 ----
                             qqValue6.setText("text");
                             infoPanel6.add(qqValue6);
-                            qqValue6.setBounds(10, 40, qqValue6.getPreferredSize().width, 25);
+                            qqValue6.setBounds(10, 40, 140, 25);
 
                             //---- nickValue6 ----
                             nickValue6.setText("text");
                             infoPanel6.add(nickValue6);
-                            nickValue6.setBounds(10, 100, nickValue6.getPreferredSize().width, 25);
+                            nickValue6.setBounds(10, 100, 140, 25);
 
                             {
                                 // compute preferred size
@@ -1045,7 +1045,7 @@ public class Setting extends JFrame {
                         scrollPane1.setViewportView(panel2);
                     }
                     setting.add(scrollPane1);
-                    scrollPane1.setBounds(170, 10, 970, 820);
+                    scrollPane1.setBounds(170, 10, 970, 480);
 
                     {
                         // compute preferred size
@@ -1102,12 +1102,12 @@ public class Setting extends JFrame {
                             //---- qqValue5 ----
                             qqValue5.setText("text");
                             infoPanel5.add(qqValue5);
-                            qqValue5.setBounds(10, 40, qqValue5.getPreferredSize().width, 25);
+                            qqValue5.setBounds(10, 40, 140, 25);
 
                             //---- nickValue5 ----
                             nickValue5.setText("text");
                             infoPanel5.add(nickValue5);
-                            nickValue5.setBounds(10, 100, nickValue5.getPreferredSize().width, 25);
+                            nickValue5.setBounds(10, 100, 140, 25);
 
                             {
                                 // compute preferred size
@@ -1367,12 +1367,12 @@ public class Setting extends JFrame {
                             //---- qqValue3 ----
                             qqValue3.setText("text");
                             infoPanel3.add(qqValue3);
-                            qqValue3.setBounds(10, 40, qqValue3.getPreferredSize().width, 25);
+                            qqValue3.setBounds(10, 40, 140, 25);
 
                             //---- nickValue3 ----
                             nickValue3.setText("text");
                             infoPanel3.add(nickValue3);
-                            nickValue3.setBounds(10, 100, nickValue3.getPreferredSize().width, 25);
+                            nickValue3.setBounds(10, 100, 140, 25);
 
                             {
                                 // compute preferred size
@@ -1580,12 +1580,12 @@ public class Setting extends JFrame {
                             //---- qqValue4 ----
                             qqValue4.setText("text");
                             infoPanel4.add(qqValue4);
-                            qqValue4.setBounds(10, 40, qqValue4.getPreferredSize().width, 25);
+                            qqValue4.setBounds(10, 40, 140, 25);
 
                             //---- nickValue4 ----
                             nickValue4.setText("text");
                             infoPanel4.add(nickValue4);
-                            nickValue4.setBounds(10, 100, nickValue4.getPreferredSize().width, 25);
+                            nickValue4.setBounds(10, 100, 140, 25);
 
                             {
                                 // compute preferred size
@@ -1825,7 +1825,6 @@ public class Setting extends JFrame {
             windows.add(panel22, BorderLayout.NORTH);
             windows.pack();
             windows.setLocationRelativeTo(windows.getOwner());
-            windows.setVisible(true);
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
