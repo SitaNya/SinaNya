@@ -12,6 +12,8 @@ import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesLevel.*;
@@ -117,6 +119,10 @@ public class Setting extends JFrame {
         entityBanProperties.setFrequentnessBanInfo(frequentnessBanInfo.getText());
         new InsertProperties().insertProperties(entityBanProperties);
         JOptionPane.showMessageDialog(null, "保存成功");
+    }
+
+    private void windowsWindowClosing(WindowEvent e) {
+        windows.setVisible(false);
     }
 
     private void initComponents() {
@@ -342,6 +348,12 @@ public class Setting extends JFrame {
             windows.setTitle("SinaNya\u8dd1\u56e2\u9ab0\u70b9\u6838\u5fc3 By SitaNya");
             windows.setBackground(new Color(60, 63, 65));
             windows.setAlwaysOnTop(true);
+            windows.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    windowsWindowClosing(e);
+                }
+            });
             windows.setLayout(new BorderLayout());
 
             //======== tabContain ========
@@ -395,7 +407,7 @@ public class Setting extends JFrame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for (int i = 0; i < infoPanel6.getComponentCount(); i++) {
+                                for(int i = 0; i < infoPanel6.getComponentCount(); i++) {
                                     Rectangle bounds = infoPanel6.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -608,7 +620,7 @@ public class Setting extends JFrame {
                                     {
                                         // compute preferred size
                                         Dimension preferredSize = new Dimension();
-                                        for (int i = 0; i < infoPanel7.getComponentCount(); i++) {
+                                        for(int i = 0; i < infoPanel7.getComponentCount(); i++) {
                                             Rectangle bounds = infoPanel7.getComponent(i).getBounds();
                                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1100,7 +1112,7 @@ public class Setting extends JFrame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for (int i = 0; i < infoPanel5.getComponentCount(); i++) {
+                                for(int i = 0; i < infoPanel5.getComponentCount(); i++) {
                                     Rectangle bounds = infoPanel5.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1654,7 +1666,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for (int i = 0; i < panel21.getComponentCount(); i++) {
+                            for(int i = 0; i < panel21.getComponentCount(); i++) {
                                 Rectangle bounds = panel21.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1727,7 +1739,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for (int i = 0; i < panel23.getComponentCount(); i++) {
+                            for(int i = 0; i < panel23.getComponentCount(); i++) {
                                 Rectangle bounds = panel23.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1757,7 +1769,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for (int i = 0; i < panel24.getComponentCount(); i++) {
+                            for(int i = 0; i < panel24.getComponentCount(); i++) {
                                 Rectangle bounds = panel24.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1775,7 +1787,7 @@ public class Setting extends JFrame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for (int i = 0; i < panel19.getComponentCount(); i++) {
+                        for(int i = 0; i < panel19.getComponentCount(); i++) {
                             Rectangle bounds = panel19.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1798,7 +1810,7 @@ public class Setting extends JFrame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for (int i = 0; i < panel22.getComponentCount(); i++) {
+                    for(int i = 0; i < panel22.getComponentCount(); i++) {
                         Rectangle bounds = panel22.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1813,7 +1825,6 @@ public class Setting extends JFrame {
             windows.add(panel22, BorderLayout.NORTH);
             windows.pack();
             windows.setLocationRelativeTo(windows.getOwner());
-            windows.setVisible(true);
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
