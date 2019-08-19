@@ -31,18 +31,7 @@ public class test extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         windows = new Frame();
         tabContain = new JTabbedPane();
-        clean = new JPanel();
-        monitorPanel2 = new JPanel();
-        promethusActive2 = new JRadioButtonMenuItem();
-        promethusPortText2 = new JLabel();
-        promethusPortValue2 = new JTextField();
-        heapActive2 = new JRadioButtonMenuItem();
-        setMaster = new JPanel();
-        masterText = new JLabel();
-        notMasterInfoText = new JLabel();
-        masterValue = new JTextField();
-        notMasterInfoValue = new JFormattedTextField();
-        panel1 = new JPanel();
+        setting = new JPanel();
         panel3 = new JPanel();
         infoPanel = new JPanel();
         qqText = new JLabel();
@@ -152,6 +141,81 @@ public class test extends JFrame {
         textField33 = new JTextField();
         label38 = new JLabel();
         textField34 = new JTextField();
+        panel1 = new JPanel();
+        panel4 = new JPanel();
+        infoPanel2 = new JPanel();
+        qqText2 = new JLabel();
+        nickText2 = new JLabel();
+        qqValue2 = new JLabel();
+        nickValue2 = new JLabel();
+        save2 = new JButton();
+        panel15 = new JPanel();
+        label1 = new JLabel();
+        scrollPane2 = new JScrollPane();
+        textArea1 = new JTextArea();
+        label2 = new JLabel();
+        scrollPane3 = new JScrollPane();
+        textArea2 = new JTextArea();
+        label3 = new JLabel();
+        scrollPane4 = new JScrollPane();
+        textArea3 = new JTextArea();
+        label4 = new JLabel();
+        label50 = new JLabel();
+        label51 = new JLabel();
+        scrollPane5 = new JScrollPane();
+        textArea4 = new JTextArea();
+        scrollPane6 = new JScrollPane();
+        textArea5 = new JTextArea();
+        scrollPane7 = new JScrollPane();
+        textArea6 = new JTextArea();
+        clean = new JPanel();
+        monitorPanel2 = new JPanel();
+        promethusPortText2 = new JLabel();
+        promethusPortValue2 = new JTextField();
+        checkBox1 = new JCheckBox();
+        checkBox2 = new JCheckBox();
+        setMaster = new JPanel();
+        masterText = new JLabel();
+        notMasterInfoText = new JLabel();
+        masterValue = new JTextField();
+        scrollPane8 = new JScrollPane();
+        textArea7 = new JTextArea();
+        panel16 = new JPanel();
+        infoPanel3 = new JPanel();
+        qqText3 = new JLabel();
+        nickText3 = new JLabel();
+        qqValue3 = new JLabel();
+        nickValue3 = new JLabel();
+        save3 = new JButton();
+        panel17 = new JPanel();
+        label52 = new JLabel();
+        label53 = new JLabel();
+        label54 = new JLabel();
+        label55 = new JLabel();
+        textField46 = new JTextField();
+        textField47 = new JTextField();
+        textField48 = new JTextField();
+        textField49 = new JTextField();
+        panel18 = new JPanel();
+        label56 = new JLabel();
+        label57 = new JLabel();
+        label58 = new JLabel();
+        label59 = new JLabel();
+        textField50 = new JTextField();
+        textField51 = new JTextField();
+        textField52 = new JTextField();
+        textField53 = new JTextField();
+        panel19 = new JPanel();
+        panel20 = new JPanel();
+        infoPanel4 = new JPanel();
+        qqText4 = new JLabel();
+        nickText4 = new JLabel();
+        qqValue4 = new JLabel();
+        nickValue4 = new JLabel();
+        save4 = new JButton();
+        panel21 = new JPanel();
+        checkBox3 = new JCheckBox();
+        checkBox4 = new JCheckBox();
 
         //======== windows ========
         {
@@ -161,108 +225,9 @@ public class test extends JFrame {
             //======== tabContain ========
             {
 
-                //======== clean ========
+                //======== setting ========
                 {
-                    clean.setLayout(null);
-
-                    //======== monitorPanel2 ========
-                    {
-                        monitorPanel2.setToolTipText("\u76d1\u63a7\u4fe1\u606f");
-                        monitorPanel2.setBorder(new EtchedBorder());
-                        monitorPanel2.setLayout(null);
-
-                        //---- promethusActive2 ----
-                        promethusActive2.setText("\u542f\u7528\u666e\u7f57\u7c73\u4fee\u65af\u76d1\u63a7\u4e0a\u62a5");
-                        monitorPanel2.add(promethusActive2);
-                        promethusActive2.setBounds(10, 10, 170, 20);
-
-                        //---- promethusPortText2 ----
-                        promethusPortText2.setText("\u666e\u7f57\u7c73\u4fee\u65af\u81ea\u5b9a\u4e49\u7aef\u53e3");
-                        monitorPanel2.add(promethusPortText2);
-                        promethusPortText2.setBounds(10, 40, promethusPortText2.getPreferredSize().width, 20);
-                        monitorPanel2.add(promethusPortValue2);
-                        promethusPortValue2.setBounds(140, 40, 40, 20);
-
-                        //---- heapActive2 ----
-                        heapActive2.setText("\u542f\u7528\u5fc3\u8df3\u62a5\u544a");
-                        monitorPanel2.add(heapActive2);
-                        heapActive2.setBounds(10, 70, 170, 20);
-
-                        {
-                            // compute preferred size
-                            Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < monitorPanel2.getComponentCount(); i++) {
-                                Rectangle bounds = monitorPanel2.getComponent(i).getBounds();
-                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                            }
-                            Insets insets = monitorPanel2.getInsets();
-                            preferredSize.width += insets.right;
-                            preferredSize.height += insets.bottom;
-                            monitorPanel2.setMinimumSize(preferredSize);
-                            monitorPanel2.setPreferredSize(preferredSize);
-                        }
-                    }
-                    clean.add(monitorPanel2);
-                    monitorPanel2.setBounds(0, 190, 190, 100);
-
-                    //======== setMaster ========
-                    {
-                        setMaster.setBorder(new EtchedBorder());
-                        setMaster.setLayout(null);
-
-                        //---- masterText ----
-                        masterText.setText("Master");
-                        setMaster.add(masterText);
-                        masterText.setBounds(10, 10, 60, 25);
-
-                        //---- notMasterInfoText ----
-                        notMasterInfoText.setText("\u975eMaster\u547d\u4ee4\u56de\u590d");
-                        setMaster.add(notMasterInfoText);
-                        notMasterInfoText.setBounds(10, 40, 220, 25);
-                        setMaster.add(masterValue);
-                        masterValue.setBounds(80, 10, 144, masterValue.getPreferredSize().height);
-                        setMaster.add(notMasterInfoValue);
-                        notMasterInfoValue.setBounds(15, 70, 200, 75);
-
-                        {
-                            // compute preferred size
-                            Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < setMaster.getComponentCount(); i++) {
-                                Rectangle bounds = setMaster.getComponent(i).getBounds();
-                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                            }
-                            Insets insets = setMaster.getInsets();
-                            preferredSize.width += insets.right;
-                            preferredSize.height += insets.bottom;
-                            setMaster.setMinimumSize(preferredSize);
-                            setMaster.setPreferredSize(preferredSize);
-                        }
-                    }
-                    clean.add(setMaster);
-                    setMaster.setBounds(0, 10, 235, 165);
-
-                    {
-                        // compute preferred size
-                        Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < clean.getComponentCount(); i++) {
-                            Rectangle bounds = clean.getComponent(i).getBounds();
-                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                        }
-                        Insets insets = clean.getInsets();
-                        preferredSize.width += insets.right;
-                        preferredSize.height += insets.bottom;
-                        clean.setMinimumSize(preferredSize);
-                        clean.setPreferredSize(preferredSize);
-                    }
-                }
-                tabContain.addTab("\u76d1\u63a7", clean);
-
-                //======== panel1 ========
-                {
-                    panel1.setLayout(null);
+                    setting.setLayout(null);
 
                     //======== panel3 ========
                     {
@@ -310,7 +275,7 @@ public class test extends JFrame {
                             }
                         }
                         panel3.add(infoPanel);
-                        infoPanel.setBounds(5, 10, 145, 105);
+                        infoPanel.setBounds(5, 5, 145, 105);
 
                         //---- save ----
                         save.setText("\u4fdd\u5b58");
@@ -338,7 +303,7 @@ public class test extends JFrame {
                             panel3.setPreferredSize(preferredSize);
                         }
                     }
-                    panel1.add(panel3);
+                    setting.add(panel3);
                     panel3.setBounds(10, 10, 155, 480);
 
                     //======== scrollPane1 ========
@@ -917,8 +882,201 @@ public class test extends JFrame {
                         }
                         scrollPane1.setViewportView(panel2);
                     }
-                    panel1.add(scrollPane1);
+                    setting.add(scrollPane1);
                     scrollPane1.setBounds(170, 10, 970, 480);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < setting.getComponentCount(); i++) {
+                            Rectangle bounds = setting.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = setting.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        setting.setMinimumSize(preferredSize);
+                        setting.setPreferredSize(preferredSize);
+                    }
+                }
+                tabContain.addTab("\u62a5\u9519\u56de\u590d\u8bed\u7b49\u8bbe\u7f6e", setting);
+
+                //======== panel1 ========
+                {
+                    panel1.setLayout(null);
+
+                    //======== panel4 ========
+                    {
+                        panel4.setBorder(new EtchedBorder());
+                        panel4.setLayout(null);
+
+                        //======== infoPanel2 ========
+                        {
+                            infoPanel2.setBorder(new BevelBorder(BevelBorder.LOWERED));
+                            infoPanel2.setLayout(null);
+
+                            //---- qqText2 ----
+                            qqText2.setText("\u5f53\u524d\u9ab0\u5a18QQ\u53f7:");
+                            infoPanel2.add(qqText2);
+                            qqText2.setBounds(5, 5, 90, 20);
+
+                            //---- nickText2 ----
+                            nickText2.setText("\u5f53\u524d\u9ab0\u5a18\u6635\u79f0:");
+                            infoPanel2.add(nickText2);
+                            nickText2.setBounds(5, 40, 90, 20);
+
+                            //---- qqValue2 ----
+                            qqValue2.setText("text");
+                            infoPanel2.add(qqValue2);
+                            qqValue2.setBounds(20, 25, 50, qqValue2.getPreferredSize().height);
+
+                            //---- nickValue2 ----
+                            nickValue2.setText("text");
+                            infoPanel2.add(nickValue2);
+                            nickValue2.setBounds(15, 65, 40, 16);
+
+                            {
+                                // compute preferred size
+                                Dimension preferredSize = new Dimension();
+                                for(int i = 0; i < infoPanel2.getComponentCount(); i++) {
+                                    Rectangle bounds = infoPanel2.getComponent(i).getBounds();
+                                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                                }
+                                Insets insets = infoPanel2.getInsets();
+                                preferredSize.width += insets.right;
+                                preferredSize.height += insets.bottom;
+                                infoPanel2.setMinimumSize(preferredSize);
+                                infoPanel2.setPreferredSize(preferredSize);
+                            }
+                        }
+                        panel4.add(infoPanel2);
+                        infoPanel2.setBounds(5, 5, 145, 105);
+
+                        //---- save2 ----
+                        save2.setText("\u4fdd\u5b58");
+                        save2.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                save(e);
+                            }
+                        });
+                        panel4.add(save2);
+                        save2.setBounds(new Rectangle(new Point(35, 435), save2.getPreferredSize()));
+
+                        {
+                            // compute preferred size
+                            Dimension preferredSize = new Dimension();
+                            for(int i = 0; i < panel4.getComponentCount(); i++) {
+                                Rectangle bounds = panel4.getComponent(i).getBounds();
+                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            }
+                            Insets insets = panel4.getInsets();
+                            preferredSize.width += insets.right;
+                            preferredSize.height += insets.bottom;
+                            panel4.setMinimumSize(preferredSize);
+                            panel4.setPreferredSize(preferredSize);
+                        }
+                    }
+                    panel1.add(panel4);
+                    panel4.setBounds(10, 10, 155, 480);
+
+                    //======== panel15 ========
+                    {
+                        panel15.setBorder(new EtchedBorder());
+                        panel15.setLayout(null);
+
+                        //---- label1 ----
+                        label1.setText("\u5927\u6210\u529f\u56de\u590d\u8bed");
+                        panel15.add(label1);
+                        label1.setBounds(10, 10, 150, label1.getPreferredSize().height);
+
+                        //======== scrollPane2 ========
+                        {
+                            scrollPane2.setViewportView(textArea1);
+                        }
+                        panel15.add(scrollPane2);
+                        scrollPane2.setBounds(10, 30, 440, 120);
+
+                        //---- label2 ----
+                        label2.setText("\u6781\u96be\u6210\u529f\u56de\u590d\u8bed");
+                        panel15.add(label2);
+                        label2.setBounds(new Rectangle(new Point(10, 165), label2.getPreferredSize()));
+
+                        //======== scrollPane3 ========
+                        {
+                            scrollPane3.setViewportView(textArea2);
+                        }
+                        panel15.add(scrollPane3);
+                        scrollPane3.setBounds(10, 185, 440, 120);
+
+                        //---- label3 ----
+                        label3.setText("\u56f0\u96be\u6210\u529f\u56de\u590d\u8bed");
+                        panel15.add(label3);
+                        label3.setBounds(new Rectangle(new Point(10, 320), label3.getPreferredSize()));
+
+                        //======== scrollPane4 ========
+                        {
+                            scrollPane4.setViewportView(textArea3);
+                        }
+                        panel15.add(scrollPane4);
+                        scrollPane4.setBounds(10, 340, 440, 120);
+
+                        //---- label4 ----
+                        label4.setText("\u6210\u529f\u56de\u590d\u8bed");
+                        panel15.add(label4);
+                        label4.setBounds(new Rectangle(new Point(490, 10), label4.getPreferredSize()));
+
+                        //---- label50 ----
+                        label50.setText("\u5931\u8d25\u56de\u590d\u8bed");
+                        panel15.add(label50);
+                        label50.setBounds(new Rectangle(new Point(490, 165), label50.getPreferredSize()));
+
+                        //---- label51 ----
+                        label51.setText("\u5927\u5931\u8d25\u56de\u590d\u8bed");
+                        panel15.add(label51);
+                        label51.setBounds(new Rectangle(new Point(490, 320), label51.getPreferredSize()));
+
+                        //======== scrollPane5 ========
+                        {
+                            scrollPane5.setViewportView(textArea4);
+                        }
+                        panel15.add(scrollPane5);
+                        scrollPane5.setBounds(490, 30, 440, 120);
+
+                        //======== scrollPane6 ========
+                        {
+                            scrollPane6.setViewportView(textArea5);
+                        }
+                        panel15.add(scrollPane6);
+                        scrollPane6.setBounds(490, 185, 440, 120);
+
+                        //======== scrollPane7 ========
+                        {
+                            scrollPane7.setViewportView(textArea6);
+                        }
+                        panel15.add(scrollPane7);
+                        scrollPane7.setBounds(490, 340, 440, 120);
+
+                        {
+                            // compute preferred size
+                            Dimension preferredSize = new Dimension();
+                            for(int i = 0; i < panel15.getComponentCount(); i++) {
+                                Rectangle bounds = panel15.getComponent(i).getBounds();
+                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            }
+                            Insets insets = panel15.getInsets();
+                            preferredSize.width += insets.right;
+                            preferredSize.height += insets.bottom;
+                            panel15.setMinimumSize(preferredSize);
+                            panel15.setPreferredSize(preferredSize);
+                        }
+                    }
+                    panel1.add(panel15);
+                    panel15.setBounds(175, 10, 970, 480);
 
                     {
                         // compute preferred size
@@ -935,10 +1093,426 @@ public class test extends JFrame {
                         panel1.setPreferredSize(preferredSize);
                     }
                 }
-                tabContain.addTab("text", panel1);
+                tabContain.addTab("\u81ea\u5b9a\u4e49\u6210\u529f\u968f\u5373\u56de\u590d\u8bcd", panel1);
+
+                //======== clean ========
+                {
+                    clean.setLayout(null);
+
+                    //======== monitorPanel2 ========
+                    {
+                        monitorPanel2.setToolTipText("\u76d1\u63a7\u4fe1\u606f");
+                        monitorPanel2.setBorder(new EtchedBorder());
+                        monitorPanel2.setLayout(null);
+
+                        //---- promethusPortText2 ----
+                        promethusPortText2.setText("\u666e\u7f57\u7c73\u4fee\u65af\u81ea\u5b9a\u4e49\u7aef\u53e3");
+                        monitorPanel2.add(promethusPortText2);
+                        promethusPortText2.setBounds(10, 40, promethusPortText2.getPreferredSize().width, 25);
+                        monitorPanel2.add(promethusPortValue2);
+                        promethusPortValue2.setBounds(140, 40, 40, 25);
+
+                        //---- checkBox1 ----
+                        checkBox1.setText("\u542f\u7528\u666e\u7f57\u7c73\u4fee\u65af\u76d1\u63a7\u4e0a\u62a5");
+                        monitorPanel2.add(checkBox1);
+                        checkBox1.setBounds(new Rectangle(new Point(20, 10), checkBox1.getPreferredSize()));
+
+                        //---- checkBox2 ----
+                        checkBox2.setText("\u542f\u7528\u5fc3\u8df3\u62a5\u544a");
+                        monitorPanel2.add(checkBox2);
+                        checkBox2.setBounds(new Rectangle(new Point(40, 65), checkBox2.getPreferredSize()));
+
+                        {
+                            // compute preferred size
+                            Dimension preferredSize = new Dimension();
+                            for(int i = 0; i < monitorPanel2.getComponentCount(); i++) {
+                                Rectangle bounds = monitorPanel2.getComponent(i).getBounds();
+                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            }
+                            Insets insets = monitorPanel2.getInsets();
+                            preferredSize.width += insets.right;
+                            preferredSize.height += insets.bottom;
+                            monitorPanel2.setMinimumSize(preferredSize);
+                            monitorPanel2.setPreferredSize(preferredSize);
+                        }
+                    }
+                    clean.add(monitorPanel2);
+                    monitorPanel2.setBounds(180, 185, 235, 100);
+
+                    //======== setMaster ========
+                    {
+                        setMaster.setBorder(new EtchedBorder());
+                        setMaster.setLayout(null);
+
+                        //---- masterText ----
+                        masterText.setText("Master");
+                        setMaster.add(masterText);
+                        masterText.setBounds(10, 10, 60, 25);
+
+                        //---- notMasterInfoText ----
+                        notMasterInfoText.setText("\u975eMaster\u547d\u4ee4\u56de\u590d");
+                        setMaster.add(notMasterInfoText);
+                        notMasterInfoText.setBounds(10, 40, 220, 25);
+                        setMaster.add(masterValue);
+                        masterValue.setBounds(80, 10, 144, masterValue.getPreferredSize().height);
+
+                        //======== scrollPane8 ========
+                        {
+                            scrollPane8.setViewportView(textArea7);
+                        }
+                        setMaster.add(scrollPane8);
+                        scrollPane8.setBounds(15, 75, 205, 75);
+
+                        {
+                            // compute preferred size
+                            Dimension preferredSize = new Dimension();
+                            for(int i = 0; i < setMaster.getComponentCount(); i++) {
+                                Rectangle bounds = setMaster.getComponent(i).getBounds();
+                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            }
+                            Insets insets = setMaster.getInsets();
+                            preferredSize.width += insets.right;
+                            preferredSize.height += insets.bottom;
+                            setMaster.setMinimumSize(preferredSize);
+                            setMaster.setPreferredSize(preferredSize);
+                        }
+                    }
+                    clean.add(setMaster);
+                    setMaster.setBounds(180, 15, 235, 165);
+
+                    //======== panel16 ========
+                    {
+                        panel16.setBorder(new EtchedBorder());
+                        panel16.setLayout(null);
+
+                        //======== infoPanel3 ========
+                        {
+                            infoPanel3.setBorder(new BevelBorder(BevelBorder.LOWERED));
+                            infoPanel3.setLayout(null);
+
+                            //---- qqText3 ----
+                            qqText3.setText("\u5f53\u524d\u9ab0\u5a18QQ\u53f7:");
+                            infoPanel3.add(qqText3);
+                            qqText3.setBounds(5, 5, 90, 20);
+
+                            //---- nickText3 ----
+                            nickText3.setText("\u5f53\u524d\u9ab0\u5a18\u6635\u79f0:");
+                            infoPanel3.add(nickText3);
+                            nickText3.setBounds(5, 40, 90, 20);
+
+                            //---- qqValue3 ----
+                            qqValue3.setText("text");
+                            infoPanel3.add(qqValue3);
+                            qqValue3.setBounds(20, 25, 50, qqValue3.getPreferredSize().height);
+
+                            //---- nickValue3 ----
+                            nickValue3.setText("text");
+                            infoPanel3.add(nickValue3);
+                            nickValue3.setBounds(15, 65, 40, 16);
+
+                            {
+                                // compute preferred size
+                                Dimension preferredSize = new Dimension();
+                                for(int i = 0; i < infoPanel3.getComponentCount(); i++) {
+                                    Rectangle bounds = infoPanel3.getComponent(i).getBounds();
+                                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                                }
+                                Insets insets = infoPanel3.getInsets();
+                                preferredSize.width += insets.right;
+                                preferredSize.height += insets.bottom;
+                                infoPanel3.setMinimumSize(preferredSize);
+                                infoPanel3.setPreferredSize(preferredSize);
+                            }
+                        }
+                        panel16.add(infoPanel3);
+                        infoPanel3.setBounds(5, 5, 145, 105);
+
+                        //---- save3 ----
+                        save3.setText("\u4fdd\u5b58");
+                        save3.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                save(e);
+                            }
+                        });
+                        panel16.add(save3);
+                        save3.setBounds(new Rectangle(new Point(35, 435), save3.getPreferredSize()));
+
+                        {
+                            // compute preferred size
+                            Dimension preferredSize = new Dimension();
+                            for(int i = 0; i < panel16.getComponentCount(); i++) {
+                                Rectangle bounds = panel16.getComponent(i).getBounds();
+                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            }
+                            Insets insets = panel16.getInsets();
+                            preferredSize.width += insets.right;
+                            preferredSize.height += insets.bottom;
+                            panel16.setMinimumSize(preferredSize);
+                            panel16.setPreferredSize(preferredSize);
+                        }
+                    }
+                    clean.add(panel16);
+                    panel16.setBounds(10, 10, 155, 480);
+
+                    //======== panel17 ========
+                    {
+                        panel17.setBorder(new EtchedBorder());
+                        panel17.setToolTipText("\u673a\u5668\u4eba\u5e38\u7528\u4fe1\u606f");
+                        panel17.setLayout(null);
+
+                        //---- label52 ----
+                        label52.setText("\u5173\u95ed\u7fa4\u6e05\u7406\u671f\u9650(\u5355\u4f4d:\u5929)");
+                        panel17.add(label52);
+                        label52.setBounds(10, 10, label52.getPreferredSize().width, 25);
+
+                        //---- label53 ----
+                        label53.setText("\u5173\u95ed\u7fa4\u6e05\u7406\u7528\u8bed");
+                        panel17.add(label53);
+                        label53.setBounds(10, 40, label53.getPreferredSize().width, 20);
+
+                        //---- label54 ----
+                        label54.setText("\u5e9f\u5f03\u7fa4\u6e05\u7406\u671f\u9650(\u5355\u4f4d:\u5929)");
+                        panel17.add(label54);
+                        label54.setBounds(10, 70, label54.getPreferredSize().width, 20);
+
+                        //---- label55 ----
+                        label55.setText("\u5e9f\u5f03\u7fa4\u6e05\u7406\u7528\u8bed");
+                        panel17.add(label55);
+                        label55.setBounds(10, 100, label55.getPreferredSize().width, 20);
+                        panel17.add(textField46);
+                        textField46.setBounds(205, 10, 320, 25);
+                        panel17.add(textField47);
+                        textField47.setBounds(205, 40, 320, 25);
+                        panel17.add(textField48);
+                        textField48.setBounds(205, 70, 320, 25);
+                        panel17.add(textField49);
+                        textField49.setBounds(205, 100, 320, 25);
+
+                        {
+                            // compute preferred size
+                            Dimension preferredSize = new Dimension();
+                            for(int i = 0; i < panel17.getComponentCount(); i++) {
+                                Rectangle bounds = panel17.getComponent(i).getBounds();
+                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            }
+                            Insets insets = panel17.getInsets();
+                            preferredSize.width += insets.right;
+                            preferredSize.height += insets.bottom;
+                            panel17.setMinimumSize(preferredSize);
+                            panel17.setPreferredSize(preferredSize);
+                        }
+                    }
+                    clean.add(panel17);
+                    panel17.setBounds(425, 155, 545, 130);
+
+                    //======== panel18 ========
+                    {
+                        panel18.setBorder(new EtchedBorder());
+                        panel18.setToolTipText("\u673a\u5668\u4eba\u5e38\u7528\u4fe1\u606f");
+                        panel18.setLayout(null);
+
+                        //---- label56 ----
+                        label56.setText("\u8b66\u544a\u5237\u5c4f\u9891\u5ea6(N\u6761/\u6bcf\u5206\u949f)");
+                        panel18.add(label56);
+                        label56.setBounds(10, 10, label56.getPreferredSize().width, 25);
+
+                        //---- label57 ----
+                        label57.setText("\u8b66\u544a\u5237\u5c4f\u7528\u8bed");
+                        panel18.add(label57);
+                        label57.setBounds(10, 40, label57.getPreferredSize().width, 20);
+
+                        //---- label58 ----
+                        label58.setText("\u62c9\u9ed1\u9000\u7fa4\u5237\u5c4f\u9891\u5ea6(N\u6761/\u6bcf\u5206\u949f)");
+                        panel18.add(label58);
+                        label58.setBounds(10, 70, label58.getPreferredSize().width, 20);
+
+                        //---- label59 ----
+                        label59.setText("\u62c9\u9ed1\u9000\u7fa4\u5237\u5c4f\u7528\u8bed");
+                        panel18.add(label59);
+                        label59.setBounds(10, 100, label59.getPreferredSize().width, 20);
+                        panel18.add(textField50);
+                        textField50.setBounds(205, 10, 320, 25);
+                        panel18.add(textField51);
+                        textField51.setBounds(205, 40, 320, 25);
+                        panel18.add(textField52);
+                        textField52.setBounds(205, 70, 320, 25);
+                        panel18.add(textField53);
+                        textField53.setBounds(205, 100, 320, 25);
+
+                        {
+                            // compute preferred size
+                            Dimension preferredSize = new Dimension();
+                            for(int i = 0; i < panel18.getComponentCount(); i++) {
+                                Rectangle bounds = panel18.getComponent(i).getBounds();
+                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            }
+                            Insets insets = panel18.getInsets();
+                            preferredSize.width += insets.right;
+                            preferredSize.height += insets.bottom;
+                            panel18.setMinimumSize(preferredSize);
+                            panel18.setPreferredSize(preferredSize);
+                        }
+                    }
+                    clean.add(panel18);
+                    panel18.setBounds(425, 15, 545, 130);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < clean.getComponentCount(); i++) {
+                            Rectangle bounds = clean.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = clean.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        clean.setMinimumSize(preferredSize);
+                        clean.setPreferredSize(preferredSize);
+                    }
+                }
+                tabContain.addTab("\u76d1\u63a7", clean);
+
+                //======== panel19 ========
+                {
+                    panel19.setLayout(null);
+
+                    //======== panel20 ========
+                    {
+                        panel20.setBorder(new EtchedBorder());
+                        panel20.setLayout(null);
+
+                        //======== infoPanel4 ========
+                        {
+                            infoPanel4.setBorder(new BevelBorder(BevelBorder.LOWERED));
+                            infoPanel4.setLayout(null);
+
+                            //---- qqText4 ----
+                            qqText4.setText("\u5f53\u524d\u9ab0\u5a18QQ\u53f7:");
+                            infoPanel4.add(qqText4);
+                            qqText4.setBounds(5, 5, 90, 20);
+
+                            //---- nickText4 ----
+                            nickText4.setText("\u5f53\u524d\u9ab0\u5a18\u6635\u79f0:");
+                            infoPanel4.add(nickText4);
+                            nickText4.setBounds(5, 40, 90, 20);
+
+                            //---- qqValue4 ----
+                            qqValue4.setText("text");
+                            infoPanel4.add(qqValue4);
+                            qqValue4.setBounds(20, 25, 50, qqValue4.getPreferredSize().height);
+
+                            //---- nickValue4 ----
+                            nickValue4.setText("text");
+                            infoPanel4.add(nickValue4);
+                            nickValue4.setBounds(15, 65, 40, 16);
+
+                            {
+                                // compute preferred size
+                                Dimension preferredSize = new Dimension();
+                                for(int i = 0; i < infoPanel4.getComponentCount(); i++) {
+                                    Rectangle bounds = infoPanel4.getComponent(i).getBounds();
+                                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                                }
+                                Insets insets = infoPanel4.getInsets();
+                                preferredSize.width += insets.right;
+                                preferredSize.height += insets.bottom;
+                                infoPanel4.setMinimumSize(preferredSize);
+                                infoPanel4.setPreferredSize(preferredSize);
+                            }
+                        }
+                        panel20.add(infoPanel4);
+                        infoPanel4.setBounds(5, 5, 145, 105);
+
+                        //---- save4 ----
+                        save4.setText("\u4fdd\u5b58");
+                        save4.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                save(e);
+                            }
+                        });
+                        panel20.add(save4);
+                        save4.setBounds(new Rectangle(new Point(35, 435), save4.getPreferredSize()));
+
+                        {
+                            // compute preferred size
+                            Dimension preferredSize = new Dimension();
+                            for(int i = 0; i < panel20.getComponentCount(); i++) {
+                                Rectangle bounds = panel20.getComponent(i).getBounds();
+                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            }
+                            Insets insets = panel20.getInsets();
+                            preferredSize.width += insets.right;
+                            preferredSize.height += insets.bottom;
+                            panel20.setMinimumSize(preferredSize);
+                            panel20.setPreferredSize(preferredSize);
+                        }
+                    }
+                    panel19.add(panel20);
+                    panel20.setBounds(10, 10, 155, 480);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < panel19.getComponentCount(); i++) {
+                            Rectangle bounds = panel19.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = panel19.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        panel19.setMinimumSize(preferredSize);
+                        panel19.setPreferredSize(preferredSize);
+                    }
+                }
+                tabContain.addTab("\u4e91\u9ed1\u540d\u5355", panel19);
             }
             windows.add(tabContain);
             tabContain.setBounds(25, 30, 1155, 530);
+
+            //======== panel21 ========
+            {
+                panel21.setBorder(new EtchedBorder());
+                panel21.setLayout(null);
+
+                //---- checkBox3 ----
+                checkBox3.setText("\u5f00\u542f\u4e91\u9ed1\u540d\u5355");
+                panel21.add(checkBox3);
+                checkBox3.setBounds(new Rectangle(new Point(20, 20), checkBox3.getPreferredSize()));
+
+                //---- checkBox4 ----
+                checkBox4.setText("\u5f53\u9ed1\u540d\u5355\u7528\u6237\u5904\u4e8e\u767d\u540d\u5355\u7fa4\u4e2d\u65f6\uff0c\u5ffd\u7565\u6b64\u7528\u6237");
+                panel21.add(checkBox4);
+                checkBox4.setBounds(new Rectangle(new Point(40, 50), checkBox4.getPreferredSize()));
+
+                {
+                    // compute preferred size
+                    Dimension preferredSize = new Dimension();
+                    for(int i = 0; i < panel21.getComponentCount(); i++) {
+                        Rectangle bounds = panel21.getComponent(i).getBounds();
+                        preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                        preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                    }
+                    Insets insets = panel21.getInsets();
+                    preferredSize.width += insets.right;
+                    preferredSize.height += insets.bottom;
+                    panel21.setMinimumSize(preferredSize);
+                    panel21.setPreferredSize(preferredSize);
+                }
+            }
+            windows.add(panel21);
+            panel21.setBounds(130, 600, 405, 325);
 
             {
                 // compute preferred size
@@ -963,18 +1537,7 @@ public class test extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private Frame windows;
     private JTabbedPane tabContain;
-    private JPanel clean;
-    private JPanel monitorPanel2;
-    private JRadioButtonMenuItem promethusActive2;
-    private JLabel promethusPortText2;
-    private JTextField promethusPortValue2;
-    private JRadioButtonMenuItem heapActive2;
-    private JPanel setMaster;
-    private JLabel masterText;
-    private JLabel notMasterInfoText;
-    private JTextField masterValue;
-    private JFormattedTextField notMasterInfoValue;
-    private JPanel panel1;
+    private JPanel setting;
     private JPanel panel3;
     private JPanel infoPanel;
     private JLabel qqText;
@@ -1084,5 +1647,80 @@ public class test extends JFrame {
     private JTextField textField33;
     private JLabel label38;
     private JTextField textField34;
+    private JPanel panel1;
+    private JPanel panel4;
+    private JPanel infoPanel2;
+    private JLabel qqText2;
+    private JLabel nickText2;
+    private JLabel qqValue2;
+    private JLabel nickValue2;
+    private JButton save2;
+    private JPanel panel15;
+    private JLabel label1;
+    private JScrollPane scrollPane2;
+    private JTextArea textArea1;
+    private JLabel label2;
+    private JScrollPane scrollPane3;
+    private JTextArea textArea2;
+    private JLabel label3;
+    private JScrollPane scrollPane4;
+    private JTextArea textArea3;
+    private JLabel label4;
+    private JLabel label50;
+    private JLabel label51;
+    private JScrollPane scrollPane5;
+    private JTextArea textArea4;
+    private JScrollPane scrollPane6;
+    private JTextArea textArea5;
+    private JScrollPane scrollPane7;
+    private JTextArea textArea6;
+    private JPanel clean;
+    private JPanel monitorPanel2;
+    private JLabel promethusPortText2;
+    private JTextField promethusPortValue2;
+    private JCheckBox checkBox1;
+    private JCheckBox checkBox2;
+    private JPanel setMaster;
+    private JLabel masterText;
+    private JLabel notMasterInfoText;
+    private JTextField masterValue;
+    private JScrollPane scrollPane8;
+    private JTextArea textArea7;
+    private JPanel panel16;
+    private JPanel infoPanel3;
+    private JLabel qqText3;
+    private JLabel nickText3;
+    private JLabel qqValue3;
+    private JLabel nickValue3;
+    private JButton save3;
+    private JPanel panel17;
+    private JLabel label52;
+    private JLabel label53;
+    private JLabel label54;
+    private JLabel label55;
+    private JTextField textField46;
+    private JTextField textField47;
+    private JTextField textField48;
+    private JTextField textField49;
+    private JPanel panel18;
+    private JLabel label56;
+    private JLabel label57;
+    private JLabel label58;
+    private JLabel label59;
+    private JTextField textField50;
+    private JTextField textField51;
+    private JTextField textField52;
+    private JTextField textField53;
+    private JPanel panel19;
+    private JPanel panel20;
+    private JPanel infoPanel4;
+    private JLabel qqText4;
+    private JLabel nickText4;
+    private JLabel qqValue4;
+    private JLabel nickValue4;
+    private JButton save4;
+    private JPanel panel21;
+    private JCheckBox checkBox3;
+    private JCheckBox checkBox4;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
