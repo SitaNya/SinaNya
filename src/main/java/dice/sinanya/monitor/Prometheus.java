@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
 
 /**
  * @author SitaNya
@@ -27,7 +28,7 @@ public class Prometheus {
     public void start() {
         Logger log = LogManager.getLogger(dice.sinanya.listener.Prometheus.class.getName());
         try {
-            HTTPServer server = new HTTPServer(62258);
+            HTTPServer server = new HTTPServer(entityBanProperties.getPrometheusPort());
             log.info("Prometheus监控系统已在本机" + server.getPort() + "端口启动");
         } catch (IOException e) {
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));

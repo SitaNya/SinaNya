@@ -11,6 +11,7 @@ package dice.sinanya.entity;
 public class EntityBanProperties {
     boolean cloudBan;
     boolean Prometheus;
+    int PrometheusPort;
     boolean heap;
 
     String master;
@@ -40,9 +41,13 @@ public class EntityBanProperties {
     int clearGroupByOff;
     int clearGroup;
 
+    String frequentnessAlterInfo;
+    String frequentnessBanInfo;
+
     public EntityBanProperties() {
         cloudBan = true;
         Prometheus = false;
+        PrometheusPort=62258;
         heap = false;
 
         master = "";
@@ -72,6 +77,32 @@ public class EntityBanProperties {
 
         whiteGroup = "";
         whiteUser = "";
+        frequentnessAlterInfo="请勿刷屏，过多可能导致退群拉黑，谢谢合作";
+        frequentnessBanInfo="检测到极大量刷屏，正在退群拉黑";
+    }
+
+    public int getPrometheusPort() {
+        return PrometheusPort;
+    }
+
+    public void setPrometheusPort(int prometheusPort) {
+        PrometheusPort = prometheusPort;
+    }
+
+    public String getFrequentnessAlterInfo() {
+        return frequentnessAlterInfo;
+    }
+
+    public void setFrequentnessAlterInfo(String frequentnessAlterInfo) {
+        this.frequentnessAlterInfo = frequentnessAlterInfo;
+    }
+
+    public String getFrequentnessBanInfo() {
+        return frequentnessBanInfo;
+    }
+
+    public void setFrequentnessBanInfo(String frequentnessBanInfo) {
+        this.frequentnessBanInfo = frequentnessBanInfo;
     }
 
     public int getClearGroupByOff() {
