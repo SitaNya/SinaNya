@@ -148,6 +148,13 @@
             <artifactId>simpleclient_pushgateway</artifactId>
             <version>0.6.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.github.insubstantial/substance -->
+        <dependency>
+            <groupId>com.github.insubstantial</groupId>
+            <artifactId>substance</artifactId>
+            <version>7.2.1</version>
+        </dependency>
+
     </dependencies>
 
     <repositories><!-- 代码库 -->

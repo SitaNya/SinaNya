@@ -2,6 +2,7 @@ package dice.sinanya.dice.roll;
 
 import dice.sinanya.db.roles.InsertRoles;
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.entity.imal.MessagesTypes;
 import dice.sinanya.exceptions.NotFoundSkillException;
 
 import java.util.regex.Matcher;
@@ -41,7 +42,7 @@ public class SkillUp {
     public void en() throws NotFoundSkillException {
         String tag = TAG_EN;
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
-        if (entityTypeMessages.getFromGroup().equals("0")) {
+        if (entityTypeMessages.getMessagesTypes() == MessagesTypes.PRIVATE_MSG) {
             sender(entityTypeMessages, entitySystemProperties.getCantInPrivate());
             return;
         }

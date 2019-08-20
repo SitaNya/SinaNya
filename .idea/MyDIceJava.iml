@@ -74,5 +74,9 @@
     <orderEntry type="library" name="Maven: io.prometheus:simpleclient_httpserver:0.6.0" level="project" />
     <orderEntry type="library" name="Maven: io.prometheus:simpleclient_common:0.6.0" level="project" />
     <orderEntry type="library" name="Maven: io.prometheus:simpleclient_pushgateway:0.6.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.insubstantial:substance:7.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.insubstantial:laf-widget:7.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.insubstantial:trident:swing:7.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.insubstantial:laf-plugin:7.2.1" level="project" />
   </component>
 </module>

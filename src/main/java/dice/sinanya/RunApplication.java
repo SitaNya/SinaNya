@@ -251,7 +251,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     public int groupMsg(int subType, int msgId, long fromGroup, long fromQq, String fromAnonymous, String msg,
                         int font) {
         try {
-            if (!scheduler.isStarted()) {
+            if (scheduler != null && !scheduler.isStarted()) {
                 scheduler.start();
             }
         } catch (SchedulerException e) {

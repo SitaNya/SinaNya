@@ -280,29 +280,29 @@ public class Setting extends JFrame {
         entitySystemProperties.setAntagonizeSecondSuccess(antagonizeSecondSuccess.getText());
         entitySystemProperties.setAntagonizeAllFailed(antagonizeAllFailed.getText());
         entitySystemProperties.setAntagonizeDraw(antagonizeDraw.getText());
-        entitySystemProperties.setSanCheck(sanCheck.getText());
-        entitySystemProperties.setSymptom(symptom.getText());
-        entitySystemProperties.setSanCheckFumble(sanCheckFumble.getText());
-        entitySystemProperties.setSanCheckCriticalSuccess(sanCheckCriticalSuccess.getText());
-        entitySystemProperties.setSanCheckSuccess(sanCheckSuccess.getText());
-        entitySystemProperties.setSanCheckFailure(sanCheckFailure.getText());
-        entitySystemProperties.setEnSuccess(enSuccess.getText());
-        entitySystemProperties.setEnFailed(enFailed.getText());
-        entitySystemProperties.setHiddenDice(hiddenDice.getText());
-        entitySystemProperties.setTeamIsEmpty(teamIsEmpty.getText());
-        entitySystemProperties.setTeamMemberEnIsEmpty(teamMemberEnIsEmpty.getText());
-        entitySystemProperties.setCRITICAL_SUCCESS(criticalSuccess.getText());
-        entitySystemProperties.setEXTREME_SUCCESS(extremeSuccess.getText());
-        entitySystemProperties.setHARD_SUCCESS(headSuccess.getText());
-        entitySystemProperties.setSUCCESS(success.getText());
-        entitySystemProperties.setFAILURE(failure.getText());
-        entitySystemProperties.setFUMBLE(fumble.getText());
-        STR_CRITICAL_SUCCESS.setText(criticalSuccess.getText());
-        STR_EXTREME_SUCCESS.setText(extremeSuccess.getText());
-        STR_HARD_SUCCESS.setText(headSuccess.getText());
-        STR_SUCCESS.setText(success.getText());
-        STR_FAILURE.setText(failure.getText());
-        STR_FUMBLE.setText(fumble.getText());
+        entitySystemProperties.setSanCheck(sanCheck.getText().replace("\\n", "\n"));
+        entitySystemProperties.setSymptom(symptom.getText().replace("\\n", "\n"));
+        entitySystemProperties.setSanCheckFumble(sanCheckFumble.getText().replace("\\n", "\n"));
+        entitySystemProperties.setSanCheckCriticalSuccess(sanCheckCriticalSuccess.getText().replace("\\n", "\n"));
+        entitySystemProperties.setSanCheckSuccess(sanCheckSuccess.getText().replace("\\n", "\n"));
+        entitySystemProperties.setSanCheckFailure(sanCheckFailure.getText().replace("\\n", "\n"));
+        entitySystemProperties.setEnSuccess(enSuccess.getText().replace("\\n", "\n"));
+        entitySystemProperties.setEnFailed(enFailed.getText().replace("\\n", "\n"));
+        entitySystemProperties.setHiddenDice(hiddenDice.getText().replace("\\n", "\n"));
+        entitySystemProperties.setTeamIsEmpty(teamIsEmpty.getText().replace("\\n", "\n"));
+        entitySystemProperties.setTeamMemberEnIsEmpty(teamMemberEnIsEmpty.getText().replace("\\n", "\n"));
+        entitySystemProperties.setCRITICAL_SUCCESS(criticalSuccess.getText().replace("\\n", "\n"));
+        entitySystemProperties.setEXTREME_SUCCESS(extremeSuccess.getText().replace("\\n", "\n"));
+        entitySystemProperties.setHARD_SUCCESS(headSuccess.getText().replace("\\n", "\n"));
+        entitySystemProperties.setSUCCESS(success.getText().replace("\\n", "\n"));
+        entitySystemProperties.setFAILURE(failure.getText().replace("\\n", "\n"));
+        entitySystemProperties.setFUMBLE(fumble.getText().replace("\\n", "\n"));
+        STR_CRITICAL_SUCCESS.setText(criticalSuccess.getText().replace("\\n", "\n"));
+        STR_EXTREME_SUCCESS.setText(extremeSuccess.getText().replace("\\n", "\n"));
+        STR_HARD_SUCCESS.setText(headSuccess.getText().replace("\\n", "\n"));
+        STR_SUCCESS.setText(success.getText().replace("\\n", "\n"));
+        STR_FAILURE.setText(failure.getText().replace("\\n", "\n"));
+        STR_FUMBLE.setText(fumble.getText().replace("\\n", "\n"));
         new dice.sinanya.db.properties.system.InsertProperties().insertProperties(entitySystemProperties);
         JOptionPane.showMessageDialog(null, "保存成功");
     }
@@ -311,28 +311,28 @@ public class Setting extends JFrame {
         entityBanProperties.setCloudBan(cloudBan.isSelected());
         entityBanProperties.setPrometheus(Prometheus.isSelected());
         entityBanProperties.setHeap(heap.isSelected());
-        entityBanProperties.setMaster(master.getText());
+        entityBanProperties.setMaster(master.getText().replace("\\n", "\n"));
         entityBanProperties.setBanListInputNotId(banListInputNotId.getText());
-        entityBanProperties.setNotMaster(notMaster.getText());
+        entityBanProperties.setNotMaster(notMaster.getText().replace("\\n", "\n"));
         entityBanProperties.setIgnoreBanUser(ignoreBanUser.isSelected());
         entityBanProperties.setLeaveByBanUser(leaveByBanUser.isSelected());
         entityBanProperties.setLeaveGroupByBan(leaveGroupByBan.isSelected());
         entityBanProperties.setBanGroupBecauseBan(banGroupBecauseBan.isSelected());
         entityBanProperties.setBanGroupBecauseReduce(banGroupBecauseReduce.isSelected());
         entityBanProperties.setBanUserBecauseReduce(banUserBecauseReduce.isSelected());
-        entityBanProperties.setAddGroup(addGroup.getText());
-        entityBanProperties.setAddFriend(addFriend.getText());
-        entityBanProperties.setRefuseGroupByBan(refuseGroupByBan.getText());
-        entityBanProperties.setRefuseFriendByBan(refuseFriendByBan.getText());
+        entityBanProperties.setAddGroup(addGroup.getText().replace("\\n", "\n"));
+        entityBanProperties.setAddFriend(addFriend.getText().replace("\\n", "\n"));
+        entityBanProperties.setRefuseGroupByBan(refuseGroupByBan.getText().replace("\\n", "\n"));
+        entityBanProperties.setRefuseFriendByBan(refuseFriendByBan.getText().replace("\\n", "\n"));
         entityBanProperties.setClearGroup(Integer.parseInt(clearGroup.getText()));
         entityBanProperties.setClearGroupByOff(Integer.parseInt(clearGroupByOff.getText()));
         entityBanProperties.setAlterFrequentness(Integer.parseInt(alterFrequentness.getText()));
         entityBanProperties.setBanFrequentness(Integer.parseInt(banFrequentness.getText()));
         entityBanProperties.setPrometheusPort(Integer.parseInt(prometheusPort.getText()));
-        entityBanProperties.setClearGroupByOffInfo(clearGroupByOffInfo.getText());
-        entityBanProperties.setClearGroupInfo(clearGroupInfo.getText());
-        entityBanProperties.setFrequentnessAlterInfo(frequentnessAlterInfo.getText());
-        entityBanProperties.setFrequentnessBanInfo(frequentnessBanInfo.getText());
+        entityBanProperties.setClearGroupByOffInfo(clearGroupByOffInfo.getText().replace("\\n", "\n"));
+        entityBanProperties.setClearGroupInfo(clearGroupInfo.getText().replace("\\n", "\n"));
+        entityBanProperties.setFrequentnessAlterInfo(frequentnessAlterInfo.getText().replace("\\n", "\n"));
+        entityBanProperties.setFrequentnessBanInfo(frequentnessBanInfo.getText().replace("\\n", "\n"));
         new InsertProperties().insertProperties(entityBanProperties);
         JOptionPane.showMessageDialog(null, "保存成功");
     }
@@ -2041,6 +2041,27 @@ public class Setting extends JFrame {
             windows.add(panel22, BorderLayout.NORTH);
             windows.pack();
             windows.setLocationRelativeTo(windows.getOwner());
+
+            try {
+                //设置外观
+                UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.BusinessBlackSteelSkin");
+                JFrame.setDefaultLookAndFeelDecorated(true);
+//                //设置主题
+//                SubstanceLookAndFeel.setCurrentTheme(new SubstanceEbonyTheme());
+//                //设置按钮外观
+//                SubstanceLookAndFeel.setCurrentButtonShaper(new ClassicButtonShaper());
+//                //设置水印
+//                SubstanceLookAndFeel.setCurrentWatermark(new SubstanceBinaryWatermark());
+//                //设置边框
+//                SubstanceLookAndFeel.setCurrentBorderPainter(new StandardBorderPainter());
+//                //设置渐变渲染
+//                SubstanceLookAndFeel.setCurrentGradientPainter(new StandardGradientPainter());
+//                //设置标题
+//                SubstanceLookAndFeel.setCurrentTitlePainter(new FlatTitlePainter());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
             windows.setVisible(true);
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
