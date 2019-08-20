@@ -378,7 +378,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
             if (entityBanProperties.isBanUserBecauseReduce()) {
                 CQ.sendGroupMsg(162279609, "已被移出群" + "(" + fromGroup + ")中，将群和操作者"
                         + getUserName(fromQQ) + "(" + fromQQ + ")拉黑");
-                insertQqBanList(String.valueOf(beingOperateQQ), "被踢出群" + fromGroup);
+                insertQqBanList(String.valueOf(fromQQ), "被踢出群" + fromGroup);
                 insertGroupBanList(String.valueOf(fromGroup), "被" + fromQQ + "踢出");
             } else {
                 CQ.sendGroupMsg(162279609, "已被移出群" + "(" + fromGroup + ")中，将群拉黑");
