@@ -559,6 +559,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     private boolean messagesBotForAll(String messages, String tagBotSwitch) {
         boolean forAll = messages.trim().matches(tagBotSwitch) && !messages.trim().contains("[cq:at")
                 && !messages.matches(".*[0-9]+.*") && !messages.matches(chineseRegex.toString());
+        CQ.logDebug("判断信息为", messages);
         CQ.logDebug("包含汉字", String.valueOf(messages.matches(chineseRegex.toString())));
         CQ.logDebug("返回机器人开关值", "全体: " + forAll);
         return forAll;
