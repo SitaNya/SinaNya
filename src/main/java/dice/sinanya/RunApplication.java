@@ -112,6 +112,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         } catch (SchedulerException e) {
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
+        System.exit(0);
         return 0;
     }
 
@@ -202,6 +203,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         } catch (SchedulerException e) {
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
+        System.exit(0);
         return 0;
     }
 
