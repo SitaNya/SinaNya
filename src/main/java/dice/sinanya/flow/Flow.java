@@ -141,6 +141,8 @@ class Flow implements MakeNickToSender {
 
     private boolean isRules = false;
 
+    private boolean isMagic = false;
+
     private boolean isJrrp = false;
 
     private boolean isTest = false;
@@ -291,6 +293,8 @@ class Flow implements MakeNickToSender {
             isRules = checkTagRegex(TAG_RULES);
 
             isTest = checkTagRegex(TAG_TEST);
+
+            isMagic = checkTagRegex(TAG_MAGIC);
         }
     }
 
@@ -308,6 +312,7 @@ class Flow implements MakeNickToSender {
         Test test = new Test(entityTypeMessages);
         Rules rules = new Rules(entityTypeMessages);
         Admin admin = new Admin(entityTypeMessages);
+        DndMagic dndMagic = new DndMagic(entityTypeMessages);
 
         isFunctionR();
         isStFunction();
@@ -361,6 +366,10 @@ class Flow implements MakeNickToSender {
             admin.off();
         } else if (isAdminExit) {
             admin.exit();
+        }
+
+        if (isMagic) {
+            dndMagic.get();
         }
 
     }

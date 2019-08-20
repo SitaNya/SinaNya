@@ -159,4 +159,6 @@ public interface MessagesTag {
     String TAG_TEST = HEADER + "test[ ]*.*";
 
     String TAG_RULES = HEADER + "rule[ ]*.*";
+
+    String TAG_MAGIC = HEADER + "magic[ ]*.*";
 }
