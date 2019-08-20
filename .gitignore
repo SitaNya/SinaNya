@@ -56,3 +56,16 @@
 /saveLogs
 /logs
 /pid
+/.settings/org.eclipse.core.resources.prefs
+/.settings/org.eclipse.jdt.apt.core.prefs
+/.settings/org.eclipse.jdt.core.prefs
+/.settings/org.eclipse.m2e.core.prefs
+/lib/miglayout-core.jar
+/lib/miglayout-core-javadoc.jar
+/lib/miglayout-core-sources.jar
+/lib/miglayout-swing.jar
+/lib/miglayout-swing-javadoc.jar
+/lib/miglayout-swing-sources.jar
+/.classpath
+/.factorypath
+/.project
