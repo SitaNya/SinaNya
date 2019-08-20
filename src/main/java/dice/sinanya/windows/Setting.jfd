@@ -68,6 +68,18 @@ new FormModel {
 							"x": 5
 							"y": 5
 						} )
+						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+							name: "scrollPane11"
+							add( new FormComponent( "javax.swing.JTextPane" ) {
+								name: "textPane1"
+								"text": "这个界面用于设定：\n各种命令回复语\n各种报错回复语\n你需要注意的是，第一次启动会有默认信息生成\n里面可能会夹杂%s这样的字符，这指代实际的名称\n如日志创建并开启栏位中的%s指代日志名称\n小队成员en中的%s指代成员名\n此外，你可以善用\\n字符来代表回车\n完毕后记得点保存"
+							} )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 145
+							"height": 275
+							"x": 5
+							"y": 145
+						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 10
 						"y": 10
@@ -1110,6 +1122,18 @@ new FormModel {
 							"x": 5
 							"y": 5
 						} )
+						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+							name: "scrollPane14"
+							add( new FormComponent( "javax.swing.JTextPane" ) {
+								name: "textPane2"
+								"text": "这个界面用于设定：\n大成功乃至大失败的回复语\n这里不会出现%s\n\\n一样代表换行\n\n你一定要记住的是：\n|\n这个竖线符号，它在你的回车上方\n同一种回复语，用|分割多句，在骰娘回复时会随即选取一句，这里比如\n成功|成功啦|是成功呢|你成功了\n会4种里随机选择1种\n此外，我为了尽可能给予你自由，没有写死回复“成功”这个字眼，因此你需要在回复语中填写“成功”二字"
+							} )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 5
+							"y": 145
+							"width": 145
+							"height": 275
+						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 155
 						"height": 480
@@ -1406,6 +1430,18 @@ new FormModel {
 							"x": 35
 							"y": 435
 						} )
+						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+							name: "scrollPane15"
+							add( new FormComponent( "javax.swing.JTextPane" ) {
+								name: "textPane3"
+								"text": "在这个界面中你需要设置:\nMasterQQ号和其报错信息\n只有设置了Master的QQ号，心跳报告才会正确的报警，后续的云黑也才可以正常使用\n这里需要为你解释的是：\n心跳报告，是指当你的骰娘因为任何原因挂起时，可以在20分钟内于群808619122中得到报告（只需要你加入，你的骰娘不需要）\n而普罗米修斯监控上报，你可以忽略，那是一种企业级的服务器负载监控能力，需要一些额外的配置。如果你的服务器上挂载了非常多的骰娘不堪重负，或者干脆它就有过宕机连不上的经历。你可以在加入报警群后询问我如何配置"
+							} )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 145
+							"height": 275
+							"x": 5
+							"y": 145
+						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 155
 						"height": 480
@@ -1668,6 +1704,18 @@ new FormModel {
 							"x": 5
 							"y": 5
 						} )
+						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+							name: "scrollPane16"
+							add( new FormComponent( "javax.swing.JTextPane" ) {
+								name: "textPane4"
+								"text": "这里是黑名单设置区:\n我们采用云黑策略，因此这里不会用来显示黑名单列表——别人添加的黑名单你是不能修改的，同样，你添加的黑名单也不会有别人搭个骰子后偷偷删掉。\n开启云黑名单之后，每15分钟会请求一次远端服务器，拉取最新的黑名单列表\n而手工添加、删除黑名单一样是允许的，你可以在《关于》选项卡的文档中找到相应命令\n如果你想要用私人的黑名单插件，那么只需要取消掉左上方的“开启云黑名单”即可"
+							} )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 5
+							"y": 145
+							"width": 145
+							"height": 275
+						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 155
 						"height": 480
@@ -1884,6 +1932,71 @@ new FormModel {
 				}, new FormLayoutConstraints( null ) {
 					"title": "云黑名单"
 				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panel26"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label6"
+						"text": "这里显示了插件的更新日志"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 20
+						"y": 15
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane17"
+						add( new FormComponent( "javax.swing.JTextPane" ) {
+							name: "textPane5"
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 20
+						"y": 50
+						"width": 1115
+						"height": 430
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "更新日志"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panel27"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label7"
+						"text": "项目文档"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 535
+						"y": 35
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane18"
+						add( new FormComponent( "javax.swing.JTextPane" ) {
+							name: "textPane6"
+							"text": "https://sitcnya.gitbook.io/sinanya/"
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 455
+						"y": 60
+						"width": 215
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label8"
+						"text": "鸣谢"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 545
+						"y": 100
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane19"
+						add( new FormComponent( "javax.swing.JTextPane" ) {
+							name: "textPane7"
+							"text": "感谢以下人员的大力支持:\n\n羲、Bright 我的第一批用户，感谢你们\n\nshiki、惠惠，你们给我提供了很多好的建议和思路\n\n秃了秃了、夏浅秋 你们制作的rule和dnd法术列表文本帮助的不只是我，还有很多人\n\n月上中天 我最棒的测试者，在我的骰子恨不得一天崩溃5次的时候，坚持为我测试各种功能。我也承诺，你的需求我永远排在最前面完成\n\n贝尔SAMA喵 感谢你为这个核心制作的人物卡，辛苦了\n\n还有很多没想起来的人，请随时私聊提醒我加到这里来。"
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 295
+						"y": 135
+						"width": 550
+						"height": 320
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "关于"
+				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"
 			} )
@@ -1900,22 +2013,31 @@ new FormModel {
 			name: "dialog1"
 			"$locationPolicy": 1
 			"modal": true
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label5"
-				"text": "保存成功"
+			"$sizePolicy": 1
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panel25"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label5"
+					"text": "保存成功"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 60
+					"height": 20
+					"x": 140
+					"y": 35
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button1"
+					"text": "确定"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "button1MouseClicked", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 130
+					"y": 80
+				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 135
-				"y": 40
-				"width": 195
-				"height": 20
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button1"
-				"text": "确定"
-				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "button1MouseClicked", true ) )
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 125
-				"y": 85
+				"x": 0
+				"y": 0
+				"width": 335
+				"height": 125
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 425, 680 )

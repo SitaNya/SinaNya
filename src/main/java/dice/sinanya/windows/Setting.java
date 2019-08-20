@@ -141,6 +141,8 @@ public class Setting extends JFrame {
         nickText6 = new JLabel();
         qqValue6 = new JLabel();
         nickValue6 = new JLabel();
+        scrollPane11 = new JScrollPane();
+        textPane1 = new JTextPane();
         scrollPane1 = new JScrollPane();
         panel2 = new JPanel();
         panel6 = new JPanel();
@@ -251,6 +253,8 @@ public class Setting extends JFrame {
         nickText5 = new JLabel();
         qqValue5 = new JLabel();
         nickValue5 = new JLabel();
+        scrollPane14 = new JScrollPane();
+        textPane2 = new JTextPane();
         panel15 = new JPanel();
         label1 = new JLabel();
         scrollPane2 = new JScrollPane();
@@ -289,6 +293,8 @@ public class Setting extends JFrame {
         qqValue3 = new JLabel();
         nickValue3 = new JLabel();
         save3 = new JButton();
+        scrollPane15 = new JScrollPane();
+        textPane3 = new JTextPane();
         panel17 = new JPanel();
         label52 = new JLabel();
         label53 = new JLabel();
@@ -317,6 +323,8 @@ public class Setting extends JFrame {
         nickText4 = new JLabel();
         qqValue4 = new JLabel();
         nickValue4 = new JLabel();
+        scrollPane16 = new JScrollPane();
+        textPane4 = new JTextPane();
         panel21 = new JPanel();
         cloudBan = new JCheckBox();
         ignoreBanUser = new JCheckBox();
@@ -342,8 +350,20 @@ public class Setting extends JFrame {
         panel24 = new JPanel();
         label65 = new JLabel();
         banListInputNotId = new JTextField();
+        panel26 = new JPanel();
+        label6 = new JLabel();
+        scrollPane17 = new JScrollPane();
+        textPane5 = new JTextPane();
+        panel27 = new JPanel();
+        label7 = new JLabel();
+        scrollPane18 = new JScrollPane();
+        textPane6 = new JTextPane();
+        label8 = new JLabel();
+        scrollPane19 = new JScrollPane();
+        textPane7 = new JTextPane();
         panel22 = new JPanel();
         dialog1 = new JDialog();
+        panel25 = new JPanel();
         label5 = new JLabel();
         button1 = new JButton();
 
@@ -425,6 +445,16 @@ public class Setting extends JFrame {
                         }
                         panel3.add(infoPanel6);
                         infoPanel6.setBounds(5, 5, 145, 135);
+
+                        //======== scrollPane11 ========
+                        {
+
+                            //---- textPane1 ----
+                            textPane1.setText("\u8fd9\u4e2a\u754c\u9762\u7528\u4e8e\u8bbe\u5b9a\uff1a\n\u5404\u79cd\u547d\u4ee4\u56de\u590d\u8bed\n\u5404\u79cd\u62a5\u9519\u56de\u590d\u8bed\n\u4f60\u9700\u8981\u6ce8\u610f\u7684\u662f\uff0c\u7b2c\u4e00\u6b21\u542f\u52a8\u4f1a\u6709\u9ed8\u8ba4\u4fe1\u606f\u751f\u6210\n\u91cc\u9762\u53ef\u80fd\u4f1a\u5939\u6742%s\u8fd9\u6837\u7684\u5b57\u7b26\uff0c\u8fd9\u6307\u4ee3\u5b9e\u9645\u7684\u540d\u79f0\n\u5982\u65e5\u5fd7\u521b\u5efa\u5e76\u5f00\u542f\u680f\u4f4d\u4e2d\u7684%s\u6307\u4ee3\u65e5\u5fd7\u540d\u79f0\n\u5c0f\u961f\u6210\u5458en\u4e2d\u7684%s\u6307\u4ee3\u6210\u5458\u540d\n\u6b64\u5916\uff0c\u4f60\u53ef\u4ee5\u5584\u7528\\n\u5b57\u7b26\u6765\u4ee3\u8868\u56de\u8f66\n\u5b8c\u6bd5\u540e\u8bb0\u5f97\u70b9\u4fdd\u5b58");
+                            scrollPane11.setViewportView(textPane1);
+                        }
+                        panel3.add(scrollPane11);
+                        scrollPane11.setBounds(5, 145, 145, 275);
 
                         {
                             // compute preferred size
@@ -1088,6 +1118,16 @@ public class Setting extends JFrame {
                         panel4.add(infoPanel5);
                         infoPanel5.setBounds(5, 5, 145, 135);
 
+                        //======== scrollPane14 ========
+                        {
+
+                            //---- textPane2 ----
+                            textPane2.setText("\u8fd9\u4e2a\u754c\u9762\u7528\u4e8e\u8bbe\u5b9a\uff1a\n\u5927\u6210\u529f\u4e43\u81f3\u5927\u5931\u8d25\u7684\u56de\u590d\u8bed\n\u8fd9\u91cc\u4e0d\u4f1a\u51fa\u73b0%s\n\\n\u4e00\u6837\u4ee3\u8868\u6362\u884c\n\n\u4f60\u4e00\u5b9a\u8981\u8bb0\u4f4f\u7684\u662f\uff1a\n|\n\u8fd9\u4e2a\u7ad6\u7ebf\u7b26\u53f7\uff0c\u5b83\u5728\u4f60\u7684\u56de\u8f66\u4e0a\u65b9\n\u540c\u4e00\u79cd\u56de\u590d\u8bed\uff0c\u7528|\u5206\u5272\u591a\u53e5\uff0c\u5728\u9ab0\u5a18\u56de\u590d\u65f6\u4f1a\u968f\u5373\u9009\u53d6\u4e00\u53e5\uff0c\u8fd9\u91cc\u6bd4\u5982\n\u6210\u529f|\u6210\u529f\u5566|\u662f\u6210\u529f\u5462|\u4f60\u6210\u529f\u4e86\n\u4f1a4\u79cd\u91cc\u968f\u673a\u9009\u62e91\u79cd\n\u6b64\u5916\uff0c\u6211\u4e3a\u4e86\u5c3d\u53ef\u80fd\u7ed9\u4e88\u4f60\u81ea\u7531\uff0c\u6ca1\u6709\u5199\u6b7b\u56de\u590d\u201c\u6210\u529f\u201d\u8fd9\u4e2a\u5b57\u773c\uff0c\u56e0\u6b64\u4f60\u9700\u8981\u5728\u56de\u590d\u8bed\u4e2d\u586b\u5199\u201c\u6210\u529f\u201d\u4e8c\u5b57");
+                            scrollPane14.setViewportView(textPane2);
+                        }
+                        panel4.add(scrollPane14);
+                        scrollPane14.setBounds(5, 145, 145, 275);
+
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
@@ -1364,6 +1404,16 @@ public class Setting extends JFrame {
                         panel16.add(save3);
                         save3.setBounds(new Rectangle(new Point(35, 435), save3.getPreferredSize()));
 
+                        //======== scrollPane15 ========
+                        {
+
+                            //---- textPane3 ----
+                            textPane3.setText("\u5728\u8fd9\u4e2a\u754c\u9762\u4e2d\u4f60\u9700\u8981\u8bbe\u7f6e:\nMasterQQ\u53f7\u548c\u5176\u62a5\u9519\u4fe1\u606f\n\u53ea\u6709\u8bbe\u7f6e\u4e86Master\u7684QQ\u53f7\uff0c\u5fc3\u8df3\u62a5\u544a\u624d\u4f1a\u6b63\u786e\u7684\u62a5\u8b66\uff0c\u540e\u7eed\u7684\u4e91\u9ed1\u4e5f\u624d\u53ef\u4ee5\u6b63\u5e38\u4f7f\u7528\n\u8fd9\u91cc\u9700\u8981\u4e3a\u4f60\u89e3\u91ca\u7684\u662f\uff1a\n\u5fc3\u8df3\u62a5\u544a\uff0c\u662f\u6307\u5f53\u4f60\u7684\u9ab0\u5a18\u56e0\u4e3a\u4efb\u4f55\u539f\u56e0\u6302\u8d77\u65f6\uff0c\u53ef\u4ee5\u572820\u5206\u949f\u5185\u4e8e\u7fa4808619122\u4e2d\u5f97\u5230\u62a5\u544a\uff08\u53ea\u9700\u8981\u4f60\u52a0\u5165\uff0c\u4f60\u7684\u9ab0\u5a18\u4e0d\u9700\u8981\uff09\n\u800c\u666e\u7f57\u7c73\u4fee\u65af\u76d1\u63a7\u4e0a\u62a5\uff0c\u4f60\u53ef\u4ee5\u5ffd\u7565\uff0c\u90a3\u662f\u4e00\u79cd\u4f01\u4e1a\u7ea7\u7684\u670d\u52a1\u5668\u8d1f\u8f7d\u76d1\u63a7\u80fd\u529b\uff0c\u9700\u8981\u4e00\u4e9b\u989d\u5916\u7684\u914d\u7f6e\u3002\u5982\u679c\u4f60\u7684\u670d\u52a1\u5668\u4e0a\u6302\u8f7d\u4e86\u975e\u5e38\u591a\u7684\u9ab0\u5a18\u4e0d\u582a\u91cd\u8d1f\uff0c\u6216\u8005\u5e72\u8106\u5b83\u5c31\u6709\u8fc7\u5b95\u673a\u8fde\u4e0d\u4e0a\u7684\u7ecf\u5386\u3002\u4f60\u53ef\u4ee5\u5728\u52a0\u5165\u62a5\u8b66\u7fa4\u540e\u8be2\u95ee\u6211\u5982\u4f55\u914d\u7f6e");
+                            scrollPane15.setViewportView(textPane3);
+                        }
+                        panel16.add(scrollPane15);
+                        scrollPane15.setBounds(5, 145, 145, 275);
+
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
@@ -1576,6 +1626,16 @@ public class Setting extends JFrame {
                         panel20.add(infoPanel4);
                         infoPanel4.setBounds(5, 5, 145, 135);
 
+                        //======== scrollPane16 ========
+                        {
+
+                            //---- textPane4 ----
+                            textPane4.setText("\u8fd9\u91cc\u662f\u9ed1\u540d\u5355\u8bbe\u7f6e\u533a:\n\u6211\u4eec\u91c7\u7528\u4e91\u9ed1\u7b56\u7565\uff0c\u56e0\u6b64\u8fd9\u91cc\u4e0d\u4f1a\u7528\u6765\u663e\u793a\u9ed1\u540d\u5355\u5217\u8868\u2014\u2014\u522b\u4eba\u6dfb\u52a0\u7684\u9ed1\u540d\u5355\u4f60\u662f\u4e0d\u80fd\u4fee\u6539\u7684\uff0c\u540c\u6837\uff0c\u4f60\u6dfb\u52a0\u7684\u9ed1\u540d\u5355\u4e5f\u4e0d\u4f1a\u6709\u522b\u4eba\u642d\u4e2a\u9ab0\u5b50\u540e\u5077\u5077\u5220\u6389\u3002\n\u5f00\u542f\u4e91\u9ed1\u540d\u5355\u4e4b\u540e\uff0c\u6bcf15\u5206\u949f\u4f1a\u8bf7\u6c42\u4e00\u6b21\u8fdc\u7aef\u670d\u52a1\u5668\uff0c\u62c9\u53d6\u6700\u65b0\u7684\u9ed1\u540d\u5355\u5217\u8868\n\u800c\u624b\u5de5\u6dfb\u52a0\u3001\u5220\u9664\u9ed1\u540d\u5355\u4e00\u6837\u662f\u5141\u8bb8\u7684\uff0c\u4f60\u53ef\u4ee5\u5728\u300a\u5173\u4e8e\u300b\u9009\u9879\u5361\u7684\u6587\u6863\u4e2d\u627e\u5230\u76f8\u5e94\u547d\u4ee4\n\u5982\u679c\u4f60\u60f3\u8981\u7528\u79c1\u4eba\u7684\u9ed1\u540d\u5355\u63d2\u4ef6\uff0c\u90a3\u4e48\u53ea\u9700\u8981\u53d6\u6d88\u6389\u5de6\u4e0a\u65b9\u7684\u201c\u5f00\u542f\u4e91\u9ed1\u540d\u5355\u201d\u5373\u53ef");
+                            scrollPane16.setViewportView(textPane4);
+                        }
+                        panel20.add(scrollPane16);
+                        scrollPane16.setBounds(5, 145, 145, 275);
+
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
@@ -1771,6 +1831,90 @@ public class Setting extends JFrame {
                     }
                 }
                 tabContain.addTab("\u4e91\u9ed1\u540d\u5355", panel19);
+
+                //======== panel26 ========
+                {
+                    panel26.setLayout(null);
+
+                    //---- label6 ----
+                    label6.setText("\u8fd9\u91cc\u663e\u793a\u4e86\u63d2\u4ef6\u7684\u66f4\u65b0\u65e5\u5fd7");
+                    panel26.add(label6);
+                    label6.setBounds(new Rectangle(new Point(20, 15), label6.getPreferredSize()));
+
+                    //======== scrollPane17 ========
+                    {
+                        scrollPane17.setViewportView(textPane5);
+                    }
+                    panel26.add(scrollPane17);
+                    scrollPane17.setBounds(20, 50, 1115, 430);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < panel26.getComponentCount(); i++) {
+                            Rectangle bounds = panel26.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = panel26.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        panel26.setMinimumSize(preferredSize);
+                        panel26.setPreferredSize(preferredSize);
+                    }
+                }
+                tabContain.addTab("\u66f4\u65b0\u65e5\u5fd7", panel26);
+
+                //======== panel27 ========
+                {
+                    panel27.setLayout(null);
+
+                    //---- label7 ----
+                    label7.setText("\u9879\u76ee\u6587\u6863");
+                    panel27.add(label7);
+                    label7.setBounds(new Rectangle(new Point(535, 35), label7.getPreferredSize()));
+
+                    //======== scrollPane18 ========
+                    {
+
+                        //---- textPane6 ----
+                        textPane6.setText("https://sitcnya.gitbook.io/sinanya/");
+                        scrollPane18.setViewportView(textPane6);
+                    }
+                    panel27.add(scrollPane18);
+                    scrollPane18.setBounds(455, 60, 215, scrollPane18.getPreferredSize().height);
+
+                    //---- label8 ----
+                    label8.setText("\u9e23\u8c22");
+                    panel27.add(label8);
+                    label8.setBounds(new Rectangle(new Point(545, 100), label8.getPreferredSize()));
+
+                    //======== scrollPane19 ========
+                    {
+
+                        //---- textPane7 ----
+                        textPane7.setText("\u611f\u8c22\u4ee5\u4e0b\u4eba\u5458\u7684\u5927\u529b\u652f\u6301:\n\n\u7fb2\u3001Bright \u6211\u7684\u7b2c\u4e00\u6279\u7528\u6237\uff0c\u611f\u8c22\u4f60\u4eec\n\nshiki\u3001\u60e0\u60e0\uff0c\u4f60\u4eec\u7ed9\u6211\u63d0\u4f9b\u4e86\u5f88\u591a\u597d\u7684\u5efa\u8bae\u548c\u601d\u8def\n\n\u79c3\u4e86\u79c3\u4e86\u3001\u590f\u6d45\u79cb \u4f60\u4eec\u5236\u4f5c\u7684rule\u548cdnd\u6cd5\u672f\u5217\u8868\u6587\u672c\u5e2e\u52a9\u7684\u4e0d\u53ea\u662f\u6211\uff0c\u8fd8\u6709\u5f88\u591a\u4eba\n\n\u6708\u4e0a\u4e2d\u5929 \u6211\u6700\u68d2\u7684\u6d4b\u8bd5\u8005\uff0c\u5728\u6211\u7684\u9ab0\u5b50\u6068\u4e0d\u5f97\u4e00\u5929\u5d29\u6e835\u6b21\u7684\u65f6\u5019\uff0c\u575a\u6301\u4e3a\u6211\u6d4b\u8bd5\u5404\u79cd\u529f\u80fd\u3002\u6211\u4e5f\u627f\u8bfa\uff0c\u4f60\u7684\u9700\u6c42\u6211\u6c38\u8fdc\u6392\u5728\u6700\u524d\u9762\u5b8c\u6210\n\n\u8d1d\u5c14SAMA\u55b5 \u611f\u8c22\u4f60\u4e3a\u8fd9\u4e2a\u6838\u5fc3\u5236\u4f5c\u7684\u4eba\u7269\u5361\uff0c\u8f9b\u82e6\u4e86\n\n\u8fd8\u6709\u5f88\u591a\u6ca1\u60f3\u8d77\u6765\u7684\u4eba\uff0c\u8bf7\u968f\u65f6\u79c1\u804a\u63d0\u9192\u6211\u52a0\u5230\u8fd9\u91cc\u6765\u3002");
+                        scrollPane19.setViewportView(textPane7);
+                    }
+                    panel27.add(scrollPane19);
+                    scrollPane19.setBounds(295, 135, 550, 320);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < panel27.getComponentCount(); i++) {
+                            Rectangle bounds = panel27.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = panel27.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        panel27.setMinimumSize(preferredSize);
+                        panel27.setPreferredSize(preferredSize);
+                    }
+                }
+                tabContain.addTab("\u5173\u4e8e", panel27);
             }
             windows.add(tabContain, BorderLayout.CENTER);
 
@@ -1804,21 +1948,43 @@ public class Setting extends JFrame {
             Container dialog1ContentPane = dialog1.getContentPane();
             dialog1ContentPane.setLayout(null);
 
-            //---- label5 ----
-            label5.setText("\u4fdd\u5b58\u6210\u529f");
-            dialog1ContentPane.add(label5);
-            label5.setBounds(135, 40, 195, 20);
+            //======== panel25 ========
+            {
+                panel25.setLayout(null);
 
-            //---- button1 ----
-            button1.setText("\u786e\u5b9a");
-            button1.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    button1MouseClicked(e);
+                //---- label5 ----
+                label5.setText("\u4fdd\u5b58\u6210\u529f");
+                panel25.add(label5);
+                label5.setBounds(140, 35, 60, 20);
+
+                //---- button1 ----
+                button1.setText("\u786e\u5b9a");
+                button1.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        button1MouseClicked(e);
+                    }
+                });
+                panel25.add(button1);
+                button1.setBounds(new Rectangle(new Point(130, 80), button1.getPreferredSize()));
+
+                {
+                    // compute preferred size
+                    Dimension preferredSize = new Dimension();
+                    for(int i = 0; i < panel25.getComponentCount(); i++) {
+                        Rectangle bounds = panel25.getComponent(i).getBounds();
+                        preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                        preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                    }
+                    Insets insets = panel25.getInsets();
+                    preferredSize.width += insets.right;
+                    preferredSize.height += insets.bottom;
+                    panel25.setMinimumSize(preferredSize);
+                    panel25.setPreferredSize(preferredSize);
                 }
-            });
-            dialog1ContentPane.add(button1);
-            button1.setBounds(new Rectangle(new Point(125, 85), button1.getPreferredSize()));
+            }
+            dialog1ContentPane.add(panel25);
+            panel25.setBounds(0, 0, 335, 125);
 
             {
                 // compute preferred size
@@ -1834,16 +2000,14 @@ public class Setting extends JFrame {
                 dialog1ContentPane.setMinimumSize(preferredSize);
                 dialog1ContentPane.setPreferredSize(preferredSize);
             }
-            dialog1.pack();
+            dialog1.setSize(335, 150);
             dialog1.setLocationRelativeTo(null);
-            dialog1.setAlwaysOnTop(true);
         }
 
         //---- buttonGroup1 ----
         ButtonGroup buttonGroup1 = new ButtonGroup();
         buttonGroup1.add(banGroupAndUserByFre);
         buttonGroup1.add(banUserByFre);
-        windows.setVisible(true);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -1949,6 +2113,8 @@ public class Setting extends JFrame {
     private JLabel nickText6;
     private JLabel qqValue6;
     private JLabel nickValue6;
+    private JScrollPane scrollPane11;
+    private JTextPane textPane1;
     private JScrollPane scrollPane1;
     private JPanel panel2;
     private JPanel panel6;
@@ -2059,6 +2225,8 @@ public class Setting extends JFrame {
     private JLabel nickText5;
     private JLabel qqValue5;
     private JLabel nickValue5;
+    private JScrollPane scrollPane14;
+    private JTextPane textPane2;
     private JPanel panel15;
     private JLabel label1;
     private JScrollPane scrollPane2;
@@ -2097,6 +2265,8 @@ public class Setting extends JFrame {
     private JLabel qqValue3;
     private JLabel nickValue3;
     private JButton save3;
+    private JScrollPane scrollPane15;
+    private JTextPane textPane3;
     private JPanel panel17;
     private JLabel label52;
     private JLabel label53;
@@ -2125,6 +2295,8 @@ public class Setting extends JFrame {
     private JLabel nickText4;
     private JLabel qqValue4;
     private JLabel nickValue4;
+    private JScrollPane scrollPane16;
+    private JTextPane textPane4;
     private JPanel panel21;
     private JCheckBox cloudBan;
     private JCheckBox ignoreBanUser;
@@ -2150,8 +2322,20 @@ public class Setting extends JFrame {
     private JPanel panel24;
     private JLabel label65;
     private JTextField banListInputNotId;
+    private JPanel panel26;
+    private JLabel label6;
+    private JScrollPane scrollPane17;
+    private JTextPane textPane5;
+    private JPanel panel27;
+    private JLabel label7;
+    private JScrollPane scrollPane18;
+    private JTextPane textPane6;
+    private JLabel label8;
+    private JScrollPane scrollPane19;
+    private JTextPane textPane7;
     private JPanel panel22;
     private JDialog dialog1;
+    private JPanel panel25;
     private JLabel label5;
     private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
