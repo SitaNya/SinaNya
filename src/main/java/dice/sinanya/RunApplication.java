@@ -516,37 +516,38 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
             return MSG_IGNORE;
         }
 
-        String tagBotOff = ".*[\\.。][ ]*bot[ ]*off.*";
-        String tagBotInfo = ".*[\\.。][ ]*bot.*";
-        String tagBotExit = ".*[\\.。][ ]*bot[ ]*exit.*";
-        String tagBotUpdate = ".*[\\.。][ ]*bot[ ]*update.*";
+        String tagBotOff = ".*[.。][ ]*bot[ ]*off.*";
+        String tagBotInfo = ".*[.。][ ]*bot.*";
+        String tagBotExit = ".*[.。][ ]*bot[ ]*exit.*";
+        String tagBotUpdate = ".*[.。][ ]*bot[ ]*update.*";
 
-        String tagBotOn = ".*[\\.。][ ]*bot[ ]*on.*";
+        String tagBotOn = ".*[.。][ ]*bot[ ]*on.*";
         boolean botOn = messagesContainsAtMe(messages, tagBotOn, tagMe) || messagesBotForAll(messages, tagBotOn)
                 || messagesContainsQqId(messages, tagBotOn);
-        boolean botOff = messagesContainsAtMe(messages, tagBotOff, tagMe) || messagesBotForAll(messages, tagBotOff)
-                || messagesContainsQqId(messages, tagBotOff);
-        boolean botExit = messagesContainsAtMe(messages, tagBotExit, tagMe) || messagesBotForAll(messages, tagBotExit)
-                || messagesContainsQqId(messages, tagBotExit);
-        boolean botUpdate = (messagesContainsAtMe(messages, tagBotUpdate, tagMe)
-                || messagesBotForAll(messages, tagBotUpdate) || messagesContainsQqId(messages, tagBotUpdate));
-        boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo)
-                || messagesContainsQqId(messages, tagBotInfo)) && !botOn && !botOff && !botExit && !botUpdate;
+//        boolean botOff = messagesContainsAtMe(messages, tagBotOff, tagMe) || messagesBotForAll(messages, tagBotOff)
+//                || messagesContainsQqId(messages, tagBotOff);
+//        boolean botExit = messagesContainsAtMe(messages, tagBotExit, tagMe) || messagesBotForAll(messages, tagBotExit)
+//                || messagesContainsQqId(messages, tagBotExit);
+//        boolean botUpdate = (messagesContainsAtMe(messages, tagBotUpdate, tagMe)
+//                || messagesBotForAll(messages, tagBotUpdate) || messagesContainsQqId(messages, tagBotUpdate));
+//        boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo)
+//                || messagesContainsQqId(messages, tagBotInfo)) && !botOn && !botOff && !botExit && !botUpdate;
 
         if (botOn) {
             checkAudit(entityTypeMessages);
             new Bot(entityTypeMessages).on();
-        } else if (botOff) {
-            checkAudit(entityTypeMessages);
-            new Bot(entityTypeMessages).off();
-        } else if (botExit) {
-            checkAudit(entityTypeMessages);
-            new Bot(entityTypeMessages).exit();
-        } else if (botUpdate) {
-            new Bot(entityTypeMessages).update();
-        } else if (botInfo) {
-            new Bot(entityTypeMessages).info();
         }
+//        } else if (botOff) {
+//            checkAudit(entityTypeMessages);
+//            new Bot(entityTypeMessages).off();
+//        } else if (botExit) {
+//            checkAudit(entityTypeMessages);
+//            new Bot(entityTypeMessages).exit();
+//        } else if (botUpdate) {
+//            new Bot(entityTypeMessages).update();
+//        } else if (botInfo) {
+//            new Bot(entityTypeMessages).info();
+//        }
         return MSG_INTERCEPT;
     }
 
