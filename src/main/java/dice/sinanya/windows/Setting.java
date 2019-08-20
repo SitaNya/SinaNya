@@ -5,6 +5,7 @@
 package dice.sinanya.windows;
 
 import dice.sinanya.db.properties.ban.InsertProperties;
+import dice.sinanya.system.MessagesSystem;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -353,7 +354,7 @@ public class Setting extends JFrame {
         panel26 = new JPanel();
         label6 = new JLabel();
         scrollPane17 = new JScrollPane();
-        textPane5 = new JTextPane();
+        updateText = new JTextPane();
         panel27 = new JPanel();
         label7 = new JLabel();
         scrollPane18 = new JScrollPane();
@@ -1843,7 +1844,7 @@ public class Setting extends JFrame {
 
                     //======== scrollPane17 ========
                     {
-                        scrollPane17.setViewportView(textPane5);
+                        scrollPane17.setViewportView(updateText);
                     }
                     panel26.add(scrollPane17);
                     scrollPane17.setBounds(20, 50, 1115, 430);
@@ -2100,6 +2101,7 @@ public class Setting extends JFrame {
         success.setText(entitySystemProperties.getSUCCESS());
         failure.setText(entitySystemProperties.getFAILURE());
         fumble.setText(entitySystemProperties.getFUMBLE());
+        updateText.setText(MessagesSystem.UPDATE.toString());
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -2325,7 +2327,7 @@ public class Setting extends JFrame {
     private JPanel panel26;
     private JLabel label6;
     private JScrollPane scrollPane17;
-    private JTextPane textPane5;
+    private JTextPane updateText;
     private JPanel panel27;
     private JLabel label7;
     private JScrollPane scrollPane18;

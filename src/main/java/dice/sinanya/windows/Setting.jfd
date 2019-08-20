@@ -1945,6 +1945,9 @@ new FormModel {
 						name: "scrollPane17"
 						add( new FormComponent( "javax.swing.JTextPane" ) {
 							name: "textPane5"
+							auxiliary() {
+								"JavaCodeGenerator.variableName": "updateText"
+							}
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 20
