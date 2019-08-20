@@ -524,30 +524,29 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         String tagBotOn = ".*[.。][ ]*bot[ ]*on.*";
         boolean botOn = messagesContainsAtMe(messages, tagBotOn, tagMe) || messagesBotForAll(messages, tagBotOn)
                 || messagesContainsQqId(messages, tagBotOn);
-//        boolean botOff = messagesContainsAtMe(messages, tagBotOff, tagMe) || messagesBotForAll(messages, tagBotOff)
-//                || messagesContainsQqId(messages, tagBotOff);
-//        boolean botExit = messagesContainsAtMe(messages, tagBotExit, tagMe) || messagesBotForAll(messages, tagBotExit)
-//                || messagesContainsQqId(messages, tagBotExit);
-//        boolean botUpdate = (messagesContainsAtMe(messages, tagBotUpdate, tagMe)
-//                || messagesBotForAll(messages, tagBotUpdate) || messagesContainsQqId(messages, tagBotUpdate));
-//        boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo)
-//                || messagesContainsQqId(messages, tagBotInfo)) && !botOn && !botOff && !botExit && !botUpdate;
+        boolean botOff = messagesContainsAtMe(messages, tagBotOff, tagMe) || messagesBotForAll(messages, tagBotOff)
+                || messagesContainsQqId(messages, tagBotOff);
+        boolean botExit = messagesContainsAtMe(messages, tagBotExit, tagMe) || messagesBotForAll(messages, tagBotExit)
+                || messagesContainsQqId(messages, tagBotExit);
+        boolean botUpdate = (messagesContainsAtMe(messages, tagBotUpdate, tagMe)
+                || messagesBotForAll(messages, tagBotUpdate) || messagesContainsQqId(messages, tagBotUpdate));
+        boolean botInfo = (messagesContainsAtMe(messages, tagBotInfo, tagMe) || messagesBotForAll(messages, tagBotInfo)
+                || messagesContainsQqId(messages, tagBotInfo)) && !botOn && !botOff && !botExit && !botUpdate;
 
         if (botOn) {
             checkAudit(entityTypeMessages);
             new Bot(entityTypeMessages).on();
+        } else if (botOff) {
+            checkAudit(entityTypeMessages);
+            new Bot(entityTypeMessages).off();
+        } else if (botExit) {
+            checkAudit(entityTypeMessages);
+            new Bot(entityTypeMessages).exit();
+        } else if (botUpdate) {
+            new Bot(entityTypeMessages).update();
+        } else if (botInfo) {
+            new Bot(entityTypeMessages).info();
         }
-//        } else if (botOff) {
-//            checkAudit(entityTypeMessages);
-//            new Bot(entityTypeMessages).off();
-//        } else if (botExit) {
-//            checkAudit(entityTypeMessages);
-//            new Bot(entityTypeMessages).exit();
-//        } else if (botUpdate) {
-//            new Bot(entityTypeMessages).update();
-//        } else if (botInfo) {
-//            new Bot(entityTypeMessages).info();
-//        }
         return MSG_INTERCEPT;
     }
 
@@ -558,9 +557,8 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     }
 
     private boolean messagesBotForAll(String messages, String tagBotSwitch) {
-        CQ.logDebug("正则","^[ ]*" + tagBotSwitch.substring(2, tagBotSwitch.length() - 2) + "[ ]*$");
         boolean forAll = messages.trim().matches(tagBotSwitch) && !messages.trim().contains("[cq:at")
-                && !messages.matches(".*[0-9]+.*") && !messages.matches("^[ ]*" + tagBotSwitch.substring(2, tagBotSwitch.length() - 2) + "[ ]*$");
+                && !messages.matches(".*[0-9]+.*") && messages.matches("^[ ]*" + tagBotSwitch.substring(2, tagBotSwitch.length() - 2) + "[ ]*$");
         CQ.logDebug("判断信息为", messages);
         CQ.logDebug("返回机器人开关值", "全体: " + forAll);
         return forAll;
