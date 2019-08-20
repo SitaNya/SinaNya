@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.0.5.251" Java: "1.8.0_202-release" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.0.5.251" Java: "11.0.3" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -348,48 +348,6 @@ new FormModel {
 									"height": 25
 									"x": 105
 									"y": 160
-								} )
-								add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
-									name: "infoPanel7"
-									"border": #BevelBorder0
-									add( new FormComponent( "javax.swing.JLabel" ) {
-										name: "qqText7"
-										"text": "当前骰娘QQ号:"
-									}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-										"x": 10
-										"y": 10
-										"width": 90
-										"height": 25
-									} )
-									add( new FormComponent( "javax.swing.JLabel" ) {
-										name: "nickText7"
-										"text": "当前骰娘昵称:"
-									}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-										"height": 25
-										"x": 10
-										"y": 70
-									} )
-									add( new FormComponent( "javax.swing.JLabel" ) {
-										name: "qqValue7"
-										"text": "text"
-									}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-										"x": 10
-										"y": 40
-										"height": 25
-									} )
-									add( new FormComponent( "javax.swing.JLabel" ) {
-										name: "nickValue7"
-										"text": "text"
-									}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-										"height": 25
-										"x": 10
-										"y": 100
-									} )
-								}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-									"width": 145
-									"height": 135
-									"x": 0
-									"y": 190
 								} )
 							}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 								"x": 10
