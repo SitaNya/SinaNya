@@ -17,6 +17,7 @@ import dice.sinanya.flow.Flow;
 import dice.sinanya.listener.InputHistoryToDataBase;
 import dice.sinanya.listener.Prometheus;
 import dice.sinanya.listener.TestRunningTime;
+import dice.sinanya.update.UpdateForDice;
 import dice.sinanya.windows.Setting;
 import org.apache.commons.lang.StringUtils;
 import org.quartz.*;
@@ -624,6 +625,11 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
 
     public int setting() {
         new Setting();
+        return 0;
+    }
+
+    public int update() {
+        new UpdateForDice(entitySystemProperties.getSystemDir()).update();
         return 0;
     }
 
