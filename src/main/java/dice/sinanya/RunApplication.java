@@ -3,6 +3,7 @@ package dice.sinanya;
 import com.sobte.cqp.jcq.entity.ICQVer;
 import com.sobte.cqp.jcq.entity.IMsg;
 import com.sobte.cqp.jcq.entity.IRequest;
+import com.sobte.cqp.jcq.entity.Member;
 import com.sobte.cqp.jcq.event.JcqAppAbstract;
 import dice.sinanya.db.properties.ban.SelectBanProperties;
 import dice.sinanya.db.properties.system.SelectSystemProperties;
@@ -21,6 +22,9 @@ import org.apache.commons.lang.StringUtils;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import static dice.sinanya.db.system.SelectBot.flushBot;
@@ -484,7 +488,34 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         if (checkBeBan(entityTypeMessages.getMsg()) && entityBanProperties.isBanGroupBecauseBan()) {
             sender(entityTypeMessages, "于群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "("
                     + entityTypeMessages.getFromGroup() + ")中被禁言，已退出并拉黑");
-            CQ.sendGroupMsg(162279609, "于群" + entityTypeMessages.getFromGroup() + "中被禁言，已退出并拉黑");
+            List<Member> members = CQ.getGroupMemberList(Long.parseLong(entityTypeMessages.getFromGroup()));
+            HashMap<Long,String> adminList = new HashMap<>();
+            long owner = 0;
+            String ownerNick = "";
+            for (Member member : members) {
+                if (member.getAuthority() == 3) {
+                    owner = member.getQqId();
+                    ownerNick = member.getNick();
+                } else if (member.getAuthority() == 2) {
+                    adminList.put(member.getQqId(),member.getNick());
+                }
+            }
+            if (adminList.size() == 0) {
+                insertQqBanList(String.valueOf(owner), "在群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "("
+                        + entityTypeMessages.getFromGroup() + ")中被禁言，无管理员强制拉黑群主: " + ownerNick + "(" + owner + ")");
+                CQ.sendGroupMsg(162279609, "在群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "("
+                        + entityTypeMessages.getFromGroup() + ")中被禁言，无管理员强制拉黑群主: " + ownerNick + "(" + owner + ")");
+            }else{
+                StringBuilder adminListInfo=new StringBuilder();
+                adminListInfo.append("其中管理员列表为: ");
+                for (Map.Entry<Long,String> admin:adminList.entrySet()){
+                    adminListInfo.append(admin.getValue()).append("(").append(admin.getKey()).append(")");
+                }
+                CQ.sendGroupMsg(162279609, "在群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "("
+                        + entityTypeMessages.getFromGroup() + ")中被禁言，其中群主: " + ownerNick + "(" + owner + ")"+adminListInfo.toString()+"\n由于无法确定操作者，不对任何进行拉黑");
+            }
+            CQ.sendGroupMsg(162279609, "于群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "("
+                    + entityTypeMessages.getFromGroup() + ")中被禁言，已退出并拉黑");
             leave(entityTypeMessages.getMessagesTypes(), entityTypeMessages.getFromGroup());
             insertGroupBanList(entityTypeMessages.getFromGroup(), "被禁言");
             return MSG_INTERCEPT;

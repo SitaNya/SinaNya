@@ -1504,7 +1504,7 @@ new FormModel {
 						"toolTipText": "机器人常用信息"
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "label56"
-							"text": "警告刷屏频度(N条/每分钟)"
+							"text": "警告刷屏频度(N条/每10秒)"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"x": 10
 							"y": 10
