@@ -119,7 +119,7 @@ public class InputBanList {
     public String selectOthorInputBanGroup(String groupId, EntityTypeMessages entityTypeMessages) throws NotBanListInputException {
         String inputBot = "";
         try (Connection conn = DbUtil.getConnection()) {
-            String sql = "select botId from groupBanList where groupId=? ";
+            String sql = "select botId from groupBanList where groupId=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, groupId);
                 try (ResultSet set = ps.executeQuery()) {
