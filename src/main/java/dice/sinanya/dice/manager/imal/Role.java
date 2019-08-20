@@ -65,7 +65,7 @@ public interface Role extends MakeNickToSender {
     /**
      * 格式化属性值为xxx:50
      *
-     * @param propMain           主属性列表值
+     * @param propMain 主属性列表值
      * @return 获取后的列表值
      */
     default ArrayList<String> formatProp(ArrayList<String> propMain, Long qq) {
@@ -83,8 +83,8 @@ public interface Role extends MakeNickToSender {
     /**
      * 格式化属性值为xxx:50，这里会过滤掉所有传入的项目
      *
-     * @param prop               需要过滤的列表值
-     * @param up                 过滤后的值，true则返回50以上的项目，false则返回50以下的项目
+     * @param prop 需要过滤的列表值
+     * @param up   过滤后的值，true则返回50以上的项目，false则返回50以下的项目
      * @return 获取后的列表值
      */
     default ArrayList<String> formatProp(ArrayList<String> prop, Long qq, boolean up) {

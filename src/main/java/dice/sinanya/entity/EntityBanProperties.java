@@ -50,7 +50,7 @@ public class EntityBanProperties {
     public EntityBanProperties() {
         cloudBan = true;
         Prometheus = false;
-        PrometheusPort=62258;
+        PrometheusPort = 62258;
         heap = false;
 
         master = "";
@@ -80,11 +80,11 @@ public class EntityBanProperties {
 
         whiteGroup = "";
         whiteUser = "";
-        frequentnessAlterInfo="请勿刷屏，过多可能导致退群拉黑，谢谢合作";
-        frequentnessBanInfo="检测到极大量刷屏，正在退群拉黑";
+        frequentnessAlterInfo = "请勿刷屏，过多可能导致退群拉黑，谢谢合作";
+        frequentnessBanInfo = "检测到极大量刷屏，正在退群拉黑";
 
-        clearGroupByOffInfo="已在群: %s 中超过 %s 日未响应且处于关闭状态，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题";
-        clearGroupInfo="已在群: %s 中超过 %s 日未响应，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题";
+        clearGroupByOffInfo = "已在群: %s 中超过 %s 日未响应且处于关闭状态，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题";
+        clearGroupInfo = "已在群: %s 中超过 %s 日未响应，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题";
     }
 
     public String getClearGroupByOffInfo() {

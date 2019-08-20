@@ -82,7 +82,7 @@ public class BanList {
         if (Long.parseLong(id) == CQ.getLoginQQ()) {
             insertBanList.removeGroupBanList(groupId, entityTypeMessages);
             groupBanList.remove(groupId);
-            sender(entityTypeMessages, "已将群:\t" +groupId + "移出云黑名单");
+            sender(entityTypeMessages, "已将群:\t" + groupId + "移出云黑名单");
             return;
         }
         ArrayList<EntityOtherBotInfo> otherBotInfos = new SelectOnlineBotList().selectOnlineBotList();

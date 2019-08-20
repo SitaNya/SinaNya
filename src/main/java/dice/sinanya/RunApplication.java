@@ -251,7 +251,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     public int groupMsg(int subType, int msgId, long fromGroup, long fromQq, String fromAnonymous, String msg,
                         int font) {
         try {
-            if (!scheduler.isStarted()){
+            if (!scheduler.isStarted()) {
                 scheduler.start();
             }
         } catch (SchedulerException e) {
@@ -270,7 +270,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
 
-        if (!getBot(fromGroup)){
+        if (!getBot(fromGroup)) {
             return MSG_INTERCEPT;
         }
 
@@ -312,7 +312,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
 
-        if (!getBot(fromDiscuss)){
+        if (!getBot(fromDiscuss)) {
             return MSG_INTERCEPT;
         }
 

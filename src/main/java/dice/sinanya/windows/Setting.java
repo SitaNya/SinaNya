@@ -24,6 +24,222 @@ import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemPrope
  * @author unknown
  */
 public class Setting extends JFrame {
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private Frame windows;
+    private JTabbedPane tabContain;
+    private JPanel setting;
+    private JPanel panel3;
+    private JButton save;
+    private JPanel infoPanel6;
+    private JLabel qqText6;
+    private JLabel nickText6;
+    private JLabel qqValue6;
+    private JLabel nickValue6;
+    private JScrollPane scrollPane1;
+    private JPanel panel2;
+    private JPanel panel6;
+    private JLabel label11;
+    private JLabel label12;
+    private JLabel label13;
+    private JLabel label14;
+    private JTextField setPropFormat;
+    private JTextField setHelp;
+    private JTextField notFoundSkill;
+    private JTextField setPropSuccess;
+    private JPanel panel13;
+    private JLabel label45;
+    private JLabel label46;
+    private JLabel label47;
+    private JTextField enSuccess;
+    private JTextField enFailed;
+    private JTextField hiddenDice;
+    private JPanel panel5;
+    private JLabel botStartLable;
+    private JLabel botAlreadyStartLable;
+    private JLabel botStopLable;
+    private JLabel botAlreadyStopLable;
+    private JLabel label9;
+    private JLabel label10;
+    private JTextField botStart;
+    private JTextField botAlreadyStart;
+    private JTextField botStop;
+    private JTextField botAlreadyStop;
+    private JTextField botExit;
+    private JTextField botInfo;
+    private JPanel infoPanel7;
+    private JLabel qqText7;
+    private JLabel nickText7;
+    private JLabel qqValue7;
+    private JLabel nickValue7;
+    private JPanel panel12;
+    private JLabel label39;
+    private JLabel label40;
+    private JLabel label41;
+    private JLabel label42;
+    private JLabel label43;
+    private JLabel label44;
+    private JTextField sanCheck;
+    private JTextField symptom;
+    private JTextField sanCheckCriticalSuccess;
+    private JTextField sanCheckFumble;
+    private JTextField sanCheckSuccess;
+    private JTextField sanCheckFailure;
+    private JPanel panel9;
+    private JLabel label24;
+    private JLabel label25;
+    private JLabel label26;
+    private JLabel label27;
+    private JLabel label28;
+    private JLabel label29;
+    private JTextField createLog;
+    private JTextField appendLog;
+    private JTextField alreadyOpen;
+    private JTextField alreadyClose;
+    private JTextField notFoundLog;
+    private JTextField cantEmptyLogName;
+    private JLabel label30;
+    private JLabel label31;
+    private JTextField deleteOpenLog;
+    private JTextField readLock;
+    private JPanel panel8;
+    private JLabel label19;
+    private JLabel label20;
+    private JLabel label21;
+    private JLabel label22;
+    private JLabel label23;
+    private JTextField manyRollsFormat;
+    private JTextField diceTimesTooBig;
+    private JTextField needKpGroup;
+    private JTextField cantInPrivate;
+    private JTextField onlyManager;
+    private JPanel panel10;
+    private JLabel label32;
+    private JLabel label33;
+    private JTextField dndInitIsEmtpy;
+    private JTextField clrDndInit;
+    private JPanel panel14;
+    private JLabel label48;
+    private JLabel label49;
+    private JTextField teamIsEmpty;
+    private JTextField teamMemberEnIsEmpty;
+    private JPanel panel7;
+    private JLabel label15;
+    private JLabel label16;
+    private JLabel label17;
+    private JLabel label18;
+    private JTextField bookCard;
+    private JTextField bookRp;
+    private JTextField bookKp;
+    private JTextField bookMake;
+    private JPanel panel11;
+    private JLabel label34;
+    private JLabel label35;
+    private JLabel label36;
+    private JLabel label37;
+    private JTextField antagonizeOver;
+    private JTextField antagonizeFirstSuccess;
+    private JTextField antagonizeSecondSuccess;
+    private JTextField antagonizeAllFailed;
+    private JLabel label38;
+    private JTextField antagonizeDraw;
+    private JPanel panel1;
+    private JPanel panel4;
+    private JButton save2;
+    private JPanel infoPanel5;
+    private JLabel qqText5;
+    private JLabel nickText5;
+    private JLabel qqValue5;
+    private JLabel nickValue5;
+    private JPanel panel15;
+    private JLabel label1;
+    private JScrollPane scrollPane2;
+    private JTextArea criticalSuccess;
+    private JLabel label2;
+    private JScrollPane scrollPane3;
+    private JTextArea extremeSuccess;
+    private JLabel label3;
+    private JScrollPane scrollPane4;
+    private JTextArea headSuccess;
+    private JLabel label4;
+    private JLabel label50;
+    private JLabel label51;
+    private JScrollPane scrollPane5;
+    private JTextArea success;
+    private JScrollPane scrollPane6;
+    private JTextArea failure;
+    private JScrollPane scrollPane7;
+    private JTextArea fumble;
+    private JPanel clean;
+    private JPanel monitorPanel2;
+    private JLabel promethusPortText2;
+    private JTextField prometheusPort;
+    private JCheckBox Prometheus;
+    private JCheckBox heap;
+    private JPanel setMaster;
+    private JLabel masterText;
+    private JLabel notMasterInfoText;
+    private JTextField master;
+    private JScrollPane scrollPane8;
+    private JTextArea notMaster;
+    private JPanel panel16;
+    private JPanel infoPanel3;
+    private JLabel qqText3;
+    private JLabel nickText3;
+    private JLabel qqValue3;
+    private JLabel nickValue3;
+    private JButton save3;
+    private JPanel panel17;
+    private JLabel label52;
+    private JLabel label53;
+    private JLabel label54;
+    private JLabel label55;
+    private JTextField clearGroupByOff;
+    private JTextField clearGroupByOffInfo;
+    private JTextField clearGroup;
+    private JTextField clearGroupInfo;
+    private JPanel panel18;
+    private JLabel label56;
+    private JLabel label57;
+    private JLabel label58;
+    private JLabel label59;
+    private JTextField alterFrequentness;
+    private JTextField frequentnessAlterInfo;
+    private JTextField banFrequentness;
+    private JTextField frequentnessBanInfo;
+    private JPanel panel19;
+    private JPanel panel20;
+    private JButton save4;
+    private JPanel infoPanel4;
+    private JLabel qqText4;
+    private JLabel nickText4;
+    private JLabel qqValue4;
+    private JLabel nickValue4;
+    private JPanel panel21;
+    private JCheckBox cloudBan;
+    private JCheckBox ignoreBanUser;
+    private JCheckBox leaveByBanUser;
+    private JCheckBox leaveGroupByBan;
+    private JCheckBox banGroupBecauseBan;
+    private JCheckBox banGroupBecauseReduce;
+    private JCheckBox banUserBecauseReduce;
+    private JPanel panel23;
+    private JLabel label60;
+    private JScrollPane scrollPane9;
+    private JTextArea addGroup;
+    private JLabel label61;
+    private JScrollPane scrollPane10;
+    private JTextArea addFriend;
+    private JLabel label62;
+    private JLabel label63;
+    private JLabel label64;
+    private JScrollPane scrollPane12;
+    private JTextArea refuseGroupByBan;
+    private JScrollPane scrollPane13;
+    private JTextArea refuseFriendByBan;
+    private JPanel panel24;
+    private JLabel label65;
+    private JTextField banListInputNotId;
+    private JPanel panel22;
     public Setting() {
         initComponents();
         initData();
@@ -407,7 +623,7 @@ public class Setting extends JFrame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < infoPanel6.getComponentCount(); i++) {
+                                for (int i = 0; i < infoPanel6.getComponentCount(); i++) {
                                     Rectangle bounds = infoPanel6.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -425,7 +641,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < panel3.getComponentCount(); i++) {
+                            for (int i = 0; i < panel3.getComponentCount(); i++) {
                                 Rectangle bounds = panel3.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -484,7 +700,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for(int i = 0; i < panel6.getComponentCount(); i++) {
+                                    for (int i = 0; i < panel6.getComponentCount(); i++) {
                                         Rectangle bounds = panel6.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -529,7 +745,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for(int i = 0; i < panel13.getComponentCount(); i++) {
+                                    for (int i = 0; i < panel13.getComponentCount(); i++) {
                                         Rectangle bounds = panel13.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -620,7 +836,7 @@ public class Setting extends JFrame {
                                     {
                                         // compute preferred size
                                         Dimension preferredSize = new Dimension();
-                                        for(int i = 0; i < infoPanel7.getComponentCount(); i++) {
+                                        for (int i = 0; i < infoPanel7.getComponentCount(); i++) {
                                             Rectangle bounds = infoPanel7.getComponent(i).getBounds();
                                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -638,7 +854,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for(int i = 0; i < panel5.getComponentCount(); i++) {
+                                    for (int i = 0; i < panel5.getComponentCount(); i++) {
                                         Rectangle bounds = panel5.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -769,7 +985,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for(int i = 0; i < panel9.getComponentCount(); i++) {
+                                    for (int i = 0; i < panel9.getComponentCount(); i++) {
                                         Rectangle bounds = panel9.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -828,7 +1044,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for(int i = 0; i < panel8.getComponentCount(); i++) {
+                                    for (int i = 0; i < panel8.getComponentCount(); i++) {
                                         Rectangle bounds = panel8.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -865,7 +1081,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for(int i = 0; i < panel10.getComponentCount(); i++) {
+                                    for (int i = 0; i < panel10.getComponentCount(); i++) {
                                         Rectangle bounds = panel10.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -903,7 +1119,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for(int i = 0; i < panel14.getComponentCount(); i++) {
+                                    for (int i = 0; i < panel14.getComponentCount(); i++) {
                                         Rectangle bounds = panel14.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -954,7 +1170,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for(int i = 0; i < panel7.getComponentCount(); i++) {
+                                    for (int i = 0; i < panel7.getComponentCount(); i++) {
                                         Rectangle bounds = panel7.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1012,7 +1228,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for(int i = 0; i < panel11.getComponentCount(); i++) {
+                                    for (int i = 0; i < panel11.getComponentCount(); i++) {
                                         Rectangle bounds = panel11.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1030,7 +1246,7 @@ public class Setting extends JFrame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < panel2.getComponentCount(); i++) {
+                                for (int i = 0; i < panel2.getComponentCount(); i++) {
                                     Rectangle bounds = panel2.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1050,7 +1266,7 @@ public class Setting extends JFrame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < setting.getComponentCount(); i++) {
+                        for (int i = 0; i < setting.getComponentCount(); i++) {
                             Rectangle bounds = setting.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1112,7 +1328,7 @@ public class Setting extends JFrame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < infoPanel5.getComponentCount(); i++) {
+                                for (int i = 0; i < infoPanel5.getComponentCount(); i++) {
                                     Rectangle bounds = infoPanel5.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1130,7 +1346,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < panel4.getComponentCount(); i++) {
+                            for (int i = 0; i < panel4.getComponentCount(); i++) {
                                 Rectangle bounds = panel4.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1225,7 +1441,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < panel15.getComponentCount(); i++) {
+                            for (int i = 0; i < panel15.getComponentCount(); i++) {
                                 Rectangle bounds = panel15.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1243,7 +1459,7 @@ public class Setting extends JFrame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel1.getComponentCount(); i++) {
+                        for (int i = 0; i < panel1.getComponentCount(); i++) {
                             Rectangle bounds = panel1.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1287,7 +1503,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < monitorPanel2.getComponentCount(); i++) {
+                            for (int i = 0; i < monitorPanel2.getComponentCount(); i++) {
                                 Rectangle bounds = monitorPanel2.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1329,7 +1545,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < setMaster.getComponentCount(); i++) {
+                            for (int i = 0; i < setMaster.getComponentCount(); i++) {
                                 Rectangle bounds = setMaster.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1377,7 +1593,7 @@ public class Setting extends JFrame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < infoPanel3.getComponentCount(); i++) {
+                                for (int i = 0; i < infoPanel3.getComponentCount(); i++) {
                                     Rectangle bounds = infoPanel3.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1406,7 +1622,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < panel16.getComponentCount(); i++) {
+                            for (int i = 0; i < panel16.getComponentCount(); i++) {
                                 Rectangle bounds = panel16.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1458,7 +1674,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < panel17.getComponentCount(); i++) {
+                            for (int i = 0; i < panel17.getComponentCount(); i++) {
                                 Rectangle bounds = panel17.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1510,7 +1726,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < panel18.getComponentCount(); i++) {
+                            for (int i = 0; i < panel18.getComponentCount(); i++) {
                                 Rectangle bounds = panel18.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1528,7 +1744,7 @@ public class Setting extends JFrame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < clean.getComponentCount(); i++) {
+                        for (int i = 0; i < clean.getComponentCount(); i++) {
                             Rectangle bounds = clean.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1590,7 +1806,7 @@ public class Setting extends JFrame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < infoPanel4.getComponentCount(); i++) {
+                                for (int i = 0; i < infoPanel4.getComponentCount(); i++) {
                                     Rectangle bounds = infoPanel4.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1608,7 +1824,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < panel20.getComponentCount(); i++) {
+                            for (int i = 0; i < panel20.getComponentCount(); i++) {
                                 Rectangle bounds = panel20.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1666,7 +1882,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < panel21.getComponentCount(); i++) {
+                            for (int i = 0; i < panel21.getComponentCount(); i++) {
                                 Rectangle bounds = panel21.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1739,7 +1955,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < panel23.getComponentCount(); i++) {
+                            for (int i = 0; i < panel23.getComponentCount(); i++) {
                                 Rectangle bounds = panel23.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1769,7 +1985,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < panel24.getComponentCount(); i++) {
+                            for (int i = 0; i < panel24.getComponentCount(); i++) {
                                 Rectangle bounds = panel24.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1787,7 +2003,7 @@ public class Setting extends JFrame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel19.getComponentCount(); i++) {
+                        for (int i = 0; i < panel19.getComponentCount(); i++) {
                             Rectangle bounds = panel19.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1810,7 +2026,7 @@ public class Setting extends JFrame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < panel22.getComponentCount(); i++) {
+                    for (int i = 0; i < panel22.getComponentCount(); i++) {
                         Rectangle bounds = panel22.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1919,222 +2135,5 @@ public class Setting extends JFrame {
         failure.setText(entitySystemProperties.getFAILURE());
         fumble.setText(entitySystemProperties.getFUMBLE());
     }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private Frame windows;
-    private JTabbedPane tabContain;
-    private JPanel setting;
-    private JPanel panel3;
-    private JButton save;
-    private JPanel infoPanel6;
-    private JLabel qqText6;
-    private JLabel nickText6;
-    private JLabel qqValue6;
-    private JLabel nickValue6;
-    private JScrollPane scrollPane1;
-    private JPanel panel2;
-    private JPanel panel6;
-    private JLabel label11;
-    private JLabel label12;
-    private JLabel label13;
-    private JLabel label14;
-    private JTextField setPropFormat;
-    private JTextField setHelp;
-    private JTextField notFoundSkill;
-    private JTextField setPropSuccess;
-    private JPanel panel13;
-    private JLabel label45;
-    private JLabel label46;
-    private JLabel label47;
-    private JTextField enSuccess;
-    private JTextField enFailed;
-    private JTextField hiddenDice;
-    private JPanel panel5;
-    private JLabel botStartLable;
-    private JLabel botAlreadyStartLable;
-    private JLabel botStopLable;
-    private JLabel botAlreadyStopLable;
-    private JLabel label9;
-    private JLabel label10;
-    private JTextField botStart;
-    private JTextField botAlreadyStart;
-    private JTextField botStop;
-    private JTextField botAlreadyStop;
-    private JTextField botExit;
-    private JTextField botInfo;
-    private JPanel infoPanel7;
-    private JLabel qqText7;
-    private JLabel nickText7;
-    private JLabel qqValue7;
-    private JLabel nickValue7;
-    private JPanel panel12;
-    private JLabel label39;
-    private JLabel label40;
-    private JLabel label41;
-    private JLabel label42;
-    private JLabel label43;
-    private JLabel label44;
-    private JTextField sanCheck;
-    private JTextField symptom;
-    private JTextField sanCheckCriticalSuccess;
-    private JTextField sanCheckFumble;
-    private JTextField sanCheckSuccess;
-    private JTextField sanCheckFailure;
-    private JPanel panel9;
-    private JLabel label24;
-    private JLabel label25;
-    private JLabel label26;
-    private JLabel label27;
-    private JLabel label28;
-    private JLabel label29;
-    private JTextField createLog;
-    private JTextField appendLog;
-    private JTextField alreadyOpen;
-    private JTextField alreadyClose;
-    private JTextField notFoundLog;
-    private JTextField cantEmptyLogName;
-    private JLabel label30;
-    private JLabel label31;
-    private JTextField deleteOpenLog;
-    private JTextField readLock;
-    private JPanel panel8;
-    private JLabel label19;
-    private JLabel label20;
-    private JLabel label21;
-    private JLabel label22;
-    private JLabel label23;
-    private JTextField manyRollsFormat;
-    private JTextField diceTimesTooBig;
-    private JTextField needKpGroup;
-    private JTextField cantInPrivate;
-    private JTextField onlyManager;
-    private JPanel panel10;
-    private JLabel label32;
-    private JLabel label33;
-    private JTextField dndInitIsEmtpy;
-    private JTextField clrDndInit;
-    private JPanel panel14;
-    private JLabel label48;
-    private JLabel label49;
-    private JTextField teamIsEmpty;
-    private JTextField teamMemberEnIsEmpty;
-    private JPanel panel7;
-    private JLabel label15;
-    private JLabel label16;
-    private JLabel label17;
-    private JLabel label18;
-    private JTextField bookCard;
-    private JTextField bookRp;
-    private JTextField bookKp;
-    private JTextField bookMake;
-    private JPanel panel11;
-    private JLabel label34;
-    private JLabel label35;
-    private JLabel label36;
-    private JLabel label37;
-    private JTextField antagonizeOver;
-    private JTextField antagonizeFirstSuccess;
-    private JTextField antagonizeSecondSuccess;
-    private JTextField antagonizeAllFailed;
-    private JLabel label38;
-    private JTextField antagonizeDraw;
-    private JPanel panel1;
-    private JPanel panel4;
-    private JButton save2;
-    private JPanel infoPanel5;
-    private JLabel qqText5;
-    private JLabel nickText5;
-    private JLabel qqValue5;
-    private JLabel nickValue5;
-    private JPanel panel15;
-    private JLabel label1;
-    private JScrollPane scrollPane2;
-    private JTextArea criticalSuccess;
-    private JLabel label2;
-    private JScrollPane scrollPane3;
-    private JTextArea extremeSuccess;
-    private JLabel label3;
-    private JScrollPane scrollPane4;
-    private JTextArea headSuccess;
-    private JLabel label4;
-    private JLabel label50;
-    private JLabel label51;
-    private JScrollPane scrollPane5;
-    private JTextArea success;
-    private JScrollPane scrollPane6;
-    private JTextArea failure;
-    private JScrollPane scrollPane7;
-    private JTextArea fumble;
-    private JPanel clean;
-    private JPanel monitorPanel2;
-    private JLabel promethusPortText2;
-    private JTextField prometheusPort;
-    private JCheckBox Prometheus;
-    private JCheckBox heap;
-    private JPanel setMaster;
-    private JLabel masterText;
-    private JLabel notMasterInfoText;
-    private JTextField master;
-    private JScrollPane scrollPane8;
-    private JTextArea notMaster;
-    private JPanel panel16;
-    private JPanel infoPanel3;
-    private JLabel qqText3;
-    private JLabel nickText3;
-    private JLabel qqValue3;
-    private JLabel nickValue3;
-    private JButton save3;
-    private JPanel panel17;
-    private JLabel label52;
-    private JLabel label53;
-    private JLabel label54;
-    private JLabel label55;
-    private JTextField clearGroupByOff;
-    private JTextField clearGroupByOffInfo;
-    private JTextField clearGroup;
-    private JTextField clearGroupInfo;
-    private JPanel panel18;
-    private JLabel label56;
-    private JLabel label57;
-    private JLabel label58;
-    private JLabel label59;
-    private JTextField alterFrequentness;
-    private JTextField frequentnessAlterInfo;
-    private JTextField banFrequentness;
-    private JTextField frequentnessBanInfo;
-    private JPanel panel19;
-    private JPanel panel20;
-    private JButton save4;
-    private JPanel infoPanel4;
-    private JLabel qqText4;
-    private JLabel nickText4;
-    private JLabel qqValue4;
-    private JLabel nickValue4;
-    private JPanel panel21;
-    private JCheckBox cloudBan;
-    private JCheckBox ignoreBanUser;
-    private JCheckBox leaveByBanUser;
-    private JCheckBox leaveGroupByBan;
-    private JCheckBox banGroupBecauseBan;
-    private JCheckBox banGroupBecauseReduce;
-    private JCheckBox banUserBecauseReduce;
-    private JPanel panel23;
-    private JLabel label60;
-    private JScrollPane scrollPane9;
-    private JTextArea addGroup;
-    private JLabel label61;
-    private JScrollPane scrollPane10;
-    private JTextArea addFriend;
-    private JLabel label62;
-    private JLabel label63;
-    private JLabel label64;
-    private JScrollPane scrollPane12;
-    private JTextArea refuseGroupByBan;
-    private JScrollPane scrollPane13;
-    private JTextArea refuseFriendByBan;
-    private JPanel panel24;
-    private JLabel label65;
-    private JTextField banListInputNotId;
-    private JPanel panel22;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -73,7 +73,7 @@ public class TestRunningTime implements Job, MakeNickToSender {
             long lastMsgForNow = System.currentTimeMillis() - CQ.getGroupMemberInfo(offBotGroupId, CQ.getLoginQQ()).getLastTime().getTime();
             if (lastMsgForNow / 1000 > entityBanProperties.getClearGroupByOff() * 60 * 60 * 24) {
                 try {
-                    CQ.sendGroupMsg(offBotGroupId, String.format(entityBanProperties.getClearGroupByOffInfo(),makeGroupNickToSender(getGroupName(offBotGroupId))+ "(" +offBotGroupId + ")",lastMsgForNow / 1000 / 60 / 60 / 24));
+                    CQ.sendGroupMsg(offBotGroupId, String.format(entityBanProperties.getClearGroupByOffInfo(), makeGroupNickToSender(getGroupName(offBotGroupId)) + "(" + offBotGroupId + ")", lastMsgForNow / 1000 / 60 / 60 / 24));
                     CQ.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 1000 / 60 / 60 / 24 + "日未使用，且已关闭本骰的群: " + makeGroupNickToSender(getGroupName(offBotGroupId)) + offBotGroupId);
                     CQ.setGroupLeave(offBotGroupId, false);
                 } catch (Exception e) {
@@ -99,7 +99,7 @@ public class TestRunningTime implements Job, MakeNickToSender {
             long lastMsgForNow = System.currentTimeMillis() - CQ.getGroupMemberInfo(notPlayBotGroupId, CQ.getLoginQQ()).getLastTime().getTime();
             if (lastMsgForNow / 1000 > entityBanProperties.getClearGroup() * 60 * 60 * 24) {
                 try {
-                    CQ.sendGroupMsg(notPlayBotGroupId, String.format(entityBanProperties.getClearGroupInfo(),makeGroupNickToSender(getGroupName(notPlayBotGroupId))+ "(" +notPlayBotGroupId + ")", lastMsgForNow / 1000 / 60 / 60 / 24));
+                    CQ.sendGroupMsg(notPlayBotGroupId, String.format(entityBanProperties.getClearGroupInfo(), makeGroupNickToSender(getGroupName(notPlayBotGroupId)) + "(" + notPlayBotGroupId + ")", lastMsgForNow / 1000 / 60 / 60 / 24));
                     CQ.sendGroupMsg(groupManager, "已清理" + lastMsgForNow / 1000 / 60 / 60 / 24 + "日未使用的群: " + makeGroupNickToSender(getGroupName(notPlayBotGroupId)) + notPlayBotGroupId);
                     CQ.setGroupLeave(notPlayBotGroupId, false);
                 } catch (Exception e) {
