@@ -10,6 +10,7 @@ import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemPrope
 import static dice.sinanya.tools.getinfo.SwitchBot.botOff;
 import static dice.sinanya.tools.getinfo.SwitchBot.botOn;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
  * @author SitaNya
@@ -32,6 +33,8 @@ public class Admin {
         if (entityBanProperties.getMaster().equals(entityTypeMessages.getFromQq())) {
             botOn(Long.parseLong(msg));
             CQ.sendGroupMsg(Long.parseLong(msg), entitySystemProperties.getBotStart());
+        } else {
+            sender(entityTypeMessages, entityBanProperties.getNotMaster());
         }
     }
 
@@ -41,6 +44,8 @@ public class Admin {
         if (entityBanProperties.getMaster().equals(entityTypeMessages.getFromQq())) {
             botOff(Long.parseLong(msg));
             CQ.sendGroupMsg(Long.parseLong(msg), entitySystemProperties.getBotAlreadyStop());
+        } else {
+            sender(entityTypeMessages, entityBanProperties.getNotMaster());
         }
     }
 
@@ -56,6 +61,8 @@ public class Admin {
                 Thread.currentThread().interrupt();
             }
             CQ.setGroupLeave(Long.parseLong(msg), false);
+        } else {
+            sender(entityTypeMessages, entityBanProperties.getNotMaster());
         }
     }
 }

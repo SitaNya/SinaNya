@@ -97,7 +97,7 @@ public class RewardAndPunishment implements En, MakeNickToSender {
     public void rp() {
         String tag = TAG_RP;
         String msg = entityTypeMessages.getMsg().trim().replaceFirst(tag.substring(0, tag.length() - 2), "");
-        int times = 0;
+        int times = 1;
         Matcher findTimes = timesRegex.matcher(msg);
         while (findTimes.find()) {
             times = Integer.parseInt(findTimes.group(1));

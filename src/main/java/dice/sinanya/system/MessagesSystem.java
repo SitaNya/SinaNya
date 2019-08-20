@@ -14,10 +14,14 @@ public interface MessagesSystem {
     String NONE = "";
     String SPACE = " ";
 
-    String VERSIONS = "3.6.19.43Beta";
+    String VERSIONS = "3.8.20.45Beta";
     StringBuilder UPDATE = new StringBuilder()
             .append("更新日志:\n")
-            .append("2019年08月14日 修复数项问题\n")
+            .append("2019年08月20日 修改多重投掷的显示方式\n")
+            .append("2019年08月20日 增加rp允许多重投掷\n")
+            .append("2019年08月20日 增加dnd法术查询\n")
+            .append("2019年08月20日 增加admin命令用于远程关闭、开启、退出\n")
+            .append("2019年08月20日 调整开关识别范围\n")
             .append("2019年08月14日 增加频度检测\n")
             .append("2019年08月14日 换用JCQ\n")
             .append("2019年08月14日 增加界面\n")
