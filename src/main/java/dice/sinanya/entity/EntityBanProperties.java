@@ -75,8 +75,8 @@ public class EntityBanProperties {
         refuseGroupByBan = "拒绝加入黑名单群";
         refuseFriendByBan = "拒绝添加黑名单好友";
 
-        alterFrequentness = 40;
-        banFrequentness = 80;
+        alterFrequentness = 10;
+        banFrequentness = 20;
 
         whiteGroup = "";
         whiteUser = "";
