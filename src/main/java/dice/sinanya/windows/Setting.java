@@ -1800,6 +1800,7 @@ public class Setting extends JFrame {
 
         //======== dialog1 ========
         {
+            dialog1.setModal(true);
             Container dialog1ContentPane = dialog1.getContentPane();
             dialog1ContentPane.setLayout(null);
 
