@@ -24,6 +24,8 @@ public class UpdateForDice {
         File json=new File(entitySystemProperties.getSystemDir()+"/../com.sinanya.dice.json");
         if (jar.exists()&&json.exists()){
             JOptionPane.showMessageDialog(null, "文件存在");
+        }else{
+            JOptionPane.showMessageDialog(null, "文件不存在");
         }
     }
 }
