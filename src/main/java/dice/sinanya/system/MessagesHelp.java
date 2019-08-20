@@ -39,6 +39,7 @@ public interface MessagesHelp {
             .append(".rp\n")
             .append(".rp 50\t.rp 50+10\t.rp 力量\t.rp 力量+10\t.rp2 力量\n")
             .append("惩罚骰判定，紧跟在.rb后面的数字代表奖励骰的个数。空格后的数字或文字将被视为技能进行判定。支持数学计算")
+            .append("此外rp命令可以接#次数，譬如手枪连射时可以使用.rp3#2 60，意思是2个惩罚骰，连续骰3次，60成功率判定")
             .append(SEQ)
 
             .append(".sc\n")
