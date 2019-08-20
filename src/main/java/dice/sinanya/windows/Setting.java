@@ -1836,12 +1836,14 @@ public class Setting extends JFrame {
             }
             dialog1.pack();
             dialog1.setLocationRelativeTo(null);
+            dialog1.setAlwaysOnTop(true);
         }
 
         //---- buttonGroup1 ----
         ButtonGroup buttonGroup1 = new ButtonGroup();
         buttonGroup1.add(banGroupAndUserByFre);
         buttonGroup1.add(banUserByFre);
+        windows.setVisible(true);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
