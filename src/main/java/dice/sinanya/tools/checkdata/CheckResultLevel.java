@@ -5,6 +5,7 @@ import dice.sinanya.entity.EntityLevelResult;
 import dice.sinanya.system.MessagesLevel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static dice.sinanya.tools.makedata.RandomInt.random;
 
@@ -74,6 +75,21 @@ public class CheckResultLevel {
         String strlevel = checkResultLevel();
         ArrayList<String> resultInfo = MessagesLevel.valueOf(strlevel).getText();
         return resultInfo.get(random(0, resultInfo.size() - 1));
+    }
+
+    /**
+     * @return 根据字符串的成功等级，获取随机的回复语
+     */
+    public String getLevelResultStrForSimple() {
+        String strlevel = checkResultLevel();
+        HashMap<String, String> resultInfo = new HashMap<>();
+        resultInfo.put("STR_CRITICAL_SUCCESS", "大成功");
+        resultInfo.put("STR_EXTREME_SUCCESS", "极难成功");
+        resultInfo.put("STR_HARD_SUCCESS", "困难成功");
+        resultInfo.put("STR_SUCCESS", "成功");
+        resultInfo.put("STR_FAILURE", "失败");
+        resultInfo.put("STR_FUMBLE", "大失败");
+        return resultInfo.get(strlevel);
     }
 
     /**
