@@ -551,18 +551,24 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     }
 
     private boolean messagesContainsAtMe(String messages, String tagBotSwitch, String tagMe) {
-        return messages.trim().matches(tagBotSwitch) && messages.trim().contains(tagMe);
+        boolean atMe = messages.trim().matches(tagBotSwitch) && messages.trim().contains(tagMe);
+        CQ.logDebug("返回机器人开关值", "at自身: " + atMe);
+        return atMe;
     }
 
     private boolean messagesBotForAll(String messages, String tagBotSwitch) {
-        return messages.trim().matches(tagBotSwitch) && !messages.trim().contains("[cq:at")
+        boolean forAll = messages.trim().matches(tagBotSwitch) && !messages.trim().contains("[cq:at")
                 && !messages.matches(".*[0-9]+.*") && !messages.matches(chineseRegex.toString());
+        CQ.logDebug("返回机器人开关值", "全体: " + forAll);
+        return forAll;
     }
 
     private boolean messagesContainsQqId(String messages, String tagBotSwitch) {
         String qqId = String.valueOf(CQ.getLoginQQ());
-        return messages.trim().matches(tagBotSwitch)
+        boolean containsQqId = messages.trim().matches(tagBotSwitch)
                 && (messages.trim().contains(qqId) || messages.trim().contains(qqId.substring(qqId.length() - 5)));
+        CQ.logDebug("返回机器人开关值", "QQId: " + containsQqId);
+        return containsQqId;
     }
 
     private void checkAudit(EntityTypeMessages entityTypeMessages) throws OnlyManagerException {
