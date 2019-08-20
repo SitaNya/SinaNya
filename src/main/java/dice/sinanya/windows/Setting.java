@@ -1806,7 +1806,7 @@ public class Setting extends JFrame {
             //---- label5 ----
             label5.setText("\u4fdd\u5b58\u6210\u529f");
             dialog1ContentPane.add(label5);
-            label5.setBounds(135, 40, 75, 20);
+            label5.setBounds(135, 40, 195, 20);
 
             //---- button1 ----
             button1.setText("\u786e\u5b9a");
@@ -1834,7 +1834,7 @@ public class Setting extends JFrame {
                 dialog1ContentPane.setPreferredSize(preferredSize);
             }
             dialog1.pack();
-            dialog1.setLocationRelativeTo(dialog1.getOwner());
+            dialog1.setLocationRelativeTo(null);
         }
 
         //---- buttonGroup1 ----

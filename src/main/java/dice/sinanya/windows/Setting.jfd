@@ -1898,13 +1898,14 @@ new FormModel {
 		} )
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 			name: "dialog1"
+			"$locationPolicy": 1
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label5"
 				"text": "保存成功"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 135
 				"y": 40
-				"width": 75
+				"width": 195
 				"height": 20
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
