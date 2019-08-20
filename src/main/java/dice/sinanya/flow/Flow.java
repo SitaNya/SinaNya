@@ -1,5 +1,6 @@
 package dice.sinanya.flow;
 
+import com.sobte.cqp.jcq.entity.Member;
 import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.dice.game.Jrrp;
 import dice.sinanya.dice.get.*;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesBanList.frequentnessForGroupList;
 import static dice.sinanya.system.MessagesTag.*;
-import static dice.sinanya.tools.getinfo.BanList.insertGroupBanList;
+import static dice.sinanya.tools.getinfo.BanList.insertQqBanList;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
@@ -428,24 +429,26 @@ class Flow implements MakeNickToSender {
         ArrayList<Long> timeList = new ArrayList<>();
         long now = System.currentTimeMillis();
         timeList.add(now);
-        if (frequentnessForGroupList.containsKey(entityTypeMessages.getFromGroup())) {
-            for (long time : frequentnessForGroupList.get(entityTypeMessages.getFromGroup())) {
+        if (frequentnessForGroupList.containsKey(entityTypeMessages.getFromQq())) {
+            for (long time : frequentnessForGroupList.get(entityTypeMessages.getFromQq())) {
                 if (time > now - 1000 * 10) {
                     timeList.add(time);
                 }
             }
         }
         if (timeList.size() >= entityBanProperties.getAlterFrequentness()) {
+            Member member = CQ.getGroupMemberInfo(Long.parseLong(entityTypeMessages.getFromGroup()), Long.parseLong(entityTypeMessages.getFromQq()));
             CQ.sendGroupMsg(Long.parseLong(entityTypeMessages.getFromGroup()), entityBanProperties.getFrequentnessAlterInfo());
-            CQ.sendGroupMsg(162279609, "于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中频度达到" + timeList.size()+"/10，警告");
+            CQ.sendGroupMsg(162279609, "于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中" + member.getNick() + "(" + member.getQqId() + ")频度达到" + timeList.size() + "/10，警告");
         }
         if (timeList.size() >= entityBanProperties.getBanFrequentness()) {
+            Member member = CQ.getGroupMemberInfo(Long.parseLong(entityTypeMessages.getFromGroup()), Long.parseLong(entityTypeMessages.getFromQq()));
             CQ.sendGroupMsg(Long.parseLong(entityTypeMessages.getFromGroup()), entityBanProperties.getFrequentnessBanInfo());
-            CQ.sendGroupMsg(162279609, "于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中频度达到" + timeList.size() + "/10,已退群并拉黑");
+            CQ.sendGroupMsg(162279609, "于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中" + member.getNick() + "(" + member.getQqId() + ")频度达到" + timeList.size() + "/10,已退群并拉黑");
             CQ.setGroupLeave(Long.parseLong(entityTypeMessages.getFromGroup()), false);
-            insertGroupBanList(entityTypeMessages.getFromGroup(), "大量刷屏");
+            insertQqBanList(entityTypeMessages.getFromQq(), "大量刷屏");
         }
-        frequentnessForGroupList.put(entityTypeMessages.getFromGroup(), timeList);
+        frequentnessForGroupList.put(entityTypeMessages.getFromQq(), timeList);
     }
 
     private boolean checkTagRegex(String tag) {
