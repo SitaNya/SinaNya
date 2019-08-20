@@ -27,6 +27,7 @@ import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemPrope
 public class Setting extends JFrame {
     public Setting() {
         initComponents();
+        windows.setVisible(true);
         initData();
     }
 
@@ -370,7 +371,7 @@ public class Setting extends JFrame {
 
         //======== windows ========
         {
-            windows.setTitle("SinaNya\u8dd1\u56e2\u9ab0\u70b9\u6838\u5fc3 By SitaNya");
+            windows.setTitle("SinaNya\u8dd1\u56e2\u9ab0\u70b9\u6838\u5fc3 By SitaNya\t"+MessagesSystem.VERSIONS);
             windows.setBackground(new Color(60, 63, 65));
             windows.setAlwaysOnTop(true);
             windows.addWindowListener(new WindowAdapter() {
@@ -2003,6 +2004,7 @@ public class Setting extends JFrame {
             }
             dialog1.setSize(335, 150);
             dialog1.setLocationRelativeTo(null);
+            dialog1.setAlwaysOnTop(true);
         }
 
         //---- buttonGroup1 ----
