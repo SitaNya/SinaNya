@@ -27,6 +27,7 @@ import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemPrope
 public class Setting extends JFrame {
     public Setting() {
         initComponents();
+        windows.setVisible(true);
         initData();
     }
 
@@ -2003,6 +2004,7 @@ public class Setting extends JFrame {
             }
             dialog1.setSize(335, 150);
             dialog1.setLocationRelativeTo(null);
+            dialog1.setAlwaysOnTop(true);
         }
 
         //---- buttonGroup1 ----
