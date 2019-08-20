@@ -516,12 +516,12 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
             return MSG_IGNORE;
         }
 
-        String tagBotOff = ".*[.。][ ]*bot[ ]*off.*";
-        String tagBotInfo = ".*[.。][ ]*bot.*";
-        String tagBotExit = ".*[.。][ ]*bot[ ]*exit.*";
-        String tagBotUpdate = ".*[.。][ ]*bot[ ]*update.*";
+        String tagBotOff = ".*[\\.。][ ]*bot[ ]*off.*";
+        String tagBotInfo = ".*[\\.。][ ]*bot.*";
+        String tagBotExit = ".*[\\.。][ ]*bot[ ]*exit.*";
+        String tagBotUpdate = ".*[\\.。][ ]*bot[ ]*update.*";
 
-        String tagBotOn = ".*[.。][ ]*bot[ ]*on.*";
+        String tagBotOn = ".*[\\.。][ ]*bot[ ]*on.*";
         boolean botOn = messagesContainsAtMe(messages, tagBotOn, tagMe) || messagesBotForAll(messages, tagBotOn)
                 || messagesContainsQqId(messages, tagBotOn);
         boolean botOff = messagesContainsAtMe(messages, tagBotOff, tagMe) || messagesBotForAll(messages, tagBotOff)
@@ -557,7 +557,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     }
 
     private boolean messagesBotForAll(String messages, String tagBotSwitch) {
-        CQ.logDebug("正则","[ ]*" + tagBotSwitch.substring(2, tagBotSwitch.length() - 2) + "[ ]*");
+        CQ.logDebug("正则","^[ ]*" + tagBotSwitch.substring(2, tagBotSwitch.length() - 2) + "[ ]*$");
         boolean forAll = messages.trim().matches(tagBotSwitch) && !messages.trim().contains("[cq:at")
                 && !messages.matches(".*[0-9]+.*") && !messages.matches("^[ ]*" + tagBotSwitch.substring(2, tagBotSwitch.length() - 2) + "[ ]*$");
         CQ.logDebug("判断信息为", messages);
