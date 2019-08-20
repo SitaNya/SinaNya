@@ -430,18 +430,18 @@ class Flow implements MakeNickToSender {
         timeList.add(now);
         if (frequentnessForGroupList.containsKey(entityTypeMessages.getFromGroup())) {
             for (long time : frequentnessForGroupList.get(entityTypeMessages.getFromGroup())) {
-                if (time > now - 1000 * 60) {
+                if (time > now - 1000 * 10) {
                     timeList.add(time);
                 }
             }
         }
         if (timeList.size() >= entityBanProperties.getAlterFrequentness()) {
             CQ.sendGroupMsg(Long.parseLong(entityTypeMessages.getFromGroup()), entityBanProperties.getFrequentnessAlterInfo());
-            CQ.sendGroupMsg(162279609, "于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中频度达到" + timeList.size());
+            CQ.sendGroupMsg(162279609, "于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中频度达到" + timeList.size()+"/10，警告");
         }
         if (timeList.size() >= entityBanProperties.getBanFrequentness()) {
             CQ.sendGroupMsg(Long.parseLong(entityTypeMessages.getFromGroup()), entityBanProperties.getFrequentnessBanInfo());
-            CQ.sendGroupMsg(162279609, "于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中频度达到" + timeList.size() + "已退群并拉黑");
+            CQ.sendGroupMsg(162279609, "于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中频度达到" + timeList.size() + "/10,已退群并拉黑");
             CQ.setGroupLeave(Long.parseLong(entityTypeMessages.getFromGroup()), false);
             insertGroupBanList(entityTypeMessages.getFromGroup(), "大量刷屏");
         }
