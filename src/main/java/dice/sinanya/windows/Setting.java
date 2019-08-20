@@ -20,226 +20,114 @@ import static dice.sinanya.system.MessagesLevel.*;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 
-
 /**
  * @author unknown
  */
 public class Setting extends JFrame {
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private Frame windows;
-    private JTabbedPane tabContain;
-    private JPanel setting;
-    private JPanel panel3;
-    private JButton save;
-    private JPanel infoPanel6;
-    private JLabel qqText6;
-    private JLabel nickText6;
-    private JLabel qqValue6;
-    private JLabel nickValue6;
-    private JScrollPane scrollPane1;
-    private JPanel panel2;
-    private JPanel panel6;
-    private JLabel label11;
-    private JLabel label12;
-    private JLabel label13;
-    private JLabel label14;
-    private JTextField setPropFormat;
-    private JTextField setHelp;
-    private JTextField notFoundSkill;
-    private JTextField setPropSuccess;
-    private JPanel panel13;
-    private JLabel label45;
-    private JLabel label46;
-    private JLabel label47;
-    private JTextField enSuccess;
-    private JTextField enFailed;
-    private JTextField hiddenDice;
-    private JPanel panel5;
-    private JLabel botStartLable;
-    private JLabel botAlreadyStartLable;
-    private JLabel botStopLable;
-    private JLabel botAlreadyStopLable;
-    private JLabel label9;
-    private JLabel label10;
-    private JTextField botStart;
-    private JTextField botAlreadyStart;
-    private JTextField botStop;
-    private JTextField botAlreadyStop;
-    private JTextField botExit;
-    private JTextField botInfo;
-    private JPanel panel12;
-    private JLabel label39;
-    private JLabel label40;
-    private JLabel label41;
-    private JLabel label42;
-    private JLabel label43;
-    private JLabel label44;
-    private JTextField sanCheck;
-    private JTextField symptom;
-    private JTextField sanCheckCriticalSuccess;
-    private JTextField sanCheckFumble;
-    private JTextField sanCheckSuccess;
-    private JTextField sanCheckFailure;
-    private JPanel panel9;
-    private JLabel label24;
-    private JLabel label25;
-    private JLabel label26;
-    private JLabel label27;
-    private JLabel label28;
-    private JLabel label29;
-    private JTextField createLog;
-    private JTextField appendLog;
-    private JTextField alreadyOpen;
-    private JTextField alreadyClose;
-    private JTextField notFoundLog;
-    private JTextField cantEmptyLogName;
-    private JLabel label30;
-    private JLabel label31;
-    private JTextField deleteOpenLog;
-    private JTextField readLock;
-    private JPanel panel8;
-    private JLabel label19;
-    private JLabel label20;
-    private JLabel label21;
-    private JLabel label22;
-    private JLabel label23;
-    private JTextField manyRollsFormat;
-    private JTextField diceTimesTooBig;
-    private JTextField needKpGroup;
-    private JTextField cantInPrivate;
-    private JTextField onlyManager;
-    private JPanel panel10;
-    private JLabel label32;
-    private JLabel label33;
-    private JTextField dndInitIsEmtpy;
-    private JTextField clrDndInit;
-    private JPanel panel14;
-    private JLabel label48;
-    private JLabel label49;
-    private JTextField teamIsEmpty;
-    private JTextField teamMemberEnIsEmpty;
-    private JPanel panel7;
-    private JLabel label15;
-    private JLabel label16;
-    private JLabel label17;
-    private JLabel label18;
-    private JTextField bookCard;
-    private JTextField bookRp;
-    private JTextField bookKp;
-    private JTextField bookMake;
-    private JPanel panel11;
-    private JLabel label34;
-    private JLabel label35;
-    private JLabel label36;
-    private JLabel label37;
-    private JTextField antagonizeOver;
-    private JTextField antagonizeFirstSuccess;
-    private JTextField antagonizeSecondSuccess;
-    private JTextField antagonizeAllFailed;
-    private JLabel label38;
-    private JTextField antagonizeDraw;
-    private JPanel panel1;
-    private JPanel panel4;
-    private JButton save2;
-    private JPanel infoPanel5;
-    private JLabel qqText5;
-    private JLabel nickText5;
-    private JLabel qqValue5;
-    private JLabel nickValue5;
-    private JPanel panel15;
-    private JLabel label1;
-    private JScrollPane scrollPane2;
-    private JTextArea criticalSuccess;
-    private JLabel label2;
-    private JScrollPane scrollPane3;
-    private JTextArea extremeSuccess;
-    private JLabel label3;
-    private JScrollPane scrollPane4;
-    private JTextArea headSuccess;
-    private JLabel label4;
-    private JLabel label50;
-    private JLabel label51;
-    private JScrollPane scrollPane5;
-    private JTextArea success;
-    private JScrollPane scrollPane6;
-    private JTextArea failure;
-    private JScrollPane scrollPane7;
-    private JTextArea fumble;
-    private JPanel clean;
-    private JPanel monitorPanel2;
-    private JLabel promethusPortText2;
-    private JTextField prometheusPort;
-    private JCheckBox Prometheus;
-    private JCheckBox heap;
-    private JPanel setMaster;
-    private JLabel masterText;
-    private JLabel notMasterInfoText;
-    private JTextField master;
-    private JScrollPane scrollPane8;
-    private JTextArea notMaster;
-    private JPanel panel16;
-    private JPanel infoPanel3;
-    private JLabel qqText3;
-    private JLabel nickText3;
-    private JLabel qqValue3;
-    private JLabel nickValue3;
-    private JButton save3;
-    private JPanel panel17;
-    private JLabel label52;
-    private JLabel label53;
-    private JLabel label54;
-    private JLabel label55;
-    private JTextField clearGroupByOff;
-    private JTextField clearGroupByOffInfo;
-    private JTextField clearGroup;
-    private JTextField clearGroupInfo;
-    private JPanel panel18;
-    private JLabel label56;
-    private JLabel label57;
-    private JLabel label58;
-    private JLabel label59;
-    private JTextField alterFrequentness;
-    private JTextField frequentnessAlterInfo;
-    private JTextField banFrequentness;
-    private JTextField frequentnessBanInfo;
-    private JRadioButton banGroupAndUserByFre;
-    private JRadioButton banUserByFre;
-    private JPanel panel19;
-    private JPanel panel20;
-    private JButton save4;
-    private JPanel infoPanel4;
-    private JLabel qqText4;
-    private JLabel nickText4;
-    private JLabel qqValue4;
-    private JLabel nickValue4;
-    private JPanel panel21;
-    private JCheckBox cloudBan;
-    private JCheckBox ignoreBanUser;
-    private JCheckBox leaveByBanUser;
-    private JCheckBox leaveGroupByBan;
-    private JCheckBox banGroupBecauseBan;
-    private JCheckBox banGroupBecauseReduce;
-    private JCheckBox banUserBecauseReduce;
-    private JPanel panel23;
-    private JLabel label60;
-    private JScrollPane scrollPane9;
-    private JTextArea addGroup;
-    private JLabel label61;
-    private JScrollPane scrollPane10;
-    private JTextArea addFriend;
-    private JLabel label62;
-    private JLabel label63;
-    private JLabel label64;
-    private JScrollPane scrollPane12;
-    private JTextArea refuseGroupByBan;
-    private JScrollPane scrollPane13;
-    private JTextArea refuseFriendByBan;
-    private JPanel panel24;
-    private JLabel label65;
-    private JTextField banListInputNotId;
-    private JPanel panel22;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
+    public Setting() {
+        initComponents();
+        initData();
+    }
 
+    private void saveSystem(MouseEvent e) {
+        entitySystemProperties.setBotStart(botStart.getText());
+        entitySystemProperties.setBotAlreadyStart(botAlreadyStart.getText());
+        entitySystemProperties.setBotStop(botStop.getText());
+        entitySystemProperties.setBotAlreadyStop(botAlreadyStop.getText());
+        entitySystemProperties.setBotExit(botExit.getText());
+        entitySystemProperties.setBotInfo(botInfo.getText());
+        entitySystemProperties.setBookCard(bookCard.getText());
+        entitySystemProperties.setBookRp(bookRp.getText());
+        entitySystemProperties.setBookKp(bookKp.getText());
+        entitySystemProperties.setBookMake(bookMake.getText());
+        entitySystemProperties.setSetPropFormat(setPropFormat.getText());
+        entitySystemProperties.setSetHelp(setHelp.getText());
+        entitySystemProperties.setNotFoundSkill(notFoundSkill.getText());
+        entitySystemProperties.setSetPropSuccess(setPropSuccess.getText());
+        entitySystemProperties.setManyRollsFormat(manyRollsFormat.getText());
+        entitySystemProperties.setDiceTimesTooBig(diceTimesTooBig.getText());
+        entitySystemProperties.setNeedKpGroup(needKpGroup.getText());
+        entitySystemProperties.setCantInPrivate(cantInPrivate.getText());
+        entitySystemProperties.setOnlyManager(onlyManager.getText());
+        entitySystemProperties.setAlreadyOpen(alreadyOpen.getText());
+        entitySystemProperties.setAlreadyClose(alreadyClose.getText());
+        entitySystemProperties.setNotFoundLog(notFoundLog.getText());
+        entitySystemProperties.setReadLock(readLock.getText());
+        entitySystemProperties.setDeleteOpenLog(deleteOpenLog.getText());
+        entitySystemProperties.setAppendLog(appendLog.getText());
+        entitySystemProperties.setCreateLog(createLog.getText());
+        entitySystemProperties.setCantEmptyLogName(cantEmptyLogName.getText());
+        entitySystemProperties.setDndInitIsEmtpy(dndInitIsEmtpy.getText());
+        entitySystemProperties.setClrDndInit(clrDndInit.getText());
+        entitySystemProperties.setAntagonizeOver(antagonizeOver.getText());
+        entitySystemProperties.setAntagonizeFirstSuccess(antagonizeFirstSuccess.getText());
+        entitySystemProperties.setAntagonizeSecondSuccess(antagonizeSecondSuccess.getText());
+        entitySystemProperties.setAntagonizeAllFailed(antagonizeAllFailed.getText());
+        entitySystemProperties.setAntagonizeDraw(antagonizeDraw.getText());
+        entitySystemProperties.setSanCheck(sanCheck.getText());
+        entitySystemProperties.setSymptom(symptom.getText());
+        entitySystemProperties.setSanCheckFumble(sanCheckFumble.getText());
+        entitySystemProperties.setSanCheckCriticalSuccess(sanCheckCriticalSuccess.getText());
+        entitySystemProperties.setSanCheckSuccess(sanCheckSuccess.getText());
+        entitySystemProperties.setSanCheckFailure(sanCheckFailure.getText());
+        entitySystemProperties.setEnSuccess(enSuccess.getText());
+        entitySystemProperties.setEnFailed(enFailed.getText());
+        entitySystemProperties.setHiddenDice(hiddenDice.getText());
+        entitySystemProperties.setTeamIsEmpty(teamIsEmpty.getText());
+        entitySystemProperties.setTeamMemberEnIsEmpty(teamMemberEnIsEmpty.getText());
+        entitySystemProperties.setCRITICAL_SUCCESS(criticalSuccess.getText());
+        entitySystemProperties.setEXTREME_SUCCESS(extremeSuccess.getText());
+        entitySystemProperties.setHARD_SUCCESS(headSuccess.getText());
+        entitySystemProperties.setSUCCESS(success.getText());
+        entitySystemProperties.setFAILURE(failure.getText());
+        entitySystemProperties.setFUMBLE(fumble.getText());
+        STR_CRITICAL_SUCCESS.setText(criticalSuccess.getText());
+        STR_EXTREME_SUCCESS.setText(extremeSuccess.getText());
+        STR_HARD_SUCCESS.setText(headSuccess.getText());
+        STR_SUCCESS.setText(success.getText());
+        STR_FAILURE.setText(failure.getText());
+        STR_FUMBLE.setText(fumble.getText());
+        new dice.sinanya.db.properties.system.InsertProperties().insertProperties(entitySystemProperties);
+        dialog1.setVisible(true);
+    }
+
+    private void saveBan(MouseEvent e) {
+        entityBanProperties.setCloudBan(cloudBan.isSelected());
+        entityBanProperties.setPrometheus(Prometheus.isSelected());
+        entityBanProperties.setHeap(heap.isSelected());
+        entityBanProperties.setMaster(master.getText());
+        entityBanProperties.setBanListInputNotId(banListInputNotId.getText());
+        entityBanProperties.setNotMaster(notMaster.getText());
+        entityBanProperties.setIgnoreBanUser(ignoreBanUser.isSelected());
+        entityBanProperties.setLeaveByBanUser(leaveByBanUser.isSelected());
+        entityBanProperties.setLeaveGroupByBan(leaveGroupByBan.isSelected());
+        entityBanProperties.setBanGroupBecauseBan(banGroupBecauseBan.isSelected());
+        entityBanProperties.setBanGroupBecauseReduce(banGroupBecauseReduce.isSelected());
+        entityBanProperties.setBanUserBecauseReduce(banUserBecauseReduce.isSelected());
+        entityBanProperties.setAddGroup(addGroup.getText());
+        entityBanProperties.setAddFriend(addFriend.getText());
+        entityBanProperties.setRefuseGroupByBan(refuseGroupByBan.getText());
+        entityBanProperties.setRefuseFriendByBan(refuseFriendByBan.getText());
+        entityBanProperties.setClearGroup(Integer.parseInt(clearGroup.getText()));
+        entityBanProperties.setClearGroupByOff(Integer.parseInt(clearGroupByOff.getText()));
+        entityBanProperties.setAlterFrequentness(Integer.parseInt(alterFrequentness.getText()));
+        entityBanProperties.setBanFrequentness(Integer.parseInt(banFrequentness.getText()));
+        entityBanProperties.setPrometheusPort(Integer.parseInt(prometheusPort.getText()));
+        entityBanProperties.setClearGroupByOffInfo(clearGroupByOffInfo.getText());
+        entityBanProperties.setClearGroupInfo(clearGroupInfo.getText());
+        entityBanProperties.setFrequentnessAlterInfo(frequentnessAlterInfo.getText());
+        entityBanProperties.setFrequentnessBanInfo(frequentnessBanInfo.getText());
+        new InsertProperties().insertProperties(entityBanProperties);
+        dialog1.setVisible(true);
+    }
+
+    private void windowsWindowClosing(WindowEvent e) {
+        windows.setVisible(false);
+    }
+
+    private void button1MouseClicked(MouseEvent e) {
+        dialog1.setVisible(false);
+    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -455,6 +343,9 @@ public class Setting extends JFrame {
         label65 = new JLabel();
         banListInputNotId = new JTextField();
         panel22 = new JPanel();
+        dialog1 = new JDialog();
+        label5 = new JLabel();
+        button1 = new JButton();
 
         //======== windows ========
         {
@@ -1907,109 +1798,50 @@ public class Setting extends JFrame {
             windows.setLocationRelativeTo(windows.getOwner());
         }
 
+        //======== dialog1 ========
+        {
+            Container dialog1ContentPane = dialog1.getContentPane();
+            dialog1ContentPane.setLayout(null);
+
+            //---- label5 ----
+            label5.setText("\u4fdd\u5b58\u6210\u529f");
+            dialog1ContentPane.add(label5);
+            label5.setBounds(135, 40, 75, 20);
+
+            //---- button1 ----
+            button1.setText("\u786e\u5b9a");
+            button1.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    button1MouseClicked(e);
+                }
+            });
+            dialog1ContentPane.add(button1);
+            button1.setBounds(new Rectangle(new Point(125, 85), button1.getPreferredSize()));
+
+            {
+                // compute preferred size
+                Dimension preferredSize = new Dimension();
+                for(int i = 0; i < dialog1ContentPane.getComponentCount(); i++) {
+                    Rectangle bounds = dialog1ContentPane.getComponent(i).getBounds();
+                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                }
+                Insets insets = dialog1ContentPane.getInsets();
+                preferredSize.width += insets.right;
+                preferredSize.height += insets.bottom;
+                dialog1ContentPane.setMinimumSize(preferredSize);
+                dialog1ContentPane.setPreferredSize(preferredSize);
+            }
+            dialog1.pack();
+            dialog1.setLocationRelativeTo(dialog1.getOwner());
+        }
+
         //---- buttonGroup1 ----
         ButtonGroup buttonGroup1 = new ButtonGroup();
         buttonGroup1.add(banGroupAndUserByFre);
         buttonGroup1.add(banUserByFre);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
-    }
-
-    private void saveSystem(MouseEvent e) {
-        entitySystemProperties.setBotStart(botStart.getText().replace("\\n", "\n"));
-        entitySystemProperties.setBotAlreadyStart(botAlreadyStart.getText().replace("\\n", "\n"));
-        entitySystemProperties.setBotStop(botStop.getText().replace("\\n", "\n"));
-        entitySystemProperties.setBotAlreadyStop(botAlreadyStop.getText().replace("\\n", "\n"));
-        entitySystemProperties.setBotExit(botExit.getText().replace("\\n", "\n"));
-        entitySystemProperties.setBotInfo(botInfo.getText().replace("\\n", "\n"));
-        entitySystemProperties.setBookCard(bookCard.getText().replace("\\n", "\n"));
-        entitySystemProperties.setBookRp(bookRp.getText().replace("\\n", "\n"));
-        entitySystemProperties.setBookKp(bookKp.getText().replace("\\n", "\n"));
-        entitySystemProperties.setBookMake(bookMake.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSetPropFormat(setPropFormat.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSetHelp(setHelp.getText().replace("\\n", "\n"));
-        entitySystemProperties.setNotFoundSkill(notFoundSkill.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSetPropSuccess(setPropSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setManyRollsFormat(manyRollsFormat.getText().replace("\\n", "\n"));
-        entitySystemProperties.setDiceTimesTooBig(diceTimesTooBig.getText().replace("\\n", "\n"));
-        entitySystemProperties.setNeedKpGroup(needKpGroup.getText().replace("\\n", "\n"));
-        entitySystemProperties.setCantInPrivate(cantInPrivate.getText().replace("\\n", "\n"));
-        entitySystemProperties.setOnlyManager(onlyManager.getText().replace("\\n", "\n"));
-        entitySystemProperties.setAlreadyOpen(alreadyOpen.getText().replace("\\n", "\n"));
-        entitySystemProperties.setAlreadyClose(alreadyClose.getText().replace("\\n", "\n"));
-        entitySystemProperties.setNotFoundLog(notFoundLog.getText().replace("\\n", "\n"));
-        entitySystemProperties.setReadLock(readLock.getText().replace("\\n", "\n"));
-        entitySystemProperties.setDeleteOpenLog(deleteOpenLog.getText().replace("\\n", "\n"));
-        entitySystemProperties.setAppendLog(appendLog.getText().replace("\\n", "\n"));
-        entitySystemProperties.setCreateLog(createLog.getText().replace("\\n", "\n"));
-        entitySystemProperties.setCantEmptyLogName(cantEmptyLogName.getText().replace("\\n", "\n"));
-        entitySystemProperties.setDndInitIsEmtpy(dndInitIsEmtpy.getText().replace("\\n", "\n"));
-        entitySystemProperties.setClrDndInit(clrDndInit.getText().replace("\\n", "\n"));
-        entitySystemProperties.setAntagonizeOver(antagonizeOver.getText().replace("\\n", "\n"));
-        entitySystemProperties.setAntagonizeFirstSuccess(antagonizeFirstSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setAntagonizeSecondSuccess(antagonizeSecondSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setAntagonizeAllFailed(antagonizeAllFailed.getText().replace("\\n", "\n"));
-        entitySystemProperties.setAntagonizeDraw(antagonizeDraw.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSanCheck(sanCheck.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSymptom(symptom.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSanCheckFumble(sanCheckFumble.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSanCheckCriticalSuccess(sanCheckCriticalSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSanCheckSuccess(sanCheckSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSanCheckFailure(sanCheckFailure.getText().replace("\\n", "\n"));
-        entitySystemProperties.setEnSuccess(enSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setEnFailed(enFailed.getText().replace("\\n", "\n"));
-        entitySystemProperties.setHiddenDice(hiddenDice.getText().replace("\\n", "\n"));
-        entitySystemProperties.setTeamIsEmpty(teamIsEmpty.getText().replace("\\n", "\n"));
-        entitySystemProperties.setTeamMemberEnIsEmpty(teamMemberEnIsEmpty.getText().replace("\\n", "\n"));
-        entitySystemProperties.setCRITICAL_SUCCESS(criticalSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setEXTREME_SUCCESS(extremeSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setHARD_SUCCESS(headSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSUCCESS(success.getText().replace("\\n", "\n"));
-        entitySystemProperties.setFAILURE(failure.getText().replace("\\n", "\n"));
-        entitySystemProperties.setFUMBLE(fumble.getText().replace("\\n", "\n"));
-        STR_CRITICAL_SUCCESS.setText(criticalSuccess.getText().replace("\\n", "\n"));
-        STR_EXTREME_SUCCESS.setText(extremeSuccess.getText().replace("\\n", "\n"));
-        STR_HARD_SUCCESS.setText(headSuccess.getText().replace("\\n", "\n"));
-        STR_SUCCESS.setText(success.getText().replace("\\n", "\n"));
-        STR_FAILURE.setText(failure.getText().replace("\\n", "\n"));
-        STR_FUMBLE.setText(fumble.getText().replace("\\n", "\n"));
-        new dice.sinanya.db.properties.system.InsertProperties().insertProperties(entitySystemProperties);
-        JOptionPane.showMessageDialog(null, "保存成功");
-    }
-
-    private void saveBan(MouseEvent e) {
-        entityBanProperties.setCloudBan(cloudBan.isSelected());
-        entityBanProperties.setPrometheus(Prometheus.isSelected());
-        entityBanProperties.setHeap(heap.isSelected());
-        entityBanProperties.setMaster(master.getText().replace("\\n", "\n"));
-        entityBanProperties.setBanListInputNotId(banListInputNotId.getText());
-        entityBanProperties.setNotMaster(notMaster.getText().replace("\\n", "\n"));
-        entityBanProperties.setIgnoreBanUser(ignoreBanUser.isSelected());
-        entityBanProperties.setLeaveByBanUser(leaveByBanUser.isSelected());
-        entityBanProperties.setLeaveGroupByBan(leaveGroupByBan.isSelected());
-        entityBanProperties.setBanGroupBecauseBan(banGroupBecauseBan.isSelected());
-        entityBanProperties.setBanGroupBecauseReduce(banGroupBecauseReduce.isSelected());
-        entityBanProperties.setBanUserBecauseReduce(banUserBecauseReduce.isSelected());
-        entityBanProperties.setAddGroup(addGroup.getText().replace("\\n", "\n"));
-        entityBanProperties.setAddFriend(addFriend.getText().replace("\\n", "\n"));
-        entityBanProperties.setRefuseGroupByBan(refuseGroupByBan.getText().replace("\\n", "\n"));
-        entityBanProperties.setRefuseFriendByBan(refuseFriendByBan.getText().replace("\\n", "\n"));
-        entityBanProperties.setClearGroup(Integer.parseInt(clearGroup.getText()));
-        entityBanProperties.setClearGroupByOff(Integer.parseInt(clearGroupByOff.getText()));
-        entityBanProperties.setAlterFrequentness(Integer.parseInt(alterFrequentness.getText()));
-        entityBanProperties.setBanFrequentness(Integer.parseInt(banFrequentness.getText()));
-        entityBanProperties.setPrometheusPort(Integer.parseInt(prometheusPort.getText()));
-        entityBanProperties.setClearGroupByOffInfo(clearGroupByOffInfo.getText().replace("\\n", "\n"));
-        entityBanProperties.setClearGroupInfo(clearGroupInfo.getText().replace("\\n", "\n"));
-        entityBanProperties.setFrequentnessAlterInfo(frequentnessAlterInfo.getText().replace("\\n", "\n"));
-        entityBanProperties.setFrequentnessBanInfo(frequentnessBanInfo.getText().replace("\\n", "\n"));
-        entityBanProperties.setBanGroupAndUserByFre(banGroupAndUserByFre.isSelected());
-        entityBanProperties.setBanUserByFre(banUserByFre.isSelected());
-        new InsertProperties().insertProperties(entityBanProperties);
-        JOptionPane.showMessageDialog(null, "保存成功");
-    }
-
-    private void windowsWindowClosing(WindowEvent e) {
-        windows.setVisible(false);
     }
 
     private void initData() {
@@ -2103,8 +1935,221 @@ public class Setting extends JFrame {
         fumble.setText(entitySystemProperties.getFUMBLE());
     }
 
-    public Setting() {
-        initComponents();
-        initData();
-    }
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private Frame windows;
+    private JTabbedPane tabContain;
+    private JPanel setting;
+    private JPanel panel3;
+    private JButton save;
+    private JPanel infoPanel6;
+    private JLabel qqText6;
+    private JLabel nickText6;
+    private JLabel qqValue6;
+    private JLabel nickValue6;
+    private JScrollPane scrollPane1;
+    private JPanel panel2;
+    private JPanel panel6;
+    private JLabel label11;
+    private JLabel label12;
+    private JLabel label13;
+    private JLabel label14;
+    private JTextField setPropFormat;
+    private JTextField setHelp;
+    private JTextField notFoundSkill;
+    private JTextField setPropSuccess;
+    private JPanel panel13;
+    private JLabel label45;
+    private JLabel label46;
+    private JLabel label47;
+    private JTextField enSuccess;
+    private JTextField enFailed;
+    private JTextField hiddenDice;
+    private JPanel panel5;
+    private JLabel botStartLable;
+    private JLabel botAlreadyStartLable;
+    private JLabel botStopLable;
+    private JLabel botAlreadyStopLable;
+    private JLabel label9;
+    private JLabel label10;
+    private JTextField botStart;
+    private JTextField botAlreadyStart;
+    private JTextField botStop;
+    private JTextField botAlreadyStop;
+    private JTextField botExit;
+    private JTextField botInfo;
+    private JPanel panel12;
+    private JLabel label39;
+    private JLabel label40;
+    private JLabel label41;
+    private JLabel label42;
+    private JLabel label43;
+    private JLabel label44;
+    private JTextField sanCheck;
+    private JTextField symptom;
+    private JTextField sanCheckCriticalSuccess;
+    private JTextField sanCheckFumble;
+    private JTextField sanCheckSuccess;
+    private JTextField sanCheckFailure;
+    private JPanel panel9;
+    private JLabel label24;
+    private JLabel label25;
+    private JLabel label26;
+    private JLabel label27;
+    private JLabel label28;
+    private JLabel label29;
+    private JTextField createLog;
+    private JTextField appendLog;
+    private JTextField alreadyOpen;
+    private JTextField alreadyClose;
+    private JTextField notFoundLog;
+    private JTextField cantEmptyLogName;
+    private JLabel label30;
+    private JLabel label31;
+    private JTextField deleteOpenLog;
+    private JTextField readLock;
+    private JPanel panel8;
+    private JLabel label19;
+    private JLabel label20;
+    private JLabel label21;
+    private JLabel label22;
+    private JLabel label23;
+    private JTextField manyRollsFormat;
+    private JTextField diceTimesTooBig;
+    private JTextField needKpGroup;
+    private JTextField cantInPrivate;
+    private JTextField onlyManager;
+    private JPanel panel10;
+    private JLabel label32;
+    private JLabel label33;
+    private JTextField dndInitIsEmtpy;
+    private JTextField clrDndInit;
+    private JPanel panel14;
+    private JLabel label48;
+    private JLabel label49;
+    private JTextField teamIsEmpty;
+    private JTextField teamMemberEnIsEmpty;
+    private JPanel panel7;
+    private JLabel label15;
+    private JLabel label16;
+    private JLabel label17;
+    private JLabel label18;
+    private JTextField bookCard;
+    private JTextField bookRp;
+    private JTextField bookKp;
+    private JTextField bookMake;
+    private JPanel panel11;
+    private JLabel label34;
+    private JLabel label35;
+    private JLabel label36;
+    private JLabel label37;
+    private JTextField antagonizeOver;
+    private JTextField antagonizeFirstSuccess;
+    private JTextField antagonizeSecondSuccess;
+    private JTextField antagonizeAllFailed;
+    private JLabel label38;
+    private JTextField antagonizeDraw;
+    private JPanel panel1;
+    private JPanel panel4;
+    private JButton save2;
+    private JPanel infoPanel5;
+    private JLabel qqText5;
+    private JLabel nickText5;
+    private JLabel qqValue5;
+    private JLabel nickValue5;
+    private JPanel panel15;
+    private JLabel label1;
+    private JScrollPane scrollPane2;
+    private JTextArea criticalSuccess;
+    private JLabel label2;
+    private JScrollPane scrollPane3;
+    private JTextArea extremeSuccess;
+    private JLabel label3;
+    private JScrollPane scrollPane4;
+    private JTextArea headSuccess;
+    private JLabel label4;
+    private JLabel label50;
+    private JLabel label51;
+    private JScrollPane scrollPane5;
+    private JTextArea success;
+    private JScrollPane scrollPane6;
+    private JTextArea failure;
+    private JScrollPane scrollPane7;
+    private JTextArea fumble;
+    private JPanel clean;
+    private JPanel monitorPanel2;
+    private JLabel promethusPortText2;
+    private JTextField prometheusPort;
+    private JCheckBox Prometheus;
+    private JCheckBox heap;
+    private JPanel setMaster;
+    private JLabel masterText;
+    private JLabel notMasterInfoText;
+    private JTextField master;
+    private JScrollPane scrollPane8;
+    private JTextArea notMaster;
+    private JPanel panel16;
+    private JPanel infoPanel3;
+    private JLabel qqText3;
+    private JLabel nickText3;
+    private JLabel qqValue3;
+    private JLabel nickValue3;
+    private JButton save3;
+    private JPanel panel17;
+    private JLabel label52;
+    private JLabel label53;
+    private JLabel label54;
+    private JLabel label55;
+    private JTextField clearGroupByOff;
+    private JTextField clearGroupByOffInfo;
+    private JTextField clearGroup;
+    private JTextField clearGroupInfo;
+    private JPanel panel18;
+    private JLabel label56;
+    private JLabel label57;
+    private JLabel label58;
+    private JLabel label59;
+    private JTextField alterFrequentness;
+    private JTextField frequentnessAlterInfo;
+    private JTextField banFrequentness;
+    private JTextField frequentnessBanInfo;
+    private JRadioButton banGroupAndUserByFre;
+    private JRadioButton banUserByFre;
+    private JPanel panel19;
+    private JPanel panel20;
+    private JButton save4;
+    private JPanel infoPanel4;
+    private JLabel qqText4;
+    private JLabel nickText4;
+    private JLabel qqValue4;
+    private JLabel nickValue4;
+    private JPanel panel21;
+    private JCheckBox cloudBan;
+    private JCheckBox ignoreBanUser;
+    private JCheckBox leaveByBanUser;
+    private JCheckBox leaveGroupByBan;
+    private JCheckBox banGroupBecauseBan;
+    private JCheckBox banGroupBecauseReduce;
+    private JCheckBox banUserBecauseReduce;
+    private JPanel panel23;
+    private JLabel label60;
+    private JScrollPane scrollPane9;
+    private JTextArea addGroup;
+    private JLabel label61;
+    private JScrollPane scrollPane10;
+    private JTextArea addFriend;
+    private JLabel label62;
+    private JLabel label63;
+    private JLabel label64;
+    private JScrollPane scrollPane12;
+    private JTextArea refuseGroupByBan;
+    private JScrollPane scrollPane13;
+    private JTextArea refuseFriendByBan;
+    private JPanel panel24;
+    private JLabel label65;
+    private JTextField banListInputNotId;
+    private JPanel panel22;
+    private JDialog dialog1;
+    private JLabel label5;
+    private JButton button1;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

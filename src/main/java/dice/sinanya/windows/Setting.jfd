@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.0.5.251" Java: "11.0.3" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.0.5.251" Java: "1.8.0_202-release" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -1896,6 +1896,29 @@ new FormModel {
 			"location": new java.awt.Point( 25, 0 )
 			"size": new java.awt.Dimension( 1150, 560 )
 		} )
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "dialog1"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label5"
+				"text": "保存成功"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 135
+				"y": 40
+				"width": 75
+				"height": 20
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "确定"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "button1MouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 125
+				"y": 85
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 425, 680 )
+			"size": new java.awt.Dimension( 335, 150 )
+		} )
 		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
 			name: "buttonGroup1"
 		}, new FormLayoutConstraints( null ) {
@@ -1903,5 +1926,3 @@ new FormModel {
 		} )
 	}
 }
-
-

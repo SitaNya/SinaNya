@@ -18,6 +18,20 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="MigLayout" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context-support:5.1.9.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.1.9.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:5.1.9.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.1.9.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.1.9.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-core:5.1.9.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.1.9.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.12.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.12.1" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.48" level="project" />
+    <orderEntry type="library" name="Maven: com.github.insubstantial:substance:7.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.insubstantial:laf-widget:7.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.insubstantial:trident:swing:7.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.insubstantial:laf-plugin:7.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.quartz-scheduler:quartz:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: com.mchange:mchange-commons-java:0.2.15" level="project" />
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP-java7:2.4.13" level="project" />
