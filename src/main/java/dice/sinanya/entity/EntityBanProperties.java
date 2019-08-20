@@ -47,6 +47,9 @@ public class EntityBanProperties {
     String clearGroupByOffInfo;
     String clearGroupInfo;
 
+    boolean banGroupAndUserByFre;
+    boolean banUserByFre;
+
     public EntityBanProperties() {
         cloudBan = true;
         Prometheus = false;
@@ -67,6 +70,9 @@ public class EntityBanProperties {
         banGroupBecauseReduce = true;
         banUserBecauseReduce = true;
 
+        banGroupAndUserByFre=true;
+        banUserByFre=false;
+
         clearGroupByOff = 10;
         clearGroup = 30;
 
@@ -85,6 +91,22 @@ public class EntityBanProperties {
 
         clearGroupByOffInfo = "已在群: %s 中超过 %s 日未响应且处于关闭状态，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题";
         clearGroupInfo = "已在群: %s 中超过 %s 日未响应，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题";
+    }
+
+    public boolean isBanGroupAndUserByFre() {
+        return banGroupAndUserByFre;
+    }
+
+    public void setBanGroupAndUserByFre(boolean banGroupAndUserByFre) {
+        this.banGroupAndUserByFre = banGroupAndUserByFre;
+    }
+
+    public boolean isBanUserByFre() {
+        return banUserByFre;
+    }
+
+    public void setBanUserByFre(boolean banUserByFre) {
+        this.banUserByFre = banUserByFre;
     }
 
     public String getClearGroupByOffInfo() {

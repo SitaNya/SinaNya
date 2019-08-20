@@ -66,6 +66,8 @@ public class SelectBanProperties {
                         entityBanProperties.setFrequentnessAlterInfo(set.getString("frequentnessAlterInfo"));
                         entityBanProperties.setFrequentnessBanInfo(set.getString("frequentnessBanInfo"));
                         entityBanProperties.setPrometheusPort(set.getInt("prometheusPort"));
+                        entityBanProperties.setBanGroupAndUserByFre(set.getBoolean("banGroupAndUserByFre"));
+                        entityBanProperties.setBanUserByFre(set.getBoolean("banUserByFre"));
                         i++;
                     }
                 }

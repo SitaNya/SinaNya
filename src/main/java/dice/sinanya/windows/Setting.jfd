@@ -1496,7 +1496,7 @@ new FormModel {
 						"width": 545
 						"height": 130
 						"x": 425
-						"y": 155
+						"y": 220
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 						name: "panel18"
@@ -1578,9 +1578,33 @@ new FormModel {
 							"x": 205
 							"y": 100
 						} )
+						add( new FormComponent( "javax.swing.JRadioButton" ) {
+							name: "radioButton1"
+							"text": "当到达拉黑频度时，退群、拉黑群、拉黑操作人"
+							"$buttonGroup": new FormReference( "buttonGroup1" )
+							auxiliary() {
+								"JavaCodeGenerator.variableName": "banGroupAndUserByFre"
+							}
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"height": 25
+							"x": 10
+							"y": 130
+						} )
+						add( new FormComponent( "javax.swing.JRadioButton" ) {
+							name: "radioButton2"
+							"text": "当到达拉黑频度时，只拉黑操作人"
+							"$buttonGroup": new FormReference( "buttonGroup1" )
+							auxiliary() {
+								"JavaCodeGenerator.variableName": "banUserByFre"
+							}
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"height": 25
+							"x": 10
+							"y": 160
+						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 545
-						"height": 130
+						"height": 200
 						"x": 425
 						"y": 15
 					} )
@@ -1871,6 +1895,11 @@ new FormModel {
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 25, 0 )
 			"size": new java.awt.Dimension( 1150, 560 )
+		} )
+		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
+			name: "buttonGroup1"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 576 )
 		} )
 	}
 }

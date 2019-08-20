@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesBanList.frequentnessForGroupList;
 import static dice.sinanya.system.MessagesTag.*;
+import static dice.sinanya.tools.getinfo.BanList.insertGroupBanList;
 import static dice.sinanya.tools.getinfo.BanList.insertQqBanList;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
@@ -444,9 +445,18 @@ class Flow implements MakeNickToSender {
         if (timeList.size() >= entityBanProperties.getBanFrequentness()) {
             Member member = CQ.getGroupMemberInfo(Long.parseLong(entityTypeMessages.getFromGroup()), Long.parseLong(entityTypeMessages.getFromQq()));
             CQ.sendGroupMsg(Long.parseLong(entityTypeMessages.getFromGroup()), entityBanProperties.getFrequentnessBanInfo());
-            CQ.sendGroupMsg(162279609, "于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中" + member.getNick() + "(" + member.getQqId() + ")频度达到" + timeList.size() + "/10,已退群并拉黑");
-            CQ.setGroupLeave(Long.parseLong(entityTypeMessages.getFromGroup()), false);
-            insertQqBanList(entityTypeMessages.getFromQq(), "大量刷屏");
+            String text="于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中" + member.getNick() + "(" + member.getQqId() + ")频度达到" + timeList.size() + "/10";
+
+            if (entityBanProperties.isBanGroupAndUserByFre()){
+                insertQqBanList(entityTypeMessages.getFromQq(), "在群"+entityTypeMessages.getFromGroup()+"中大量刷屏");
+                insertGroupBanList(entityTypeMessages.getFromGroup(),entityTypeMessages.getFromQq()+"在群中大量刷屏");
+                CQ.setGroupLeave(Long.parseLong(entityTypeMessages.getFromGroup()), false);
+                CQ.sendGroupMsg(162279609, text+"已退群并拉黑群和用户");
+            }
+            if (entityBanProperties.isBanUserByFre()){
+                insertQqBanList(entityTypeMessages.getFromQq(), "在群"+entityTypeMessages.getFromGroup()+"中大量刷屏");
+                CQ.sendGroupMsg(162279609, text+"已拉黑用户");
+            }
         }
         frequentnessForGroupList.put(entityTypeMessages.getFromQq(), timeList);
     }

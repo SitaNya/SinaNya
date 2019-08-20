@@ -20,6 +20,7 @@ import static dice.sinanya.system.MessagesLevel.*;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 
+
 /**
  * @author unknown
  */
@@ -66,11 +67,6 @@ public class Setting extends JFrame {
     private JTextField botAlreadyStop;
     private JTextField botExit;
     private JTextField botInfo;
-    private JPanel infoPanel7;
-    private JLabel qqText7;
-    private JLabel nickText7;
-    private JLabel qqValue7;
-    private JLabel nickValue7;
     private JPanel panel12;
     private JLabel label39;
     private JLabel label40;
@@ -206,6 +202,8 @@ public class Setting extends JFrame {
     private JTextField frequentnessAlterInfo;
     private JTextField banFrequentness;
     private JTextField frequentnessBanInfo;
+    private JRadioButton banGroupAndUserByFre;
+    private JRadioButton banUserByFre;
     private JPanel panel19;
     private JPanel panel20;
     private JButton save4;
@@ -240,106 +238,8 @@ public class Setting extends JFrame {
     private JLabel label65;
     private JTextField banListInputNotId;
     private JPanel panel22;
-    public Setting() {
-        initComponents();
-        initData();
-    }
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    private void saveSystem(MouseEvent e) {
-        entitySystemProperties.setBotStart(botStart.getText());
-        entitySystemProperties.setBotAlreadyStart(botAlreadyStart.getText());
-        entitySystemProperties.setBotStop(botStop.getText());
-        entitySystemProperties.setBotAlreadyStop(botAlreadyStop.getText());
-        entitySystemProperties.setBotExit(botExit.getText());
-        entitySystemProperties.setBotInfo(botInfo.getText());
-        entitySystemProperties.setBookCard(bookCard.getText());
-        entitySystemProperties.setBookRp(bookRp.getText());
-        entitySystemProperties.setBookKp(bookKp.getText());
-        entitySystemProperties.setBookMake(bookMake.getText());
-        entitySystemProperties.setSetPropFormat(setPropFormat.getText());
-        entitySystemProperties.setSetHelp(setHelp.getText());
-        entitySystemProperties.setNotFoundSkill(notFoundSkill.getText());
-        entitySystemProperties.setSetPropSuccess(setPropSuccess.getText());
-        entitySystemProperties.setManyRollsFormat(manyRollsFormat.getText());
-        entitySystemProperties.setDiceTimesTooBig(diceTimesTooBig.getText());
-        entitySystemProperties.setNeedKpGroup(needKpGroup.getText());
-        entitySystemProperties.setCantInPrivate(cantInPrivate.getText());
-        entitySystemProperties.setOnlyManager(onlyManager.getText());
-        entitySystemProperties.setAlreadyOpen(alreadyOpen.getText());
-        entitySystemProperties.setAlreadyClose(alreadyClose.getText());
-        entitySystemProperties.setNotFoundLog(notFoundLog.getText());
-        entitySystemProperties.setReadLock(readLock.getText());
-        entitySystemProperties.setDeleteOpenLog(deleteOpenLog.getText());
-        entitySystemProperties.setAppendLog(appendLog.getText());
-        entitySystemProperties.setCreateLog(createLog.getText());
-        entitySystemProperties.setCantEmptyLogName(cantEmptyLogName.getText());
-        entitySystemProperties.setDndInitIsEmtpy(dndInitIsEmtpy.getText());
-        entitySystemProperties.setClrDndInit(clrDndInit.getText());
-        entitySystemProperties.setAntagonizeOver(antagonizeOver.getText());
-        entitySystemProperties.setAntagonizeFirstSuccess(antagonizeFirstSuccess.getText());
-        entitySystemProperties.setAntagonizeSecondSuccess(antagonizeSecondSuccess.getText());
-        entitySystemProperties.setAntagonizeAllFailed(antagonizeAllFailed.getText());
-        entitySystemProperties.setAntagonizeDraw(antagonizeDraw.getText());
-        entitySystemProperties.setSanCheck(sanCheck.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSymptom(symptom.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSanCheckFumble(sanCheckFumble.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSanCheckCriticalSuccess(sanCheckCriticalSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSanCheckSuccess(sanCheckSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSanCheckFailure(sanCheckFailure.getText().replace("\\n", "\n"));
-        entitySystemProperties.setEnSuccess(enSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setEnFailed(enFailed.getText().replace("\\n", "\n"));
-        entitySystemProperties.setHiddenDice(hiddenDice.getText().replace("\\n", "\n"));
-        entitySystemProperties.setTeamIsEmpty(teamIsEmpty.getText().replace("\\n", "\n"));
-        entitySystemProperties.setTeamMemberEnIsEmpty(teamMemberEnIsEmpty.getText().replace("\\n", "\n"));
-        entitySystemProperties.setCRITICAL_SUCCESS(criticalSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setEXTREME_SUCCESS(extremeSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setHARD_SUCCESS(headSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSUCCESS(success.getText().replace("\\n", "\n"));
-        entitySystemProperties.setFAILURE(failure.getText().replace("\\n", "\n"));
-        entitySystemProperties.setFUMBLE(fumble.getText().replace("\\n", "\n"));
-        STR_CRITICAL_SUCCESS.setText(criticalSuccess.getText().replace("\\n", "\n"));
-        STR_EXTREME_SUCCESS.setText(extremeSuccess.getText().replace("\\n", "\n"));
-        STR_HARD_SUCCESS.setText(headSuccess.getText().replace("\\n", "\n"));
-        STR_SUCCESS.setText(success.getText().replace("\\n", "\n"));
-        STR_FAILURE.setText(failure.getText().replace("\\n", "\n"));
-        STR_FUMBLE.setText(fumble.getText().replace("\\n", "\n"));
-        new dice.sinanya.db.properties.system.InsertProperties().insertProperties(entitySystemProperties);
-        JOptionPane.showMessageDialog(null, "保存成功");
-    }
-
-    private void saveBan(MouseEvent e) {
-        entityBanProperties.setCloudBan(cloudBan.isSelected());
-        entityBanProperties.setPrometheus(Prometheus.isSelected());
-        entityBanProperties.setHeap(heap.isSelected());
-        entityBanProperties.setMaster(master.getText().replace("\\n", "\n"));
-        entityBanProperties.setBanListInputNotId(banListInputNotId.getText());
-        entityBanProperties.setNotMaster(notMaster.getText().replace("\\n", "\n"));
-        entityBanProperties.setIgnoreBanUser(ignoreBanUser.isSelected());
-        entityBanProperties.setLeaveByBanUser(leaveByBanUser.isSelected());
-        entityBanProperties.setLeaveGroupByBan(leaveGroupByBan.isSelected());
-        entityBanProperties.setBanGroupBecauseBan(banGroupBecauseBan.isSelected());
-        entityBanProperties.setBanGroupBecauseReduce(banGroupBecauseReduce.isSelected());
-        entityBanProperties.setBanUserBecauseReduce(banUserBecauseReduce.isSelected());
-        entityBanProperties.setAddGroup(addGroup.getText().replace("\\n", "\n"));
-        entityBanProperties.setAddFriend(addFriend.getText().replace("\\n", "\n"));
-        entityBanProperties.setRefuseGroupByBan(refuseGroupByBan.getText().replace("\\n", "\n"));
-        entityBanProperties.setRefuseFriendByBan(refuseFriendByBan.getText().replace("\\n", "\n"));
-        entityBanProperties.setClearGroup(Integer.parseInt(clearGroup.getText()));
-        entityBanProperties.setClearGroupByOff(Integer.parseInt(clearGroupByOff.getText()));
-        entityBanProperties.setAlterFrequentness(Integer.parseInt(alterFrequentness.getText()));
-        entityBanProperties.setBanFrequentness(Integer.parseInt(banFrequentness.getText()));
-        entityBanProperties.setPrometheusPort(Integer.parseInt(prometheusPort.getText()));
-        entityBanProperties.setClearGroupByOffInfo(clearGroupByOffInfo.getText().replace("\\n", "\n"));
-        entityBanProperties.setClearGroupInfo(clearGroupInfo.getText().replace("\\n", "\n"));
-        entityBanProperties.setFrequentnessAlterInfo(frequentnessAlterInfo.getText().replace("\\n", "\n"));
-        entityBanProperties.setFrequentnessBanInfo(frequentnessBanInfo.getText().replace("\\n", "\n"));
-        new InsertProperties().insertProperties(entityBanProperties);
-        JOptionPane.showMessageDialog(null, "保存成功");
-    }
-
-    private void windowsWindowClosing(WindowEvent e) {
-        windows.setVisible(false);
-    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -384,11 +284,6 @@ public class Setting extends JFrame {
         botAlreadyStop = new JTextField();
         botExit = new JTextField();
         botInfo = new JTextField();
-        infoPanel7 = new JPanel();
-        qqText7 = new JLabel();
-        nickText7 = new JLabel();
-        qqValue7 = new JLabel();
-        nickValue7 = new JLabel();
         panel12 = new JPanel();
         label39 = new JLabel();
         label40 = new JLabel();
@@ -524,6 +419,8 @@ public class Setting extends JFrame {
         frequentnessAlterInfo = new JTextField();
         banFrequentness = new JTextField();
         frequentnessBanInfo = new JTextField();
+        banGroupAndUserByFre = new JRadioButton();
+        banUserByFre = new JRadioButton();
         panel19 = new JPanel();
         panel20 = new JPanel();
         save4 = new JButton();
@@ -623,7 +520,7 @@ public class Setting extends JFrame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for (int i = 0; i < infoPanel6.getComponentCount(); i++) {
+                                for(int i = 0; i < infoPanel6.getComponentCount(); i++) {
                                     Rectangle bounds = infoPanel6.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -641,7 +538,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for (int i = 0; i < panel3.getComponentCount(); i++) {
+                            for(int i = 0; i < panel3.getComponentCount(); i++) {
                                 Rectangle bounds = panel3.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -700,7 +597,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for (int i = 0; i < panel6.getComponentCount(); i++) {
+                                    for(int i = 0; i < panel6.getComponentCount(); i++) {
                                         Rectangle bounds = panel6.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -745,7 +642,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for (int i = 0; i < panel13.getComponentCount(); i++) {
+                                    for(int i = 0; i < panel13.getComponentCount(); i++) {
                                         Rectangle bounds = panel13.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -808,53 +705,10 @@ public class Setting extends JFrame {
                                 panel5.add(botInfo);
                                 botInfo.setBounds(105, 160, 340, 25);
 
-                                //======== infoPanel7 ========
-                                {
-                                    infoPanel7.setBorder(new BevelBorder(BevelBorder.LOWERED));
-                                    infoPanel7.setLayout(null);
-
-                                    //---- qqText7 ----
-                                    qqText7.setText("\u5f53\u524d\u9ab0\u5a18QQ\u53f7:");
-                                    infoPanel7.add(qqText7);
-                                    qqText7.setBounds(10, 10, 90, 25);
-
-                                    //---- nickText7 ----
-                                    nickText7.setText("\u5f53\u524d\u9ab0\u5a18\u6635\u79f0:");
-                                    infoPanel7.add(nickText7);
-                                    nickText7.setBounds(10, 70, nickText7.getPreferredSize().width, 25);
-
-                                    //---- qqValue7 ----
-                                    qqValue7.setText("text");
-                                    infoPanel7.add(qqValue7);
-                                    qqValue7.setBounds(10, 40, qqValue7.getPreferredSize().width, 25);
-
-                                    //---- nickValue7 ----
-                                    nickValue7.setText("text");
-                                    infoPanel7.add(nickValue7);
-                                    nickValue7.setBounds(10, 100, nickValue7.getPreferredSize().width, 25);
-
-                                    {
-                                        // compute preferred size
-                                        Dimension preferredSize = new Dimension();
-                                        for (int i = 0; i < infoPanel7.getComponentCount(); i++) {
-                                            Rectangle bounds = infoPanel7.getComponent(i).getBounds();
-                                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                                        }
-                                        Insets insets = infoPanel7.getInsets();
-                                        preferredSize.width += insets.right;
-                                        preferredSize.height += insets.bottom;
-                                        infoPanel7.setMinimumSize(preferredSize);
-                                        infoPanel7.setPreferredSize(preferredSize);
-                                    }
-                                }
-                                panel5.add(infoPanel7);
-                                infoPanel7.setBounds(0, 190, 145, 135);
-
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for (int i = 0; i < panel5.getComponentCount(); i++) {
+                                    for(int i = 0; i < panel5.getComponentCount(); i++) {
                                         Rectangle bounds = panel5.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -985,7 +839,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for (int i = 0; i < panel9.getComponentCount(); i++) {
+                                    for(int i = 0; i < panel9.getComponentCount(); i++) {
                                         Rectangle bounds = panel9.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1044,7 +898,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for (int i = 0; i < panel8.getComponentCount(); i++) {
+                                    for(int i = 0; i < panel8.getComponentCount(); i++) {
                                         Rectangle bounds = panel8.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1081,7 +935,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for (int i = 0; i < panel10.getComponentCount(); i++) {
+                                    for(int i = 0; i < panel10.getComponentCount(); i++) {
                                         Rectangle bounds = panel10.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1119,7 +973,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for (int i = 0; i < panel14.getComponentCount(); i++) {
+                                    for(int i = 0; i < panel14.getComponentCount(); i++) {
                                         Rectangle bounds = panel14.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1170,7 +1024,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for (int i = 0; i < panel7.getComponentCount(); i++) {
+                                    for(int i = 0; i < panel7.getComponentCount(); i++) {
                                         Rectangle bounds = panel7.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1228,7 +1082,7 @@ public class Setting extends JFrame {
                                 {
                                     // compute preferred size
                                     Dimension preferredSize = new Dimension();
-                                    for (int i = 0; i < panel11.getComponentCount(); i++) {
+                                    for(int i = 0; i < panel11.getComponentCount(); i++) {
                                         Rectangle bounds = panel11.getComponent(i).getBounds();
                                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1246,7 +1100,7 @@ public class Setting extends JFrame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for (int i = 0; i < panel2.getComponentCount(); i++) {
+                                for(int i = 0; i < panel2.getComponentCount(); i++) {
                                     Rectangle bounds = panel2.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1266,7 +1120,7 @@ public class Setting extends JFrame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for (int i = 0; i < setting.getComponentCount(); i++) {
+                        for(int i = 0; i < setting.getComponentCount(); i++) {
                             Rectangle bounds = setting.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1328,7 +1182,7 @@ public class Setting extends JFrame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for (int i = 0; i < infoPanel5.getComponentCount(); i++) {
+                                for(int i = 0; i < infoPanel5.getComponentCount(); i++) {
                                     Rectangle bounds = infoPanel5.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1346,7 +1200,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for (int i = 0; i < panel4.getComponentCount(); i++) {
+                            for(int i = 0; i < panel4.getComponentCount(); i++) {
                                 Rectangle bounds = panel4.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1441,7 +1295,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for (int i = 0; i < panel15.getComponentCount(); i++) {
+                            for(int i = 0; i < panel15.getComponentCount(); i++) {
                                 Rectangle bounds = panel15.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1459,7 +1313,7 @@ public class Setting extends JFrame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for (int i = 0; i < panel1.getComponentCount(); i++) {
+                        for(int i = 0; i < panel1.getComponentCount(); i++) {
                             Rectangle bounds = panel1.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1503,7 +1357,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for (int i = 0; i < monitorPanel2.getComponentCount(); i++) {
+                            for(int i = 0; i < monitorPanel2.getComponentCount(); i++) {
                                 Rectangle bounds = monitorPanel2.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1545,7 +1399,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for (int i = 0; i < setMaster.getComponentCount(); i++) {
+                            for(int i = 0; i < setMaster.getComponentCount(); i++) {
                                 Rectangle bounds = setMaster.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1593,7 +1447,7 @@ public class Setting extends JFrame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for (int i = 0; i < infoPanel3.getComponentCount(); i++) {
+                                for(int i = 0; i < infoPanel3.getComponentCount(); i++) {
                                     Rectangle bounds = infoPanel3.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1622,7 +1476,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for (int i = 0; i < panel16.getComponentCount(); i++) {
+                            for(int i = 0; i < panel16.getComponentCount(); i++) {
                                 Rectangle bounds = panel16.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1674,7 +1528,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for (int i = 0; i < panel17.getComponentCount(); i++) {
+                            for(int i = 0; i < panel17.getComponentCount(); i++) {
                                 Rectangle bounds = panel17.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1687,7 +1541,7 @@ public class Setting extends JFrame {
                         }
                     }
                     clean.add(panel17);
-                    panel17.setBounds(425, 155, 545, 130);
+                    panel17.setBounds(425, 220, 545, 130);
 
                     //======== panel18 ========
                     {
@@ -1696,7 +1550,7 @@ public class Setting extends JFrame {
                         panel18.setLayout(null);
 
                         //---- label56 ----
-                        label56.setText("\u8b66\u544a\u5237\u5c4f\u9891\u5ea6(N\u6761/\u6bcf\u5206\u949f)");
+                        label56.setText("\u8b66\u544a\u5237\u5c4f\u9891\u5ea6(N\u6761/\u6bcf10\u79d2)");
                         panel18.add(label56);
                         label56.setBounds(10, 10, label56.getPreferredSize().width, 25);
 
@@ -1723,10 +1577,20 @@ public class Setting extends JFrame {
                         panel18.add(frequentnessBanInfo);
                         frequentnessBanInfo.setBounds(205, 100, 320, 25);
 
+                        //---- banGroupAndUserByFre ----
+                        banGroupAndUserByFre.setText("\u5f53\u5230\u8fbe\u62c9\u9ed1\u9891\u5ea6\u65f6\uff0c\u9000\u7fa4\u3001\u62c9\u9ed1\u7fa4\u3001\u62c9\u9ed1\u64cd\u4f5c\u4eba");
+                        panel18.add(banGroupAndUserByFre);
+                        banGroupAndUserByFre.setBounds(10, 130, banGroupAndUserByFre.getPreferredSize().width, 25);
+
+                        //---- banUserByFre ----
+                        banUserByFre.setText("\u5f53\u5230\u8fbe\u62c9\u9ed1\u9891\u5ea6\u65f6\uff0c\u53ea\u62c9\u9ed1\u64cd\u4f5c\u4eba");
+                        panel18.add(banUserByFre);
+                        banUserByFre.setBounds(10, 160, banUserByFre.getPreferredSize().width, 25);
+
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for (int i = 0; i < panel18.getComponentCount(); i++) {
+                            for(int i = 0; i < panel18.getComponentCount(); i++) {
                                 Rectangle bounds = panel18.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1739,12 +1603,12 @@ public class Setting extends JFrame {
                         }
                     }
                     clean.add(panel18);
-                    panel18.setBounds(425, 15, 545, 130);
+                    panel18.setBounds(425, 15, 545, 200);
 
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for (int i = 0; i < clean.getComponentCount(); i++) {
+                        for(int i = 0; i < clean.getComponentCount(); i++) {
                             Rectangle bounds = clean.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1806,7 +1670,7 @@ public class Setting extends JFrame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for (int i = 0; i < infoPanel4.getComponentCount(); i++) {
+                                for(int i = 0; i < infoPanel4.getComponentCount(); i++) {
                                     Rectangle bounds = infoPanel4.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1824,7 +1688,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for (int i = 0; i < panel20.getComponentCount(); i++) {
+                            for(int i = 0; i < panel20.getComponentCount(); i++) {
                                 Rectangle bounds = panel20.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1882,7 +1746,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for (int i = 0; i < panel21.getComponentCount(); i++) {
+                            for(int i = 0; i < panel21.getComponentCount(); i++) {
                                 Rectangle bounds = panel21.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1955,7 +1819,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for (int i = 0; i < panel23.getComponentCount(); i++) {
+                            for(int i = 0; i < panel23.getComponentCount(); i++) {
                                 Rectangle bounds = panel23.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1985,7 +1849,7 @@ public class Setting extends JFrame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for (int i = 0; i < panel24.getComponentCount(); i++) {
+                            for(int i = 0; i < panel24.getComponentCount(); i++) {
                                 Rectangle bounds = panel24.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2003,7 +1867,7 @@ public class Setting extends JFrame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for (int i = 0; i < panel19.getComponentCount(); i++) {
+                        for(int i = 0; i < panel19.getComponentCount(); i++) {
                             Rectangle bounds = panel19.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2026,7 +1890,7 @@ public class Setting extends JFrame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for (int i = 0; i < panel22.getComponentCount(); i++) {
+                    for(int i = 0; i < panel22.getComponentCount(); i++) {
                         Rectangle bounds = panel22.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2041,30 +1905,111 @@ public class Setting extends JFrame {
             windows.add(panel22, BorderLayout.NORTH);
             windows.pack();
             windows.setLocationRelativeTo(windows.getOwner());
-
-            try {
-                //设置外观
-                UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.BusinessBlackSteelSkin");
-                JFrame.setDefaultLookAndFeelDecorated(true);
-//                //设置主题
-//                SubstanceLookAndFeel.setCurrentTheme(new SubstanceEbonyTheme());
-//                //设置按钮外观
-//                SubstanceLookAndFeel.setCurrentButtonShaper(new ClassicButtonShaper());
-//                //设置水印
-//                SubstanceLookAndFeel.setCurrentWatermark(new SubstanceBinaryWatermark());
-//                //设置边框
-//                SubstanceLookAndFeel.setCurrentBorderPainter(new StandardBorderPainter());
-//                //设置渐变渲染
-//                SubstanceLookAndFeel.setCurrentGradientPainter(new StandardGradientPainter());
-//                //设置标题
-//                SubstanceLookAndFeel.setCurrentTitlePainter(new FlatTitlePainter());
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-
-            windows.setVisible(true);
         }
+
+        //---- buttonGroup1 ----
+        ButtonGroup buttonGroup1 = new ButtonGroup();
+        buttonGroup1.add(banGroupAndUserByFre);
+        buttonGroup1.add(banUserByFre);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
+
+    private void saveSystem(MouseEvent e) {
+        entitySystemProperties.setBotStart(botStart.getText().replace("\\n", "\n"));
+        entitySystemProperties.setBotAlreadyStart(botAlreadyStart.getText().replace("\\n", "\n"));
+        entitySystemProperties.setBotStop(botStop.getText().replace("\\n", "\n"));
+        entitySystemProperties.setBotAlreadyStop(botAlreadyStop.getText().replace("\\n", "\n"));
+        entitySystemProperties.setBotExit(botExit.getText().replace("\\n", "\n"));
+        entitySystemProperties.setBotInfo(botInfo.getText().replace("\\n", "\n"));
+        entitySystemProperties.setBookCard(bookCard.getText().replace("\\n", "\n"));
+        entitySystemProperties.setBookRp(bookRp.getText().replace("\\n", "\n"));
+        entitySystemProperties.setBookKp(bookKp.getText().replace("\\n", "\n"));
+        entitySystemProperties.setBookMake(bookMake.getText().replace("\\n", "\n"));
+        entitySystemProperties.setSetPropFormat(setPropFormat.getText().replace("\\n", "\n"));
+        entitySystemProperties.setSetHelp(setHelp.getText().replace("\\n", "\n"));
+        entitySystemProperties.setNotFoundSkill(notFoundSkill.getText().replace("\\n", "\n"));
+        entitySystemProperties.setSetPropSuccess(setPropSuccess.getText().replace("\\n", "\n"));
+        entitySystemProperties.setManyRollsFormat(manyRollsFormat.getText().replace("\\n", "\n"));
+        entitySystemProperties.setDiceTimesTooBig(diceTimesTooBig.getText().replace("\\n", "\n"));
+        entitySystemProperties.setNeedKpGroup(needKpGroup.getText().replace("\\n", "\n"));
+        entitySystemProperties.setCantInPrivate(cantInPrivate.getText().replace("\\n", "\n"));
+        entitySystemProperties.setOnlyManager(onlyManager.getText().replace("\\n", "\n"));
+        entitySystemProperties.setAlreadyOpen(alreadyOpen.getText().replace("\\n", "\n"));
+        entitySystemProperties.setAlreadyClose(alreadyClose.getText().replace("\\n", "\n"));
+        entitySystemProperties.setNotFoundLog(notFoundLog.getText().replace("\\n", "\n"));
+        entitySystemProperties.setReadLock(readLock.getText().replace("\\n", "\n"));
+        entitySystemProperties.setDeleteOpenLog(deleteOpenLog.getText().replace("\\n", "\n"));
+        entitySystemProperties.setAppendLog(appendLog.getText().replace("\\n", "\n"));
+        entitySystemProperties.setCreateLog(createLog.getText().replace("\\n", "\n"));
+        entitySystemProperties.setCantEmptyLogName(cantEmptyLogName.getText().replace("\\n", "\n"));
+        entitySystemProperties.setDndInitIsEmtpy(dndInitIsEmtpy.getText().replace("\\n", "\n"));
+        entitySystemProperties.setClrDndInit(clrDndInit.getText().replace("\\n", "\n"));
+        entitySystemProperties.setAntagonizeOver(antagonizeOver.getText().replace("\\n", "\n"));
+        entitySystemProperties.setAntagonizeFirstSuccess(antagonizeFirstSuccess.getText().replace("\\n", "\n"));
+        entitySystemProperties.setAntagonizeSecondSuccess(antagonizeSecondSuccess.getText().replace("\\n", "\n"));
+        entitySystemProperties.setAntagonizeAllFailed(antagonizeAllFailed.getText().replace("\\n", "\n"));
+        entitySystemProperties.setAntagonizeDraw(antagonizeDraw.getText().replace("\\n", "\n"));
+        entitySystemProperties.setSanCheck(sanCheck.getText().replace("\\n", "\n"));
+        entitySystemProperties.setSymptom(symptom.getText().replace("\\n", "\n"));
+        entitySystemProperties.setSanCheckFumble(sanCheckFumble.getText().replace("\\n", "\n"));
+        entitySystemProperties.setSanCheckCriticalSuccess(sanCheckCriticalSuccess.getText().replace("\\n", "\n"));
+        entitySystemProperties.setSanCheckSuccess(sanCheckSuccess.getText().replace("\\n", "\n"));
+        entitySystemProperties.setSanCheckFailure(sanCheckFailure.getText().replace("\\n", "\n"));
+        entitySystemProperties.setEnSuccess(enSuccess.getText().replace("\\n", "\n"));
+        entitySystemProperties.setEnFailed(enFailed.getText().replace("\\n", "\n"));
+        entitySystemProperties.setHiddenDice(hiddenDice.getText().replace("\\n", "\n"));
+        entitySystemProperties.setTeamIsEmpty(teamIsEmpty.getText().replace("\\n", "\n"));
+        entitySystemProperties.setTeamMemberEnIsEmpty(teamMemberEnIsEmpty.getText().replace("\\n", "\n"));
+        entitySystemProperties.setCRITICAL_SUCCESS(criticalSuccess.getText().replace("\\n", "\n"));
+        entitySystemProperties.setEXTREME_SUCCESS(extremeSuccess.getText().replace("\\n", "\n"));
+        entitySystemProperties.setHARD_SUCCESS(headSuccess.getText().replace("\\n", "\n"));
+        entitySystemProperties.setSUCCESS(success.getText().replace("\\n", "\n"));
+        entitySystemProperties.setFAILURE(failure.getText().replace("\\n", "\n"));
+        entitySystemProperties.setFUMBLE(fumble.getText().replace("\\n", "\n"));
+        STR_CRITICAL_SUCCESS.setText(criticalSuccess.getText().replace("\\n", "\n"));
+        STR_EXTREME_SUCCESS.setText(extremeSuccess.getText().replace("\\n", "\n"));
+        STR_HARD_SUCCESS.setText(headSuccess.getText().replace("\\n", "\n"));
+        STR_SUCCESS.setText(success.getText().replace("\\n", "\n"));
+        STR_FAILURE.setText(failure.getText().replace("\\n", "\n"));
+        STR_FUMBLE.setText(fumble.getText().replace("\\n", "\n"));
+        new dice.sinanya.db.properties.system.InsertProperties().insertProperties(entitySystemProperties);
+        JOptionPane.showMessageDialog(null, "保存成功");
+    }
+
+    private void saveBan(MouseEvent e) {
+        entityBanProperties.setCloudBan(cloudBan.isSelected());
+        entityBanProperties.setPrometheus(Prometheus.isSelected());
+        entityBanProperties.setHeap(heap.isSelected());
+        entityBanProperties.setMaster(master.getText().replace("\\n", "\n"));
+        entityBanProperties.setBanListInputNotId(banListInputNotId.getText());
+        entityBanProperties.setNotMaster(notMaster.getText().replace("\\n", "\n"));
+        entityBanProperties.setIgnoreBanUser(ignoreBanUser.isSelected());
+        entityBanProperties.setLeaveByBanUser(leaveByBanUser.isSelected());
+        entityBanProperties.setLeaveGroupByBan(leaveGroupByBan.isSelected());
+        entityBanProperties.setBanGroupBecauseBan(banGroupBecauseBan.isSelected());
+        entityBanProperties.setBanGroupBecauseReduce(banGroupBecauseReduce.isSelected());
+        entityBanProperties.setBanUserBecauseReduce(banUserBecauseReduce.isSelected());
+        entityBanProperties.setAddGroup(addGroup.getText().replace("\\n", "\n"));
+        entityBanProperties.setAddFriend(addFriend.getText().replace("\\n", "\n"));
+        entityBanProperties.setRefuseGroupByBan(refuseGroupByBan.getText().replace("\\n", "\n"));
+        entityBanProperties.setRefuseFriendByBan(refuseFriendByBan.getText().replace("\\n", "\n"));
+        entityBanProperties.setClearGroup(Integer.parseInt(clearGroup.getText()));
+        entityBanProperties.setClearGroupByOff(Integer.parseInt(clearGroupByOff.getText()));
+        entityBanProperties.setAlterFrequentness(Integer.parseInt(alterFrequentness.getText()));
+        entityBanProperties.setBanFrequentness(Integer.parseInt(banFrequentness.getText()));
+        entityBanProperties.setPrometheusPort(Integer.parseInt(prometheusPort.getText()));
+        entityBanProperties.setClearGroupByOffInfo(clearGroupByOffInfo.getText().replace("\\n", "\n"));
+        entityBanProperties.setClearGroupInfo(clearGroupInfo.getText().replace("\\n", "\n"));
+        entityBanProperties.setFrequentnessAlterInfo(frequentnessAlterInfo.getText().replace("\\n", "\n"));
+        entityBanProperties.setFrequentnessBanInfo(frequentnessBanInfo.getText().replace("\\n", "\n"));
+        entityBanProperties.setBanGroupAndUserByFre(banGroupAndUserByFre.isSelected());
+        entityBanProperties.setBanUserByFre(banUserByFre.isSelected());
+        new InsertProperties().insertProperties(entityBanProperties);
+        JOptionPane.showMessageDialog(null, "保存成功");
+    }
+
+    private void windowsWindowClosing(WindowEvent e) {
+        windows.setVisible(false);
     }
 
     private void initData() {
@@ -2157,5 +2102,9 @@ public class Setting extends JFrame {
         failure.setText(entitySystemProperties.getFAILURE());
         fumble.setText(entitySystemProperties.getFUMBLE());
     }
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+    public Setting() {
+        initComponents();
+        initData();
+    }
 }

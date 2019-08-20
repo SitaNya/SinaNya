@@ -53,7 +53,7 @@ public class InsertProperties {
                     "clearGroupInfo," +
                     "frequentnessAlterInfo," +
                     "frequentnessBanInfo," +
-                    "prometheusPort)  VALUES (?," +
+                    "prometheusPort,banGroupAndUserByFre,banUserByFre)  VALUES (?," +
                     "?," +
                     "?," +
                     "?," +
@@ -73,7 +73,7 @@ public class InsertProperties {
                     "?," +
                     "?," +
                     "?," +
-                    "?,?,?,?,?,?,?,?,?,?);";
+                    "?,?,?,?,?,?,?,?,?,?,?,?);";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setBoolean(1, entityBanProperties.isCloudBan());
                 ps.setBoolean(2, entityBanProperties.isPrometheus());
@@ -105,6 +105,8 @@ public class InsertProperties {
                 ps.setString(28, entityBanProperties.getFrequentnessAlterInfo());
                 ps.setString(29, entityBanProperties.getFrequentnessBanInfo());
                 ps.setInt(30, entityBanProperties.getPrometheusPort());
+                ps.setBoolean(31,entityBanProperties.isBanGroupAndUserByFre());
+                ps.setBoolean(32,entityBanProperties.isBanUserByFre());
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
