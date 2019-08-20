@@ -2102,6 +2102,8 @@ public class Setting extends JFrame {
         failure.setText(entitySystemProperties.getFAILURE());
         fumble.setText(entitySystemProperties.getFUMBLE());
         updateText.setText(MessagesSystem.UPDATE.toString());
+        banGroupAndUserByFre.setSelected(entityBanProperties.isBanGroupAndUserByFre());
+        banUserByFre.setSelected(entityBanProperties.isBanUserByFre());
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
