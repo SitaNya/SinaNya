@@ -57,7 +57,7 @@ new FormModel {
 					"width": 200
 					"height": 75
 					"x": 10
-					"y": 10
+					"y": 30
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 					name: "panel1"
@@ -211,8 +211,15 @@ new FormModel {
 					}
 					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "button1MouseClicked", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 65
-					"y": 105
+					"x": 70
+					"y": 115
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label15"
+					"text": "升级过程中服务不会停止"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 35
+					"y": 5
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"

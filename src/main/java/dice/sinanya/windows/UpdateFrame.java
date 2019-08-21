@@ -90,6 +90,7 @@ public class UpdateFrame extends JFrame {
         label11 = new JLabel();
         label12 = new JLabel();
         updateButton = new JButton();
+        label15 = new JLabel();
 
         //======== this ========
         setTitle("\u5347\u7ea7\u7a97\u53e3");
@@ -148,7 +149,7 @@ public class UpdateFrame extends JFrame {
                 }
             }
             panel4.add(panel2);
-            panel2.setBounds(10, 10, 200, 75);
+            panel2.setBounds(10, 30, 200, 75);
 
             //======== panel1 ========
             {
@@ -272,7 +273,12 @@ public class UpdateFrame extends JFrame {
                 }
             });
             panel4.add(updateButton);
-            updateButton.setBounds(new Rectangle(new Point(65, 105), updateButton.getPreferredSize()));
+            updateButton.setBounds(new Rectangle(new Point(70, 115), updateButton.getPreferredSize()));
+
+            //---- label15 ----
+            label15.setText("\u5347\u7ea7\u8fc7\u7a0b\u4e2d\u670d\u52a1\u4e0d\u4f1a\u505c\u6b62");
+            panel4.add(label15);
+            label15.setBounds(new Rectangle(new Point(35, 5), label15.getPreferredSize()));
 
             {
                 // compute preferred size
@@ -317,5 +323,6 @@ public class UpdateFrame extends JFrame {
     private JLabel label11;
     private JLabel label12;
     private JButton updateButton;
+    private JLabel label15;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
