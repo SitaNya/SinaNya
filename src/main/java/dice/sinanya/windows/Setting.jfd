@@ -2015,7 +2015,6 @@ new FormModel {
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 			name: "dialog1"
 			"$locationPolicy": 1
-			"modal": true
 			"$sizePolicy": 1
 			"alwaysOnTop": true
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
