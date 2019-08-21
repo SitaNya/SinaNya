@@ -232,7 +232,6 @@ public class UpdateFrame extends JFrame {
                 //---- downJsonProgress ----
                 downJsonProgress.setBackground(new Color(204, 204, 204));
                 downJsonProgress.setStringPainted(true);
-                downJsonProgress.setForeground(new Color(51, 255, 0));
                 panel3.add(downJsonProgress);
                 downJsonProgress.setBounds(10, 105, 515, 19);
 

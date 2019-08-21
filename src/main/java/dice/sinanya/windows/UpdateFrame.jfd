@@ -174,7 +174,6 @@ new FormModel {
 						name: "progressBar2"
 						"background": new java.awt.Color( 204, 204, 204, 255 )
 						"stringPainted": true
-						"foreground": new java.awt.Color( 51, 255, 0, 255 )
 						auxiliary() {
 							"JavaCodeGenerator.variableName": "downJsonProgress"
 						}
@@ -224,4 +223,3 @@ new FormModel {
 		} )
 	}
 }
-
