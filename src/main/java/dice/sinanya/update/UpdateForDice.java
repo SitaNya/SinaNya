@@ -67,10 +67,10 @@ public class UpdateForDice {
                 cachedThreadPool.shutdown();
             } catch (IOException e) {
                 CQ.logError("下载文件异常", StringUtils.join(e.getStackTrace(), "\n"));
-                JOptionPane.showMessageDialog(null, "更新失败");
+                JOptionPane.showMessageDialog(null, "更新失败,请检查本地文件是否正常");
                 return;
             }
-            JOptionPane.showMessageDialog(null, "更新完毕,请关闭所有窗口并重启酷Q");
+            JOptionPane.showMessageDialog(null, "更新完毕,请立刻关闭所有相关窗口并重启酷Q");
         }else{
             JOptionPane.showMessageDialog(null, "更新失败,请检查本地文件是否正常");
         }
