@@ -435,7 +435,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     @Override
     public int requestAddFriend(int subtype, int sendTime, long fromQQ, String msg, String responseFlag) {
         if (!checkQqInBanList(String.valueOf(fromQQ))) {
-            CQ.sendGroupMsg(162279609, "收到" + getUserName(fromQQ) + "(" + fromQQ + ")的好友邀请，已同意");
+            CQ.sendGroupMsg(162279609, "收到" + makeNickToSender(getUserName(fromQQ)) + "(" + fromQQ + ")的好友邀请，已同意");
             CQ.setFriendAddRequest(responseFlag, REQUEST_ADOPT, "");
             CQ.sendPrivateMsg(fromQQ, entityBanProperties.getAddFriend());
         } else {
@@ -463,12 +463,12 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         if (subtype == 2) {
             if (!checkQqInBanList(String.valueOf(fromQQ)) && !checkGroupInBanList(String.valueOf(fromGroup))) {
                 CQ.setGroupAddRequestV2(responseFlag, REQUEST_GROUP_INVITE, REQUEST_ADOPT, "");
-                CQ.sendGroupMsg(162279609, "收到" + getUserName(fromQQ) + "(" + fromQQ + ")的群" + getGroupName(fromGroup) + "("
+                CQ.sendGroupMsg(162279609, "收到" + makeNickToSender(getUserName(fromQQ)) + "(" + fromQQ + ")的群" + makeGroupNickToSender(getGroupName(fromGroup)) + "("
                         + fromGroup + ")邀请，已同意");
                 CQ.sendGroupMsg(fromGroup, entityBanProperties.getAddGroup());
             } else {
                 CQ.sendGroupMsg(162279609,
-                        "收到" + getUserName(fromQQ) + "(" + fromQQ + ")的群" + fromGroup + "邀请，处于黑名单中已拒绝");
+                        "收到" + makeGroupNickToSender(getUserName(fromQQ)) + "(" + fromQQ + ")的群" + fromGroup + "邀请，处于黑名单中已拒绝");
                 CQ.setGroupAddRequestV2(responseFlag, REQUEST_GROUP_INVITE, REQUEST_REFUSE, "群或邀请人处于黑名单内");
             }
         }
@@ -505,17 +505,17 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
             }
             if (adminList.size() == 0) {
                 insertQqBanList(String.valueOf(owner), "在群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "("
-                        + entityTypeMessages.getFromGroup() + ")中被禁言，无管理员强制拉黑群主: " + ownerNick + "(" + owner + ")");
+                        + entityTypeMessages.getFromGroup() + ")中被禁言，无管理员强制拉黑群主: " + makeNickToSender(ownerNick) + "(" + owner + ")");
                 CQ.sendGroupMsg(162279609, "在群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "("
-                        + entityTypeMessages.getFromGroup() + ")中被禁言，无管理员强制拉黑群主: " + ownerNick + "(" + owner + ")");
+                        + entityTypeMessages.getFromGroup() + ")中被禁言，无管理员强制拉黑群主: " + makeNickToSender(ownerNick) + "(" + owner + ")");
             }else{
                 StringBuilder adminListInfo=new StringBuilder();
                 adminListInfo.append("其中管理员列表为: ");
                 for (Map.Entry<Long,String> admin:adminList.entrySet()){
-                    adminListInfo.append(admin.getValue()).append("(").append(admin.getKey()).append(")");
+                    adminListInfo.append(makeNickToSender(admin.getValue())).append("(").append(admin.getKey()).append(")");
                 }
                 CQ.sendGroupMsg(162279609, "在群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "("
-                        + entityTypeMessages.getFromGroup() + ")中被禁言，其中群主: " + ownerNick + "(" + owner + ")"+adminListInfo.toString()+"\n由于无法确定操作者，不对任何进行拉黑");
+                        + entityTypeMessages.getFromGroup() + ")中被禁言，其中群主: " + makeNickToSender(ownerNick) + "(" + owner + ")"+adminListInfo.toString()+"\n由于无法确定操作者，不对任何进行拉黑");
             }
             CQ.sendGroupMsg(162279609, "于群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "("
                     + entityTypeMessages.getFromGroup() + ")中被禁言，已退出并拉黑");

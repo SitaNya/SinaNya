@@ -62,6 +62,7 @@ public class UpdateForDice {
                 downLoadFromUrl("http://123.207.150.160/com.sinanya.dice.jar", "com.sinanya.dice.jar", downJarProgress, jarDir.getPath());
                 downLoadFromUrl("http://123.207.150.160/com.sinanya.dice.json", "com.sinanya.dice.json", downJsonProgress, jarDir.getPath());
                 Rectangle rect = new Rectangle(0, 0, downJsonProgress.getWidth(), downJsonProgress.getHeight());
+                downJsonProgress.setValue(downJsonProgress.getMaximum());
                 downJsonProgress.paintImmediately(rect);
                 cachedThreadPool.shutdown();
             } catch (IOException e) {
