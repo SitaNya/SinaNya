@@ -48,7 +48,7 @@ public class UpdateFrame extends JFrame {
             jarDirExists.setForeground(Color.RED);
             updateButton.setEnabled(false);
         }
-
+        this.setVisible(true);
     }
 
     private void thisWindowClosing(WindowEvent e) {
