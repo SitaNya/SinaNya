@@ -1,6 +1,7 @@
 package dice.sinanya.tools.getinfo;
 
 import dice.sinanya.entity.EntityBanProperties;
+import dice.sinanya.entity.EntityGame;
 import dice.sinanya.entity.EntitySystemProperties;
 
 /**
@@ -18,6 +19,7 @@ public class GetMessagesProperties {
      */
     public static EntitySystemProperties entitySystemProperties;
     public static EntityBanProperties entityBanProperties;
+    public static EntityGame entityGame;
 
     private GetMessagesProperties() {
         throw new IllegalStateException("Utility class");
@@ -35,5 +37,9 @@ public class GetMessagesProperties {
      */
     public static void initMessagesBanProperties() {
         entityBanProperties = new EntityBanProperties();
+    }
+
+    public static void initMessagesGameProperties(){
+        entityGame=new EntityGame();
     }
 }

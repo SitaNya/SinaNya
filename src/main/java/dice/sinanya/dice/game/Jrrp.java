@@ -6,6 +6,7 @@ import dice.sinanya.entity.EntityTypeMessages;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityGame;
 import static dice.sinanya.tools.getinfo.GetNickName.getNickName;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
@@ -48,6 +49,6 @@ public class Jrrp implements MakeNickToSender {
         for (char c : b) {
             tmp += (int) c;
         }
-        sender(entityTypeMessages, makeNickToSender(getNickName(entityTypeMessages)) + "的今日人品为: " + (tmp % 100));
+        sender(entityTypeMessages, String.format(entityGame.getJrrpInfo(), makeNickToSender(getNickName(entityTypeMessages)), (tmp % 100)));
     }
 }

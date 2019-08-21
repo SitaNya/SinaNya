@@ -22,8 +22,7 @@ import static dice.sinanya.system.MessagesBanList.frequentnessForGroupList;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.BanList.insertGroupBanList;
 import static dice.sinanya.tools.getinfo.BanList.insertQqBanList;
-import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
-import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.*;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
@@ -350,9 +349,9 @@ class Flow implements MakeNickToSender {
             history.hiy();
         }
 
-//        if (isJrrp) {
-//            jrrp.get();
-//        }
+        if (isJrrp && entityGame.isJrrpSwitch()) {
+            jrrp.get();
+        }
 
         if (isRules) {
             rules.get();

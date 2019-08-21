@@ -17,8 +17,7 @@ import java.awt.event.WindowEvent;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesLevel.*;
-import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
-import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.*;
 
 
 /**
@@ -26,7 +25,7 @@ import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemPrope
  */
 public class Setting extends Frame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JTabbedPane tabContain;
+    private JTabbedPane tab;
     private JPanel setting;
     private JPanel panel3;
     private JButton save;
@@ -209,17 +208,6 @@ public class Setting extends Frame {
     private JTextField frequentnessBanInfo;
     private JRadioButton banGroupAndUserByFre;
     private JRadioButton banUserByFre;
-    private JPanel panel26;
-    private JLabel label6;
-    private JScrollPane scrollPane17;
-    private JTextPane updateText;
-    private JPanel panel27;
-    private JLabel label7;
-    private JScrollPane scrollPane18;
-    private JTextPane textPane6;
-    private JLabel label8;
-    private JScrollPane scrollPane19;
-    private JTextPane textPane7;
     private JPanel panel19;
     private JPanel panel20;
     private JButton save4;
@@ -230,6 +218,8 @@ public class Setting extends Frame {
     private JLabel nickValue4;
     private JScrollPane scrollPane16;
     private JTextPane textPane4;
+    private JScrollPane scrollPane21;
+    private JPanel panel33;
     private JPanel panel21;
     private JCheckBox cloudBan;
     private JCheckBox ignoreBanUser;
@@ -238,6 +228,11 @@ public class Setting extends Frame {
     private JCheckBox banGroupBecauseBan;
     private JCheckBox banGroupBecauseReduce;
     private JCheckBox banUserBecauseReduce;
+    private JCheckBox autoAddFriends;
+    private JCheckBox autoInputGroup;
+    private JPanel panel24;
+    private JLabel label65;
+    private JTextField banListInputNotId;
     private JPanel panel23;
     private JLabel label60;
     private JScrollPane scrollPane9;
@@ -252,12 +247,37 @@ public class Setting extends Frame {
     private JTextArea refuseGroupByBan;
     private JScrollPane scrollPane13;
     private JTextArea refuseFriendByBan;
-    private JPanel panel24;
-    private JLabel label65;
-    private JTextField banListInputNotId;
-    private JPanel panel28;
-    private JCheckBox autoAddFriends;
-    private JCheckBox autoInputGroup;
+    private JPanel panel29;
+    private JPanel panel30;
+    private JButton saveGame;
+    private JPanel infoPanel7;
+    private JLabel qqText7;
+    private JLabel nickText7;
+    private JLabel qqValue7;
+    private JLabel nickValue7;
+    private JScrollPane scrollPane20;
+    private JTextPane textPane8;
+    private JPanel panel31;
+    private JPanel panel32;
+    private JCheckBox jrrpSwitch;
+    private JLabel label66;
+    private JTextField jrrpInfo;
+    private JPanel panel34;
+    private JCheckBox welcomeSwitch;
+    private JCheckBox botList;
+    private JCheckBox deck;
+    private JPanel panel35;
+    private JPanel panel26;
+    private JLabel label6;
+    private JScrollPane scrollPane17;
+    private JTextPane updateText;
+    private JPanel panel27;
+    private JLabel label7;
+    private JScrollPane scrollPane18;
+    private JTextPane textPane6;
+    private JLabel label8;
+    private JScrollPane scrollPane19;
+    private JTextPane textPane7;
     private JPanel panel22;
     private JDialog dialog1;
     private JPanel panel25;
@@ -272,7 +292,7 @@ public class Setting extends Frame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        tabContain = new JTabbedPane();
+        tab = new JTabbedPane();
         setting = new JPanel();
         panel3 = new JPanel();
         save = new JButton();
@@ -455,17 +475,6 @@ public class Setting extends Frame {
         frequentnessBanInfo = new JTextField();
         banGroupAndUserByFre = new JRadioButton();
         banUserByFre = new JRadioButton();
-        panel26 = new JPanel();
-        label6 = new JLabel();
-        scrollPane17 = new JScrollPane();
-        updateText = new JTextPane();
-        panel27 = new JPanel();
-        label7 = new JLabel();
-        scrollPane18 = new JScrollPane();
-        textPane6 = new JTextPane();
-        label8 = new JLabel();
-        scrollPane19 = new JScrollPane();
-        textPane7 = new JTextPane();
         panel19 = new JPanel();
         panel20 = new JPanel();
         save4 = new JButton();
@@ -476,6 +485,8 @@ public class Setting extends Frame {
         nickValue4 = new JLabel();
         scrollPane16 = new JScrollPane();
         textPane4 = new JTextPane();
+        scrollPane21 = new JScrollPane();
+        panel33 = new JPanel();
         panel21 = new JPanel();
         cloudBan = new JCheckBox();
         ignoreBanUser = new JCheckBox();
@@ -484,6 +495,11 @@ public class Setting extends Frame {
         banGroupBecauseBan = new JCheckBox();
         banGroupBecauseReduce = new JCheckBox();
         banUserBecauseReduce = new JCheckBox();
+        autoAddFriends = new JCheckBox();
+        autoInputGroup = new JCheckBox();
+        panel24 = new JPanel();
+        label65 = new JLabel();
+        banListInputNotId = new JTextField();
         panel23 = new JPanel();
         label60 = new JLabel();
         scrollPane9 = new JScrollPane();
@@ -498,12 +514,37 @@ public class Setting extends Frame {
         refuseGroupByBan = new JTextArea();
         scrollPane13 = new JScrollPane();
         refuseFriendByBan = new JTextArea();
-        panel24 = new JPanel();
-        label65 = new JLabel();
-        banListInputNotId = new JTextField();
-        panel28 = new JPanel();
-        autoAddFriends = new JCheckBox();
-        autoInputGroup = new JCheckBox();
+        panel29 = new JPanel();
+        panel30 = new JPanel();
+        saveGame = new JButton();
+        infoPanel7 = new JPanel();
+        qqText7 = new JLabel();
+        nickText7 = new JLabel();
+        qqValue7 = new JLabel();
+        nickValue7 = new JLabel();
+        scrollPane20 = new JScrollPane();
+        textPane8 = new JTextPane();
+        panel31 = new JPanel();
+        panel32 = new JPanel();
+        jrrpSwitch = new JCheckBox();
+        label66 = new JLabel();
+        jrrpInfo = new JTextField();
+        panel34 = new JPanel();
+        welcomeSwitch = new JCheckBox();
+        botList = new JCheckBox();
+        deck = new JCheckBox();
+        panel35 = new JPanel();
+        panel26 = new JPanel();
+        label6 = new JLabel();
+        scrollPane17 = new JScrollPane();
+        updateText = new JTextPane();
+        panel27 = new JPanel();
+        label7 = new JLabel();
+        scrollPane18 = new JScrollPane();
+        textPane6 = new JTextPane();
+        label8 = new JLabel();
+        scrollPane19 = new JScrollPane();
+        textPane7 = new JTextPane();
         panel22 = new JPanel();
         dialog1 = new JDialog();
         panel25 = new JPanel();
@@ -521,7 +562,7 @@ public class Setting extends Frame {
         });
         setLayout(new BorderLayout());
 
-        //======== tabContain ========
+        //======== tab ========
         {
 
             //======== setting ========
@@ -688,12 +729,12 @@ public class Setting extends Frame {
                             //---- label46 ----
                             label46.setText("en\u5931\u8d25\u9644\u52a0\u8bed");
                             panel13.add(label46);
-                            label46.setBounds(10, 40, label46.getPreferredSize().width, 20);
+                            label46.setBounds(10, 40, label46.getPreferredSize().width, 25);
 
                             //---- label47 ----
                             label47.setText("\u6697\u9ab0\u8bed");
                             panel13.add(label47);
-                            label47.setBounds(10, 70, label47.getPreferredSize().width, 20);
+                            label47.setBounds(10, 70, label47.getPreferredSize().width, 25);
                             panel13.add(enSuccess);
                             enSuccess.setBounds(105, 10, 340, 25);
                             panel13.add(enFailed);
@@ -733,27 +774,27 @@ public class Setting extends Frame {
                             //---- botAlreadyStartLable ----
                             botAlreadyStartLable.setText("\u5df2\u5f00\u542f\u63d0\u793a");
                             panel5.add(botAlreadyStartLable);
-                            botAlreadyStartLable.setBounds(10, 40, botAlreadyStartLable.getPreferredSize().width, 20);
+                            botAlreadyStartLable.setBounds(10, 40, botAlreadyStartLable.getPreferredSize().width, 25);
 
                             //---- botStopLable ----
                             botStopLable.setText("\u5173\u95ed\u4fe1\u606f");
                             panel5.add(botStopLable);
-                            botStopLable.setBounds(10, 70, botStopLable.getPreferredSize().width, 20);
+                            botStopLable.setBounds(10, 70, botStopLable.getPreferredSize().width, 25);
 
                             //---- botAlreadyStopLable ----
                             botAlreadyStopLable.setText("\u5df2\u5173\u95ed\u63d0\u793a");
                             panel5.add(botAlreadyStopLable);
-                            botAlreadyStopLable.setBounds(10, 100, botAlreadyStopLable.getPreferredSize().width, 20);
+                            botAlreadyStopLable.setBounds(10, 100, botAlreadyStopLable.getPreferredSize().width, 25);
 
                             //---- label9 ----
                             label9.setText("\u9000\u7fa4\u63d0\u793a");
                             panel5.add(label9);
-                            label9.setBounds(10, 130, label9.getPreferredSize().width, 20);
+                            label9.setBounds(10, 130, label9.getPreferredSize().width, 25);
 
                             //---- label10 ----
                             label10.setText("\u673a\u5668\u4eba\u4fe1\u606f\u63d0\u793a");
                             panel5.add(label10);
-                            label10.setBounds(10, 160, label10.getPreferredSize().width, 20);
+                            label10.setBounds(10, 160, label10.getPreferredSize().width, 25);
                             panel5.add(botStart);
                             botStart.setBounds(105, 10, 340, 25);
                             panel5.add(botAlreadyStart);
@@ -783,7 +824,7 @@ public class Setting extends Frame {
                             }
                         }
                         panel2.add(panel5);
-                        panel5.setBounds(10, 10, 460, 195);
+                        panel5.setBounds(10, 10, 460, 200);
 
                         //======== panel12 ========
                         {
@@ -799,27 +840,27 @@ public class Setting extends Frame {
                             //---- label40 ----
                             label40.setText("\u75af\u72c2\u9644\u52a0\u8bed");
                             panel12.add(label40);
-                            label40.setBounds(10, 40, label40.getPreferredSize().width, 20);
+                            label40.setBounds(10, 40, label40.getPreferredSize().width, 25);
 
                             //---- label41 ----
                             label41.setText("SC\u5927\u6210\u529f\u9644\u52a0\u8bed");
                             panel12.add(label41);
-                            label41.setBounds(10, 70, label41.getPreferredSize().width, 20);
+                            label41.setBounds(10, 70, label41.getPreferredSize().width, 25);
 
                             //---- label42 ----
                             label42.setText("SC\u5927\u5931\u8d25\u9644\u52a0\u8bed");
                             panel12.add(label42);
-                            label42.setBounds(10, 100, label42.getPreferredSize().width, 20);
+                            label42.setBounds(10, 100, label42.getPreferredSize().width, 25);
 
                             //---- label43 ----
                             label43.setText("SC\u6210\u529f\u9644\u52a0\u8bed");
                             panel12.add(label43);
-                            label43.setBounds(10, 130, label43.getPreferredSize().width, 20);
+                            label43.setBounds(10, 130, label43.getPreferredSize().width, 25);
 
                             //---- label44 ----
                             label44.setText("SC\u5931\u8d25\u9644\u52a0\u8bed");
                             panel12.add(label44);
-                            label44.setBounds(10, 160, label44.getPreferredSize().width, 20);
+                            label44.setBounds(10, 160, label44.getPreferredSize().width, 25);
                             panel12.add(sanCheck);
                             sanCheck.setBounds(105, 10, 340, 25);
                             panel12.add(symptom);
@@ -850,27 +891,27 @@ public class Setting extends Frame {
                             //---- label25 ----
                             label25.setText("\u65e5\u5fd7\u8ffd\u52a0\u5e76\u5f00\u542f");
                             panel9.add(label25);
-                            label25.setBounds(10, 40, label25.getPreferredSize().width, 20);
+                            label25.setBounds(10, 40, label25.getPreferredSize().width, 25);
 
                             //---- label26 ----
                             label26.setText("\u65e5\u5fd7\u5df2\u5f00\u542f");
                             panel9.add(label26);
-                            label26.setBounds(10, 70, label26.getPreferredSize().width, 20);
+                            label26.setBounds(10, 70, label26.getPreferredSize().width, 25);
 
                             //---- label27 ----
                             label27.setText("\u65e5\u5fd7\u5df2\u5173\u95ed");
                             panel9.add(label27);
-                            label27.setBounds(10, 100, label27.getPreferredSize().width, 20);
+                            label27.setBounds(10, 100, label27.getPreferredSize().width, 25);
 
                             //---- label28 ----
                             label28.setText("\u65e5\u5fd7\u672a\u627e\u5230");
                             panel9.add(label28);
-                            label28.setBounds(10, 130, label28.getPreferredSize().width, 20);
+                            label28.setBounds(10, 130, label28.getPreferredSize().width, 25);
 
                             //---- label29 ----
                             label29.setText("\u4e0d\u53ef\u4f7f\u7528\u7a7a\u65e5\u5fd7\u540d");
                             panel9.add(label29);
-                            label29.setBounds(10, 160, label29.getPreferredSize().width, 20);
+                            label29.setBounds(10, 160, label29.getPreferredSize().width, 25);
                             panel9.add(createLog);
                             createLog.setBounds(150, 10, 290, 25);
                             panel9.add(appendLog);
@@ -887,12 +928,12 @@ public class Setting extends Frame {
                             //---- label30 ----
                             label30.setText("\u65e0\u6cd5\u5220\u9664\u5df2\u5f00\u542f\u7684\u65e5\u5fd7");
                             panel9.add(label30);
-                            label30.setBounds(10, 190, label30.getPreferredSize().width, 20);
+                            label30.setBounds(10, 190, label30.getPreferredSize().width, 25);
 
                             //---- label31 ----
                             label31.setText("\u83b7\u53d6\u65e5\u5fd7\u961f\u5217\u5835\u585e");
                             panel9.add(label31);
-                            label31.setBounds(10, 220, label31.getPreferredSize().width, 20);
+                            label31.setBounds(10, 220, label31.getPreferredSize().width, 25);
                             panel9.add(deleteOpenLog);
                             deleteOpenLog.setBounds(150, 190, 290, 25);
                             panel9.add(readLock);
@@ -930,22 +971,22 @@ public class Setting extends Frame {
                             //---- label20 ----
                             label20.setText("\u9ab0\u70b9\u6b21\u6570\u8fc7\u591a");
                             panel8.add(label20);
-                            label20.setBounds(10, 40, label20.getPreferredSize().width, 20);
+                            label20.setBounds(10, 40, label20.getPreferredSize().width, 25);
 
                             //---- label21 ----
                             label21.setText("\u672a\u8bbe\u7f6ekp\u7fa4");
                             panel8.add(label21);
-                            label21.setBounds(10, 70, label21.getPreferredSize().width, 20);
+                            label21.setBounds(10, 70, label21.getPreferredSize().width, 25);
 
                             //---- label22 ----
                             label22.setText("\u975e\u79c1\u804a\u547d\u4ee4");
                             panel8.add(label22);
-                            label22.setBounds(10, 100, label22.getPreferredSize().width, 20);
+                            label22.setBounds(10, 100, label22.getPreferredSize().width, 25);
 
                             //---- label23 ----
                             label23.setText("\u4ec5\u7fa4\u4e3b\u6216\u7ba1\u7406\u5458\u53ef\u7528");
                             panel8.add(label23);
-                            label23.setBounds(10, 130, label23.getPreferredSize().width, 20);
+                            label23.setBounds(10, 130, label23.getPreferredSize().width, 25);
                             panel8.add(manyRollsFormat);
                             manyRollsFormat.setBounds(175, 10, 270, 25);
                             panel8.add(diceTimesTooBig);
@@ -1026,7 +1067,7 @@ public class Setting extends Frame {
                             //---- label49 ----
                             label49.setText("\u5f53\u524d\u5c0f\u961fEN\u5217\u8868\u4e3a\u7a7a");
                             panel14.add(label49);
-                            label49.setBounds(10, 40, label49.getPreferredSize().width, 20);
+                            label49.setBounds(10, 40, label49.getPreferredSize().width, 25);
                             panel14.add(teamIsEmpty);
                             teamIsEmpty.setBounds(145, 10, 300, 25);
                             panel14.add(teamMemberEnIsEmpty);
@@ -1194,7 +1235,7 @@ public class Setting extends Frame {
                     setting.setPreferredSize(preferredSize);
                 }
             }
-            tabContain.addTab("\u62a5\u9519\u56de\u590d\u8bed\u7b49\u8bbe\u7f6e", setting);
+            tab.addTab("\u62a5\u9519\u56de\u590d\u8bed\u7b49\u8bbe\u7f6e", setting);
 
             //======== panel1 ========
             {
@@ -1295,7 +1336,7 @@ public class Setting extends Frame {
                     //---- label1 ----
                     label1.setText("\u5927\u6210\u529f\u56de\u590d\u8bed");
                     panel15.add(label1);
-                    label1.setBounds(10, 10, 150, label1.getPreferredSize().height);
+                    label1.setBounds(10, 5, 150, 25);
 
                     //======== scrollPane2 ========
                     {
@@ -1307,7 +1348,7 @@ public class Setting extends Frame {
                     //---- label2 ----
                     label2.setText("\u6781\u96be\u6210\u529f\u56de\u590d\u8bed");
                     panel15.add(label2);
-                    label2.setBounds(new Rectangle(new Point(10, 165), label2.getPreferredSize()));
+                    label2.setBounds(10, 160, label2.getPreferredSize().width, 25);
 
                     //======== scrollPane3 ========
                     {
@@ -1319,7 +1360,7 @@ public class Setting extends Frame {
                     //---- label3 ----
                     label3.setText("\u56f0\u96be\u6210\u529f\u56de\u590d\u8bed");
                     panel15.add(label3);
-                    label3.setBounds(new Rectangle(new Point(10, 320), label3.getPreferredSize()));
+                    label3.setBounds(10, 315, label3.getPreferredSize().width, 25);
 
                     //======== scrollPane4 ========
                     {
@@ -1331,17 +1372,17 @@ public class Setting extends Frame {
                     //---- label4 ----
                     label4.setText("\u6210\u529f\u56de\u590d\u8bed");
                     panel15.add(label4);
-                    label4.setBounds(new Rectangle(new Point(490, 10), label4.getPreferredSize()));
+                    label4.setBounds(490, 5, label4.getPreferredSize().width, 25);
 
                     //---- label50 ----
                     label50.setText("\u5931\u8d25\u56de\u590d\u8bed");
                     panel15.add(label50);
-                    label50.setBounds(new Rectangle(new Point(490, 165), label50.getPreferredSize()));
+                    label50.setBounds(490, 160, label50.getPreferredSize().width, 25);
 
                     //---- label51 ----
                     label51.setText("\u5927\u5931\u8d25\u56de\u590d\u8bed");
                     panel15.add(label51);
-                    label51.setBounds(new Rectangle(new Point(490, 320), label51.getPreferredSize()));
+                    label51.setBounds(490, 315, label51.getPreferredSize().width, 25);
 
                     //======== scrollPane5 ========
                     {
@@ -1397,7 +1438,7 @@ public class Setting extends Frame {
                     panel1.setPreferredSize(preferredSize);
                 }
             }
-            tabContain.addTab("\u81ea\u5b9a\u4e49\u6210\u529f\u968f\u5373\u56de\u590d\u8bcd", panel1);
+            tab.addTab("\u81ea\u5b9a\u4e49\u6210\u529f\u968f\u5373\u56de\u590d\u8bcd", panel1);
 
             //======== clean ========
             {
@@ -1412,19 +1453,19 @@ public class Setting extends Frame {
                     //---- promethusPortText2 ----
                     promethusPortText2.setText("\u666e\u7f57\u7c73\u4fee\u65af\u81ea\u5b9a\u4e49\u7aef\u53e3");
                     monitorPanel2.add(promethusPortText2);
-                    promethusPortText2.setBounds(10, 40, promethusPortText2.getPreferredSize().width, 25);
+                    promethusPortText2.setBounds(10, 65, promethusPortText2.getPreferredSize().width, 25);
                     monitorPanel2.add(prometheusPort);
-                    prometheusPort.setBounds(140, 40, 55, 25);
+                    prometheusPort.setBounds(150, 65, 55, 25);
 
                     //---- Prometheus ----
                     Prometheus.setText("\u542f\u7528\u666e\u7f57\u7c73\u4fee\u65af\u76d1\u63a7\u4e0a\u62a5");
                     monitorPanel2.add(Prometheus);
-                    Prometheus.setBounds(new Rectangle(new Point(10, 10), Prometheus.getPreferredSize()));
+                    Prometheus.setBounds(10, 35, Prometheus.getPreferredSize().width, 25);
 
                     //---- heap ----
                     heap.setText("\u542f\u7528\u5fc3\u8df3\u62a5\u544a");
                     monitorPanel2.add(heap);
-                    heap.setBounds(new Rectangle(new Point(10, 70), heap.getPreferredSize()));
+                    heap.setBounds(10, 10, heap.getPreferredSize().width, 25);
 
                     {
                         // compute preferred size
@@ -1442,7 +1483,7 @@ public class Setting extends Frame {
                     }
                 }
                 clean.add(monitorPanel2);
-                monitorPanel2.setBounds(180, 185, 235, 100);
+                monitorPanel2.setBounds(180, 185, 235, 105);
 
                 //======== setMaster ========
                 {
@@ -1459,7 +1500,7 @@ public class Setting extends Frame {
                     setMaster.add(notMasterInfoText);
                     notMasterInfoText.setBounds(10, 40, 220, 25);
                     setMaster.add(master);
-                    master.setBounds(80, 10, 144, master.getPreferredSize().height);
+                    master.setBounds(80, 10, 144, 25);
 
                     //======== scrollPane8 ========
                     {
@@ -1587,17 +1628,17 @@ public class Setting extends Frame {
                     //---- label53 ----
                     label53.setText("\u5173\u95ed\u7fa4\u6e05\u7406\u7528\u8bed");
                     panel17.add(label53);
-                    label53.setBounds(10, 40, label53.getPreferredSize().width, 20);
+                    label53.setBounds(10, 40, label53.getPreferredSize().width, 25);
 
                     //---- label54 ----
                     label54.setText("\u5e9f\u5f03\u7fa4\u6e05\u7406\u671f\u9650(\u5355\u4f4d:\u5929)");
                     panel17.add(label54);
-                    label54.setBounds(10, 70, label54.getPreferredSize().width, 20);
+                    label54.setBounds(10, 70, label54.getPreferredSize().width, 25);
 
                     //---- label55 ----
                     label55.setText("\u5e9f\u5f03\u7fa4\u6e05\u7406\u7528\u8bed");
                     panel17.add(label55);
-                    label55.setBounds(10, 100, label55.getPreferredSize().width, 20);
+                    label55.setBounds(10, 100, label55.getPreferredSize().width, 25);
                     panel17.add(clearGroupByOff);
                     clearGroupByOff.setBounds(205, 10, 320, 25);
                     panel17.add(clearGroupByOffInfo);
@@ -1639,17 +1680,17 @@ public class Setting extends Frame {
                     //---- label57 ----
                     label57.setText("\u8b66\u544a\u5237\u5c4f\u7528\u8bed");
                     panel18.add(label57);
-                    label57.setBounds(10, 40, label57.getPreferredSize().width, 20);
+                    label57.setBounds(10, 40, label57.getPreferredSize().width, 25);
 
                     //---- label58 ----
                     label58.setText("\u62c9\u9ed1\u9000\u7fa4\u5237\u5c4f\u9891\u5ea6(N\u6761/\u6bcf\u5206\u949f)");
                     panel18.add(label58);
-                    label58.setBounds(10, 70, label58.getPreferredSize().width, 20);
+                    label58.setBounds(10, 70, label58.getPreferredSize().width, 25);
 
                     //---- label59 ----
                     label59.setText("\u62c9\u9ed1\u9000\u7fa4\u5237\u5c4f\u7528\u8bed");
                     panel18.add(label59);
-                    label59.setBounds(10, 100, label59.getPreferredSize().width, 20);
+                    label59.setBounds(10, 100, label59.getPreferredSize().width, 25);
                     panel18.add(alterFrequentness);
                     alterFrequentness.setBounds(205, 10, 320, 25);
                     panel18.add(frequentnessAlterInfo);
@@ -1702,91 +1743,7 @@ public class Setting extends Frame {
                     clean.setPreferredSize(preferredSize);
                 }
             }
-            tabContain.addTab("\u76d1\u63a7", clean);
-
-            //======== panel26 ========
-            {
-                panel26.setLayout(null);
-
-                //---- label6 ----
-                label6.setText("\u8fd9\u91cc\u663e\u793a\u4e86\u63d2\u4ef6\u7684\u66f4\u65b0\u65e5\u5fd7");
-                panel26.add(label6);
-                label6.setBounds(new Rectangle(new Point(20, 15), label6.getPreferredSize()));
-
-                //======== scrollPane17 ========
-                {
-                    scrollPane17.setViewportView(updateText);
-                }
-                panel26.add(scrollPane17);
-                scrollPane17.setBounds(20, 50, 1115, 430);
-
-                {
-                    // compute preferred size
-                    Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < panel26.getComponentCount(); i++) {
-                        Rectangle bounds = panel26.getComponent(i).getBounds();
-                        preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                        preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                    }
-                    Insets insets = panel26.getInsets();
-                    preferredSize.width += insets.right;
-                    preferredSize.height += insets.bottom;
-                    panel26.setMinimumSize(preferredSize);
-                    panel26.setPreferredSize(preferredSize);
-                }
-            }
-            tabContain.addTab("\u66f4\u65b0\u65e5\u5fd7", panel26);
-
-            //======== panel27 ========
-            {
-                panel27.setLayout(null);
-
-                //---- label7 ----
-                label7.setText("\u9879\u76ee\u6587\u6863");
-                panel27.add(label7);
-                label7.setBounds(new Rectangle(new Point(535, 35), label7.getPreferredSize()));
-
-                //======== scrollPane18 ========
-                {
-
-                    //---- textPane6 ----
-                    textPane6.setText("https://sitcnya.gitbook.io/sinanya/");
-                    scrollPane18.setViewportView(textPane6);
-                }
-                panel27.add(scrollPane18);
-                scrollPane18.setBounds(455, 60, 215, scrollPane18.getPreferredSize().height);
-
-                //---- label8 ----
-                label8.setText("\u9e23\u8c22");
-                panel27.add(label8);
-                label8.setBounds(new Rectangle(new Point(545, 100), label8.getPreferredSize()));
-
-                //======== scrollPane19 ========
-                {
-
-                    //---- textPane7 ----
-                    textPane7.setText("\u611f\u8c22\u4ee5\u4e0b\u4eba\u5458\u7684\u5927\u529b\u652f\u6301:\n\n\u7fb2\u3001Bright \u6211\u7684\u7b2c\u4e00\u6279\u7528\u6237\uff0c\u611f\u8c22\u4f60\u4eec\n\nshiki\u3001\u60e0\u60e0\uff0c\u4f60\u4eec\u7ed9\u6211\u63d0\u4f9b\u4e86\u5f88\u591a\u597d\u7684\u5efa\u8bae\u548c\u601d\u8def\n\n\u79c3\u4e86\u79c3\u4e86\u3001\u590f\u6d45\u79cb \u4f60\u4eec\u5236\u4f5c\u7684rule\u548cdnd\u6cd5\u672f\u5217\u8868\u6587\u672c\u5e2e\u52a9\u7684\u4e0d\u53ea\u662f\u6211\uff0c\u8fd8\u6709\u5f88\u591a\u4eba\n\n\u6708\u4e0a\u4e2d\u5929 \u6211\u6700\u68d2\u7684\u6d4b\u8bd5\u8005\uff0c\u5728\u6211\u7684\u9ab0\u5b50\u6068\u4e0d\u5f97\u4e00\u5929\u5d29\u6e835\u6b21\u7684\u65f6\u5019\uff0c\u575a\u6301\u4e3a\u6211\u6d4b\u8bd5\u5404\u79cd\u529f\u80fd\u3002\u6211\u4e5f\u627f\u8bfa\uff0c\u4f60\u7684\u9700\u6c42\u6211\u6c38\u8fdc\u6392\u5728\u6700\u524d\u9762\u5b8c\u6210\n\n\u8d1d\u5c14SAMA\u55b5 \u611f\u8c22\u4f60\u4e3a\u8fd9\u4e2a\u6838\u5fc3\u5236\u4f5c\u7684\u4eba\u7269\u5361\uff0c\u8f9b\u82e6\u4e86\n\n\u8fd8\u6709\u5f88\u591a\u6ca1\u60f3\u8d77\u6765\u7684\u4eba\uff0c\u8bf7\u968f\u65f6\u79c1\u804a\u63d0\u9192\u6211\u52a0\u5230\u8fd9\u91cc\u6765\u3002");
-                    scrollPane19.setViewportView(textPane7);
-                }
-                panel27.add(scrollPane19);
-                scrollPane19.setBounds(295, 135, 550, 320);
-
-                {
-                    // compute preferred size
-                    Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < panel27.getComponentCount(); i++) {
-                        Rectangle bounds = panel27.getComponent(i).getBounds();
-                        preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                        preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                    }
-                    Insets insets = panel27.getInsets();
-                    preferredSize.width += insets.right;
-                    preferredSize.height += insets.bottom;
-                    panel27.setMinimumSize(preferredSize);
-                    panel27.setPreferredSize(preferredSize);
-                }
-            }
-            tabContain.addTab("\u5173\u4e8e", panel27);
+            tab.addTab("\u76d1\u63a7", clean);
 
             //======== panel19 ========
             {
@@ -1879,199 +1836,203 @@ public class Setting extends Frame {
                 panel19.add(panel20);
                 panel20.setBounds(10, 10, 155, 480);
 
-                //======== panel21 ========
+                //======== scrollPane21 ========
                 {
-                    panel21.setBorder(new EtchedBorder());
-                    panel21.setLayout(null);
 
-                    //---- cloudBan ----
-                    cloudBan.setText("\u5f00\u542f\u4e91\u9ed1\u540d\u5355");
-                    panel21.add(cloudBan);
-                    cloudBan.setBounds(new Rectangle(new Point(10, 10), cloudBan.getPreferredSize()));
-
-                    //---- ignoreBanUser ----
-                    ignoreBanUser.setText("\u5f53\u9ed1\u540d\u5355\u7528\u6237\u5904\u4e8e\u767d\u540d\u5355\u7fa4\u4e2d\u65f6\uff0c\u5ffd\u7565\u6b64\u7528\u6237");
-                    panel21.add(ignoreBanUser);
-                    ignoreBanUser.setBounds(new Rectangle(new Point(10, 35), ignoreBanUser.getPreferredSize()));
-
-                    //---- leaveByBanUser ----
-                    leaveByBanUser.setText("\u5f53\u9ed1\u540d\u5355\u7528\u6237\u5904\u4e8e\u767d\u540d\u5355\u7fa4\u4e2d\u65f6\uff0c\u56e0\u6b64\u800c\u9000\u7fa4");
-                    panel21.add(leaveByBanUser);
-                    leaveByBanUser.setBounds(new Rectangle(new Point(10, 60), leaveByBanUser.getPreferredSize()));
-
-                    //---- leaveGroupByBan ----
-                    leaveGroupByBan.setText("\u81ea\u52a8\u9000\u51fa\u9ed1\u540d\u5355\u7fa4");
-                    panel21.add(leaveGroupByBan);
-                    leaveGroupByBan.setBounds(new Rectangle(new Point(10, 85), leaveGroupByBan.getPreferredSize()));
-
-                    //---- banGroupBecauseBan ----
-                    banGroupBecauseBan.setText("\u9000\u51fa\u5e76\u62c9\u9ed1\u88ab\u7981\u8a00\u7684\u7fa4");
-                    panel21.add(banGroupBecauseBan);
-                    banGroupBecauseBan.setBounds(new Rectangle(new Point(10, 110), banGroupBecauseBan.getPreferredSize()));
-
-                    //---- banGroupBecauseReduce ----
-                    banGroupBecauseReduce.setText("\u62c9\u9ed1\u88ab\u8e22\u51fa\u7684\u7fa4");
-                    panel21.add(banGroupBecauseReduce);
-                    banGroupBecauseReduce.setBounds(new Rectangle(new Point(10, 135), banGroupBecauseReduce.getPreferredSize()));
-
-                    //---- banUserBecauseReduce ----
-                    banUserBecauseReduce.setText("\u62c9\u9ed1\u8e22\u51fa\u81ea\u5df1\u7684\u7ba1\u7406\u5458");
-                    panel21.add(banUserBecauseReduce);
-                    banUserBecauseReduce.setBounds(new Rectangle(new Point(10, 160), banUserBecauseReduce.getPreferredSize()));
-
+                    //======== panel33 ========
                     {
-                        // compute preferred size
-                        Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel21.getComponentCount(); i++) {
-                            Rectangle bounds = panel21.getComponent(i).getBounds();
-                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        panel33.setLayout(null);
+
+                        //======== panel21 ========
+                        {
+                            panel21.setBorder(new EtchedBorder());
+                            panel21.setLayout(null);
+
+                            //---- cloudBan ----
+                            cloudBan.setText("\u5f00\u542f\u4e91\u9ed1\u540d\u5355");
+                            panel21.add(cloudBan);
+                            cloudBan.setBounds(10, 10, cloudBan.getPreferredSize().width, 25);
+
+                            //---- ignoreBanUser ----
+                            ignoreBanUser.setText("\u5f53\u9ed1\u540d\u5355\u7528\u6237\u5904\u4e8e\u767d\u540d\u5355\u7fa4\u4e2d\u65f6\uff0c\u5ffd\u7565\u6b64\u7528\u6237");
+                            panel21.add(ignoreBanUser);
+                            ignoreBanUser.setBounds(10, 40, ignoreBanUser.getPreferredSize().width, 25);
+
+                            //---- leaveByBanUser ----
+                            leaveByBanUser.setText("\u5f53\u9ed1\u540d\u5355\u7528\u6237\u5904\u4e8e\u767d\u540d\u5355\u7fa4\u4e2d\u65f6\uff0c\u56e0\u6b64\u800c\u9000\u7fa4");
+                            panel21.add(leaveByBanUser);
+                            leaveByBanUser.setBounds(10, 70, leaveByBanUser.getPreferredSize().width, 25);
+
+                            //---- leaveGroupByBan ----
+                            leaveGroupByBan.setText("\u81ea\u52a8\u9000\u51fa\u9ed1\u540d\u5355\u7fa4");
+                            panel21.add(leaveGroupByBan);
+                            leaveGroupByBan.setBounds(10, 100, leaveGroupByBan.getPreferredSize().width, 25);
+
+                            //---- banGroupBecauseBan ----
+                            banGroupBecauseBan.setText("\u9000\u51fa\u5e76\u62c9\u9ed1\u88ab\u7981\u8a00\u7684\u7fa4");
+                            panel21.add(banGroupBecauseBan);
+                            banGroupBecauseBan.setBounds(10, 130, banGroupBecauseBan.getPreferredSize().width, 25);
+
+                            //---- banGroupBecauseReduce ----
+                            banGroupBecauseReduce.setText("\u62c9\u9ed1\u88ab\u8e22\u51fa\u7684\u7fa4");
+                            panel21.add(banGroupBecauseReduce);
+                            banGroupBecauseReduce.setBounds(10, 160, banGroupBecauseReduce.getPreferredSize().width, 25);
+
+                            //---- banUserBecauseReduce ----
+                            banUserBecauseReduce.setText("\u62c9\u9ed1\u8e22\u51fa\u81ea\u5df1\u7684\u7ba1\u7406\u5458");
+                            panel21.add(banUserBecauseReduce);
+                            banUserBecauseReduce.setBounds(10, 190, banUserBecauseReduce.getPreferredSize().width, 25);
+
+                            //---- autoAddFriends ----
+                            autoAddFriends.setText("\u81ea\u52a8\u6dfb\u52a0\u975e\u9ed1\u540d\u5355\u597d\u53cb");
+                            panel21.add(autoAddFriends);
+                            autoAddFriends.setBounds(10, 220, 155, 25);
+
+                            //---- autoInputGroup ----
+                            autoInputGroup.setText("\u81ea\u52a8\u52a0\u5165\u975e\u9ed1\u540d\u5355\u7fa4");
+                            panel21.add(autoInputGroup);
+                            autoInputGroup.setBounds(10, 250, 142, 22);
+
+                            {
+                                // compute preferred size
+                                Dimension preferredSize = new Dimension();
+                                for(int i = 0; i < panel21.getComponentCount(); i++) {
+                                    Rectangle bounds = panel21.getComponent(i).getBounds();
+                                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                                }
+                                Insets insets = panel21.getInsets();
+                                preferredSize.width += insets.right;
+                                preferredSize.height += insets.bottom;
+                                panel21.setMinimumSize(preferredSize);
+                                panel21.setPreferredSize(preferredSize);
+                            }
                         }
-                        Insets insets = panel21.getInsets();
-                        preferredSize.width += insets.right;
-                        preferredSize.height += insets.bottom;
-                        panel21.setMinimumSize(preferredSize);
-                        panel21.setPreferredSize(preferredSize);
-                    }
-                }
-                panel19.add(panel21);
-                panel21.setBounds(175, 15, 325, 190);
+                        panel33.add(panel21);
+                        panel21.setBounds(10, 10, 325, 280);
 
-                //======== panel23 ========
-                {
-                    panel23.setBorder(new EtchedBorder());
-                    panel23.setLayout(null);
+                        //======== panel24 ========
+                        {
+                            panel24.setBorder(new EtchedBorder());
+                            panel24.setLayout(null);
 
-                    //---- label60 ----
-                    label60.setText("\u5165\u7fa4\u8bcd");
-                    panel23.add(label60);
-                    label60.setBounds(10, 10, 150, label60.getPreferredSize().height);
+                            //---- label65 ----
+                            label65.setText("\u8f93\u5165\u7684\u4e0d\u662fQQ\u53f7\u6216\u7fa4\u53f7");
+                            panel24.add(label65);
+                            label65.setBounds(10, 10, label65.getPreferredSize().width, 25);
+                            panel24.add(banListInputNotId);
+                            banListInputNotId.setBounds(10, 40, 300, 25);
 
-                    //======== scrollPane9 ========
-                    {
-                        scrollPane9.setViewportView(addGroup);
-                    }
-                    panel23.add(scrollPane9);
-                    scrollPane9.setBounds(10, 30, 440, 100);
-
-                    //---- label61 ----
-                    label61.setText("\u52a0\u597d\u53cb\u6b22\u8fce\u8bcd");
-                    panel23.add(label61);
-                    label61.setBounds(new Rectangle(new Point(10, 140), label61.getPreferredSize()));
-
-                    //======== scrollPane10 ========
-                    {
-                        scrollPane10.setViewportView(addFriend);
-                    }
-                    panel23.add(scrollPane10);
-                    scrollPane10.setBounds(10, 165, 440, 100);
-                    panel23.add(label62);
-                    label62.setBounds(new Rectangle(new Point(10, 320), label62.getPreferredSize()));
-
-                    //---- label63 ----
-                    label63.setText("\u62d2\u7edd\u9ed1\u540d\u5355\u7fa4\u7528\u8bed");
-                    panel23.add(label63);
-                    label63.setBounds(new Rectangle(new Point(490, 10), label63.getPreferredSize()));
-
-                    //---- label64 ----
-                    label64.setText("\u62d2\u7edd\u9ed1\u540d\u5355\u597d\u53cb\u7528\u8bed");
-                    panel23.add(label64);
-                    label64.setBounds(new Rectangle(new Point(490, 140), label64.getPreferredSize()));
-
-                    //======== scrollPane12 ========
-                    {
-                        scrollPane12.setViewportView(refuseGroupByBan);
-                    }
-                    panel23.add(scrollPane12);
-                    scrollPane12.setBounds(490, 30, 440, 100);
-
-                    //======== scrollPane13 ========
-                    {
-                        scrollPane13.setViewportView(refuseFriendByBan);
-                    }
-                    panel23.add(scrollPane13);
-                    scrollPane13.setBounds(490, 165, 440, 100);
-
-                    {
-                        // compute preferred size
-                        Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel23.getComponentCount(); i++) {
-                            Rectangle bounds = panel23.getComponent(i).getBounds();
-                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            {
+                                // compute preferred size
+                                Dimension preferredSize = new Dimension();
+                                for(int i = 0; i < panel24.getComponentCount(); i++) {
+                                    Rectangle bounds = panel24.getComponent(i).getBounds();
+                                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                                }
+                                Insets insets = panel24.getInsets();
+                                preferredSize.width += insets.right;
+                                preferredSize.height += insets.bottom;
+                                panel24.setMinimumSize(preferredSize);
+                                panel24.setPreferredSize(preferredSize);
+                            }
                         }
-                        Insets insets = panel23.getInsets();
-                        preferredSize.width += insets.right;
-                        preferredSize.height += insets.bottom;
-                        panel23.setMinimumSize(preferredSize);
-                        panel23.setPreferredSize(preferredSize);
-                    }
-                }
-                panel19.add(panel23);
-                panel23.setBounds(175, 215, 970, 275);
+                        panel33.add(panel24);
+                        panel24.setBounds(10, 295, 325, 80);
 
-                //======== panel24 ========
-                {
-                    panel24.setBorder(new EtchedBorder());
-                    panel24.setLayout(null);
+                        //======== panel23 ========
+                        {
+                            panel23.setBorder(new EtchedBorder());
+                            panel23.setLayout(null);
 
-                    //---- label65 ----
-                    label65.setText("\u8f93\u5165\u7684\u4e0d\u662fQQ\u53f7\u6216\u7fa4\u53f7");
-                    panel24.add(label65);
-                    label65.setBounds(15, 15, label65.getPreferredSize().width, 25);
-                    panel24.add(banListInputNotId);
-                    banListInputNotId.setBounds(170, 15, 245, 25);
+                            //---- label60 ----
+                            label60.setText("\u5165\u7fa4\u8bcd");
+                            panel23.add(label60);
+                            label60.setBounds(10, 10, 150, label60.getPreferredSize().height);
 
-                    {
-                        // compute preferred size
-                        Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel24.getComponentCount(); i++) {
-                            Rectangle bounds = panel24.getComponent(i).getBounds();
-                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            //======== scrollPane9 ========
+                            {
+                                scrollPane9.setViewportView(addGroup);
+                            }
+                            panel23.add(scrollPane9);
+                            scrollPane9.setBounds(10, 30, 285, 145);
+
+                            //---- label61 ----
+                            label61.setText("\u52a0\u597d\u53cb\u6b22\u8fce\u8bcd");
+                            panel23.add(label61);
+                            label61.setBounds(new Rectangle(new Point(10, 185), label61.getPreferredSize()));
+
+                            //======== scrollPane10 ========
+                            {
+                                scrollPane10.setViewportView(addFriend);
+                            }
+                            panel23.add(scrollPane10);
+                            scrollPane10.setBounds(10, 210, 285, 145);
+                            panel23.add(label62);
+                            label62.setBounds(new Rectangle(new Point(10, 320), label62.getPreferredSize()));
+
+                            //---- label63 ----
+                            label63.setText("\u62d2\u7edd\u9ed1\u540d\u5355\u7fa4\u7528\u8bed");
+                            panel23.add(label63);
+                            label63.setBounds(new Rectangle(new Point(310, 10), label63.getPreferredSize()));
+
+                            //---- label64 ----
+                            label64.setText("\u62d2\u7edd\u9ed1\u540d\u5355\u597d\u53cb\u7528\u8bed");
+                            panel23.add(label64);
+                            label64.setBounds(new Rectangle(new Point(310, 185), label64.getPreferredSize()));
+
+                            //======== scrollPane12 ========
+                            {
+                                scrollPane12.setViewportView(refuseGroupByBan);
+                            }
+                            panel23.add(scrollPane12);
+                            scrollPane12.setBounds(310, 30, 285, 145);
+
+                            //======== scrollPane13 ========
+                            {
+                                scrollPane13.setViewportView(refuseFriendByBan);
+                            }
+                            panel23.add(scrollPane13);
+                            scrollPane13.setBounds(310, 210, 285, 145);
+
+                            {
+                                // compute preferred size
+                                Dimension preferredSize = new Dimension();
+                                for(int i = 0; i < panel23.getComponentCount(); i++) {
+                                    Rectangle bounds = panel23.getComponent(i).getBounds();
+                                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                                }
+                                Insets insets = panel23.getInsets();
+                                preferredSize.width += insets.right;
+                                preferredSize.height += insets.bottom;
+                                panel23.setMinimumSize(preferredSize);
+                                panel23.setPreferredSize(preferredSize);
+                            }
                         }
-                        Insets insets = panel24.getInsets();
-                        preferredSize.width += insets.right;
-                        preferredSize.height += insets.bottom;
-                        panel24.setMinimumSize(preferredSize);
-                        panel24.setPreferredSize(preferredSize);
-                    }
-                }
-                panel19.add(panel24);
-                panel24.setBounds(710, 15, 430, 190);
+                        panel33.add(panel23);
+                        panel23.setBounds(340, 10, 610, 365);
 
-                //======== panel28 ========
-                {
-                    panel28.setBorder(new EtchedBorder());
-                    panel28.setLayout(null);
-
-                    //---- autoAddFriends ----
-                    autoAddFriends.setText("\u81ea\u52a8\u6dfb\u52a0\u975e\u9ed1\u540d\u5355\u597d\u53cb");
-                    panel28.add(autoAddFriends);
-                    autoAddFriends.setBounds(new Rectangle(new Point(10, 10), autoAddFriends.getPreferredSize()));
-
-                    //---- autoInputGroup ----
-                    autoInputGroup.setText("\u81ea\u52a8\u52a0\u5165\u975e\u9ed1\u540d\u5355\u7fa4");
-                    panel28.add(autoInputGroup);
-                    autoInputGroup.setBounds(new Rectangle(new Point(10, 35), autoInputGroup.getPreferredSize()));
-
-                    {
-                        // compute preferred size
-                        Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel28.getComponentCount(); i++) {
-                            Rectangle bounds = panel28.getComponent(i).getBounds();
-                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        {
+                            // compute preferred size
+                            Dimension preferredSize = new Dimension();
+                            for(int i = 0; i < panel33.getComponentCount(); i++) {
+                                Rectangle bounds = panel33.getComponent(i).getBounds();
+                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            }
+                            Insets insets = panel33.getInsets();
+                            preferredSize.width += insets.right;
+                            preferredSize.height += insets.bottom;
+                            panel33.setMinimumSize(preferredSize);
+                            panel33.setPreferredSize(preferredSize);
                         }
-                        Insets insets = panel28.getInsets();
-                        preferredSize.width += insets.right;
-                        preferredSize.height += insets.bottom;
-                        panel28.setMinimumSize(preferredSize);
-                        panel28.setPreferredSize(preferredSize);
                     }
+                    scrollPane21.setViewportView(panel33);
                 }
-                panel19.add(panel28);
-                panel28.setBounds(505, 15, 200, 190);
+                panel19.add(scrollPane21);
+                scrollPane21.setBounds(175, 10, 960, 480);
 
                 {
                     // compute preferred size
@@ -2088,9 +2049,320 @@ public class Setting extends Frame {
                     panel19.setPreferredSize(preferredSize);
                 }
             }
-            tabContain.addTab("\u4e91\u9ed1\u540d\u5355", panel19);
+            tab.addTab("\u4e91\u9ed1\u540d\u5355", panel19);
+
+            //======== panel29 ========
+            {
+                panel29.setLayout(null);
+
+                //======== panel30 ========
+                {
+                    panel30.setBorder(new EtchedBorder());
+                    panel30.setLayout(null);
+
+                    //---- saveGame ----
+                    saveGame.setText("\u4fdd\u5b58");
+                    saveGame.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            saveGame(e);
+                        }
+                    });
+                    panel30.add(saveGame);
+                    saveGame.setBounds(new Rectangle(new Point(35, 435), saveGame.getPreferredSize()));
+
+                    //======== infoPanel7 ========
+                    {
+                        infoPanel7.setBorder(new BevelBorder(BevelBorder.LOWERED));
+                        infoPanel7.setLayout(null);
+
+                        //---- qqText7 ----
+                        qqText7.setText("\u5f53\u524d\u9ab0\u5a18QQ\u53f7:");
+                        infoPanel7.add(qqText7);
+                        qqText7.setBounds(10, 10, 90, 25);
+
+                        //---- nickText7 ----
+                        nickText7.setText("\u5f53\u524d\u9ab0\u5a18\u6635\u79f0:");
+                        infoPanel7.add(nickText7);
+                        nickText7.setBounds(10, 70, nickText7.getPreferredSize().width, 25);
+
+                        //---- qqValue7 ----
+                        qqValue7.setText("text");
+                        infoPanel7.add(qqValue7);
+                        qqValue7.setBounds(10, 40, 140, 25);
+
+                        //---- nickValue7 ----
+                        nickValue7.setText("text");
+                        infoPanel7.add(nickValue7);
+                        nickValue7.setBounds(10, 100, 140, 25);
+
+                        {
+                            // compute preferred size
+                            Dimension preferredSize = new Dimension();
+                            for(int i = 0; i < infoPanel7.getComponentCount(); i++) {
+                                Rectangle bounds = infoPanel7.getComponent(i).getBounds();
+                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            }
+                            Insets insets = infoPanel7.getInsets();
+                            preferredSize.width += insets.right;
+                            preferredSize.height += insets.bottom;
+                            infoPanel7.setMinimumSize(preferredSize);
+                            infoPanel7.setPreferredSize(preferredSize);
+                        }
+                    }
+                    panel30.add(infoPanel7);
+                    infoPanel7.setBounds(5, 5, 145, 135);
+
+                    //======== scrollPane20 ========
+                    {
+
+                        //---- textPane8 ----
+                        textPane8.setText("\u8fd9\u4e2a\u754c\u9762\u7528\u4e8e\u8bbe\u5b9a\uff1a\n\u5404\u79cd\u547d\u4ee4\u56de\u590d\u8bed\n\u5404\u79cd\u62a5\u9519\u56de\u590d\u8bed\n\u4f60\u9700\u8981\u6ce8\u610f\u7684\u662f\uff0c\u7b2c\u4e00\u6b21\u542f\u52a8\u4f1a\u6709\u9ed8\u8ba4\u4fe1\u606f\u751f\u6210\n\u91cc\u9762\u53ef\u80fd\u4f1a\u5939\u6742%s\u8fd9\u6837\u7684\u5b57\u7b26\uff0c\u8fd9\u6307\u4ee3\u5b9e\u9645\u7684\u540d\u79f0\n\u5982\u65e5\u5fd7\u521b\u5efa\u5e76\u5f00\u542f\u680f\u4f4d\u4e2d\u7684%s\u6307\u4ee3\u65e5\u5fd7\u540d\u79f0\n\u5c0f\u961f\u6210\u5458en\u4e2d\u7684%s\u6307\u4ee3\u6210\u5458\u540d\n\u6b64\u5916\uff0c\u4f60\u53ef\u4ee5\u5584\u7528\\n\u5b57\u7b26\u6765\u4ee3\u8868\u56de\u8f66\n\u5b8c\u6bd5\u540e\u8bb0\u5f97\u70b9\u4fdd\u5b58");
+                        scrollPane20.setViewportView(textPane8);
+                    }
+                    panel30.add(scrollPane20);
+                    scrollPane20.setBounds(5, 145, 145, 275);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < panel30.getComponentCount(); i++) {
+                            Rectangle bounds = panel30.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = panel30.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        panel30.setMinimumSize(preferredSize);
+                        panel30.setPreferredSize(preferredSize);
+                    }
+                }
+                panel29.add(panel30);
+                panel30.setBounds(5, 5, 155, 480);
+
+                //======== panel31 ========
+                {
+                    panel31.setBorder(new EtchedBorder());
+                    panel31.setLayout(null);
+
+                    //======== panel32 ========
+                    {
+                        panel32.setBorder(new EtchedBorder());
+                        panel32.setLayout(null);
+
+                        //---- jrrpSwitch ----
+                        jrrpSwitch.setText("\u4eca\u65e5\u4eba\u54c1");
+                        panel32.add(jrrpSwitch);
+                        jrrpSwitch.setBounds(10, 10, jrrpSwitch.getPreferredSize().width, 25);
+
+                        //---- label66 ----
+                        label66.setText("\u4eca\u65e5\u4eba\u54c1\u8bed\u53e5");
+                        panel32.add(label66);
+                        label66.setBounds(10, 40, label66.getPreferredSize().width, 25);
+                        panel32.add(jrrpInfo);
+                        jrrpInfo.setBounds(110, 40, 175, jrrpInfo.getPreferredSize().height);
+
+                        {
+                            // compute preferred size
+                            Dimension preferredSize = new Dimension();
+                            for(int i = 0; i < panel32.getComponentCount(); i++) {
+                                Rectangle bounds = panel32.getComponent(i).getBounds();
+                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            }
+                            Insets insets = panel32.getInsets();
+                            preferredSize.width += insets.right;
+                            preferredSize.height += insets.bottom;
+                            panel32.setMinimumSize(preferredSize);
+                            panel32.setPreferredSize(preferredSize);
+                        }
+                    }
+                    panel31.add(panel32);
+                    panel32.setBounds(10, 10, 300, 80);
+
+                    //======== panel34 ========
+                    {
+                        panel34.setBorder(new EtchedBorder());
+                        panel34.setLayout(null);
+
+                        //---- welcomeSwitch ----
+                        welcomeSwitch.setText("\u5165\u7fa4\u6b22\u8fce\u8bcd");
+                        panel34.add(welcomeSwitch);
+                        welcomeSwitch.setBounds(10, 10, welcomeSwitch.getPreferredSize().width, 25);
+
+                        //---- botList ----
+                        botList.setText("\u5c55\u793a\u9ab0\u5a18\u5217\u8868");
+                        panel34.add(botList);
+                        botList.setBounds(10, 35, botList.getPreferredSize().width, 25);
+
+                        //---- deck ----
+                        deck.setText("\u8c03\u7528\u81ea\u5b9a\u4e49\u6587\u4ef6\u5361\u724c");
+                        panel34.add(deck);
+                        deck.setBounds(new Rectangle(new Point(10, 60), deck.getPreferredSize()));
+
+                        {
+                            // compute preferred size
+                            Dimension preferredSize = new Dimension();
+                            for(int i = 0; i < panel34.getComponentCount(); i++) {
+                                Rectangle bounds = panel34.getComponent(i).getBounds();
+                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            }
+                            Insets insets = panel34.getInsets();
+                            preferredSize.width += insets.right;
+                            preferredSize.height += insets.bottom;
+                            panel34.setMinimumSize(preferredSize);
+                            panel34.setPreferredSize(preferredSize);
+                        }
+                    }
+                    panel31.add(panel34);
+                    panel34.setBounds(10, 95, 300, 375);
+
+                    //======== panel35 ========
+                    {
+                        panel35.setBorder(new EtchedBorder());
+                        panel35.setLayout(null);
+
+                        {
+                            // compute preferred size
+                            Dimension preferredSize = new Dimension();
+                            for(int i = 0; i < panel35.getComponentCount(); i++) {
+                                Rectangle bounds = panel35.getComponent(i).getBounds();
+                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                            }
+                            Insets insets = panel35.getInsets();
+                            preferredSize.width += insets.right;
+                            preferredSize.height += insets.bottom;
+                            panel35.setMinimumSize(preferredSize);
+                            panel35.setPreferredSize(preferredSize);
+                        }
+                    }
+                    panel31.add(panel35);
+                    panel35.setBounds(315, 10, 645, 460);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < panel31.getComponentCount(); i++) {
+                            Rectangle bounds = panel31.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = panel31.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        panel31.setMinimumSize(preferredSize);
+                        panel31.setPreferredSize(preferredSize);
+                    }
+                }
+                panel29.add(panel31);
+                panel31.setBounds(165, 5, 975, 480);
+
+                {
+                    // compute preferred size
+                    Dimension preferredSize = new Dimension();
+                    for(int i = 0; i < panel29.getComponentCount(); i++) {
+                        Rectangle bounds = panel29.getComponent(i).getBounds();
+                        preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                        preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                    }
+                    Insets insets = panel29.getInsets();
+                    preferredSize.width += insets.right;
+                    preferredSize.height += insets.bottom;
+                    panel29.setMinimumSize(preferredSize);
+                    panel29.setPreferredSize(preferredSize);
+                }
+            }
+            tab.addTab("\u9644\u52a0\u529f\u80fd", panel29);
+
+            //======== panel26 ========
+            {
+                panel26.setLayout(null);
+
+                //---- label6 ----
+                label6.setText("\u8fd9\u91cc\u663e\u793a\u4e86\u63d2\u4ef6\u7684\u66f4\u65b0\u65e5\u5fd7");
+                panel26.add(label6);
+                label6.setBounds(20, 15, label6.getPreferredSize().width, 25);
+
+                //======== scrollPane17 ========
+                {
+                    scrollPane17.setViewportView(updateText);
+                }
+                panel26.add(scrollPane17);
+                scrollPane17.setBounds(20, 50, 1115, 430);
+
+                {
+                    // compute preferred size
+                    Dimension preferredSize = new Dimension();
+                    for(int i = 0; i < panel26.getComponentCount(); i++) {
+                        Rectangle bounds = panel26.getComponent(i).getBounds();
+                        preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                        preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                    }
+                    Insets insets = panel26.getInsets();
+                    preferredSize.width += insets.right;
+                    preferredSize.height += insets.bottom;
+                    panel26.setMinimumSize(preferredSize);
+                    panel26.setPreferredSize(preferredSize);
+                }
+            }
+            tab.addTab("\u66f4\u65b0\u65e5\u5fd7", panel26);
+
+            //======== panel27 ========
+            {
+                panel27.setLayout(null);
+
+                //---- label7 ----
+                label7.setText("\u9879\u76ee\u6587\u6863");
+                panel27.add(label7);
+                label7.setBounds(535, 35, label7.getPreferredSize().width, 25);
+
+                //======== scrollPane18 ========
+                {
+
+                    //---- textPane6 ----
+                    textPane6.setText("https://sitcnya.gitbook.io/sinanya/");
+                    scrollPane18.setViewportView(textPane6);
+                }
+                panel27.add(scrollPane18);
+                scrollPane18.setBounds(455, 65, 215, 25);
+
+                //---- label8 ----
+                label8.setText("\u9e23\u8c22");
+                panel27.add(label8);
+                label8.setBounds(545, 100, label8.getPreferredSize().width, 25);
+
+                //======== scrollPane19 ========
+                {
+
+                    //---- textPane7 ----
+                    textPane7.setText("\u611f\u8c22\u4ee5\u4e0b\u4eba\u5458\u7684\u5927\u529b\u652f\u6301:\n\n\u7fb2\u3001Bright \u6211\u7684\u7b2c\u4e00\u6279\u7528\u6237\uff0c\u611f\u8c22\u4f60\u4eec\n\nshiki\u3001\u60e0\u60e0\uff0c\u4f60\u4eec\u7ed9\u6211\u63d0\u4f9b\u4e86\u5f88\u591a\u597d\u7684\u5efa\u8bae\u548c\u601d\u8def\n\n\u79c3\u4e86\u79c3\u4e86\u3001\u590f\u6d45\u79cb \u4f60\u4eec\u5236\u4f5c\u7684rule\u548cdnd\u6cd5\u672f\u5217\u8868\u6587\u672c\u5e2e\u52a9\u7684\u4e0d\u53ea\u662f\u6211\uff0c\u8fd8\u6709\u5f88\u591a\u4eba\n\n\u6708\u4e0a\u4e2d\u5929 \u6211\u6700\u68d2\u7684\u6d4b\u8bd5\u8005\uff0c\u5728\u6211\u7684\u9ab0\u5b50\u6068\u4e0d\u5f97\u4e00\u5929\u5d29\u6e835\u6b21\u7684\u65f6\u5019\uff0c\u575a\u6301\u4e3a\u6211\u6d4b\u8bd5\u5404\u79cd\u529f\u80fd\u3002\u6211\u4e5f\u627f\u8bfa\uff0c\u4f60\u7684\u9700\u6c42\u6211\u6c38\u8fdc\u6392\u5728\u6700\u524d\u9762\u5b8c\u6210\n\n\u8d1d\u5c14SAMA\u55b5 \u611f\u8c22\u4f60\u4e3a\u8fd9\u4e2a\u6838\u5fc3\u5236\u4f5c\u7684\u4eba\u7269\u5361\uff0c\u8f9b\u82e6\u4e86\n\n\u8fd8\u6709\u5f88\u591a\u6ca1\u60f3\u8d77\u6765\u7684\u4eba\uff0c\u8bf7\u968f\u65f6\u79c1\u804a\u63d0\u9192\u6211\u52a0\u5230\u8fd9\u91cc\u6765\u3002");
+                    scrollPane19.setViewportView(textPane7);
+                }
+                panel27.add(scrollPane19);
+                scrollPane19.setBounds(295, 135, 550, 320);
+
+                {
+                    // compute preferred size
+                    Dimension preferredSize = new Dimension();
+                    for(int i = 0; i < panel27.getComponentCount(); i++) {
+                        Rectangle bounds = panel27.getComponent(i).getBounds();
+                        preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                        preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                    }
+                    Insets insets = panel27.getInsets();
+                    preferredSize.width += insets.right;
+                    preferredSize.height += insets.bottom;
+                    panel27.setMinimumSize(preferredSize);
+                    panel27.setPreferredSize(preferredSize);
+                }
+            }
+            tab.addTab("\u5173\u4e8e", panel27);
         }
-        add(tabContain, BorderLayout.CENTER);
+        add(tab, BorderLayout.CENTER);
 
         //======== panel22 ========
         {
@@ -2129,7 +2401,7 @@ public class Setting extends Frame {
                 //---- label5 ----
                 label5.setText("\u4fdd\u5b58\u6210\u529f");
                 panel25.add(label5);
-                label5.setBounds(140, 35, 60, 20);
+                label5.setBounds(140, 35, 60, 25);
 
                 //---- button1 ----
                 button1.setText("\u786e\u5b9a");
@@ -2140,7 +2412,7 @@ public class Setting extends Frame {
                     }
                 });
                 panel25.add(button1);
-                button1.setBounds(new Rectangle(new Point(130, 80), button1.getPreferredSize()));
+                button1.setBounds(130, 80, button1.getPreferredSize().width, 25);
 
                 {
                     // compute preferred size
@@ -2275,7 +2547,19 @@ public class Setting extends Frame {
         entityBanProperties.setFrequentnessBanInfo(frequentnessBanInfo.getText().replace("\\n", "\n"));
         entityBanProperties.setBanGroupAndUserByFre(banGroupAndUserByFre.isSelected());
         entityBanProperties.setBanUserByFre(banUserByFre.isSelected());
+        entityBanProperties.setAutoAddFriends(autoAddFriends.isSelected());
+        entityBanProperties.setAutoAddFriends(autoInputGroup.isSelected());
         new InsertProperties().insertProperties(entityBanProperties);
+        JOptionPane.showMessageDialog(null, "保存成功");
+    }
+
+    private void saveGame(MouseEvent e){
+        entityGame.setJrrpSwitch(jrrpSwitch.isSelected());
+        entityGame.setJrrpInfo(jrrpInfo.getText().replace("\\n", "\n"));
+        entityGame.setWelcomeSwitch(welcomeSwitch.isSelected());
+        entityGame.setBotList(botList.isSelected());
+        entityGame.setDeck(deck.isSelected());
+        new dice.sinanya.db.properties.game.InsertProperties().insertProperties(entityGame);
         JOptionPane.showMessageDialog(null, "保存成功");
     }
 
@@ -2290,10 +2574,12 @@ public class Setting extends Frame {
         qqValue4.setText(qqId);
         qqValue5.setText(qqId);
         qqValue6.setText(qqId);
+        qqValue7.setText(qqId);
         nickValue3.setText(nick);
         nickValue4.setText(nick);
         nickValue5.setText(nick);
         nickValue6.setText(nick);
+        nickValue7.setText(nick);
 
         Prometheus.setSelected(entityBanProperties.isPrometheus());
         heap.setSelected(entityBanProperties.isHeap());
@@ -2372,6 +2658,14 @@ public class Setting extends Frame {
         success.setText(entitySystemProperties.getSUCCESS());
         failure.setText(entitySystemProperties.getFAILURE());
         fumble.setText(entitySystemProperties.getFUMBLE());
+        autoInputGroup.setSelected(entityBanProperties.isAutoInputGroup());
+        autoAddFriends.setSelected(entityBanProperties.isAutoAddFriends());
+
+        jrrpSwitch.setSelected(entityGame.isJrrpSwitch());
+        jrrpInfo.setText(entityGame.getJrrpInfo());
+        welcomeSwitch.setSelected(entityGame.isWelcomeSwitch());
+        botList.setSelected(entityGame.isBotList());
+        deck.setSelected(entityGame.isDeck());
     }
 
     public Setting() {

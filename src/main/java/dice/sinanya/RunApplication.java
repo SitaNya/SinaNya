@@ -81,6 +81,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     public int startup() {
         initMessagesSystemProperties();
         initMessagesBanProperties();
+        initMessagesGameProperties();
         entitySystemProperties.setSystemDir(CQ.getAppDirectory());
         return 0;
     }
