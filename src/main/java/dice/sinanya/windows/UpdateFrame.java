@@ -62,7 +62,9 @@ public class UpdateFrame extends JFrame {
     }
 
     private void button1MouseClicked(MouseEvent e) {
-        updateForDice.update();
+        if (updateButton.isEnabled()) {
+            updateForDice.update();
+        }
     }
 
     private void initComponents() {
