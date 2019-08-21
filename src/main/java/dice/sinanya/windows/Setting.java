@@ -507,7 +507,6 @@ public class Setting extends Frame {
         //======== this ========
         setTitle("SinaNya\u8dd1\u56e2\u9ab0\u70b9\u6838\u5fc3 By SitaNya");
         setBackground(new Color(60, 63, 65));
-        setAlwaysOnTop(true);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -2080,6 +2079,7 @@ public class Setting extends Frame {
         //======== dialog1 ========
         {
             dialog1.setAlwaysOnTop(true);
+            dialog1.setModal(true);
             Container dialog1ContentPane = dialog1.getContentPane();
             dialog1ContentPane.setLayout(null);
 
