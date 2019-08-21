@@ -5,6 +5,7 @@ import dice.sinanya.system.MessagesSystem;
 import org.apache.commons.lang.StringUtils;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -12,6 +13,7 @@ import java.util.concurrent.*;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
+import static dice.sinanya.windows.imal.HttpGet.checkHttpFileExist;
 import static dice.sinanya.windows.imal.HttpGet.sendGet;
 
 /**
@@ -59,6 +61,8 @@ public class UpdateForDice {
             try {
                 downLoadFromUrl("http://123.207.150.160/com.sinanya.dice.jar", "com.sinanya.dice.jar", downJarProgress, jarDir.getPath());
                 downLoadFromUrl("http://123.207.150.160/com.sinanya.dice.json", "com.sinanya.dice.json", downJsonProgress, jarDir.getPath());
+                Rectangle rect = new Rectangle(0, 0, downJsonProgress.getWidth(), downJsonProgress.getHeight());
+                downJsonProgress.paintImmediately(rect);
                 cachedThreadPool.shutdown();
             } catch (IOException e) {
                 CQ.logError("下载文件异常", StringUtils.join(e.getStackTrace(), "\n"));
@@ -85,6 +89,10 @@ public class UpdateForDice {
 
     public boolean checkNeedUpdate(){
         return !MessagesSystem.VERSIONS.equals(sendGet("http://123.207.150.160/version"));
+    }
+
+    public boolean serverFileExist() {
+        return checkHttpFileExist("http://123.207.150.160/com.sinanya.dice.json") && checkHttpFileExist("http://123.207.150.160/com.sinanya.dice.jar");
     }
 
     private void downLoadFromUrl(String urlStr, String fileName, JProgressBar jProgressBar, String savePath) throws IOException {

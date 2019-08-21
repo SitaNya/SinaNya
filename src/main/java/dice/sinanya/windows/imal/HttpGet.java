@@ -5,6 +5,7 @@ import org.apache.commons.lang.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
@@ -48,6 +49,16 @@ public class HttpGet {
             CQ.logError("发送GET请求出现异常", StringUtils.join(e.getStackTrace(), "\n"));
         }
         return result.toString();
+    }
+
+    public static boolean checkHttpFileExist(String url) {
+        try {
+            URL pathUrl = new URL(url);
+            HttpURLConnection urlcon = (HttpURLConnection) pathUrl.openConnection();
+            return urlcon.getResponseCode() < 400;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 

@@ -9,18 +9,23 @@ package dice.sinanya.update;
  * 类说明:
  */
 
+import org.apache.commons.lang.StringUtils;
+
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
+
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
 public class ProgressBarThread implements Runnable {
 
-    private ArrayList<Integer> proList = new ArrayList<Integer>();
+    private final ArrayList<Integer> proList = new ArrayList<Integer>();
     private int progress;//当前进度
     private int totalSize;//总大小
     private boolean run = true;
-    JProgressBar jProgressBar;
+    private JProgressBar jProgressBar;
 
-    public ProgressBarThread(int totalSize, JProgressBar jProgressBar) {
+    ProgressBarThread(int totalSize, JProgressBar jProgressBar) {
         this.totalSize = totalSize;
         this.jProgressBar = jProgressBar;
     }
@@ -28,7 +33,7 @@ public class ProgressBarThread implements Runnable {
     /**
      * @param progress 进度
      */
-    public void updateProgress(int progress) {
+    void updateProgress(int progress) {
         synchronized (this.proList) {
             if (this.run) {
                 this.proList.add(progress);
@@ -37,7 +42,7 @@ public class ProgressBarThread implements Runnable {
         }
     }
 
-    public void finish() {
+    void finish() {
         this.run = false;
         //关闭进度条
     }
@@ -52,12 +57,14 @@ public class ProgressBarThread implements Runnable {
                     }
                     synchronized (proList) {
                         this.progress += this.proList.remove(0);
-                        jProgressBar.setValue(progress);
+                        jProgressBar.setValue((int) (progress * 1.0 / totalSize * 100));
+                        Rectangle rect = new Rectangle(0, 0, jProgressBar.getWidth(), jProgressBar.getHeight());
+                        jProgressBar.paintImmediately(rect);
                     }
                 }
-                System.err.println("下载完成");
+                CQ.logInfo("更新", "下载完成");
             } catch (Exception e) {
-                e.printStackTrace();
+                CQ.logError("更新", "失败: " + e.getMessage() + "\n" + StringUtils.join(e.getStackTrace(), "\n"));
             }
         }
     }
