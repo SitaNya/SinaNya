@@ -50,6 +50,9 @@ public class EntityBanProperties {
     boolean banGroupAndUserByFre;
     boolean banUserByFre;
 
+    boolean autoInputGroup;
+    boolean autoAddFriends;
+
     public EntityBanProperties() {
         cloudBan = true;
         Prometheus = false;
@@ -91,6 +94,25 @@ public class EntityBanProperties {
 
         clearGroupByOffInfo = "已在群: %s 中超过 %s 日未响应且处于关闭状态，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题";
         clearGroupInfo = "已在群: %s 中超过 %s 日未响应，即将退群。\n此次退群不会记录黑名单，如遇到问题请至群162279609进行反馈或使用退群命令缓解问题";
+
+        autoInputGroup=true;
+        autoAddFriends=true;
+    }
+
+    public boolean isAutoInputGroup() {
+        return autoInputGroup;
+    }
+
+    public void setAutoInputGroup(boolean autoInputGroup) {
+        this.autoInputGroup = autoInputGroup;
+    }
+
+    public boolean isAutoAddFriends() {
+        return autoAddFriends;
+    }
+
+    public void setAutoAddFriends(boolean autoAddFriends) {
+        this.autoAddFriends = autoAddFriends;
     }
 
     public boolean isBanGroupAndUserByFre() {

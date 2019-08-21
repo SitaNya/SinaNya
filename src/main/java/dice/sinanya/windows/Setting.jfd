@@ -1647,6 +1647,74 @@ new FormModel {
 					"title": "监控"
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panel26"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label6"
+						"text": "这里显示了插件的更新日志"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 20
+						"y": 15
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane17"
+						add( new FormComponent( "javax.swing.JTextPane" ) {
+							name: "textPane5"
+							auxiliary() {
+								"JavaCodeGenerator.variableName": "updateText"
+							}
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 20
+						"y": 50
+						"width": 1115
+						"height": 430
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "更新日志"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panel27"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label7"
+						"text": "项目文档"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 535
+						"y": 35
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane18"
+						add( new FormComponent( "javax.swing.JTextPane" ) {
+							name: "textPane6"
+							"text": "https://sitcnya.gitbook.io/sinanya/"
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 455
+						"y": 60
+						"width": 215
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label8"
+						"text": "鸣谢"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 545
+						"y": 100
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane19"
+						add( new FormComponent( "javax.swing.JTextPane" ) {
+							name: "textPane7"
+							"text": "感谢以下人员的大力支持:\n\n羲、Bright 我的第一批用户，感谢你们\n\nshiki、惠惠，你们给我提供了很多好的建议和思路\n\n秃了秃了、夏浅秋 你们制作的rule和dnd法术列表文本帮助的不只是我，还有很多人\n\n月上中天 我最棒的测试者，在我的骰子恨不得一天崩溃5次的时候，坚持为我测试各种功能。我也承诺，你的需求我永远排在最前面完成\n\n贝尔SAMA喵 感谢你为这个核心制作的人物卡，辛苦了\n\n还有很多没想起来的人，请随时私聊提醒我加到这里来。"
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 295
+						"y": 135
+						"width": 550
+						"height": 320
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "关于"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 					name: "panel19"
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 						name: "panel20"
@@ -1905,7 +1973,7 @@ new FormModel {
 						"border": new javax.swing.border.EtchedBorder( 1, null, null )
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "label65"
-							"text": "黑名单录入报错:输入的不是QQ号或群号"
+							"text": "输入的不是QQ号或群号"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"x": 15
 							"y": 15
@@ -1917,87 +1985,48 @@ new FormModel {
 								"JavaCodeGenerator.variableName": "banListInputNotId"
 							}
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"x": 265
+							"x": 170
 							"y": 15
 							"height": 25
-							"width": 355
+							"width": 245
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 710
+						"y": 15
+						"width": 430
+						"height": 190
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+						name: "panel28"
+						"border": #EtchedBorder0
+						add( new FormComponent( "javax.swing.JCheckBox" ) {
+							name: "checkBox10"
+							"text": "自动添加非黑名单好友"
+							auxiliary() {
+								"JavaCodeGenerator.variableName": "autoAddFriends"
+							}
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 10
+							"y": 10
+						} )
+						add( new FormComponent( "javax.swing.JCheckBox" ) {
+							name: "checkBox11"
+							"text": "自动加入非黑名单群"
+							auxiliary() {
+								"JavaCodeGenerator.variableName": "autoInputGroup"
+							}
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 10
+							"y": 35
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 200
+						"height": 190
 						"x": 505
 						"y": 15
-						"width": 635
-						"height": 190
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "云黑名单"
-				} )
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
-					name: "panel26"
-					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label6"
-						"text": "这里显示了插件的更新日志"
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 20
-						"y": 15
-					} )
-					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-						name: "scrollPane17"
-						add( new FormComponent( "javax.swing.JTextPane" ) {
-							name: "textPane5"
-							auxiliary() {
-								"JavaCodeGenerator.variableName": "updateText"
-							}
-						} )
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 20
-						"y": 50
-						"width": 1115
-						"height": 430
-					} )
-				}, new FormLayoutConstraints( null ) {
-					"title": "更新日志"
-				} )
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
-					name: "panel27"
-					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label7"
-						"text": "项目文档"
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 535
-						"y": 35
-					} )
-					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-						name: "scrollPane18"
-						add( new FormComponent( "javax.swing.JTextPane" ) {
-							name: "textPane6"
-							"text": "https://sitcnya.gitbook.io/sinanya/"
-						} )
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 455
-						"y": 60
-						"width": 215
-					} )
-					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label8"
-						"text": "鸣谢"
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 545
-						"y": 100
-					} )
-					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-						name: "scrollPane19"
-						add( new FormComponent( "javax.swing.JTextPane" ) {
-							name: "textPane7"
-							"text": "感谢以下人员的大力支持:\n\n羲、Bright 我的第一批用户，感谢你们\n\nshiki、惠惠，你们给我提供了很多好的建议和思路\n\n秃了秃了、夏浅秋 你们制作的rule和dnd法术列表文本帮助的不只是我，还有很多人\n\n月上中天 我最棒的测试者，在我的骰子恨不得一天崩溃5次的时候，坚持为我测试各种功能。我也承诺，你的需求我永远排在最前面完成\n\n贝尔SAMA喵 感谢你为这个核心制作的人物卡，辛苦了\n\n还有很多没想起来的人，请随时私聊提醒我加到这里来。"
-						} )
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 295
-						"y": 135
-						"width": 550
-						"height": 320
-					} )
-				}, new FormLayoutConstraints( null ) {
-					"title": "关于"
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"

@@ -18,7 +18,6 @@ public class GetMessagesProperties {
      */
     public static EntitySystemProperties entitySystemProperties;
     public static EntityBanProperties entityBanProperties;
-    private static org.apache.log4j.Logger log = org.apache.log4j.LogManager.getLogger(GetMessagesProperties.class.getName());
 
     private GetMessagesProperties() {
         throw new IllegalStateException("Utility class");

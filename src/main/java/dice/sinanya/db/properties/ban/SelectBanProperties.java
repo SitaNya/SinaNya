@@ -68,6 +68,8 @@ public class SelectBanProperties {
                         entityBanProperties.setPrometheusPort(set.getInt("prometheusPort"));
                         entityBanProperties.setBanGroupAndUserByFre(set.getBoolean("banGroupAndUserByFre"));
                         entityBanProperties.setBanUserByFre(set.getBoolean("banUserByFre"));
+                        entityBanProperties.setAutoInputGroup(set.getBoolean("autoInputGroup"));
+                        entityBanProperties.setAutoAddFriends(set.getBoolean("autoAddFriends"));
                         i++;
                     }
                 }

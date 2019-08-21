@@ -434,7 +434,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
      */
     @Override
     public int requestAddFriend(int subtype, int sendTime, long fromQQ, String msg, String responseFlag) {
-        if (!checkQqInBanList(String.valueOf(fromQQ))) {
+        if (!checkQqInBanList(String.valueOf(fromQQ)) && (entityBanProperties.isAutoAddFriends()&&entityBanProperties.isCloudBan())) {
             CQ.sendGroupMsg(162279609, "收到" + makeNickToSender(getUserName(fromQQ)) + "(" + fromQQ + ")的好友邀请，已同意");
             CQ.setFriendAddRequest(responseFlag, REQUEST_ADOPT, "");
             CQ.sendPrivateMsg(fromQQ, entityBanProperties.getAddFriend());
@@ -460,7 +460,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
     @Override
     public int requestAddGroup(int subtype, int sendTime, long fromGroup, long fromQQ, String msg,
                                String responseFlag) {
-        if (subtype == 2) {
+        if (subtype == 2 &&(entityBanProperties.isAutoInputGroup()&&entityBanProperties.isCloudBan())) {
             if (!checkQqInBanList(String.valueOf(fromQQ)) && !checkGroupInBanList(String.valueOf(fromGroup))) {
                 CQ.setGroupAddRequestV2(responseFlag, REQUEST_GROUP_INVITE, REQUEST_ADOPT, "");
                 CQ.sendGroupMsg(162279609, "收到" + makeNickToSender(getUserName(fromQQ)) + "(" + fromQQ + ")的群" + makeGroupNickToSender(getGroupName(fromGroup)) + "("
@@ -503,11 +503,11 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
                     adminList.put(member.getQqId(),member.getNick());
                 }
             }
-            if (adminList.size() == 0) {
+            if (adminList.size() == 0||CQ.getGroupMemberInfo(Long.parseLong(entityTypeMessages.getFromGroup()),CQ.getLoginQQ()).getAuthority()==2) {
                 insertQqBanList(String.valueOf(owner), "在群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "("
-                        + entityTypeMessages.getFromGroup() + ")中被禁言，无管理员强制拉黑群主: " + makeNickToSender(ownerNick) + "(" + owner + ")");
+                        + entityTypeMessages.getFromGroup() + ")中被禁言，确认是被群主禁言，强制拉黑群主: " + makeNickToSender(ownerNick) + "(" + owner + ")");
                 CQ.sendGroupMsg(162279609, "在群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "("
-                        + entityTypeMessages.getFromGroup() + ")中被禁言，无管理员强制拉黑群主: " + makeNickToSender(ownerNick) + "(" + owner + ")");
+                        + entityTypeMessages.getFromGroup() + ")中被禁言，确认是被群主禁言，强制拉黑群主: " + makeNickToSender(ownerNick) + "(" + owner + ")");
             }else{
                 StringBuilder adminListInfo=new StringBuilder();
                 adminListInfo.append("其中管理员列表为: ");
