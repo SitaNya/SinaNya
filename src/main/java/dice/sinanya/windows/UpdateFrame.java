@@ -22,7 +22,7 @@ public class UpdateFrame extends JFrame {
     UpdateForDice updateForDice;
 
     public UpdateFrame() {
-        this.updateForDice = new UpdateForDice();
+        this.updateForDice = new UpdateForDice(downJarProgress,downJsonProgress);
         initComponents();
         updateButton.setEnabled(false);
         updateVersion.setText(MessagesSystem.VERSIONS);
@@ -49,7 +49,6 @@ public class UpdateFrame extends JFrame {
             updateButton.setEnabled(false);
         }
 
-
     }
 
     private void thisWindowClosing(WindowEvent e) {
@@ -75,6 +74,11 @@ public class UpdateFrame extends JFrame {
         label9 = new JLabel();
         needUpdate = new JLabel();
         updateButton = new JButton();
+        panel3 = new JPanel();
+        downJarProgress = new JProgressBar();
+        downJsonProgress = new JProgressBar();
+        label11 = new JLabel();
+        label12 = new JLabel();
 
         //======== this ========
         setTitle("\u5347\u7ea7\u7a97\u53e3");
@@ -141,7 +145,7 @@ public class UpdateFrame extends JFrame {
             }
         }
         contentPane.add(panel1);
-        panel1.setBounds(20, 100, 200, 105);
+        panel1.setBounds(225, 20, 200, 105);
 
         //======== panel2 ========
         {
@@ -196,7 +200,44 @@ public class UpdateFrame extends JFrame {
             }
         });
         contentPane.add(updateButton);
-        updateButton.setBounds(new Rectangle(new Point(455, 345), updateButton.getPreferredSize()));
+        updateButton.setBounds(new Rectangle(new Point(75, 100), updateButton.getPreferredSize()));
+
+        //======== panel3 ========
+        {
+            panel3.setBorder(new EtchedBorder());
+            panel3.setLayout(null);
+            panel3.add(downJarProgress);
+            downJarProgress.setBounds(10, 35, 515, 9);
+            panel3.add(downJsonProgress);
+            downJsonProgress.setBounds(10, 80, 515, 9);
+
+            //---- label11 ----
+            label11.setText("\u4e0b\u8f7dJar\u5305");
+            panel3.add(label11);
+            label11.setBounds(new Rectangle(new Point(10, 10), label11.getPreferredSize()));
+
+            //---- label12 ----
+            label12.setText("\u4e0b\u8f7dJSON\u6587\u4ef6");
+            panel3.add(label12);
+            label12.setBounds(new Rectangle(new Point(10, 55), label12.getPreferredSize()));
+
+            {
+                // compute preferred size
+                Dimension preferredSize = new Dimension();
+                for(int i = 0; i < panel3.getComponentCount(); i++) {
+                    Rectangle bounds = panel3.getComponent(i).getBounds();
+                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                }
+                Insets insets = panel3.getInsets();
+                preferredSize.width += insets.right;
+                preferredSize.height += insets.bottom;
+                panel3.setMinimumSize(preferredSize);
+                panel3.setPreferredSize(preferredSize);
+            }
+        }
+        contentPane.add(panel3);
+        panel3.setBounds(430, 20, 535, 105);
 
         {
             // compute preferred size
@@ -231,5 +272,10 @@ public class UpdateFrame extends JFrame {
     private JLabel label9;
     private JLabel needUpdate;
     private JButton updateButton;
+    private JPanel panel3;
+    private JProgressBar downJarProgress;
+    private JProgressBar downJsonProgress;
+    private JLabel label11;
+    private JLabel label12;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
