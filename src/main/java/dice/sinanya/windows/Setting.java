@@ -2080,6 +2080,7 @@ public class Setting extends Frame {
         //======== dialog1 ========
         {
             dialog1.setModal(true);
+            dialog1.setAlwaysOnTop(true);
             Container dialog1ContentPane = dialog1.getContentPane();
             dialog1ContentPane.setLayout(null);
 

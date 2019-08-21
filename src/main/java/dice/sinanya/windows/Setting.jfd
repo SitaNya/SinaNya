@@ -2017,6 +2017,7 @@ new FormModel {
 			"$locationPolicy": 1
 			"modal": true
 			"$sizePolicy": 1
+			"alwaysOnTop": true
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "panel25"
 				add( new FormComponent( "javax.swing.JLabel" ) {
