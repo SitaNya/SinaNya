@@ -14,22 +14,48 @@ import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemPrope
  * 类说明:
  */
 public class UpdateForDice {
-    String dir;
-    public UpdateForDice(String dir){
-        this.dir=dir;
+    File jar;
+    File json;
+    File jarDir;
+    boolean jarExists;
+    boolean jsonExists;
+    boolean jarDirExists;
+
+    public UpdateForDice() {
+        String dir = entitySystemProperties.getSystemDir();
+        this.jar = new File(dir + "/../com.sinanya.dice.jar");
+        this.json = new File(dir + "/../com.sinanya.dice.json");
+
+        this.jarDir = new File(dir + "/../");
+
+        this.jarExists = jar.exists();
+        this.jsonExists = json.exists();
+        this.jarDirExists = jar.exists() && jarDir.isDirectory();
     }
 
     public void update(){
-        File jar=new File(entitySystemProperties.getSystemDir()+"/../com.sinanya.dice.jar");
-        File json=new File(entitySystemProperties.getSystemDir()+"/../com.sinanya.dice.json");
-
-        File jarDir = new File(entitySystemProperties.getSystemDir() + "/../");
-        File jsonDir = new File(entitySystemProperties.getSystemDir() + "/../");
-        if (jar.exists() && json.exists() && jar.delete() && json.delete() && jarDir.isDirectory() && jsonDir.isDirectory()) {
+        if (jar.delete() && json.delete()) {
             //TODO 下载文件到指定路径
             JOptionPane.showMessageDialog(null, "更新完毕");
         }else{
             JOptionPane.showMessageDialog(null, "更新失败");
         }
+    }
+
+    public boolean isJarExists() {
+        return jarExists;
+    }
+
+    public boolean isJsonExists() {
+        return jsonExists;
+    }
+
+    public boolean isJarDirExists() {
+        return jarDirExists;
+    }
+
+    public boolean checkNeedUpdate(){
+        //TODO
+        return true;
     }
 }
