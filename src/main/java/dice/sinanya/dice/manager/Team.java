@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
+import static dice.sinanya.system.MessagesSystem.NONE;
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
@@ -59,6 +60,10 @@ public class Team implements GetDb, Role, AtQq {
     public void set() {
         String tag = TAG_TEAM_SET;
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
+        if (msg.equals(NONE)){
+            sender(entityTypeMessages,"不可录入空成员");
+            return;
+        }
         ArrayList<String> qqList = getAtQqList(msg);
         for (String qq : qqList) {
             sender(entityTypeMessages, "已将玩家: [CQ:at,qq=" + qq + "]加入小队。可以使用.team查看队伍信息,.team hp/san对成员状态进行强制调整\n其余使用方式请查看.help命令");

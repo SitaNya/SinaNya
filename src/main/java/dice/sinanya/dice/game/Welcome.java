@@ -3,9 +3,11 @@ package dice.sinanya.dice.game;
 import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.entity.EntityWelcome;
+import dice.sinanya.exceptions.NotEnableException;
 
 import static dice.sinanya.system.MessagesTag.TAG_WELCOME;
 import static dice.sinanya.system.MessagesWelcome.welcomes;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityGame;
 import static dice.sinanya.tools.getinfo.Welcome.insertWelcome;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
 import static dice.sinanya.tools.makedata.Sender.sender;
@@ -25,7 +27,8 @@ public class Welcome implements MakeNickToSender {
         this.entityTypeMessages = entityTypeMessages;
     }
 
-    public void set() {
+    public void set() throws NotEnableException {
+        checkEnable();
         String tag = TAG_WELCOME;
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
@@ -47,10 +50,16 @@ public class Welcome implements MakeNickToSender {
             insertWelcome(Long.parseLong(entityTypeMessages.getFromGroup()), entityWelcome);
             welcomes.put(groupId, entityWelcome);
             sender(entityTypeMessages, "已开启，原有的欢迎词已保留并恢复");
-        } else if (welcomes.get(groupId).isEnable()) {
+        } else if (!welcomes.containsKey(groupId) || (welcomes.containsKey(groupId) && welcomes.get(groupId).isEnable())) {
             EntityWelcome entityWelcome = new EntityWelcome(true, msg);
             insertWelcome(groupId, entityWelcome);
             sender(entityTypeMessages, "已录入,置为开启");
+        }
+    }
+
+    private void checkEnable() throws NotEnableException {
+        if (!entityGame.isNameSwitch()) {
+            throw new NotEnableException(entityTypeMessages);
         }
     }
 }
