@@ -79,10 +79,6 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
      */
     @Override
     public int startup() {
-        initMessagesSystemProperties();
-        initMessagesBanProperties();
-        initMessagesGameProperties();
-        entitySystemProperties.setSystemDir(CQ.getAppDirectory());
         return 0;
     }
 
@@ -119,6 +115,10 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
 
     @Override
     public int enable() {
+        initMessagesSystemProperties();
+        initMessagesBanProperties();
+        initMessagesGameProperties();
+        entitySystemProperties.setSystemDir(CQ.getAppDirectory());
         tagMe = String.format(atTag, CQ.getLoginQQ());
         new SelectSystemProperties().flushProperties();
         new SelectBanProperties().flushProperties();
@@ -489,7 +489,7 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
             return MSG_INTERCEPT;
         }
 
-        if (checkBeBan(entityTypeMessages.getMsg()) && entityBanProperties.isBanGroupBecauseBan()) {
+        if (checkBeBan(entityTypeMessages) && entityBanProperties.isBanGroupBecauseBan()) {
             sender(entityTypeMessages, "于群" + makeGroupNickToSender(getGroupName(entityTypeMessages)) + "("
                     + entityTypeMessages.getFromGroup() + ")中被禁言，已退出并拉黑");
             List<Member> members = CQ.getGroupMemberList(Long.parseLong(entityTypeMessages.getFromGroup()));
@@ -527,8 +527,8 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         return MSG_IGNORE;
     }
 
-    private boolean checkBeBan(String msg) {
-        return msg.contains("禁言") && msg.contains(String.valueOf(CQ.getLoginQQ()));
+    private boolean checkBeBan(EntityTypeMessages entityTypeMessages) {
+        return entityTypeMessages.getMsg().contains("禁言") && entityTypeMessages.getMsg().contains(String.valueOf(CQ.getLoginQQ())) && entityTypeMessages.getMsg().contains("被") && entityTypeMessages.getFromQq().equals("1000000");
     }
 
     private void leave(MessagesTypes messagesTypes, String groupId) {

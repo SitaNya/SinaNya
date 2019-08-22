@@ -161,4 +161,6 @@ public interface MessagesTag {
     String TAG_RULES = HEADER + "rule[ ]*.*";
 
     String TAG_MAGIC = HEADER + "magic[ ]*.*";
+
+    String TAG_WELCOME = HEADER + "welcome[ ]*.*";
 }

@@ -4,6 +4,7 @@ import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.entity.EntityWelcome;
 
+import static dice.sinanya.system.MessagesTag.TAG_WELCOME;
 import static dice.sinanya.system.MessagesWelcome.welcomes;
 import static dice.sinanya.tools.getinfo.Welcome.insertWelcome;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
