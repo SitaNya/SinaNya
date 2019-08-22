@@ -8,6 +8,7 @@ import static dice.sinanya.system.MessagesTag.TAG_WELCOME;
 import static dice.sinanya.system.MessagesWelcome.welcomes;
 import static dice.sinanya.tools.getinfo.Welcome.insertWelcome;
 import static dice.sinanya.tools.makedata.MakeMessages.deleteTag;
+import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
  * @author SitaNya
@@ -27,12 +28,29 @@ public class Welcome implements MakeNickToSender {
     public void set() {
         String tag = TAG_WELCOME;
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
+        long groupId = Long.parseLong(entityTypeMessages.getFromGroup());
         if (msg.equals("close")) {
-            if (welcomes.containsKey(Long.parseLong(entityTypeMessages.getFromGroup()))) {
-                EntityWelcome entityWelcome = welcomes.get(Long.parseLong(entityTypeMessages.getFromGroup()));
-                entityWelcome.setEnable(false);
-                insertWelcome(Long.parseLong(entityTypeMessages.getFromGroup()), entityWelcome);
+            String text = "";
+            if (welcomes.containsKey(groupId)) {
+                text = welcomes.get(groupId).getText();
             }
+            EntityWelcome entityWelcome = new EntityWelcome(false, text);
+            insertWelcome(Long.parseLong(entityTypeMessages.getFromGroup()), entityWelcome);
+            welcomes.put(groupId, entityWelcome);
+            sender(entityTypeMessages, "已关闭，将保留原欢迎词设置");
+        } else if (msg.equals("open")) {
+            String text = "";
+            if (welcomes.containsKey(groupId)) {
+                text = welcomes.get(groupId).getText();
+            }
+            EntityWelcome entityWelcome = new EntityWelcome(true, text);
+            insertWelcome(Long.parseLong(entityTypeMessages.getFromGroup()), entityWelcome);
+            welcomes.put(groupId, entityWelcome);
+            sender(entityTypeMessages, "已开启，原有的欢迎词已保留并恢复");
+        } else if (welcomes.get(groupId).isEnable()) {
+            EntityWelcome entityWelcome = new EntityWelcome(true, msg);
+            insertWelcome(groupId, entityWelcome);
+            sender(entityTypeMessages, "已录入,置为开启");
         }
     }
 }

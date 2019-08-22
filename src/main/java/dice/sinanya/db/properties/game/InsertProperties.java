@@ -23,7 +23,7 @@ public class InsertProperties {
     public void insertProperties(EntityGame entityGame) {
         try (Connection conn = DbUtil.getConnection()) {
             //language=MySQL
-            String sql = "replace into gameProperties(botId,jrrpSwitch,jrrpInfo,welcomeSwitch,botList,deck)  VALUES (?,?,?,?,?,?);";
+            String sql = "replace into gameProperties(botId,jrrpSwitch,jrrpInfo,welcomeSwitch,botList,deck,nameSwitch)  VALUES (?,?,?,?,?,?,?);";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, String.valueOf(CQ.getLoginQQ()));
                 ps.setBoolean(2, entityGame.isJrrpSwitch());
@@ -31,6 +31,7 @@ public class InsertProperties {
                 ps.setBoolean(4, entityGame.isWelcomeSwitch());
                 ps.setBoolean(5, entityGame.isBotList());
                 ps.setBoolean(6, entityGame.isDeck());
+                ps.setBoolean(7,entityGame.isNameSwitch());
                 ps.executeUpdate();
             }
         } catch (SQLException e) {

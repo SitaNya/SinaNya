@@ -23,14 +23,14 @@ public class GetName {
     /**
      * @return 中文人名
      */
-    private static String getChineseName() {
+    public static String getChineseName() {
         return getFromList(ChineseSurname) + getFromList(ChineseFirstName);
     }
 
     /**
      * @return 英文人名（含有中文翻译）
      */
-    private static String getEnglishName() {
+    public static String getEnglishName() {
         String firstName = getFromList(EnglishFirstName);
         String lastName = getFromList(EnglishLastName);
         return firstName + "·" + lastName + "(" + EnglishFirstNameChineseTranslation.get(EnglishFirstName.indexOf(firstName)) + "·" + EnglishLastNameChineseTranslation.get(EnglishLastName.indexOf(lastName)) + ")";
@@ -39,7 +39,7 @@ public class GetName {
     /**
      * @return 日本人名（中间带有空格）
      */
-    private static String getJapaneseName() {
+    public static String getJapaneseName() {
         return getFromList(JapaneseSurname) + " " + getFromList(JapaneseFirstName);
     }
 

@@ -2,7 +2,10 @@ package dice.sinanya.flow;
 
 import com.sobte.cqp.jcq.entity.Member;
 import dice.sinanya.dice.MakeNickToSender;
+import dice.sinanya.dice.game.DiceList;
+import dice.sinanya.dice.game.GroupInfo;
 import dice.sinanya.dice.game.Jrrp;
+import dice.sinanya.dice.game.Name;
 import dice.sinanya.dice.get.*;
 import dice.sinanya.dice.getbook.Book;
 import dice.sinanya.dice.manager.*;
@@ -135,6 +138,18 @@ class Flow implements MakeNickToSender {
     private boolean isAdminOn = false;
     private boolean isAdminOff = false;
     private boolean isAdminExit = false;
+    private boolean isAdminList = false;
+
+    private boolean isName = false;
+    private boolean isNameEn = false;
+    private boolean isNameCh = false;
+    private boolean isNameJp = false;
+
+    private boolean isWelcome = false;
+
+    private boolean isDiceList = false;
+
+    private boolean isGroupInfo = false;
 
     private boolean isKp = false;
 
@@ -248,6 +263,14 @@ class Flow implements MakeNickToSender {
         isAdminOn = checkTagRegex(TAG_ADMIN_ON);
         isAdminOff = checkTagRegex(TAG_ADMIN_OFF);
         isAdminExit = checkTagRegex(TAG_ADMIN_EXIT);
+        isAdminList = checkTagRegex(TAG_ADMIN_LIST);
+    }
+
+    private void nameTag() {
+        isNameEn = checkTagRegex(TAG_NAME_EN);
+        isNameCh = checkTagRegex(TAG_NAME_CH);
+        isNameJp = checkTagRegex(TAG_NAME_JP);
+        isName = checkTagRegex(TAG_NAME) && !isNameEn && !isNameCh && !isNameJp;
     }
 
     private void checkMessages() {
@@ -272,6 +295,8 @@ class Flow implements MakeNickToSender {
             banTag();
         } else if (checkTagRegex(HEADER_ADMIN + forAll)) {
             adminTag();
+        } else if (checkTagRegex(HEADER_NAME)) {
+            nameTag();
         } else if (checkTagRegex(TAGR)) {
             initDiceTag();
         } else {
@@ -296,6 +321,12 @@ class Flow implements MakeNickToSender {
             isTest = checkTagRegex(TAG_TEST);
 
             isMagic = checkTagRegex(TAG_MAGIC);
+
+            isWelcome = checkTagRegex(TAG_WELCOME);
+
+            isDiceList = checkTagRegex(TAG_DICE_LIST);
+
+            isGroupInfo = checkTagRegex(TAG_GROUP_INFO);
         }
     }
 
@@ -314,6 +345,7 @@ class Flow implements MakeNickToSender {
         Rules rules = new Rules(entityTypeMessages);
         Admin admin = new Admin(entityTypeMessages);
         DndMagic dndMagic = new DndMagic(entityTypeMessages);
+        Name name = new Name(entityTypeMessages);
 
         isFunctionR();
         isStFunction();
@@ -367,10 +399,26 @@ class Flow implements MakeNickToSender {
             admin.off();
         } else if (isAdminExit) {
             admin.exit();
+        } else if (isAdminList) {
+            admin.search();
         }
 
         if (isMagic) {
             dndMagic.get();
+        }
+
+        if (entityGame.isNameSwitch()) {
+            if (isName) {
+                name.random();
+            } else if (isNameEn) {
+                name.en();
+            } else if (isNameCh) {
+                name.ch();
+            } else if (isNameJp) {
+                name.jp();
+            }
+        }else{
+            sender(entityTypeMessages,"抱歉骰主未开启此功能");
         }
 
     }
@@ -383,6 +431,8 @@ class Flow implements MakeNickToSender {
         Roll roll = new Roll(entityTypeMessages);
         SetRollMaxValue setRollMaxValue = new SetRollMaxValue(entityTypeMessages);
         Kp kp = new Kp(entityTypeMessages);
+        GroupInfo groupInfo = new GroupInfo(entityTypeMessages);
+        DiceList diceList = new DiceList(entityTypeMessages);
 
         isTeamFunction();
         isEnFunction();
@@ -404,6 +454,18 @@ class Flow implements MakeNickToSender {
 
         if (isSetRollMaxValue) {
             setRollMaxValue.set();
+        }
+
+        if (entityGame.isBotList()) {
+            if (isDiceList) {
+                diceList.get();
+            }
+        }else{
+            sender(entityTypeMessages,"抱歉骰主未开启此功能");
+        }
+
+        if (isGroupInfo) {
+            groupInfo.get();
         }
 
         toPrivate();

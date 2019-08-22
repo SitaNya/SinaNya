@@ -266,6 +266,7 @@ public class Setting extends Frame {
     private JCheckBox welcomeSwitch;
     private JCheckBox botList;
     private JCheckBox deck;
+    private JCheckBox nameSwitch;
     private JPanel panel35;
     private JPanel panel26;
     private JLabel label6;
@@ -535,6 +536,7 @@ public class Setting extends Frame {
         welcomeSwitch = new JCheckBox();
         botList = new JCheckBox();
         deck = new JCheckBox();
+        nameSwitch = new JCheckBox();
         panel35 = new JPanel();
         panel26 = new JPanel();
         label6 = new JLabel();
@@ -2199,12 +2201,17 @@ public class Setting extends Frame {
                         //---- botList ----
                         botList.setText("\u5c55\u793a\u9ab0\u5a18\u5217\u8868");
                         panel34.add(botList);
-                        botList.setBounds(10, 35, botList.getPreferredSize().width, 25);
+                        botList.setBounds(10, 40, botList.getPreferredSize().width, 25);
 
                         //---- deck ----
                         deck.setText("\u8c03\u7528\u81ea\u5b9a\u4e49\u6587\u4ef6\u5361\u724c");
                         panel34.add(deck);
-                        deck.setBounds(new Rectangle(new Point(10, 60), deck.getPreferredSize()));
+                        deck.setBounds(10, 70, deck.getPreferredSize().width, 25);
+
+                        //---- nameSwitch ----
+                        nameSwitch.setText("\u83b7\u53d6\u968f\u673a\u540d\u79f0");
+                        panel34.add(nameSwitch);
+                        nameSwitch.setBounds(10, 100, 142, 25);
 
                         {
                             // compute preferred size
@@ -2573,6 +2580,7 @@ public class Setting extends Frame {
         entityGame.setWelcomeSwitch(welcomeSwitch.isSelected());
         entityGame.setBotList(botList.isSelected());
         entityGame.setDeck(deck.isSelected());
+        entityGame.setNameSwitch(nameSwitch.isSelected());
         new dice.sinanya.db.properties.game.InsertProperties().insertProperties(entityGame);
         JOptionPane.showMessageDialog(null, "保存成功");
     }
@@ -2680,6 +2688,7 @@ public class Setting extends Frame {
         welcomeSwitch.setSelected(entityGame.isWelcomeSwitch());
         botList.setSelected(entityGame.isBotList());
         deck.setSelected(entityGame.isDeck());
+        nameSwitch.setSelected(entityGame.isNameSwitch());
     }
 
     public Setting() {

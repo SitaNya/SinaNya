@@ -43,6 +43,7 @@ public class SelectGameProperties {
                        entityGame.setWelcomeSwitch(set.getBoolean("welcomeSwitch"));
                        entityGame.setBotList(set.getBoolean("botList"));
                        entityGame.setDeck(set.getBoolean("deck"));
+                       entityGame.setNameSwitch(set.getBoolean("nameSwitch"));
                         i++;
                     }
                 }

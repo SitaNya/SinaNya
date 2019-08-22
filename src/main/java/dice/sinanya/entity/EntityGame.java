@@ -14,6 +14,7 @@ public class EntityGame {
     boolean welcomeSwitch;
     boolean botList;
     boolean deck;
+    boolean nameSwitch;
 
     public EntityGame() {
         jrrpSwitch = false;
@@ -21,6 +22,15 @@ public class EntityGame {
         welcomeSwitch = false;
         botList = true;
         deck = true;
+        nameSwitch=false;
+    }
+
+    public boolean isNameSwitch() {
+        return nameSwitch;
+    }
+
+    public void setNameSwitch(boolean nameSwitch) {
+        this.nameSwitch = nameSwitch;
     }
 
     public boolean isJrrpSwitch() {

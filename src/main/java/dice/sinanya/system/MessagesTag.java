@@ -145,6 +145,7 @@ public interface MessagesTag {
     String TAG_ADMIN_ON = HEADER_ADMIN + "on[ ]*\\d+";
     String TAG_ADMIN_OFF = HEADER_ADMIN + "off[ ]*\\d+";
     String TAG_ADMIN_EXIT = HEADER_ADMIN + "exit[ ]*\\d+";
+    String TAG_ADMIN_LIST = HEADER_ADMIN + "list[ ]*\\d+";
 
     //    获取骰点历史标签
     String TAG_HIY = HEADER + "hiy[ ]*.*";
@@ -163,4 +164,15 @@ public interface MessagesTag {
     String TAG_MAGIC = HEADER + "magic[ ]*.*";
 
     String TAG_WELCOME = HEADER + "welcome[ ]*.*";
+
+    String HEADER_NAME = HEADER+"name[ ]*";
+    String TAG_NAME = HEADER_NAME + "\\d+";
+    String TAG_NAME_EN = HEADER_NAME + "en[ ]*\\d+";
+    String TAG_NAME_CH = HEADER_NAME + "ch[ ]*\\d+";
+    String TAG_NAME_JP = HEADER_NAME + "jp[ ]*\\d+";
+
+    String TAG_DICE_LIST=HEADER+"dice[ ]*list.*";
+    String TAG_GROUP_INFO=HEADER+"group[ ]*info.*";
+
+    String TAG_DECK = HEADER + "deck.*";
 }

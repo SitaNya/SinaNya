@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import static dice.sinanya.db.system.SelectBot.flushBot;
+import static dice.sinanya.system.MessagesWelcome.welcomes;
 import static dice.sinanya.tools.getinfo.BanList.*;
 import static dice.sinanya.tools.getinfo.DefaultMaxRolls.flushMaxRolls;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.*;
@@ -405,6 +406,9 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
      */
     @Override
     public int groupMemberIncrease(int subtype, int sendTime, long fromGroup, long fromQQ, long beingOperateQQ) {
+        if (entityGame.isWelcomeSwitch() && welcomes.containsKey(fromGroup) && welcomes.get(fromGroup).isEnable()) {
+            CQ.sendGroupMsg(fromGroup, String.format(welcomes.get(fromGroup).getText(), beingOperateQQ));
+        }
         return 0;
     }
 
@@ -464,6 +468,11 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
         if (subtype == 2 &&(entityBanProperties.isAutoInputGroup()&&entityBanProperties.isCloudBan())) {
             if (!checkQqInBanList(String.valueOf(fromQQ)) && !checkGroupInBanList(String.valueOf(fromGroup))) {
                 CQ.setGroupAddRequestV2(responseFlag, REQUEST_GROUP_INVITE, REQUEST_ADOPT, "");
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
+                }
                 CQ.sendGroupMsg(162279609, "收到" + makeNickToSender(getUserName(fromQQ)) + "(" + fromQQ + ")的群" + makeGroupNickToSender(getGroupName(fromGroup)) + "("
                         + fromGroup + ")邀请，已同意");
                 CQ.sendGroupMsg(fromGroup, entityBanProperties.getAddGroup());

@@ -2124,7 +2124,7 @@ new FormModel {
 							}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 								"height": 25
 								"x": 10
-								"y": 35
+								"y": 40
 							} )
 							add( new FormComponent( "javax.swing.JCheckBox" ) {
 								name: "checkBox13"
@@ -2134,7 +2134,20 @@ new FormModel {
 								}
 							}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 								"x": 10
-								"y": 60
+								"y": 70
+								"height": 25
+							} )
+							add( new FormComponent( "javax.swing.JCheckBox" ) {
+								name: "checkBox14"
+								"text": "获取随机名称"
+								auxiliary() {
+									"JavaCodeGenerator.variableName": "nameSwitch"
+								}
+							}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+								"width": 142
+								"height": 25
+								"x": 10
+								"y": 100
 							} )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"width": 300
