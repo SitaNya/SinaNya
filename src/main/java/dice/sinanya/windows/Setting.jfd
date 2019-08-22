@@ -2224,10 +2224,22 @@ new FormModel {
 							"text": "感谢以下人员的大力支持:\n\n羲、Bright 我的第一批用户，感谢你们\n\nshiki、惠惠，你们给我提供了很多好的建议和思路\n\n秃了秃了、夏浅秋 你们制作的rule和dnd法术列表文本帮助的不只是我，还有很多人\n\n月上中天 我最棒的测试者，在我的骰子恨不得一天崩溃5次的时候，坚持为我测试各种功能。我也承诺，你的需求我永远排在最前面完成\n\n贝尔SAMA喵 感谢你为这个核心制作的人物卡，辛苦了\n\n还有很多没想起来的人，请随时私聊提醒我加到这里来。"
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 295
+						"x": 135
 						"y": 135
-						"width": 550
-						"height": 320
+						"width": 865
+						"height": 225
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane22"
+						add( new FormComponent( "javax.swing.JTextPane" ) {
+							name: "textPane9"
+							"text": "ƞƄȒČȵƄŔćnƅrČÑƃȓƇnbRċŃƅřcǸƄȒȻňƁŔÇǸƄRƈȠßȒĊÑƁŖĈŅƀŕĆnƃȒƇÑBŖĈŃbRćńþȒČÑBŖĈńÞŘȻŅþȒČƝƁŔcȠƅřCŘƇňƄȠÞrcnƅȒÇňBrȻŅƅŖčǹƀȒƈņƄrČŃþŔĉȠƅȒĊNƅŖČńƀřcńBȓcńþŘcȠþrcÑƃȓƇnƁRċȠƅřCŅþȒČńÞŘĈŘĉȠƃŘĉȵbŗčnBŗČȵƃŗƈǹßȠbrcŇƀȒČǹƀŖčƝBřćNƄȓcnƀRċƞƁrȼȠßȒĊƞƁŗCǸƄRƈȠßȒĊÑƃŖĈƞƃŗĈƞÞȒȻňÞŘƇȠÞRĆNÞȒƇǸƁŗĊƝÞŘƈŇƀȒȻȵBrĈƞÞŔCȠßȒĊÑBŖĈńÞRȻǹƀȒƈņƃrČÑÞŔČŅƃȒČŇÞŕčņßrĊ"
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 135
+						"y": 400
+						"width": 865
+						"height": 35
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "关于"

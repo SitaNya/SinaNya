@@ -278,6 +278,8 @@ public class Setting extends Frame {
     private JLabel label8;
     private JScrollPane scrollPane19;
     private JTextPane textPane7;
+    private JScrollPane scrollPane22;
+    private JTextPane textPane9;
     private JPanel panel22;
     private JDialog dialog1;
     private JPanel panel25;
@@ -545,6 +547,8 @@ public class Setting extends Frame {
         label8 = new JLabel();
         scrollPane19 = new JScrollPane();
         textPane7 = new JTextPane();
+        scrollPane22 = new JScrollPane();
+        textPane9 = new JTextPane();
         panel22 = new JPanel();
         dialog1 = new JDialog();
         panel25 = new JPanel();
@@ -2343,7 +2347,17 @@ public class Setting extends Frame {
                     scrollPane19.setViewportView(textPane7);
                 }
                 panel27.add(scrollPane19);
-                scrollPane19.setBounds(295, 135, 550, 320);
+                scrollPane19.setBounds(135, 135, 865, 225);
+
+                //======== scrollPane22 ========
+                {
+
+                    //---- textPane9 ----
+                    textPane9.setText("\u019e\u0184\u0212\u010c\u0235\u0184\u0154\u0107n\u0185r\u010c\u00d1\u0183\u0213\u0187nbR\u010b\u0143\u0185\u0159c\u01f8\u0184\u0212\u023b\u0148\u0181\u0154\u00c7\u01f8\u0184R\u0188\u0220\u00df\u0212\u010a\u00d1\u0181\u0156\u0108\u0145\u0180\u0155\u0106n\u0183\u0212\u0187\u00d1B\u0156\u0108\u0143bR\u0107\u0144\u00fe\u0212\u010c\u00d1B\u0156\u0108\u0144\u00de\u0158\u023b\u0145\u00fe\u0212\u010c\u019d\u0181\u0154c\u0220\u0185\u0159C\u0158\u0187\u0148\u0184\u0220\u00dercn\u0185\u0212\u00c7\u0148Br\u023b\u0145\u0185\u0156\u010d\u01f9\u0180\u0212\u0188\u0146\u0184r\u010c\u0143\u00fe\u0154\u0109\u0220\u0185\u0212\u010aN\u0185\u0156\u010c\u0144\u0180\u0159c\u0144B\u0213c\u0144\u00fe\u0158c\u0220\u00ferc\u00d1\u0183\u0213\u0187n\u0181R\u010b\u0220\u0185\u0159C\u0145\u00fe\u0212\u010c\u0144\u00de\u0158\u0108\u0158\u0109\u0220\u0183\u0158\u0109\u0235b\u0157\u010dnB\u0157\u010c\u0235\u0183\u0157\u0188\u01f9\u00df\u0220brc\u0147\u0180\u0212\u010c\u01f9\u0180\u0156\u010d\u019dB\u0159\u0107N\u0184\u0213cn\u0180R\u010b\u019e\u0181r\u023c\u0220\u00df\u0212\u010a\u019e\u0181\u0157C\u01f8\u0184R\u0188\u0220\u00df\u0212\u010a\u00d1\u0183\u0156\u0108\u019e\u0183\u0157\u0108\u019e\u00de\u0212\u023b\u0148\u00de\u0158\u0187\u0220\u00deR\u0106N\u00de\u0212\u0187\u01f8\u0181\u0157\u010a\u019d\u00de\u0158\u0188\u0147\u0180\u0212\u023b\u0235Br\u0108\u019e\u00de\u0154C\u0220\u00df\u0212\u010a\u00d1B\u0156\u0108\u0144\u00deR\u023b\u01f9\u0180\u0212\u0188\u0146\u0183r\u010c\u00d1\u00de\u0154\u010c\u0145\u0183\u0212\u010c\u0147\u00de\u0155\u010d\u0146\u00dfr\u010a");
+                    scrollPane22.setViewportView(textPane9);
+                }
+                panel27.add(scrollPane22);
+                scrollPane22.setBounds(135, 400, 865, 35);
 
                 {
                     // compute preferred size
