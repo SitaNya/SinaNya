@@ -29,9 +29,17 @@ public class UpdateForDice {
     File jar;
     File json;
     File jarDir;
+
+    File newJar;
+    File newJson;
+
     boolean jarExists;
     boolean jsonExists;
     boolean jarDirExists;
+
+    boolean newJarExists;
+    boolean newJsonExists;
+
     ProgressBarThread pbt;
     JProgressBar downJarProgress;
     JProgressBar downJsonProgress;
@@ -41,10 +49,15 @@ public class UpdateForDice {
         this.jar = new File(dir + "/../com.sinanya.dice.jar");
         this.json = new File(dir + "/../com.sinanya.dice.json");
 
+        newJar = new File(dir + "/../com.sinanya.dice.jar.new");
+        newJson = new File(dir + "/../com.sinanya.dice.json.new");
+
         this.jarDir = new File(dir + "/../");
 
         this.jarExists = jar.exists();
         this.jsonExists = json.exists();
+        this.newJarExists = newJar.exists();
+        this.newJarExists = newJson.exists();
         this.jarDirExists = jar.exists() && jarDir.isDirectory();
         this.downJarProgress = downJarProgress;
         this.downJsonProgress = downJsonProgress;
@@ -56,23 +69,42 @@ public class UpdateForDice {
                 new LinkedBlockingQueue<Runnable>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
     }
 
-    public void update(){
-        if (jar.delete() && json.delete()) {
+    public void update() throws IOException {
+        if (newJarExists && newJsonExists) {
+            newJar.delete();
+            newJson.delete();
+        }
             try {
-                downLoadFromUrl("http://123.207.150.160/com.sinanya.dice.jar", "com.sinanya.dice.jar", downJarProgress, jarDir.getPath());
-                downLoadFromUrl("http://123.207.150.160/com.sinanya.dice.json", "com.sinanya.dice.json", downJsonProgress, jarDir.getPath());
+                downLoadFromUrl("http://123.207.150.160/com.sinanya.dice.jar", "com.sinanya.dice.jar.new", downJarProgress, jarDir.getPath());
+                downLoadFromUrl("http://123.207.150.160/com.sinanya.dice.json", "com.sinanya.dice.json.new", downJsonProgress, jarDir.getPath());
                 Rectangle rect = new Rectangle(0, 0, downJsonProgress.getWidth(), downJsonProgress.getHeight());
                 downJsonProgress.setValue(downJsonProgress.getMaximum());
                 downJsonProgress.paintImmediately(rect);
                 cachedThreadPool.shutdown();
+                newJsonExists = newJson.exists();
+                newJarExists = newJar.exists();
             } catch (IOException e) {
                 CQ.logError("下载文件异常", StringUtils.join(e.getStackTrace(), "\n"));
-                JOptionPane.showMessageDialog(null, "更新失败,请检查本地文件是否正常");
+                JOptionPane.showMessageDialog(null, "下载失败，请重新下载");
                 return;
             }
-            JOptionPane.showMessageDialog(null, "更新完毕,请立刻关闭所有相关窗口并重启酷Q");
+
+        long jarSize = new URL("http://123.207.150.160/com.sinanya.dice.jar").openConnection().getContentLength();
+        long jsonSize = new URL("http://123.207.150.160/com.sinanya.dice.json").openConnection().getContentLength();
+
+
+        if (newJarExists && newJsonExists && newJar.length() == jarSize && newJson.length() == jsonSize) {
+            if (jarExists) {
+                jar.delete();
+            }
+            if (jsonExists) {
+                json.delete();
+            }
+            newJar.renameTo(jar);
+            newJson.renameTo(json);
+            JOptionPane.showMessageDialog(null, "更新完毕,请检查进度条是否已满\n若未满请不要关闭酷Q重新更新。\n若进度条已满，请立刻关闭所有相关窗口并重启酷Q");
         }else{
-            JOptionPane.showMessageDialog(null, "更新失败,请检查本地文件是否正常");
+            JOptionPane.showMessageDialog(null, "更新失败,请不要关闭酷Q重新更新。");
         }
     }
 

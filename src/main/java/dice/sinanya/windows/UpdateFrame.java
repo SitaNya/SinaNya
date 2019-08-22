@@ -6,6 +6,7 @@ package dice.sinanya.windows;
 
 import dice.sinanya.system.MessagesSystem;
 import dice.sinanya.update.UpdateForDice;
+import org.apache.commons.lang.StringUtils;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -14,6 +15,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
+
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 
 /**
  * @author xiaozhou zhang
@@ -63,7 +67,11 @@ public class UpdateFrame extends JFrame {
 
     private void button1MouseClicked(MouseEvent e) {
         if (updateButton.isEnabled()) {
-            updateForDice.update();
+            try {
+                updateForDice.update();
+            } catch (IOException ex) {
+                CQ.logError("更新", "失败: " + ex.getMessage() + "\n" + StringUtils.join(ex.getStackTrace(), "\n"));
+            }
         }
     }
 

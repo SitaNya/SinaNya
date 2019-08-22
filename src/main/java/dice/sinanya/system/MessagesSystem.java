@@ -14,7 +14,7 @@ public interface MessagesSystem {
     String NONE = "";
     String SPACE = " ";
 
-    String VERSIONS = "3.16.22.45Alpha";
+    String VERSIONS = "3.16.23.45Alpha";
     StringBuilder UPDATE = new StringBuilder()
             .append("更新日志:\n")
             .append("2019年08月22日 紧急解决被禁言识别问题")
