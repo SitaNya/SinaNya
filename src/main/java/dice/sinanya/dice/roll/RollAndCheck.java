@@ -219,7 +219,7 @@ public class RollAndCheck implements En, MakeNickToSender {
                 CQ.sendGroupMsg(Long.parseLong(groupId), entitySystemProperties.getAntagonizeDraw());
             }
         } else {
-            sender(entityTypeMessages, entitySystemProperties.getAntagonizeSecondSuccess());
+            CQ.sendGroupMsg(Long.parseLong(groupId), entitySystemProperties.getAntagonizeSecondSuccess());
         }
     }
 

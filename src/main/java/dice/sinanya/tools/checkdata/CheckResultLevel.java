@@ -56,7 +56,7 @@ public class CheckResultLevel {
         } else {
             ruleFumble = 96;
             ruleCriticalSuccess = 5;
-            if (random >= ruleFumble && random >= skill) {
+            if (random >= ruleFumble) {
                 level = 0;
                 return "STR_FUMBLE";
             } else if (random <= skill && random <= ruleCriticalSuccess) {
