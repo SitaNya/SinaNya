@@ -73,7 +73,7 @@ public class Admin implements MakeNickToSender {
     }
 
     public void search() {
-        String tag = TAG_ADMIN_LIST;
+        String tag = TAG_ADMIN_SEARCH;
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 4));
         long qqId = 0;
         if (!isNumeric(msg)) {

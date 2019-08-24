@@ -4,7 +4,9 @@ import dice.sinanya.db.heap.SelectOnlineBotList;
 import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityOtherBotInfo;
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.exceptions.NotEnableException;
 
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityGame;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
 /**
@@ -22,7 +24,8 @@ public class DiceList implements MakeNickToSender {
         this.entityTypeMessages = entityTypeMessages;
     }
 
-    public void get(){
+    public void get() throws NotEnableException {
+        checkEnable();
         StringBuilder diceList=new StringBuilder();
         diceList.append("目前使用本核心、24小时开机、正在提供服务、并可以共享人物卡等数据的骰娘有:");
         SelectOnlineBotList selectOnlineBotList=new SelectOnlineBotList();
@@ -34,5 +37,11 @@ public class DiceList implements MakeNickToSender {
                     .append(")");
         }
         sender(entityTypeMessages,diceList.toString());
+    }
+
+    private void checkEnable() throws NotEnableException {
+        if (!entityGame.isBotList()){
+            throw new NotEnableException(entityTypeMessages);
+        }
     }
 }

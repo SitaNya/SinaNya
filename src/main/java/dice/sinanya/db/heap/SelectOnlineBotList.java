@@ -26,7 +26,7 @@ public class SelectOnlineBotList {
         ArrayList<EntityOtherBotInfo> otherBotInfos = new ArrayList<>();
         try (Connection conn = DbUtil.getConnection()) {
             long notTimeFor20Min = System.currentTimeMillis() / 1000 - 60 * 20;
-            String sql = "select * from heap where enable=1 and time<=?";
+            String sql = "select * from heap where enable=1 and time>=?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setLong(1, notTimeFor20Min);
                 try (ResultSet set = ps.executeQuery()) {

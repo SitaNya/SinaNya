@@ -2,10 +2,7 @@ package dice.sinanya.flow;
 
 import com.sobte.cqp.jcq.entity.Member;
 import dice.sinanya.dice.MakeNickToSender;
-import dice.sinanya.dice.game.DiceList;
-import dice.sinanya.dice.game.GroupInfo;
-import dice.sinanya.dice.game.Jrrp;
-import dice.sinanya.dice.game.Name;
+import dice.sinanya.dice.game.*;
 import dice.sinanya.dice.get.*;
 import dice.sinanya.dice.getbook.Book;
 import dice.sinanya.dice.manager.*;
@@ -25,7 +22,8 @@ import static dice.sinanya.system.MessagesBanList.frequentnessForGroupList;
 import static dice.sinanya.system.MessagesTag.*;
 import static dice.sinanya.tools.getinfo.BanList.insertGroupBanList;
 import static dice.sinanya.tools.getinfo.BanList.insertQqBanList;
-import static dice.sinanya.tools.getinfo.GetMessagesProperties.*;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityBanProperties;
+import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.getinfo.GetNickName.getGroupName;
 import static dice.sinanya.tools.makedata.Sender.sender;
 
@@ -138,7 +136,7 @@ class Flow implements MakeNickToSender {
     private boolean isAdminOn = false;
     private boolean isAdminOff = false;
     private boolean isAdminExit = false;
-    private boolean isAdminList = false;
+    private boolean isAdminSearch = false;
 
     private boolean isName = false;
     private boolean isNameEn = false;
@@ -263,7 +261,7 @@ class Flow implements MakeNickToSender {
         isAdminOn = checkTagRegex(TAG_ADMIN_ON);
         isAdminOff = checkTagRegex(TAG_ADMIN_OFF);
         isAdminExit = checkTagRegex(TAG_ADMIN_EXIT);
-        isAdminList = checkTagRegex(TAG_ADMIN_LIST);
+        isAdminSearch = checkTagRegex(TAG_ADMIN_SEARCH);
     }
 
     private void nameTag() {
@@ -295,7 +293,7 @@ class Flow implements MakeNickToSender {
             banTag();
         } else if (checkTagRegex(HEADER_ADMIN + forAll)) {
             adminTag();
-        } else if (checkTagRegex(HEADER_NAME)) {
+        } else if (checkTagRegex(HEADER_NAME + forAll)) {
             nameTag();
         } else if (checkTagRegex(TAGR)) {
             initDiceTag();
@@ -346,6 +344,7 @@ class Flow implements MakeNickToSender {
         Admin admin = new Admin(entityTypeMessages);
         DndMagic dndMagic = new DndMagic(entityTypeMessages);
         Name name = new Name(entityTypeMessages);
+        DiceList diceList = new DiceList(entityTypeMessages);
 
         isFunctionR();
         isStFunction();
@@ -381,8 +380,12 @@ class Flow implements MakeNickToSender {
             history.hiy();
         }
 
-        if (isJrrp && entityGame.isJrrpSwitch()) {
-            jrrp.get();
+        try {
+            if (isJrrp) {
+                jrrp.get();
+            }
+        } catch (NotEnableException e) {
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
 
         if (isRules) {
@@ -399,7 +402,7 @@ class Flow implements MakeNickToSender {
             admin.off();
         } else if (isAdminExit) {
             admin.exit();
-        } else if (isAdminList) {
+        } else if (isAdminSearch) {
             admin.search();
         }
 
@@ -407,7 +410,8 @@ class Flow implements MakeNickToSender {
             dndMagic.get();
         }
 
-        if (entityGame.isNameSwitch()) {
+
+        try {
             if (isName) {
                 name.random();
             } else if (isNameEn) {
@@ -417,10 +421,17 @@ class Flow implements MakeNickToSender {
             } else if (isNameJp) {
                 name.jp();
             }
-        }else{
-            sender(entityTypeMessages,"抱歉骰主未开启此功能");
+        } catch (NotEnableException e) {
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
 
+        try {
+            if (isDiceList) {
+                diceList.get();
+            }
+        } catch (NotEnableException e) {
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
+        }
     }
 
     /**
@@ -432,7 +443,8 @@ class Flow implements MakeNickToSender {
         SetRollMaxValue setRollMaxValue = new SetRollMaxValue(entityTypeMessages);
         Kp kp = new Kp(entityTypeMessages);
         GroupInfo groupInfo = new GroupInfo(entityTypeMessages);
-        DiceList diceList = new DiceList(entityTypeMessages);
+
+        Welcome welcome=new Welcome(entityTypeMessages);
 
         isTeamFunction();
         isEnFunction();
@@ -456,16 +468,16 @@ class Flow implements MakeNickToSender {
             setRollMaxValue.set();
         }
 
-        if (entityGame.isBotList()) {
-            if (isDiceList) {
-                diceList.get();
-            }
-        }else{
-            sender(entityTypeMessages,"抱歉骰主未开启此功能");
-        }
-
         if (isGroupInfo) {
             groupInfo.get();
+        }
+
+        try {
+            if (isWelcome) {
+                welcome.set();
+            }
+        }catch (NotEnableException e){
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
 
         toPrivate();
@@ -506,17 +518,17 @@ class Flow implements MakeNickToSender {
         if (timeList.size() >= entityBanProperties.getBanFrequentness()) {
             Member member = CQ.getGroupMemberInfo(Long.parseLong(entityTypeMessages.getFromGroup()), Long.parseLong(entityTypeMessages.getFromQq()));
             CQ.sendGroupMsg(Long.parseLong(entityTypeMessages.getFromGroup()), entityBanProperties.getFrequentnessBanInfo());
-            String text="于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中" + member.getNick() + "(" + member.getQqId() + ")频度达到" + timeList.size() + "/10";
+            String text = "于" + makeGroupNickToSender(getGroupName(entityTypeMessages.getFromGroup())) + entityTypeMessages.getFromGroup() + "中" + member.getNick() + "(" + member.getQqId() + ")频度达到" + timeList.size() + "/10";
 
-            if (entityBanProperties.isBanGroupAndUserByFre()){
-                insertQqBanList(entityTypeMessages.getFromQq(), "在群"+entityTypeMessages.getFromGroup()+"中大量刷屏");
-                insertGroupBanList(entityTypeMessages.getFromGroup(),entityTypeMessages.getFromQq()+"在群中大量刷屏");
+            if (entityBanProperties.isBanGroupAndUserByFre()) {
+                insertQqBanList(entityTypeMessages.getFromQq(), "在群" + entityTypeMessages.getFromGroup() + "中大量刷屏");
+                insertGroupBanList(entityTypeMessages.getFromGroup(), entityTypeMessages.getFromQq() + "在群中大量刷屏");
                 CQ.setGroupLeave(Long.parseLong(entityTypeMessages.getFromGroup()), false);
-                CQ.sendGroupMsg(162279609, text+"已退群并拉黑群和用户");
+                CQ.sendGroupMsg(162279609, text + "已退群并拉黑群和用户");
             }
-            if (entityBanProperties.isBanUserByFre()){
-                insertQqBanList(entityTypeMessages.getFromQq(), "在群"+entityTypeMessages.getFromGroup()+"中大量刷屏");
-                CQ.sendGroupMsg(162279609, text+"已拉黑用户");
+            if (entityBanProperties.isBanUserByFre()) {
+                insertQqBanList(entityTypeMessages.getFromQq(), "在群" + entityTypeMessages.getFromGroup() + "中大量刷屏");
+                CQ.sendGroupMsg(162279609, text + "已拉黑用户");
             }
         }
         frequentnessForGroupList.put(entityTypeMessages.getFromQq(), timeList);

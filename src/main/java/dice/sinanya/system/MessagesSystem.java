@@ -14,9 +14,10 @@ public interface MessagesSystem {
     String NONE = "";
     String SPACE = " ";
 
-    String VERSIONS = "3.16.23.45Alpha";
+    String VERSIONS = "3.16.23.45Beta";
     StringBuilder UPDATE = new StringBuilder()
             .append("更新日志:\n")
+            .append("2019年08月22日 增加了JRRP、WELCOME、NAME功能的可选项支持")
             .append("2019年08月22日 紧急解决被禁言识别问题")
             .append("2019年08月21日 增加更新界面\n")
             .append("2019年08月20日 修改多重投掷的显示方式\n")

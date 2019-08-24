@@ -2,6 +2,7 @@ package dice.sinanya.dice.game;
 
 import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityTypeMessages;
+import dice.sinanya.exceptions.NotEnableException;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,7 +42,8 @@ public class Jrrp implements MakeNickToSender {
     /**
      * 将结果发送出去，里面使用了对方的QQ号和时间戳作为种子
      */
-    public void get() {
+    public void get() throws NotEnableException {
+        checkEnable();
         String date = toTimestamp(new Date());
         int tmp = 0;
         char[] b = (entityTypeMessages.getFromQq() + date).toCharArray();
@@ -50,5 +52,11 @@ public class Jrrp implements MakeNickToSender {
             tmp += (int) c;
         }
         sender(entityTypeMessages, String.format(entityGame.getJrrpInfo(), makeNickToSender(getNickName(entityTypeMessages)), (tmp % 100)));
+    }
+
+    private void checkEnable() throws NotEnableException {
+        if (!entityGame.isJrrpSwitch()){
+            throw new NotEnableException(entityTypeMessages);
+        }
     }
 }

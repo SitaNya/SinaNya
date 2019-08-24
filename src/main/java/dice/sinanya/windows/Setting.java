@@ -5,6 +5,7 @@
 package dice.sinanya.windows;
 
 import dice.sinanya.db.properties.ban.InsertProperties;
+import dice.sinanya.system.MessagesSystem;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -2682,6 +2683,7 @@ public class Setting extends Frame {
         fumble.setText(entitySystemProperties.getFUMBLE());
         autoInputGroup.setSelected(entityBanProperties.isAutoInputGroup());
         autoAddFriends.setSelected(entityBanProperties.isAutoAddFriends());
+        updateText.setText(MessagesSystem.UPDATE.toString());
 
         jrrpSwitch.setSelected(entityGame.isJrrpSwitch());
         jrrpInfo.setText(entityGame.getJrrpInfo());
