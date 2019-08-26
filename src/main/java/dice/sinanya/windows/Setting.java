@@ -5,19 +5,24 @@
 package dice.sinanya.windows;
 
 import dice.sinanya.db.properties.ban.InsertProperties;
+import dice.sinanya.entity.EntityDeckList;
 import dice.sinanya.system.MessagesSystem;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesLevel.*;
+import static dice.sinanya.tools.getinfo.Deck.getHasDeckList;
+import static dice.sinanya.tools.getinfo.Deck.getInternetDeck;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.*;
 
 
@@ -2250,6 +2255,13 @@ public class Setting extends Frame {
 
                             //---- table2 ----
                             table2.setAutoCreateRowSorter(true);
+                            table2.setModel(new DefaultTableModel(
+                                    new Object[][]{
+                                    },
+                                    new String[]{
+                                            "\u540d\u79f0", "\u547d\u4ee4", "\u7248\u672c", "\u4f5c\u8005", "\u8bf4\u660e"
+                                    }
+                            ));
                             scrollPane24.setViewportView(table2);
                         }
                         panel35.add(scrollPane24);
@@ -2260,6 +2272,13 @@ public class Setting extends Frame {
 
                             //---- table1 ----
                             table1.setAutoCreateRowSorter(true);
+                            table1.setModel(new DefaultTableModel(
+                                    new Object[][]{
+                                    },
+                                    new String[]{
+                                            "\u540d\u79f0", "\u547d\u4ee4", "\u7248\u672c", "\u4f5c\u8005", "\u8bf4\u660e"
+                                    }
+                            ));
                             scrollPane23.setViewportView(table1);
                         }
                         panel35.add(scrollPane23);
@@ -2719,11 +2738,27 @@ public class Setting extends Frame {
         botList.setSelected(entityGame.isBotList());
         deck.setSelected(entityGame.isDeck());
         nameSwitch.setSelected(entityGame.isNameSwitch());
+        table2.setModel(makeData(getHasDeckList()));
+        table1.setModel(makeData(getInternetDeck()));
     }
 
     public Setting() {
         initComponents();
         initData();
         this.setVisible(true);
+    }
+
+    private DefaultTableModel makeData(ArrayList<EntityDeckList> deckLists) {
+        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        int r = 0;
+        for (EntityDeckList entityDeckList : deckLists) {
+            defaultTableModel.setValueAt(entityDeckList.getName(), r, 0);
+            defaultTableModel.setValueAt(entityDeckList.getCommand(), r, 1);
+            defaultTableModel.setValueAt(entityDeckList.getVersion(), r, 2);
+            defaultTableModel.setValueAt(entityDeckList.getAuthor(), r, 3);
+            defaultTableModel.setValueAt(entityDeckList.getDesc(), r, 4);
+            r++;
+        }
+        return defaultTableModel;
     }
 }

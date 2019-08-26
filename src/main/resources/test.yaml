@@ -1,0 +1,12 @@
+testA:
+  - aaaaaaaa
+  - bbbbbbbb
+  - cccccccc
+testB:
+  - ddddddd
+  - eeeeeee
+default:
+# 愚者碎片
+  #- 愚者碎片1：一阵轻柔的吟唱拉开了序幕。歌声起伏、婉转动听，在她身边缭绕飘荡，在脑海中旋转流淌。
+# 魔术师碎片
+  - 魔术师碎片1：{%testB}

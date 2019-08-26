@@ -53,11 +53,11 @@
     </build>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.ini4j/ini4j -->
+        <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
         <dependency>
-            <groupId>org.ini4j</groupId>
-            <artifactId>ini4j</artifactId>
-            <version>0.5.4</version>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.25</version>
         </dependency>
         <!-- quartz -->
         <dependency>

@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.0.5.251" Java: "1.8.0_202-release" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.0.5.251" Java: "11.0.3" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -2163,6 +2163,31 @@ new FormModel {
 								add( new FormComponent( "javax.swing.JTable" ) {
 									name: "table2"
 									"autoCreateRowSorter": true
+									"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
+										add( "名称" )
+										add( "命令" )
+										add( "版本" )
+										add( "作者" )
+										add( "说明" )
+									}, new java.util.Vector {
+										add( class java.lang.Object )
+										add( null )
+										add( null )
+										add( null )
+										add( null )
+									}, new java.util.Vector {
+										add( null )
+										add( null )
+										add( null )
+										add( null )
+										add( null )
+									}, new java.util.Vector {
+										add( null )
+										add( null )
+										add( null )
+										add( null )
+										add( null )
+									} )
 								} )
 							}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 								"width": 325
@@ -2175,6 +2200,31 @@ new FormModel {
 								add( new FormComponent( "javax.swing.JTable" ) {
 									name: "table1"
 									"autoCreateRowSorter": true
+									"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
+										add( "名称" )
+										add( "命令" )
+										add( "版本" )
+										add( "作者" )
+										add( "说明" )
+									}, new java.util.Vector {
+										add( null )
+										add( null )
+										add( null )
+										add( null )
+										add( null )
+									}, new java.util.Vector {
+										add( null )
+										add( null )
+										add( null )
+										add( null )
+										add( null )
+									}, new java.util.Vector {
+										add( null )
+										add( null )
+										add( null )
+										add( null )
+										add( null )
+									} )
 								} )
 							}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 								"width": 320
