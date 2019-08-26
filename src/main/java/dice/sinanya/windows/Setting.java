@@ -19,8 +19,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesLevel.*;
@@ -310,14 +312,12 @@ public class Setting extends Frame {
     }
 
     private void deleteDeck(MouseEvent e) {
-        EntityDeckList entityDeckList = new EntityDeckList();
-        int row = table2.getSelectedRow();
-        entityDeckList.setName(String.valueOf(table2.getValueAt(row, 0)));
-        entityDeckList.setCommand(String.valueOf(table2.getValueAt(row, 1)));
-        entityDeckList.setVersion((int) table2.getValueAt(row, 2));
-        entityDeckList.setAuthor(String.valueOf(table2.getValueAt(row, 3)));
-        entityDeckList.setDesc(String.valueOf(table2.getValueAt(row, 4)));
-        //TODO 删除
+        JOptionPane.showMessageDialog(null, "由于文件正在使用，因此将为您打开文件所在目录，请您关闭酷Q后手工删除相应文件");
+        try {
+            Desktop.getDesktop().open(new File(entitySystemProperties.getSystemDir() + "deck"));
+        } catch (IOException ex) {
+            CQ.logError(ex.getMessage(), StringUtils.join(ex.getStackTrace(), "\n"));
+        }
     }
 
     private void getDeck(MouseEvent e) {
@@ -333,6 +333,8 @@ public class Setting extends Frame {
         } catch (IOException ex) {
             CQ.logError(ex.getMessage(), StringUtils.join(ex.getStackTrace(), "\n"));
         }
+        table2.setModel(makeData(getHasDeckList()));
+        table1.setModel(makeData(getInternetDeck()));
     }
 
     private void initComponents() {
@@ -668,7 +670,7 @@ public class Setting extends Frame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < infoPanel6.getComponentCount(); i++) {
+                            for (int i = 0; i < infoPanel6.getComponentCount(); i++) {
                                 Rectangle bounds = infoPanel6.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -696,7 +698,7 @@ public class Setting extends Frame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel3.getComponentCount(); i++) {
+                        for (int i = 0; i < panel3.getComponentCount(); i++) {
                             Rectangle bounds = panel3.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -755,7 +757,7 @@ public class Setting extends Frame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < panel6.getComponentCount(); i++) {
+                                for (int i = 0; i < panel6.getComponentCount(); i++) {
                                     Rectangle bounds = panel6.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -800,7 +802,7 @@ public class Setting extends Frame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < panel13.getComponentCount(); i++) {
+                                for (int i = 0; i < panel13.getComponentCount(); i++) {
                                     Rectangle bounds = panel13.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -866,7 +868,7 @@ public class Setting extends Frame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < panel5.getComponentCount(); i++) {
+                                for (int i = 0; i < panel5.getComponentCount(); i++) {
                                     Rectangle bounds = panel5.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -997,7 +999,7 @@ public class Setting extends Frame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < panel9.getComponentCount(); i++) {
+                                for (int i = 0; i < panel9.getComponentCount(); i++) {
                                     Rectangle bounds = panel9.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1056,7 +1058,7 @@ public class Setting extends Frame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < panel8.getComponentCount(); i++) {
+                                for (int i = 0; i < panel8.getComponentCount(); i++) {
                                     Rectangle bounds = panel8.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1093,7 +1095,7 @@ public class Setting extends Frame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < panel10.getComponentCount(); i++) {
+                                for (int i = 0; i < panel10.getComponentCount(); i++) {
                                     Rectangle bounds = panel10.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1131,7 +1133,7 @@ public class Setting extends Frame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < panel14.getComponentCount(); i++) {
+                                for (int i = 0; i < panel14.getComponentCount(); i++) {
                                     Rectangle bounds = panel14.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1182,7 +1184,7 @@ public class Setting extends Frame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < panel7.getComponentCount(); i++) {
+                                for (int i = 0; i < panel7.getComponentCount(); i++) {
                                     Rectangle bounds = panel7.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1240,7 +1242,7 @@ public class Setting extends Frame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < panel11.getComponentCount(); i++) {
+                                for (int i = 0; i < panel11.getComponentCount(); i++) {
                                     Rectangle bounds = panel11.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1258,7 +1260,7 @@ public class Setting extends Frame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < panel2.getComponentCount(); i++) {
+                            for (int i = 0; i < panel2.getComponentCount(); i++) {
                                 Rectangle bounds = panel2.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1278,7 +1280,7 @@ public class Setting extends Frame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < setting.getComponentCount(); i++) {
+                    for (int i = 0; i < setting.getComponentCount(); i++) {
                         Rectangle bounds = setting.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1340,7 +1342,7 @@ public class Setting extends Frame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < infoPanel5.getComponentCount(); i++) {
+                            for (int i = 0; i < infoPanel5.getComponentCount(); i++) {
                                 Rectangle bounds = infoPanel5.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1368,7 +1370,7 @@ public class Setting extends Frame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel4.getComponentCount(); i++) {
+                        for (int i = 0; i < panel4.getComponentCount(); i++) {
                             Rectangle bounds = panel4.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1463,7 +1465,7 @@ public class Setting extends Frame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel15.getComponentCount(); i++) {
+                        for (int i = 0; i < panel15.getComponentCount(); i++) {
                             Rectangle bounds = panel15.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1481,7 +1483,7 @@ public class Setting extends Frame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < panel1.getComponentCount(); i++) {
+                    for (int i = 0; i < panel1.getComponentCount(); i++) {
                         Rectangle bounds = panel1.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1525,7 +1527,7 @@ public class Setting extends Frame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < monitorPanel2.getComponentCount(); i++) {
+                        for (int i = 0; i < monitorPanel2.getComponentCount(); i++) {
                             Rectangle bounds = monitorPanel2.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1567,7 +1569,7 @@ public class Setting extends Frame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < setMaster.getComponentCount(); i++) {
+                        for (int i = 0; i < setMaster.getComponentCount(); i++) {
                             Rectangle bounds = setMaster.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1615,7 +1617,7 @@ public class Setting extends Frame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < infoPanel3.getComponentCount(); i++) {
+                            for (int i = 0; i < infoPanel3.getComponentCount(); i++) {
                                 Rectangle bounds = infoPanel3.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1654,7 +1656,7 @@ public class Setting extends Frame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel16.getComponentCount(); i++) {
+                        for (int i = 0; i < panel16.getComponentCount(); i++) {
                             Rectangle bounds = panel16.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1706,7 +1708,7 @@ public class Setting extends Frame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel17.getComponentCount(); i++) {
+                        for (int i = 0; i < panel17.getComponentCount(); i++) {
                             Rectangle bounds = panel17.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1768,7 +1770,7 @@ public class Setting extends Frame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel18.getComponentCount(); i++) {
+                        for (int i = 0; i < panel18.getComponentCount(); i++) {
                             Rectangle bounds = panel18.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1786,7 +1788,7 @@ public class Setting extends Frame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < clean.getComponentCount(); i++) {
+                    for (int i = 0; i < clean.getComponentCount(); i++) {
                         Rectangle bounds = clean.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1848,7 +1850,7 @@ public class Setting extends Frame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < infoPanel4.getComponentCount(); i++) {
+                            for (int i = 0; i < infoPanel4.getComponentCount(); i++) {
                                 Rectangle bounds = infoPanel4.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1876,7 +1878,7 @@ public class Setting extends Frame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel20.getComponentCount(); i++) {
+                        for (int i = 0; i < panel20.getComponentCount(); i++) {
                             Rectangle bounds = panel20.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1951,7 +1953,7 @@ public class Setting extends Frame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < panel21.getComponentCount(); i++) {
+                                for (int i = 0; i < panel21.getComponentCount(); i++) {
                                     Rectangle bounds = panel21.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -1981,7 +1983,7 @@ public class Setting extends Frame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < panel24.getComponentCount(); i++) {
+                                for (int i = 0; i < panel24.getComponentCount(); i++) {
                                     Rectangle bounds = panel24.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2054,7 +2056,7 @@ public class Setting extends Frame {
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
-                                for(int i = 0; i < panel23.getComponentCount(); i++) {
+                                for (int i = 0; i < panel23.getComponentCount(); i++) {
                                     Rectangle bounds = panel23.getComponent(i).getBounds();
                                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2072,7 +2074,7 @@ public class Setting extends Frame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < panel33.getComponentCount(); i++) {
+                            for (int i = 0; i < panel33.getComponentCount(); i++) {
                                 Rectangle bounds = panel33.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2092,7 +2094,7 @@ public class Setting extends Frame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < panel19.getComponentCount(); i++) {
+                    for (int i = 0; i < panel19.getComponentCount(); i++) {
                         Rectangle bounds = panel19.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2154,7 +2156,7 @@ public class Setting extends Frame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < infoPanel7.getComponentCount(); i++) {
+                            for (int i = 0; i < infoPanel7.getComponentCount(); i++) {
                                 Rectangle bounds = infoPanel7.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2182,7 +2184,7 @@ public class Setting extends Frame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel30.getComponentCount(); i++) {
+                        for (int i = 0; i < panel30.getComponentCount(); i++) {
                             Rectangle bounds = panel30.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2222,7 +2224,7 @@ public class Setting extends Frame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < panel32.getComponentCount(); i++) {
+                            for (int i = 0; i < panel32.getComponentCount(); i++) {
                                 Rectangle bounds = panel32.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2265,7 +2267,7 @@ public class Setting extends Frame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < panel34.getComponentCount(); i++) {
+                            for (int i = 0; i < panel34.getComponentCount(); i++) {
                                 Rectangle bounds = panel34.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2346,7 +2348,7 @@ public class Setting extends Frame {
                         {
                             // compute preferred size
                             Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < panel35.getComponentCount(); i++) {
+                            for (int i = 0; i < panel35.getComponentCount(); i++) {
                                 Rectangle bounds = panel35.getComponent(i).getBounds();
                                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2364,7 +2366,7 @@ public class Setting extends Frame {
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel31.getComponentCount(); i++) {
+                        for (int i = 0; i < panel31.getComponentCount(); i++) {
                             Rectangle bounds = panel31.getComponent(i).getBounds();
                             preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                             preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2382,7 +2384,7 @@ public class Setting extends Frame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < panel29.getComponentCount(); i++) {
+                    for (int i = 0; i < panel29.getComponentCount(); i++) {
                         Rectangle bounds = panel29.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2415,7 +2417,7 @@ public class Setting extends Frame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < panel26.getComponentCount(); i++) {
+                    for (int i = 0; i < panel26.getComponentCount(); i++) {
                         Rectangle bounds = panel26.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2476,7 +2478,7 @@ public class Setting extends Frame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < panel27.getComponentCount(); i++) {
+                    for (int i = 0; i < panel27.getComponentCount(); i++) {
                         Rectangle bounds = panel27.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2499,7 +2501,7 @@ public class Setting extends Frame {
             {
                 // compute preferred size
                 Dimension preferredSize = new Dimension();
-                for(int i = 0; i < panel22.getComponentCount(); i++) {
+                for (int i = 0; i < panel22.getComponentCount(); i++) {
                     Rectangle bounds = panel22.getComponent(i).getBounds();
                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2545,7 +2547,7 @@ public class Setting extends Frame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < panel25.getComponentCount(); i++) {
+                    for (int i = 0; i < panel25.getComponentCount(); i++) {
                         Rectangle bounds = panel25.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2563,7 +2565,7 @@ public class Setting extends Frame {
             {
                 // compute preferred size
                 Dimension preferredSize = new Dimension();
-                for(int i = 0; i < dialog1ContentPane.getComponentCount(); i++) {
+                for (int i = 0; i < dialog1ContentPane.getComponentCount(); i++) {
                     Rectangle bounds = dialog1ContentPane.getComponent(i).getBounds();
                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -2681,7 +2683,7 @@ public class Setting extends Frame {
         JOptionPane.showMessageDialog(null, "保存成功");
     }
 
-    private void saveGame(MouseEvent e){
+    private void saveGame(MouseEvent e) {
         entityGame.setJrrpSwitch(jrrpSwitch.isSelected());
         entityGame.setJrrpInfo(jrrpInfo.getText().replace("\\n", "\n"));
         entityGame.setWelcomeSwitch(welcomeSwitch.isSelected());
@@ -2808,9 +2810,17 @@ public class Setting extends Frame {
     }
 
     private DefaultTableModel makeData(ArrayList<EntityDeckList> deckLists) {
-        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        DefaultTableModel defaultTableModel = new DefaultTableModel(deckLists.size(), 5);
+        Vector<String> columName = new Vector<String>();
+        columName.add("名称");
+        columName.add("命令");
+        columName.add("版本号");
+        columName.add("作者");
+        columName.add("说明");
+        defaultTableModel.setColumnIdentifiers(columName);
         int r = 0;
-        for (EntityDeckList entityDeckList : deckLists) {
+        for (
+                EntityDeckList entityDeckList : deckLists) {
             defaultTableModel.setValueAt(entityDeckList.getName(), r, 0);
             defaultTableModel.setValueAt(entityDeckList.getCommand(), r, 1);
             defaultTableModel.setValueAt(entityDeckList.getVersion(), r, 2);

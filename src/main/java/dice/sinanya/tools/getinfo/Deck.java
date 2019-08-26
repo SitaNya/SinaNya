@@ -36,12 +36,13 @@ public class Deck {
 
     /**
      * 尝试从指定的配置文件中获取类型
+     *
      * @param deckType 指定的类型
      * @return 获取的语句，或报错骰主未添加此类型
      */
     private static HashMap<String, ArrayList<String>> getDeckMap(String deckType) {
-//        File deckTypeFile = new File(entitySystemProperties.getSystemDir() + File.separator + "deck" + File.separator + deckType);
-        File deckTypeFile = new File(deckType);
+        File deckTypeFile = new File(entitySystemProperties.getSystemDir() +File.separator+ "deck" + File.separator+ deckType);
+//        File deckTypeFile = new File(deckType);
         HashMap<String, ArrayList<String>> deckList = new HashMap<>();
         if (!deckTypeFile.exists() || !deckTypeFile.isFile()) {
             return deckList;
@@ -52,9 +53,11 @@ public class Deck {
             // 加载配置文件
             Map map = yaml.load(new FileInputStream(deckTypeFile));
             for (Object key : map.keySet()) {
-                String value = map.get(key).toString();
-                valueList = new ArrayList<>(Arrays.asList(value.substring(1, value.length() - 1).split(",")));
-                deckList.put(String.valueOf(key), valueList);
+                if (!key.equals("name") && !key.equals("command") && !key.equals("author") && !key.equals("version") && !key.equals("desc")) {
+                    String value = map.get(key).toString();
+                    valueList = new ArrayList<>(Arrays.asList(value.substring(1, value.length() - 1).split(",")));
+                    deckList.put(String.valueOf(key), valueList);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -110,39 +113,10 @@ public class Deck {
         return result;
     }
 
-
-    /**
-     * 根据目录中的文件名获取已有的列表，每次删除或新增后会刷新
-     * @return 返回列表的内容，包括列表中文名和分支命令名
-     */
-    public static HashMap<String,String> getMyDeck(){
-        HashMap<String,String> myDeck=new HashMap<>();
-        File typeDir = new File(entitySystemProperties.getSystemDir() + File.separator + "deck");
-        if (!typeDir.exists()) {
-            typeDir.mkdirs();
-        }
-        File[] typeFiles = typeDir.listFiles();
-        for (File typeFile : typeFiles) {
-            if (typeFile.isFile()) {
-                String deckName = "未找到";
-                Yaml yaml = new Yaml();
-                try {
-                    // 加载配置文件
-                    Map map = yaml.load(new FileInputStream(typeFile));
-                    deckName = String.valueOf(map.get("name"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                myDeck.put(typeFile.getName(), deckName);
-            }
-        }
-        return myDeck;
-    }
-
     public static ArrayList<EntityDeckList> getHasDeckList() {
         ArrayList<EntityDeckList> hasDeckList = new ArrayList();
-        //        File deckTypeDir = new File(entitySystemProperties.getSystemDir() + File.separator + "deck" + File.separator + deckType);
-        File deckTypeDir = new File("src/main/resources/");
+        File deckTypeDir = new File(entitySystemProperties.getSystemDir() +File.separator+ "deck");
+//        File deckTypeDir = new File("src/main/resources/");
         if (deckTypeDir.isDirectory()) {
             for (File deckType : deckTypeDir.listFiles()) {
                 if (deckType.isFile()) {
@@ -171,6 +145,7 @@ public class Deck {
 
     /**
      * 获取全部的deck列表，包括名字、分支指令（已拥有的不显示），每次删除或新增后会刷新
+     *
      * @return
      */
     public static ArrayList<EntityDeckList> getInternetDeck() {

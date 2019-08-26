@@ -77,13 +77,13 @@ public class UpdateForDice {
 
     public UpdateForDice(JProgressBar downDeckProgress) {
         String dir = entitySystemProperties.getSystemDir();
-        deckDir = new File(dir + "/deck");
+        deckDir = new File(dir + File.separator+"deck");
 
         this.deckDirExists = deckDir.exists() && deckDir.isDirectory();
 
         this.downDeckProgress = downDeckProgress;
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
-                .setNameFormat("download-jar-and-json-%d").build();
+                .setNameFormat("download-deck-%d").build();
         //Common Thread Pool
         cachedThreadPool = new ThreadPoolExecutor(1, 10,
                 0L, TimeUnit.MILLISECONDS,
@@ -95,20 +95,20 @@ public class UpdateForDice {
             newJar.delete();
             newJson.delete();
         }
-            try {
-                downLoadFromUrl("http://123.207.150.160/com.sinanya.dice.jar", "com.sinanya.dice.jar.new", downJarProgress, jarDir.getPath());
-                downLoadFromUrl("http://123.207.150.160/com.sinanya.dice.json", "com.sinanya.dice.json.new", downJsonProgress, jarDir.getPath());
-                Rectangle rect = new Rectangle(0, 0, downJsonProgress.getWidth(), downJsonProgress.getHeight());
-                downJsonProgress.setValue(downJsonProgress.getMaximum());
-                downJsonProgress.paintImmediately(rect);
-                cachedThreadPool.shutdown();
-                newJsonExists = newJson.exists();
-                newJarExists = newJar.exists();
-            } catch (IOException e) {
-                CQ.logError("下载文件异常", StringUtils.join(e.getStackTrace(), "\n"));
-                JOptionPane.showMessageDialog(null, "下载失败，请重新下载");
-                return;
-            }
+        try {
+            downLoadFromUrl("http://123.207.150.160/com.sinanya.dice.jar", "com.sinanya.dice.jar.new", downJarProgress, jarDir.getPath());
+            downLoadFromUrl("http://123.207.150.160/com.sinanya.dice.json", "com.sinanya.dice.json.new", downJsonProgress, jarDir.getPath());
+            Rectangle rect = new Rectangle(0, 0, downJsonProgress.getWidth(), downJsonProgress.getHeight());
+            downJsonProgress.setValue(downJsonProgress.getMaximum());
+            downJsonProgress.paintImmediately(rect);
+            cachedThreadPool.shutdown();
+            newJsonExists = newJson.exists();
+            newJarExists = newJar.exists();
+        } catch (IOException e) {
+            CQ.logError("下载文件异常", StringUtils.join(e.getStackTrace(), "\n"));
+            JOptionPane.showMessageDialog(null, "下载失败，请重新下载");
+            return;
+        }
 
         long jarSize = new URL("http://123.207.150.160/com.sinanya.dice.jar").openConnection().getContentLength();
         long jsonSize = new URL("http://123.207.150.160/com.sinanya.dice.json").openConnection().getContentLength();
@@ -124,41 +124,43 @@ public class UpdateForDice {
             newJar.renameTo(jar);
             newJson.renameTo(json);
             JOptionPane.showMessageDialog(null, "更新完毕,请检查进度条是否已满\n若未满请不要关闭酷Q重新更新。\n若进度条已满，请立刻关闭所有相关窗口并重启酷Q");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "更新失败,请不要关闭酷Q重新更新。");
         }
     }
 
     public void downLoad(String deck) throws IOException {
-        if (deckDirExists) {
-            File newDeck = new File(deckDir.getPath() + File.pathSeparator + deck);
-            boolean newDeckExists;
-            try {
-                downLoadFromUrl("http://123.207.150.160/deck" + File.separator + deck, deck, downDeckProgress, deckDir.getPath());
-                Rectangle rect = new Rectangle(0, 0, downDeckProgress.getWidth(), downDeckProgress.getHeight());
-                downDeckProgress.setValue(downJsonProgress.getMaximum());
-                downDeckProgress.paintImmediately(rect);
-                cachedThreadPool.shutdown();
-                newDeckExists = newDeck.exists();
-            } catch (IOException e) {
-                CQ.logError("下载文件异常", StringUtils.join(e.getStackTrace(), "\n"));
-                JOptionPane.showMessageDialog(null, "下载失败，请重新下载");
-                return;
-            }
-
-            long deckSize = new URL("http://123.207.150.160/deck" + File.separator + deck).openConnection().getContentLength();
-
-
-            if (newDeckExists && newDeck.length() == deckSize) {
-                JOptionPane.showMessageDialog(null, "下载成功");
-            } else {
-                File deleteFile = new File(deckDir.getPath() + File.pathSeparator + deck);
-                if (deleteFile.exists() && deleteFile.isFile()) {
-                    deleteFile.delete();
-                }
-                JOptionPane.showMessageDialog(null, "下载失败失败,请重新下载");
-            }
+        if (!deckDirExists) {
+            deckDir.mkdirs();
         }
+        File newDeck = new File(deckDir.getPath() + File.separator+ deck);
+        boolean newDeckExists;
+        try {
+            downLoadFromUrl("http://123.207.150.160/deck/" + deck, deck, downDeckProgress, deckDir.getPath());
+            Rectangle rect = new Rectangle(0, 0, downDeckProgress.getWidth(), downDeckProgress.getHeight());
+            downDeckProgress.setValue(downDeckProgress.getMaximum());
+            downDeckProgress.paintImmediately(rect);
+            cachedThreadPool.shutdown();
+            newDeckExists = newDeck.exists();
+        } catch (IOException e) {
+            CQ.logError("下载文件异常", StringUtils.join(e.getStackTrace(), "\n"));
+            CQ.logError("下载文件异常", "http://123.207.150.160/deck/"  + deck);
+            JOptionPane.showMessageDialog(null, "下载失败，请重新下载");
+            return;
+        }
+
+        long deckSize = new URL("http://123.207.150.160/deck/" + deck).openConnection().getContentLength();
+
+        if (newDeckExists && newDeck.length() == deckSize) {
+            JOptionPane.showMessageDialog(null, "下载成功");
+        } else {
+            File deleteFile = new File(deckDir.getPath() + File.separator + deck);
+            if (deleteFile.exists() && deleteFile.isFile()) {
+                deleteFile.delete();
+            }
+            JOptionPane.showMessageDialog(null, "下载失败失败,请重新下载");
+        }
+
     }
 
     public boolean isJarExists() {
@@ -173,7 +175,7 @@ public class UpdateForDice {
         return jarDirExists;
     }
 
-    public boolean checkNeedUpdate(){
+    public boolean checkNeedUpdate() {
         return !MessagesSystem.VERSIONS.equals(sendGet("http://123.207.150.160/version"));
     }
 
@@ -199,7 +201,7 @@ public class UpdateForDice {
 
         //文件保存位置
         File saveDir = new File(savePath);
-        File file = new File(saveDir + File.separator + fileName);
+        File file = new File(saveDir + File.separator+ fileName);
         FileOutputStream fos = new FileOutputStream(file);
         fos.write(getData);
         fos.close();

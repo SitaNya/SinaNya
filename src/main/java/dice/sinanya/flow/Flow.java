@@ -161,6 +161,8 @@ class Flow implements MakeNickToSender {
 
     private boolean isTest = false;
 
+    private boolean isDeck = false;
+
     public Flow(EntityTypeMessages entityTypeMessages) {
         this.entityTypeMessages = entityTypeMessages;
         checkMessages();
@@ -325,6 +327,8 @@ class Flow implements MakeNickToSender {
             isDiceList = checkTagRegex(TAG_DICE_LIST);
 
             isGroupInfo = checkTagRegex(TAG_GROUP_INFO);
+
+            isDeck = checkTagRegex(TAG_DECK);
         }
     }
 
@@ -345,6 +349,7 @@ class Flow implements MakeNickToSender {
         DndMagic dndMagic = new DndMagic(entityTypeMessages);
         Name name = new Name(entityTypeMessages);
         DiceList diceList = new DiceList(entityTypeMessages);
+        Deck deck = new Deck(entityTypeMessages);
 
         isFunctionR();
         isStFunction();
@@ -432,6 +437,14 @@ class Flow implements MakeNickToSender {
         } catch (NotEnableException e) {
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
+
+        try {
+            if (isDeck) {
+                deck.get();
+            }
+        } catch (NotEnableException e) {
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
+        }
     }
 
     /**
@@ -444,7 +457,7 @@ class Flow implements MakeNickToSender {
         Kp kp = new Kp(entityTypeMessages);
         GroupInfo groupInfo = new GroupInfo(entityTypeMessages);
 
-        Welcome welcome=new Welcome(entityTypeMessages);
+        Welcome welcome = new Welcome(entityTypeMessages);
 
         isTeamFunction();
         isEnFunction();
@@ -476,7 +489,7 @@ class Flow implements MakeNickToSender {
             if (isWelcome) {
                 welcome.set();
             }
-        }catch (NotEnableException e){
+        } catch (NotEnableException e) {
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
 
