@@ -94,6 +94,11 @@ public interface MakeCard {
     default String getCoc7CardInfo() {
         EntityCoc7CardInfo coc7CardInfo = new EntityCoc7CardInfo();
 
+        String luckString = String.valueOf((coc7CardInfo.getHasLuck() * 1.0 / 810) * 100);
+        if (luckString.length() >= 5) {
+            luckString = luckString.substring(0, 5) + "%";
+        }
+
         return "力量:" +
                 coc7CardInfo.getStr() +
                 " " +
@@ -132,7 +137,9 @@ public interface MakeCard {
                 "/" +
                 coc7CardInfo.getHasLuck() +
                 " " +
-                "占总点数的:" + String.valueOf((coc7CardInfo.getHasLuck() * 1.0 / 810) * 100).substring(0, 5) + "%";
+                "占总点数的:" + luckString;
+
+
     }
 
 }

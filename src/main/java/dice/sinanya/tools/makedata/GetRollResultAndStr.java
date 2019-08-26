@@ -108,7 +108,11 @@ public class GetRollResultAndStr {
             }
 //            取第二个X，是骰点最大值，这个maxRolls已根据设定的默认最大值或100设定，如果取到则覆盖
             if (!mFunction.group(2).isEmpty()) {
-                maxRolls = Integer.parseInt(mFunction.group(2));
+                try {
+                    maxRolls = Integer.parseInt(mFunction.group(2));
+                } catch (NumberFormatException e) {
+                    throw new ManyRollsTimesTooMoreException(entityTypeMessages);
+                }
             }
 //            取第三个X，是获取最大几个结果（也就是K命令，如果你不知道这是什么的话，可以输入.r4d6k2试试）
 //            如果取到则使用取到的值

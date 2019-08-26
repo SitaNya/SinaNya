@@ -1,5 +1,7 @@
 package dice.sinanya.dice;
 
+import static dice.sinanya.tools.checkdata.CheckValue.checkValue;
+
 /**
  * @author SitaNya
  * 日期: 2019-07-09
@@ -37,6 +39,6 @@ public interface MakeNickToSender {
      * @return 加工后返回
      */
     default String makeLogNickToSender(String logName) {
-        return "《" + logName + "》";
+        return "《" + checkValue(logName) + "》";
     }
 }

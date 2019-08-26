@@ -160,6 +160,7 @@ class MakeSkillName {
 
         skillTable.put("唱歌", "sing");
         skillTable.put("歌唱", "sing");
+        skillTable.put("美术", "paint");
         skillTable.put("作画", "paint");
         skillTable.put("做画", "paint");
         skillTable.put("耕做", "tillage");

@@ -39,6 +39,15 @@ class DbPool {
             dataSource.setJdbcUrl("jdbc:mysql://123.207.150.160:3306/roles?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull&useSSL=false&autoReconnect=true");
             dataSource.setUser("root");
             dataSource.setPassword("rong");
+            dataSource.setInitialPoolSize(5); // 初始化时获取连接数，取值应在minPoolSize与maxPoolSize之间。Default: 3
+            dataSource.setMinPoolSize(1);  //  连接池中保留的最小连接数
+            dataSource.setMaxPoolSize(10); // 连接池中保留的最大连接数。Default: 15
+
+            dataSource.setMaxStatements(50);//最长等待时间
+
+            dataSource.setMaxIdleTime(60);//最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0
+            dataSource.setAcquireIncrement(3);// 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3
+            dataSource.setAcquireRetryAttempts(30);// 定义在从数据库获取新连接失败后重复尝试的次数。Default: 30
         } catch (PropertyVetoException e) {
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }

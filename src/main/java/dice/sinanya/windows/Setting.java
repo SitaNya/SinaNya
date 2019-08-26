@@ -269,6 +269,10 @@ public class Setting extends Frame {
     private JCheckBox deck;
     private JCheckBox nameSwitch;
     private JPanel panel35;
+    private JScrollPane scrollPane24;
+    private JTable table2;
+    private JScrollPane scrollPane23;
+    private JTable table1;
     private JPanel panel26;
     private JLabel label6;
     private JScrollPane scrollPane17;
@@ -539,6 +543,10 @@ public class Setting extends Frame {
         deck = new JCheckBox();
         nameSwitch = new JCheckBox();
         panel35 = new JPanel();
+        scrollPane24 = new JScrollPane();
+        table2 = new JTable();
+        scrollPane23 = new JScrollPane();
+        table1 = new JTable();
         panel26 = new JPanel();
         label6 = new JLabel();
         scrollPane17 = new JScrollPane();
@@ -2236,6 +2244,26 @@ public class Setting extends Frame {
                     {
                         panel35.setBorder(new EtchedBorder());
                         panel35.setLayout(null);
+
+                        //======== scrollPane24 ========
+                        {
+
+                            //---- table2 ----
+                            table2.setAutoCreateRowSorter(true);
+                            scrollPane24.setViewportView(table2);
+                        }
+                        panel35.add(scrollPane24);
+                        scrollPane24.setBounds(0, 0, 325, 400);
+
+                        //======== scrollPane23 ========
+                        {
+
+                            //---- table1 ----
+                            table1.setAutoCreateRowSorter(true);
+                            scrollPane23.setViewportView(table1);
+                        }
+                        panel35.add(scrollPane23);
+                        scrollPane23.setBounds(325, 0, 320, 400);
 
                         {
                             // compute preferred size

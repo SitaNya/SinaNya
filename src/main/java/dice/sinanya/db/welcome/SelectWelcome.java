@@ -40,7 +40,7 @@ public class SelectWelcome {
                 try (ResultSet set = ps.executeQuery()) {
                     while (set.next()) {
                         EntityWelcome entityWelcome = new EntityWelcome();
-                        entityWelcome.setEnable(set.getBoolean("enaable"));
+                        entityWelcome.setEnable(set.getBoolean("enable"));
                         entityWelcome.setText(set.getString("text"));
                         welcomes.put(set.getLong("groupId"),entityWelcome);
                     }

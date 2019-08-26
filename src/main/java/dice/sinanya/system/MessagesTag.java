@@ -165,6 +165,7 @@ public interface MessagesTag {
 
     String TAG_WELCOME = HEADER + "welcome[ ]*.*";
 
+//    随即起名
     String HEADER_NAME = HEADER + "name[ ]*";
     String TAG_NAME = HEADER_NAME + "\\d*";
     String TAG_NAME_EN = HEADER_NAME + "en[ ]*\\d*";

@@ -159,11 +159,15 @@ public class RollAndCheck implements En, MakeNickToSender {
     public void ral() {
         String tag = TAG_RAL;
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
-        ArrayList<Integer> rollsList = initRalAndRcl(msg);
-        EntityHistory entityHistory = new EntityHistory("0");
-        rollsList = (ArrayList<Integer>) rollsList.stream().parallel().map(s -> new MakeRal(entityTypeMessages, msg.split(" ")[0]).call()).collect(Collectors.toList());
-        updateHistory(entityHistory, rollsList);
-        formatRxlAndSend(entityHistory);
+        try {
+            ArrayList<Integer> rollsList = initRalAndRcl(msg);
+            EntityHistory entityHistory = new EntityHistory("0");
+            rollsList = (ArrayList<Integer>) rollsList.stream().parallel().map(s -> new MakeRal(entityTypeMessages, msg.split(" ")[0]).call()).collect(Collectors.toList());
+            updateHistory(entityHistory, rollsList);
+            formatRxlAndSend(entityHistory);
+        } catch (ManyRollsFormatException | ManyRollsTimesTooMoreException e) {
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+        }
     }
 
     /**
@@ -172,12 +176,16 @@ public class RollAndCheck implements En, MakeNickToSender {
     public void rcl() {
         String tag = TAG_RCL;
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
-        ArrayList<Integer> rollsList = initRalAndRcl(msg);
-        EntityHistory entityHistory = new EntityHistory("0");
+        try {
+            ArrayList<Integer> rollsList = initRalAndRcl(msg);
+            EntityHistory entityHistory = new EntityHistory("0");
 
-        rollsList = (ArrayList<Integer>) rollsList.stream().parallel().map(s -> new MakeRcl(entityTypeMessages, msg.split(" ")[0]).call()).collect(Collectors.toList());
-        updateHistory(entityHistory, rollsList);
-        formatRxlAndSend(entityHistory);
+            rollsList = (ArrayList<Integer>) rollsList.stream().parallel().map(s -> new MakeRcl(entityTypeMessages, msg.split(" ")[0]).call()).collect(Collectors.toList());
+            updateHistory(entityHistory, rollsList);
+            formatRxlAndSend(entityHistory);
+        } catch (ManyRollsFormatException | ManyRollsTimesTooMoreException e) {
+            CQ.logError(e.getMessage(), Arrays.toString(e.getStackTrace()));
+        }
     }
 
     /**
@@ -302,12 +310,8 @@ public class RollAndCheck implements En, MakeNickToSender {
         return groupId;
     }
 
-    private ArrayList<Integer> initRalAndRcl(String msg) {
-        try {
+    private ArrayList<Integer> initRalAndRcl(String msg) throws ManyRollsFormatException, ManyRollsTimesTooMoreException {
             checkManyRollsError(msg);
-        } catch (ManyRollsTimesTooMoreException | ManyRollsFormatException manyRollsTimesTooMoreException) {
-            CQ.logError(manyRollsTimesTooMoreException.getMessage(), Arrays.toString(manyRollsTimesTooMoreException.getStackTrace()));
-        }
 
         ArrayList<Integer> rollsList = new ArrayList<>();
         for (int i = 0; i < Integer.parseInt(msg.split(SPACE)[1]); i++) {
