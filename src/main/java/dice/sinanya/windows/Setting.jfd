@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.0.5.251" Java: "11.0.3" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.0.5.251" Java: "1.8.0_202-release" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -2190,8 +2190,8 @@ new FormModel {
 									} )
 								} )
 							}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-								"width": 325
-								"height": 400
+								"width": 320
+								"height": 370
 								"x": 0
 								"y": 0
 							} )
@@ -2227,10 +2227,37 @@ new FormModel {
 									} )
 								} )
 							}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-								"width": 320
-								"height": 400
-								"x": 325
+								"width": 325
+								"height": 370
+								"x": 320
 								"y": 0
+							} )
+							add( new FormComponent( "javax.swing.JProgressBar" ) {
+								name: "progressBar1"
+								auxiliary() {
+									"JavaCodeGenerator.variableName": "DeckProgress"
+								}
+							}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+								"x": 5
+								"y": 375
+								"width": 635
+								"height": 30
+							} )
+							add( new FormComponent( "javax.swing.JButton" ) {
+								name: "button2"
+								"text": "删除"
+								addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "deleteDeck", true ) )
+							}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+								"x": 120
+								"y": 410
+							} )
+							add( new FormComponent( "javax.swing.JButton" ) {
+								name: "button3"
+								"text": "下载"
+								addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "getDeck", true ) )
+							}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+								"x": 445
+								"y": 410
 							} )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"x": 315
@@ -2376,7 +2403,7 @@ new FormModel {
 				"height": 125
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 1230, 240 )
+			"location": new java.awt.Point( 1230, 290 )
 			"size": new java.awt.Dimension( 335, 150 )
 		} )
 		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {

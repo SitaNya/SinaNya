@@ -7,6 +7,8 @@ package dice.sinanya.windows;
 import dice.sinanya.db.properties.ban.InsertProperties;
 import dice.sinanya.entity.EntityDeckList;
 import dice.sinanya.system.MessagesSystem;
+import dice.sinanya.update.UpdateForDice;
+import org.apache.commons.lang.StringUtils;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -17,6 +19,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static com.sobte.cqp.jcq.event.JcqApp.CQ;
@@ -278,6 +281,9 @@ public class Setting extends Frame {
     private JTable table2;
     private JScrollPane scrollPane23;
     private JTable table1;
+    private JProgressBar DeckProgress;
+    private JButton button2;
+    private JButton button3;
     private JPanel panel26;
     private JLabel label6;
     private JScrollPane scrollPane17;
@@ -301,6 +307,32 @@ public class Setting extends Frame {
 
     private void button1MouseClicked(MouseEvent e) {
         dialog1.setVisible(false);
+    }
+
+    private void deleteDeck(MouseEvent e) {
+        EntityDeckList entityDeckList = new EntityDeckList();
+        int row = table2.getSelectedRow();
+        entityDeckList.setName(String.valueOf(table2.getValueAt(row, 0)));
+        entityDeckList.setCommand(String.valueOf(table2.getValueAt(row, 1)));
+        entityDeckList.setVersion((int) table2.getValueAt(row, 2));
+        entityDeckList.setAuthor(String.valueOf(table2.getValueAt(row, 3)));
+        entityDeckList.setDesc(String.valueOf(table2.getValueAt(row, 4)));
+        //TODO 删除
+    }
+
+    private void getDeck(MouseEvent e) {
+        EntityDeckList entityDeckList = new EntityDeckList();
+        int row = table1.getSelectedRow();
+        entityDeckList.setName(String.valueOf(table1.getValueAt(row, 0)));
+        entityDeckList.setCommand(String.valueOf(table1.getValueAt(row, 1)));
+        entityDeckList.setVersion((int) table1.getValueAt(row, 2));
+        entityDeckList.setAuthor(String.valueOf(table1.getValueAt(row, 3)));
+        entityDeckList.setDesc(String.valueOf(table1.getValueAt(row, 4)));
+        try {
+            new UpdateForDice(DeckProgress).downLoad(entityDeckList.getCommand());
+        } catch (IOException ex) {
+            CQ.logError(ex.getMessage(), StringUtils.join(ex.getStackTrace(), "\n"));
+        }
     }
 
     private void initComponents() {
@@ -552,6 +584,9 @@ public class Setting extends Frame {
         table2 = new JTable();
         scrollPane23 = new JScrollPane();
         table1 = new JTable();
+        DeckProgress = new JProgressBar();
+        button2 = new JButton();
+        button3 = new JButton();
         panel26 = new JPanel();
         label6 = new JLabel();
         scrollPane17 = new JScrollPane();
@@ -2265,7 +2300,7 @@ public class Setting extends Frame {
                             scrollPane24.setViewportView(table2);
                         }
                         panel35.add(scrollPane24);
-                        scrollPane24.setBounds(0, 0, 325, 400);
+                        scrollPane24.setBounds(0, 0, 320, 370);
 
                         //======== scrollPane23 ========
                         {
@@ -2282,7 +2317,31 @@ public class Setting extends Frame {
                             scrollPane23.setViewportView(table1);
                         }
                         panel35.add(scrollPane23);
-                        scrollPane23.setBounds(325, 0, 320, 400);
+                        scrollPane23.setBounds(320, 0, 325, 370);
+                        panel35.add(DeckProgress);
+                        DeckProgress.setBounds(5, 375, 635, 30);
+
+                        //---- button2 ----
+                        button2.setText("\u5220\u9664");
+                        button2.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                deleteDeck(e);
+                            }
+                        });
+                        panel35.add(button2);
+                        button2.setBounds(new Rectangle(new Point(120, 410), button2.getPreferredSize()));
+
+                        //---- button3 ----
+                        button3.setText("\u4e0b\u8f7d");
+                        button3.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                getDeck(e);
+                            }
+                        });
+                        panel35.add(button3);
+                        button3.setBounds(new Rectangle(new Point(445, 410), button3.getPreferredSize()));
 
                         {
                             // compute preferred size

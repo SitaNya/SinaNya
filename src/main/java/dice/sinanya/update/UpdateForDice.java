@@ -33,6 +33,9 @@ public class UpdateForDice {
     File newJar;
     File newJson;
 
+    File deckDir;
+    File deckFile;
+
     boolean jarExists;
     boolean jsonExists;
     boolean jarDirExists;
@@ -40,9 +43,12 @@ public class UpdateForDice {
     boolean newJarExists;
     boolean newJsonExists;
 
+    boolean deckDirExists;
+
     ProgressBarThread pbt;
     JProgressBar downJarProgress;
     JProgressBar downJsonProgress;
+    JProgressBar downDeckProgress;
 
     public UpdateForDice(JProgressBar downJarProgress, JProgressBar downJsonProgress) {
         String dir = entitySystemProperties.getSystemDir();
@@ -61,6 +67,21 @@ public class UpdateForDice {
         this.jarDirExists = jar.exists() && jarDir.isDirectory();
         this.downJarProgress = downJarProgress;
         this.downJsonProgress = downJsonProgress;
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("download-jar-and-json-%d").build();
+        //Common Thread Pool
+        cachedThreadPool = new ThreadPoolExecutor(1, 10,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+    }
+
+    public UpdateForDice(JProgressBar downDeckProgress) {
+        String dir = entitySystemProperties.getSystemDir();
+        deckDir = new File(dir + "/deck");
+
+        this.deckDirExists = deckDir.exists() && deckDir.isDirectory();
+
+        this.downDeckProgress = downDeckProgress;
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
                 .setNameFormat("download-jar-and-json-%d").build();
         //Common Thread Pool
@@ -105,6 +126,38 @@ public class UpdateForDice {
             JOptionPane.showMessageDialog(null, "更新完毕,请检查进度条是否已满\n若未满请不要关闭酷Q重新更新。\n若进度条已满，请立刻关闭所有相关窗口并重启酷Q");
         }else{
             JOptionPane.showMessageDialog(null, "更新失败,请不要关闭酷Q重新更新。");
+        }
+    }
+
+    public void downLoad(String deck) throws IOException {
+        if (deckDirExists) {
+            File newDeck = new File(deckDir.getPath() + File.pathSeparator + deck);
+            boolean newDeckExists;
+            try {
+                downLoadFromUrl("http://123.207.150.160/deck" + File.separator + deck, deck, downDeckProgress, deckDir.getPath());
+                Rectangle rect = new Rectangle(0, 0, downDeckProgress.getWidth(), downDeckProgress.getHeight());
+                downDeckProgress.setValue(downJsonProgress.getMaximum());
+                downDeckProgress.paintImmediately(rect);
+                cachedThreadPool.shutdown();
+                newDeckExists = newDeck.exists();
+            } catch (IOException e) {
+                CQ.logError("下载文件异常", StringUtils.join(e.getStackTrace(), "\n"));
+                JOptionPane.showMessageDialog(null, "下载失败，请重新下载");
+                return;
+            }
+
+            long deckSize = new URL("http://123.207.150.160/deck" + File.separator + deck).openConnection().getContentLength();
+
+
+            if (newDeckExists && newDeck.length() == deckSize) {
+                JOptionPane.showMessageDialog(null, "下载成功");
+            } else {
+                File deleteFile = new File(deckDir.getPath() + File.pathSeparator + deck);
+                if (deleteFile.exists() && deleteFile.isFile()) {
+                    deleteFile.delete();
+                }
+                JOptionPane.showMessageDialog(null, "下载失败失败,请重新下载");
+            }
         }
     }
 
