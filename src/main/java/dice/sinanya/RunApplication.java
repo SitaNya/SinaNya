@@ -1,9 +1,6 @@
 package dice.sinanya;
 
-import com.sobte.cqp.jcq.entity.ICQVer;
-import com.sobte.cqp.jcq.entity.IMsg;
-import com.sobte.cqp.jcq.entity.IRequest;
-import com.sobte.cqp.jcq.entity.Member;
+import com.sobte.cqp.jcq.entity.*;
 import com.sobte.cqp.jcq.event.JcqAppAbstract;
 import dice.sinanya.db.properties.ban.SelectBanProperties;
 import dice.sinanya.db.properties.game.SelectGameProperties;
@@ -19,7 +16,6 @@ import dice.sinanya.flow.Flow;
 import dice.sinanya.listener.InputHistoryToDataBase;
 import dice.sinanya.listener.Prometheus;
 import dice.sinanya.listener.TestRunningTime;
-import dice.sinanya.tools.getinfo.Welcome;
 import dice.sinanya.windows.Setting;
 import dice.sinanya.windows.UpdateFrame;
 import org.apache.commons.lang.StringUtils;
@@ -390,6 +386,20 @@ public class RunApplication extends JcqAppAbstract implements ICQVer, IMsg, IReq
                         + getUserName(fromQQ) + "(" + fromQQ + ")拉黑");
                 insertQqBanList(String.valueOf(fromQQ), "被踢出群" + fromGroup);
                 insertGroupBanList(String.valueOf(fromGroup), "被" + fromQQ + "踢出");
+                List<Group> groupList = CQ.getGroupList();
+                for (Group group : groupList) {
+                    Member member = CQ.getGroupMemberInfoV2(group.getId(), fromQQ);
+                    if (member == null) {
+                        continue;
+                    }
+                    boolean isMember = CQ.getGroupMemberInfoV2(group.getId(), CQ.getLoginQQ()).getAuthority() == 1;
+                    boolean powerThanMe = member.getAuthority() > CQ.getGroupMemberInfoV2(group.getId(), CQ.getLoginQQ()).getAuthority();
+                    if (member.getAuthority() > 1 && (isMember || powerThanMe)) {
+                        CQ.sendGroupMsg(162279609, "发现在群" + group.getName() + "(" + group.getId() + ")中有黑名单成员" + member.getNick() + "(" + member.getQqId() + ")且权限更高,将预防性退群");
+                        CQ.sendGroupMsg(group.getId(),"发现在群" + group.getName() + "(" + group.getId() + ")中有黑名单成员" + member.getNick() + "(" + member.getQqId() + ")且权限更高,将预防性退群");
+                        CQ.setGroupLeave(group.getId(),false);
+                    }
+                }
             } else {
                 CQ.sendGroupMsg(162279609, "已被移出群" + "(" + fromGroup + ")中，将群拉黑");
                 insertGroupBanList(String.valueOf(fromGroup), "被" + fromQQ + "踢出");

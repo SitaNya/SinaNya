@@ -1,7 +1,6 @@
 package dice.sinanya.dice.manager;
 
 import com.sobte.cqp.jcq.entity.Group;
-import com.sobte.cqp.jcq.entity.Member;
 import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityTypeMessages;
 import org.apache.commons.lang.StringUtils;
@@ -86,13 +85,10 @@ public class Admin implements MakeNickToSender {
         hasGroup.append("你和指定人同处于以下群中:");
         List<Group> groups = CQ.getGroupList();
         for (Group group : groups) {
-            List<Member> members = CQ.getGroupMemberList(group.getId());
-            for (Member member : members) {
-                if (qqId == member.getQqId()) {
+            if (CQ.getGroupMemberInfoV2(group.getId(), qqId) != null) {
                     hasGroup.append("\n").append(makeGroupNickToSender(group.getName())).append("(").append(group.getId()).append(")");
                 }
             }
-        }
         sender(entityTypeMessages, hasGroup.toString());
     }
 }

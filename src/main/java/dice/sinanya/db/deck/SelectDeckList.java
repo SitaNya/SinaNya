@@ -24,7 +24,6 @@ import static com.sobte.cqp.jcq.event.JcqApp.CQ;
  */
 public class SelectDeckList {
 
-
     /**
      * 从数据库刷写默认骰最大值到静态变量
      */
