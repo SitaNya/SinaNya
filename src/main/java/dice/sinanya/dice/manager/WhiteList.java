@@ -40,7 +40,7 @@ public class WhiteList {
             sender(entityTypeMessages, "未启用用户白名单");
             return;
         }
-        String tag = TAG_BAN_USER;
+        String tag = TAG_WHITE_USER;
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 4));
         try {
             checkMaster();
@@ -66,7 +66,7 @@ public class WhiteList {
             sender(entityTypeMessages, "未启群组白名单");
             return;
         }
-        String tag = TAG_BAN_GROUP;
+        String tag = TAG_WHITE_GROUP;
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 4));
         try {
             checkMaster();
@@ -92,7 +92,7 @@ public class WhiteList {
             sender(entityTypeMessages, "未启用用户白名单");
             return;
         }
-        String tag = TAG_RM_BAN_USER;
+        String tag = TAG_RM_WHITE_USER;
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 4));
         try {
             checkMaster();
@@ -117,7 +117,7 @@ public class WhiteList {
             sender(entityTypeMessages, "未启群组白名单");
             return;
         }
-        String tag = TAG_RM_BAN_GROUP;
+        String tag = TAG_RM_WHITE_GROUP;
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 4));
         try {
             checkMaster();

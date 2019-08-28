@@ -811,9 +811,9 @@ class Flow implements MakeNickToSender {
             whiteList.rmQqWhiteList();
         } else if (isRmWhiteGroup) {
             whiteList.rmGroupWhiteList();
-        } else if (isListBanUser) {
+        } else if (isListWhiteUser) {
             whiteList.getQqWhiteList();
-        } else if (isListBanGroup) {
+        } else if (isListWhiteGroup) {
             whiteList.getGroupWhiteList();
         }
     }
