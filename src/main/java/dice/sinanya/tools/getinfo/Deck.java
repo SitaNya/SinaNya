@@ -66,6 +66,39 @@ public class Deck {
         return deckList;
     }
 
+    /**
+     * 尝试从指定的配置文件中获取类型
+     *
+     * @param deckType 指定的类型
+     * @return 获取的语句，或报错骰主未添加此类型
+     */
+    private static HashMap<String, ArrayList<String>> getDeckHelp() {
+        File deckTypeDir = new File(entitySystemProperties.getSystemDir() + File.separator + "deck");
+        HashMap<String, ArrayList<String>> deckList = new HashMap<>();
+        if (deckTypeDir.exists() && deckTypeDir.isDirectory()) {
+            Yaml yaml = new Yaml();
+            for (File file : deckTypeDir.listFiles()) {
+                ArrayList<String> keyList=new ArrayList<>();
+                try {
+                    // 加载配置文件
+                    Map map = yaml.load(new FileInputStream(file));
+                    for (Object key : map.keySet()) {
+                        if (!key.equals("name") && !key.equals("command") && !key.equals("author") && !key.equals("version") && !key.equals("desc") && !key.equals("default")) {
+                            keyList.add(String.valueOf(key));
+                        }
+                    }
+                    if (map.containsKey("default")){
+                        keyList.add(String.valueOf(map.get("command")));
+                    }
+                } catch (IOException e) {
+                    CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
+                }
+                deckList.put(file.getName(),keyList);
+            }
+        }
+        return deckList;
+    }
+
     public static String getDeck(EntityTypeMessages entityTypeMessages, String deckType, String type) {
         long qqId = Long.parseLong(entityTypeMessages.getFromQq());
         HashMap<String, ArrayList<String>> deck = getDeckMap(deckType);
