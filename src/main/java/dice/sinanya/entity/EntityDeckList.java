@@ -1,5 +1,7 @@
 package dice.sinanya.entity;
 
+import java.util.Objects;
+
 /**
  * @author SitaNya
  * 日期: 2019-08-26
@@ -65,4 +67,26 @@ public class EntityDeckList {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        {
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            EntityDeckList that = (EntityDeckList) o;
+            return version == that.version &&
+                    command.equals(that.command) &&
+                    name.equals(that.name) &&
+                    author.equals(that.author) &&
+                    desc.equals(that.desc);
+        }
+
+        @Override
+        public int hashCode () {
+            return Objects.hash(command, name, author, version, desc);
+        }
 }
