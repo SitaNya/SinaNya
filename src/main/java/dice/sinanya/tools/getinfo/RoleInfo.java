@@ -8,6 +8,7 @@ import dice.sinanya.entity.EntityTypeMessages;
 import java.util.HashMap;
 import java.util.Map;
 
+import static dice.sinanya.system.MessagesSystem.NONE;
 import static dice.sinanya.system.RoleInfoCache.ROLE_CHOOSE;
 import static dice.sinanya.system.RoleInfoCache.ROLE_INFO_CACHE;
 import static dice.sinanya.tools.getinfo.RoleChoose.checkRoleChooseExistByQQ;
@@ -179,6 +180,9 @@ public class RoleInfo {
      * @return 属性值列表
      */
     public static Map<String, Integer> getRoleInfoFromChooseByQQ(String qq) {
+        if (qq==NONE){
+            return null;
+        }
         long qqId = Long.parseLong(qq);
         String role;
         if (checkRoleChooseExistByQQ(qqId)) {
