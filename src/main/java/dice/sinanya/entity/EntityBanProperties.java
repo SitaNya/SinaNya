@@ -33,8 +33,8 @@ public class EntityBanProperties {
     String refuseGroupByBan;
     String refuseFriendByBan;
 
-    String whiteGroup;
-    String whiteUser;
+    boolean whiteGroup;
+    boolean whiteUser;
     int alterFrequentness;
     int banFrequentness;
 
@@ -87,8 +87,8 @@ public class EntityBanProperties {
         alterFrequentness = 10;
         banFrequentness = 20;
 
-        whiteGroup = "";
-        whiteUser = "";
+        whiteGroup = false;
+        whiteUser = false;
         frequentnessAlterInfo = "请勿刷屏，过多可能导致退群拉黑，谢谢合作";
         frequentnessBanInfo = "检测到极大量刷屏，正在退群拉黑";
 
@@ -347,19 +347,19 @@ public class EntityBanProperties {
         this.refuseFriendByBan = refuseFriendByBan;
     }
 
-    public String getWhiteGroup() {
+    public boolean isWhiteGroup() {
         return whiteGroup;
     }
 
-    public void setWhiteGroup(String whiteGroup) {
+    public void setWhiteGroup(boolean whiteGroup) {
         this.whiteGroup = whiteGroup;
     }
 
-    public String getWhiteUser() {
+    public boolean isWhiteUser() {
         return whiteUser;
     }
 
-    public void setWhiteUser(String whiteUser) {
+    public void setWhiteUser(boolean whiteUser) {
         this.whiteUser = whiteUser;
     }
 }

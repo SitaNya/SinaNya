@@ -133,6 +133,13 @@ class Flow implements MakeNickToSender {
     private boolean isListBanUser = false;
     private boolean isListBanGroup = false;
 
+    private boolean isWhiteUser = false;
+    private boolean isWhiteGroup = false;
+    private boolean isRmWhiteUser = false;
+    private boolean isRmWhiteGroup = false;
+    private boolean isListWhiteUser = false;
+    private boolean isListWhiteGroup = false;
+
     private boolean isAdminOn = false;
     private boolean isAdminOff = false;
     private boolean isAdminExit = false;
@@ -259,6 +266,15 @@ class Flow implements MakeNickToSender {
         isListBanGroup = checkTagRegex(TAG_BAN_GROUP_LIST);
     }
 
+    private void whiteTag() {
+        isWhiteUser = checkTagRegex(TAG_WHITE_USER);
+        isWhiteGroup = checkTagRegex(TAG_WHITE_GROUP);
+        isRmWhiteUser = checkTagRegex(TAG_RM_WHITE_USER);
+        isRmWhiteGroup = checkTagRegex(TAG_RM_WHITE_GROUP);
+        isListWhiteUser = checkTagRegex(TAG_WHITE_USER_LIST);
+        isListWhiteGroup = checkTagRegex(TAG_WHITE_GROUP_LIST);
+    }
+
     private void adminTag() {
         isAdminOn = checkTagRegex(TAG_ADMIN_ON);
         isAdminOff = checkTagRegex(TAG_ADMIN_OFF);
@@ -297,6 +313,8 @@ class Flow implements MakeNickToSender {
             adminTag();
         } else if (checkTagRegex(HEADER_NAME + forAll)) {
             nameTag();
+        } else if (checkTagRegex(HEADER_WHITE + forAll)) {
+            whiteTag();
         } else if (checkTagRegex(TAGR)) {
             initDiceTag();
         } else {
@@ -351,6 +369,7 @@ class Flow implements MakeNickToSender {
         DiceList diceList = new DiceList(entityTypeMessages);
         Deck deck = new Deck(entityTypeMessages);
 
+        isWhiteFunction();
         isFunctionR();
         isStFunction();
         isScFunction();
@@ -489,7 +508,7 @@ class Flow implements MakeNickToSender {
             if (isWelcome) {
                 welcome.set();
             }
-        } catch (NotEnableException e) {
+        } catch (NotEnableException | OnlyManagerException e) {
             CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
 
@@ -778,6 +797,24 @@ class Flow implements MakeNickToSender {
             banList.getQqBanList();
         } else if (isListBanGroup) {
             banList.getGroupBanList();
+        }
+    }
+
+    private void isWhiteFunction() {
+        WhiteList whiteList = new WhiteList(entityTypeMessages);
+
+        if (isWhiteUser) {
+            whiteList.inputQqWhiteList();
+        } else if (isWhiteGroup) {
+            whiteList.inputGroupWhiteList();
+        } else if (isRmWhiteUser) {
+            whiteList.rmQqWhiteList();
+        } else if (isRmWhiteGroup) {
+            whiteList.rmGroupWhiteList();
+        } else if (isListBanUser) {
+            whiteList.getQqWhiteList();
+        } else if (isListBanGroup) {
+            whiteList.getGroupWhiteList();
         }
     }
 }

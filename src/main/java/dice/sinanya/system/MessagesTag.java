@@ -141,6 +141,15 @@ public interface MessagesTag {
     String TAG_BAN_GROUP_LIST = HEADER_BAN + "group[ ]*list.*";
 
     //    获取云黑相关标签
+    String HEADER_WHITE = HEADER + "white[ ]*";
+    String TAG_WHITE_USER = HEADER_WHITE + "user[ ]*\\d+";
+    String TAG_WHITE_GROUP = HEADER_WHITE + "group[ ]*\\d+";
+    String TAG_RM_WHITE_USER = HEADER_WHITE + "rm[ ]*user[ ]*\\d+";
+    String TAG_RM_WHITE_GROUP = HEADER_WHITE + "rm[ ]*group[ ]*\\d+";
+    String TAG_WHITE_USER_LIST = HEADER_WHITE + "user[ ]*list.*";
+    String TAG_WHITE_GROUP_LIST = HEADER_WHITE + "group[ ]*list.*";
+
+    //    获取云黑相关标签
     String HEADER_ADMIN = HEADER + "admin[ ]*";
     String TAG_ADMIN_ON = HEADER_ADMIN + "on[ ]*\\d+";
     String TAG_ADMIN_OFF = HEADER_ADMIN + "off[ ]*\\d+";

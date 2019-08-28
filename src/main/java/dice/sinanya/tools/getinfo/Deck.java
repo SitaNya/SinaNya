@@ -1,10 +1,10 @@
 package dice.sinanya.tools.getinfo;
 
-
 import dice.sinanya.db.deck.SelectDeckList;
 import dice.sinanya.entity.EntityDeckBack;
 import dice.sinanya.entity.EntityDeckList;
 import dice.sinanya.entity.EntityTypeMessages;
+import org.apache.commons.lang.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entitySystemProperties;
 import static dice.sinanya.tools.makedata.RandomInt.random;
 
@@ -60,7 +61,7 @@ public class Deck {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
         }
         return deckList;
     }
@@ -134,7 +135,7 @@ public class Deck {
                         entityDeckList.setDesc(String.valueOf(map.get("desc")));
                         hasDeckList.add(entityDeckList);
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        CQ.logError(e.getMessage(), StringUtils.join(e.getStackTrace(), "\n"));
                     }
                 }
             }
@@ -149,6 +150,14 @@ public class Deck {
      * @return
      */
     public static ArrayList<EntityDeckList> getInternetDeck() {
-        return new SelectDeckList().selectDeckList();
+        ArrayList<EntityDeckList> result = new ArrayList<>();
+        ArrayList<EntityDeckList> hasDeckList = getHasDeckList();
+        ArrayList<EntityDeckList> internetDeckList = new SelectDeckList().selectDeckList();
+        for (EntityDeckList entityDeckList : internetDeckList) {
+            if (!hasDeckList.contains(entityDeckList)) {
+                result.add(entityDeckList);
+            }
+        }
+        return result;
     }
 }

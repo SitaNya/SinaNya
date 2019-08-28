@@ -4,7 +4,9 @@ import dice.sinanya.dice.MakeNickToSender;
 import dice.sinanya.entity.EntityTypeMessages;
 import dice.sinanya.entity.EntityWelcome;
 import dice.sinanya.exceptions.NotEnableException;
+import dice.sinanya.exceptions.OnlyManagerException;
 
+import static com.sobte.cqp.jcq.event.JcqApp.CQ;
 import static dice.sinanya.system.MessagesTag.TAG_WELCOME;
 import static dice.sinanya.system.MessagesWelcome.welcomes;
 import static dice.sinanya.tools.getinfo.GetMessagesProperties.entityGame;
@@ -27,8 +29,11 @@ public class Welcome implements MakeNickToSender {
         this.entityTypeMessages = entityTypeMessages;
     }
 
-    public void set() throws NotEnableException {
+    public void set() throws NotEnableException, OnlyManagerException {
         checkEnable();
+        if (CQ.getGroupMemberInfoV2(Long.parseLong(entityTypeMessages.getFromGroup()),Long.parseLong(entityTypeMessages.getFromQq())).getAuthority()<=1){
+            throw new OnlyManagerException(entityTypeMessages);
+        }
         String tag = TAG_WELCOME;
         String msg = deleteTag(entityTypeMessages.getMsg(), tag.substring(0, tag.length() - 2));
         long groupId = Long.parseLong(entityTypeMessages.getFromGroup());

@@ -12,6 +12,8 @@ import java.util.HashMap;
  * 类说明:
  */
 public class MessagesBanList {
+    public static ArrayList<Long> qqWhiteList = new ArrayList<>();
+    public static ArrayList<Long> groupWhiteList = new ArrayList<>();
     public static HashMap<String, String> qqBanList = new HashMap<>();
     public static HashMap<String, String> groupBanList = new HashMap<>();
     public static ArrayList<String> allBotList = new ArrayList<>();
