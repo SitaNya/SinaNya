@@ -19,10 +19,13 @@ public class WhiteList {
     static InputWhiteList inputWhiteList = new InputWhiteList();
     static SelectWhiteList selectWhiteList = new SelectWhiteList();
 
-    public static void flushWhiteList() {
+    public static void flushWhiteGroupList() {
         if (entityBanProperties.isWhiteGroup()) {
             selectWhiteList.flushGroupWhiteListFromDataBase();
         }
+    }
+
+    public static void flushWhiteUserList(){
         if (entityBanProperties.isWhiteUser()) {
             selectWhiteList.flushQqWhiteListFromDataBase();
         }
