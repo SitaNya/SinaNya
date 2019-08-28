@@ -54,8 +54,8 @@ public class SelectBanProperties {
                         entityBanProperties.setAddFriend(set.getString("addFriend"));
                         entityBanProperties.setRefuseGroupByBan(set.getString("refuseGroupByBan"));
                         entityBanProperties.setRefuseFriendByBan(set.getString("refuseFriendByBan"));
-                        entityBanProperties.setWhiteGroup(set.getString("whiteGroup"));
-                        entityBanProperties.setWhiteUser(set.getString("whiteUser"));
+                        entityBanProperties.setWhiteGroup(set.getBoolean("whiteGroup"));
+                        entityBanProperties.setWhiteUser(set.getBoolean("whiteUser"));
                         entityBanProperties.setNotBanListInput(set.getString("notBanListInput"));
                         entityBanProperties.setClearGroupByOff(set.getInt("clearGroupByOff"));
                         entityBanProperties.setClearGroup(set.getInt("clearGroup"));

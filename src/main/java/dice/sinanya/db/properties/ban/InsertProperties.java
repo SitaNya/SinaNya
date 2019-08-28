@@ -92,8 +92,8 @@ public class InsertProperties {
                 ps.setString(15, entityBanProperties.getAddFriend());
                 ps.setString(16, entityBanProperties.getRefuseGroupByBan());
                 ps.setString(17, entityBanProperties.getRefuseFriendByBan());
-                ps.setString(18, entityBanProperties.getWhiteGroup());
-                ps.setString(19, entityBanProperties.getWhiteUser());
+                ps.setBoolean(18, entityBanProperties.isWhiteGroup());
+                ps.setBoolean(19, entityBanProperties.isWhiteUser());
                 ps.setString(20, entityBanProperties.getNotBanListInput());
                 ps.setString(21, String.valueOf(CQ.getLoginQQ()));
                 ps.setInt(22, entityBanProperties.getClearGroupByOff());

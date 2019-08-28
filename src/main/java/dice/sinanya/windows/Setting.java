@@ -241,6 +241,8 @@ public class Setting extends Frame {
     private JCheckBox banUserBecauseReduce;
     private JCheckBox autoAddFriends;
     private JCheckBox autoInputGroup;
+    private JCheckBox whiteUser;
+    private JCheckBox whiteGroup;
     private JPanel panel24;
     private JLabel label65;
     private JTextField banListInputNotId;
@@ -544,6 +546,8 @@ public class Setting extends Frame {
         banUserBecauseReduce = new JCheckBox();
         autoAddFriends = new JCheckBox();
         autoInputGroup = new JCheckBox();
+        whiteUser = new JCheckBox();
+        whiteGroup = new JCheckBox();
         panel24 = new JPanel();
         label65 = new JLabel();
         banListInputNotId = new JTextField();
@@ -1950,6 +1954,16 @@ public class Setting extends Frame {
                             panel21.add(autoInputGroup);
                             autoInputGroup.setBounds(10, 250, 142, 22);
 
+                            //---- whiteUser ----
+                            whiteUser.setText("\u5f00\u542f\u7528\u6237\u767d\u540d\u5355(\u975e\u4e91\u540c\u6b65)");
+                            panel21.add(whiteUser);
+                            whiteUser.setBounds(10, 277, whiteUser.getPreferredSize().width, 22);
+
+                            //---- whiteGroup ----
+                            whiteGroup.setText("\u5f00\u542f\u7fa4\u7ec4\u767d\u540d\u5355(\u975e\u4e91\u540c\u6b65)");
+                            panel21.add(whiteGroup);
+                            whiteGroup.setBounds(10, 304, whiteGroup.getPreferredSize().width, 22);
+
                             {
                                 // compute preferred size
                                 Dimension preferredSize = new Dimension();
@@ -1966,7 +1980,7 @@ public class Setting extends Frame {
                             }
                         }
                         panel33.add(panel21);
-                        panel21.setBounds(10, 10, 325, 280);
+                        panel21.setBounds(10, 10, 325, 365);
 
                         //======== panel24 ========
                         {
@@ -1996,7 +2010,7 @@ public class Setting extends Frame {
                             }
                         }
                         panel33.add(panel24);
-                        panel24.setBounds(10, 295, 325, 80);
+                        panel24.setBounds(10, 390, 325, 80);
 
                         //======== panel23 ========
                         {
@@ -2633,18 +2647,18 @@ public class Setting extends Frame {
         entitySystemProperties.setHiddenDice(hiddenDice.getText().replace("\\n", "\n"));
         entitySystemProperties.setTeamIsEmpty(teamIsEmpty.getText().replace("\\n", "\n"));
         entitySystemProperties.setTeamMemberEnIsEmpty(teamMemberEnIsEmpty.getText().replace("\\n", "\n"));
-        entitySystemProperties.setCRITICAL_SUCCESS(criticalSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setEXTREME_SUCCESS(extremeSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setHARD_SUCCESS(headSuccess.getText().replace("\\n", "\n"));
-        entitySystemProperties.setSUCCESS(success.getText().replace("\\n", "\n"));
-        entitySystemProperties.setFAILURE(failure.getText().replace("\\n", "\n"));
-        entitySystemProperties.setFUMBLE(fumble.getText().replace("\\n", "\n"));
-        STR_CRITICAL_SUCCESS.setText(criticalSuccess.getText().replace("\\n", "\n"));
-        STR_EXTREME_SUCCESS.setText(extremeSuccess.getText().replace("\\n", "\n"));
-        STR_HARD_SUCCESS.setText(headSuccess.getText().replace("\\n", "\n"));
-        STR_SUCCESS.setText(success.getText().replace("\\n", "\n"));
-        STR_FAILURE.setText(failure.getText().replace("\\n", "\n"));
-        STR_FUMBLE.setText(fumble.getText().replace("\\n", "\n"));
+        entitySystemProperties.setCRITICAL_SUCCESS(criticalSuccess.getText());
+        entitySystemProperties.setEXTREME_SUCCESS(extremeSuccess.getText());
+        entitySystemProperties.setHARD_SUCCESS(headSuccess.getText());
+        entitySystemProperties.setSUCCESS(success.getText());
+        entitySystemProperties.setFAILURE(failure.getText());
+        entitySystemProperties.setFUMBLE(fumble.getText());
+        STR_CRITICAL_SUCCESS.setText(criticalSuccess.getText());
+        STR_EXTREME_SUCCESS.setText(extremeSuccess.getText());
+        STR_HARD_SUCCESS.setText(headSuccess.getText());
+        STR_SUCCESS.setText(success.getText());
+        STR_FAILURE.setText(failure.getText());
+        STR_FUMBLE.setText(fumble.getText());
         new dice.sinanya.db.properties.system.InsertProperties().insertProperties(entitySystemProperties);
         JOptionPane.showMessageDialog(null, "保存成功");
     }
@@ -2679,6 +2693,8 @@ public class Setting extends Frame {
         entityBanProperties.setBanUserByFre(banUserByFre.isSelected());
         entityBanProperties.setAutoAddFriends(autoAddFriends.isSelected());
         entityBanProperties.setAutoAddFriends(autoInputGroup.isSelected());
+        entityBanProperties.setWhiteUser(whiteUser.isSelected());
+        entityBanProperties.setWhiteGroup(whiteGroup.isSelected());
         new InsertProperties().insertProperties(entityBanProperties);
         JOptionPane.showMessageDialog(null, "保存成功");
     }
@@ -2737,6 +2753,8 @@ public class Setting extends Frame {
         banFrequentness.setText(String.valueOf(entityBanProperties.getBanFrequentness()));
         frequentnessAlterInfo.setText(String.valueOf(entityBanProperties.getFrequentnessAlterInfo()));
         frequentnessBanInfo.setText(String.valueOf(entityBanProperties.getFrequentnessBanInfo()));
+        whiteUser.setSelected(entityBanProperties.isWhiteUser());
+        whiteGroup.setSelected(entityBanProperties.isWhiteGroup());
 
         botStart.setText(entitySystemProperties.getBotStart());
         botAlreadyStart.setText(entitySystemProperties.getBotAlreadyStart());
