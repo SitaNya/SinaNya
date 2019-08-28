@@ -73,17 +73,17 @@ public class EntityDeckList {
         if (this == o) {
             return true;
         }
-        {
-            if (o == null || getClass() != o.getClass()) {
+
+        if (o == null || getClass() != o.getClass()) {
                 return false;
-            }
-            EntityDeckList that = (EntityDeckList) o;
-            return version == that.version &&
+        }
+        EntityDeckList that = (EntityDeckList) o;
+        return version == that.version &&
                     command.equals(that.command) &&
                     name.equals(that.name) &&
                     author.equals(that.author) &&
                     desc.equals(that.desc);
-        }
+    }
 
         @Override
         public int hashCode () {
