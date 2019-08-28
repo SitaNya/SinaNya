@@ -14,11 +14,13 @@ public interface MessagesSystem {
     String NONE = "";
     String SPACE = " ";
 
-    String VERSIONS = "3.16.23.45Beta";
+    String VERSIONS = "3.18.24.46Alpha";
     StringBuilder UPDATE = new StringBuilder()
             .append("更新日志:\n")
-            .append("2019年08月22日 增加了JRRP、WELCOME、NAME功能的可选项支持")
-            .append("2019年08月22日 紧急解决被禁言识别问题")
+            .append("2019年08月28日 增加deck牌堆及其市场支持\n")
+            .append("2019年08月28日 增加白名单用户、群组的可选项支持\n")
+            .append("2019年08月22日 增加了JRRP、WELCOME、NAME功能的可选项支持\n")
+            .append("2019年08月22日 紧急解决被禁言识别问题\n")
             .append("2019年08月21日 增加更新界面\n")
             .append("2019年08月20日 修改多重投掷的显示方式\n")
             .append("2019年08月20日 增加rp允许多重投掷\n")
