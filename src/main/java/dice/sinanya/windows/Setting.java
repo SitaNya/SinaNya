@@ -315,7 +315,7 @@ public class Setting extends Frame {
 
     private void deleteDeck(MouseEvent e) {
         int row = table2.getSelectedRow();
-        if (!new File(entitySystemProperties.getSystemDir() + "deck" + File.separator + String.valueOf(table1.getValueAt(row, 1))).delete()) {
+        if (!new File(entitySystemProperties.getSystemDir() + "deck" + File.separator + table2.getValueAt(row, 1)).delete()) {
             JOptionPane.showMessageDialog(null, "由于文件正在使用，因此将为您打开文件所在目录，请您关闭酷Q后手工删除相应文件");
             try {
                 Desktop.getDesktop().open(new File(entitySystemProperties.getSystemDir() + "deck"));
