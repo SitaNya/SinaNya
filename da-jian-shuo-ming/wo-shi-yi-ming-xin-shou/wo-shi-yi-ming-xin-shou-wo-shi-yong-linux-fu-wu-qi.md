@@ -19,7 +19,8 @@ Linux服务器搭建说明
 你可以从此链接得到JDK
 
 * 官方: [JDK1.8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-* 百度云: 链接:[https://pan.baidu.com/s/1YsXC6VfcosyW6nXoYZ-TaA](https://pan.baidu.com/s/1YsXC6VfcosyW6nXoYZ-TaA) 密码:6hiw
+* 新版本已使用新官网[https://sinanya.com](https://sinanya.com)
+* 请跳转至新页面，放弃本页面内容
 
 下载应该获得一个.rpm结尾的文件，使用命令
 
